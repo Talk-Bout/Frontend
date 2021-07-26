@@ -9,6 +9,7 @@ const Input = (props) => {
         border_radius: border_radius,
         border: border,
         bg: bg,
+        //우리는 짱이다!
     }
     return(
         <React.Fragment>

@@ -9,4 +9,8 @@ const Template = (props) => {
   )
 };
 
+Template.defaultProps = {
+  
+}
+
 export default Template;

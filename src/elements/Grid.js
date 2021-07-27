@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Grid = (props) => {
   // onClick 함수는 _onClick 으로 전달
   // is_center, is_left, is_right 는 세부 단위 지정 없이 넘기기(정렬 방향)
-
+  
   const {
     children,
     _onClick,

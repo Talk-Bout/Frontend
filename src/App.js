@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
+import Login from './pages/Login';
 
 //부트캠프별 리뷰 게시판 페이지
 import ReviewMain from './pages/ReviewMain';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/Review/detail" exact component={ReviewDetail} />
         <Route path="/Review/write" exact component={ReviewWrite} />
       </BrowserRouter>
+      <Login></Login>
     </React.Fragment>
   );
 }

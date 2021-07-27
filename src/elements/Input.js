@@ -60,6 +60,7 @@ const ElInput = styled.input`
     _onChange,
     bg,
     multiLine,
+    margin,
   } = props;
 
   const styles = {
@@ -67,7 +68,7 @@ const ElInput = styled.input`
     border_radius: border_radius,
     border: border,
     bg: bg,
-    //우리는 짱이다!
+    margin: margin,
   };
 
   if (multiLine) {
@@ -102,6 +103,7 @@ Input.defaultProps = {
   border: '1px solid black',
   _onChange: () => {},
   bg: null,
+  margin: null,
   // is_submit: false,
   // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
 };
@@ -113,6 +115,7 @@ const ElTextarea = styled.textarea`
   border-radius: ${(props) => props.border_radius};
   background-color: ${(props) => props.bg};
   padding: 2%;
+  margin: ${(props) => props.margin};
 `;
 
 const ElInput = styled.input`
@@ -122,6 +125,7 @@ const ElInput = styled.input`
   border-radius: ${(props) => props.border_radius};
   background-color: ${(props) => props.bg};
   padding: 2%;
+  margin: ${(props) => props.margin};
 `;
 
 export default Input;

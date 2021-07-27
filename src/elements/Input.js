@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const {placeholder, type, width, border_radius, border, _onChange, bg, font_size} = props;
+    const {placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin} = props;
 
     const styles = {
         width: width,
@@ -10,6 +10,8 @@ const Input = (props) => {
         border: border,
         bg: bg,
         font_size: font_size,
+        outline: outline,
+        margin: margin,
     }
     return(
         <React.Fragment>
@@ -31,6 +33,8 @@ Input.defaultProps = {
     _onChange: () => {},
     bg: null,
     font_size: null,
+    outline: null,
+    margin: false,
     // is_submit: false,
     // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
 }
@@ -41,7 +45,10 @@ const ElInput = styled.input`
     width: ${(props) => props.width};
     border-radius: ${(props) => props.border_radius};
     background-color: ${(props) => props.bg};
+    height:  ${(props) => props.height};
     padding: 2%;
+    outline: ${(props) => props.outline};
+    margin: ${(props) => props.margin};
 `;
 
 

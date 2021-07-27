@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = (props) => {
-    const {children, text, bg, width, height, margin, _onClick, border_radius, cursor, border, color} = props;
+    const {children, text, bg, width, height, margin, _onClick, border_radius, cursor, border, color, font_size} = props;
 
     const styles = {
         bg: bg,
@@ -13,6 +13,7 @@ const Button = (props) => {
         cursor: cursor,
         border: border,
         color: color,
+        font_size: font_size,
     }
     return (
         <React.Fragment>
@@ -36,6 +37,7 @@ Button.defaultProps = {
     cursor: "pointer",
     border: null,
     color: null,
+    font_size: null,
 }
 
 const ElButton = styled.button`
@@ -47,6 +49,7 @@ const ElButton = styled.button`
     cursor: ${(props) => props.cursor};
     border: ${(props) => props.border};
     color: ${(props) => props.color};
+    font-size: ${(props) => props.font_size};
 `;
 
 export default Button;

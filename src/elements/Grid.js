@@ -5,7 +5,7 @@ const Grid = (props) => {
   // onClick 함수는 _onClick 으로 전달
   // is_center, is_left, is_right 는 세부 단위 지정 없이 넘기기(정렬 방향)
 
-  const { children, _onClick, is_center, is_left, is_right, is_flex, flex_wrap, width, height, margin, padding, backgroundColor, backgroundImageUrl, top, right, bottom, left, position, display, flexDirection, minHeight, minWidth, boxShadow, border, borderStyle, borderRadius, borderColor, hover, active, float } = props;
+  const { children, _onClick, is_center, is_left, is_right, is_flex, flex_wrap, width, height, margin, padding, backgroundColor, backgroundImageUrl, top, right, bottom, left, position, display, flexDirection, minHeight, minWidth, boxShadow, border, borderStyle, borderRadius, borderColor, hover, active, float, overflow } = props;
 
 const styles = {
 is_center: is_center,                         // 가운데 정렬
@@ -36,6 +36,7 @@ borderColor: borderColor,
 hover: hover,                                  // 마우스 올렸을 때 효과
 active: active,                             // 마우스 클릭 시 효과
 float: float,
+overflow: overflow,
 };
 
   return (
@@ -75,6 +76,7 @@ Grid.defaultProps = {
   hover: null,
   active: null,
   float: null,
+  overflow: null,
 }
 const GridBox = styled.div`
 ${(props) =>
@@ -89,7 +91,10 @@ ${(props) =>
   props.is_right
     ? `display: block; align-items: center; text-align: right;`
     : ""};
-flex: ${(props) => props.flex};
+${(props) =>
+  props.is_flex
+    ? `display: block; align-items: center; text-align: center;`
+    : ""};
 flex_wrap: ${(props) => props.wrap};
 float: ${(props) => props.float};
 width: ${(props) => props.width};
@@ -113,6 +118,7 @@ border: ${(props) => props.border};
 border-style: ${(props) => props.borderStyle};
 border-radius: ${(props) => props.borderRadius};
 border-color: ${(props) => props.borderColor};
+overflow: ${(props) => props.overflow};
 ${(props) => props.hover ? `&:hover {${props.hover}}` : ''}
 ${(props) => props.hover ? `&:active {${props.active}}` : ''}
 `;

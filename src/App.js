@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+import { Route } from 'react-router-dom';
+import CommonDetail from './pages/CommonDetail';
+import CommonList from './pages/CommonList';
+import CommonWrite from './pages/CommonWrite';
 
 //부트캠프별 리뷰 게시판 페이지
 import ReviewMain from './pages/ReviewMain';
@@ -16,6 +18,9 @@ import InfoWrite from './pages/InfoWrite';
 function App() {
   return (
     <React.Fragment>
+      <Route exact path="/commonlist" component={CommonList} />
+      <Route exact path="/commondetail" component={CommonDetail} />
+      <Route exact path="/commonwrite" component={CommonWrite} />
       <BrowserRouter>
         <Route path="/info" exact component={InfoList} />
         <Route path="/infowrite" exact component={InfoWrite} />

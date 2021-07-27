@@ -42,7 +42,7 @@ const Grid = (props) => {
     is_left: is_left, // 왼쪽 정렬
     is_right: is_right, // 오른쪽 정렬
     is_flex: is_flex,
-    flex_wrap,
+    flex_wrap: flex_wrap,
     width: width,
     height: height,
     margin: margin,
@@ -106,6 +106,7 @@ Grid.defaultProps = {
   hover: null,
   active: null,
 };
+
 const GridBox = styled.div`
   ${(props) =>
     props.is_center

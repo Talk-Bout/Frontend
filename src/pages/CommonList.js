@@ -10,15 +10,15 @@ const CommonBoardList = (props) => {
     <React.Fragment>
       <Grid padding="10%">
       <Grid>
-          <Title>자유게시판</Title>
+          <Text p margin="0px 0px 10px 0px">자유게시판</Text>
       </Grid>
       <Grid styles={{display:"flex"}}>
           <Categories>
-              <Button bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
-              <Button bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
-              <Button bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
-              <Button bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
-              <Button bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
+              <Button cursor= "pointer" bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
+              <Button cursor= "pointer" bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
+              <Button cursor= "pointer" bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
+              <Button cursor= "pointer" bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
+              <Button cursor= "pointer" bg= "#FAFAFA" border_radius="30px" width="20vw" margin="0px 5px">항해99</Button>
           </Categories>
       </Grid>
       <Grid>
@@ -26,7 +26,7 @@ const CommonBoardList = (props) => {
           <button style={{float: "right"}}>글쓰기</button>
           </WriteBox>
       </Grid>
-      <hr/>
+      <Hr/>
       <Grid>
       <Contents>
 
@@ -34,11 +34,11 @@ const CommonBoardList = (props) => {
             <Text p margin="0px" padding="2%" width="10%" fontWeight="bold">개발자는 커뮤니케이션 능력이 중요한 것 같아요...</Text>
             <Text p margin="0px" padding="2%" fontSize="14px">뭐랄까...</Text>
             <Text p margin="0px" padding="2%" fontSize="11px">글쓴이</Text>
+
             <Grid is_flex width="100%">
-           
-            <Text padding="2%" width="33.3%" fontSize="11px"><BiTimeFive/>2021.07.27</Text>
-            <Text padding="2%" width="33.3%" fontSize="11px"><BiLike/>좋아요 10</Text>
-            <Text padding="2%" width="33.3%" fontSize="11px"><BiComment/>댓글 2</Text>
+            <Text padding="2%" width="33.3%" fontSize="11px"><BiTimeFive/> 2021.07.27</Text>
+            <Text padding="2%" width="33.3%" fontSize="11px"><BiLike/> 10</Text>
+            <Text padding="2%" width="33.3%" fontSize="11px"><BiComment/> 2</Text>
             </Grid>
             </Content>
             
@@ -48,9 +48,6 @@ const CommonBoardList = (props) => {
     </React.Fragment>
   )
 };
-const Title = styled.h2`
-height: 5%
-`;
 
 const Categories = styled.div`
 display: flex;
@@ -66,6 +63,10 @@ const WriteBox = styled.div`
 height: 5%;
 padding: 4%;
 margin-bottom: 2%;
+`;
+
+const Hr = styled.hr`
+border:  0.5px solid #E5E5E5;
 `;
 
 const Contents = styled.div`

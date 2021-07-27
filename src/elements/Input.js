@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
-    const {placeholder, type, width, border_radius, border, _onChange, bg} = props;
+    const {placeholder, type, width, border_radius, border, _onChange, bg, font_size} = props;
 
     const styles = {
         width: width,
         border_radius: border_radius,
         border: border,
         bg: bg,
-        //우리는 짱이다!
+        font_size: font_size,
     }
     return(
         <React.Fragment>
@@ -30,12 +30,13 @@ Input.defaultProps = {
     border: "1px solid black",
     _onChange: () => {},
     bg: null,
+    font_size: null,
     // is_submit: false,
     // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
 }
 
 const ElInput = styled.input`
-    font-size: 15px;
+    font-size: ${(props) => props.font_size};
     border: ${(props) => props.border};
     width: ${(props) => props.width};
     border-radius: ${(props) => props.border_radius};

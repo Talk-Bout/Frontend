@@ -1,9 +1,41 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Grid = (props) => {
   // onClick 함수는 _onClick 으로 전달
   // is_center, is_left, is_right 는 세부 단위 지정 없이 넘기기(정렬 방향)
+  
+  const {
+    children,
+    _onClick,
+    is_center,
+    is_left,
+    is_right,
+    is_flex,
+    flex_wrap,
+    width,
+    height,
+    margin,
+    padding,
+    backgroundColor,
+    backgroundImageUrl,
+    top,
+    right,
+    bottom,
+    left,
+    position,
+    display,
+    flexDirection,
+    minHeight,
+    minWidth,
+    boxShadow,
+    border,
+    borderStyle,
+    borderRadius,
+    borderColor,
+    hover,
+    active,
+  } = props;
 
   const { children, _onClick, is_center, is_left, is_right, is_flex, flex_wrap, width, height, margin, padding, backgroundColor, backgroundImageUrl, top, right, bottom, left, position, display, flexDirection, minHeight, minWidth, boxShadow, border, borderStyle, borderRadius, borderColor, hover, active, float, overflow } = props;
 
@@ -41,9 +73,11 @@ overflow: overflow,
 
   return (
     <React.Fragment>
-      <GridBox {...styles} onClick={_onClick}>{children}</GridBox>
+      <GridBox {...styles} onClick={_onClick}>
+        {children}
+      </GridBox>
     </React.Fragment>
-  )
+  );
 };
 
 Grid.defaultProps = {
@@ -77,14 +111,15 @@ Grid.defaultProps = {
   active: null,
   float: null,
   overflow: null,
-}
+};
+
 const GridBox = styled.div`
-${(props) =>
-  props.is_center
-    ? `display: block; text-align: center; align-items: center; justify-content:space-between`
-    : ""};
   ${(props) =>
-  props.is_left
+    props.is_center
+      ? `display: block; text-align: center; align-items: center; justify-content:space-between`
+      : ''};
+  ${(props) =>
+    props.is_left
       ? `display: block; align-items: center; text-align: left;`
       : ""};
 ${(props) =>

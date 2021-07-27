@@ -4,9 +4,10 @@ import styled from "styled-components";
 const Text = (props) => {
   // 기본 설정은 span 태그, 만약 p 태그로 사용 원할 시 props 에 p 넘기기
 
-    const { p, children, color, fontSize, fontWeight, margin, padding, display, position } = props;
+    const { p, children, color, fontSize, fontWeight, margin, padding, display, lineHeight, float, position } = props;
 
-    const styles = {color: color, fontSize: fontSize, fontWeight: fontWeight, margin: margin, padding: padding, display: display, position: position};
+    const styles = {color: color, fontSize: fontSize, fontWeight: fontWeight, margin: margin, padding: padding, display: display, position: position, lineHeight: lineHeight, float: float,};
+
 
     if (p) {                                     
       return (                                  
@@ -33,6 +34,9 @@ Text.defaultProps = {
     padding: null,
     display: null,
     position: null,
+    lineHeight: null,
+    float: null,
+
   };
   
   const TextBoxP = styled.p`
@@ -43,6 +47,9 @@ Text.defaultProps = {
     padding: ${(props) => props.padding};
     display: ${(props) => props.display};
     position: ${(props) => props.position};
+    line-height: ${(props) => props.lineHeight};
+    float: ${(props) => props.float};
+
   `;
 
   const TextBoxS = styled.span`
@@ -53,6 +60,9 @@ Text.defaultProps = {
     padding: ${(props) => props.padding};
     display: ${(props) => props.display};
     position: ${(props) => props.position};
+    line-height: ${(props) => props.lineHeight};
+    float: ${(props) => props.float};
+
   `;
 
 export default Text;

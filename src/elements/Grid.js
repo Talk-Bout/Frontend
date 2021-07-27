@@ -5,12 +5,13 @@ const Grid = (props) => {
   // onClick 함수는 _onClick 으로 전달
   // is_center, is_left, is_right 는 세부 단위 지정 없이 넘기기(정렬 방향)
 
-  const { children, _onClick, is_center, is_left, is_right, width, height, margin, padding, backgroundColor, backgroundImageUrl, top, right, bottom, left, position, display, flexDirection, minHeight, minWidth, boxShadow, border, borderStyle, borderRadius, borderColor, hover, active } = props;
+  const { children, _onClick, is_center, is_left, is_right, is_flex, width, height, margin, padding, backgroundColor, backgroundImageUrl, top, right, bottom, left, position, display, flexDirection, minHeight, minWidth, boxShadow, border, borderStyle, borderRadius, borderColor, hover, active } = props;
 
 const styles = {
 is_center: is_center,                         // 가운데 정렬
 is_left: is_left,                             // 왼쪽 정렬
 is_right: is_right,                           // 오른쪽 정렬
+is_flex: is_flex,                           
 width: width,                                 
 height: height,                               
 margin: margin,                               
@@ -48,6 +49,7 @@ Grid.defaultProps = {
   is_center: false,
   is_right: false,
   is_left: false,
+  is_flex: false,
   width: "100%",
   margin: null,
   padding: null,
@@ -82,6 +84,10 @@ ${(props) =>
 ${(props) =>
   props.is_right
     ? `display: block; align-items: center; text-align: right;`
+    : ""};
+${(props) =>
+  props.is_flex
+    ? `display: flex; align-items: center; justify-content: space-between;`
     : ""};
 width: ${(props) => props.width};
 height: ${(props) => props.height};

@@ -35,9 +35,9 @@ const Grid = (props) => {
     borderColor,
     hover,
     active,
+    float,
+    overflow,
   } = props;
-
-  const { children, _onClick, is_center, is_left, is_right, is_flex, flex_wrap, width, height, margin, padding, backgroundColor, backgroundImageUrl, top, right, bottom, left, position, display, flexDirection, minHeight, minWidth, boxShadow, border, borderStyle, borderRadius, borderColor, hover, active, float, overflow } = props;
 
 const styles = {
 is_center: is_center,                         // 가운데 정렬

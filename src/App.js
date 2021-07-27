@@ -1,5 +1,7 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
+
+//자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
 import CommonList from './pages/CommonList';
 import CommonWrite from './pages/CommonWrite';

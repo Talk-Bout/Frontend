@@ -27,7 +27,7 @@ const Main = (props) => {
             부트캠프
           </Text>
           <Text fontSize="1.6vh" margin="0 0 0 auto">
-            더보기 >
+            더보기 &gt;
           </Text>
         </Grid>
         <Text p fontSize="1.6vh">
@@ -81,7 +81,7 @@ const Main = (props) => {
             styles={{ justify_content: 'flex-end' }}
             margin="0 0 0 auto"
           >
-            더보기 >
+            더보기 &gt;
           </Text>
         </Grid>
         <Text p fontSize="1.6vh">
@@ -130,7 +130,7 @@ const Main = (props) => {
             styles={{ justify_content: 'flex-end' }}
             margin="0 0 0 auto"
           >
-            더보기 >
+            더보기 &gt;
           </Text>
         </Grid>
         <Text p fontSize="1.6vh">

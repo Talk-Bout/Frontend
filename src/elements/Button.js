@@ -40,32 +40,32 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-    children: null,
-    text: false,
-    bg: "#BCBCBC",
-    width: "100%",
-    height: "100%",
-    margin: null,
-    _onClick: () => {},
-    border_radius: "0px",
-    cursor: "pointer",
-    border: null,
-    color: null,
-    font_size: null,
-    display: null,
-}
+  children: null,
+  text: false,
+  bg: '#BCBCBC',
+  width: '100%',
+  height: '100%',
+  margin: null,
+  _onClick: () => {},
+  border_radius: '0px',
+  cursor: 'pointer',
+  border: null,
+  color: null,
+  font_size: null,
+  display: null,
+};
 
 const ElButton = styled.button`
-    width: ${(props) => props.width};
-    margin: ${(props) => props.margin};
-    height: ${(props) => props.height};
-    background-color: ${(props) => props.bg};
-    border-radius: ${(props) => props.border_radius};
-    cursor: ${(props) => props.cursor};
-    border: ${(props) => props.border};
-    color: ${(props) => props.color};
-    font-size: ${(props) => props.font_size};
-    display: ${(props) => props.display};
+  width: ${(props) => props.width};
+  margin: ${(props) => props.margin};
+  height: ${(props) => props.height};
+  background-color: ${(props) => props.bg};
+  border-radius: ${(props) => props.border_radius};
+  cursor: ${(props) => props.cursor};
+  border: ${(props) => props.border};
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.font_size};
+  display: ${(props) => props.display};
 `;
 
 export default Button;

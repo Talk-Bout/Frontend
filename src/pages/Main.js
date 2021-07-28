@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Grid, Image, Input, Text } from '../elements';
 import Header from '../components/Header';
-
+import { history } from '../redux/ConfigureStore';
 //icons
 import { BiTimeFive } from 'react-icons/bi';
 import { BiLike } from 'react-icons/bi';
@@ -26,7 +26,13 @@ const Main = (props) => {
           <Text fontSize="2vh" fontWeight="700">
             부트캠프
           </Text>
-          <Text fontSize="1.6vh" margin="0 0 0 auto">
+          <Text
+            fontSize="1.6vh"
+            margin="0 0 0 auto"
+            _onClick={() => {
+              history.push('/review');
+            }}
+          >
             더보기 &gt;
           </Text>
         </Grid>

@@ -23,6 +23,9 @@ import QuestionList from './pages/QuestionList';
 import QuestionDetail from './pages/QuestionDetail';
 import QuestionWrite from './pages/QuestionWrite';
 
+//마이페이지
+import MyPageEdit from './pages/MyPageEdit';
+
 function App() {
   return (
     <React.Fragment>
@@ -40,6 +43,7 @@ function App() {
         <Route path="/review/list" exact component={ReviewList} />
         <Route path="/review/detail" exact component={ReviewDetail} />
         <Route path="/review/write" exact component={ReviewWrite} />
+        <Route path="/mypage/edit" exact component={MyPageEdit} />
       </BrowserRouter>
     </React.Fragment>
   );

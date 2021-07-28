@@ -124,7 +124,7 @@ padding: 0% 3% 3% 3%;
 
 const NoresultCard = styled.div`
 background-color: #FFFFFF;
-height: 100%
+height: 100%;
 `;
 
 

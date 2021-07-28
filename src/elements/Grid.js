@@ -121,43 +121,45 @@ const GridBox = styled.div`
   ${(props) =>
     props.is_left
       ? `display: block; align-items: center; text-align: left;`
-<<<<<<< HEAD
-      : ""};
-${(props) =>
-  props.is_right
-    ? `display: block; align-items: center; text-align: right;`
-    : ""};
-${(props) =>
-  props.is_flex
-    ? `display: block; align-items: center; text-align: center;`
-    : ""};
-flex-wrap: ${(props) => props.wrap};
-float: ${(props) => props.float};
-width: ${(props) => props.width};
-height: ${(props) => props.height};
-margin: ${(props) => props.margin};
-padding: ${(props) => props.padding};
-${(props) => (props.backgroundColor ? `background-color: ${props.backgroundColor};` : '')};
-${(props) => (props.backgroundImageUrl ? `background-image: url(${props.backgroundImageUrl});` : '')};
-top: ${(props) => props.top};
-right: ${(props) => props.right};
-bottom: ${(props) => props.bottom};
-left: ${(props) => props.left};
-position: ${(props) => props.position};
-display: ${(props) => props.display};
-flex-direction: ${(props) => props.flexDirection};
-min-width: ${(props) => props.minWidth};
-min-height: ${(props) => props.minHeight};
-box-sizing: border-box;
-box-shadow: ${(props) => props.boxShadow};
-border: ${(props) => props.border};
-border-style: ${(props) => props.borderStyle};
-border-radius: ${(props) => props.borderRadius};
-border-color: ${(props) => props.borderColor};
-overflow: ${(props) => props.overflow};
-${(props) => props.hover ? `&:hover {${props.hover}}` : ''}
-${(props) => props.hover ? `&:active {${props.active}}` : ''}
-
+      : ''};
+  ${(props) =>
+    props.is_right
+      ? `display: block; align-items: center; text-align: right;`
+      : ''};
+  ${(props) =>
+    props.is_flex
+      ? `display: block; align-items: center; text-align: center;`
+      : ''};
+  flex-wrap: ${(props) => props.wrap};
+  float: ${(props) => props.float};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
+  ${(props) =>
+    props.backgroundColor ? `background-color: ${props.backgroundColor};` : ''};
+  ${(props) =>
+    props.backgroundImageUrl
+      ? `background-image: url(${props.backgroundImageUrl});`
+      : ''};
+  top: ${(props) => props.top};
+  right: ${(props) => props.right};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+  position: ${(props) => props.position};
+  display: ${(props) => props.display};
+  flex-direction: ${(props) => props.flexDirection};
+  min-width: ${(props) => props.minWidth};
+  min-height: ${(props) => props.minHeight};
+  box-sizing: border-box;
+  box-shadow: ${(props) => props.boxShadow};
+  border: ${(props) => props.border};
+  border-style: ${(props) => props.borderStyle};
+  border-radius: ${(props) => props.borderRadius};
+  border-color: ${(props) => props.borderColor};
+  overflow: ${(props) => props.overflow};
+  ${(props) => (props.hover ? `&:hover {${props.hover}}` : '')}
+  ${(props) => (props.hover ? `&:active {${props.active}}` : '')}
 `;
 
 export default Grid;

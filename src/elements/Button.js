@@ -38,27 +38,12 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-<<<<<<< HEAD
-    children: null,
-    text: false,
-    bg: "#BCBCBC",
-    width: "100%",
-    height: "100%",
-    margin: null,
-    _onClick: () => {},
-    border_radius: "0px",
-    cursor: "pointer",
-    border: null,
-    color: null,
-    font_size: null,
-}
-=======
   children: null,
   text: false,
   bg: '#BCBCBC',
   width: '100%',
   height: '100%',
-  margin: 'auto',
+  margin: null,
   _onClick: () => {},
   border_radius: '0px',
   cursor: 'pointer',
@@ -66,7 +51,6 @@ Button.defaultProps = {
   color: null,
   font_size: null,
 };
->>>>>>> DH
 
 const ElButton = styled.button`
   width: ${(props) => props.width};

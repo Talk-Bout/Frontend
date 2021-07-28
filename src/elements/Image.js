@@ -67,6 +67,10 @@ const Image = (props) => {
     return <ProfileImage {...styles}></ProfileImage>;
   }
 
+  if (shape === "BigProfileImage") {
+    return <BigProfileImage {...styles}></BigProfileImage>;
+  }
+
   return (
     <React.Fragment>
       <ImageDefault {...styles}></ImageDefault>
@@ -126,6 +130,19 @@ const ImageDefault = styled.div`
   ${(props) => props.hover ? `&:hover {${props.hover}}` : ''};
   ${(props) => props.hover ? `&:active {${props.active}}` : ''};
 
+`;
+
+// 마이페이지(정보수정) 프로필 이미지
+const BigProfileImage = styled.div`
+  width: 7rem;
+  height: 7rem;
+  background-size: cover;
+  background-position: 50% 50%;                  // 이미지의 중간 부분이 보이게
+  background-color: #eee;                        // 이미지 안 뜨는 경우 배경색
+  border-radius: 2.5vh;
+  background-image: url("${(props) => props.src}");
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 // 프로필 이미지

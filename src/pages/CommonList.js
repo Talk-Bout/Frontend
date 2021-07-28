@@ -6,8 +6,11 @@ import { BiLike } from 'react-icons/bi';
 import { BiComment } from 'react-icons/bi';
 import { history } from '../redux/ConfigureStore';
 
+import Header from '../components/Header';
+
 const CommonBoardList = (props) => {
 
+  
   return (
     <React.Fragment>
       <Grid padding="10%">
@@ -29,23 +32,22 @@ const CommonBoardList = (props) => {
           </WriteBox>
       </Grid>
       <Hr/>
-      <Grid>
-      <Contents>
-
-            <Content>
-            <Text p margin="0px" padding="2%" width="10%" fontWeight="bold">개발자는 커뮤니케이션 능력이 중요한 것 같아요...</Text>
-            <Text p margin="0px" padding="2%" fontSize="14px">뭐랄까...</Text>
-            <Text p margin="0px" padding="2%" fontSize="11px">글쓴이</Text>
-
-            <Grid is_flex width="100%">
-            <Text padding="2%" width="33.3%" fontSize="11px"><BiTimeFive/> 2021.07.27</Text>
-            <Text padding="2%" width="33.3%" fontSize="11px"><BiLike/> 10</Text>
-            <Text padding="2%" width="33.3%" fontSize="11px"><BiComment/> 2</Text>
-            </Grid>
-            </Content>
-            
-          </Contents>
-      </Grid>
+      <Contents flex_wrap="wrap">
+      {[1, 2, 3, 4, 5, 6].map((n, idx) => {
+            return (
+        <Content>
+        <Text p margin="0px" padding="2%" fontWeight="bold">개발자는 커뮤니케이션 능력이 중요한 것 같아요...</Text>
+        <Text p margin="0px" padding="2%" fontSize="14px">뭐랄까...</Text>
+        <Text p margin="0px" padding="2%" fontSize="11px">글쓴이</Text>
+        <Grid is_flex width="100%">
+        <Text padding="2%" width="33.3%" fontSize="11px"><BiTimeFive/> 2021.07.27</Text>
+        <Text padding="2%" width="33.3%" fontSize="11px"><BiLike/> 10</Text>
+        <Text padding="2%" width="33.3%" fontSize="11px"><BiComment/> 2</Text>
+        </Grid>
+        </Content>
+        );
+          })}
+      </Contents>
       </Grid>
     </React.Fragment>
   )
@@ -77,7 +79,6 @@ grid-template-columns: repeat(2, 1fr);
 display: grid;
 align-items: center;
 place-items: center;
-width: 100%;
 height: 75%;
 margin: 3%;
 border: 1px solid DarkGrey;

@@ -54,6 +54,8 @@ const Mypage = (props) => {
                 <DetailCard></DetailCard>
               </Grid>
             </Grid>
+
+              {/* 게시물이 없을 경우
             <Grid height="30%" margin="0 0 2% 0">
               <DetailHeader>
                 <Text p lineHeight="7vh" margin="0" padding="0% 5%" > 내 북마크 <span> (0) </span> </Text>
@@ -63,7 +65,8 @@ const Mypage = (props) => {
                   <Text display="block" text_align="center" vertical_align="middle" > 작성된 글이 없어요 :( </Text>
                 </NoresultCard>
               </Grid>
-            </Grid>
+            </Grid> */}
+
           </Grid>
         </Grid>
       </Grid>

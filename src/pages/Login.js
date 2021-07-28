@@ -46,6 +46,7 @@ const Button = styled.button`
 
 const HelpDiv = styled.div`
   padding: 0 10px;
+  display: inline;
 `;
 
 

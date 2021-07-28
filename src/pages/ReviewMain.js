@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Button, Grid, Image, Input, Text} from '../elements';
+import { Button, Grid, Image, Input, Text } from '../elements';
 import Header from '../components/Header';
 
 const ReviewMain = (props) => {
-
   return (
     <React.Fragment>
       <Grid>
         <Header />
-        <Grid is_center backgroundColor='#e5e5e5' height='25vh' padding='9vh 0'>
-          <Text fontSize='3vh' fontWeight='700'>부트캠퍼들의 속 시원한 이야기</Text>
-          <Text p fontSize='1.5vh' margin='5px'>부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.</Text>
+        <Grid is_center backgroundColor="#e5e5e5" height="25vh" padding="9vh 0">
+          <Text fontSize="3vh" fontWeight="700">
+            부트캠퍼들의 속 시원한 이야기
+          </Text>
+          <Text p fontSize="1.5vh" margin="5px">
+            부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.
+          </Text>
         </Grid>
         <Grid is_center>
           <CardList>
@@ -19,13 +22,19 @@ const ReviewMain = (props) => {
               return (
                 <Card>
                   <ImageDiv>
-                    <Text fontSize='2.5vh'>LOGO</Text>
+                    <Text fontSize="2.5vh">LOGO</Text>
                   </ImageDiv>
-                  <Text p fontSize='1.6vh' fontWeight='700' margin='3vh 0 0'>스파르타코딩클럽</Text>
-                  <Text fontSize='1.2vh' color='#aaa' margin='1px 0 0'>99일 만에 진짜 개발자가 되는 법</Text>
-                  <Text p fontSize='1.5vh'>★★☆☆☆ 2.2</Text>
+                  <Text p fontSize="1.6vh" fontWeight="700" margin="3vh 0 0">
+                    스파르타코딩클럽
+                  </Text>
+                  <Text fontSize="1.2vh" color="#aaa" margin="1px 0 0">
+                    99일 만에 진짜 개발자가 되는 법
+                  </Text>
+                  <Text p fontSize="1.5vh">
+                    ★★☆☆☆ 2.2
+                  </Text>
                 </Card>
-              )
+              );
             })}
           </CardList>
         </Grid>

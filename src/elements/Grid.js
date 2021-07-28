@@ -37,6 +37,12 @@ const Grid = (props) => {
     active,
     float,
     overflow,
+    flex,
+    justify_content,
+    fontSize,
+    align_items,
+    vertical_align,
+    fontWeight,
   } = props;
 
 const styles = {
@@ -69,6 +75,12 @@ hover: hover,                                  // 마우스 올렸을 때 효과
 active: active,                             // 마우스 클릭 시 효과
 float: float,
 overflow: overflow,
+flex: flex,
+justify_content: justify_content,
+fontSize: fontSize,
+align_items: align_items,
+vertical_align: vertical_align,
+fontWeight: fontWeight,
 };
 
   return (
@@ -111,6 +123,12 @@ Grid.defaultProps = {
   active: null,
   float: null,
   overflow: null,
+  flex: null,
+  justify_content: null,
+  fontSize: null,
+  align_items: null,
+  vertical_align: null,
+  fontWeight: null,
 };
 
 const GridBox = styled.div`
@@ -130,6 +148,11 @@ ${(props) =>
   props.is_flex
     ? `display: block; align-items: center; text-align: center;`
     : ""};
+font-weight: ${(props) => props.fontWeight};
+vertical-align: ${(props) => props.vertical_align};
+align-items: ${(props) => props.align_items};
+justify-content: ${(props) => props.justify_content};
+flex: ${(props) => props.flex};
 flex_wrap: ${(props) => props.wrap};
 float: ${(props) => props.float};
 width: ${(props) => props.width};
@@ -143,7 +166,7 @@ right: ${(props) => props.right};
 bottom: ${(props) => props.bottom};
 left: ${(props) => props.left};
 position: ${(props) => props.position};
-display: ${(props) => props.dp};
+display: ${(props) => props.display};
 flex-direction: ${(props) => props.fd};
 min-width: ${(props) => props.minWidth};
 min-height: ${(props) => props.minHeight};
@@ -154,6 +177,7 @@ border-style: ${(props) => props.borderStyle};
 border-radius: ${(props) => props.borderRadius};
 border-color: ${(props) => props.borderColor};
 overflow: ${(props) => props.overflow};
+font-size: ${(props) => props.fontSize};
 ${(props) => props.hover ? `&:hover {${props.hover}}` : ''}
 ${(props) => props.hover ? `&:active {${props.active}}` : ''}
 `;

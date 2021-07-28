@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Image = (props) => {
 
-  const { shape, src, size, cursor, margin, padding} = props;
+  const { shape, src, size, cursor, margin, padding, align_items} = props;
 
   const styles = {
     src: src,
@@ -11,6 +11,7 @@ const Image = (props) => {
     cursor: cursor,
     margin: margin,
     padding: padding,
+    align_items: align_items,
 
   };
 
@@ -59,9 +60,10 @@ Image.defaultProps = {
   src: "https://previews.123rf.com/images/imagevectors/imagevectors1603/imagevectors160300845/53026883-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%EC%97%90-%ED%8F%89%EB%A9%B4-%EA%B2%80%EC%9D%80-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%94%84%EB%A1%9C%ED%95%84-%EC%9B%B9-%EC%95%84%EC%9D%B4%EC%BD%98.jpg",
   _onClick: () => {},
   cursor: "",
-  size: 36,
-  margin: false,
-  padding: false,
+  size: null,
+  margin: null,
+  padding: null,
+  align_items: null,
 };
 
 // 기본 이미지
@@ -72,37 +74,36 @@ const ImageDefault = styled.div`
   cursor: ${(props) => props.cursor};
   background-image: url("${(props) => props.src}");
   background-size: cover;
+  align-items: ${(props) => props.align_items};
+  margin: ${(props) => props.margin};
 `;
 
 // 마이페이지 프로필 이미지
 const ProfileImage = styled.div`
-  position: "absolute",
   width: "72px",
   height: "72px",
   left: "109px",
   top: "56px",
-  
+  align-items: ${(props) => props.align_items};
   background-image: url("${(props) => props.src}");
-  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-  ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 // 마이페이지(정보수정) 프로필 이미지
 const BigProfileImage = styled.div`
-  position: absolute;
   width: 120px;
   height: 120px;
   left: 415px;
   top: 743px;
-
+  align-items: ${(props) => props.align_items};
   background-image: url("${(props) => props.src}");
-  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-  ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 // Header 로고 이미지
 const HeaderLogo = styled.div`
-  position: absolute;
   width: 66px;
   height: 32px;
   left: 363px;
@@ -123,13 +124,12 @@ const HeaderLogo = styled.div`
 
   cursor: ${(props) => props.cursor};
   background-image: url("${(props) => props.src}");
-  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-  ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 // 메인페이지 circle 로고 이미지
 const CircleLogo = styled.div`
-  position: absolute;
   width: 80px;
   height: 80px;
   left: 24px;
@@ -138,13 +138,12 @@ const CircleLogo = styled.div`
   cursor: ${(props) => props.cursor};
   background-size: cover;
   background-image: url("${(props) => props.src}");
-  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-  ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 // 리뷰페이지 card부분 로고 이미지
 const ReviewLogo = styled.div`
-position: absolute;
 width: 66px;
 height: 32px;
 left: calc(50% - 66px/2);
@@ -165,13 +164,12 @@ text-transform: uppercase;
 color: #121212;
 
 background-image: url("${(props) => props.src}");
-${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+margin: ${(props) => props.margin};
+padding: ${(props) => props.padding};
 `;
 
 // 부트캠프 상세페이지 각 캠프의 로고 이미지
 const CampBigLogo = styled.div`
-  position: absolute;
   width: 190px;
   height: 112px;
   left: 365px;
@@ -179,13 +177,12 @@ const CampBigLogo = styled.div`
   background: #FAFAFA;
   
   background-image: url("${(props) => props.src}");
-  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-  ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 // 부트캠프 상세페이지 '다른 부트캠프' circle 이미지
 const CampSmallLogo = styled.div`
-  position: static;
   width: 80px;
   height: 80px;
   left: 0px;
@@ -198,14 +195,13 @@ const CampSmallLogo = styled.div`
   margin: 0px 16px;
   
   background-image: url("${(props) => props.src}");
-  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-  ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 
 `;
 
 //로그인, 회원가입페이지 로고 이미지
 const LoginLogo = styled.div`
-  position: absolute;
   width: 87px;
   height: 40px;
   left: 819px;
@@ -225,8 +221,8 @@ const LoginLogo = styled.div`
   color: #101010;
   
   background-image: url("${(props) => props.src}");
-  ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
-  ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 export default Image;

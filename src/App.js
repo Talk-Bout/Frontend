@@ -17,6 +17,9 @@ import InfoList from './pages/InfoList';
 import InfoDetail from './pages/InfoDetail';
 import InfoWrite from './pages/InfoWrite';
 
+//마이 페이지
+import Mypage from './pages/Mypage';
+
 function App() {
   return (
     <React.Fragment>
@@ -33,7 +36,8 @@ function App() {
         <Route path="/Review/write" exact component={ReviewWrite} />
         <Route exact path="/common/List" component={CommonList} />
         <Route exact path="/common/Detail" component={CommonDetail} />
-        <Route exact path="/common/Write" component={CommonWrite} /> 
+        <Route exact path="/common/Write" component={CommonWrite} />
+        <Route exact path="/mypage" component={Mypage} />
       </BrowserRouter>
     </React.Fragment>
   );

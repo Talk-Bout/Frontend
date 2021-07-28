@@ -1,29 +1,41 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Button = (props) => {
-    const {children, text, bg, width, height, margin, _onClick, border_radius, cursor, border, color, font_size} = props;
+  const {
+    children,
+    text,
+    bg,
+    width,
+    height,
+    margin,
+    _onClick,
+    border_radius,
+    cursor,
+    border,
+    color,
+    font_size,
+  } = props;
 
-    const styles = {
-        bg: bg,
-        width: width,
-        height: height,
-        margin: margin,
-        border_radius: border_radius,
-        cursor: cursor,
-        border: border,
-        color: color,
-        font_size: font_size,
-    }
-    return (
-        <React.Fragment>
-            <ElButton {...styles}
-            text={text}
-            onClick={_onClick}
-            >{children}</ElButton>
-        </React.Fragment>
-    )
-}
+  const styles = {
+    bg: bg,
+    width: width,
+    height: height,
+    margin: margin,
+    border_radius: border_radius,
+    cursor: cursor,
+    border: border,
+    color: color,
+    font_size: font_size,
+  };
+  return (
+    <React.Fragment>
+      <ElButton {...styles} text={text} onClick={_onClick}>
+        {children}
+      </ElButton>
+    </React.Fragment>
+  );
+};
 
 Button.defaultProps = {
     children: null,
@@ -41,15 +53,15 @@ Button.defaultProps = {
 }
 
 const ElButton = styled.button`
-    width: ${(props) => props.width};
-    margin: ${(props) => props.margin};
-    height: ${(props) => props.height};
-    background-color: ${(props) => props.bg};
-    border-radius: ${(props) => props.border_radius};
-    cursor: ${(props) => props.cursor};
-    border: ${(props) => props.border};
-    color: ${(props) => props.color};
-    font-size: ${(props) => props.font_size};
+  width: ${(props) => props.width};
+  margin: ${(props) => props.margin};
+  height: ${(props) => props.height};
+  background-color: ${(props) => props.bg};
+  border-radius: ${(props) => props.border_radius};
+  cursor: ${(props) => props.cursor};
+  border: ${(props) => props.border};
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.font_size};
 `;
 
 export default Button;

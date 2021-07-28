@@ -7,7 +7,7 @@ import { BiTimeFive } from 'react-icons/bi';
 import { BiLike } from 'react-icons/bi';
 import { BiComment } from 'react-icons/bi';
 
-const InfoList = (props) => {
+const QuestionList = (props) => {
   return (
     <React.Fragment>
       <Grid padding="10%">
@@ -15,7 +15,7 @@ const InfoList = (props) => {
         <>
           <Grid width="100%" margin="5px auto" is_flex>
             <Text fontSize="40px" fontWeight="600">
-              정보 게시판
+              질문/답변 게시판
             </Text>
             <Button width="10%" margin="1%">
               글쓰기
@@ -73,4 +73,4 @@ const InfoBox = styled.div`
   margin: 1%;
 `;
 
-export default InfoList;
+export default QuestionList;

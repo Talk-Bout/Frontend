@@ -19,7 +19,11 @@ const QuestionList = (props) => {
           <Text width="90%" fontSize="3.5vh" fontWeight="600">
             질문/답변 게시판
           </Text>
-          <Button width="10%" margin="auto 0 auto auto" _onClick={() => history.push('/question/write')}>
+          <Button
+            width="10%"
+            margin="auto 0 auto auto"
+            _onClick={() => history.push('/question/write')}
+          >
             글쓰기
           </Button>
           {/* // 글쓰기 페이지로 이동하기 */}
@@ -30,7 +34,7 @@ const QuestionList = (props) => {
         <Questions flex_wrap="wrap">
           {[1, 2, 3, 4, 5, 6].map((n, idx) => {
             return (
-              <QuestionBox>
+              <QuestionBox onClick={() => history.push('/question/detail')}>
                 <Grid display="flex">
                   <Text padding="3%" fontWeight="700" fontSize="2vh">
                     Q
@@ -90,6 +94,9 @@ const QuestionBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0% 1%;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export default QuestionList;

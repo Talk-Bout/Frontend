@@ -5,6 +5,7 @@ import Main from './pages/Main';
 
 //로그인 회원가입 페이지
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 //자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
@@ -28,6 +29,7 @@ function App() {
       <BrowserRouter>
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
+        <Route path="/signup" exact component={Signup} />
         <Route path="/common/list" exact component={CommonList} />
         <Route path="/common/detail" exact component={CommonDetail} />
         <Route path="/common/write" exact component={CommonWrite} />

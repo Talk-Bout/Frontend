@@ -160,6 +160,7 @@ const GridBox = styled.div`
   overflow: ${(props) => props.overflow};
   ${(props) => (props.hover ? `&:hover {${props.hover}}` : '')}
   ${(props) => (props.hover ? `&:active {${props.active}}` : '')}
+
 `;
 
 export default Grid;

@@ -6,7 +6,7 @@ const Text = (props) => {
 
     const { p, children, color, fontSize, fontWeight, margin, padding, display, lineHeight, float, position } = props;
 
-    const styles = {color: color, fontSize: fontSize, fontWeight: fontWeight, margin: margin, padding: padding, display: display, position: position, lineHeight: lineHeight, float: float,};
+    const styles = {color: color, fontSize: fontSize, fontWeight: fontWeight, margin: margin, padding: padding, display: display, position: position, lineHeight: lineHeight, float: float};
 
 
     if (p) {                                     
@@ -36,7 +36,6 @@ Text.defaultProps = {
     position: null,
     lineHeight: null,
     float: null,
-
   };
   
   const TextBoxP = styled.p`
@@ -49,7 +48,6 @@ Text.defaultProps = {
     position: ${(props) => props.position};
     line-height: ${(props) => props.lineHeight};
     float: ${(props) => props.float};
-
   `;
 
   const TextBoxS = styled.span`
@@ -62,7 +60,6 @@ Text.defaultProps = {
     position: ${(props) => props.position};
     line-height: ${(props) => props.lineHeight};
     float: ${(props) => props.float};
-
   `;
 
 export default Text;

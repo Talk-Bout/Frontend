@@ -14,17 +14,9 @@ import ReviewList from './pages/ReviewList';
 import ReviewDetail from './pages/ReviewDetail';
 import ReviewWrite from './pages/ReviewWrite';
 
-
-//부트캠프별 리뷰 게시판 페이지
-import ReviewMain from './pages/ReviewMain';
-import ReviewList from './pages/ReviewList';
-import ReviewDetail from './pages/ReviewDetail';
-import ReviewWrite from './pages/ReviewWrite';
-
 //질문 게시판 페이지
 import QuestionList from './pages/QuestionList';
 import QuestionDetail from './pages/QuestionDetail';
-
 
 function App() {
   return (
@@ -34,9 +26,9 @@ function App() {
         <Route path="/common/list" exact component={CommonList} />
         <Route path="/common/detail" exact component={CommonDetail} />
         <Route path="/common/write" exact component={CommonWrite} />
-        <Route path="/info" exact component={InfoList} />
-        <Route path="/info/write" exact component={InfoWrite} />
-        <Route path="/info/detail" exact component={InfoDetail} />
+        <Route path="/question" exact component={QuestionList} />
+        {/* <Route path="/question/write" exact component={InfoWrite} /> */}
+        <Route path="/question/detail" exact component={QuestionDetail} />
         <Route path="/review" exact component={ReviewMain} />
         <Route path="/review/list" exact component={ReviewList} />
         <Route path="/review/detail" exact component={ReviewDetail} />

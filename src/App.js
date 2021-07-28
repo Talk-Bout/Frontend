@@ -14,10 +14,17 @@ import ReviewList from './pages/ReviewList';
 import ReviewDetail from './pages/ReviewDetail';
 import ReviewWrite from './pages/ReviewWrite';
 
-//정보 게시판 페이지
-import InfoList from './pages/InfoList';
-import InfoDetail from './pages/InfoDetail';
-import InfoWrite from './pages/InfoWrite';
+
+//부트캠프별 리뷰 게시판 페이지
+import ReviewMain from './pages/ReviewMain';
+import ReviewList from './pages/ReviewList';
+import ReviewDetail from './pages/ReviewDetail';
+import ReviewWrite from './pages/ReviewWrite';
+
+//질문 게시판 페이지
+import QuestionList from './pages/QuestionList';
+import QuestionDetail from './pages/QuestionDetail';
+
 
 function App() {
   return (

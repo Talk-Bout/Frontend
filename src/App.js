@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
+import { Route, BrowserRouter } from 'react-router-dom';
 
+//자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
 import CommonList from './pages/CommonList';
 import CommonWrite from './pages/CommonWrite';
@@ -31,6 +31,9 @@ function App() {
         <Route path="/Review/list" exact component={ReviewList} />
         <Route path="/Review/detail" exact component={ReviewDetail} />
         <Route path="/Review/write" exact component={ReviewWrite} />
+        <Route exact path="/common/List" component={CommonList} />
+        <Route exact path="/common/Detail" component={CommonDetail} />
+        <Route exact path="/common/Write" component={CommonWrite} /> 
       </BrowserRouter>
     </React.Fragment>
   );

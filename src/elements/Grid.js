@@ -4,8 +4,40 @@ import styled from 'styled-components';
 const Grid = (props) => {
   // onClick 함수는 _onClick 으로 전달
   // is_center, is_left, is_right 는 세부 단위 지정 없이 넘기기(정렬 방향)
-
-  const { children, _onClick, is_center, is_left, is_right, is_flex, flex_wrap, width, height, margin, padding, backgroundColor, backgroundImageUrl, top, right, bottom, left, position, display, flexDirection, minHeight, minWidth, boxShadow, border, borderStyle, borderRadius, borderColor, hover, active, float, overflow } = props;
+  
+  const {
+    children,
+    _onClick,
+    is_center,
+    is_left,
+    is_right,
+    is_flex,
+    flex_wrap,
+    width,
+    height,
+    margin,
+    padding,
+    backgroundColor,
+    backgroundImageUrl,
+    top,
+    right,
+    bottom,
+    left,
+    position,
+    display,
+    flexDirection,
+    minHeight,
+    minWidth,
+    boxShadow,
+    border,
+    borderStyle,
+    borderRadius,
+    borderColor,
+    hover,
+    active,
+    float,
+    overflow,
+  } = props;
 
 const styles = {
 is_center: is_center,                         // 가운데 정렬

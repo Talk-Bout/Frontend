@@ -15,6 +15,7 @@ const Input = (props) => {
         margin: margin,
     }
 
+
   if (multiLine) {
     return (
       <ElTextarea
@@ -47,7 +48,10 @@ Input.defaultProps = {
   border: '1px solid black',
   _onChange: () => {},
   bg: null,
+  font_size: null,
+  outline: null,
   margin: null,
+  
   // is_submit: false,
   // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
 };
@@ -69,6 +73,8 @@ const ElInput = styled.input`
   border-radius: ${(props) => props.border_radius};
   background-color: ${(props) => props.bg};
   padding: 2%;
+  height:  ${(props) => props.height};
+  outline: ${(props) => props.outline};
   margin: ${(props) => props.margin};
 `;
 

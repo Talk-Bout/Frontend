@@ -31,7 +31,7 @@ Button.defaultProps = {
     bg: "#BCBCBC",
     width: "100%",
     height: "100%",
-    margin: "auto",
+    margin: null,
     _onClick: () => {},
     border_radius: "0px",
     cursor: "pointer",

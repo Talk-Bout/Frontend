@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 //자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
@@ -25,6 +26,7 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Route path="/login" exact component={Login} />
+        <Route path="/signup" exact component={Signup} />
         <Route path="/common/list" exact component={CommonList} />
         <Route path="/common/detail" exact component={CommonDetail} />
         <Route path="/common/write" exact component={CommonWrite} />

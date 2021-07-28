@@ -130,7 +130,7 @@ ${(props) =>
   props.is_flex
     ? `display: block; align-items: center; text-align: center;`
     : ""};
-flex_wrap: ${(props) => props.wrap};
+flex-wrap: ${(props) => props.wrap};
 float: ${(props) => props.float};
 width: ${(props) => props.width};
 height: ${(props) => props.height};

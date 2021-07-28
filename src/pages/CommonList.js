@@ -4,6 +4,8 @@ import {Text, Button, Grid} from "../elements/index";
 import { BiTimeFive } from 'react-icons/bi'; 
 import { BiLike } from 'react-icons/bi'; 
 import { BiComment } from 'react-icons/bi';
+import { history } from '../redux/ConfigureStore';
+
 const CommonBoardList = (props) => {
 
   return (
@@ -23,7 +25,7 @@ const CommonBoardList = (props) => {
       </Grid>
       <Grid>
           <WriteBox>
-          <button style={{float: "right"}}>글쓰기</button>
+          <button style={{float: "right", cursor: 'pointer'}} onClick={() => history.push('/common/write')}>글쓰기</button>
           </WriteBox>
       </Grid>
       <Hr/>
@@ -54,7 +56,7 @@ display: flex;
 flex-direction: row;
 align-items: flex-start;
 width: 100%;
-height: 15%
+height: 15%;
 left: 8vw;
 top: 8vh;
 `;
@@ -76,7 +78,7 @@ display: grid;
 align-items: center;
 place-items: center;
 width: 100%;
-height: 75%
+height: 75%;
 margin: 3%;
 border: 1px solid DarkGrey;
 box-sizing: border-box;

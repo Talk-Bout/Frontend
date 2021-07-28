@@ -15,6 +15,7 @@ const Button = (props) => {
     border,
     color,
     font_size,
+    display,
   } = props;
 
   const styles = {
@@ -27,6 +28,7 @@ const Button = (props) => {
     border: border,
     color: color,
     font_size: font_size,
+    display: display,
   };
   return (
     <React.Fragment>
@@ -50,18 +52,20 @@ Button.defaultProps = {
     border: null,
     color: null,
     font_size: null,
+    display: null,
 }
 
 const ElButton = styled.button`
-  width: ${(props) => props.width};
-  margin: ${(props) => props.margin};
-  height: ${(props) => props.height};
-  background-color: ${(props) => props.bg};
-  border-radius: ${(props) => props.border_radius};
-  cursor: ${(props) => props.cursor};
-  border: ${(props) => props.border};
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.font_size};
+    width: ${(props) => props.width};
+    margin: ${(props) => props.margin};
+    height: ${(props) => props.height};
+    background-color: ${(props) => props.bg};
+    border-radius: ${(props) => props.border_radius};
+    cursor: ${(props) => props.cursor};
+    border: ${(props) => props.border};
+    color: ${(props) => props.color};
+    font-size: ${(props) => props.font_size};
+    display: ${(props) => props.display};
 `;
 
 export default Button;

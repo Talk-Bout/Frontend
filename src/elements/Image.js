@@ -76,11 +76,11 @@ const ImageDefault = styled.div`
 
 // 마이페이지 프로필 이미지
 const ProfileImage = styled.div`
-  position: "absolute",
-  width: "72px",
-  height: "72px",
-  left: "109px",
-  top: "56px",
+  position: "absolute";
+  width: "72px";
+  height: "72px";
+  left: "109px";
+  top: "56px";
   
   background-image: url("${(props) => props.src}");
   ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
@@ -89,12 +89,12 @@ const ProfileImage = styled.div`
 
 // 마이페이지(정보수정) 프로필 이미지
 const BigProfileImage = styled.div`
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  left: 415px;
-  top: 743px;
-
+  width: 7rem;
+  height: 7rem;
+  background-size: cover;
+  background-position: 50% 50%;                  // 이미지의 중간 부분이 보이게
+  background-color: #eee;                        // 이미지 안 뜨는 경우 배경색
+  border-radius: 2.5vh;
   background-image: url("${(props) => props.src}");
   ${(props) => (props.margin ? `margin: ${props.margin}` : "")};
   ${(props) => (props.padding ? `padding: ${props.padding}` : "")};
@@ -134,7 +134,6 @@ const CircleLogo = styled.div`
   height: 80px;
   left: 24px;
   top: 22px;
-  _onClick: () => {},
   cursor: ${(props) => props.cursor};
   background-size: cover;
   background-image: url("${(props) => props.src}");

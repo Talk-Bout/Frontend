@@ -20,9 +20,6 @@ import InfoWrite from './pages/InfoWrite';
 function App() {
   return (
     <React.Fragment>
-      <Route exact path="/commonlist" component={CommonList} />
-      <Route exact path="/commondetail" component={CommonDetail} />
-      <Route exact path="/commonwrite" component={CommonWrite} />
       <BrowserRouter>
         <Route path="/info" exact component={InfoList} />
         <Route path="/infowrite" exact component={InfoWrite} />
@@ -31,6 +28,9 @@ function App() {
         <Route path="/Review/list" exact component={ReviewList} />
         <Route path="/Review/detail" exact component={ReviewDetail} />
         <Route path="/Review/write" exact component={ReviewWrite} />
+        <Route exact path="/common/List" component={CommonList} />
+        <Route exact path="/common/Detail" component={CommonDetail} />
+        <Route exact path="/common/Write" component={CommonWrite} /> 
       </BrowserRouter>
     </React.Fragment>
   );

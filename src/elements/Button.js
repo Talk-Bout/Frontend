@@ -1,30 +1,43 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Button = (props) => {
-    const {children, text, bg, width, height, margin, _onClick, border_radius, cursor, border, color, font_size, display} = props;
+  const {
+    children,
+    text,
+    bg,
+    width,
+    height,
+    margin,
+    _onClick,
+    border_radius,
+    cursor,
+    border,
+    color,
+    font_size,
+    display,
+  } = props;
 
-    const styles = {
-        bg: bg,
-        width: width,
-        height: height,
-        margin: margin,
-        border_radius: border_radius,
-        cursor: cursor,
-        border: border,
-        color: color,
-        font_size: font_size,
-        display: display,
-    }
-    return (
-        <React.Fragment>
-            <ElButton {...styles}
-            text={text}
-            onClick={_onClick}
-            >{children}</ElButton>
-        </React.Fragment>
-    )
-}
+  const styles = {
+    bg: bg,
+    width: width,
+    height: height,
+    margin: margin,
+    border_radius: border_radius,
+    cursor: cursor,
+    border: border,
+    color: color,
+    font_size: font_size,
+    display: display,
+  };
+  return (
+    <React.Fragment>
+      <ElButton {...styles} text={text} onClick={_onClick}>
+        {children}
+      </ElButton>
+    </React.Fragment>
+  );
+};
 
 Button.defaultProps = {
     children: null,
@@ -32,7 +45,7 @@ Button.defaultProps = {
     bg: "#BCBCBC",
     width: "100%",
     height: "100%",
-    margin: "auto",
+    margin: null,
     _onClick: () => {},
     border_radius: "0px",
     cursor: "pointer",

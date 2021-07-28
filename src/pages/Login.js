@@ -9,7 +9,7 @@ const Login = (props) => {
 
   return (
     <SmallWindow>
-      <Grid height='100%' display='flex'>
+      <Grid height='100%'>
         <Grid height='25%'>
           <Grid height='50%'/>
           <Grid is_center height='50%'><Text fontSize='3vh'>LOGO</Text></Grid>
@@ -46,6 +46,7 @@ const Button = styled.button`
 
 const HelpDiv = styled.div`
   padding: 0 10px;
+  display: inline;
 `;
 
 

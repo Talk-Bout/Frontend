@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Grid = (props) => {
   // onClick 함수는 _onClick 으로 전달
   // is_center, is_left, is_right 는 세부 단위 지정 없이 넘기기(정렬 방향)
-  
+
   const {
     children,
     _onClick,
@@ -45,43 +45,43 @@ const Grid = (props) => {
     fontWeight,
   } = props;
 
-const styles = {
-is_center: is_center,                         // 가운데 정렬
-is_left: is_left,                             // 왼쪽 정렬
-is_right: is_right,                            // 오른쪽 정렬
-is_flex: is_flex,
-flex_wrap: flex_wrap,                          
-width: width,                                 
-height: height,                               
-margin: margin,                               
-padding: padding,                             
-backgroundColor: backgroundColor,             
-backgroundImageUrl: backgroundImageUrl,       // 배경 이미지 있을 경우 url
-top: top,
-right: right,
-bottom: bottom,
-left: left,
-postion: position,
-display: display,
-flexDirection: flexDirection,
-minWidth: minWidth,
-minHeight: minHeight,
-boxShadow: boxShadow,                          // 그림자
-border: border,
-borderStyle: borderStyle,
-borderRadius: borderRadius,
-borderColor: borderColor,
-hover: hover,                                  // 마우스 올렸을 때 효과
-active: active,                             // 마우스 클릭 시 효과
-float: float,
-overflow: overflow,
-flex: flex,
-justify_content: justify_content,
-fontSize: fontSize,
-align_items: align_items,
-vertical_align: vertical_align,
-fontWeight: fontWeight,
-};
+  const styles = {
+    is_center: is_center, // 가운데 정렬
+    is_left: is_left, // 왼쪽 정렬
+    is_right: is_right, // 오른쪽 정렬
+    is_flex: is_flex,
+    flex_wrap: flex_wrap,
+    width: width,
+    height: height,
+    margin: margin,
+    padding: padding,
+    backgroundColor: backgroundColor,
+    backgroundImageUrl: backgroundImageUrl, // 배경 이미지 있을 경우 url
+    top: top,
+    right: right,
+    bottom: bottom,
+    left: left,
+    postion: position,
+    display: display,
+    flexDirection: flexDirection,
+    minWidth: minWidth,
+    minHeight: minHeight,
+    boxShadow: boxShadow, // 그림자
+    border: border,
+    borderStyle: borderStyle,
+    borderRadius: borderRadius,
+    borderColor: borderColor,
+    hover: hover, // 마우스 올렸을 때 효과
+    active: active, // 마우스 클릭 시 효과
+    float: float,
+    overflow: overflow,
+    flex: flex,
+    justify_content: justify_content,
+    fontSize: fontSize,
+    align_items: align_items,
+    vertical_align: vertical_align,
+    fontWeight: fontWeight,
+  };
 
   return (
     <React.Fragment>
@@ -100,7 +100,7 @@ Grid.defaultProps = {
   is_left: false,
   is_flex: false,
   flex_wrap: null,
-  width: "100%",
+  width: '100%',
   margin: null,
   padding: null,
   backgroundColor: null,

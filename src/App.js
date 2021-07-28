@@ -1,5 +1,11 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
+//메인 페이지
+import Main from './pages/Main';
+
+//로그인 회원가입 페이지
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 //자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
@@ -12,10 +18,13 @@ import ReviewList from './pages/ReviewList';
 import ReviewDetail from './pages/ReviewDetail';
 import ReviewWrite from './pages/ReviewWrite';
 
-//정보 게시판 페이지
-import InfoList from './pages/InfoList';
-import InfoDetail from './pages/InfoDetail';
-import InfoWrite from './pages/InfoWrite';
+//질문 게시판 페이지
+import QuestionList from './pages/QuestionList';
+import QuestionDetail from './pages/QuestionDetail';
+import QuestionWrite from './pages/QuestionWrite';
+
+//마이페이지
+import MyPageEdit from './pages/MyPageEdit';
 
 //마이 페이지
 import Mypage from './pages/Mypage';
@@ -24,20 +33,21 @@ function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        <Route exact path="/common/list" component={CommonList} />
-        <Route exact path="/common/detail" component={CommonDetail} />
-        <Route exact path="/common/write" component={CommonWrite} />
-        <Route path="/info" exact component={InfoList} />
-        <Route path="/info/write" exact component={InfoWrite} />
-        <Route path="/info/detail" exact component={InfoDetail} />
-        <Route path="/Review" exact component={ReviewMain} />
-        <Route path="/Review/list" exact component={ReviewList} />
-        <Route path="/Review/detail" exact component={ReviewDetail} />
-        <Route path="/Review/write" exact component={ReviewWrite} />
-        <Route exact path="/common/List" component={CommonList} />
-        <Route exact path="/common/Detail" component={CommonDetail} />
-        <Route exact path="/common/Write" component={CommonWrite} />
-        <Route exact path="/mypage" component={Mypage} />
+        <Route path="/" exact component={Main} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/signup" exact component={Signup} />
+        <Route path="/common/list" exact component={CommonList} />
+        <Route path="/common/detail" exact component={CommonDetail} />
+        <Route path="/common/write" exact component={CommonWrite} />
+        <Route path="/question" exact component={QuestionList} />
+        <Route path="/question/write" exact component={QuestionWrite} />
+        <Route path="/question/detail" exact component={QuestionDetail} />
+        <Route path="/review" exact component={ReviewMain} />
+        <Route path="/review/list" exact component={ReviewList} />
+        <Route path="/review/detail" exact component={ReviewDetail} />
+        <Route path="/review/write" exact component={ReviewWrite} />
+        <Route path="/mypage/edit" exact component={MyPageEdit} />
+        <Route path="/mypage" exact component={Mypage} />
       </BrowserRouter>
     </React.Fragment>
   );

@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button, Grid, Input, Text } from '../elements';
+import { history } from '../redux/ConfigureStore';
 
 const QuestionWrite = (props) => {
   return (
@@ -10,7 +11,7 @@ const QuestionWrite = (props) => {
         <Grid backgroundColor="#fff" width="45vw" height="65vh" margin="auto">
           <WindowInner>
             <HeaderBox>
-              <Button width="7%"> X </Button>
+              <Button width="7%" _onClick={() => history.goBack()}> X </Button>
               <Text
                 margin="0 13vw"
                 fontSize="2vh"

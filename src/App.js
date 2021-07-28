@@ -1,5 +1,8 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route } from 'react-router-dom';
+import { history } from './redux/ConfigureStore';
+
 //메인 페이지
 import Main from './pages/Main';
 
@@ -23,10 +26,14 @@ import QuestionList from './pages/QuestionList';
 import QuestionDetail from './pages/QuestionDetail';
 import QuestionWrite from './pages/QuestionWrite';
 
+//마이 페이지
+import Mypage from './pages/Mypage';
+import MyPageEdit from './pages/MyPageEdit';
+
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
@@ -40,7 +47,9 @@ function App() {
         <Route path="/review/list" exact component={ReviewList} />
         <Route path="/review/detail" exact component={ReviewDetail} />
         <Route path="/review/write" exact component={ReviewWrite} />
-      </BrowserRouter>
+        <Route path="/mypage" exact component={Mypage} />
+        <Route path="/mypage/edit" exact component={MyPageEdit} />
+      </ConnectedRouter>
     </React.Fragment>
   );
 }

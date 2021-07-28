@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const Text = (props) => {
   // 기본 설정은 span 태그, 만약 p 태그로 사용 원할 시 props 에 p 넘기기
-
   const {
     p,
     children,
@@ -17,7 +16,13 @@ const Text = (props) => {
     float,
     position,
     _onClick,
+    bg,
+    height,
+    text_align,
+    vertical_align,
+    top,
   } = props;
+
 
   const styles = {
     color: color,
@@ -29,6 +34,11 @@ const Text = (props) => {
     position: position,
     lineHeight: lineHeight,
     float: float,
+    bg:bg,
+    height:height,
+    text_align:text_align,
+    vertical_align:vertical_align,
+    top:top,
   };
 
   if (p) {
@@ -51,42 +61,58 @@ const Text = (props) => {
 };
 
 Text.defaultProps = {
-  p: false,
-  children: null,
-  color: 'black',
-  fontSize: '1rem',
-  fontWeight: '400',
-  margin: null,
-  padding: null,
-  display: null,
-  position: null,
-  lineHeight: null,
-  float: null,
-  _onClick: () => {},
-};
+    p: false,
+    children: null,
+    color: 'black',
+    fontSize: '1rem',
+    fontWeight: '400',
+    margin: null,
+    padding: null,
+    display: null,
+    position: null,
+    lineHeight: null,
+    float: null,
+    bg: null,
+    height: null,
+    text_align: null,
+    vertical_align: null,
+    top: null,
+    _onClick: () => {},
 
-const TextBoxP = styled.p`
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.fontSize};
-  font-weight: ${(props) => props.fontWeight};
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-  display: ${(props) => props.display};
-  position: ${(props) => props.position};
-  line-height: ${(props) => props.lineHeight};
-  float: ${(props) => props.float};
-`;
+  };
+  
+  const TextBoxP = styled.p`
+    color: ${(props) => props.color};
+    font-size: ${(props) => props.fontSize};
+    font-weight: ${(props) => props.fontWeight};
+    margin: ${(props) => props.margin};
+    padding: ${(props) => props.padding};
+    display: ${(props) => props.display};
+    position: ${(props) => props.position};
+    line-height: ${(props) => props.lineHeight};
+    float: ${(props) => props.float};
+    background-color: ${(props) => props.bg};
+    height: ${(props) => props.height};
+    vertical-align: ${(props) => props.vertical_align};
+    top: ${(props) => props.top};
 
-const TextBoxS = styled.span`
-  color: ${(props) => props.color};
-  font-size: ${(props) => props.fontSize};
-  font-weight: ${(props) => props.fontWeight};
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-  display: ${(props) => props.display};
-  position: ${(props) => props.position};
-  line-height: ${(props) => props.lineHeight};
-  float: ${(props) => props.float};
+  `;
+
+  const TextBoxS = styled.span`
+    color: ${(props) => props.color};
+    font-size: ${(props) => props.fontSize};
+    font-weight: ${(props) => props.fontWeight};
+    margin: ${(props) => props.margin};
+    padding: ${(props) => props.padding};
+    display: ${(props) => props.display};
+    position: ${(props) => props.position};
+    line-height: ${(props) => props.lineHeight};
+    float: ${(props) => props.float};
+    background-color: ${(props) => props.bg};
+    height: ${(props) => props.height};
+    text-align: ${(props) => props.text_align};
+    vertical-align: ${(props) => props.vertical_align};
+    top: ${(props) => props.top};
 `;
 
 export default Text;

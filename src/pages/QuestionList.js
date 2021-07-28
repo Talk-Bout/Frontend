@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button } from '../elements';
 import Header from '../components/Header';
+import { history } from '../redux/ConfigureStore';
 
 //icons
 import { BiTimeFive } from 'react-icons/bi';
@@ -18,7 +19,7 @@ const QuestionList = (props) => {
           <Text width="90%" fontSize="3.5vh" fontWeight="600">
             질문/답변 게시판
           </Text>
-          <Button width="10%" margin="auto 0 auto auto">
+          <Button width="10%" margin="auto 0 auto auto" _onClick={() => history.push('/question/write')}>
             글쓰기
           </Button>
           {/* // 글쓰기 페이지로 이동하기 */}

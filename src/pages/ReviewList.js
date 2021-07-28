@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Button, Grid, Image, Input, Text} from '../elements';
+import {Grid, Text} from '../elements';
 import Header from '../components/Header';
+import { history } from '../redux/ConfigureStore';
 
 const ReviewList = (props) => {
 
@@ -28,12 +29,12 @@ const ReviewList = (props) => {
           <NavBar>
             <NavBox>
               <Menu><a><Text fontSize='2vh' fontWeight='700'>리뷰</Text></a></Menu>
-              <Menu><a><Text fontSize='2vh' fontWeight='700'>게시글</Text></a></Menu>
+              <Menu><a><Text fontSize='2vh' fontWeight='700'>커뮤니티</Text></a></Menu>
             </NavBox>
           </NavBar>
         </Grid>
         <Grid is_center backgroundColor='#e5e5e5'>
-          <Grid is_flex height='100%' width='55%' margin='0 auto' padding='3vh 0 0'>
+          <Grid display='flex' height='100%' width='55%' margin='0 auto' padding='3vh 0 0'>
             <PostList>
               {[1, 2, 3].map((n, idx) => {
                 return (
@@ -42,7 +43,7 @@ const ReviewList = (props) => {
                       <Score><Text fontSize='2vh'>2.2</Text></Score>
                       <Stars><Text fontSize='1.5vh'>★★☆☆☆</Text></Stars>
                     </StarBox>
-                    <PostBox>
+                    <PostBox onClick={() => history.push('/review/detail')}>
                       <PostInner>
                         <Text fontSize='2vh' fontWeight='700'>리뷰 제목<br/></Text>
                         <Text color='#bbb'>수료자: sp****** 2021.07.25<br/><br/></Text>
@@ -61,7 +62,7 @@ const ReviewList = (props) => {
                   <Title><Text fontSize='1.5vh' fontWeight='700' lineHeight='5vh'>다른 부트캠프</Text></Title>
                   {[1, 2, 3, 4].map((n) => {
                     return (
-                      <Camp>
+                      <Camp onClick={() => history.push('/review/list')}>
                         <ImageBox>
                         </ImageBox>
                         <InfoBox>
@@ -160,6 +161,10 @@ const Stars = styled.div`
 const PostBox = styled.div`
   width: 80%;
   height: 100%;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const PostInner = styled.div`
@@ -193,6 +198,10 @@ const Camp = styled.div`
   height: 20%;
   display: flex;
   border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImageBox = styled.div`

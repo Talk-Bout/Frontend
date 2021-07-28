@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Grid, Image, Input, Text } from '../elements';
+import { Grid, Text } from '../elements';
 import Header from '../components/Header';
+import { history } from '../redux/ConfigureStore';
 
 const ReviewMain = (props) => {
   return (
@@ -20,7 +21,7 @@ const ReviewMain = (props) => {
           <CardList>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, idx) => {
               return (
-                <Card>
+                <Card onClick={() => history.push('/review/list')}>
                   <ImageDiv>
                     <Text fontSize="2.5vh">LOGO</Text>
                   </ImageDiv>
@@ -62,6 +63,10 @@ const Card = styled.div`
   box-sizing: border-box;
   padding: 5vh 1vw 0;
   text-align: left;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImageDiv = styled.div`

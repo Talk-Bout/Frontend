@@ -15,6 +15,7 @@ const Button = (props) => {
     border,
     color,
     font_size,
+    display,
   } = props;
 
   const styles = {
@@ -27,6 +28,7 @@ const Button = (props) => {
     border: border,
     color: color,
     font_size: font_size,
+    display: display,
   };
   return (
     <React.Fragment>
@@ -50,6 +52,7 @@ Button.defaultProps = {
   border: null,
   color: null,
   font_size: null,
+  display: null,
 };
 
 const ElButton = styled.button`
@@ -62,6 +65,7 @@ const ElButton = styled.button`
   border: ${(props) => props.border};
   color: ${(props) => props.color};
   font-size: ${(props) => props.font_size};
+  display: ${(props) => props.display};
 `;
 
 export default Button;

@@ -4,6 +4,7 @@ import SmallWindow from '../components/SmallWindow';
 import {Grid, Input, Text} from '../elements';
 import { TextField } from '@material-ui/core';
 import { AiFillGoogleCircle } from 'react-icons/ai';
+import { history } from '../redux/ConfigureStore';
 
 const Login = (props) => {
 
@@ -24,9 +25,9 @@ const Login = (props) => {
         <Grid height='20%'>
           <Button><Text fontSize='1.5vh' color='white'>로그인</Text></Button>
           <Grid is_flex padding='0 10px' margin='5px 0 0'>
-            <HelpDiv><a><Text fontSize='1.3vh' color='#555'>아이디 찾기</Text></a></HelpDiv>
-            <HelpDiv><a><Text fontSize='1.3vh' color='#555'>비밀번호 찾기</Text></a></HelpDiv>
-            <HelpDiv><a><Text fontSize='1.3vh' color='#555'>회원가입</Text></a></HelpDiv>
+            <HelpDiv><A onClick={() => {}}><Text fontSize='1.3vh' color='#555'>아이디 찾기</Text></A></HelpDiv>
+            <HelpDiv><A onClick={() => {}}><Text fontSize='1.3vh' color='#555'>비밀번호 찾기</Text></A></HelpDiv>
+            <HelpDiv><A onClick={() => history.push('/signup')}><Text fontSize='1.3vh' color='#555'>회원가입</Text></A></HelpDiv>
           </Grid>
         </Grid>
         <Grid height='25%'>
@@ -36,6 +37,10 @@ const Login = (props) => {
     </SmallWindow>
   )
 };
+
+const A = styled.a`
+  cursor: pointer;
+`;
 
 const Button = styled.button`
   width: 100%;

@@ -45,7 +45,11 @@ const Main = (props) => {
         <CardList>
           {[1, 2, 3, 4, 5, 6].map((n, idx) => {
             return (
-              <CampCard>
+              <CampCard
+                onClick={() => {
+                  history.push('/review/list');
+                }}
+              >
                 <Grid width="30%">
                   <ImageDiv>
                     <Text fontSize="1.5vh">LOGO</Text>
@@ -86,6 +90,9 @@ const Main = (props) => {
             fontSize="1.6vh"
             styles={{ justify_content: 'flex-end' }}
             margin="0 0 0 auto"
+            _onClick={() => {
+              history.push('/common/list');
+            }}
           >
             더보기 &gt;
           </Text>
@@ -112,7 +119,7 @@ const Main = (props) => {
             {[1, 2, 3, 4].map((n, idx) => {
               return (
                 <tbody>
-                  <tr>
+                  <tr onClick={() => history.push('/common/detail')}>
                     <Th>토픽</Th>
                     <Th>게시물 제목</Th>
                     <Th>16</Th>
@@ -135,6 +142,9 @@ const Main = (props) => {
             fontSize="1.6vh"
             styles={{ justify_content: 'flex-end' }}
             margin="0 0 0 auto"
+            _onClick={() => {
+              history.push('/question');
+            }}
           >
             더보기 &gt;
           </Text>
@@ -146,7 +156,7 @@ const Main = (props) => {
           {/* 질문게시판 게시물 목록 */}
           {[1, 2, 3, 4, 5, 6, 7, 8].map((n, idx) => {
             return (
-              <QuestionBox>
+              <QuestionBox onClick={() => history.push('/question/detail')}>
                 <Grid display="flex" flexDirection="rows">
                   <Text padding="3%" fontWeight="700" fontSize="1.7vh">
                     Q
@@ -208,6 +218,9 @@ const CampCard = styled.div`
   padding: 1%;
   text-align: left;
   display: flex;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImageDiv = styled.div`
@@ -255,6 +268,9 @@ const QuestionBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0% 1%;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export default Main;

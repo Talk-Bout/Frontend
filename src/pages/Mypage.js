@@ -33,7 +33,7 @@ const Mypage = (props) => {
           <Grid height="100%" width="74%" margin="0 0 0 1%">
             <Grid height="30%" margin="0 0 2% 0">
               <DetailHeader>
-                <Text p margin="0" padding="0% 5%" > 내 북마크 <span> (5) </span> </Text>
+                <Text p lineHeight="7vh" margin="0" padding="0% 5%" > 내 북마크 <span> (5) </span> </Text>
               </DetailHeader>
               <Grid height="70%" display="flex" justify_content="space-evenly">
                 <DetailCard>
@@ -56,11 +56,11 @@ const Mypage = (props) => {
             </Grid>
             <Grid height="30%" margin="0 0 2% 0">
               <DetailHeader>
-                <Text p margin="0" padding="0% 5%" > 내 북마크 <span> (0) </span> </Text>
+                <Text p lineHeight="7vh" margin="0" padding="0% 5%" > 내 북마크 <span> (0) </span> </Text>
               </DetailHeader>
-              <Grid height="70%">
+              <Grid backgroundColor="green" height="70%">
                 <NoresultCard>
-                  <Text p margin="0" text_align="center" padding="0% 5%" > 작성된 글이 없어요 :( </Text>
+                  <Text display="block" text_align="center" vertical_align="middle" > 작성된 글이 없어요 :( </Text>
                 </NoresultCard>
               </Grid>
             </Grid>
@@ -74,24 +74,24 @@ const Mypage = (props) => {
 const ProfileInnerBox = styled.div`
 height: 100%;
 width: 100%;
-background-color: tomato;
+
 `;
 
 const ProfileImage = styled.div`
 background-color: #FFFFFF;
-height: 45%;
-text-align: center;
+height: 35%;
+padding-top: 10%;
 `;
 
 const ProfileName = styled.div`
 text-align: center;
 background-color: #FFFFFF;
-height: 30%;
+height: 35%;
 `;
 
 const ProfileEditButton = styled.div`
 background-color: #FFFFFF;
-height: 25%;
+height: 20%;
 text-align: center;
 `;
 

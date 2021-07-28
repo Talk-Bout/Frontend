@@ -4,9 +4,9 @@ import styled from "styled-components";
 const Text = (props) => {
   // 기본 설정은 span 태그, 만약 p 태그로 사용 원할 시 props 에 p 넘기기
 
-    const { p, children, color, fontSize, fontWeight, margin, padding, display, lineHeight, float, position, bg, height, text_align, vertical_align } = props;
+    const { p, children, color, fontSize, fontWeight, margin, padding, display, lineHeight, float, position, bg, height, text_align, vertical_align, top } = props;
 
-    const styles = {color: color, fontSize: fontSize, fontWeight: fontWeight, margin: margin, padding: padding, display: display, position: position, lineHeight: lineHeight, float: float, bg: bg, height: height, text_align: text_align, vertical_align: vertical_align,};
+    const styles = {color: color, fontSize: fontSize, fontWeight: fontWeight, margin: margin, padding: padding, display: display, position: position, lineHeight: lineHeight, float: float, bg: bg, height: height, text_align: text_align, vertical_align: vertical_align, top: top,};
 
 
     if (p) {                                     
@@ -40,6 +40,7 @@ Text.defaultProps = {
     height: null,
     text_align: null,
     vertical_align: null,
+    top: null,
 
   };
   
@@ -56,6 +57,7 @@ Text.defaultProps = {
     background-color: ${(props) => props.bg};
     height: ${(props) => props.height};
     vertical-align: ${(props) => props.vertical_align};
+    top: ${(props) => props.top};
 
   `;
 
@@ -73,6 +75,7 @@ Text.defaultProps = {
     height: ${(props) => props.height};
     text-align: ${(props) => props.text_align};
     vertical-align: ${(props) => props.vertical_align};
+    top: ${(props) => props.top};
 
   `;
 

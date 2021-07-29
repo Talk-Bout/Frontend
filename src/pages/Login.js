@@ -14,6 +14,10 @@ const Login = (props) => {
   const [password, setPwd] = React.useState('');
 
   const login = () => {
+    if (email === '' || password === '') {
+      window.alert('이메일과 비밀번호를 입력해주세요');
+      return;
+    }
     dispatch(userActions.logInDB(email, password));
   };
 

@@ -18,40 +18,19 @@ const deleteComment = createAction(DELETE_COMMENT, (comment) => ({comment}));
 
 // 기본값 정하기
 const initialState = {
-    list: [
-        {
-            commentId: 1,
-            createdAt: '2021-07-29T06:37:49.413Z',
-            content: '흥미로운 것 같아요',
-            nickname: '코린이',            
-            postId: 1,
-        },
-        {
-            commentId: 2,
-            createdAt: '2021-07-29T06:37:49.413Z',
-            content: '개인적으로 커뮤니케이션 잘해야한다는 단순한 말로 표현하기에는 단일 책임 원칙에 위배 되는게 아닐까요',
-            nickname: '토크부트',            
-            postId: 1,
-        },
-        {
-            commentId: 3,
-            createdAt: '2021-07-29T06:37:49.413Z',
-            content: '맞아요. 그곳은 기본적으로 풀스텍을 가르치는 곳입니다.',
-            nickname: '부트캠프어디가',            
-            postId: 1,
-        },
-    ],
+    list: [],
 };
 
 // 액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
     return function (dispatch) {
+        console.log(postId);
         const axios = require('axios');
         axios.get(`http://15.165.18.118/posts/${postId}/comments`)
         .then((response) => {
             console.log('setPostDB 함수 호출 성공!');
             console.log(response.data);
-                // dispatch(setComment(response.data));
+                dispatch(setComment(response.data));
             })
             .catch((err) => {
                 console.log(`에러 발생: ${err}`);
@@ -69,11 +48,9 @@ const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는
             nickname: nickname,
             content: content,
         }).then((response) => {
-                console.log('addCommentDB 함수 호출 성공!');
-                console.log(response);
-                console.log(response.data);
+                // console.log(response.data);
                 dispatch(addComment(response.data));
-                // history.push('/');
+                // history.push(`/posts/${postId}/comments`);
             }).catch((err) => {
                 console.log(`댓글 추가하기 에러 발생: ${err}`);
             });
@@ -114,15 +91,26 @@ const deleteCommentDB = (id, postId) => {           // 댓글 삭제하는 함�
     };
 };
 
+
+// reducer
+
 export default handleActions({
     [SET_COMMENT]: (state, action) => produce(state, (draft) => {
         draft.list = [...action.payload.comment_list];
+        // console.log(action.payload.comment_list);
     }),
+
+    [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
+        draft.list.unshift(action.payload.comment);
+    }),
+
 }, initialState);
 
 
 // 액션 생성자
 const actionCreators = {
+    setComment,
+    addComment,
     setCommentDB,
     addCommentDB,
     editCommentDB,

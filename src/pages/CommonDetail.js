@@ -1,17 +1,18 @@
 import React from 'react';
-import { history } from '../redux/ConfigureStore';
-
 import styled from "styled-components";
+import { history } from '../redux/ConfigureStore';
+import { useSelector } from 'react-redux';
+
 import {Text, Button, Grid, Input} from "../elements/index";
 import Header from '../components/Header';
 
 //icons
-import { BiTimeFive } from 'react-icons/bi'; 
-import { BiLike } from 'react-icons/bi'; 
-import { BiComment } from 'react-icons/bi';
-
+import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
 const CoomonBoardDetail = (props) => {
+  const common_id = window.location.pathname.split('/common/detail/')[1];
+  const common_list = useSelector(state => state.post.list);
+  const common_find = common_list.find((post)=> post.postId == common_id);
 
   return (
     <React.Fragment>
@@ -21,11 +22,23 @@ const CoomonBoardDetail = (props) => {
       <Grid float="right" padding="60px 0px 60px 40px">
       <Grid>
         <Text padding="2%" fontSize="10px">토픽 &gt; 회사생활</Text>
-        <Text p fontSize="13px" margin="0px" padding="2%" width="10%" fontWeight="bold">개발자는 커뮤니케이션 능력이 중요한 것 같아요...</Text>
+        <Text p fontSize="13px" margin="0px" padding="2%" width="10%" fontWeight="bold">
+        {common_find.title}
+        </Text>
+        <Text p margin="0" padding="2%" fontSize="11px">
+          {common_find.author}
+        </Text>
         <Grid display="flex" width="100%" >
-            <Text padding="2%" width="33.3%" fontSize="12px"><BiTimeFive/> 2021.07.27</Text>
-            <Text padding="2%" width="33.3%" fontSize="12px"><BiLike/> 10</Text>
-            <Text padding="2%" width="33.3%" fontSize="12px"><BiComment/> 2</Text>
+            <Text padding="2%" width="33.3%" fontSize="12px">
+              <BiTimeFive/> {common_find.createdAt}
+            </Text>
+            <Text padding="2%" width="33.3%" fontSize="12px">
+              <BiLike/> {common_find.likes}
+            </Text>
+            <Text padding="2%" width="33.3%" fontSize="12px">
+              <BiComment/>
+            2
+            </Text>
 
           {/* 버튼 추가 */}
           <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
@@ -42,9 +55,7 @@ const CoomonBoardDetail = (props) => {
       {/* 게시물 본문 */}
       <Grid padding="2%">
           <Text fontSize="11px" style={{wordBreak:"break-all"}}>
-          뭐랄까...  일단 마음을 비우고 (Null) 특정 상황에 대한  (Input)
-          맥락적 해석을 하고 답을 내야 하는과정 (Output).
-          조크든 위트든 프로젝트 커뮤가 되었던 process를 잘 따르는 사람이 커뮤를 잘한다고 봅니다.
+          {common_find.content}
           </Text>
       </Grid>
       <Hr/>

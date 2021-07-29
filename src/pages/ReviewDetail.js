@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 
 const ReviewDetail = (props) => {
-  const dispatch = useDispatch();
   const post_id = window.location.pathname.split('/review/detail/')[1];
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);

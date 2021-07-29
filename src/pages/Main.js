@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Grid, Image, Input, Text } from '../elements';
 import Header from '../components/Header';
+import Banner from '../components/Banner';
 import { history } from '../redux/ConfigureStore';
 //icons
 import { BiTimeFive } from 'react-icons/bi';
@@ -12,14 +13,7 @@ const Main = (props) => {
   return (
     <React.Fragment>
       <Header />
-      <Grid is_center backgroundColor="#e5e5e5" height="25vh" padding="9vh 0">
-        <Text fontSize="3vh" fontWeight="700">
-          부트캠퍼들의 속 시원한 이야기
-        </Text>
-        <Text p fontSize="1.5vh" margin="5px">
-          부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.
-        </Text>
-      </Grid>
+      <Banner title='수강생들의 100% 리얼 후기!' description='부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.'/>
       {/* 부트캠프 게시판 */}
       <Grid padding="5% 10% 0% 10%">
         <Grid display="flex" flexDirection="row">

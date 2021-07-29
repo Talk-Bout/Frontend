@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import Header from '../components/Header';
+import Banner from '../components/Banner';
 import { history } from '../redux/ConfigureStore';
 
 const ReviewMain = (props) => {
@@ -9,14 +10,7 @@ const ReviewMain = (props) => {
     <React.Fragment>
       <Grid>
         <Header />
-        <Grid is_center backgroundColor="#e5e5e5" height="25vh" padding="9vh 0">
-          <Text fontSize="3vh" fontWeight="700">
-            부트캠퍼들의 속 시원한 이야기
-          </Text>
-          <Text p fontSize="1.5vh" margin="5px">
-            부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.
-          </Text>
-        </Grid>
+        <Banner title='부트캠퍼들의 속 시원한 이야기' description='부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.'/>
         <Grid is_center>
           <CardList>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, idx) => {

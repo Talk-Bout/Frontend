@@ -10,17 +10,18 @@ import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
 
 const CommonBoardList = (props) => {
   const common_list = useSelector(state => state.post.list);
-  const comment_list = useSelector(state => state.comment.list);
   
   return (
     <React.Fragment>
       <Header />
+      {/* 자유게시판 */}
       <Grid padding="10%">
         <Grid>
           <Text p margin="0px 0px 10px 0px">
             자유게시판
           </Text>
         </Grid>
+        {/* 게시판 카테고리 */}
         <Grid styles={{ display: 'flex' }}>
           <Categories>
           {[1, 2, 3, 4, 5, 6].map((n, idx) => {
@@ -49,6 +50,7 @@ const CommonBoardList = (props) => {
           </WriteBox>
       </Grid>
       <Hr/>
+      {/* 자유게시판 게시물  */}
       <Contents>
       {common_list.map((c, idx) => {
             return (
@@ -62,6 +64,7 @@ const CommonBoardList = (props) => {
         <Text p margin="0px" padding="2%" fontSize="11px">
           {c.author}
           </Text>
+          {/* 게시한 날짜, 좋아요, 댓글 */}
         <Grid is_flex width="100%">
         <Text padding="2%" width="33.3%" fontSize="11px">
           <BiTimeFive/> 

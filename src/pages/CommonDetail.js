@@ -11,16 +11,10 @@ import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
 const CoomonBoardDetail = (props) => {
   const common_id = window.location.pathname.split('/common/detail/')[1];
-
   const common_list = useSelector(state => state.post.list);
   const common_find = common_list.find((comment)=> comment.postId == common_id);
 
-  console.log(props);
-  const comment_id = props.match.params.id;
   const comment_list = useSelector(state => state.comment.list);
-  console.log(comment_list)
-  const comment_find = comment_list.find((comment)=> comment.commentId == comment_id);
-  console.log(comment_find);
 
   return (
     <React.Fragment>

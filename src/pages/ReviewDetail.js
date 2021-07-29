@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {Button, Grid, Image, Input, Text} from '../elements';
+import {Button, Grid, Input, Text} from '../elements';
 import Header from '../components/Header';
-import { BiTimeFive, BiLike, BiComment, BiTime } from "react-icons/bi";
+import { BiTimeFive, BiLike, BiComment } from "react-icons/bi";
+import { useDispatch, useSelector } from 'react-redux';
+import {actionCreators as postActions} from '../redux/modules/post';
 
 const ReviewDetail = (props) => {
+  const dispatch = useDispatch();
+  const post_id = window.location.pathname.split('/review/detail/')[1];
+  const post_list = useSelector(state => state.post.list);
+  const post_found = post_list.find((post) => post.postId == post_id);
 
   return (
     <React.Fragment>
@@ -14,12 +20,12 @@ const ReviewDetail = (props) => {
           <Post>
             <PostDiv>
               <PostBox>
-                <Title><Text fontSize='2.5vh' fontWeight='700'>항해99 어떤가요</Text></Title>
-                <TextBox><Text fontSize='1.5vh' color='#ccc'>sp********</Text></TextBox>
-                <TextBox><Text fontSize='1.5vh' color='#ccc'><BiTimeFive /> 2021.07.27 <BiLike /> 17 <BiComment /> 5 </Text></TextBox>
+                <Title><Text fontSize='2.5vh' fontWeight='700'>{post_found.title}</Text></Title>
+                <TextBox><Text fontSize='1.5vh' color='#ccc'>{post_found.author}</Text></TextBox>
+                <TextBox><Text fontSize='1.5vh' color='#ccc'><BiTimeFive /> {post_found.createdAt} <BiLike /> 17 <BiComment /> 5 </Text><Button width='5vw' margin='0 0.5vw 0'>수정</Button><Button width='5vw' margin='0 0.5vw 0'>삭제</Button></TextBox>
                 <hr style={{margin: '3vh 0', borderTop: '1px solid #eee'}}/>
                 <Body>
-                  <Text fontSize='2vh'>부트캠프 참여하려고 알아보는 중인데 궁금한 게 있습니다.<br/> 항해99 생각중인데, 괜찮은가요?</Text>
+                  <Text fontSize='2vh'>{post_found.content}</Text>
                 </Body>
                 <hr style={{margin: '3vh 0', borderTop: '1px solid #eee'}}/>
               </PostBox>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Input = (props) => {
   
-    const {multiLine, placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin} = props;
+    const {multiLine, placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin, _ref,} = props;
 
     const styles = {
         width: width,
@@ -13,6 +13,7 @@ const Input = (props) => {
         font_size: font_size,
         outline: outline,
         margin: margin,
+        _ref: _ref,
     }
 
   if (multiLine) {
@@ -23,6 +24,7 @@ const Input = (props) => {
         rows={5}
         placeholder={placeholder}
         onChange={_onChange}
+        ref={_ref}
       ></ElTextarea>
     );
   }
@@ -33,6 +35,7 @@ const Input = (props) => {
         type={type}
         placeholder={placeholder}
         onChange={_onChange}
+        ref={_ref}
       />
     </React.Fragment>
   );

@@ -1,8 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import {history} from '../ConfigureStore';
-import axios from "axios";
-import moment from "moment";
 
 // 액션타입
 const SET_COMMENT = 'SET_COMMENT';               // 댓글 불러오기
@@ -24,12 +22,9 @@ const initialState = {
 // 액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
     return function (dispatch) {
-        console.log(postId);
         const axios = require('axios');
         axios.get(`http://15.165.18.118/posts/${postId}/comments`)
         .then((response) => {
-            console.log('setPostDB 함수 호출 성공!');
-            // console.log(response.data);
                 dispatch(setComment(response.data));
             })
             .catch((err) => {
@@ -82,8 +77,7 @@ const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하�
         const axios = require('axios');
         axios.delete(`http://15.165.18.118/posts/${postId}/comments/${commentId}`)
         .then((response) => {
-                console.log('deleteCommentDB 함수 호출 성공!');
-                // history.push('/');
+                dispatch(deleteComment(response.data));
             }).catch((err) => {
                 console.log(`댓글 삭제하기 에러 발생: ${err}`);
             });
@@ -102,7 +96,10 @@ export default handleActions({
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
         draft.list.unshift(action.payload.comment);
     }),
-
+    [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
+        let idx = draft.list.findIndex((c) => c.commentId===action.payload.comment.commentId);
+        draft.list.splice(idx, 1);
+    }),
 }, initialState);
 
 

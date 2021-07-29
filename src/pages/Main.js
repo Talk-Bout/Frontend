@@ -24,7 +24,7 @@ const Main = (props) => {
             fontSize="1.6vh"
             margin="0 0 0 auto"
             _onClick={() => {
-              history.push('/review');
+              history.push('/boot');
             }}
           >
             더보기 &gt;
@@ -41,7 +41,7 @@ const Main = (props) => {
             return (
               <CampCard
                 onClick={() => {
-                  history.push('/review/list');
+                  history.push('/boot/info');
                 }}
               >
                 <Grid width="30%">

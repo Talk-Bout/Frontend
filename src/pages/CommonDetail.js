@@ -7,6 +7,7 @@ import {Text, Button, Grid, Input} from "../elements/index";
 import Header from '../components/Header';
 import Comment from '../components/Comment';
 import { actionCreators as commentActions} from "../redux/modules/comment";
+import { actionCreators as postActions} from "../redux/modules/post";
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
@@ -15,8 +16,22 @@ const CoomonBoardDetail = (props) => {
   const postId = props.match.params.id;
   //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_list = useSelector(state => state.post.list);
+
   const common_find = common_list.find((comment)=> comment.postId == postId);
   const comment_list = useSelector((state) => state.comment.list);
+
+  React.useEffect(() => {
+    if (common_find){
+      return;
+    }
+    dispatch(postActions.setOnePostDB(postId));
+  }, []);
+
+  if (!common_find){
+    return(
+      <></>
+    )
+  }
 
   return (
     <React.Fragment>

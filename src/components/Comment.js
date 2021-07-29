@@ -13,6 +13,7 @@ const Comment = (props) => {
     const dispatch = useDispatch();
     // 리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
     const comment_list = useSelector(state => state.comment.list);
+    const postId = props.postId;
 
     // 댓글 확인
     const [content, setComments] = React.useState('');
@@ -26,22 +27,27 @@ const Comment = (props) => {
             content : content,
             nickname : "username"
         }
-      dispatch(commentActions.addCommentDB(new_comment, props.postId));
+      dispatch(commentActions.addCommentDB(new_comment, postId));
     }
 
     // 댓글 조회
     React.useEffect(() => {
-        dispatch(commentActions.setCommentDB(props.postId));
+        dispatch(commentActions.setCommentDB(postId));
     }, []);
 
     // 댓글 수정
     const editComment = () => {
-        const edited_comment = {
+        const edit_comment = {
+          postId : postId,
+          nickname : "username",
+          content : content,
         }
+        dispatch(commentActions.editCommentDB(edit_comment));
     }
 
     // 댓글 삭제
-    const deleteComment = () => {
+    const deleteComment = (postId, commentId) => {
+      dispatch(commentActions.deleteCommentDB(postId, commentId));
     }
     
     return (
@@ -68,6 +74,7 @@ const Comment = (props) => {
       <Grid>
         {comment_list && comment_list.map((ct, index) => {
         return (
+          
           <Content>
             <Text padding="0% 2%" color="Grey" fontSize="7px">{ct.nickname}</Text>
             <Text p margin="0px" padding="0% 2%" fontSize="11px">{ct.content}</Text>
@@ -79,11 +86,11 @@ const Comment = (props) => {
           {/* 수정, 삭제 버튼 */}
               <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
                 <Button border="none" color="white" bg="Grey" width="45%" margin="0 10% 0 0"
-                _onClick={editComment} >
+                _onClick={()=>editComment()} >
                   수정
                 </Button>
                 <Button border="none" color="white" bg="Grey" width="45%"
-                _onClick={deleteComment} >
+                _onClick={()=>deleteComment(postId, ct.commentId)} >
                   삭제
                 </Button>
               </Grid>

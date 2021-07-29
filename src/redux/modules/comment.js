@@ -24,11 +24,10 @@ const initialState = {
 // 액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
     return function (dispatch) {
-        console.log(postId);
         const axios = require('axios');
         axios.get(`http://15.165.18.118/posts/${postId}/comments`)
         .then((response) => {
-            console.log('setPostDB 함수 호출 성공!');
+            // console.log('setPostDB 함수 호출 성공!');
             // console.log(response.data);
                 dispatch(setComment(response.data));
             })
@@ -57,17 +56,16 @@ const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는
     };
 };
 
-const editCommentDB = (edited_comment) => {           // 댓글 수정하는 함수
-    return function (dispatch) {
-        const commentId = edited_comment.commentId;
-        const content = edited_comment.content;
-        const nickname = edited_comment.nickname;
-        const postId = edited_comment.postId;
+const editCommentDB = (edit_comment, commentId) => {           // 댓글 수정하는 함수
+    return function (dispatch, getState) {
+        const _content = getState().comment.content;
+        const _nickname = getState().comment.nickname;
+        const postId = getState().comment.postId;
+        const commentId = getState().comment.commentId;
         const axios = require('axios');
         axios.patch(`http://15.165.18.118/posts/${postId}/comments/${commentId}`,
         {
-            nickname: nickname,
-            content: content,
+
         }).then((response) => {
                 console.log('editCommentDB 함수 호출 성공!');
                 // history.push('/');
@@ -82,8 +80,8 @@ const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하�
         const axios = require('axios');
         axios.delete(`http://15.165.18.118/posts/${postId}/comments/${commentId}`)
         .then((response) => {
-                console.log('deleteCommentDB 함수 호출 성공!');
-                // history.push('/');
+                // console.log('deleteCommentDB 함수 호출 성공!');
+                dispatch(deleteComment(commentId))
             }).catch((err) => {
                 console.log(`댓글 삭제하기 에러 발생: ${err}`);
             });
@@ -92,7 +90,6 @@ const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하�
 
 
 // reducer
-
 export default handleActions({
     [SET_COMMENT]: (state, action) => produce(state, (draft) => {
         draft.list = [...action.payload.comment_list];
@@ -103,6 +100,15 @@ export default handleActions({
         draft.list.unshift(action.payload.comment);
     }),
 
+    [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
+        let new_comment_list = draft.list.filter((v) => {
+            if(v.commentId !== action.payload.comment){
+              return v
+            }
+          })
+          draft.list = new_comment_list;
+        }),
+
 }, initialState);
 
 
@@ -110,6 +116,7 @@ export default handleActions({
 const actionCreators = {
     setComment,
     addComment,
+    editComment,
     setCommentDB,
     addCommentDB,
     editCommentDB,

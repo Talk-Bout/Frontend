@@ -4,14 +4,24 @@ import Header from '../components/Header';
 import { history } from '../redux/ConfigureStore';
 import { Text, Button, Grid } from '../elements/index';
 import { useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
+
+import { actionCreators as commentActions} from "../redux/modules/comment";
+import { actionCreators as postActions} from "../redux/modules/post";
 //icons
 import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
 
 
 const CommonBoardList = (props) => {
+  const dispatch = useDispatch();
+
   // 리덕스 : 게시글 리스트 조회
   const common_list = useSelector(state => state.post.list);
   
+  React.useEffect(() => {
+    dispatch(postActions.setPostDB());
+  }, []);
+
   return (
     <React.Fragment>
       <Header />

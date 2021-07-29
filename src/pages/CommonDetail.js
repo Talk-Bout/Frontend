@@ -1,20 +1,33 @@
 import React from 'react';
 import styled from "styled-components";
 import { history } from '../redux/ConfigureStore';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {Text, Button, Grid, Input} from "../elements/index";
 import Header from '../components/Header';
-
+import { actionCreators as commentActions} from "../redux/modules/comment";
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
 const CoomonBoardDetail = (props) => {
+  // 리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_id = window.location.pathname.split('/common/detail/')[1];
   const common_list = useSelector(state => state.post.list);
   const common_find = common_list.find((comment)=> comment.postId == common_id);
-
   const comment_list = useSelector(state => state.comment.list);
+
+  // 댓글 확인
+  const [comments, setComments] = React.useState('');
+  const checkComments = (e) => {
+    setComments(e.target.value);
+  }
+  
+  //댓글 등록
+  const dispatch = useDispatch();
+  const {history} = props;
+  const addComment = () => {
+    dispatch(commentActions.addCommentDB(comments,common_id));
+  }
 
   return (
     <React.Fragment>
@@ -63,10 +76,16 @@ const CoomonBoardDetail = (props) => {
       <Hr/>
         {/* 댓글 남기기 */}
       <Grid>
-        <Text padding="2%" fontWeight="bold" fontSize="10px">댓글5</Text>
+        <Text padding="2%" fontWeight="bold" fontSize="10px">
+          댓글5
+        </Text>
         <CommentBox>
-        <Input font_size="9px" border="1px solid #E5E5E5;"placeholder="댓글을 남겨주세요"/>
-        <Button border="none" height="40px" color="white" bg="Grey" cursor="pointer" width="15%">등록</Button>
+        <Input font_size="9px" border="1px solid #E5E5E5;"
+        placeholder="댓글을 남겨주세요" _onChange={checkComments}/>
+        <Button border="none" height="40px" color="white" bg="Grey" cursor="pointer" width="15%"
+        _onClick={addComment}>
+          등록
+        </Button>
         </CommentBox>
         <Hr/>
         <div style={{textAlign: "center"}}>

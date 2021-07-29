@@ -1,6 +1,8 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import {history} from '../ConfigureStore';
+import axios from "axios";
+import moment from "moment";
 
 // 액션타입
 const SET_COMMENT = 'SET_COMMENT';               // 댓글 불러오기
@@ -58,7 +60,7 @@ const setCommentDB = (postId) => {                        // 댓글 불러오는
 };
 
 const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는 함수
-    return function (dispatch) {
+    return function (dispatch, {history}) {
         const nickname = new_comment.nickname;
         const content = new_comment.content;
         const axios = require('axios');
@@ -68,8 +70,9 @@ const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는
             content: content,
         }).then((response) => {
                 console.log('addCommentDB 함수 호출 성공!');
+                console.log(response);
                 console.log(response.data);
-                // dispatch(addComment(response.data));
+                dispatch(addComment(response.data));
                 // history.push('/');
             }).catch((err) => {
                 console.log(`댓글 추가하기 에러 발생: ${err}`);

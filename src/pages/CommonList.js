@@ -9,6 +9,7 @@ import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
 
 
 const CommonBoardList = (props) => {
+  // 리덕스 : 게시글 리스트 조회
   const common_list = useSelector(state => state.post.list);
   
   return (

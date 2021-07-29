@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { Grid, Text, Button } from '../elements';
 import Header from '../components/Header';
 import { history } from '../redux/ConfigureStore';
-
+import { useDispatch, useSelector } from 'react-redux';
 //icons
 import { BiTimeFive } from 'react-icons/bi';
 import { BiLike } from 'react-icons/bi';
 import { BiComment } from 'react-icons/bi';
 
 const QuestionList = (props) => {
+  const question_list = useSelector((state) => state.post.list);
   return (
     <React.Fragment>
       <Header />
@@ -32,35 +33,36 @@ const QuestionList = (props) => {
 
         {/* 게시물 목록 */}
         <Questions flex_wrap="wrap">
-          {[1, 2, 3, 4, 5, 6].map((n, idx) => {
+          {question_list.map((q, idx) => {
             return (
-              <QuestionBox onClick={() => history.push('/question/detail')}>
+              <QuestionBox
+                onClick={() => history.push(`/question/detail/${q.postId}`)}
+              >
                 <Grid display="flex">
                   <Text padding="3%" fontWeight="700" fontSize="2vh">
                     Q
                   </Text>
                   <Text padding="3%" fontWeight="700" fontSize="2vh">
-                    질문 제목
+                    {q.title}
                   </Text>
                 </Grid>
 
                 <Text padding="3%" fontSize="1.7vh" color="#C4C4C4">
-                  Proident exercitation velit non eiusmod eiusmod nostrud amet
-                  magna culpa ullamco nulla officia commodo fugiat.
+                  {q.content}
                 </Text>
                 <br />
 
                 <Grid width="100%" padding="3%">
                   <Text p color="#C4C4C4">
-                    닉네임
+                    {q.author}
                   </Text>
                   <Text fontSize="1.6vh" color="#C4C4C4" margin="0% 1% 0% 0%">
                     <BiTimeFive />
-                    2021.07.25
+                    {q.createdAt}
                   </Text>
                   <Text fontSize="1.6vh" color="#C4C4C4" margin="0% 1% 0% 0%">
                     <BiLike />
-                    17
+                    {q.like}
                   </Text>
                   <Text fontSize="1.6vh" color="#C4C4C4" margin="0% 1% 0% 0%">
                     <BiComment />1

@@ -42,7 +42,7 @@ function App() {
         <Route path="/common/write" exact component={CommonWrite} />
         <Route path="/question" exact component={QuestionList} />
         <Route path="/question/write" exact component={QuestionWrite} />
-        <Route path="/question/detail" exact component={QuestionDetail} />
+        <Route path="/question/detail/:id" exact component={QuestionDetail} />
         <Route path="/review" exact component={ReviewMain} />
         <Route path="/review/list" exact component={ReviewList} />
         <Route path="/review/detail/:id" exact component={ReviewDetail} />

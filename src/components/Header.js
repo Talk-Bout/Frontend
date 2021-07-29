@@ -14,7 +14,7 @@ const Header = (props) => {
             <LeftMenu>
               <A onClick={() => history.push('/')}><Text fontSize='2vh' margin='0 1vw 0 0'>LOGO</Text></A>
               <A onClick={() => history.push('/')}><Text fontSize='1.5vh' margin='0 1vw 0'>홈</Text></A>
-              <A onClick={() => history.push('/review')}><Text fontSize='1.5vh' margin='0 1vw 0'>부트캠프</Text></A>
+              <A onClick={() => history.push('/boot')}><Text fontSize='1.5vh' margin='0 1vw 0'>부트캠프</Text></A>
               <A onClick={() => history.push('/common/list')}><Text fontSize='1.5vh' margin='0 1vw 0'>자유게시판</Text></A>
               <A onClick={() => history.push('/question')}><Text fontSize='1.5vh' margin='0 1vw 0'>질문/답변 게시판</Text></A>
             </LeftMenu>
@@ -35,7 +35,7 @@ const Header = (props) => {
           <LeftMenu>
             <A onClick={() => history.push('/')}><Text fontSize='2vh' margin='0 1vw 0 0'>LOGO</Text></A>
             <A onClick={() => history.push('/')}><Text fontSize='1.5vh' margin='0 1vw 0'>홈</Text></A>
-            <A onClick={() => history.push('/review')}><Text fontSize='1.5vh' margin='0 1vw 0'>부트캠프</Text></A>
+            <A onClick={() => history.push('/boot')}><Text fontSize='1.5vh' margin='0 1vw 0'>부트캠프</Text></A>
             <A onClick={() => history.push('/common/list')}><Text fontSize='1.5vh' margin='0 1vw 0'>자유게시판</Text></A>
             <A onClick={() => history.push('/question')}><Text fontSize='1.5vh' margin='0 1vw 0'>질문/답변 게시판</Text></A>
           </LeftMenu>

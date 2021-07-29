@@ -19,13 +19,30 @@ const Signup = (props) => {
 
   const signup = () => {
     const user_mail = String(id + '@' + selectMail.current.value);
-
     const new_user = {
       user_mail,
       password,
       nickname,
       confirm_password,
     };
+
+    if (
+      id === '' ||
+      password === '' ||
+      nickname === '' ||
+      confirm_password === ''
+    ) {
+      window.alert('모든 정보를 입력해주세요');
+      return;
+    }
+
+    if (password === confirm_password) {
+      dispatch(userActions.signUpDB(new_user));
+    } else {
+      window.alert('비밀번호를 다시 확인해주세요');
+      return;
+    }
+
     dispatch(userActions.signUpDB(new_user));
   };
 

@@ -20,6 +20,8 @@ const CommonBoardList = (props) => {
         </Grid>
         <Grid styles={{ display: 'flex' }}>
           <Categories>
+          {[1, 2, 3, 4, 5, 6].map((n, idx) => {
+            return (
             <Button
               cursor="pointer"
               bg="#FAFAFA"
@@ -29,42 +31,8 @@ const CommonBoardList = (props) => {
             >
               항해99
             </Button>
-            <Button
-              cursor="pointer"
-              bg="#FAFAFA"
-              border_radius="30px"
-              width="20vw"
-              margin="0px 5px"
-            >
-              항해99
-            </Button>
-            <Button
-              cursor="pointer"
-              bg="#FAFAFA"
-              border_radius="30px"
-              width="20vw"
-              margin="0px 5px"
-            >
-              항해99
-            </Button>
-            <Button
-              cursor="pointer"
-              bg="#FAFAFA"
-              border_radius="30px"
-              width="20vw"
-              margin="0px 5px"
-            >
-              항해99
-            </Button>
-            <Button
-              cursor="pointer"
-              bg="#FAFAFA"
-              border_radius="30px"
-              width="20vw"
-              margin="0px 5px"
-            >
-              항해99
-            </Button>
+            );
+          })}
           </Categories>
         </Grid>
         <Grid>
@@ -78,7 +46,7 @@ const CommonBoardList = (props) => {
           </WriteBox>
       </Grid>
       <Hr/>
-      <Contents flex_wrap="wrap">
+      <Contents>
       {[1, 2, 3, 4, 5, 6].map((n, idx) => {
             return (
         <Content onClick={() => history.push('/common/detail')}>

@@ -1,7 +1,10 @@
 import React from 'react';
+import { history } from '../redux/ConfigureStore';
+
 import styled from "styled-components";
 import {Text, Button, Grid, Input} from "../elements/index";
 import Header from '../components/Header';
+
 //icons
 import { BiTimeFive } from 'react-icons/bi'; 
 import { BiLike } from 'react-icons/bi'; 
@@ -19,18 +22,29 @@ const CoomonBoardDetail = (props) => {
       <Grid>
         <Text padding="2%" fontSize="10px">토픽 &gt; 회사생활</Text>
         <Text p fontSize="13px" margin="0px" padding="2%" width="10%" fontWeight="bold">개발자는 커뮤니케이션 능력이 중요한 것 같아요...</Text>
-        <Grid is_flex width="100%">
-            <Text padding="2%" width="33.3%" fontSize="9px"><BiTimeFive/> 2021.07.27</Text>
-            <Text padding="2%" width="33.3%" fontSize="9px"><BiLike/> 10</Text>
-            <Text padding="2%" width="33.3%" fontSize="9px"><BiComment/> 2</Text>
+        <Grid display="flex" width="100%" >
+            <Text padding="2%" width="33.3%" fontSize="12px"><BiTimeFive/> 2021.07.27</Text>
+            <Text padding="2%" width="33.3%" fontSize="12px"><BiLike/> 10</Text>
+            <Text padding="2%" width="33.3%" fontSize="12px"><BiComment/> 2</Text>
+
+          {/* 버튼 추가 */}
+          <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
+            <Button _onClick={() => history.push('/common/write')} border="none" color="white" bg="Grey" width="45%" margin="0 10% 0 0" >
+              수정
+            </Button>
+            <Button border="none" color="white" bg="Grey" width="45%" >
+              삭제
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       <Hr/>
+      {/* 게시물 본문 */}
       <Grid padding="2%">
           <Text fontSize="11px" style={{wordBreak:"break-all"}}>
           뭐랄까...  일단 마음을 비우고 (Null) 특정 상황에 대한  (Input)
           맥락적 해석을 하고 답을 내야 하는과정 (Output).
-          조크든 위트든 프로젝트 커뮤가되었던  이 process를 잘 따르는 사람이 커뮤를 잘한다고 봅니다.
+          조크든 위트든 프로젝트 커뮤가 되었던 process를 잘 따르는 사람이 커뮤를 잘한다고 봅니다.
           </Text>
       </Grid>
       <Hr/>
@@ -49,29 +63,29 @@ const CoomonBoardDetail = (props) => {
       </Grid>
         {/* 댓글 달기 */}
       <Grid>
-        <Content>
-          <Text padding="0% 2%" color="Grey" fontSize="7px">글쓴이</Text>
-          <Text p margin="0px" padding="0% 2%" fontSize="11px">흥미로운 것 같아요</Text>
-          
+        {[1, 2, 3, 4, 5].map((p, index) => {
+        return (
+          <Content>
+            <Text padding="0% 2%" color="Grey" fontSize="7px">글쓴이</Text>
+            <Text p margin="0px" padding="0% 2%" fontSize="11px">흥미로운 것 같아요</Text>
+            <Grid display="flex" width="100%" >
+              <Text padding="2%" width="33.3%" fontSize="12px"><BiTimeFive/> 2021.07.27</Text>
+              <Text padding="2%" width="33.3%" fontSize="12px"><BiLike/> 10</Text>
+              <Text padding="2%" width="33.3%" fontSize="12px"><BiComment/> 2</Text>
 
-          <Grid is_flex width="100%">
-          <Text color="Grey" padding="0% 2%" width="33.3%" fontSize="7px"><BiTimeFive/> 2021.07.27</Text>
-          <Text color="Grey" padding="0% 2%" width="33.3%" fontSize="7px"><BiLike/> 10</Text>
-          <Text color="Grey" padding="0% 2%" width="33.3%" fontSize="7px"><BiComment/> 2</Text>
-          </Grid>
-        </Content>
-      </Grid>
-      <Grid>
-        <Content>
-          <Text padding="0% 2%" color="Grey" fontSize="7px">글쓴이</Text>
-          <Text p margin="0px" padding="0% 2%" fontSize="11px">흥미로운 것 같아요</Text>
-          
-          <Grid is_flex width="100%">
-          <Text color="Grey" padding="0% 2%" width="33.3%" fontSize="7px"><BiTimeFive/> 2021.07.27</Text>
-          <Text color="Grey" padding="0% 2%" width="33.3%" fontSize="7px"><BiLike/> 10</Text>
-          <Text color="Grey" padding="0% 2%" width="33.3%" fontSize="7px"><BiComment/> 2</Text>
-          </Grid>
-        </Content>
+          {/* 버튼 추가 */}
+              <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
+                <Button border="none" color="white" bg="Grey" width="45%" margin="0 10% 0 0" >
+                  수정
+                </Button>
+                <Button border="none" color="white" bg="Grey" width="45%" >
+                  삭제
+                </Button>
+              </Grid>
+            </Grid>
+          </Content>
+        )
+      })}
       </Grid>
       </Grid>
       </Outter>
@@ -82,7 +96,7 @@ const CoomonBoardDetail = (props) => {
           <Text padding="2%" fontSize="11px" fontWeight="bold">
             다른 게시물 <br/>
           </Text>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p) => {
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p, index) => {
             return (
           <AnotherList> ● 부트캠프 질문드립니다! <br/></AnotherList>
           )

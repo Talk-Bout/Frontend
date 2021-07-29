@@ -4,7 +4,7 @@ import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 
 const Header = (props) => {
-  const [is_login, setIsLogin] = useState(false);
+  const [is_login, setIsLogin] = useState(false); //리덕스에서 가져오는 걸루 바꾸기!
 
   if (is_login) {
     return (
@@ -43,9 +43,9 @@ const Header = (props) => {
             <A onClick={() => history.push('/signup')}><Text fontSize='1.5vh' margin='0 1vw 0'>회원가입</Text></A>
           </RightMenu>
         </Grid>
-    </React.Fragment>
-  )
-};
+      </React.Fragment>
+    );
+  };
 
 const A = styled.a`
   cursor: pointer;

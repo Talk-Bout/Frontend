@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const ReviewList = (props) => {
   const post_list = useSelector(state => state.post.list);
-  console.log(post_list);
+  // console.log(post_list);
 
   return (
     <React.Fragment>

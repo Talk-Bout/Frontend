@@ -1,23 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text, Button, Grid } from '../elements/index';
-import { BiTimeFive } from 'react-icons/bi';
-import { BiLike } from 'react-icons/bi';
-import { BiComment } from 'react-icons/bi';
-import { history } from '../redux/ConfigureStore';
 import Header from '../components/Header';
+import { history } from '../redux/ConfigureStore';
+import { Text, Button, Grid } from '../elements/index';
+import { useSelector } from 'react-redux';
+//icons
+import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
+
 
 const CommonBoardList = (props) => {
-
+  // 리덕스 : 게시글 리스트 조회
+  const common_list = useSelector(state => state.post.list);
+  
   return (
     <React.Fragment>
       <Header />
+      {/* 자유게시판 */}
       <Grid padding="10%">
         <Grid>
           <Text p margin="0px 0px 10px 0px">
             자유게시판
           </Text>
         </Grid>
+        {/* 게시판 카테고리 */}
         <Grid styles={{ display: 'flex' }}>
           <Categories>
           {[1, 2, 3, 4, 5, 6].map((n, idx) => {
@@ -46,27 +51,29 @@ const CommonBoardList = (props) => {
           </WriteBox>
       </Grid>
       <Hr/>
+      {/* 자유게시판 게시물  */}
       <Contents>
-      {[1, 2, 3, 4, 5, 6].map((n, idx) => {
+      {common_list.map((c, idx) => {
             return (
-        <Content onClick={() => history.push('/common/detail')}>
+        <Content onClick={() => history.push(`/common/detail/${c.postId}`)}>
         <Text p margin="0px" padding="2%" fontWeight="bold">
-          개발자는 커뮤니케이션 능력이 중요한 것 같아요...
+          {c.title}
         </Text>
         <Text p margin="0px" padding="2%" fontSize="14px">
-          뭐랄까...
+          {c.content}
           </Text>
         <Text p margin="0px" padding="2%" fontSize="11px">
-          글쓴이
+          {c.author}
           </Text>
+          {/* 게시한 날짜, 좋아요, 댓글 */}
         <Grid is_flex width="100%">
         <Text padding="2%" width="33.3%" fontSize="11px">
           <BiTimeFive/> 
-          2021.07.27
+          {c.createdAt}
           </Text>
         <Text padding="2%" width="33.3%" fontSize="11px">
           <BiLike/>
-          10
+          {c.likes}
           </Text>
         <Text padding="2%" width="33.3%" fontSize="11px">
           <BiComment/>

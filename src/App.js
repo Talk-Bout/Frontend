@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
@@ -15,11 +16,11 @@ import CommonDetail from './pages/CommonDetail';
 import CommonList from './pages/CommonList';
 import CommonWrite from './pages/CommonWrite';
 
-//부트캠프별 리뷰 게시판 페이지
-import ReviewMain from './pages/ReviewMain';
-import ReviewList from './pages/ReviewList';
-import ReviewDetail from './pages/ReviewDetail';
-import ReviewWrite from './pages/ReviewWrite';
+//부트캠프별 페이지
+import BootMain from './pages/BootMain';
+import BootInfo from './pages/BootInfo';
+import BootPost from './pages/BootPost';
+import BootWrite from './pages/BootWrite';
 
 //질문 게시판 페이지
 import QuestionList from './pages/QuestionList';
@@ -38,15 +39,16 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/common/list" exact component={CommonList} />
-        <Route path="/common/detail" exact component={CommonDetail} />
+        <Route path="/common/detail/:id" exact component={CommonDetail} />
         <Route path="/common/write" exact component={CommonWrite} />
         <Route path="/question" exact component={QuestionList} />
         <Route path="/question/write" exact component={QuestionWrite} />
         <Route path="/question/detail/:id" exact component={QuestionDetail} />
-        <Route path="/review" exact component={ReviewMain} />
-        <Route path="/review/list" exact component={ReviewList} />
-        <Route path="/review/detail/:id" exact component={ReviewDetail} />
-        <Route path="/review/write" exact component={ReviewWrite} />
+        <Route path="/boot" exact component={BootMain} />
+        <Route path="/boot/info" exact component={BootInfo} />
+        <Route path="/boot/post/:id" exact component={BootPost} />
+        <Route path="/boot/write" exact component={BootWrite} />
+        <Route path="/boot/write/:id" exact component={BootWrite} />
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />
       </ConnectedRouter>

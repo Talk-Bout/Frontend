@@ -48,6 +48,7 @@ function App() {
         <Route path="/review/list" exact component={ReviewList} />
         <Route path="/review/detail/:id" exact component={ReviewDetail} />
         <Route path="/review/write" exact component={ReviewWrite} />
+        <Route path="/review/write/:id" exact component={ReviewWrite} />
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />
       </ConnectedRouter>

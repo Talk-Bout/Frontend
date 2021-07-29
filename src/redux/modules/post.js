@@ -139,9 +139,9 @@ export default handleActions({
     [ADD_POST]: (state, action) => produce(state, (draft) => {
         draft.list.push(action.payload.post);
     }),
-    [EDIT_POST]: (state, action) => produce(state, (draft) => {
-        // console.log(state);
-    })
+    // [EDIT_POST]: (state, action) => produce(state, (draft) => {
+    //     // console.log(state);
+    // })
 }, initialState);
 
 

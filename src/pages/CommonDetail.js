@@ -11,8 +11,16 @@ import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
 const CoomonBoardDetail = (props) => {
   const common_id = window.location.pathname.split('/common/detail/')[1];
+
   const common_list = useSelector(state => state.post.list);
-  const common_find = common_list.find((post)=> post.postId == common_id);
+  const common_find = common_list.find((comment)=> comment.postId == common_id);
+
+  console.log(props);
+  const comment_id = props.match.params.id;
+  const comment_list = useSelector(state => state.comment.list);
+  console.log(comment_list)
+  const comment_find = comment_list.find((comment)=> comment.commentId == comment_id);
+  console.log(comment_find);
 
   return (
     <React.Fragment>
@@ -74,13 +82,13 @@ const CoomonBoardDetail = (props) => {
       </Grid>
         {/* 댓글 달기 */}
       <Grid>
-        {[1, 2, 3, 4, 5].map((p, index) => {
+        {comment_list.map((ct, index) => {
         return (
           <Content>
-            <Text padding="0% 2%" color="Grey" fontSize="7px">글쓴이</Text>
-            <Text p margin="0px" padding="0% 2%" fontSize="11px">흥미로운 것 같아요</Text>
+            <Text padding="0% 2%" color="Grey" fontSize="7px">{ct.nickname}</Text>
+            <Text p margin="0px" padding="0% 2%" fontSize="11px">{ct.content}</Text>
             <Grid display="flex" width="100%" >
-              <Text padding="2%" width="33.3%" fontSize="12px"><BiTimeFive/> 2021.07.27</Text>
+              <Text padding="2%" width="33.3%" fontSize="12px"><BiTimeFive/>{ct.createdAt}</Text>
               <Text padding="2%" width="33.3%" fontSize="12px"><BiLike/> 10</Text>
               <Text padding="2%" width="33.3%" fontSize="12px"><BiComment/> 2</Text>
 

@@ -10,6 +10,7 @@ import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
 
 const CommonBoardList = (props) => {
   const common_list = useSelector(state => state.post.list);
+  const comment_list = useSelector(state => state.comment.list);
   
   return (
     <React.Fragment>

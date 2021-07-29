@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 
 const Header = (props) => {
-  const [is_login, setIsLogin] = useState(false); //리덕스에서 가져오는 걸루 바꾸기!
+  const is_login = useSelector(state => state.user.is_login);
 
   if (is_login) {
     return (

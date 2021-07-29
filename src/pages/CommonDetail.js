@@ -1,19 +1,23 @@
 import React from 'react';
 import styled from "styled-components";
-
 import {Text, Button, Grid, Input} from "../elements/index";
+import Header from '../components/Header';
+//icons
 import { BiTimeFive } from 'react-icons/bi'; 
 import { BiLike } from 'react-icons/bi'; 
 import { BiComment } from 'react-icons/bi';
+
 
 const CoomonBoardDetail = (props) => {
 
   return (
     <React.Fragment>
+      <Header/>
+        {/* 게시물 */}
       <Outter>
       <Grid float="right" padding="60px 0px 60px 40px">
       <Grid>
-        <Text padding="2%" fontSize="10px">토픽 > 회사생활</Text>
+        <Text padding="2%" fontSize="10px">토픽 &gt; 회사생활</Text>
         <Text p fontSize="13px" margin="0px" padding="2%" width="10%" fontWeight="bold">개발자는 커뮤니케이션 능력이 중요한 것 같아요...</Text>
         <Grid is_flex width="100%">
             <Text padding="2%" width="33.3%" fontSize="9px"><BiTimeFive/> 2021.07.27</Text>
@@ -30,6 +34,7 @@ const CoomonBoardDetail = (props) => {
           </Text>
       </Grid>
       <Hr/>
+        {/* 댓글 남기기 */}
       <Grid>
         <Text padding="2%" fontWeight="bold" fontSize="10px">댓글5</Text>
         <CommentBox>
@@ -41,8 +46,8 @@ const CoomonBoardDetail = (props) => {
         <Text style={{display: "inline-block"}} padding="2%" fontWeight="bold" fontSize="11px">댓글1개더보기</Text>
         <Hr/>
         </div>
-         
       </Grid>
+        {/* 댓글 달기 */}
       <Grid>
         <Content>
           <Text padding="0% 2%" color="Grey" fontSize="7px">글쓴이</Text>
@@ -70,12 +75,18 @@ const CoomonBoardDetail = (props) => {
       </Grid>
       </Grid>
       </Outter>
+      {/* 다른 게시물 */}
       <Side >
         <Grid padding="30px" float="left" width="30%">
         <Another>
-          <Text padding="2%" fontSize="11px" fontWeight="bold"> 다른 게시물 <br/> </Text>
+          <Text padding="2%" fontSize="11px" fontWeight="bold">
+            다른 게시물 <br/>
+          </Text>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p) => {
+            return (
           <AnotherList> ● 부트캠프 질문드립니다! <br/></AnotherList>
-          <AnotherList> ● 부트캠프 질문드립니다! <br/></AnotherList>
+          )
+        })}
         </Another>
       </Grid>
       </Side>
@@ -110,7 +121,6 @@ const Side = styled.div`
 padding: 15px 0px;
 float: right;
 width: 40%;
-
 `;
 
 const Another = styled.div`

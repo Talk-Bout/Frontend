@@ -38,7 +38,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/common/list" exact component={CommonList} />
-        <Route path="/common/detail" exact component={CommonDetail} />
+        <Route path="/common/detail/:id" exact component={CommonDetail} />
         <Route path="/common/write" exact component={CommonWrite} />
         <Route path="/question" exact component={QuestionList} />
         <Route path="/question/write" exact component={QuestionWrite} />

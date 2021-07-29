@@ -3,9 +3,16 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 const Header = (props) => {
+  const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
+  const logOutBtn = () => {
+    dispatch(userActions.logOut());
+    history.push('/');
+  };
 
   if (is_login) {
     return (
@@ -59,7 +66,7 @@ const Header = (props) => {
                 마이페이지
               </Text>
             </A>
-            <A onClick={() => {}}>
+            <A onClick={logOutBtn}>
               <Text fontSize="1.5vh" margin="0 1vw 0">
                 로그아웃
               </Text>

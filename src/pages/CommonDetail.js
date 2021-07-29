@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from "styled-components";
 import { history } from '../redux/ConfigureStore';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {Text, Button, Grid, Input} from "../elements/index";
 import Header from '../components/Header';
-
+import Comment from '../components/Comment';
+import { actionCreators as commentActions} from "../redux/modules/comment";
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
 const CoomonBoardDetail = (props) => {
-  const common_id = window.location.pathname.split('/common/detail/')[1];
+  const dispatch = useDispatch();
+  const postId = props.match.params.id;
+  //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_list = useSelector(state => state.post.list);
-  const common_find = common_list.find((post)=> post.postId == common_id);
+  const common_find = common_list.find((comment)=> comment.postId == postId);
+  const comment_list = useSelector((state) => state.comment.list);
 
   return (
     <React.Fragment>
@@ -59,45 +63,8 @@ const CoomonBoardDetail = (props) => {
           </Text>
       </Grid>
       <Hr/>
-        {/* 댓글 남기기 */}
-      <Grid>
-        <Text padding="2%" fontWeight="bold" fontSize="10px">댓글5</Text>
-        <CommentBox>
-        <Input font_size="9px" border="1px solid #E5E5E5;"placeholder="댓글을 남겨주세요"/>
-        <Button border="none" height="40px" color="white" bg="Grey" cursor="pointer" width="15%">등록</Button>
-        </CommentBox>
-        <Hr/>
-        <div style={{textAlign: "center"}}>
-        <Text style={{display: "inline-block"}} padding="2%" fontWeight="bold" fontSize="11px">댓글1개더보기</Text>
-        <Hr/>
-        </div>
-      </Grid>
-        {/* 댓글 달기 */}
-      <Grid>
-        {[1, 2, 3, 4, 5].map((p, index) => {
-        return (
-          <Content>
-            <Text padding="0% 2%" color="Grey" fontSize="7px">글쓴이</Text>
-            <Text p margin="0px" padding="0% 2%" fontSize="11px">흥미로운 것 같아요</Text>
-            <Grid display="flex" width="100%" >
-              <Text padding="2%" width="33.3%" fontSize="12px"><BiTimeFive/> 2021.07.27</Text>
-              <Text padding="2%" width="33.3%" fontSize="12px"><BiLike/> 10</Text>
-              <Text padding="2%" width="33.3%" fontSize="12px"><BiComment/> 2</Text>
-
-          {/* 버튼 추가 */}
-              <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
-                <Button border="none" color="white" bg="Grey" width="45%" margin="0 10% 0 0" >
-                  수정
-                </Button>
-                <Button border="none" color="white" bg="Grey" width="45%" >
-                  삭제
-                </Button>
-              </Grid>
-            </Grid>
-          </Content>
-        )
-      })}
-      </Grid>
+        {/* comment component */}
+        <Comment postId={postId}/>
       </Grid>
       </Outter>
       {/* 다른 게시물 */}

@@ -29,7 +29,7 @@ const setCommentDB = (postId) => {                        // 댓글 불러오는
         axios.get(`http://15.165.18.118/posts/${postId}/comments`)
         .then((response) => {
             console.log('setPostDB 함수 호출 성공!');
-            console.log(response.data);
+            // console.log(response.data);
                 dispatch(setComment(response.data));
             })
             .catch((err) => {
@@ -77,9 +77,8 @@ const editCommentDB = (edited_comment) => {           // 댓글 수정하는 함
     };
 };
 
-const deleteCommentDB = (id, postId) => {           // 댓글 삭제하는 함수
+const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하는 함수
     return function (dispatch) {
-        const commentId = id;
         const axios = require('axios');
         axios.delete(`http://15.165.18.118/posts/${postId}/comments/${commentId}`)
         .then((response) => {

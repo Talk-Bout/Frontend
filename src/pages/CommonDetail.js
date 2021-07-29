@@ -16,7 +16,7 @@ const CoomonBoardDetail = (props) => {
   //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_list = useSelector(state => state.post.list);
   const common_find = common_list.find((comment)=> comment.postId == postId);
-  
+  const comment_list = useSelector((state) => state.comment.list);
 
   return (
     <React.Fragment>

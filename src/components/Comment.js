@@ -13,17 +13,17 @@ const Comment = (props) => {
     const dispatch = useDispatch();
     // 리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
     const comment_list = useSelector(state => state.comment.list);
-    
+
     // 댓글 확인
-    const [comments, setComments] = React.useState('');
+    const [content, setComments] = React.useState('');
     const checkComments = (e) => {
       setComments(e.target.value);
     }
-    
+
     //댓글 등록
     const addComment = () => {
         const new_comment = {
-            content : comments,
+            content : content,
             nickname : "username"
         }
       dispatch(commentActions.addCommentDB(new_comment, props.postId));
@@ -34,6 +34,15 @@ const Comment = (props) => {
         dispatch(commentActions.setCommentDB(props.postId));
     }, []);
 
+    // 댓글 수정
+    const editComment = () => {
+        const edited_comment = {
+        }
+    }
+
+    // 댓글 삭제
+    const deleteComment = () => {
+    }
     
     return (
         <React.Fragment>
@@ -57,7 +66,7 @@ const Comment = (props) => {
       </Grid>
         {/* 댓글 달기 */}
       <Grid>
-        {comment_list.map((ct, index) => {
+        {comment_list && comment_list.map((ct, index) => {
         return (
           <Content>
             <Text padding="0% 2%" color="Grey" fontSize="7px">{ct.nickname}</Text>
@@ -70,11 +79,11 @@ const Comment = (props) => {
           {/* 수정, 삭제 버튼 */}
               <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
                 <Button border="none" color="white" bg="Grey" width="45%" margin="0 10% 0 0"
-                // _onClick={editComment}
-                >
+                _onClick={editComment} >
                   수정
                 </Button>
-                <Button border="none" color="white" bg="Grey" width="45%" >
+                <Button border="none" color="white" bg="Grey" width="45%"
+                _onClick={deleteComment} >
                   삭제
                 </Button>
               </Grid>

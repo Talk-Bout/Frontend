@@ -18,32 +18,7 @@ const deletePost = createAction(DELETE_POST, (post) => ({post}));
 
 // 기본값 정하기
 const initialState = {
-    list: [
-        // {
-        //     postId: 1,
-        //     title: '스파르타 정말 괜찮은가요?',
-        //     author: '코딩초보',
-        //     content: '아무리 생각해도 어느 부트캠프가 좋은지 모르겠습니다.. 스파르타코딩클럽의 항해99라는 프로그램을 추천하는 분들도 계시는데, 믿을 만한 정보일까요? 확실하게 알고 싶습니다.',
-        //     createdAt: '29 07 2021',
-        //     likes: 3,
-        // },
-        // {
-        //     postId: 2,
-        //     title: '강의로만 따지자면 글쎄요...',
-        //     author: '비대면조아요',
-        //     content: '강의 질로만 따지자면 저는 차라리 독학하시라고 얘기하고도 싶은데, 독학이 어려우시면 드림코딩 추천합니다. 이해가 잘 돼요.',
-        //     createdAt: '29 07 2021',
-        //     likes: 1,
-        // },
-        // {
-        //     postId: 3,
-        //     title: '저 글 쓴 사람 알바 아닙니까?',
-        //     author: '알바척결',
-        //     content: '부트캠프 얘기하자고 모인 곳이잖아요. 왜 여기서 특정 업체 홍보를 하고 있는 겁니까? 저런 사람들 걸러서 내보내야 한다고 생각합니다. 확실한 사용자 인증이 필요한 이유가 바로 여기 있었군요!',
-        //     createdAt: '29 07 2021',
-        //     likes: 5,
-        // },
-    ],
+    list: [],
 };
 
 // 액션함수
@@ -137,11 +112,8 @@ export default handleActions({
         draft.list = [action.payload.post];
     }),
     [ADD_POST]: (state, action) => produce(state, (draft) => {
-        draft.list.push(action.payload.post);
+        draft.list.unshift(action.payload.post);
     }),
-    // [EDIT_POST]: (state, action) => produce(state, (draft) => {
-    //     // console.log(state);
-    // })
 }, initialState);
 
 

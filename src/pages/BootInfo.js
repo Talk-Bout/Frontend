@@ -6,7 +6,7 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 
-const ReviewList = (props) => {
+const BootInfo = (props) => {
   const dispatch = useDispatch();
   const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
 
@@ -46,7 +46,7 @@ const ReviewList = (props) => {
             <PostList>
               {post_list && post_list.map((p, idx) => {
                 return (
-                  <Post key={p.postId} onClick={() => history.push(`/review/detail/${p.postId}`)}>
+                  <Post key={p.postId} onClick={() => history.push(`/boot/post/${p.postId}`)}>
                     <StarBox>
                       <Score><Text fontSize='2vh'>2.2</Text></Score>
                       <Stars><Text fontSize='1.5vh'>★★☆☆☆</Text></Stars>
@@ -226,4 +226,4 @@ const InfoBoxInner = styled.div`
   padding: 2vh 0 0 0.5vw;
 `;
 
-export default ReviewList;
+export default BootInfo;

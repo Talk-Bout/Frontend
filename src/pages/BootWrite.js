@@ -5,7 +5,7 @@ import { Button, Grid, Input, Text } from '../elements';
 import {history} from '../redux/ConfigureStore';
 import {actionCreators as postActions} from '../redux/modules/post';
 
-const ReviewWrite = (props) => {
+const BootWrite = (props) => {
   const dispatch = useDispatch();
   const [edit_mode, setEditMode] = useState(false);
   const post_id = props.match.params.id;
@@ -40,7 +40,7 @@ const ReviewWrite = (props) => {
         <Grid backgroundColor='#fff' width='45vw' height='65vh' margin='auto'>
           <WindowInner>
             <HeaderBox>
-              <Button width='7%' _onClick={() => history.push('/review/list')}> X </Button>
+              <Button width='7%' _onClick={() => history.push('/boot/main')}> X </Button>
               <Text margin='0 11vw' fontSize='2vh' fontWeight='700' lineHeight='4vh'>부트캠프 리뷰작성</Text>
               <Button width='7%' _onClick={() => addPost()}>{edit_mode ? '수정' : '등록'}</Button>
             </HeaderBox>
@@ -102,4 +102,4 @@ const Key = styled.span`
   margin-right: 2vw;
 `;
 
-export default ReviewWrite;
+export default BootWrite;

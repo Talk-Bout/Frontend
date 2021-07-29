@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Input } from '../elements';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/Header';
 //icons
 import { BiTimeFive } from 'react-icons/bi';
@@ -8,6 +9,12 @@ import { BiLike } from 'react-icons/bi';
 import { BiComment } from 'react-icons/bi';
 
 const QuestionDetail = (props) => {
+  const question_id = window.location.pathname.split('/question/detail/')[1];
+  const question_list = useSelector((state) => state.post.list);
+  const question_found = question_list.find(
+    (post) => post.postId == question_id
+  );
+
   return (
     // height: '100vh' 다른 카드 생기면 없애기!
     <div style={{ backgroundColor: '#C4C4C4' }}>
@@ -22,7 +29,7 @@ const QuestionDetail = (props) => {
                   Q
                 </Text>
                 <Text fontSize="3vh" fontWeight="600" margin="auto 5%">
-                  질문입니다
+                  {question_found.title}
                 </Text>
               </Grid>
               <Grid width="20%" display="flex" margin="0 0 0 auto">
@@ -32,18 +39,12 @@ const QuestionDetail = (props) => {
             </Grid>
 
             <Text p margin="5% 0%">
-              Cillum in amet cillum irure ullamco. Cupidatat occaecat ad ex
-              minim ullamco dolore eiusmod velit eu fugiat excepteur. Culpa amet
-              aliqua consectetur culpa consectetur ad cillum non cillum proident
-              velit Lorem do id. Exercitation aliquip incididunt aute officia in
-              in excepteur. Ea cupidatat et est sit qui. Eiusmod excepteur et
-              nisi ullamco voluptate cillum nisi culpa velit dolore. Culpa do
-              adipisicing voluptate pariatur fugiat.
+              {question_found.content}
             </Text>
 
             <Grid width="100%" margin="3% 0%">
               <Text fontSize="1.6vh" color="#C4C4C4" margin="0% 1% 0% 0%">
-                닉네임
+                {question_found.author}
               </Text>
               <Text fontSize="1.6vh" color="#C4C4C4" margin="0% 1% 0% 0%">
                 조회수 23

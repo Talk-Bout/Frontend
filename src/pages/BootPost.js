@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {Button, Grid, Input, Text} from '../elements';
 import Header from '../components/Header';
 import { BiTimeFive, BiLike, BiComment } from "react-icons/bi";
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
+import {actionCreators as commentActions} from '../redux/modules/comment';
 import {history} from '../redux/ConfigureStore';
 
 const BootPost = (props) => {
@@ -13,12 +14,32 @@ const BootPost = (props) => {
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
 
+  const comment_list = useSelector(state => state.comment.list);
+
+  const commentInput = useRef(null);
+
   useEffect(() => {
     if (post_found) {
+      dispatch(commentActions.setCommentDB(post_id));
       return;
     }
     dispatch(postActions.setOnePostDB(post_id));
+    dispatch(commentActions.setCommentDB(post_id));
   }, []);
+
+  const addComment = () => {
+    const content = commentInput.current.value;
+    const new_comment = {
+      nickname: 'username',
+      content: content,
+    }
+    dispatch(commentActions.addCommentDB(new_comment, post_id));
+    commentInput.current.value = '';
+  }
+
+  const deleteComment = (post_id, comment_id) => {
+    dispatch(commentActions.deleteCommentDB(post_id, comment_id));
+  }
 
   if (!post_found) {
     return (
@@ -46,20 +67,21 @@ const BootPost = (props) => {
               <CommentWrite>
                 <TextBox><Text fontSize='1.6vh' fontWeight='700'>댓글 5</Text></TextBox>
                 <InputBox>
-                  <Input width='80%'></Input>
-                  <Button width='20%' height='5vh'>등록</Button>
+                  <Input width='80%' _ref={commentInput}></Input>
+                  <Button width='20%' height='5vh' _onClick={() => addComment()}>등록</Button>
                 </InputBox>
               </CommentWrite>
               <CommentList>
                 <hr style={{margin: '1vh 0 0', borderTop: '1px solid #eee'}}/>
                 <Button height='15%'>댓글 1개 더보기</Button>
                 <hr style={{margin: '0 0 3vh', borderTop: '1px solid #eee'}}/>
-                  {[1, 2, 3].map((c, idx) => {
+                  {comment_list && comment_list.map((c, idx) => {
                     return (
-                      <React.Fragment key={idx}>
-                        <TextBox><Text fontSize='1.5vh' color='#ccc'>G******</Text></TextBox>
-                        <TextBox><Text fontSize='1.7vh'>둘 다 해요. 얕지만 다양하게 하는 겁니다.</Text></TextBox>
-                        <TextBox><Text fontSize='1.5vh' color='#ccc'><BiTimeFive /> 2021.07.27 <BiLike /> 17 <BiComment /> 5 </Text></TextBox>
+                      <React.Fragment key={c.commentId}>
+                        <TextBox><Text fontSize='1.5vh' color='#ccc'>{c.nickname}</Text></TextBox>
+                        <TextBox><Text fontSize='1.7vh'>{c.content}</Text></TextBox>
+                        <TextBox><Text fontSize='1.5vh' color='#ccc'><BiTimeFive /> {c.createdAt} <BiLike /> 17 <BiComment /> 5 </Text><Button width='5vw' margin='0 0.5vw 0'>수정</Button>
+                        <Button width='5vw' margin='0 0.5vw 0' _onClick={() => deleteComment(post_id, c.commentId)}>삭제</Button></TextBox>
                         <hr style={{margin: '3vh 0', borderTop: '1px solid #eee'}}/>
                       </React.Fragment>
                     )

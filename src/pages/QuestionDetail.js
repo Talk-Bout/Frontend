@@ -17,15 +17,17 @@ const QuestionDetail = (props) => {
         <Grid width="60vw" margin="0% auto">
           <QuestionBox>
             <Grid display="flex">
-              <Grid width="10%">
+              <Grid width="40%">
                 <Text fontSize="3vh" fontWeight="600">
                   Q
                 </Text>
-              </Grid>
-              <Grid width="90%">
-                <Text fontSize="3vh" fontWeight="600" margin="auto 0%">
+                <Text fontSize="3vh" fontWeight="600" margin="auto 5%">
                   질문입니다
                 </Text>
+              </Grid>
+              <Grid width="20%" display="flex" margin="0 0 0 auto">
+                <Button>수정하기</Button>
+                <Button>삭제하기</Button>
               </Grid>
             </Grid>
 
@@ -60,21 +62,33 @@ const QuestionDetail = (props) => {
             return (
               <AnswerBox>
                 <Grid display="flex">
-                  <Grid width="10%">
+                  <Grid width="3vw">
                     <Text fontSize="3vh" fontWeight="600">
                       A
                     </Text>
                   </Grid>
 
-                  <Grid>
-                    <Text p margin="1% auto" fontWeight="600">
+                  <Grid width="40%">
+                    <Text p margin="auto 5%" fontWeight="600">
                       닉네임님의 답변
                     </Text>
-                    <Text p margin="1% auto" color="#C4C4C4">
+                    <Text p margin="auto 5%" color="#C4C4C4">
                       2021-07-25 20:32:09 작성
                     </Text>
                   </Grid>
+
+                  <Grid
+                    width="20%"
+                    display="flex"
+                    margin="0 0 0 auto"
+                    backgroundColor="yellow"
+                  >
+                    <Button>수정하기</Button>
+                    <Button>삭제하기</Button>
+                  </Grid>
                 </Grid>
+
+                {/* <Grid height="5vh" backgroundColor="red" /> */}
 
                 <hr color="#E5E5E5" />
                 {/* commentWrite */}

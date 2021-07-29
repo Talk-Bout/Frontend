@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import Header from '../components/Header';
 import { history } from '../redux/ConfigureStore';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {actionCreators as postActions} from '../redux/modules/post';
 
 const ReviewList = (props) => {
-  const post_list = useSelector(state => state.post.list);
-  // console.log(post_list);
+  const dispatch = useDispatch();
+  const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
+
+  useEffect(() => {
+    dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
+  }, [])
 
   return (
     <React.Fragment>
@@ -39,7 +44,7 @@ const ReviewList = (props) => {
         <Grid is_center backgroundColor='#e5e5e5'>
           <Grid display='flex' height='100%' width='55%' margin='0 auto' padding='3vh 0 0'>
             <PostList>
-              {post_list && post_list.map((p) => {
+              {post_list && post_list.map((p, idx) => {
                 return (
                   <Post key={p.postId} onClick={() => history.push(`/review/detail/${p.postId}`)}>
                     <StarBox>

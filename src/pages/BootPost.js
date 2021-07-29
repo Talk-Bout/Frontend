@@ -6,11 +6,10 @@ import { BiTimeFive, BiLike, BiComment } from "react-icons/bi";
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 import {history} from '../redux/ConfigureStore';
-import { CALL_HISTORY_METHOD } from 'connected-react-router';
 
-const ReviewDetail = (props) => {
+const BootPost = (props) => {
   const dispatch = useDispatch();
-  const post_id = window.location.pathname.split('/review/detail/')[1];
+  const post_id = window.location.pathname.split('/boot/post/')[1];
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
 
@@ -37,7 +36,7 @@ const ReviewDetail = (props) => {
               <PostBox>
                 <Title><Text fontSize='2.5vh' fontWeight='700'>{post_found.title}</Text></Title>
                 <TextBox><Text fontSize='1.5vh' color='#ccc'>{post_found.nickname}</Text></TextBox>
-                <TextBox><Text fontSize='1.5vh' color='#ccc'><BiTimeFive /> {post_found.createdAt} <BiLike /> 17 <BiComment /> 5 </Text><Button width='5vw' margin='0 0.5vw 0' _onClick={() => history.push(`/review/write/${post_id}`)}>수정</Button><Button width='5vw' margin='0 0.5vw 0'>삭제</Button></TextBox>
+                <TextBox><Text fontSize='1.5vh' color='#ccc'><BiTimeFive /> {post_found.createdAt} <BiLike /> 17 <BiComment /> 5 </Text><Button width='5vw' margin='0 0.5vw 0' _onClick={() => history.push(`/boot/post/${post_id}`)}>수정</Button><Button width='5vw' margin='0 0.5vw 0'>삭제</Button></TextBox>
                 <hr style={{margin: '3vh 0', borderTop: '1px solid #eee'}}/>
                 <Body>
                   <Text fontSize='2vh'>{post_found.content}</Text>
@@ -142,4 +141,4 @@ const TitleBox = styled.div`
   padding: 2vh 1vw;
 `;
 
-export default ReviewDetail;
+export default BootPost;

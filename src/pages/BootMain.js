@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Banner from '../components/Banner';
 import { history } from '../redux/ConfigureStore';
 
-const ReviewMain = (props) => {
+const BootMain = (props) => {
   return (
     <React.Fragment>
       <Grid>
@@ -15,7 +15,7 @@ const ReviewMain = (props) => {
           <CardList>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, idx) => {
               return (
-                <Card onClick={() => history.push('/review/list')}>
+                <Card onClick={() => history.push('/boot/info')}>
                   <ImageDiv>
                     <Text fontSize="2.5vh">LOGO</Text>
                   </ImageDiv>
@@ -67,4 +67,4 @@ const ImageDiv = styled.div`
   text-align: center;
 `;
 
-export default ReviewMain;
+export default BootMain;

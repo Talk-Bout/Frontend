@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import Header from '../components/Header';
 import { history } from '../redux/ConfigureStore';
+import { useSelector } from 'react-redux';
 
 const ReviewList = (props) => {
+  const post_list = useSelector(state => state.post.list);
+  console.log(post_list);
 
   return (
     <React.Fragment>
@@ -36,21 +39,19 @@ const ReviewList = (props) => {
         <Grid is_center backgroundColor='#e5e5e5'>
           <Grid display='flex' height='100%' width='55%' margin='0 auto' padding='3vh 0 0'>
             <PostList>
-              {[1, 2, 3].map((n, idx) => {
+              {post_list && post_list.map((p) => {
                 return (
-                  <Post>
+                  <Post key={p.postId} onClick={() => history.push(`/review/detail/${p.postId}`)}>
                     <StarBox>
                       <Score><Text fontSize='2vh'>2.2</Text></Score>
                       <Stars><Text fontSize='1.5vh'>★★☆☆☆</Text></Stars>
                     </StarBox>
-                    <PostBox onClick={() => history.push('/review/detail')}>
+                    <PostBox>
                       <PostInner>
-                        <Text fontSize='2vh' fontWeight='700'>리뷰 제목<br/></Text>
-                        <Text color='#bbb'>수료자: sp****** 2021.07.25<br/><br/></Text>
-                        <Text fontSize='1.5vh' fontWeight='700'>장점<br/></Text>
-                        <Text fontSize='1.5vh'>온라인 부트캠프라서 공간적 제약이 없다ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br/><br/></Text>
-                        <Text fontSize='1.5vh' fontWeight='700'>단점<br/></Text>
-                        <Text fontSize='1.5vh'>과정도 별로 메리트 없고 전문가가 아닌 수료생들이 세션을 진행하기도 한다</Text>
+                        <Text fontSize='2vh' fontWeight='700'>{p.title}<br/></Text>
+                        <Text color='#bbb'>수료자: {p.author} {p.createdAt}<br/><br/></Text>
+                        <Text fontSize='1.5vh' fontWeight='700'>내용<br/></Text>
+                        <Text fontSize='1.5vh'>{p.content}<br/><br/></Text>
                       </PostInner>
                     </PostBox>
                   </Post>

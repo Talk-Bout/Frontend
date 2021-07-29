@@ -1,6 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
-import {history} from '../configureStore';
+import {history} from '../ConfigureStore';
 
 // 액션타입
 const SET_POST = 'SET_POST';        // 게시글 불러오기

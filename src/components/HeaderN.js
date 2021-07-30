@@ -20,7 +20,7 @@ const HeaderN = (props) => {
       <React.Fragment>
         <Grid className='header' width='100%' height='80px' borderBottom='1px solid #80868b' display='flex' justify_content='space-between' padding='1vh 40px 1vh 40px'>
           <Grid className='search' height='100%' width='90%' padding='10px 0 0' margin='5px 0 0'>
-            <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='부트캠프 이름을 검색해보세요.'></Input>
+            <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='검색어를 입력하세요.'></Input>
           </Grid>
           <Grid className='login' height='100%' width='50px'>
             <TextBox onClick={() => {logOutBtn()}}><Text p color='#f8f9fa' text_align='center'>로그아웃</Text></TextBox>
@@ -33,7 +33,7 @@ const HeaderN = (props) => {
     <React.Fragment>
       <Grid className='header' width='100%' height='80px' borderBottom='1px solid #80868b' display='flex' justify_content='space-between' padding='1vh 40px 1vh 40px'>
         <Grid className='search' height='100%' width='90%' padding='10px 0 0' margin='5px 0 0'>
-          <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='부트캠프 이름을 검색해보세요.'></Input>
+          <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='검색어를 입력하세요.'></Input>
         </Grid>
         <Grid className='login' height='100%' width='50px'>
           <TextBox onClick={() => history.push('/login')}><Text p color='#f8f9fa' text_align='center'>로그인</Text></TextBox>

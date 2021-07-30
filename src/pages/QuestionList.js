@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button } from '../elements';
 import Header from '../components/Header';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as questionActions } from '../redux/modules/post';
 //icons
-import { BiTimeFive } from 'react-icons/bi';
-import { BiLike } from 'react-icons/bi';
-import { BiComment } from 'react-icons/bi';
+import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
 const QuestionList = (props) => {
+  const dispatch = useDispatch();
   const question_list = useSelector((state) => state.post.list);
+
+  useEffect(() => {
+    dispatch(questionActions.setPostDB());
+  });
   return (
     <React.Fragment>
       <Header />

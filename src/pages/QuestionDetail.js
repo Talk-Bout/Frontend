@@ -2,18 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Input } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as questionActions } from '../redux/modules/post';
+import { history } from '../redux/ConfigureStore';
 import Header from '../components/Header';
 //icons
-import { BiTimeFive } from 'react-icons/bi';
-import { BiLike } from 'react-icons/bi';
-import { BiComment } from 'react-icons/bi';
+import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
 const QuestionDetail = (props) => {
+  const dispatch = useDispatch();
+
   const question_id = window.location.pathname.split('/question/detail/')[1];
   const question_list = useSelector((state) => state.post.list);
   const question_found = question_list.find(
     (post) => post.postId == question_id
   );
+
+  //질문 삭제
+  const deleteBtn = () => {
+    dispatch(questionActions.deletePostDB(props.postId));
+  };
+
+  //수정 페이지로 이동
+  const editBtn = () => {
+    history.push(`/question/write/${question_id}`);
+  };
 
   return (
     // height: '100vh' 다른 카드 생기면 없애기!
@@ -33,7 +45,7 @@ const QuestionDetail = (props) => {
                 </Text>
               </Grid>
               <Grid width="20%" display="flex" margin="0 0 0 auto">
-                <Button>수정하기</Button>
+                <Button _onClick={editBtn}>수정하기</Button>
                 <Button>삭제하기</Button>
               </Grid>
             </Grid>

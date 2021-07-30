@@ -14,7 +14,7 @@ const Sidebar = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='sidebar' backgroundColor='#202124' width='7vw' padding='30px 0'>
+      <Grid className='sidebar' backgroundColor='#202124' width='7vw' padding='30px 0' minWidth='100px'>
         <Grid className='sidebar-inner' is_center>
           <ImageBox className='logo' style={{marginBottom: '30px', paddingTop: '15px'}} onClick={() => history.push('/')}><LogoImg src={Logo} style={{width: '50px'}}></LogoImg></ImageBox>
           <ImageBox className='home' onClick={() => history.push('/')}><Image src={Home} /></ImageBox>
@@ -28,7 +28,9 @@ const Sidebar = (props) => {
   );
 };
 
-const ImageBox = styled.div``;
+const ImageBox = styled.div`
+  cursor: pointer;
+`;
 
 const LogoImg = styled.img`
   width: 50px;
@@ -38,6 +40,10 @@ const Image = styled.img`
   width: 100px;
   -webkit-filter: opacity(.5) drop-shadow(0 0 0 #80868b);
   filter: opacity(.5) drop-shadow(0 0 0 #80868b);
+  &:hover {
+    -webkit-filter: opacity(.5) drop-shadow(0 0 0 white);
+    filter: opacity(.5) drop-shadow(0 0 0 white);
+  }
 `;
 
 export default Sidebar;

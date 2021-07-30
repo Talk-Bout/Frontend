@@ -43,6 +43,7 @@ function App() {
         <Route path="/common/write" exact component={CommonWrite} />
         <Route path="/question" exact component={QuestionList} />
         <Route path="/question/write" exact component={QuestionWrite} />
+        <Route path="/question/write/:id" exact component={QuestionWrite} />
         <Route path="/question/detail/:id" exact component={QuestionDetail} />
         <Route path="/boot" exact component={BootMain} />
         <Route path="/boot/info" exact component={BootInfo} />

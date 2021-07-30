@@ -13,16 +13,19 @@ const SET_COMMENT = 'SET_COMMENT';               // 댓글 불러오기
 const ADD_COMMENT = 'ADD_COMMNET';              // 댓글 불러오기
 const EDIT_COMMENT = 'EDIT_COMMENT';            // 댓글 불러오기
 const DELETE_COMMENT = 'DELETE_COMMENT';        // 댓글 불러오기
+const IS_EDIT = 'IS_EDIT';
 
 // 액션생성함수
 const setComment = createAction(SET_COMMENT, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (comment) => ({comment}));
+const isEdit = createAction(IS_EDIT, (is_edit) => ({is_edit}));
 
 // 기본값 정하기
 const initialState = {
     list: [],
+    is_edit: false,
 };
 
 // 액션함수
@@ -60,16 +63,18 @@ const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는
     };
 };
 
-const editCommentDB = (postId, commentId, nickname, content) => {           // 댓글 수정하는 함수
+const editCommentDB = (edit_comment, commentId, postId) => {           // 댓글 수정하는 함수
     return function (dispatch, getState, { history }) {
+        const nickname = edit_comment.nickname;
+        const content = edit_comment.content;
+
         const axios = require('axios');
         axios.patch(`http://15.165.18.118/posts/${postId}/comments/${commentId}`,
-        {
+        { 
             nickname: nickname,
             content: content,
         }).then((response) => {
-                console.log('editCommentDB 함수 호출 성공!');
-                dispatch(editComment(nickname, content));
+                dispatch(editComment(response.data));
                 // history.replace('/');
             }).catch((err) => {
                 console.log(`댓글 수정하기 에러 발생: ${err}`);
@@ -101,6 +106,7 @@ export default handleActions({
 
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
         draft.list.unshift(action.payload.comment);
+        console.log(action.payload.comment);
     }),
     [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
         let new_comment_list = draft.list.filter((ct) => {
@@ -114,14 +120,21 @@ export default handleActions({
     [EDIT_COMMENT]: (state, action) =>
     produce(state, (draft) => {
         let idx = draft.list.findIndex(
-        (ct) => ct.commentId === action.payload.commentId
+        (ct) => ct.commentId === action.payload.comment.commentId
         );
-        console.log(action.payload.commentId);
-
+        // draft.list[idx] = {
+        // ...action.payload.comment
+        // };
         draft.list[idx] = {
-        ...action.payload.comment
+            ...draft.list[idx],
+        content : action.payload.comment.content,
         };
-    })
+    }),
+
+   [IS_EDIT] : (state, action) => produce(state, (draft)=> {
+        draft.is_edit = action.payload.is_edit
+      }),
+
 }, initialState);
 
 
@@ -134,6 +147,7 @@ const actionCreators = {
     addCommentDB,
     editCommentDB,
     deleteCommentDB,
+    isEdit,
 }
 
 export {actionCreators} ;

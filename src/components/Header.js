@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
@@ -29,7 +29,7 @@ const Header = (props) => {
               <A onClick={() => {}}><Text fontSize='1.5vh' margin='0 1vw 0'>알림</Text></A>
               <A onClick={() => {}}><Text fontSize='1.5vh' margin='0 1vw 0'>북마크</Text></A>
               <A onClick={() => {}}><Text fontSize='1.5vh' margin='0 1vw 0'>마이페이지</Text></A>
-              <A onClick={() => {}}><Text fontSize='1.5vh' margin='0 1vw 0'>로그아웃</Text></A>
+              <A onClick={() => {logOutBtn()}}><Text fontSize='1.5vh' margin='0 1vw 0'>로그아웃</Text></A>
             </RightMenu>
           </Grid>
       </React.Fragment>
@@ -55,7 +55,7 @@ const Header = (props) => {
               홈
             </Text>
           </A>
-          <A onClick={() => history.push('/review')}>
+          <A onClick={() => history.push('/boot')}>
             <Text fontSize="1.5vh" margin="0 1vw 0">
               부트캠프
             </Text>
@@ -72,14 +72,24 @@ const Header = (props) => {
           </A>
         </LeftMenu>
         <RightMenu>
-          <A onClick={() => history.push('/login')}>
+          <A onClick={() => {}}>
             <Text fontSize="1.5vh" margin="0 1vw 0">
-              로그인
+              알림
             </Text>
           </A>
-          <A onClick={() => history.push('/signup')}>
+          <A onClick={() => {}}>
             <Text fontSize="1.5vh" margin="0 1vw 0">
-              회원가입
+              북마크
+            </Text>
+          </A>
+          <A onClick={() => {}}>
+            <Text fontSize="1.5vh" margin="0 1vw 0">
+              마이페이지
+            </Text>
+          </A>
+          <A onClick={logOutBtn}>
+            <Text fontSize="1.5vh" margin="0 1vw 0">
+              로그아웃
             </Text>
           </A>
         </RightMenu>

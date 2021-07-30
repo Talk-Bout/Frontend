@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
 
 //메인 페이지
-import Main from './pages/Main';
+import MainN from './pages/MainN';
 
 //로그인 회원가입 페이지
 import Login from './pages/Login';
@@ -35,7 +35,7 @@ function App() {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
-        <Route path="/" exact component={Main} />
+        <Route path="/" exact component={MainN} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/common/list" exact component={CommonList} />

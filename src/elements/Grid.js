@@ -43,6 +43,8 @@ const Grid = (props) => {
     align_items,
     vertical_align,
     fontWeight,
+    borderBottom,
+    zIndex,
   } = props;
 
   const styles = {
@@ -81,6 +83,8 @@ const Grid = (props) => {
     align_items: align_items,
     vertical_align: vertical_align,
     fontWeight: fontWeight,
+    borderBottom: borderBottom,
+    zIndex: zIndex,
   };
 
   return (
@@ -184,6 +188,8 @@ const GridBox = styled.div`
   font-size: ${(props) => props.fontSize};
   ${(props) => (props.hover ? `&:hover {${props.hover}}` : '')}
   ${(props) => (props.hover ? `&:active {${props.active}}` : '')}
+  border-bottom: ${(props) => props.borderBottom};
+  z-index: ${(props) => props.zIndex};
 `;
 
 export default Grid;

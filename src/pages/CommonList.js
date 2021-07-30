@@ -17,7 +17,7 @@ const CommonBoardList = (props) => {
 
   // 리덕스 : 게시글 리스트 조회
   const common_list = useSelector(state => state.post.list);
-  
+
   React.useEffect(() => {
     dispatch(postActions.setPostDB());
   }, []);

@@ -2,6 +2,12 @@ import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import {history} from '../ConfigureStore';
 
+// API
+// 해당 게시물의 댓글 불러오기 /posts/:postId/comments
+// 댓글 작성 "POST" /posts/:postId/comments
+// 댓글 수정 "PATCH" /posts/:postId/comments/:commentId
+// 댓글 삭제 "DELETE" /posts/:postId/comments/:commentId
+
 // 액션타입
 const SET_COMMENT = 'SET_COMMENT';               // 댓글 불러오기
 const ADD_COMMENT = 'ADD_COMMNET';              // 댓글 불러오기
@@ -54,19 +60,17 @@ const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는
     };
 };
 
-const editCommentDB = (edit_comment, commentId) => {           // 댓글 수정하는 함수
-    return function (dispatch, getState) {
-        const _content = getState().comment.content;
-        const _nickname = getState().comment.nickname;
-        const postId = getState().comment.postId;
-        const commentId = getState().comment.commentId;
+const editCommentDB = (postId, commentId, nickname, content) => {           // 댓글 수정하는 함수
+    return function (dispatch, getState, { history }) {
         const axios = require('axios');
         axios.patch(`http://15.165.18.118/posts/${postId}/comments/${commentId}`,
         {
-
+            nickname: nickname,
+            content: content,
         }).then((response) => {
                 console.log('editCommentDB 함수 호출 성공!');
-                // history.push('/');
+                dispatch(editComment(nickname, content));
+                // history.replace('/');
             }).catch((err) => {
                 console.log(`댓글 수정하기 에러 발생: ${err}`);
             });
@@ -88,7 +92,7 @@ const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하�
 };
 
 
-// reducer
+// 리듀서
 export default handleActions({
     [SET_COMMENT]: (state, action) => produce(state, (draft) => {
         draft.list = [...action.payload.comment_list];
@@ -99,13 +103,25 @@ export default handleActions({
         draft.list.unshift(action.payload.comment);
     }),
     [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
-        let new_comment_list = draft.list.filter((v) => {
-            if(v.commentId !== action.payload.comment){
-              return v
-            }
-          })
-          draft.list = new_comment_list;
-        }),
+        let new_comment_list = draft.list.filter((ct) => {
+            if(ct.commentId !== action.payload.comment){
+        return ct
+        }
+    })
+        draft.list = new_comment_list;
+    }),
+
+    [EDIT_COMMENT]: (state, action) =>
+    produce(state, (draft) => {
+        let idx = draft.list.findIndex(
+        (ct) => ct.commentId === action.payload.commentId
+        );
+        console.log(action.payload.commentId);
+
+        draft.list[idx] = {
+        ...action.payload.comment
+        };
+    })
 }, initialState);
 
 

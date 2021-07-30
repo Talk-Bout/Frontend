@@ -18,7 +18,8 @@ import CommonWrite from './pages/CommonWrite';
 
 //부트캠프별 페이지
 import BootMain from './pages/BootMain';
-import BootInfo from './pages/BootInfo';
+import BootReview from './pages/BootReview';
+import BootCommu from './pages/BootCommu';
 import BootPost from './pages/BootPost';
 import BootWrite from './pages/BootWrite';
 
@@ -46,7 +47,8 @@ function App() {
         <Route path="/question/write/:id" exact component={QuestionWrite} />
         <Route path="/question/detail/:id" exact component={QuestionDetail} />
         <Route path="/boot" exact component={BootMain} />
-        <Route path="/boot/info" exact component={BootInfo} />
+        <Route path="/boot/review" exact component={BootReview} />
+        <Route path="/boot/community" exact component={BootCommu} />
         <Route path="/boot/post/:id" exact component={BootPost} />
         <Route path="/boot/write" exact component={BootWrite} />
         <Route path="/boot/write/:id" exact component={BootWrite} />

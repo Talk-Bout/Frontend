@@ -127,7 +127,7 @@ export default handleActions({
         // };
         draft.list[idx] = {
             ...draft.list[idx],
-        content : action.payload.comment.content,
+            ...action.payload.comment,
         };
     }),
 

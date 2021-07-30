@@ -17,7 +17,7 @@ const BootMain = (props) => {
               <CardList>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((n, idx) => {
                   return (
-                    <Card onClick={() => history.push('/boot/info')}>
+                    <Card onClick={() => history.push('/boot/review')}>
                       <ImageDiv>
                         <Text fontSize="3vh" color='#ffffff'>LOGO</Text>
                       </ImageDiv>

@@ -6,7 +6,7 @@ import {Grid} from '../elements';
 
 const templateN = (props) => {
   const {children} = props;
-
+  
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto' height='100vh'>
@@ -17,6 +17,9 @@ const templateN = (props) => {
       </Grid>
     </React.Fragment>
   )
+};
+templateN.defaultProps = {
+  children: null,
 };
 
 templateN.defaultProps = {

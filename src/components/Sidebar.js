@@ -18,7 +18,7 @@ const Sidebar = (props) => {
           <ImageBox className='home' onClick={() => history.push('/')}><Image src={Home} /></ImageBox>
           <ImageBox className='boot' onClick={() => history.push('/boot')}><Image src={Boot}></Image></ImageBox>
           <ImageBox className='qna' onClick={() => history.push('/question')}><Image src={Qna}></Image></ImageBox>
-          <ImageBox className='news'><Image src={News}></Image></ImageBox>
+          <ImageBox className='news' onClick={() => history.push('/news/list')}><Image src={News}></Image></ImageBox>
           <ImageBox className='talk' onClick={() => history.push('/common/list')}><Image src={Talk}></Image></ImageBox>
         </Grid>
       </Grid>

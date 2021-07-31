@@ -88,7 +88,7 @@ const BootReview = (props) => {
               <Text className='other-camps' p fontSize='2vh' fontWeight='700' color='#e2e2e2' margin='20px 20px 0'>다른 부트캠프</Text>
               {[1, 2, 3, 4].map((c) => {
                 return (
-                  <Camp>
+                  <Camp onClick={() => history.push('/boot/review')}>
                     <ImgBox><Image size='80' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
                     <CampBox>
                       <Text className='camp-name' p fontSize='2vh' fontWeight='700' color='#f1f3f4' margin='20px 0 0'>부트캠프명</Text>
@@ -174,6 +174,10 @@ const Camp = styled.div`
   height: 100px;
   display: flex;
   border-bottom: 1px solid #8f9091;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImgBox = styled.div`

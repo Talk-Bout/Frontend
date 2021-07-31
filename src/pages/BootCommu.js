@@ -10,12 +10,12 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { BiLike, BiComment } from "react-icons/bi";
 
 const BootCommu = (props) => {
-  const dispatch = useDispatch();
-  const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
+  // const dispatch = useDispatch();
+  // const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
 
-  useEffect(() => {
-    dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
-  }, [])
+  // useEffect(() => {
+  //   dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
+  // }, [])
 
   return (
     <React.Fragment>
@@ -45,7 +45,7 @@ const BootCommu = (props) => {
                 </Grid>
                 {[1, 2, 3, 4, 5].map((n) => {
                   return (
-                    <Post>
+                    <Post onClick={() => history.push('/boot/post')}>
                       <Text p fontSize='2vh' fontWeight='700' color='#dadce0'>항해99 궁금한 게 있어용</Text>
                       <Text p color='#80868b'>독학한 지 1년 6개월 정도입니다. 자바스크립트와 리액트 공부 중이에요. 부트캠프 하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각 중인데, 제가 프론트보다는 백엔드 쪽으로 하고 싶어서요. 적절한 선택일까요?</Text>
                       <Text p color='#bdc1c6'><BiLike /> 17  <BiComment /> 5  <AiOutlineEye /> 354</Text>
@@ -67,7 +67,7 @@ const BootCommu = (props) => {
               <Text className='other-camps' p fontSize='2vh' fontWeight='700' color='#e2e2e2' margin='20px 20px 0'>다른 부트캠프</Text>
               {[1, 2, 3, 4].map((c) => {
                 return (
-                  <Camp>
+                  <Camp onClick={() => history.push('/boot/review')}>
                     <ImgBox><Image size='80' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
                     <CampBox>
                       <Text className='camp-name' p fontSize='2vh' fontWeight='700' color='#f1f3f4' margin='20px 0 0'>부트캠프명</Text>
@@ -131,12 +131,20 @@ const TitleBox = styled.div``;
 const Post = styled.div`
   padding: 20px 40px;
   border-bottom: 1px solid #8f9091;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Camp = styled.div`
   height: 100px;
   display: flex;
   border-bottom: 1px solid #8f9091;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImgBox = styled.div`

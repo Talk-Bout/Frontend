@@ -12,7 +12,6 @@ const BootMain = (props) => {
         <Sidebar />
         <Body header>
           <Grid className='body-inner' height='100%'>
-            <Grid height='100%' padding='0 40px'></Grid>
             <Text p color='#F8F9FA' fontSize='3vh' fontWeight='700'>부트캠프</Text>
             <CardList>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((n, idx) => {

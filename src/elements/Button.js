@@ -16,6 +16,7 @@ const Button = (props) => {
     color,
     font_size,
     display,
+    text_align,
   } = props;
 
   const styles = {
@@ -29,6 +30,7 @@ const Button = (props) => {
     color: color,
     font_size: font_size,
     display: display,
+    text_align: text_align,
   };
   return (
     <React.Fragment>
@@ -53,6 +55,7 @@ Button.defaultProps = {
   color: null,
   font_size: null,
   display: null,
+  text_align: null,
 };
 
 const ElButton = styled.button`
@@ -66,6 +69,7 @@ const ElButton = styled.button`
   color: ${(props) => props.color};
   font-size: ${(props) => props.font_size};
   display: ${(props) => props.display};
+  text-align: ${(props) => props.text_align};
 `;
 
 export default Button;

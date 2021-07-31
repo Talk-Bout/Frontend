@@ -31,7 +31,7 @@ const CommonBoardList = (props) => {
       <Body header>
       <Grid height="100%" >
       <Grid height="7%">
-          <Text p fontSize="2.5rem" padding="0 1%" color="#F8F9FA">
+          <Text p fontSize="2.2vh;" padding="0 1%" color="#F8F9FA">
             부트톡톡
           </Text>
         </Grid>
@@ -133,14 +133,14 @@ const CategoryButton = styled.div`
 cursor: pointer;
 background-color: #202124;
 border: none;
-border-radius: 30px;
+border-radius: 40vh;
 width: 8%;
 height: 4vh;
 margin: 0.6%;
 color: #80868B;
 text-align: center;
-font-size: 1rem;
-line-height: 2.5rem;
+font-size: 1.3vh;
+line-height: 4vh;
 &:hover {
   background-color: #BDC1C6;
   color: #0E1013;
@@ -217,7 +217,7 @@ padding: 2%;
 const Page = styled.div`
 color: #FFFFFF;
 text-align: center;
-font-size: 1.2rem;
+font-size: 1.8vh;;
 /* margin: 2% 0 0 0; */
 `;
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Input = (props) => {
   
-    const {multiLine, placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin, _ref, onSubmit} = props;
+    const {multiLine, placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin, _ref, onSubmit, height, color} = props;
 
     const styles = {
         width: width,
@@ -14,6 +14,8 @@ const Input = (props) => {
         outline: outline,
         margin: margin,
         _ref: _ref,
+        height: height,
+        color: color,
         
     }
 
@@ -65,6 +67,8 @@ Input.defaultProps = {
   font_size: null,
   outline: null,
   margin: null,
+  height: null,
+  color: null,
   
   // is_submit: false,
   // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
@@ -90,6 +94,8 @@ const ElInput = styled.input`
   height:  ${(props) => props.height};
   outline: ${(props) => props.outline};
   margin: ${(props) => props.margin};
+  height: ${(props) => props.height};
+  color: ${(props) => props.color};
 `;
 
 export default Input;

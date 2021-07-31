@@ -15,7 +15,6 @@ const Image = (props) => {
 
   };
 
-
   if (shape === "ProfileImage") {
     return <ProfileImage {...styles}></ProfileImage>;
   }

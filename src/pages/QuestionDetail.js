@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Input } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,10 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (post) => post.postId == question_id
   );
+
+  useEffect(() => {
+    dispatch(questionActions.setOnePostDB(question_id));
+  }, []);
 
   //질문 삭제
   const deleteBtn = () => {

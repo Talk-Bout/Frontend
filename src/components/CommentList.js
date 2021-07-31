@@ -57,29 +57,6 @@ return(
 )    
 }
 
-const ButtonBox = styled.div`
-width: 100%;
-height: 100%;
-`;
-
-const EditDeleteButton = styled.button`
-float: right;
-background-color: #FFFFFF;
-margin: 1% 3% 0 0;
-font-size: 1.1vh;
-height: 80%;
-border: none;
-color: #121212;
-cursor: pointer;
-width: 12%;
-border-radius: 40vh;
-font-weight: bold;
-&:hover {
-  background-color: #282A2D;
-  color: #DADCE0;
-  }
-`;
-
 const CommentListButton = styled.button`
 width: 100%;
 margin: auto;

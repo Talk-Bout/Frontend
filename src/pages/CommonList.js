@@ -147,18 +147,9 @@ line-height: 4vh;
   }
 `;
 
-const SelectButton = styled.select`
-border: none;
-background-color: #17181B;
-font-size: 1rem;
-color: #F1F3F4;
-height: 3vh;
-margin: 15%;
-width: 70%;
-`;
-
-const Options = styled.option`
-
+const WriteBox = styled.div`
+ width: 100%;
+ height: 100%;
 `;
 
 const WriteButton = styled.button`
@@ -174,9 +165,18 @@ width: 50%;
   }
 `;
 
-const WriteBox = styled.div`
- width: 100%;
- height: 100%;
+const SelectButton = styled.select`
+border: none;
+background-color: #17181B;
+font-size: 1rem;
+color: #F1F3F4;
+height: 3vh;
+margin: 15%;
+width: 70%;
+`;
+
+const Options = styled.option`
+
 `;
 
 const Contents = styled.div`
@@ -189,7 +189,7 @@ const Contents = styled.div`
   height: 100%;
   box-sizing: border-box;
   border-top: 1.5px solid #F1F3F4;
-
+  cursor: pointer;
   // 나중에 페이징하면 수정
   overflow: hidden;
 `;

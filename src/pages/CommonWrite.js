@@ -61,14 +61,6 @@ hover: {background-color: #ddd;}
 align-items: center;
 `;
 
-const DropDownBox = styled.div`
-display: inline-block;
-position: relative;
-width: 100%;
-border: none;
-`;
-
-
 const VscChromeCloseBox = styled.span`
 cursor: pointer;
 float: right;
@@ -80,6 +72,15 @@ const TextBox = styled.div`
 
 const ButtonBox = styled.div`
 `;
+
+
+const DropDownBox = styled.div`
+display: inline-block;
+position: relative;
+width: 100%;
+border: none;
+`;
+
 
 const Hr = styled.hr`
 width: 90%;

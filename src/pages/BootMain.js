@@ -13,27 +13,27 @@ const BootMain = (props) => {
         <Body header>
           <Grid className='body-inner' height='100%'>
             <Grid height='100%' padding='0 40px'></Grid>
-              <Text p color='#F8F9FA' fontSize='3vh' fontWeight='700'>부트캠프</Text>
-              <CardList>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((n, idx) => {
-                  return (
-                    <Card onClick={() => history.push('/boot/review')}>
-                      <ImageDiv>
-                        <Text fontSize="3vh" color='#ffffff'>LOGO</Text>
-                      </ImageDiv>
-                      <Text p fontSize="1.6vh" fontWeight="700" margin="10vh 0 0" color='#F8F9FA'>
-                        스파르타코딩클럽
-                      </Text>
-                      <Text fontSize="1.2vh" color="#BDC1C6" margin="1px 0 0">
-                        99일 만에 진짜 개발자가 되는 법
-                      </Text>
-                      <Text p fontSize="1.5vh" color='#E8EAED'>
-                        ★★☆☆☆ 2.2
-                      </Text>
-                    </Card>
-                  );
-                })}
-              </CardList>
+            <Text p color='#F8F9FA' fontSize='3vh' fontWeight='700'>부트캠프</Text>
+            <CardList>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((n, idx) => {
+                return (
+                  <Card onClick={() => history.push('/boot/review')}>
+                    <ImageDiv>
+                      <Text fontSize="3vh" color='#ffffff'>LOGO</Text>
+                    </ImageDiv>
+                    <Text p fontSize="1.6vh" fontWeight="700" margin="10vh 0 0" color='#F8F9FA'>
+                      스파르타코딩클럽
+                    </Text>
+                    <Text fontSize="1.2vh" color="#BDC1C6" margin="1px 0 0">
+                      99일 만에 진짜 개발자가 되는 법
+                    </Text>
+                    <Text p fontSize="1.5vh" color='#E8EAED'>
+                      ★★☆☆☆ 2.2
+                    </Text>
+                  </Card>
+                );
+              })}
+            </CardList>
             <Grid height='7vh' is_center>
               <PageBox>
                 <Text lineHeight='8vh' margin='0 1vw 0'><Page>&lt;</Page></Text>

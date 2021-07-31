@@ -16,7 +16,7 @@ const MainBoot = (props) => {
               return (
                 <CampCard
                   onClick={() => {
-                    history.push('/boot/info');
+                    history.push('/boot/review');
                   }}
                 >
                   <Grid width="30%">
@@ -34,11 +34,11 @@ const MainBoot = (props) => {
                       </Text>
                     </Grid>
                     <Grid display="flex" margin="5% auto 0">
-                      <Text p fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED">
+                      <Text p fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED" _onClick={() => history.push('/boot/review')}>
                         리뷰
                       </Text>
-                      <Text fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED">
-                        게시물
+                      <Text fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED" _onClick={() => history.push('/boot/community')}>
+                        커뮤니티
                       </Text>
                     </Grid>
                 </Grid>

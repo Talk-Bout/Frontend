@@ -80,10 +80,10 @@ const ImageDefault = styled.div`
 
 // 마이페이지 프로필 이미지
 const ProfileImage = styled.div`
-  width: "72px";
-  height: "72px";
-  left: "109px";
-  top: "56px";
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  left: ${(props) => props.left};
+  top: ${(props) => props.top};
   align-items: ${(props) => props.align_items};
   background-image: url("${(props) => props.src}");
   margin: ${(props) => props.margin};

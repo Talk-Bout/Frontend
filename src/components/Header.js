@@ -96,7 +96,7 @@ const Header = (props) => {
       </Grid>
     </React.Fragment>
   );
-};
+}
 
 const A = styled.a`
   cursor: pointer;

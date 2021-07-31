@@ -123,6 +123,7 @@ Grid.defaultProps = {
   borderStyle: null,
   borderRadius: null,
   borderColor: null,
+  borderBottom: null,
   hover: null,
   active: null,
   float: null,

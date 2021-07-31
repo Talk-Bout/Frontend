@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Input = (props) => {
   
-    const {multiLine, placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin, _ref,} = props;
+    const {multiLine, placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin, _ref, onSubmit} = props;
 
     const styles = {
         width: width,
@@ -14,6 +14,7 @@ const Input = (props) => {
         outline: outline,
         margin: margin,
         _ref: _ref,
+        
     }
 
   if (multiLine) {
@@ -25,6 +26,11 @@ const Input = (props) => {
         placeholder={placeholder}
         onChange={_onChange}
         ref={_ref}
+        onKeyPress={(e) => {
+          if(e.key === "Enter"){
+            onsubmit(e);
+          }
+        }}
       ></ElTextarea>
     );
   }
@@ -36,6 +42,11 @@ const Input = (props) => {
         placeholder={placeholder}
         onChange={_onChange}
         ref={_ref}
+        onKeyPress={(e) => {
+          if(e.key === "Enter"){
+            onSubmit(e);
+          }
+        }}
       />
     </React.Fragment>
   );
@@ -49,6 +60,7 @@ Input.defaultProps = {
   border_radius: '',
   border: '1px solid black',
   _onChange: () => {},
+  onSubmit: () => {},
   bg: null,
   font_size: null,
   outline: null,

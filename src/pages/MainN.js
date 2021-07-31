@@ -9,6 +9,7 @@ import MainQna from '../components/MainQna';
 import MainNews from '../components/MainNews';
 import MainTalk from '../components/MainTalk';
 
+//헤더가 필요하면 바디 안에 header넣기, 아니면 body만
 const MainN = (props) => {
 
   return (

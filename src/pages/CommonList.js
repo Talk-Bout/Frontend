@@ -26,95 +26,95 @@ const CommonBoardList = (props) => {
 
   return (
     <React.Fragment>
-    <Grid display='flex' overflow="auto"  backgroundColor="#17181B">
-     <Sidebar />
-      <Body header>
-      <Grid height="100%" >
-      <Grid height="7%">
-          <Text p fontSize="2.2vh;" padding="0 1%" color="#F8F9FA">
-            부트톡톡
-          </Text>
-        </Grid>
-        {/* 게시판 카테고리 */}
-        <Grid display="flex" height="7%"  >
-            <Grid display="flex" height="100%" width="100%">
-              <Categories >
-              {[1, 2, 3, 4].map((n, idx) => {
-                return (
-                <CategoryButton>
-                  정보게시판
-                </CategoryButton>
-                );
-              })}
-              </Categories>
-              {/* 글쓰기, 인기순 */}
-                <Grid width="10%">
-                <WriteBox>
-                  <WriteButton
-                    onClick={() => history.push('/common/write')}
-                  >
-                    글쓰기
-                  </WriteButton>
-                </WriteBox>
-              </Grid>
-            <Grid width="10%" >
-              <SelectButton type="select">
-                <Options>인기순</Options>
-                <Options>최신순</Options>
-              </SelectButton>
+      <Grid className='background' display='flex' overflow='auto'>
+        <Sidebar />
+        <Body header>
+        <Grid height="100%" >
+          <Grid height="7%">
+              <Text p fontSize="2.2vh;" padding="0 1%" color="#F8F9FA">
+                부트톡톡
+              </Text>
             </Grid>
-          </Grid>
-        </Grid>
-        {/* 자유게시판 게시물  */}
-        <Grid height="77%">
-          <Grid width="100%" height="100%">
-          <Contents>
-      {common_list.map((c, idx) => {
-            return (
-        <Content onClick={() => history.push(`/common/detail/${c.postId}`)}
-        >
-        <Text p color="#F1F3F4" fontSize="1.6vh" margin="0px" padding="2%" fontWeight="bold">
-          {c.title}
-        </Text>
-        <Text p color="#9AA0A6" fontSize="1.3vh" margin="0px" padding="2%">
-          {c.content}
-          </Text>
-          <ProfileImage>
-            <Image size="25"/>
-            <Text color="#9AA0A6" margin="0 0 0 2%" >
-            {c.nickname}
+            {/* 게시판 카테고리 */}
+            <Grid display="flex" height="7%"  >
+                <Grid display="flex" height="100%" width="100%">
+                  <Categories >
+                  {[1, 2, 3, 4].map((n, idx) => {
+                    return (
+                    <CategoryButton>
+                      정보게시판
+                    </CategoryButton>
+                    );
+                  })}
+                  </Categories>
+                  {/* 글쓰기, 인기순 */}
+                    <Grid width="10%">
+                    <WriteBox>
+                      <WriteButton
+                        onClick={() => history.push('/common/write')}
+                      >
+                        글쓰기
+                      </WriteButton>
+                    </WriteBox>
+                  </Grid>
+                <Grid width="10%" >
+                  <SelectButton type="select">
+                    <Options>인기순</Options>
+                    <Options>최신순</Options>
+                  </SelectButton>
+                </Grid>
+              </Grid>
+            </Grid>
+            {/* 자유게시판 게시물  */}
+            <Grid height="77%">
+              <Grid width="100%" height="100%">
+              <Contents>
+                {common_list.map((c, idx) => {
+                return (
+                <Content onClick={() => history.push(`/common/detail/${c.postId}`)}
+                >
+                <Text p color="#F1F3F4" fontSize="1.6vh" margin="0px" padding="2%" fontWeight="bold">
+                 {c.title}
+                </Text>
+                <Text p color="#9AA0A6" fontSize="1.3vh" margin="0px" padding="2%">
+                 {c.content}
+               </Text>
+              <ProfileImage>
+                <Image size="25"/>
+                <Text color="#9AA0A6" margin="0 0 0 2%" >
+                {c.nickname}
+                </Text>
+              </ProfileImage>
+            
+              {/* 게시한 날짜, 좋아요, 댓글 */}
+            <Grid width="100%" float="left">
+            <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%" >
+              <BiTimeFive/> &nbsp;
+              {c.createdAt}
+              </Text>
+            <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%">
+              <BiLike/> &nbsp;
+              {c.likes}
+              </Text>
+            <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%" >
+              <BiComment/> &nbsp; 2
             </Text>
-          </ProfileImage>
-        
-          {/* 게시한 날짜, 좋아요, 댓글 */}
-        <Grid width="100%" float="left">
-        <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%" >
-          <BiTimeFive/> &nbsp;
-          {c.createdAt}
-          </Text>
-        <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%">
-          <BiLike/> &nbsp;
-          {c.likes}
-          </Text>
-        <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%" >
-          <BiComment/> &nbsp; 2
-        </Text>
-        <hr/>
-        </Grid>
-        </Content>
-        );
-          })}
-      </Contents>
-          </Grid>     
-        </Grid>
-        <Grid height="3%">
-          <Page>
-          &lt; &nbsp; 01 &nbsp; 02 &nbsp; 03 &nbsp; &gt;
-          </Page>
-        </Grid>
+            <hr/>
+            </Grid>
+            </Content>
+            );
+              })}
+          </Contents>
+              </Grid>     
+            </Grid>
+            <Grid height="3%">
+              <Page>
+              &lt; &nbsp; 01 &nbsp; 02 &nbsp; 03 &nbsp; &gt;
+              </Page>
+            </Grid>
+          </Grid>    
+        </Body>
       </Grid>
-     </Body>
-    </Grid>
     </React.Fragment>
   );
 };

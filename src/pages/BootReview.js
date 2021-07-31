@@ -4,6 +4,7 @@ import {Grid, Text, Image} from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 
@@ -76,11 +77,11 @@ const BootReview = (props) => {
               </PostList>
               <Grid className='pagination' height='8vh' is_center borderTop='1px solid #8f9091'>
                 <PageBox>
-                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>&lt;</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronLeft /></Page></Text>
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page>01</Page></Text>
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page>02</Page></Text>
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page>03</Page></Text>
-                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>&gt;</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronRight /></Page></Text>
                 </PageBox>
               </Grid>
             </Grid>

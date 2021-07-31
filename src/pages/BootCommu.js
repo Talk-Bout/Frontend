@@ -6,6 +6,8 @@ import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
+import { AiOutlineEye } from 'react-icons/ai';
+import { BiLike, BiComment } from "react-icons/bi";
 
 const BootCommu = (props) => {
   const dispatch = useDispatch();
@@ -37,11 +39,29 @@ const BootCommu = (props) => {
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='0 40px'>
               <PostList>
-                <Grid className=''>
-                  <TitleBox><Text className='community-title' p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
-                  <Text className='sort' fontSize='1.7vh' color='#757577'>인기순 | 최신순</Text>
+                <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091'>
+                  <TitleBox><Text p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
+                  <Text p className='sort' fontSize='1.7vh' color='#757577' margin='3vh 0 0'>인기순 | 최신순</Text>
                 </Grid>
+                {[1, 2, 3, 4, 5].map((n) => {
+                  return (
+                    <Post>
+                      <Text p fontSize='2vh' fontWeight='700' color='#dadce0'>항해99 궁금한 게 있어용</Text>
+                      <Text p color='#80868b'>독학한 지 1년 6개월 정도입니다. 자바스크립트와 리액트 공부 중이에요. 부트캠프 하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각 중인데, 제가 프론트보다는 백엔드 쪽으로 하고 싶어서요. 적절한 선택일까요?</Text>
+                      <Text p color='#bdc1c6'><BiLike /> 17  <BiComment /> 5  <AiOutlineEye /> 354</Text>
+                    </Post>
+                  )
+                })}
               </PostList>
+              <Grid className='pagination' height='8vh' is_center>
+                <PageBox>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>&lt;</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>01</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>02</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>03</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>&gt;</Page></Text>
+                </PageBox>
+              </Grid>
             </Grid>
             <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='450px' position='absolute'>
               <Text className='other-camps' p fontSize='2vh' fontWeight='700' color='#e2e2e2' margin='20px 20px 0'>다른 부트캠프</Text>
@@ -87,6 +107,10 @@ const Button = styled.button`
   border: none;
   border-radius: 8px;
   background-color: #BDC1C6;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 const Menu = styled.div`
@@ -100,14 +124,14 @@ const Menu = styled.div`
 const PostList = styled.div`
   width: 100%;
   height: 100%;
-  background-color: yellow;
 `;
 
-const TitleBox = styled.div`
-  background-color: red;
+const TitleBox = styled.div``;
+
+const Post = styled.div`
+  padding: 20px 40px;
+  border-bottom: 1px solid #8f9091;
 `;
-
-
 
 const Camp = styled.div`
   height: 100px;
@@ -122,6 +146,20 @@ const ImgBox = styled.div`
 
 const CampBox = styled.div`
   width: 80%;
+`;
+
+const PageBox = styled.div`
+  display: inline-block;
+  height: 100%;
+`;
+
+const Page = styled.span`
+  opacity: 0.5;
+  cursor: pointer;
+  color: #F8F9FA;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export default BootCommu;

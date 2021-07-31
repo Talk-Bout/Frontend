@@ -24,7 +24,7 @@ import BootMain from './pages/BootMain';
 import BootReview from './pages/BootReview';
 import BootCommu from './pages/BootCommu';
 import BootPost from './pages/BootPost';
-import BootWrite from './pages/BootWrite';
+import BootReviewWrite from './pages/BootReviewWrite';
 
 //질문 게시판 페이지
 import QuestionList from './pages/QuestionList';
@@ -56,8 +56,8 @@ function App() {
         <Route path="/boot/review" exact component={BootReview} />
         <Route path="/boot/community" exact component={BootCommu} />
         <Route path="/boot/post" exact component={BootPost} />
-        <Route path="/boot/write" exact component={BootWrite} />
-        <Route path="/boot/write/:id" exact component={BootWrite} />
+        <Route path="/boot/review/write" exact component={BootReviewWrite} />
+        <Route path="/boot/review/write/:id" exact component={BootReviewWrite} />
         <Route path="/news/list" exact component={NewsList} />
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />

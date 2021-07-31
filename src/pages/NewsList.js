@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import {Grid, Text} from '../elements';
 import { BiTimeFive } from "react-icons/bi";
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const NewsList = (props) => {
 
@@ -36,11 +37,11 @@ const NewsList = (props) => {
             </CardList>
             <Grid className='pagination' height='8vh' is_center padding='20px 0'>
               <PageBox>
-                <Text lineHeight='8vh' margin='0 1vw 0'><Page>&lt;</Page></Text>
+                <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronLeft /></Page></Text>
                 <Text lineHeight='8vh' margin='0 1vw 0'><Page>01</Page></Text>
                 <Text lineHeight='8vh' margin='0 1vw 0'><Page>02</Page></Text>
                 <Text lineHeight='8vh' margin='0 1vw 0'><Page>03</Page></Text>
-                <Text lineHeight='8vh' margin='0 1vw 0'><Page>&gt;</Page></Text>
+                <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronRight /></Page></Text>
               </PageBox>
             </Grid>
           </Grid>

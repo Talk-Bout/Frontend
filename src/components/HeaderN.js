@@ -5,7 +5,7 @@ import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import Search from '../search_black.png';
+import Search from '../image/search_black.png';
 
 const HeaderN = (props) => {
   const dispatch = useDispatch();
@@ -22,8 +22,16 @@ const HeaderN = (props) => {
           <Grid className='search' height='100%' width='90%' padding='10px 0 0' margin='5px 0 0'>
             <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='검색어를 입력하세요.'></Input>
           </Grid>
-          <Grid className='login' height='100%' width='50px'>
-            <TextBox onClick={() => {logOutBtn()}}><Text p color='#f8f9fa' text_align='center'>로그아웃</Text></TextBox>
+          <Grid className="login" height="100%" width="50px">
+            <TextBox
+              onClick={() => {
+                logOutBtn();
+              }}
+            >
+              <Text p color="#f8f9fa" text_align="center">
+                로그아웃
+              </Text>
+            </TextBox>
           </Grid>
         </Grid>
       </React.Fragment>

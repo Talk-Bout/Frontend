@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
-import Logo from '../talkbout_logo.png';
-import Home from '../Home.png';
-import Boot from '../Bootcamp.png';
-import Qna from '../Qna.png';
-import News from '../News.png';
-import Talk from '../Board.png';
+import Logo from '../image/talkbout_logo.png';
+import Home from '../image/Home.png';
+import Boot from '../image/Bootcamp.png';
+import Qna from '../image/Qna.png';
+import News from '../image/News.png';
+import Talk from '../image/Board.png';
 import { history } from '../redux/ConfigureStore';
 
-
 const Sidebar = (props) => {
-
   return (
     <React.Fragment>
       <Grid className='sidebar' backgroundColor='#3c4043' width='7vw' padding='30px 0' minWidth='100px'>
@@ -34,7 +32,7 @@ const ImageBox = styled.div`
 
 const LogoImg = styled.img`
   width: 50px;
-`;                         
+`;
 const Image = styled.img`
   cursor: pointer;
   width: 100px;

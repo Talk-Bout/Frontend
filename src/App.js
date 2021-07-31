@@ -4,6 +4,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
 
+//템플릿 페이지
+import templateN from './components/templateN';
+
 //메인 페이지
 import MainN from './pages/MainN';
 
@@ -54,6 +57,7 @@ function App() {
         <Route path="/boot/write/:id" exact component={BootWrite} />
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />
+        <Route path="/template" exact component={templateN} />
       </ConnectedRouter>
     </React.Fragment>
   );

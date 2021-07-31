@@ -5,7 +5,7 @@ import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import Search from '../search_black.png';
+import Search from '../image/search_black.png';
 
 const HeaderN = (props) => {
   const dispatch = useDispatch();
@@ -18,12 +18,35 @@ const HeaderN = (props) => {
   if (is_login) {
     return (
       <React.Fragment>
-        <Grid className='header' width='100%' height='80px' borderBottom='1px solid #80868b' display='flex' justify_content='space-between' padding='1vh 40px 1vh 40px'>
-          <Grid className='search' height='100%' width='90%' padding='10px 0 0' margin='5px 0 0'>
-            <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='부트캠프 이름을 검색해보세요.'></Input>
+        <Grid
+          className="header"
+          width="100%"
+          height="80px"
+          borderBottom="1px solid #80868b"
+          display="flex"
+          justify_content="space-between"
+          padding="1vh 40px 1vh 40px"
+        >
+          <Grid
+            className="search"
+            height="100%"
+            width="90%"
+            padding="10px 0 0"
+            margin="5px 0 0"
+          >
+            <img src={Search} style={{ verticalAlign: 'middle' }} alt="검색" />
+            <Input placeholder="부트캠프 이름을 검색해보세요."></Input>
           </Grid>
-          <Grid className='login' height='100%' width='50px'>
-            <TextBox onClick={() => {logOutBtn()}}><Text p color='#f8f9fa' text_align='center'>로그아웃</Text></TextBox>
+          <Grid className="login" height="100%" width="50px">
+            <TextBox
+              onClick={() => {
+                logOutBtn();
+              }}
+            >
+              <Text p color="#f8f9fa" text_align="center">
+                로그아웃
+              </Text>
+            </TextBox>
           </Grid>
         </Grid>
       </React.Fragment>
@@ -31,12 +54,31 @@ const HeaderN = (props) => {
   }
   return (
     <React.Fragment>
-      <Grid className='header' width='100%' height='80px' borderBottom='1px solid #80868b' display='flex' justify_content='space-between' padding='1vh 40px 1vh 40px'>
-        <Grid className='search' height='100%' width='90%' padding='10px 0 0' margin='5px 0 0'>
-          <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='부트캠프 이름을 검색해보세요.'></Input>
+      <Grid
+        className="header"
+        width="100%"
+        height="80px"
+        borderBottom="1px solid #80868b"
+        display="flex"
+        justify_content="space-between"
+        padding="1vh 40px 1vh 40px"
+      >
+        <Grid
+          className="search"
+          height="100%"
+          width="90%"
+          padding="10px 0 0"
+          margin="5px 0 0"
+        >
+          <img src={Search} style={{ verticalAlign: 'middle' }} alt="검색" />
+          <Input placeholder="부트캠프 이름을 검색해보세요."></Input>
         </Grid>
-        <Grid className='login' height='100%' width='50px'>
-          <TextBox onClick={() => history.push('/login')}><Text p color='#f8f9fa' text_align='center'>로그인</Text></TextBox>
+        <Grid className="login" height="100%" width="50px">
+          <TextBox onClick={() => history.push('/login')}>
+            <Text p color="#f8f9fa" text_align="center">
+              로그인
+            </Text>
+          </TextBox>
         </Grid>
       </Grid>
     </React.Fragment>
@@ -49,7 +91,7 @@ const Input = styled.input`
   background-color: #3c4043;
   color: #80868b;
   &::placeholder {
-    color: #80868b
+    color: #80868b;
   }
   &:focus {
     outline: none;

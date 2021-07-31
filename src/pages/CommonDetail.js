@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Text, Button, Grid, Input} from "../elements/index";
 import Header from '../components/Header';
 import Comment from '../components/Comment';
+import Sidebar from '../components/Sidebar';
+import Body from '../components/Body';
 import { actionCreators as commentActions} from "../redux/modules/comment";
 import { actionCreators as postActions} from "../redux/modules/post";
 //icons
@@ -35,68 +37,21 @@ const CoomonBoardDetail = (props) => {
 
   return (
     <React.Fragment>
-      <Header/>
-        {/* 게시물 */}
-      <Outter>
-      <Grid float="right" padding="60px 0px 60px 40px">
-      <Grid>
-        <Text padding="2%" fontSize="10px">토픽 &gt; 회사생활</Text>
-        <Text p fontSize="13px" margin="0px" padding="2%" width="10%" fontWeight="bold">
-        {common_find.title}
-        </Text>
-        <Text p margin="0" padding="2%" fontSize="11px">
-          {common_find.author}
-        </Text>
-        <Grid display="flex" width="100%" >
-            <Text padding="2%" width="33.3%" fontSize="12px">
-              <BiTimeFive/> {common_find.createdAt}
-            </Text>
-            <Text padding="2%" width="33.3%" fontSize="12px">
-              <BiLike/> {common_find.likes}
-            </Text>
-            <Text padding="2%" width="33.3%" fontSize="12px">
-              <BiComment/>
-            2
-            </Text>
-
-          {/* 버튼 추가 */}
-          <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
-            <Button _onClick={() => history.push('/common/write')} border="none" color="white" bg="Grey" width="45%" margin="0 10% 0 0" >
-              수정
-            </Button>
-            <Button border="none" color="white" bg="Grey" width="45%" >
-              삭제
-            </Button>
+      <Grid display='flex' overflow="auto" height='100vh' backgroundColor="#17181B">
+         <Sidebar />
+         <Body header>
+          <Grid display="flex" width="100%" height="100%" backgroundColor="red">
+            <Grid width="50%" height="100%" backgroundColor="orange">
+              <Grid width="100%" height="100%" backgroundColor="green">
+                <Grid></Grid>
+              </Grid>
+              <Grid></Grid>
+              <Grid></Grid>
+            </Grid>
+            <Grid width="50%" height="100%" backgroundColor="yellow"></Grid>
           </Grid>
-        </Grid>
+         </Body>
       </Grid>
-      <Hr/>
-      {/* 게시물 본문 */}
-      <Grid padding="2%">
-          <Text fontSize="11px" style={{wordBreak:"break-all"}}>
-          {common_find.content}
-          </Text>
-      </Grid>
-      <Hr/>
-        {/* comment component */}
-        <Comment postId={postId}/>
-      </Grid>
-      </Outter>
-      {/* 다른 게시물 */}
-      <Side >
-        <Grid padding="30px" float="left" width="30%">
-        <Another>
-          <Text padding="2%" fontSize="11px" fontWeight="bold">
-            다른 게시물 <br/>
-          </Text>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p, index) => {
-            return (
-          <AnotherList> ● 부트캠프 질문드립니다! <br/></AnotherList>
-          )
-        })}
-        </Another>
-      </Grid>
-      </Side>
     </React.Fragment>
   )
 };

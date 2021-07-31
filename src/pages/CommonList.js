@@ -26,7 +26,7 @@ const CommonBoardList = (props) => {
 
   return (
     <React.Fragment>
-    <Grid display='flex' overflow="auto" backgroundColor="#17181B">
+    <Grid display='flex' overflow="auto"  backgroundColor="#17181B">
      <Sidebar />
       <Body header>
       <Grid height="100%" >

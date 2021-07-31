@@ -8,7 +8,7 @@ const Body = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='whole-body' backgroundColor='#17181B' height='100%' width='93vw'>
+      <Grid className='whole-body' backgroundColor='#17181b' height='100%' width='93vw'>
         {header ? <HeaderN /> : '' }
         <Grid className='body' width='100%' height='90%' padding='40px'>
             {children}

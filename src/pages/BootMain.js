@@ -1,47 +1,57 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import Header from '../components/Header';
-import Banner from '../components/Banner';
+import Sidebar from '../components/Sidebar';
+import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
 
 const BootMain = (props) => {
   return (
     <React.Fragment>
-      <Grid>
-        <Header />
-        <Banner title='부트캠퍼들의 속 시원한 이야기' description='부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.'/>
-        <Grid is_center>
-          <CardList>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, idx) => {
-              return (
-                <Card onClick={() => history.push('/boot/info')}>
-                  <ImageDiv>
-                    <Text fontSize="2.5vh">LOGO</Text>
-                  </ImageDiv>
-                  <Text p fontSize="1.6vh" fontWeight="700" margin="3vh 0 0">
-                    스파르타코딩클럽
-                  </Text>
-                  <Text fontSize="1.2vh" color="#aaa" margin="1px 0 0">
-                    99일 만에 진짜 개발자가 되는 법
-                  </Text>
-                  <Text p fontSize="1.5vh">
-                    ★★☆☆☆ 2.2
-                  </Text>
-                </Card>
-              );
-            })}
-          </CardList>
-        </Grid>
+      <Grid className='background' display='flex' overflow='auto'>
+        <Sidebar />
+        <Body header>
+          <Grid className='body-inner' height='100%'>
+            <Grid height='100%' padding='0 40px'></Grid>
+              <Text p color='#F8F9FA' fontSize='3vh' fontWeight='700'>부트캠프</Text>
+              <CardList>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((n, idx) => {
+                  return (
+                    <Card onClick={() => history.push('/boot/review')}>
+                      <ImageDiv>
+                        <Text fontSize="3vh" color='#ffffff'>LOGO</Text>
+                      </ImageDiv>
+                      <Text p fontSize="1.6vh" fontWeight="700" margin="10vh 0 0" color='#F8F9FA'>
+                        스파르타코딩클럽
+                      </Text>
+                      <Text fontSize="1.2vh" color="#BDC1C6" margin="1px 0 0">
+                        99일 만에 진짜 개발자가 되는 법
+                      </Text>
+                      <Text p fontSize="1.5vh" color='#E8EAED'>
+                        ★★☆☆☆ 2.2
+                      </Text>
+                    </Card>
+                  );
+                })}
+              </CardList>
+            <Grid height='7vh' is_center>
+              <PageBox>
+                <Text lineHeight='8vh' margin='0 1vw 0'><Page>&lt;</Page></Text>
+                <Text lineHeight='8vh' margin='0 1vw 0'><Page>01</Page></Text>
+                <Text lineHeight='8vh' margin='0 1vw 0'><Page>02</Page></Text>
+                <Text lineHeight='8vh' margin='0 1vw 0'><Page>03</Page></Text>
+                <Text lineHeight='8vh' margin='0 1vw 0'><Page>&gt;</Page></Text>
+              </PageBox>
+            </Grid>
+          </Grid>
+        </Body>
       </Grid>
     </React.Fragment>
   );
 };
 
 const CardList = styled.div`
-  width: 60%;
-  height: 100%;
-  margin: 5vh auto 0;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -49,13 +59,14 @@ const CardList = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: #e5e5e5;
-  width: 33.33%;
-  height: 33.33%;
-  border: 0.5vh solid white;
-  margin: 0;
+  background-color: #202124;
+  width: 32.5%;
+  height: 35vh;
+  border: 0.5vh solid #202124;
+  border-radius: 8px;
+  margin: 0 0 30px;
   box-sizing: border-box;
-  padding: 5vh 1vw 0;
+  padding: 5vh 2vw 0;
   text-align: left;
   cursor: pointer;
   &:hover {
@@ -65,6 +76,21 @@ const Card = styled.div`
 
 const ImageDiv = styled.div`
   text-align: center;
+  margin-top: 3vh;
+`;
+
+const PageBox = styled.div`
+  display: inline-block;
+  height: 100%;
+`;
+
+const Page = styled.span`
+  opacity: 0.5;
+  cursor: pointer;
+  color: #F8F9FA;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export default BootMain;

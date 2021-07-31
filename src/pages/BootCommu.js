@@ -37,24 +37,10 @@ const BootCommu = (props) => {
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='0 40px'>
               <PostList>
-                {[1, 2, 3].map((p) => {
-                  return (
-                    <Post>
-                      <StarBox>
-                        <Text className='score' p fontSize='2vh' fontWeight='700' color='#e8eaed' margin='0'>2.2</Text>
-                        <Text className='star' p fontSize='2vh' color='#e8eaed' margin='0'>★★☆☆☆</Text>
-                      </StarBox>
-                      <PostBox>
-                        <Text className='title' p fontSize='2vh' fontWeight='700' color='#e8eaed' margin='0'>리뷰 제목</Text>
-                        <Text className='user' p fontSize='1.3vh' color='#80868b' margin='0'>수료자 : st****** - 2021.07.25</Text>
-                        <Text className='strong-point' p fontSize='1.5vh' fontWeight='700' color='#e8eaed' margin='20px 0 0'>장점</Text>
-                        <Text className='strong-content' p fontSize='1.5vh' color='#e8eaed' margin='0'>온라인 부트캠프라서 공간적 제약이 없고, 소득공유 결제 모델이 있어서 당장 자금이 없어도 배우고 미래에 투자할 수 있습니다.</Text>
-                        <Text className='week-point' p fontSize='1.5vh' fontWeight='700' color='#e8eaed' margin='15px 0 0'>단점</Text>
-                        <Text className='wee-content' p fontSize='1.5vh' color='#e8eaed' margin='0'>과정도 별로 메리트 없고 전문가가 아닌, 수료하고 코드스테이츠에 취업한 수료생들이 세션을 진행하는 경우도 꽤 있습니다.</Text>
-                      </PostBox>
-                    </Post>
-                  )
-                })}
+                <Grid className=''>
+                  <TitleBox><Text className='community-title' p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
+                  <Text className='sort' fontSize='1.7vh' color='#757577'>인기순 | 최신순</Text>
+                </Grid>
               </PostList>
             </Grid>
             <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='450px' position='absolute'>
@@ -114,24 +100,14 @@ const Menu = styled.div`
 const PostList = styled.div`
   width: 100%;
   height: 100%;
+  background-color: yellow;
 `;
 
-const Post = styled.div`
-  display: flex;
+const TitleBox = styled.div`
+  background-color: red;
 `;
 
-const StarBox = styled.div`
-  height: 100%;
-  width: 25%;
-  padding: 40px 0;
-`;
 
-const PostBox = styled.div`
-  height: 100%;
-  width: 75%;
-  border-bottom: 1px solid #8f9091;
-  padding: 40px 0;
-`;
 
 const Camp = styled.div`
   height: 100px;

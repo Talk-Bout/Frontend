@@ -31,6 +31,9 @@ import QuestionList from './pages/QuestionList';
 import QuestionDetail from './pages/QuestionDetail';
 import QuestionWrite from './pages/QuestionWrite';
 
+//뉴스 게시판 페이지
+import NewsList from './pages/NewsList';
+
 //마이 페이지
 import Mypage from './pages/Mypage';
 import MyPageEdit from './pages/MyPageEdit';
@@ -52,9 +55,10 @@ function App() {
         <Route path="/boot" exact component={BootMain} />
         <Route path="/boot/review" exact component={BootReview} />
         <Route path="/boot/community" exact component={BootCommu} />
-        <Route path="/boot/post/:id" exact component={BootPost} />
+        <Route path="/boot/post" exact component={BootPost} />
         <Route path="/boot/write" exact component={BootWrite} />
         <Route path="/boot/write/:id" exact component={BootWrite} />
+        <Route path="/news/list" exact component={NewsList} />
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />
         <Route path="/template" exact component={templateN} />

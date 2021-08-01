@@ -1,86 +1,91 @@
 import React from 'react';
+import { history } from '../redux/ConfigureStore';
+
 import styled from "styled-components";
 import {Text, Button, Grid, Input} from "../elements/index";
-import { VscChromeClose, VscMention, VscSymbolNumeric, VscFileMedia, VscListFlat, VscChevronDown } from "react-icons/vsc";
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import { VscMention, VscSymbolNumeric, VscFileMedia} from "react-icons/vsc";
+import { BiMenu } from "react-icons/bi";
 
-const CommonBoardWrite = (props) => {
+import Sidebar from '../components/Sidebar';
+import Body from '../components/Body';
 
-  const options = [
-    '항해99', '바닐라코딩', '코드스테이츠'
-  ];
+const CommonWrite = (props) => {
   
-
   return (
     <React.Fragment>
-      <Grid is_flex overflow="hidden" box-sizing= "border-box" margin="20%" height="65vh" width="60%" border="1px solid black">
-      <BoardHeader>
-        <VscChromeCloseBox>
-          <VscChromeClose/>
-        </VscChromeCloseBox>
-        <TextBox>
-        <Text fontSize="13px">글쓰기</Text>
-        </TextBox>
-        <ButtonBox>
-        <Button border="none" bg="transparent" cursor="pointer" font_size="13px">등록</Button>
-        </ButtonBox>
-      </BoardHeader>
-      <Grid height="17%" margin="10px 0px">
-        <DropDownBox>
-        <Dropdown options={options}
-        // onChange={this._onSelect}
-        value= "주제를 선택해주세요"/>
-        </DropDownBox>
-      </Grid>
-      <Grid height="48%" margin="15px 0px">
-        <Input outline="none" placeholder="제목을 입력해주세요" border="none"></Input>
-        <Hr/>
-        <Input margin="0px 20px" outline="none" border="none" placeholder="내용을 입력해주세요"></Input>
-      </Grid>
-      <BoardFooter>
-      <Icon><VscFileMedia/></Icon>
-      <Icon><VscMention/></Icon>
-      <Icon><VscSymbolNumeric/></Icon> 
-      </BoardFooter>
+      <Grid className='background' display='flex' overflow='auto' height='100vh'>
+        <Sidebar />
+        <Body header>
+          <Grid display="flex" width="100%" height="100%" >
+          <Grid margin="auto" width="100vh" height="60vh" backgroundColor="#3C4043" >
+            <Grid display="flex" margin="auto" justify_content="space-between" width="90%" height="12.5%">
+              <Grid width="auto" height="100%">
+                <Button border="none" bg="#3C4043" cursor="pointer" font_size="3vh" color="#FFFFFF"
+                _onClick={() => history.goBack()}>
+                  X</Button>
+              </Grid>
+              <Grid  width="auto" height="100%" display="flex" align_items="center">
+               <Text bg="#3C4043" fontSize="2.5vh" fontWeight="bold" color="#FFFFFF">글쓰기</Text>
+              </Grid>
+              <Grid width="auto" height="100%" backgroundColor="red">
+                <Button border="none" bg="#3C4043" cursor="pointer" font_size="2.5vh" color="#FFFFFF">등록</Button>
+              </Grid>
+            </Grid>
+            <Grid width="100%" height="12.5%" backgroundColor="green" borderTop="1px solid #FFFFFF">
+              {/* 카테고리 선택 */}
+            <SelectBox>
+              {/* <Dropdown
+              // onChange={this._onSelect}/> */}
+              <Option value=""> ≡  &nbsp; &nbsp; 주제를 선택해주세요 </Option>
+              <Option value="정보">정보게시판</Option>
+              <Option value="잡담">잡담방</Option>
+            </SelectBox>
+            </Grid>
+            {/* 글쓰기 */}
+            <Grid width="100%" height="63%">
+              <Grid display="flex" width="100%" height="15%" borderTop="1px solid #FFFFFF">
+              <Input font_size="1.5vh" width="80%" margin="0 0 0 3.5%" bg="#3C4043" outline="none" color="#FFFFFF" placeholder="제목을 입력해주세요" border="none"></Input>
+              </Grid>
+                <Hr/>
+              <Grid width="100%" height="70%">
+              <Input multiLine font_size="1.3vh" outline="none" width="80%" margin="0 0 0 5%" bg="#3C4043" color="#FFFFFF" placeholder="내용을 입력해주세요" border="none" ></Input>
+              </Grid>
+            </Grid>
+            <Grid width="100%" height="12%" backgroundColor="#2E3134">
+              {/* 기능 */}
+            <BoardFooter>
+              <Icon><VscFileMedia size={27}/></Icon>
+              <Icon><VscMention size={27}/></Icon>
+              <Icon><VscSymbolNumeric size={27}/></Icon> 
+            </BoardFooter>
+            </Grid>
+          </Grid>
+          </Grid>
+        </Body>
       </Grid>
     </React.Fragment>
   )
 };
 
-const BoardHeader = styled.div`
-padding: 0% 2%;
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
-height: 8%;
+const SelectBox = styled.select`
 width: 100%;
-box-sizing: border-box;
-margin-bottom: 5px;
-hover: {background-color: #ddd;}
-align-items: center;
-`;
-
-const VscChromeCloseBox = styled.span`
-cursor: pointer;
-float: right;
-`;
-
-const TextBox = styled.div`
-
-`;
-
-const ButtonBox = styled.div`
-`;
-
-
-const DropDownBox = styled.div`
-display: inline-block;
-position: relative;
-width: 100%;
+height: 7.5vh;
+background-color: #3C4043;
 border: none;
+color: #FFFFFF;
+outline: none;
+font-size: 1.8vh;
+display: block;
+/* text-align-last: center;
+text-align: center; */
+padding: 0 5%;
+appearance: none;
 `;
 
+const Option = styled.option`
+font-size: 1.7vh;
+
+`;
 
 const Hr = styled.hr`
 width: 90%;
@@ -89,15 +94,14 @@ width: 90%;
 const BoardFooter = styled.div`
 display: flex;
 align-items: center;
-height: 15%;
-background-color: #E5E5E5;
-position: relative;
+height: 7vh;
+margin: 0 0 0 5.5%;
 `;
 
 const Icon = styled.span`
 cursor: pointer;
-margin: 0px 5px;
-padding: 5px;
+margin: 2%;
+color: #FFFFFF;
 `;
 
-export default CommonBoardWrite;
+export default CommonWrite;

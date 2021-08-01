@@ -17,6 +17,7 @@ const Button = (props) => {
     font_size,
     display,
     text_align,
+    float,
   } = props;
 
   const styles = {
@@ -31,6 +32,7 @@ const Button = (props) => {
     font_size: font_size,
     display: display,
     text_align: text_align,
+    float: float,
   };
   return (
     <React.Fragment>
@@ -56,6 +58,7 @@ Button.defaultProps = {
   font_size: null,
   display: null,
   text_align: null,
+  float: null,
 };
 
 const ElButton = styled.button`
@@ -70,6 +73,7 @@ const ElButton = styled.button`
   font-size: ${(props) => props.font_size};
   display: ${(props) => props.display};
   text-align: ${(props) => props.text_align};
+  float: ${(props) => props.float};
 `;
 
 export default Button;

@@ -9,7 +9,7 @@ return(
   <React.Fragment>
     <Grid  width="100%" height="55%" >
       <Grid padding="7% 4%" width="90%" height="auto%" backgroundColor="#202124">
-        <Text color="#E8EAED" fontSize="2vh" fontWeight="bold">
+        <Text padding="0 4%" color="#E8EAED" fontSize="2vh" fontWeight="bold">
           인기 부트톡톡 <br/>
         </Text>
       <Grid>
@@ -26,10 +26,10 @@ return(
 };
 
 const BootContents = styled.div`
-padding: 2%;
+padding: 2% 4%;
 margin: 2% 0;
 border: none;
-font-size: 1.2vh;
+font-size: 1.4vh;
 color: #DADCE0;
 `;
 

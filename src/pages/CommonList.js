@@ -76,7 +76,7 @@ const CommonBoardList = (props) => {
                 <Text p color="#F1F3F4" fontSize="1.6vh" margin="0px" padding="2%" fontWeight="bold">
                  {c.title}
                 </Text>
-                <Text p color="#9AA0A6" fontSize="1.3vh" margin="0px" padding="2%">
+                <Text p color="#9AA0A6" fontSize="1.5vh" margin="0px" padding="2%">
                  {c.content}
                </Text>
               <ProfileImage>
@@ -153,15 +153,19 @@ const WriteBox = styled.div`
 `;
 
 const WriteButton = styled.button`
-background-color: #202124;
-color: #80868B;
+background-color: #FFFFFF;
+font-size: 1.5vh;
+margin: 4%;
 border: none;
-height: 3vh;
-margin: 17%;
-width: 50%;
+color: #80868B;
+cursor: pointer;
+width: 70%;
+border-radius: 40vh;
+font-weight: bold;
+height: 4vh;
 &:hover {
-  background-color: #BDC1C6;
-  color: #0E1013;
+  background-color: #282A2D;
+  color: #F1F3F4;;
   }
 `;
 
@@ -171,7 +175,7 @@ background-color: #17181B;
 font-size: 1rem;
 color: #F1F3F4;
 height: 3vh;
-margin: 15%;
+margin: 5%;
 width: 70%;
 `;
 
@@ -192,6 +196,7 @@ const Contents = styled.div`
   cursor: pointer;
   // 나중에 페이징하면 수정
   overflow: hidden;
+  margin: 0.5% 0 0 0;
 `;
 
 const Content = styled.div`

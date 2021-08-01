@@ -75,17 +75,20 @@ Input.defaultProps = {
 };
 
 const ElTextarea = styled.textarea`
-  font-size: 15px;
+  font-size: ${(props) => props.font_size};
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   border-radius: ${(props) => props.border_radius};
   background-color: ${(props) => props.bg};
   padding: 2%;
   margin: ${(props) => props.margin};
+  outline:${(props) => props.outline};
+  color: ${(props) => props.color};
+  resize: none;
 `;
 
 const ElInput = styled.input`
-  font-size: 15px;
+  font-size: ${(props) => props.font_size};
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   border-radius: ${(props) => props.border_radius};

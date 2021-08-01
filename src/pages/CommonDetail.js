@@ -21,7 +21,7 @@ const CommonDetail = (props) => {
   const postId = props.match.params.id;
   //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_list = useSelector(state => state.post.list);
-  const common_find = common_list.find((comment)=> comment.postId == postId);
+  const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
 
   React.useEffect(() => {
     if (common_find){
@@ -57,14 +57,14 @@ const CommonDetail = (props) => {
                 <Grid display="flex" width="100%" height="100%">
                   <Grid width="4.5%" height="80%" >
                   <ProfileImage>
-                    <Image size="40"/>
+                    <Image size="43"/>
                   </ProfileImage>
                   </Grid>
                   <Grid width="30%" height="80%" >
-                  <Text p margin="1% 0 0 2%" fontSize="1.2vh" color="#BDC1C6">
+                  <Text p margin="1% 0 0 1%" fontSize="1.2vh" color="#BDC1C6">
                   {common_find.nickname}
                   </Text>
-                  <Text p margin="1% 0 0 2%" fontSize="1.2vh" color="#BDC1C6">
+                  <Text p margin="1% 0 0 1%" fontSize="1.2vh" color="#BDC1C6">
                   {common_find.createdAt}
                   </Text>
                   </Grid>
@@ -84,7 +84,7 @@ const CommonDetail = (props) => {
             </Grid>
             <Grid width="70%" height="41%" >
             <Grid padding="0 1% 2% 1%" >
-                <Text fontSize="1.2vh" color="#DADCE0" style={{wordBreak:"break-all"}}>
+                <Text fontSize="1.5vh" color="#DADCE0" style={{wordBreak:"break-all"}}>
                 {common_find.content}
                 </Text>
             </Grid>

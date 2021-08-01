@@ -16,21 +16,23 @@ const CommentEdit = (props) => {
     // setEditId(commentId);
     dispatch(commentActions.isEdit(true));
   }
+  
   // 댓글 삭제
   const deleteComment = (postId, commentId) => {
     dispatch(commentActions.deleteCommentDB(postId, commentId));
   }
+  console.log(common_find);
     
 return (
   <React.Fragment>
     <Grid width="100" height="80%" >
       <ButtonBox>
         <EditDeleteButton
-          _onClick={()=>deleteComment(postId, common_find.commentId)} >
+          onClick={()=>deleteComment(postId, common_find.commentId)} >
           삭제
         </EditDeleteButton>
         <EditDeleteButton 
-          _onClick={()=>editOn(common_find.commentId)} >
+          onClick={()=>editOn(common_find.commentId)} >
           수정
         </EditDeleteButton>
       </ButtonBox>
@@ -47,15 +49,15 @@ height: 100%;
 const EditDeleteButton = styled.button`
 float: right;
 background-color: #FFFFFF;
-margin: 1% 3% 0 0;
+margin: 2% 3% 0 0;
 font-size: 0.9vh;
-height: 80%;
 border: none;
 color: #121212;
 cursor: pointer;
 width: 13%;
 border-radius: 40vh;
 font-weight: bold;
+height: 2.3vh;
 &:hover {
   background-color: #282A2D;
   color: #DADCE0;

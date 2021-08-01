@@ -15,7 +15,7 @@ return(
       <Grid>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p, index) => {
             return (
-          <BootContents> ● &nbsp; 부트캠프 질문드립니다! </BootContents>
+          <BootContents key={p}> ● &nbsp; 부트캠프 질문드립니다! </BootContents>
           )
       })}
       </Grid>

@@ -71,7 +71,7 @@ const CommonBoardList = (props) => {
               <Contents>
                 {common_list.map((c, idx) => {
                 return (
-                <Content onClick={() => history.push(`/common/detail/${c.postId}`)}
+                <Content key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
                 >
                 <Text p color="#F1F3F4" fontSize="1.6vh" margin="0px" padding="2%" fontWeight="bold">
                  {c.title}

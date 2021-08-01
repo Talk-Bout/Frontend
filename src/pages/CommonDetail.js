@@ -6,19 +6,17 @@ import { actionCreators as postActions} from "../redux/modules/post";
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import Comment from '../components/Comment';
-import CommentList from '../components/CommentList';
 import PopBootContents from '../components/PopBootContents';
-import { actionCreators as commentActions} from "../redux/modules/comment";
 
 import styled from 'styled-components';
 import {Text, Button, Grid, Input, Image} from "../elements/index";
 import { BiTimeFive, BiLike, BiComment, BiShow } from 'react-icons/bi';
 import { IoEyeOutline } from "react-icons/io5";
-import CommentEdit from '../components/CommentEdit';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
   const postId = props.match.params.id;
+
   //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_list = useSelector(state => state.post.list);
   const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
@@ -36,7 +34,7 @@ const CommonDetail = (props) => {
     )
   }
 
-  return (
+return (
     <React.Fragment>
     <Grid className='background' overflow="auto" display='flex' backgroundColor="#17181B">
       <Sidebar />
@@ -69,14 +67,14 @@ const CommonDetail = (props) => {
                   </Text>
                   </Grid>
                   <Grid width="63.5%" height="80%" >
-                      <ButtonBox>
-                        <EditDeleteButton>
-                          삭제
-                        </EditDeleteButton>
-                        <EditDeleteButton>
-                          수정
-                        </EditDeleteButton>
-                      </ButtonBox>
+                    <ButtonBox>
+                      <EditDeleteButton>
+                        삭제
+                      </EditDeleteButton>
+                      <EditDeleteButton>
+                        수정
+                      </EditDeleteButton>
+                    </ButtonBox>
                   </Grid>
                 </Grid>
                 </Grid>
@@ -84,9 +82,9 @@ const CommonDetail = (props) => {
             </Grid>
             <Grid width="70%" height="41%" >
             <Grid padding="0 1% 2% 1%" >
-                <Text fontSize="1.5vh" color="#DADCE0" style={{wordBreak:"break-all"}}>
-                {common_find.content}
-                </Text>
+              <Text fontSize="1.5vh" color="#DADCE0" style={{wordBreak:"break-all"}}>
+              {common_find.content}
+              </Text>
             </Grid>
             </Grid>
             <Grid width="100%" height="100%">
@@ -106,9 +104,7 @@ const CommonDetail = (props) => {
           <Grid width="97%" height="15vh" borderTop="1.5px solid #DADCE0">
             <Comment postId={postId}/>
           </Grid>
-          {/* 댓글 리스트 */}
           <Grid width="100%" height="40vh">
-            <CommentList/>
           </Grid>
         </Grid>
         {/* 인기 부트톡톡 */}

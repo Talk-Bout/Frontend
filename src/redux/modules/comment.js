@@ -35,8 +35,9 @@ const setCommentDB = (postId) => {                        // 댓글 불러오는
         axios.get(`http://15.165.18.118/posts/${postId}/comments`)
         .then((response) => {
             // console.log('setPostDB 함수 호출 성공!');
-            // console.log(response.data);
+            // console.log(response);
                 dispatch(setComment(response.data));
+                // console.log(setComment(response.data));
             })
             .catch((err) => {
                 console.log(`에러 발생: ${err}`);
@@ -85,7 +86,8 @@ const editCommentDB = (edit_comment, commentId, postId) => {           // 댓글
 const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하는 함수
     return function (dispatch) {
         const axios = require('axios');
-        axios.delete(`http://15.165.18.118/posts/${postId}/comments/${commentId}`)
+        axios
+        .delete(`http://15.165.18.118/posts/${postId}/comments/${commentId}`)
         .then((response) => {
                 // console.log('deleteCommentDB 함수 호출 성공!');
                 dispatch(deleteComment(commentId))
@@ -93,7 +95,7 @@ const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하�
             }).catch((err) => {
                 console.log(`댓글 삭제하기 에러 발생: ${err}`);
             });
-    };
+    }; 
 };
 
 
@@ -106,8 +108,9 @@ export default handleActions({
 
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
         draft.list.unshift(action.payload.comment);
-        console.log(action.payload.comment);
+        // console.log(action.payload.comment);
     }),
+
     [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
         let new_comment_list = draft.list.filter((ct) => {
             if(ct.commentId !== action.payload.comment){

@@ -1,43 +1,60 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {Text, Button, Grid, Input, Image} from "../elements/index";
 
+import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as commentActions} from "../redux/modules/comment";
+import { BiTimeFive, BiLike, BiComment, BiCommentEdit } from 'react-icons/bi';
 
 const CommentEdit = (props) => {
+
   const dispatch = useDispatch();
   const postId = props.postId;
-  //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
-  const common_list = useSelector(state => state.post.list);
-  const common_find = common_list.find((comment)=> comment.postId == postId);
 
-  const editOn = (commentId) => {
-    // setEditId(commentId);
-    dispatch(commentActions.isEdit(true));
-  }
-  
   // 댓글 삭제
   const deleteComment = (postId, commentId) => {
     dispatch(commentActions.deleteCommentDB(postId, commentId));
   }
-  console.log(common_find);
+
+  const editOn = () => {
+    // setEditId(commentId);
+    dispatch(commentActions.isEdit(true));
+  }
     
 return (
-  <React.Fragment>
-    <Grid width="100" height="80%" >
+<React.Fragment>
+  <Grid overflow="hidden" width="100%" height="8vh">
+  <Grid display="flex" height="30%" borderTop="0.2vh solid #DADCE0" padding="0 0 0 2%" width="100%">
+    <Grid width="50%" height="100%" >
+      <Text fontSize="1.2vh" color="#BDC1C6">{props.nickname}</Text>
+      <Text padding="0 0 0 1%" width="33.3%" fontSize="1.2vh" color="#BDC1C6"><BiTimeFive/>{props.createdAt}</Text>
+    </Grid>
+    <Grid width="50%" height="100%"> 
+      <Grid width="100" height="80%" >
       <ButtonBox>
         <EditDeleteButton
-          onClick={()=>deleteComment(postId, common_find.commentId)} >
+          onClick={()=>deleteComment(postId, props.commentId)} >
           삭제
         </EditDeleteButton>
         <EditDeleteButton 
-          onClick={()=>editOn(common_find.commentId)} >
+          onClick={()=>editOn(props.commentId)}
+          >
           수정
         </EditDeleteButton>
       </ButtonBox>
+      </Grid>
+    </Grid>
   </Grid>
-  </React.Fragment>
+  <Grid height="30%" padding="0.3% 0 0 0" width="70%"  >
+      <Text p margin="0 0 0 1%" padding="0% 2%" fontSize="1.2vh" color="#BDC1C6"> {props.content}</Text>
+  </Grid>
+  <Grid height="30%" width="100%">
+    <Text padding="0 2%" width="33.3%" fontSize="1.2vh" color="#BDC1C6"><BiLike/> 10</Text>
+    <Text width="33.3%" fontSize="1.2vh" color="#BDC1C6"><BiComment/> 2</Text>
+  </Grid>  
+</Grid>
+</React.Fragment>
 )
 };
 

@@ -73,30 +73,30 @@ const CommonBoardList = (props) => {
                 return (
                 <Content key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
                 >
-                <Text p color="#F1F3F4" fontSize="1.6vh" margin="0px" padding="2%" fontWeight="bold">
+                <Text p color="#F1F3F4" fontSize="2.4vh" margin="0px" padding="2% 2% 1% 2%" fontWeight="bold">
                  {c.title}
                 </Text>
-                <Text p color="#9AA0A6" fontSize="1.5vh" margin="0px" padding="2%">
+                <Text p color="#9AA0A6" fontSize="2.1vh" margin="0px" padding="0% 2%">
                  {c.content}
                </Text>
               <ProfileImage>
                 <Image size="25"/>
-                <Text color="#9AA0A6" margin="0 0 0 2%" >
+                <Text fontSize="1.7vh" color="#9AA0A6" margin="0 0 0 2%" >
                 {c.nickname}
                 </Text>
               </ProfileImage>
             
               {/* 게시한 날짜, 좋아요, 댓글 */}
             <Grid width="100%" float="left">
-            <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%" >
+            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" >
               <BiTimeFive/> &nbsp;
               {c.createdAt}
               </Text>
-            <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%">
+            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%">
               <BiLike/> &nbsp;
               {c.likes}
               </Text>
-            <Text color="#9AA0A6" fontSize="1.3vh" padding="2%" width="33.3%" >
+            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" >
               <BiComment/> &nbsp; 2
             </Text>
             <hr/>

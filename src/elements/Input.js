@@ -18,7 +18,8 @@ const Input = (props) => {
     _ref,
     onSubmit,
     padding,
-    height, color,
+    height,
+    color,
   } = props;
 
 

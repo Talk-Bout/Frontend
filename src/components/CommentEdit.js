@@ -60,8 +60,8 @@ return (
     )}
   {isEditMode? (
     <>
-    <EditInput 
-      defaultValue={commentValue} onChange={(e) => setCommentValue(e.target.value)} />
+    <EditInput
+    defaultValue={commentValue} onChange={(e) => setCommentValue(e.target.value)} />
     <EditButton onClick={() => (setIsEditMode(false))}>수정취소</EditButton>
     <EditButton onClick={() => (editComment())}>수정완료</EditButton>
     </>

@@ -49,16 +49,16 @@ const all_comment = comment_list.slice(0, comment_list.length)
 return (
   <React.Fragment>
   <Grid width="100%" height="90%" >
-    <Grid width="100%" height="30%"   >
-      <Text p color="#DADCE0" margin="1% 0 0 0.5%" fontWeight="bold" fontSize="1.5vh">
+    <Grid width="100%" height="20%"   >
+      <Text p color="#DADCE0" margin="2% 0 0 0.5%" fontWeight="bold" fontSize="1.5vh">
       댓글 &nbsp; 15
       </Text>
     </Grid>
     <Grid width="100%" height="65%" >
     <CommentBox>
-    <Input outline="none" color="#DADCE0" width="100%" border="1px solid #DADCE0" bg="transparent" font_size="1.3vh"  border_radius="20vh" height="10%"
+    <Input padding="0 3%" outline="none" color="#DADCE0" width="100%" border="1px solid #DADCE0" bg="transparent" font_size="1.3vh"  border_radius="20vh" height="50%"
     placeholder="댓글을 남겨주세요" _ref={addRef} onSubmit={addComment}/>
-    <WriteButton onClick={()=> {addComment();}}>
+    <WriteButton onClick={()=> {addComment()}}>
       등록하기
     </WriteButton>
     </CommentBox>

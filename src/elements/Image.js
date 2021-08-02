@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Image = (props) => {
-
-  const { shape, src, size, cursor, margin, padding, align_items} = props;
+  const { shape, src, size, cursor, margin, padding, align_items } = props;
 
   const styles = {
     src: src,
@@ -12,38 +11,38 @@ const Image = (props) => {
     margin: margin,
     padding: padding,
     align_items: align_items,
-
   };
 
   if (shape === "ProfileImage") {
+
     return <ProfileImage {...styles}></ProfileImage>;
   }
 
-  if (shape === "BigProfileImage") {
+  if (shape === 'BigProfileImage') {
     return <BigProfileImage {...styles}></BigProfileImage>;
   }
 
-  if (shape === "HeaderLogo") {
+  if (shape === 'HeaderLogo') {
     return <HeaderLogo {...styles}></HeaderLogo>;
   }
 
-  if (shape === "CircleLogo") {
+  if (shape === 'CircleLogo') {
     return <CircleLogo {...styles}></CircleLogo>;
   }
 
-  if (shape === "ReviewLogo") {
+  if (shape === 'ReviewLogo') {
     return <ReviewLogo {...styles}></ReviewLogo>;
   }
 
-  if (shape === "CampBigLogo") {
+  if (shape === 'CampBigLogo') {
     return <CampBigLogo {...styles}></CampBigLogo>;
   }
 
-  if (shape === "CampSmallLogo") {
+  if (shape === 'CampSmallLogo') {
     return <CampSmallLogo {...styles}></CampSmallLogo>;
   }
 
-  if (shape === "LoginLogo") {
+  if (shape === 'LoginLogo') {
     return <LoginLogo {...styles}></LoginLogo>;
   }
 
@@ -51,14 +50,14 @@ const Image = (props) => {
     <React.Fragment>
       <ImageDefault {...styles}></ImageDefault>
     </React.Fragment>
-  )
+  );
 };
 
 Image.defaultProps = {
-  shape: "circle",
-  src: "https://previews.123rf.com/images/imagevectors/imagevectors1603/imagevectors160300845/53026883-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%EC%97%90-%ED%8F%89%EB%A9%B4-%EA%B2%80%EC%9D%80-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%94%84%EB%A1%9C%ED%95%84-%EC%9B%B9-%EC%95%84%EC%9D%B4%EC%BD%98.jpg",
+  shape: 'circle',
+  src: 'https://previews.123rf.com/images/imagevectors/imagevectors1603/imagevectors160300845/53026883-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EB%8F%99%EA%B7%B8%EB%9D%BC%EB%AF%B8%EC%97%90-%ED%8F%89%EB%A9%B4-%EA%B2%80%EC%9D%80-%EC%82%AC%EC%9A%A9%EC%9E%90-%ED%94%84%EB%A1%9C%ED%95%84-%EC%9B%B9-%EC%95%84%EC%9D%B4%EC%BD%98.jpg',
   _onClick: () => {},
-  cursor: "",
+  cursor: '',
   size: null,
   margin: null,
   padding: null,
@@ -67,11 +66,11 @@ Image.defaultProps = {
 
 // 기본 이미지
 const ImageDefault = styled.div`
-  --size: ${(props) => props.size}px;
+  --size: ${(props) => props.size};
   width: var(--size);
   height: var(--size);
   cursor: ${(props) => props.cursor};
-  background-image: url("${(props) => props.src}");
+  background-image: url('${(props) => props.src}');
   background-size: cover;
   align-items: ${(props) => props.align_items};
   margin: ${(props) => props.margin};
@@ -84,7 +83,7 @@ const ProfileImage = styled.div`
   left: ${(props) => props.left};
   top: ${(props) => props.top};
   align-items: ${(props) => props.align_items};
-  background-image: url("${(props) => props.src}");
+  background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `;
@@ -94,10 +93,10 @@ const BigProfileImage = styled.div`
   width: 7rem;
   height: 7rem;
   background-size: cover;
-  background-position: 50% 50%;                  // 이미지의 중간 부분이 보이게
-  background-color: #eee;                        // 이미지 안 뜨는 경우 배경색
+  background-position: 50% 50%; // 이미지의 중간 부분이 보이게
+  background-color: #eee; // 이미지 안 뜨는 경우 배경색
   border-radius: 2.5vh;
-  background-image: url("${(props) => props.src}");
+  background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `;
@@ -120,7 +119,7 @@ const HeaderLogo = styled.div`
   text-transform: uppercase;
   color: #121212;
   cursor: ${(props) => props.cursor};
-  background-image: url("${(props) => props.src}");
+  background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `;
@@ -133,32 +132,32 @@ const CircleLogo = styled.div`
   top: 22px;
   cursor: ${(props) => props.cursor};
   background-size: cover;
-  background-image: url("${(props) => props.src}");
+  background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `;
 
 // 리뷰페이지 card부분 로고 이미지
 const ReviewLogo = styled.div`
-width: 66px;
-height: 32px;
-left: calc(50% - 66px/2);
-top: calc(50% - 32px/2);
-font-family: Noto Sans KR;
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 32px;
-/* identical to box height, or 133% */
-display: flex;
-align-items: center;
-text-align: center;
-letter-spacing: 0.2px;
-text-transform: uppercase;
-color: #121212;
-background-image: url("${(props) => props.src}");
-margin: ${(props) => props.margin};
-padding: ${(props) => props.padding};
+  width: 66px;
+  height: 32px;
+  left: calc(50% - 66px / 2);
+  top: calc(50% - 32px / 2);
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 32px;
+  /* identical to box height, or 133% */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #121212;
+  background-image: url('${(props) => props.src}');
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
 `;
 
 // 부트캠프 상세페이지 각 캠프의 로고 이미지
@@ -167,9 +166,9 @@ const CampBigLogo = styled.div`
   height: 112px;
   left: 365px;
   top: 104px;
-  background: #FAFAFA;
-  
-  background-image: url("${(props) => props.src}");
+  background: #fafafa;
+
+  background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `;
@@ -185,8 +184,8 @@ const CampSmallLogo = styled.div`
   order: 0;
   flex-grow: 0;
   margin: 0px 16px;
-  
-  background-image: url("${(props) => props.src}");
+
+  background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `;
@@ -208,8 +207,8 @@ const LoginLogo = styled.div`
   letter-spacing: 0.2px;
   text-transform: uppercase;
   color: #101010;
-  
-  background-image: url("${(props) => props.src}");
+
+  background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `;

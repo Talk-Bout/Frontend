@@ -18,7 +18,7 @@
 
 //   useEffect(() => {
 //     dispatch(questionActions.setPostDB());
-//   });
+//   },[]);
 
 //   return (
 //     <Grid display="flex">

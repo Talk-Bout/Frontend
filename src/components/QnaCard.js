@@ -1,15 +1,30 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Image } from '../elements';
-
+import { history } from '../redux/ConfigureStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as questionActions } from '../redux/modules/post';
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { Group } from '../image/Group.png';
 
-const QnaCard = () => {
+// 일반 html태그일경우 (button 등) 이면 기본 내장 함수가 들어있음.
+// 하지만 내가 태그를 만들었을 경우에는 그 안에 내장 함수가 없음.
+// 따로 defaultProps로 함수를 만들어줘야함! element처럼!
+
+const QnaCard = (props) => {
+  const dispatch = useDispatch();
+  const { _onClick } = props;
+  const question_id = props.postId;
+  const question_list = useSelector((state) => state.post.list);
+
+  const question_found = question_list.find(
+    (post) => post.postId == question_id
+  );
+
   return (
     <React.Fragment>
-      <QnaListCard>
+      <QnaListCard onClick={_onClick}>
         {/* 질문 내용 */}
         <QuestionSection>
           <Grid display="flex">
@@ -20,30 +35,26 @@ const QnaCard = () => {
             </Grid>
             <Grid>
               <Text fontSize="2vh" fontWeight="600" color="#F8F9FA">
-                질문 타이틀
+                {question_found.title}
               </Text>
             </Grid>
           </Grid>
 
           <Text p fontSize="1.7vh" color="#9AA0A6">
-            Cillum in amet cillum irure ullamco. Cupidatat occaecat ad ex minim
-            ullamco dolore eiusmod velit eu fugiat excepteur. Culpa amet aliqua
-            consectetur culpa consectetur ad cillum non cillum proident velit
-            Lorem do id. Exercitation aliquip incididunt aute officia in in
-            excepteur.
+            {question_found.content}
           </Text>
 
           <Grid display="flex" margin="8% 0">
             <div style={{ display: 'flex', margin: '0 3% 0 0' }}>
               <Image size="20"></Image>
               <Text fontSize="1.6vh" color="#C4C4C4" fontSize="1.6vh">
-                질문자 닉네임
+                {question_found.nickname}
               </Text>
             </div>
 
             <Text fontSize="1.6vh" color="#C4C4C4" fontSize="1.6vh">
               <BiTimeFive />
-              작성시간
+              {question_found.createdAt}
             </Text>
           </Grid>
         </QuestionSection>
@@ -108,4 +119,9 @@ const QuestionSection = styled.div`
 const AnswerSection = styled.div`
   height: 30%;
 `;
+
+QnaCard.defaultProps = {
+  _onClick: () => {},
+};
+
 export default QnaCard;

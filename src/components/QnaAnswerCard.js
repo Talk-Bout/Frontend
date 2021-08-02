@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Input, Image } from '../elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as questionActions } from '../redux/modules/post';
 //icons
 import { BiTimeFive, BiLike, BiComment, BiNoEntry } from 'react-icons/bi';
 import { GrView } from 'react-icons/gr';

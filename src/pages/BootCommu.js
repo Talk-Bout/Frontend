@@ -6,14 +6,17 @@ import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
+import { AiOutlineEye } from 'react-icons/ai';
+import { BiLike, BiComment } from "react-icons/bi";
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const BootCommu = (props) => {
-  const dispatch = useDispatch();
-  const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
+  // const dispatch = useDispatch();
+  // const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
 
-  useEffect(() => {
-    dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
-  }, [])
+  // useEffect(() => {
+  //   dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
+  // }, [])
 
   return (
     <React.Fragment>
@@ -37,31 +40,35 @@ const BootCommu = (props) => {
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='0 40px'>
               <PostList>
-                {[1, 2, 3].map((p) => {
+                <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091'>
+                  <TitleBox><Text p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
+                  <Text p className='sort' fontSize='1.7vh' color='#757577' margin='3vh 0 0'>인기순 | 최신순</Text>
+                </Grid>
+                {[1, 2, 3, 4, 5].map((n) => {
                   return (
-                    <Post>
-                      <StarBox>
-                        <Text className='score' p fontSize='2vh' fontWeight='700' color='#e8eaed' margin='0'>2.2</Text>
-                        <Text className='star' p fontSize='2vh' color='#e8eaed' margin='0'>★★☆☆☆</Text>
-                      </StarBox>
-                      <PostBox>
-                        <Text className='title' p fontSize='2vh' fontWeight='700' color='#e8eaed' margin='0'>리뷰 제목</Text>
-                        <Text className='user' p fontSize='1.3vh' color='#80868b' margin='0'>수료자 : st****** - 2021.07.25</Text>
-                        <Text className='strong-point' p fontSize='1.5vh' fontWeight='700' color='#e8eaed' margin='20px 0 0'>장점</Text>
-                        <Text className='strong-content' p fontSize='1.5vh' color='#e8eaed' margin='0'>온라인 부트캠프라서 공간적 제약이 없고, 소득공유 결제 모델이 있어서 당장 자금이 없어도 배우고 미래에 투자할 수 있습니다.</Text>
-                        <Text className='week-point' p fontSize='1.5vh' fontWeight='700' color='#e8eaed' margin='15px 0 0'>단점</Text>
-                        <Text className='wee-content' p fontSize='1.5vh' color='#e8eaed' margin='0'>과정도 별로 메리트 없고 전문가가 아닌, 수료하고 코드스테이츠에 취업한 수료생들이 세션을 진행하는 경우도 꽤 있습니다.</Text>
-                      </PostBox>
+                    <Post onClick={() => history.push('/boot/post')}>
+                      <Text p fontSize='2vh' fontWeight='700' color='#dadce0'>항해99 궁금한 게 있어용</Text>
+                      <Text p color='#80868b'>독학한 지 1년 6개월 정도입니다. 자바스크립트와 리액트 공부 중이에요. 부트캠프 하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각 중인데, 제가 프론트보다는 백엔드 쪽으로 하고 싶어서요. 적절한 선택일까요?</Text>
+                      <Text p color='#bdc1c6'><BiLike /> 17  <BiComment /> 5  <AiOutlineEye /> 354</Text>
                     </Post>
                   )
                 })}
               </PostList>
+              <Grid className='pagination' height='8vh' is_center>
+                <PageBox>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronLeft /></Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>01</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>02</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>03</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronRight /></Page></Text>
+                </PageBox>
+              </Grid>
             </Grid>
             <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='450px' position='absolute'>
               <Text className='other-camps' p fontSize='2vh' fontWeight='700' color='#e2e2e2' margin='20px 20px 0'>다른 부트캠프</Text>
               {[1, 2, 3, 4].map((c) => {
                 return (
-                  <Camp>
+                  <Camp onClick={() => history.push('/boot/review')}>
                     <ImgBox><Image size='80' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
                     <CampBox>
                       <Text className='camp-name' p fontSize='2vh' fontWeight='700' color='#f1f3f4' margin='20px 0 0'>부트캠프명</Text>
@@ -101,6 +108,10 @@ const Button = styled.button`
   border: none;
   border-radius: 8px;
   background-color: #BDC1C6;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 const Menu = styled.div`
@@ -116,27 +127,25 @@ const PostList = styled.div`
   height: 100%;
 `;
 
+const TitleBox = styled.div``;
+
 const Post = styled.div`
-  display: flex;
-`;
-
-const StarBox = styled.div`
-  height: 100%;
-  width: 25%;
-  padding: 40px 0;
-`;
-
-const PostBox = styled.div`
-  height: 100%;
-  width: 75%;
+  padding: 20px 40px;
   border-bottom: 1px solid #8f9091;
-  padding: 40px 0;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Camp = styled.div`
   height: 100px;
   display: flex;
   border-bottom: 1px solid #8f9091;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImgBox = styled.div`
@@ -146,6 +155,20 @@ const ImgBox = styled.div`
 
 const CampBox = styled.div`
   width: 80%;
+`;
+
+const PageBox = styled.div`
+  display: inline-block;
+  height: 100%;
+`;
+
+const Page = styled.span`
+  opacity: 0.5;
+  cursor: pointer;
+  color: #F8F9FA;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export default BootCommu;

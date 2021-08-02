@@ -43,7 +43,7 @@ const HeaderN = (props) => {
         <Grid className='search' height='100%' width='90%' padding='10px 0 0' margin='5px 0 0'>
           <img src={Search} style={{verticalAlign: 'middle'}} alt='검색'/><Input placeholder='검색어를 입력하세요.'></Input>
         </Grid>
-        <Grid className='login' height='100%' width='50px'>
+        <Grid className='login' height='100%' width='80px'>
           <TextBox onClick={() => history.push('/login')}><Text p fontSize='1.7vh' color='#f8f9fa' text_align='center'>로그인</Text></TextBox>
         </Grid>
       </Grid>

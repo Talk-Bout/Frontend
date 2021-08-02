@@ -16,7 +16,12 @@ const Button = (props) => {
     color,
     font_size,
     display,
+
     padding,
+
+    text_align,
+    float,
+
   } = props;
 
   const styles = {
@@ -30,7 +35,12 @@ const Button = (props) => {
     color: color,
     font_size: font_size,
     display: display,
+
     padding: padding,
+
+    text_align: text_align,
+    float: float,
+
   };
   return (
     <React.Fragment>
@@ -55,7 +65,12 @@ Button.defaultProps = {
   color: null,
   font_size: null,
   display: null,
+
   padding: null,
+
+  text_align: null,
+  float: null,
+
 };
 
 const ElButton = styled.button`
@@ -69,7 +84,12 @@ const ElButton = styled.button`
   color: ${(props) => props.color};
   font-size: ${(props) => props.font_size};
   display: ${(props) => props.display};
+
   padding: ${(props) => props.padding};
+
+  text-align: ${(props) => props.text_align};
+  float: ${(props) => props.float};
+
 `;
 
 export default Button;

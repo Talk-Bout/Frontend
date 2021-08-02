@@ -4,6 +4,7 @@ import {Grid, Text, Image} from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 
@@ -37,7 +38,25 @@ const BootReview = (props) => {
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='0 40px'>
               <PostList>
-                {[1, 2, 3].map((p) => {
+                {[1, 2, 3].map((p, idx) => {
+                  if ((idx + 1) % 3 === 0) {
+                    return (
+                      <Post>
+                        <StarBox>
+                          <Text className='score' p fontSize='2vh' fontWeight='700' color='#e8eaed' margin='0'>2.2</Text>
+                          <Text className='star' p fontSize='2vh' color='#e8eaed' margin='0'>★★☆☆☆</Text>
+                        </StarBox>
+                        <PostBoxThird>
+                          <Text className='title' p fontSize='2vh' fontWeight='700' color='#e8eaed' margin='0'>리뷰 제목</Text>
+                          <Text className='user' p fontSize='1.3vh' color='#80868b' margin='0'>수료자 : st****** - 2021.07.25</Text>
+                          <Text className='strong-point' p fontSize='1.5vh' fontWeight='700' color='#e8eaed' margin='20px 0 0'>장점</Text>
+                          <Text className='strong-content' p fontSize='1.5vh' color='#e8eaed' margin='0'>온라인 부트캠프라서 공간적 제약이 없고, 소득공유 결제 모델이 있어서 당장 자금이 없어도 배우고 미래에 투자할 수 있습니다.</Text>
+                          <Text className='week-point' p fontSize='1.5vh' fontWeight='700' color='#e8eaed' margin='15px 0 0'>단점</Text>
+                          <Text className='wee-content' p fontSize='1.5vh' color='#e8eaed' margin='0'>과정도 별로 메리트 없고 전문가가 아닌, 수료하고 코드스테이츠에 취업한 수료생들이 세션을 진행하는 경우도 꽤 있습니다.</Text>
+                        </PostBoxThird>
+                      </Post>
+                    )
+                  }
                   return (
                     <Post>
                       <StarBox>
@@ -56,12 +75,21 @@ const BootReview = (props) => {
                   )
                 })}
               </PostList>
+              <Grid className='pagination' height='8vh' is_center borderTop='1px solid #8f9091'>
+                <PageBox>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronLeft /></Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>01</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>02</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>03</Page></Text>
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronRight /></Page></Text>
+                </PageBox>
+              </Grid>
             </Grid>
             <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='450px' position='absolute'>
               <Text className='other-camps' p fontSize='2vh' fontWeight='700' color='#e2e2e2' margin='20px 20px 0'>다른 부트캠프</Text>
               {[1, 2, 3, 4].map((c) => {
                 return (
-                  <Camp>
+                  <Camp onClick={() => history.push('/boot/review')}>
                     <ImgBox><Image size='80' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
                     <CampBox>
                       <Text className='camp-name' p fontSize='2vh' fontWeight='700' color='#f1f3f4' margin='20px 0 0'>부트캠프명</Text>
@@ -101,6 +129,10 @@ const Button = styled.button`
   border: none;
   border-radius: 8px;
   background-color: #BDC1C6;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 const Menu = styled.div`
@@ -133,10 +165,20 @@ const PostBox = styled.div`
   padding: 40px 0;
 `;
 
+const PostBoxThird = styled.div`
+  height: 100%;
+  width: 75%;
+  padding: 40px 0;
+`;
+
 const Camp = styled.div`
   height: 100px;
   display: flex;
   border-bottom: 1px solid #8f9091;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ImgBox = styled.div`
@@ -146,6 +188,20 @@ const ImgBox = styled.div`
 
 const CampBox = styled.div`
   width: 80%;
+`;
+
+const PageBox = styled.div`
+  display: inline-block;
+  height: 100%;
+`;
+
+const Page = styled.span`
+  opacity: 0.5;
+  cursor: pointer;
+  color: #F8F9FA;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export default BootReview;

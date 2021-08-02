@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = (props) => {
+
   const {
     multiLine,
     placeholder,
@@ -17,19 +18,24 @@ const Input = (props) => {
     _ref,
     onSubmit,
     padding,
+    height, color,
   } = props;
 
-  const styles = {
-    width: width,
-    border_radius: border_radius,
-    border: border,
-    bg: bg,
-    font_size: font_size,
-    outline: outline,
-    margin: margin,
-    _ref: _ref,
-    padding: padding,
-  };
+
+    const styles = {
+        width: width,
+        border_radius: border_radius,
+        border: border,
+        bg: bg,
+        font_size: font_size,
+        outline: outline,
+        margin: margin,
+        _ref: _ref,
+        height: height,
+        color: color,
+      padding: padding,
+        
+    }
 
   if (multiLine) {
     return (
@@ -80,23 +86,28 @@ Input.defaultProps = {
   outline: null,
   margin: null,
   padding: null,
-
+  height: null,
+  color: null,
+ 
   // is_submit: false,
   // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
 };
 
 const ElTextarea = styled.textarea`
-  font-size: 15px;
+  font-size: ${(props) => props.font_size};
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   border-radius: ${(props) => props.border_radius};
   background-color: ${(props) => props.bg};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
+  outline:${(props) => props.outline};
+  color: ${(props) => props.color};
+  resize: none;
 `;
 
 const ElInput = styled.input`
-  font-size: 15px;
+  font-size: ${(props) => props.font_size};
   border: ${(props) => props.border};
   width: ${(props) => props.width};
   border-radius: ${(props) => props.border_radius};
@@ -105,6 +116,8 @@ const ElInput = styled.input`
   height: ${(props) => props.height};
   outline: ${(props) => props.outline};
   margin: ${(props) => props.margin};
+  height: ${(props) => props.height};
+  color: ${(props) => props.color};
 `;
 
 export default Input;

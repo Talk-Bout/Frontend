@@ -1,24 +1,25 @@
-import React from 'react';
-import styled from "styled-components";
+import React, {useState} from 'react';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
-
-import {Text, Button, Grid, Input} from "../elements/index";
-import Header from '../components/Header';
-import Comment from '../components/Comment';
-import { actionCreators as commentActions} from "../redux/modules/comment";
 import { actionCreators as postActions} from "../redux/modules/post";
-//icons
-import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 
-const CoomonBoardDetail = (props) => {
+import Sidebar from '../components/Sidebar';
+import Body from '../components/Body';
+import Comment from '../components/Comment';
+import PopBootContents from '../components/PopBootContents';
+
+import styled from 'styled-components';
+import {Text, Button, Grid, Input, Image} from "../elements/index";
+import { BiTimeFive, BiLike, BiComment, BiShow } from 'react-icons/bi';
+import { IoEyeOutline } from "react-icons/io5";
+
+const CommonDetail = (props) => {
   const dispatch = useDispatch();
   const postId = props.match.params.id;
+
   //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_list = useSelector(state => state.post.list);
-
-  const common_find = common_list.find((comment)=> comment.postId == postId);
-  const comment_list = useSelector((state) => state.comment.list);
+  const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
 
   React.useEffect(() => {
     if (common_find){
@@ -33,115 +34,133 @@ const CoomonBoardDetail = (props) => {
     )
   }
 
-  return (
+return (
     <React.Fragment>
-      <Header/>
-        {/* 게시물 */}
-      <Outter>
-      <Grid float="right" padding="60px 0px 60px 40px">
-      <Grid>
-        <Text padding="2%" fontSize="10px">토픽 &gt; 회사생활</Text>
-        <Text p fontSize="13px" margin="0px" padding="2%" width="10%" fontWeight="bold">
-        {common_find.title}
-        </Text>
-        <Text p margin="0" padding="2%" fontSize="11px">
-          {common_find.author}
-        </Text>
-        <Grid display="flex" width="100%" >
-            <Text padding="2%" width="33.3%" fontSize="12px">
-              <BiTimeFive/> {common_find.createdAt}
+    <Grid className='background' overflow="auto" display='flex' backgroundColor="#17181B">
+      <Sidebar />
+      <Body header>
+      <Grid display="flex" width="100%">
+        <Grid width="70%" height="100vh">
+          {/* 게시물 */}
+          <Grid width="100%" height="45vh">
+            <Grid width="100%" height="45%">
+              <Grid width="100%" height="100%">
+                <Grid padding="2% 0" width="100%" height="60%">
+                <Text fontSize="1.3vh" color="#BDC1C6"> 부트톡톡 &gt; 정보게시판</Text>
+                <Text p margin="0" fontSize="2.5vh" color="#F1F3F4" fontWeight="bold">
+                {common_find.title}
+                </Text>
+                </Grid>
+                <Grid width="100%" height="50%">
+                <Grid display="flex" width="100%" height="100%">
+                  <Grid width="4.5%" height="80%" >
+                  <ProfileImage>
+                    <Image size="43"/>
+                  </ProfileImage>
+                  </Grid>
+                  <Grid width="30%" height="80%" >
+                  <Text p margin="1% 0 0 1%" fontSize="1.2vh" color="#BDC1C6">
+                  {common_find.nickname}
+                  </Text>
+                  <Text p margin="1% 0 0 1%" fontSize="1.2vh" color="#BDC1C6">
+                  {common_find.createdAt}
+                  </Text>
+                  </Grid>
+                  <Grid width="63.5%" height="80%" >
+                    <ButtonBox>
+                      <EditDeleteButton>
+                        삭제
+                      </EditDeleteButton>
+                      <EditDeleteButton>
+                        수정
+                      </EditDeleteButton>
+                    </ButtonBox>
+                  </Grid>
+                </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid width="70%" height="41%" >
+            <Grid padding="0 1% 2% 1%" >
+              <Text fontSize="1.5vh" color="#DADCE0" style={{wordBreak:"break-all"}}>
+              {common_find.content}
+              </Text>
+            </Grid>
+            </Grid>
+            <Grid width="100%" height="100%">
+            <HistoryButton>
+              <BiLike/> &nbsp; 17
+            </HistoryButton>
+            <HistoryButton>
+              <BiComment/> &nbsp;  15
+            </HistoryButton>
+            <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="1.2vh">
+              <IoEyeOutline/> &nbsp;  354
             </Text>
-            <Text padding="2%" width="33.3%" fontSize="12px">
-              <BiLike/> {common_find.likes}
-            </Text>
-            <Text padding="2%" width="33.3%" fontSize="12px">
-              <BiComment/>
-            2
-            </Text>
-
-          {/* 버튼 추가 */}
-          <Grid width="30%" height="60%" display="flex" margin="auto 0 auto auto">
-            <Button _onClick={() => history.push('/common/write')} border="none" color="white" bg="Grey" width="45%" margin="0 10% 0 0" >
-              수정
-            </Button>
-            <Button border="none" color="white" bg="Grey" width="45%" >
-              삭제
-            </Button>
+            <Image profileImage />
+            </Grid>
+          </Grid>
+          {/* 댓글 작성 */}
+          <Grid width="97%" height="15vh" borderTop="1.5px solid #DADCE0">
+            <Comment postId={postId}/>
+          </Grid>
+          <Grid width="100%" height="40vh">
           </Grid>
         </Grid>
+        {/* 인기 부트톡톡 */}
+        <Grid width="27%" height="100%" >
+          <PopBootContents/>
+        </Grid>
       </Grid>
-      <Hr/>
-      {/* 게시물 본문 */}
-      <Grid padding="2%">
-          <Text fontSize="11px" style={{wordBreak:"break-all"}}>
-          {common_find.content}
-          </Text>
-      </Grid>
-      <Hr/>
-        {/* comment component */}
-        <Comment postId={postId}/>
-      </Grid>
-      </Outter>
-      {/* 다른 게시물 */}
-      <Side >
-        <Grid padding="30px" float="left" width="30%">
-        <Another>
-          <Text padding="2%" fontSize="11px" fontWeight="bold">
-            다른 게시물 <br/>
-          </Text>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((p, index) => {
-            return (
-          <AnotherList> ● 부트캠프 질문드립니다! <br/></AnotherList>
-          )
-        })}
-        </Another>
-      </Grid>
-      </Side>
-    </React.Fragment>
+      </Body>
+    </Grid>
+  </React.Fragment>
   )
 };
 
-const Outter = styled.div`
-padding: 0;
-float: left;
-width: 60%
-`;
-
-const CommentBox = styled.div`
+const ProfileImage = styled.div`
 display: flex;
-padding: 2%;
 `;
 
-const Hr = styled.hr`
-border: 0.5px solid #E5E5E5;
-margin: 7px 0px;
+const HistoryButton = styled.button`
+width: 8%;
+height: 10%;
+font-size: 1.5vh;
+background-color: transparent;
+border-radius: 40vh;
+border: none;
+cursor: pointer;
+color: #DADCE0;
+&:hover {
+  background-color: #282A2D;
+  color: #DADCE0;
+  }
 `;
 
-const Content = styled.div`
-border-bottom: 1px solid #E5E5E5;
+const ButtonBox = styled.div`
 width: 100%;
 height: 100%;
-padding: 1% 2%;
+margin: 0 1% 0 0;
 `;
 
-const Side = styled.div`
-padding: 15px 0px;
+const EditDeleteButton = styled.button`
 float: right;
-width: 40%;
-`;
-
-const Another = styled.div`
-border: 1px solid #E5E5E5;
-width: 25%;
-height: 35%;
-padding: 2%;
-position: absolute;
-`;
-const AnotherList = styled.a`
-padding: 2%;
+background-color: #FFFFFF;
+margin: 0 3% 0 0;
+font-size: 1.5vh;
+height: 50%;
 border: none;
-margin: 10px 0px;
-font-size: 10px;
+color: #121212;
+cursor: pointer;
+width: 13%;
+border-radius: 40vh;
+font-weight: bold;
+&:hover {
+  background-color: #282A2D;
+  color: #DADCE0;
+  }
 `;
 
-export default CoomonBoardDetail;
+
+
+export default CommonDetail;

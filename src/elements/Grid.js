@@ -44,7 +44,9 @@ const Grid = (props) => {
     vertical_align,
     fontWeight,
     borderBottom,
+    borderTop,
     zIndex,
+    borderCollapse,
   } = props;
 
   const styles = {
@@ -85,6 +87,9 @@ const Grid = (props) => {
     fontWeight: fontWeight,
     borderBottom: borderBottom,
     zIndex: zIndex,
+    borderTop: borderTop,
+    borderCollapse: borderCollapse,
+
   };
 
   return (
@@ -124,6 +129,7 @@ Grid.defaultProps = {
   borderRadius: null,
   borderColor: null,
   borderBottom: null,
+  borderTop: null,
   hover: null,
   active: null,
   float: null,
@@ -191,6 +197,8 @@ const GridBox = styled.div`
   ${(props) => (props.hover ? `&:active {${props.active}}` : '')}
   border-bottom: ${(props) => props.borderBottom};
   z-index: ${(props) => props.zIndex};
+  border-top: ${(props) => props.borderTop};
+  border-collapse: ${(props) => props.borderCollapse};
 `;
 
 export default Grid;

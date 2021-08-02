@@ -4,6 +4,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
 
+//템플릿 페이지
+import templateN from './components/templateN';
+
 //메인 페이지
 import MainN from './pages/MainN';
 
@@ -21,12 +24,15 @@ import BootMain from './pages/BootMain';
 import BootReview from './pages/BootReview';
 import BootCommu from './pages/BootCommu';
 import BootPost from './pages/BootPost';
-import BootWrite from './pages/BootWrite';
+import BootReviewWrite from './pages/BootReviewWrite';
 
 //질문 게시판 페이지
 import QuestionList from './pages/QuestionList';
 import QuestionDetail from './pages/QuestionDetail';
 import QuestionWrite from './pages/QuestionWrite';
+
+//뉴스 게시판 페이지
+import NewsList from './pages/NewsList';
 
 //마이 페이지
 import Mypage from './pages/Mypage';
@@ -50,11 +56,13 @@ function App() {
         <Route path="/boot" exact component={BootMain} />
         <Route path="/boot/review" exact component={BootReview} />
         <Route path="/boot/community" exact component={BootCommu} />
-        <Route path="/boot/post/:id" exact component={BootPost} />
-        <Route path="/boot/write" exact component={BootWrite} />
-        <Route path="/boot/write/:id" exact component={BootWrite} />
+        <Route path="/boot/post" exact component={BootPost} />
+        <Route path="/boot/review/write" exact component={BootReviewWrite} />
+        <Route path="/boot/review/write/:id" exact component={BootReviewWrite} />
+        <Route path="/news/list" exact component={NewsList} />
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />
+        <Route path="/template" exact component={templateN} />
       </ConnectedRouter>
     </React.Fragment>
   );

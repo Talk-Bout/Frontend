@@ -13,7 +13,8 @@ const Image = (props) => {
     align_items: align_items,
   };
 
-  if (shape === 'ProfileImage') {
+  if (shape === "ProfileImage") {
+
     return <ProfileImage {...styles}></ProfileImage>;
   }
 

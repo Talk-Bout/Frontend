@@ -7,14 +7,14 @@ import { Text, Button, Grid, Input } from '../elements/index';
 import Header from '../components/Header';
 import { actionCreators as commentActions } from '../redux/modules/comment';
 //icons
-import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import CommentEdit from '../components/CommentEdit';
 
 const Comment = (props) => {
-  const dispatch = useDispatch();
-  const comment_list = useSelector(state => state.comment.list);
-  const addRef = useRef(null);
-  const postId = props.postId;
+  
+const dispatch = useDispatch();
+const comment_list = useSelector(state => state.comment.list);
+const addRef = useRef(null);
+const postId = props.postId;
 
 // 댓글 조회
 useEffect(() => {
@@ -34,7 +34,7 @@ const all_comment = comment_list.slice(0, comment_list.length)
     console.log(addCommentRef);
     const new_comment = {
       content : addCommentRef,
-      nickname : "username"
+      nickname : "username",
   }
 
     if (addCommentRef === "") {
@@ -64,7 +64,7 @@ return (
     </CommentBox>
     </Grid>
   </Grid>
-  <Grid width="97%" height="40vh" >
+  <Grid width="100%" height="40vh" >
   {all_comment && all_comment.map((ct, index) => {
   return (
     <CommentEdit  key={ct.commentId} {...ct}/>

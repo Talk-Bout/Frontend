@@ -24,110 +24,105 @@ const isEdit = createAction(IS_EDIT, (is_edit) => ({is_edit}));
 
 // 기본값 정하기
 const initialState = {
-    list: [],
-    is_edit: false,
+  list: [],
+  is_edit: false,
 };
 
 // 액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
-    return function (dispatch) {
-        const axios = require('axios');
-        axios.get(`http://15.165.18.118/posts/${postId}/comments`)
-        .then((response) => {
-            // console.log('setPostDB 함수 호출 성공!');
-            // console.log(response);
-                dispatch(setComment(response.data));
-                // console.log(setComment(response.data));
-            })
-            .catch((err) => {
-                console.log(`에러 발생: ${err}`);
-            });
-    };
+return function (dispatch) {
+  const axios = require('axios');
+  axios.get(`http://15.165.18.118/posts/${postId}/comments`)
+  .then((response) => {
+    // console.log('setPostDB 함수 호출 성공!');
+    // console.log(response);
+        dispatch(setComment(response.data));
+        // console.log(setComment(response.data));
+    })
+    .catch((err) => {
+        console.log(`에러 발생: ${err}`);
+    });
+};
 };
 
 const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는 함수
-    return function (dispatch, {history}) {
-        const nickname = new_comment.nickname;
-        const content = new_comment.content;
-        const axios = require('axios');
-        axios.post(`http://15.165.18.118/posts/${postId}/comments`,
-        {
-            nickname: nickname,
-            content: content,
-        }).then((response) => {
-                // console.log(response.data);
-                dispatch(addComment(response.data));
-                // history.push(`/posts/${postId}/comments`);
-            }).catch((err) => {
-                console.log(`댓글 추가하기 에러 발생: ${err}`);
-            });
-    };
+return function (dispatch, {history}) {
+  const nickname = new_comment.nickname;
+  const content = new_comment.content;
+  const axios = require('axios');
+  axios.post(`http://15.165.18.118/posts/${postId}/comments`,
+  {
+      nickname: nickname,
+      content: content,
+  }).then((response) => {
+          // console.log(response.data);
+          dispatch(addComment(response.data));
+      }).catch((err) => {
+          console.log(`댓글 추가하기 에러 발생: ${err}`);
+      });
+};
 };
 
 const editCommentDB = (edit_comment, commentId, postId) => {           // 댓글 수정하는 함수
-    return function (dispatch, getState, { history }) {
-        const nickname = edit_comment.nickname;
-        const content = edit_comment.content;
+return function (dispatch, getState, { history }) {
+const nickname = edit_comment.nickname;
+const content = edit_comment.content;
 
-        const axios = require('axios');
-        axios.patch(`http://15.165.18.118/posts/${postId}/comments/${commentId}`,
-        { 
-            nickname: nickname,
-            content: content,
-        }).then((response) => {
-                dispatch(editComment(response.data));
-                // history.replace('/');
-            }).catch((err) => {
-                console.log(`댓글 수정하기 에러 발생: ${err}`);
-            });
-    };
+const axios = require('axios');
+axios.patch(`http://15.165.18.118/posts/${postId}/comments/${commentId}`,
+{ 
+    nickname: nickname,
+    content: content,
+}).then((response) => {
+        dispatch(editComment(response.data));
+    }).catch((err) => {
+        console.log(`댓글 수정하기 에러 발생: ${err}`);
+    });
+};
 };
 
 const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하는 함수
-    return function (dispatch) {
-        const axios = require('axios');
-        axios
-        .delete(`http://15.165.18.118/posts/${postId}/comments/${commentId}`)
-        .then((response) => {
-                // console.log('deleteCommentDB 함수 호출 성공!');
-                dispatch(deleteComment(commentId))
-                // dispatch(deleteComment(response.data));
-            }).catch((err) => {
-                console.log(`댓글 삭제하기 에러 발생: ${err}`);
-            });
-    }; 
+return function (dispatch) {
+const axios = require('axios');
+axios
+.delete(`http://15.165.18.118/posts/${postId}/comments/${commentId}`)
+.then((response) => {
+        // console.log('deleteCommentDB 함수 호출 성공!');
+        dispatch(deleteComment(commentId))
+        // dispatch(deleteComment(response.data));
+    }).catch((err) => {
+        console.log(`댓글 삭제하기 에러 발생: ${err}`);
+    });
+}; 
 };
 
 
 // 리듀서
 export default handleActions({
-    [SET_COMMENT]: (state, action) => produce(state, (draft) => {
-        draft.list = [...action.payload.comment_list];
-        // console.log(action.payload.comment_list);
-    }),
+[SET_COMMENT]: (state, action) => produce(state, (draft) => {
+    draft.list = [...action.payload.comment_list];
+    // console.log(action.payload.comment_list);
+}),
 
-    [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-        draft.list.unshift(action.payload.comment);
-        // console.log(action.payload.comment);
-    }),
+[ADD_COMMENT]: (state, action) => produce(state, (draft) => {
+    draft.list.unshift(action.payload.comment);
+    // console.log(action.payload.comment);
+}),
 
-    [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
-        let new_comment_list = draft.list.filter((ct) => {
-            if(ct.commentId !== action.payload.comment){
-        return ct
-        }
-    })
-        draft.list = new_comment_list;
-    }),
+[DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
+    let new_comment_list = draft.list.filter((ct) => {
+        if(ct.commentId !== action.payload.comment){
+    return ct
+    }
+})
+    draft.list = new_comment_list;
+}),
 
     [EDIT_COMMENT]: (state, action) =>
     produce(state, (draft) => {
         let idx = draft.list.findIndex(
         (ct) => ct.commentId === action.payload.comment.commentId
         );
-        // draft.list[idx] = {
-        // ...action.payload.comment
-        // };
         draft.list[idx] = {
             ...draft.list[idx],
             ...action.payload.comment,

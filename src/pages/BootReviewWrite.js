@@ -47,7 +47,7 @@ const BootReviewWrite = (props) => {
             <Window>
               <Grid className='header-box' height='10%' display='flex' borderBottom='1px solid #8f9091'>
                 <Grid className='exit-button' width='23.33%' padding='0 25px'>
-                  <Text fontSize='4vh' color='#e5e5e5' lineHeight='7.5vh' cursor='pointer' _onClick={() => history.goBack()}><BsX /></Text>
+                  <Text fontSize='4vh' color='#e5e5e5' lineHeight='7.5vh' cursor='pointer' _onClick={() => history.push('/boot/review')}><BsX /></Text>
                 </Grid>
                 <Grid className='title' width='53.33%' is_center>
                   <Text fontSize='2.5vh' fontWeight='700' color='#e5e5e5' lineHeight='7vh'>부트캠프 리뷰작성</Text>
@@ -98,7 +98,7 @@ const Input = styled.input`
   background-color: #383838;
   padding: 10px;
   font-size: 1.7vh;
-  color: #8f9091;
+  color: #e5e5e5;
   &::placeholder {
     color: #8f9091;
     font-size: 1.7vh;
@@ -115,7 +115,7 @@ const Textarea = styled.textarea`
   padding: 10px;
   font-size: 1.7vh;
   background-color: #383838;
-  color: #8f9091;
+  color: #e5e5e5;
   &::placeholder {
     color: #8f9091;
     font-size: 1.7vh;

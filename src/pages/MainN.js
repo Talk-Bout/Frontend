@@ -13,7 +13,7 @@ import MainTalk from '../components/MainTalk';
 const MainN = (props) => {
   return (
     <React.Fragment>
-      <Grid className="background" display="flex" overflow="auto">
+      <Grid className="background" display='flex'>
         <Sidebar />
         {/* //헤더가 필요하면 바디 안에 header넣기, 아니면 body만 */}
         <Body header>

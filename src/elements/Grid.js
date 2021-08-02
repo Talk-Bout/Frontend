@@ -47,6 +47,8 @@ const Grid = (props) => {
     borderTop,
     zIndex,
     borderCollapse,
+    alignItems,
+    alignSelf,
   } = props;
 
   const styles = {
@@ -89,7 +91,8 @@ const Grid = (props) => {
     zIndex: zIndex,
     borderTop: borderTop,
     borderCollapse: borderCollapse,
-
+    alignItems: alignItems,
+    alignSelf: alignSelf,
   };
 
   return (
@@ -199,6 +202,8 @@ const GridBox = styled.div`
   z-index: ${(props) => props.zIndex};
   border-top: ${(props) => props.borderTop};
   border-collapse: ${(props) => props.borderCollapse};
+  align-items: ${(props) => props.alignItems};
+  align-self: ${(props) => props.alignSelf};
 `;
 
 export default Grid;

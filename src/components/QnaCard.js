@@ -46,7 +46,7 @@ const QnaCard = (props) => {
 
           <Grid display="flex" margin="8% 0">
             <div style={{ display: 'flex', margin: '0 3% 0 0' }}>
-              <Image size="20"></Image>
+              <Image size="3"></Image>
               <Text fontSize="1.6vh" color="#C4C4C4" fontSize="1.6vh">
                 {question_found.nickname}
               </Text>
@@ -75,7 +75,7 @@ const QnaCard = (props) => {
 
           <div style={{ margin: '3% 3% 0 0' }}>
             <div style={{ display: 'flex' }}>
-              <Image size="30" width="10%" margin="0 1% 0 0"></Image>
+              <Image size="3" width="10%" margin="0 1% 0 0"></Image>
               <div>
                 <Text
                   fontSize="1.6vh"

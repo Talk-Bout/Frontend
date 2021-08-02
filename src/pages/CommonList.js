@@ -73,15 +73,15 @@ const CommonBoardList = (props) => {
                 return (
                 <Content key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
                 >
-                <Text p color="#F1F3F4" fontSize="2.4vh" margin="0px" padding="2% 2% 1% 2%" fontWeight="bold">
+                <Text p color="#F1F3F4" fontSize="2.6vh" margin="0px" padding="2% 2% 1% 2%" fontWeight="bold">
                  {c.title}
                 </Text>
                 <Text p color="#9AA0A6" fontSize="2.1vh" margin="0px" padding="0% 2%">
                  {c.content}
                </Text>
               <ProfileImage>
-                <Image size="25"/>
-                <Text fontSize="1.7vh" color="#9AA0A6" margin="0 0 0 2%" >
+                <Image margin="0 0 3% 0" size="2"/>
+                <Text fontSize="1.8vh" color="#9AA0A6" margin="0 0 0 2%" >
                 {c.nickname}
                 </Text>
               </ProfileImage>
@@ -134,7 +134,7 @@ cursor: pointer;
 background-color: #202124;
 border: none;
 border-radius: 40vh;
-width: 8%;
+width: 9%;
 height: 4vh;
 margin: 0.6%;
 color: #80868B;
@@ -216,7 +216,7 @@ const Content = styled.div`
 const ProfileImage = styled.div`
 display: flex;
 height: 10%;
-padding: 2%;
+padding: 3%;
 `;
 
 const Page = styled.div`

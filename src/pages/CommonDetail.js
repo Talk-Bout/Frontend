@@ -54,15 +54,13 @@ return (
               <Grid width="100%" height="50%">
               <Grid display="flex" width="100%" height="100%">
                 <Grid width="4.5%" height="80%" >
-                <ProfileImage>
-                  <Image size="43"/>
-                </ProfileImage>
+                  <Image margin="5%" size="3"/>
                 </Grid>
                 <Grid width="30%" height="80%" >
-                <Text p margin="1% 0 0 1%" fontSize="1.2vh" color="#BDC1C6">
+                <Text p margin="0 0 0 6%" fontSize="1.2vh" color="#BDC1C6">
                 {common_find.nickname}
                 </Text>
-                <Text p margin="1% 0 0 1%" fontSize="1.2vh" color="#BDC1C6">
+                <Text p margin="0 0 0 6%" fontSize="1.2vh" color="#BDC1C6">
                 {common_find.createdAt}
                 </Text>
                 </Grid>
@@ -97,7 +95,6 @@ return (
           <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="1.5vh">
             <AiOutlineEye/> &nbsp;  354
           </Text>
-          <Image profileImage />
           </Grid>
         </Grid>
         {/* 댓글 작성과 리스트 */}
@@ -118,9 +115,6 @@ return (
   )
 };
 
-const ProfileImage = styled.div`
-display: flex;
-`;
 
 const HistoryButton = styled.button`
 width: 8%;

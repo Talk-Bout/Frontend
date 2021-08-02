@@ -118,20 +118,20 @@ export default handleActions({
     draft.list = new_comment_list;
 }),
 
-    [EDIT_COMMENT]: (state, action) =>
-    produce(state, (draft) => {
-        let idx = draft.list.findIndex(
-        (ct) => ct.commentId === action.payload.comment.commentId
-        );
-        draft.list[idx] = {
-            ...draft.list[idx],
-            ...action.payload.comment,
-        };
-    }),
+[EDIT_COMMENT]: (state, action) =>
+produce(state, (draft) => {
+    let idx = draft.list.findIndex(
+    (ct) => ct.commentId === action.payload.comment.commentId
+    );
+    draft.list[idx] = {
+        ...draft.list[idx],
+        ...action.payload.comment,
+    };
+}),
 
-   [IS_EDIT] : (state, action) => produce(state, (draft)=> {
-        draft.is_edit = action.payload.is_edit
-      }),
+[IS_EDIT] : (state, action) => produce(state, (draft)=> {
+    draft.is_edit = action.payload.is_edit
+    }),
 
 }, initialState);
 

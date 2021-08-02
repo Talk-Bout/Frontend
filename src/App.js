@@ -1,8 +1,13 @@
 import React from 'react';
 import './App.css';
+import { Switch } from "react-router-dom";
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
+
+// NotFound 페이지
+import NotFound from './shared/NotFound';
+import Test from './pages/Test';
 
 //템플릿 페이지
 import templateN from './components/templateN';
@@ -43,6 +48,7 @@ function App() {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
+      <Switch>
         <Route path="/" exact component={MainN} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
@@ -58,6 +64,8 @@ function App() {
         <Route path="/boot/community" exact component={BootCommu} />
         <Route path="/boot/post" exact component={BootPost} />
         <Route path="/boot/review/write" exact component={BootReviewWrite} />
+        <Route path="/test" exact component={Test} />
+        
 
         <Route
           path="/boot/review/write/:id"
@@ -73,6 +81,8 @@ function App() {
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />
         <Route path="/template" exact component={templateN} />
+        <Route render={(props) => (<NotFound history={props.history}/>)} />
+        </Switch>
       </ConnectedRouter>
     </React.Fragment>
   );

@@ -20,7 +20,7 @@ const Mypage = (props) => {
             <Grid height="40%">
               <ProfileInnerBox>
                 <ProfileImage>
-                  <Image margin="auto" size="60" />
+                  <Image margin="auto" size="6" />
                 </ProfileImage>
                 <ProfileName>
                   <Text p margin="0 0 3% 0" fontWeight="bold">

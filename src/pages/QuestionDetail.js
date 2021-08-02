@@ -65,7 +65,7 @@ const QuestionDetail = (props) => {
 
               <Grid display="flex" margin="3% 0">
                 <Grid width="3vw">
-                  <Image size="45px"></Image>
+                  <Image size="5"></Image>
                 </Grid>
 
                 <Grid width="40%">

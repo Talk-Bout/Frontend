@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Image = (props) => {
-  const { shape, src, size, cursor, margin, padding, align_items } = props;
+  const { shape, src, size, cursor, margin, padding, align_items, _onClick } = props;
 
   const styles = {
     src: src,
@@ -13,42 +13,22 @@ const Image = (props) => {
     align_items: align_items,
   };
 
-  if (shape === "ProfileImage") {
-
-    return <ProfileImage {...styles}></ProfileImage>;
-  }
 
   if (shape === 'BigProfileImage') {
-    return <BigProfileImage {...styles}></BigProfileImage>;
+    return <BigProfileImage {...styles} onClick={_onClick}></BigProfileImage>;
   }
 
   if (shape === 'HeaderLogo') {
-    return <HeaderLogo {...styles}></HeaderLogo>;
+    return <HeaderLogo {...styles} onClick={_onClick}></HeaderLogo>;
   }
 
   if (shape === 'CircleLogo') {
-    return <CircleLogo {...styles}></CircleLogo>;
-  }
-
-  if (shape === 'ReviewLogo') {
-    return <ReviewLogo {...styles}></ReviewLogo>;
-  }
-
-  if (shape === 'CampBigLogo') {
-    return <CampBigLogo {...styles}></CampBigLogo>;
-  }
-
-  if (shape === 'CampSmallLogo') {
-    return <CampSmallLogo {...styles}></CampSmallLogo>;
-  }
-
-  if (shape === 'LoginLogo') {
-    return <LoginLogo {...styles}></LoginLogo>;
+    return <CircleLogo {...styles} onClick={_onClick}></CircleLogo>;
   }
 
   return (
     <React.Fragment>
-      <ImageDefault {...styles}></ImageDefault>
+      <ImageDefault {...styles} onClick={_onClick}></ImageDefault>
     </React.Fragment>
   );
 };
@@ -64,9 +44,9 @@ Image.defaultProps = {
   align_items: null,
 };
 
-// 기본 이미지
+// default로 프로필 이미지 입니다
 const ImageDefault = styled.div`
-  --size: ${(props) => props.size};
+  --size: ${(props) => props.size}vw;
   width: var(--size);
   height: var(--size);
   cursor: ${(props) => props.cursor};
@@ -76,22 +56,11 @@ const ImageDefault = styled.div`
   margin: ${(props) => props.margin};
 `;
 
-// 마이페이지 프로필 이미지
-const ProfileImage = styled.div`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  left: ${(props) => props.left};
-  top: ${(props) => props.top};
-  align-items: ${(props) => props.align_items};
-  background-image: url('${(props) => props.src}');
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-`;
-
 // 마이페이지(정보수정) 프로필 이미지
 const BigProfileImage = styled.div`
-  width: 7rem;
-  height: 7rem;
+  --size: ${(props) => props.size}vw; 
+  width: var(--size);
+  height: var(--size);
   background-size: cover;
   background-position: 50% 50%; // 이미지의 중간 부분이 보이게
   background-color: #eee; // 이미지 안 뜨는 경우 배경색
@@ -101,116 +70,32 @@ const BigProfileImage = styled.div`
   padding: ${(props) => props.padding};
 `;
 
-// Header 로고 이미지
+// bootReview(MainBoot) 캠프 로고 이미지
 const HeaderLogo = styled.div`
-  width: 66px;
-  height: 32px;
-  left: 363px;
-  top: 24px;
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 32px;
-  /* identical to box height, or 133% */
-  display: flex;
+  --size: ${(props) => props.size}vw; 
+  height: var(--size);
+  width: var(--size);
+  min-width: 150px;
+  border: 1px solid #5F6368;
   align-items: center;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-  color: #121212;
-  cursor: ${(props) => props.cursor};
-  background-image: url('${(props) => props.src}');
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
+  text-align: center;
 `;
 
-// 메인페이지 circle 로고 이미지
+// 메인페이지 circle 캠프 로고 이미지
 const CircleLogo = styled.div`
-  width: 80px;
-  height: 80px;
-  left: 24px;
-  top: 22px;
+  /* width: var(--size);
+  height: var(--size);
   cursor: ${(props) => props.cursor};
   background-size: cover;
   background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-`;
-
-// 리뷰페이지 card부분 로고 이미지
-const ReviewLogo = styled.div`
-  width: 66px;
-  height: 32px;
-  left: calc(50% - 66px / 2);
-  top: calc(50% - 32px / 2);
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 32px;
-  /* identical to box height, or 133% */
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-  color: #121212;
-  background-image: url('${(props) => props.src}');
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-`;
-
-// 부트캠프 상세페이지 각 캠프의 로고 이미지
-const CampBigLogo = styled.div`
-  width: 190px;
-  height: 112px;
-  left: 365px;
-  top: 104px;
-  background: #fafafa;
-
-  background-image: url('${(props) => props.src}');
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-`;
-
-// 부트캠프 상세페이지 '다른 부트캠프' circle 이미지
-const CampSmallLogo = styled.div`
+  padding: ${(props) => props.padding}; */
+  background-color: #3C4043;
   width: 80px;
   height: 80px;
-  left: 0px;
-  top: 0px;
-  /* Inside Auto Layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 16px;
-
-  background-image: url('${(props) => props.src}');
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
-`;
-
-//로그인, 회원가입페이지 로고 이미지
-const LoginLogo = styled.div`
-  width: 87px;
-  height: 40px;
-  left: 819px;
-  top: 288px;
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 32px;
-  line-height: 40px;
-  /* identical to box height, or 125% */
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-  color: #101010;
-
-  background-image: url('${(props) => props.src}');
-  margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding};
+  border-radius: 50%;
+  text-align: center;
+  line-height: 80px;
 `;
 
 export default Image;

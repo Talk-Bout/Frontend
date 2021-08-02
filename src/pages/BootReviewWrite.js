@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Button, Grid, Input, Text } from '../elements';
+import { Button, Grid, Text } from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import { BsX } from 'react-icons/bs';
+import { IoStar } from 'react-icons/io5';
 import { history } from '../redux/ConfigureStore';
 import { actionCreators as postActions } from '../redux/modules/post';
 
@@ -39,23 +40,34 @@ const BootReviewWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto' height='100vh'>
+      <Grid className='background' display='flex' backgroundColor='#17181b' minHeight='100vh'>
         <Sidebar />
         <Body>
-          <Grid className='body-inner' height='110%' padding='10vh 0 0'>
+          <Grid className='body-inner' height='110%' padding='5vh 0 0'>
             <Window>
               <Grid className='header-box' height='10%' display='flex' borderBottom='1px solid #8f9091'>
                 <Grid className='exit-button' width='23.33%' padding='0 25px'>
-                  <Text fontSize='4vh' color='#e5e5e5' lineHeight='7.5vh'><BsX /></Text>
+                  <Text fontSize='4vh' color='#e5e5e5' lineHeight='7.5vh' cursor='pointer' _onClick={() => history.goBack()}><BsX /></Text>
                 </Grid>
                 <Grid className='title' width='53.33%' is_center>
-                  <Text fontSize='2.5vh' fontWeight='700' color='#e5e5e5' lineHeight='6.5vh'>부트캠프 리뷰작성</Text>
+                  <Text fontSize='2.5vh' fontWeight='700' color='#e5e5e5' lineHeight='7vh'>부트캠프 리뷰작성</Text>
                 </Grid>
                 <Grid className='submit-button' width='23.33%' padding='0 25px'>
-                  <Text fontSize='2.5vh' fontWeight='700' color='#848484' lineHeight='6.5vh' float='right'>등록</Text>
+                  <Text fontSize='2.5vh' fontWeight='700' color='#848484' lineHeight='7vh' float='right' cursor='pointer'>등록</Text>
                 </Grid>
               </Grid>
-              <Grid className='body-box' backgroundColor='green' height='90%'></Grid>
+              <BodyBox>
+                <div style={{padding: '25px 0 0'}}><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프명</Text></div>
+                <div><Input placeholder='부트캠프명을 입력해주세요'/></div>
+                <div style={{padding: '25px 0 0'}}><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>기수</Text></div>
+                <div><Input placeholder='수강중'/></div>
+                <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>총 평점</Text></div>
+                <div><Text fontSize='3vh' fontWeight='700' color='#e5e5e5'><IoStar /> <IoStar /> <span style={{color: '#848484'}}><IoStar /> <IoStar /> <IoStar /></span></Text></div>
+                <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프의 장점<br /></Text><Text fontSize='1.7vh' color='#848484'>최소 20자</Text></div>
+                <div><Textarea rows='5' placeholder='부트캠프의 장점을 입력해주세요'/></div>
+                <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프의 단점<br /></Text><Text fontSize='1.7vh' color='#848484'>최소 20자</Text></div>
+                <div><Textarea rows='5' placeholder='부트캠프의 단점을 입력해주세요'/></div>
+              </BodyBox>
             </Window>
           </Grid>
         </Body>
@@ -69,6 +81,48 @@ const Window = styled.div`
   width: 60%;
   height: 90%;
   margin: auto;
+`;
+
+const BodyBox = styled.div`
+  height: 90%;
+  display: grid;
+  padding: 20px 40px;
+  grid-template-columns: 30% 70%;
+  & > div {
+    padding: 20px 0;
+  }
+`;
+
+const Input = styled.input`
+  border: 1px solid #8f9091;
+  background-color: #383838;
+  padding: 10px;
+  font-size: 1.7vh;
+  color: #8f9091;
+  &::placeholder {
+    color: #8f9091;
+    font-size: 1.7vh;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Textarea = styled.textarea`
+  border: 1px solid #8f9091;
+  width: 90%;
+  resize: none;
+  padding: 10px;
+  font-size: 1.7vh;
+  background-color: #383838;
+  color: #8f9091;
+  &::placeholder {
+    color: #8f9091;
+    font-size: 1.7vh;
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default BootReviewWrite;

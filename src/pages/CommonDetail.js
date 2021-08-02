@@ -11,7 +11,7 @@ import PopBootContents from '../components/PopBootContents';
 import styled from 'styled-components';
 import {Text, Button, Grid, Input, Image} from "../elements/index";
 import { BiTimeFive, BiLike, BiComment, BiShow } from 'react-icons/bi';
-import { IoEyeOutline } from "react-icons/io5";
+import { AiOutlineEye } from 'react-icons/ai';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -94,15 +94,15 @@ return (
             <HistoryButton>
               <BiComment/> &nbsp;  15
             </HistoryButton>
-            <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="1.2vh">
-              <IoEyeOutline/> &nbsp;  354
+            <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="1.5vh">
+              <AiOutlineEye/> &nbsp;  354
             </Text>
             <Image profileImage />
             </Grid>
           </Grid>
-          {/* 댓글 작성 */}
+          {/* 댓글 작성과 리스트 */}
           <Grid width="97%" height="15vh" borderTop="1.5px solid #DADCE0">
-            <Comment postId={postId}/>
+            <Comment postId={postId} />
           </Grid>
           <Grid width="100%" height="40vh">
           </Grid>

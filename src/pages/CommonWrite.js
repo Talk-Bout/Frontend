@@ -4,7 +4,6 @@ import { history } from '../redux/ConfigureStore';
 import styled from "styled-components";
 import {Text, Button, Grid, Input} from "../elements/index";
 import { VscMention, VscSymbolNumeric, VscFileMedia} from "react-icons/vsc";
-import { BiMenu } from "react-icons/bi";
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';

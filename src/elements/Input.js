@@ -2,20 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = (props) => {
-  
-    const {multiLine, placeholder, type, width, border_radius, border, _onChange, bg, font_size, outline, margin, _ref, onSubmit} = props;
+  const {
+    multiLine,
+    placeholder,
+    type,
+    width,
+    border_radius,
+    border,
+    _onChange,
+    bg,
+    font_size,
+    outline,
+    margin,
+    _ref,
+    onSubmit,
+    padding,
+  } = props;
 
-    const styles = {
-        width: width,
-        border_radius: border_radius,
-        border: border,
-        bg: bg,
-        font_size: font_size,
-        outline: outline,
-        margin: margin,
-        _ref: _ref,
-        
-    }
+  const styles = {
+    width: width,
+    border_radius: border_radius,
+    border: border,
+    bg: bg,
+    font_size: font_size,
+    outline: outline,
+    margin: margin,
+    _ref: _ref,
+    padding: padding,
+  };
 
   if (multiLine) {
     return (
@@ -27,7 +41,7 @@ const Input = (props) => {
         onChange={_onChange}
         ref={_ref}
         onKeyPress={(e) => {
-          if(e.key === "Enter"){
+          if (e.key === 'Enter') {
             onsubmit(e);
           }
         }}
@@ -43,7 +57,7 @@ const Input = (props) => {
         onChange={_onChange}
         ref={_ref}
         onKeyPress={(e) => {
-          if(e.key === "Enter"){
+          if (e.key === 'Enter') {
             onSubmit(e);
           }
         }}
@@ -65,7 +79,8 @@ Input.defaultProps = {
   font_size: null,
   outline: null,
   margin: null,
-  
+  padding: null,
+
   // is_submit: false,
   // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
 };
@@ -76,7 +91,7 @@ const ElTextarea = styled.textarea`
   width: ${(props) => props.width};
   border-radius: ${(props) => props.border_radius};
   background-color: ${(props) => props.bg};
-  padding: 2%;
+  padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
 `;
 
@@ -86,8 +101,8 @@ const ElInput = styled.input`
   width: ${(props) => props.width};
   border-radius: ${(props) => props.border_radius};
   background-color: ${(props) => props.bg};
-  padding: 2%;
-  height:  ${(props) => props.height};
+  padding: ${(props) => props.padding};
+  height: ${(props) => props.height};
   outline: ${(props) => props.outline};
   margin: ${(props) => props.margin};
 `;

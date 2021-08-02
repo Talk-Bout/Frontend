@@ -17,6 +17,14 @@ import { Group } from '../image/Group.png';
 import QnaCard from '../components/QnaCard';
 
 const QuestionList = (props) => {
+  const dispatch = useDispatch();
+  const qna_list = useSelector((state) => state.post.list);
+  console.log(qna_list);
+
+  useEffect(() => {
+    dispatch(questionActions.setPostDB());
+  }, []);
+
   return (
     <React.Fragment>
       <Grid display="flex">
@@ -34,8 +42,16 @@ const QuestionList = (props) => {
             </Grid>
 
             <CardList>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((q, idx) => {
-                return <QnaCard />;
+              {qna_list.map((q, idx) => {
+                return (
+                  <QnaCard
+                    qna_id={q.postId}
+                    {...q}
+                    _onClick={() =>
+                      history.push(`/question/detail/${q.postId}`)
+                    }
+                  />
+                ); //props 넘기기(이름포함)
               })}
             </CardList>
             <Grid height="7vh" is_center>

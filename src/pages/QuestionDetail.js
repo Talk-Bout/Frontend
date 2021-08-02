@@ -12,10 +12,29 @@ import QnaAnswerCard from '../components/QnaAnswerCard';
 import { BiTimeFive, BiLike, BiComment, BiNoEntry } from 'react-icons/bi';
 import { GrView } from 'react-icons/gr';
 import { BsEye } from 'react-icons/bs';
-import ThumbUp from '../image/ThumbUp.png';
-import View from '../image/View.png';
 
 const QuestionDetail = (props) => {
+  const dispatch = useDispatch();
+
+  const question_id = window.location.pathname.split('/question/detail/')[1];
+  const question_list = useSelector((state) => state.post.list);
+  const question_found = question_list.find(
+    (post) => post.postId == question_id
+  );
+  console.log(question_found);
+  console.log(question_id);
+
+  useEffect(() => {
+    dispatch(questionActions.setOnePostDB(question_id));
+  }, []);
+
+  //question_found라는 이름으로 게시물 내용을 가져오고 있음.
+  //렌더링이 더 빠름. 데이터를 가져올때까지 걸리는 시간을 오류를 띄우지 않고,
+  //찾은 게 없다면 하얀 화면을 띄워라.(스피너 역할)
+
+  if (!question_found) {
+    return <></>;
+  }
   return (
     <React.Fragment>
       <Grid display="flex">
@@ -35,7 +54,7 @@ const QuestionDetail = (props) => {
                     margin="auto 2%"
                     color="#ffffff"
                   >
-                    {/* {question_found.title} */} 질문타이틀
+                    {question_found.title}
                   </Text>
                 </Grid>
                 <Grid width="20%" display="flex" margin="0 0 0 auto">
@@ -51,25 +70,17 @@ const QuestionDetail = (props) => {
 
                 <Grid width="40%">
                   <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
-                    닉네임님의 답변
+                    {question_found.nickname}
                   </Text>
                   <Text p margin="auto 4%" color="#C4C4C4">
-                    2021-07-25 20:32:09
+                    {question_found.createdAt}
                   </Text>
                 </Grid>
               </Grid>
 
+              {/* 콘텐츠마다 달라지는 위치값 고정하기 */}
               <Text p margin="5% 0%" color="#C4C4C4">
-                {/* {question_found.content} */}
-                Cillum in amet cillum irure ullamco. Cupidatat occaecat ad ex
-                minim ullamco dolore eiusmod velit eu fugiat excepteur. Culpa
-                amet aliqua consectetur culpa consectetur ad cillum non cillum
-                proident velit Lorem do id. Exercitation aliquip incididunt aute
-                officia in in excepteur. Cillum in amet cillum irure ullamco.
-                Cupidatat occaecat ad ex minim ullamco dolore eiusmod velit eu
-                fugiat excepteur. Culpa amet aliqua consectetur culpa
-                consectetur ad cillum non cillum proident velit Lorem do id.
-                Exercitation aliquip incididunt aute officia in in excepteur.
+                {question_found.content}
               </Text>
 
               <Grid display="flex" margin="3% 0%" vertical-align="center">
@@ -101,9 +112,11 @@ const QuestionDetail = (props) => {
                 <AnswerSaveButton>답변 추가하기</AnswerSaveButton>
               </ACommentBox>
             </AddAnswerSection>
-
             {/* 새롭게 작성되는 답변 내용  */}
-            <QnaAnswerCard />
+            {[1, 2, 3].map((q, idx) => {
+              return <QnaAnswerCard />;
+            })}
+            ;
           </AnswerBox>
         </Body>
       </Grid>

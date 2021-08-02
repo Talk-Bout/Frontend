@@ -7,8 +7,11 @@ import { history } from '../redux/ConfigureStore';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
+import QnaAnswerCard from '../components/QnaAnswerCard';
 //icons
-import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
+import { BiTimeFive, BiLike, BiComment, BiNoEntry } from 'react-icons/bi';
+import { GrView } from 'react-icons/gr';
+import { BsEye } from 'react-icons/bs';
 import ThumbUp from '../image/ThumbUp.png';
 import View from '../image/View.png';
 
@@ -29,7 +32,7 @@ const QuestionDetail = (props) => {
                   <Text
                     fontSize="3vh"
                     fontWeight="600"
-                    margin="auto 5%"
+                    margin="auto 2%"
                     color="#ffffff"
                   >
                     {/* {question_found.title} */} 질문타이틀
@@ -43,15 +46,14 @@ const QuestionDetail = (props) => {
 
               <Grid display="flex" margin="3% 0">
                 <Grid width="3vw">
-                  <Image src={ThumbUp} />
                   <Image size="45px"></Image>
                 </Grid>
 
                 <Grid width="40%">
-                  <Text p margin="auto 5%" fontWeight="600" color="#ffffff">
+                  <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
                     닉네임님의 답변
                   </Text>
-                  <Text p margin="auto 5%" color="#C4C4C4">
+                  <Text p margin="auto 4%" color="#C4C4C4">
                     2021-07-25 20:32:09
                   </Text>
                 </Grid>
@@ -70,106 +72,38 @@ const QuestionDetail = (props) => {
                 Exercitation aliquip incididunt aute officia in in excepteur.
               </Text>
 
-              <Grid display="flex" width="100%" margin="3% 0%">
-                <Button
-                  width="10%"
-                  color="#C4C4C4"
-                  margin="0% 1% 0% 0%"
-                  border_radius="3%"
-                >
-                  {/* {question_found.author} */}
-                  좋아요
-                </Button>
-                <Text color="#C4C4C4" margin="0% 1% 0% 0%">
-                  <Image src={View} />
-                  23
-                </Text>
-                <Text color="#C4C4C4" margin="0% 1% 0% 0%">
+              <Grid display="flex" margin="3% 0%" vertical-align="center">
+                <LikeCommentBtn>
+                  <BiLike />
+                  17
+                </LikeCommentBtn>
+
+                <Text color="#C4C4C4" margin="auto 1%">
                   <BiComment /> 3
+                </Text>
+
+                <Text color="#C4C4C4" margin="auto 1%">
+                  <BsEye />
+                  254
                 </Text>
               </Grid>
             </Grid>
           </Grid>
 
           <AnswerBox>
-            <AnswerInput>
-              <Text p fontWeight="600">
+            {/* 답변 등록 input */}
+            <AddAnswerSection>
+              <Text p fontWeight="600" color="#E2E2E3">
                 답변 3
               </Text>
-              <input style={{ width: '100%' }}></input>
-            </AnswerInput>
+              <ACommentBox>
+                <AInput rows="5" placeholder="댓글을 남겨주세요" />
+                <AnswerSaveButton>답변 추가하기</AnswerSaveButton>
+              </ACommentBox>
+            </AddAnswerSection>
 
-            <AskCard>
-              <Grid padding="3%">
-                <Grid display="flex">
-                  <Text fontSize="3vh" fontWeight="600" color="#ffffff">
-                    A
-                  </Text>
-                  <Image size="45px" margin="0 2%" border_radius="3px"></Image>
-                  <Grid width="40%">
-                    <Text p margin="5% auto" fontWeight="600">
-                      닉네임님의 답변
-                    </Text>
-                    <Text p margin="auto" color="#C4C4C4">
-                      2021-07-25 20:32:09 작성
-                    </Text>
-                  </Grid>
-
-                  <Grid
-                    width="20%"
-                    display="flex"
-                    margin="0 0 0 auto"
-                    backgroundColor="yellow"
-                  >
-                    <Button>수정하기</Button>
-                    <Button>삭제하기</Button>
-                  </Grid>
-                </Grid>
-                <Text p margin="5% 0%" color="#C4C4C4">
-                  {/* {question_found.content} */}
-                  Cillum in amet cillum irure ullamco. Cupidatat occaecat ad ex
-                  minim ullamco dolore eiusmod velit eu fugiat excepteur. Culpa
-                  amet aliqua consectetur culpa consectetur ad cillum non cillum
-                  proident velit Lorem do id. Exercitation aliquip incididunt
-                  aute officia in in excepteur. Cillum in amet cillum irure
-                  ullamco. Cupidatat occaecat ad ex minim ullamco dolore eiusmod
-                  velit eu fugiat excepteur. Culpa amet aliqua consectetur culpa
-                  consectetur ad cillum non cillum proident velit Lorem do id.
-                  Exercitation aliquip incididunt aute officia in in excepteur.
-                </Text>
-                <Grid display="flex" width="100%" margin="3% 0%">
-                  <Button
-                    width="10%"
-                    color="#C4C4C4"
-                    margin="0% 1% 0% 0%"
-                    border_radius="3%"
-                  >
-                    {/* {question_found.author} */}
-                    좋아요 23
-                  </Button>
-
-                  <Text color="#C4C4C4" margin="0% 1% 0% 0%">
-                    <BiComment /> 3
-                  </Text>
-                </Grid>
-                <hr />
-                <Grid>
-                  <Text p fontWeight="600" margin="3% 0%">
-                    댓글 5
-                  </Text>
-                  <Grid display="flex">
-                    <Input
-                      placeholder={'댓글을 남겨주세요'}
-                      border_radius="3px"
-                      padding="1%"
-                    />
-                    <AnswerBtn>좋아요</AnswerBtn>
-                  </Grid>
-
-                  <AllBtn>댓글 모두 보기</AllBtn>
-                </Grid>
-              </Grid>
-            </AskCard>
+            {/* 새롭게 작성되는 답변 내용  */}
+            <QnaAnswerCard />
           </AnswerBox>
         </Body>
       </Grid>
@@ -179,44 +113,58 @@ const QuestionDetail = (props) => {
 
 //Answer Section
 const AnswerBox = styled.div`
-  height: 100vh;
+  height: 100%;
   /* transform: translateX(-40px); */
   margin: 0 -40px 0 -40px;
   background-color: #282a2d;
 `;
 
-const AnswerInput = styled.div`
+const AddAnswerSection = styled.div`
   width: 70vw;
-  margin: 0% auto;
-  /* background-color: yellow; */
+  margin: 3% auto;
   padding-top: 1%;
 `;
 
-const AskCard = styled.div`
-  width: 70vw;
-  margin: 1% auto;
-  background-color: #202124;
+const ACommentBox = styled.div`
+  /* color: #5d6065;
+  background-color: #212123; */
   border-radius: 5px;
-`;
-
-const AnswerBtn = styled.button`
-  width: 10%;
-  color: #c4c4c4;
-  margin: 0% 1% 0% 0%;
-  border-radius: 3%;
-  border: 0;
-  outline: 0;
-`;
-
-const AllBtn = styled.button`
-  color: #ffffff;
-  background-color: #282a2d;
+  border: 1px solid #9aa0a6;
   width: 100%;
-  height: 5vh;
-  margin: 1% 0%;
+`;
+
+const AInput = styled.textarea`
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  resize: none;
+  padding: 1%;
+  width: 98%;
+  :focus {
+    outline: none;
+  }
+`;
+
+const AnswerSaveButton = styled.button`
   border-radius: 5px;
   border: 0;
   outline: 0;
+  color: #121212;
+  font-weight: 700;
+  padding: 1.2% 5%;
+  margin-left: 80%;
+  margin-bottom: 1%;
 `;
 
+const LikeCommentBtn = styled.button`
+  background-color: #2e3134;
+  color: #bdc1cb;
+  font-weight: 700;
+  border: 0;
+  outline: 0;
+  border-radius: 7px;
+  width: 7%;
+  padding: 1%;
+  margin-right: 1%;
+`;
 export default QuestionDetail;

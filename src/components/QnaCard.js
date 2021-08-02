@@ -90,7 +90,7 @@ const QnaCard = () => {
 const QnaListCard = styled.div`
   width: 33%;
   height: 50%;
-  background-color: #696969;
+  background-color: #202124;
   border-radius: 3%;
   box-sizing: border-box;
   padding: 3vh 2vw 0;

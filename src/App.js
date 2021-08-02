@@ -52,16 +52,23 @@ function App() {
         <Route path="/question" exact component={QuestionList} />
         <Route path="/question/write" exact component={QuestionWrite} />
         <Route path="/question/write/:id" exact component={QuestionWrite} />
-        <Route path="/question/detail/" exact component={QuestionDetail} />
         <Route path="/question/detail/:id" exact component={QuestionDetail} />
         <Route path="/boot" exact component={BootMain} />
         <Route path="/boot/review" exact component={BootReview} />
         <Route path="/boot/community" exact component={BootCommu} />
         <Route path="/boot/post" exact component={BootPost} />
         <Route path="/boot/review/write" exact component={BootReviewWrite} />
+
+        <Route
+          path="/boot/review/write/:id"
+          exact
+          component={BootReviewWrite}
+        />
+
         <Route path="/boot/review/write/:id" exact component={BootReviewWrite} />
         <Route path="/boot/community/write" exact component={BootCommuWrite} />
         <Route path="/boot/community/write/:id" exact component={BootCommuWrite} />
+
         <Route path="/news/list" exact component={NewsList} />
         <Route path="/mypage" exact component={Mypage} />
         <Route path="/mypage/edit" exact component={MyPageEdit} />

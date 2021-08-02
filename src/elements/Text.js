@@ -22,6 +22,7 @@ const Text = (props) => {
     vertical_align,
     top,
     cursor,
+    hover,
   } = props;
 
 
@@ -41,6 +42,7 @@ const Text = (props) => {
     vertical_align:vertical_align,
     top:top,
     cursor: cursor,
+    hover: hover,
   };
 
   if (p) {
@@ -99,6 +101,9 @@ Text.defaultProps = {
     vertical-align: ${(props) => props.vertical_align};
     top: ${(props) => props.top};
     cursor: ${(props) => props.cursor};
+    &:hover {
+      ${(props) => props.hover};
+    }
   `;
 
   const TextBoxS = styled.span`
@@ -117,6 +122,9 @@ Text.defaultProps = {
     vertical-align: ${(props) => props.vertical_align};
     top: ${(props) => props.top};
     cursor: ${(props) => props.cursor};
+    &:hover {
+      ${(props) => props.hover};
+    }
 `;
 
 export default Text;

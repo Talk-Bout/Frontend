@@ -40,9 +40,9 @@ const BootCommu = (props) => {
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='0 40px'>
               <PostList>
-                <Grid className='temp-button' height='auto' display='inline-block' padding='20px 0 0'>
-                  <WriteBtn onClick={() => history.push('/boot/community/write')}><Text fontSize='1.6vh' color='#121212' fontWeight='700'>글쓰기</Text></WriteBtn>
-                </Grid>
+                {/* <Grid className='temp-button' height='auto' display='inline-block' padding='20px 0 0'> */}
+                <WriteBtn onClick={() => history.push('/boot/community/write')}><Text fontSize='1.6vh' color='#e8eaed' fontWeight='700'>글쓰기</Text></WriteBtn>
+                {/* </Grid> */}
                 <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091'>
                   <TitleBox><Text p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
                   <Text p className='sort' fontSize='1.7vh' color='#757577' margin='3vh 0 0'>인기순 | 최신순</Text>
@@ -132,11 +132,15 @@ const PostList = styled.div`
 
 const WriteBtn = styled.button`
   float: right;
+  margin-top: 20px;
   padding: 5px 10px;
-  background-color: #BDC1C6;
-  border: none;
-  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid #e8eaed;
+  border-radius: 7px;
   cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 const TitleBox = styled.div``;

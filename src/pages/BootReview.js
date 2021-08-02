@@ -39,7 +39,7 @@ const BootReview = (props) => {
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='0 40px'>
               <PostList>
                 <Grid className='temp-button' height='auto' display='inline-block' padding='20px 0 0'>
-                  <WriteBtn onClick={() => history.push('/boot/review/write')}><Text fontSize='1.6vh' color='#121212' fontWeight='700'>글쓰기</Text></WriteBtn>
+                  <WriteBtn onClick={() => history.push('/boot/review/write')}><Text fontSize='1.6vh' color='#e8eaed' fontWeight='700'>글쓰기</Text></WriteBtn>
                 </Grid>
                 {[1, 2, 3].map((p, idx) => {
                   if ((idx + 1) % 3 === 0) {
@@ -153,11 +153,15 @@ const PostList = styled.div`
 
 const WriteBtn = styled.button`
   float: right;
+  /* margin-top: 20px; */
   padding: 5px 10px;
-  background-color: #BDC1C6;
-  border: none;
-  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid #e8eaed;
+  border-radius: 7px;
   cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 const Post = styled.div`

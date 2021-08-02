@@ -1,16 +1,16 @@
-import React, {useState, useEffect, useRef} from 'react';
-import styled from "styled-components";
+import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {Text, Button, Grid, Input} from "../elements/index";
+import { Text, Button, Grid, Input } from '../elements/index';
 import Header from '../components/Header';
-import { actionCreators as commentActions} from "../redux/modules/comment";
+import { actionCreators as commentActions } from '../redux/modules/comment';
 //icons
 import CommentEdit from '../components/CommentEdit';
 
 const Comment = (props) => {
-
+  
 const dispatch = useDispatch();
 const comment_list = useSelector(state => state.comment.list);
 const addRef = useRef(null);

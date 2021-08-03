@@ -12,6 +12,7 @@ import QnaAnswerCard from '../components/QnaAnswerCard';
 import { BiTimeFive, BiLike, BiComment, BiNoEntry } from 'react-icons/bi';
 import { GrView } from 'react-icons/gr';
 import { BsEye } from 'react-icons/bs';
+import { RiEditCircleFill } from 'react-icons/ri';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
@@ -28,9 +29,9 @@ const QuestionDetail = (props) => {
     dispatch(questionActions.setOnePostDB(question_id));
   }, []);
 
-  //question_found라는 이름으로 게시물 내용을 가져오고 있음.
-  //렌더링이 더 빠름. 데이터를 가져올때까지 걸리는 시간을 오류를 띄우지 않고,
-  //찾은 게 없다면 하얀 화면을 띄워라.(스피너 역할)
+  const editBtn = () => {
+    history.push(`/question/write/${question_id}`);
+  };
 
   if (!question_found) {
     return <></>;
@@ -58,7 +59,7 @@ const QuestionDetail = (props) => {
                   </Text>
                 </Grid>
                 <Grid width="20%" display="flex" margin="0 0 0 auto">
-                  <Button>수정하기</Button>
+                  <Button _onClick={editBtn}>수정하기</Button>
                   <Button>삭제하기</Button>
                 </Grid>
               </Grid>

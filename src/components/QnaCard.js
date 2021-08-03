@@ -8,10 +8,6 @@ import { actionCreators as questionActions } from '../redux/modules/post';
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { Group } from '../image/Group.png';
 
-// 일반 html태그일경우 (button 등) 이면 기본 내장 함수가 들어있음.
-// 하지만 내가 태그를 만들었을 경우에는 그 안에 내장 함수가 없음.
-// 따로 defaultProps로 함수를 만들어줘야함! element처럼!
-
 const QnaCard = (props) => {
   const dispatch = useDispatch();
   const { _onClick } = props;

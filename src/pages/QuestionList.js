@@ -31,11 +31,19 @@ const QuestionList = (props) => {
         <Sidebar />
         <Body header>
           <Grid className="body-inner" height="100%">
+            <Button
+              width="10%"
+              margin="0 0 0 auto"
+              _onClick={() => history.push('question/write')}
+            >
+              글쓰기
+            </Button>
             <Grid height="100%" padding="0 40px"></Grid>
             <Grid padding="3% 0" display="flex">
               <Text color="#F8F9FA" fontWeight="700" fontSize="3vh">
                 Q&A
               </Text>
+
               <Text color="#F8F9FA" margin="0 0 0 auto">
                 인기순
               </Text>

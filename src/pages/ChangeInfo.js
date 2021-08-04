@@ -37,8 +37,8 @@ const Login = (props) => {
               <Grid height="30%" padding="9% 0%">
                 <Text color="#80868B"  margin="3% 0%">이메일</Text>
                 <Grid display="flex" margin="5% 0" width="100%">
-                  <Input border="1px solid #80868B" color="#F8F9FA" border_radius="1vh" width="35%" font_size="2vh" placeholder="이메일"
-                  bg="transparent" outline="none" padding="0 3%"></Input>
+                  <Input border="1px solid #80868B" color="#F8F9FA" border_radius="1vh" width="31%" font_size="2vh" placeholder="이메일"
+                  bg="transparent" outline="none" padding="0 3%" margin="0 1.5% 0 0"></Input>
                   <Text fontSize="3.2vh" height="7vh" color="#80868B">@</Text>
                   <Select>
                   <Option value="">선택해주세요</Option>
@@ -68,10 +68,11 @@ const Select = styled.select`
 border-radius: 1vh;
 color: #3C4043;
 font-size: 2vh;
-width: 55%;
+width: 50%;
 background-color: transparent;
 outline: none;
 padding: 0 3%;
+margin: 0 0 0 1.5%;
 `;
 
 const Option = styled.option`

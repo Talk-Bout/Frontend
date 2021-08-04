@@ -23,7 +23,7 @@ const logInDB = (email, password) => {
   return function (dispatch) {
     const axios = require('axios');
     axios
-      .post('http://15.165.18.118/login', { email, password })
+      .post('http://3.34.141.76/login', { email, password })
       .then((response) => {
         dispatch(logIn(response.data));
         window.alert('로그인 완료!');
@@ -39,7 +39,7 @@ const signUpDB = (new_user) => {
   return function (dispatch) {
     const axios = require('axios');
     axios
-      .post('http://15.165.18.118/users', {
+      .post('http://3.34.141.76/users', {
         email: new_user.user_mail,
         password: new_user.password,
         nickname: new_user.nickname,

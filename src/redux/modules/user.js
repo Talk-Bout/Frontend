@@ -38,6 +38,7 @@ const logInDB = (email, password) => {
 const signUpDB = (new_user) => {
   return function (dispatch) {
     const axios = require('axios');
+    console.log(new_user);
     axios
       .post('http://3.34.141.76/users', {
         email: new_user.user_mail,
@@ -46,6 +47,7 @@ const signUpDB = (new_user) => {
         confirmPassword: new_user.confirm_password,
       })
       .then((response) => {
+        console.log(response.data);
         window.alert('회원가입 완료!');
         history.push('/login');
       })

@@ -12,6 +12,7 @@ import CommentEdit from '../components/CommentEdit';
 const Comment = (props) => {
   
 const dispatch = useDispatch();
+const username = useSelector(state => state.user.user.user.nickname);
 const comment_list = useSelector(state => state.comment.list);
 const addRef = useRef(null);
 const postId = props.postId;
@@ -32,16 +33,21 @@ const all_comment = comment_list.slice(0, comment_list.length)
   const addComment = () => {
     const addCommentRef = addRef.current.value;
     console.log(addCommentRef);
+
     const new_comment = {
       content : addCommentRef,
-      nickname : "song",
+      nickname : username,
+      //
       postId : postId,
+      //
   }
+  console.log(new_comment);
+  
     if (addCommentRef === "") {
       window.alert("댓글을 입력해주세요!");
       return;
     }
-  dispatch(commentActions.addCommentDB(new_comment, postId));
+  dispatch(commentActions.addCommentDB(new_comment));
   addRef.current.value = "";
   }
 

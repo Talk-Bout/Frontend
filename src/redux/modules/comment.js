@@ -45,17 +45,20 @@ return function (dispatch) {
 };
 };
 
-const addCommentDB = (new_comment, postId) => {           // 댓글 추가하는 함수
+const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
 return function (dispatch, {history}) {
   const nickname = new_comment.nickname;
   const content = new_comment.content;
+  //
+  const postId = new_comment.postId;
+  //
   const axios = require('axios');
   axios.post(`http://3.34.141.76/posts/${postId}/comments`,
   {
       nickname: nickname,
       content: content,
   }).then((response) => {
-          // console.log(response.data);
+          console.log(response.data);
           dispatch(addComment(response.data));
       }).catch((err) => {
           console.log(`댓글 추가하기 에러 발생: ${err}`);

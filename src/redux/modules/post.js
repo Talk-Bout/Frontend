@@ -87,11 +87,16 @@ const editPostDB = (edited_post) => {
     const title = edited_post.title;
     const content = edited_post.content;
     const postId = edited_post.postId;
+    const category = edited_post.category;
+    const nickname = edited_post.nickname;
     const axios = require('axios');
     axios
       .patch(`http://3.34.141.76/posts/${postId}`, {
         title: title,
         content: content,
+        postId: postId,
+        category: category,
+        nickname: nickname,
       })
       .then((response) => {
         dispatch(editPost(response.data));

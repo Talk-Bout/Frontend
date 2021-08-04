@@ -7,6 +7,7 @@ import { actionCreators as questionActions } from '../redux/modules/post';
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { Group } from '../image/Group.png';
+import profile_small from '../image/profile_small.png';
 
 const QnaCard = (props) => {
   const dispatch = useDispatch();
@@ -41,8 +42,11 @@ const QnaCard = (props) => {
           </Text>
 
           <Grid display="flex" margin="8% 0">
-            <div style={{ display: 'flex', margin: '0 3% 0 0' }}>
-              <Image size="3"></Image>
+            <div style={{ display: 'flex', margin: '0 5% 0 0' }}>
+              <div>
+                <Image src={profile_small} size="1.4"></Image>
+              </div>
+
               <Text fontSize="1.6vh" color="#C4C4C4" fontSize="1.6vh">
                 {question_found.nickname}
               </Text>
@@ -71,8 +75,11 @@ const QnaCard = (props) => {
 
           <div style={{ margin: '3% 3% 0 0' }}>
             <div style={{ display: 'flex' }}>
-              <Image size="3" width="10%" margin="0 1% 0 0"></Image>
-              <div>
+              <div style={{ margin: ' 0 3% 0 0%' }}>
+                <Image src={profile_small} size="3"></Image>
+              </div>
+
+              <div width="60%">
                 <Text
                   fontSize="1.6vh"
                   color="#9AA0A6"

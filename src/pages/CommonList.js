@@ -18,7 +18,7 @@ import Body from '../components/Body';
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
 
-  // 리덕스 : 게시글 리스트 조회
+  // 게시글 리스트 조회
   const common_list = useSelector(state => state.post.list);
 
   React.useEffect(() => {

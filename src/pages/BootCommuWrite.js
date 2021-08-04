@@ -8,18 +8,19 @@ import { BiImageAdd } from 'react-icons/bi';
 import { RiAtLine } from 'react-icons/ri';
 import { FiHash } from 'react-icons/fi';
 import { history } from '../redux/ConfigureStore';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
+  const username = useSelector(state => state.user.user.user.nickname);
   const titleRef = useRef('');
   const contentRef = useRef('');
   const addPost = () => {
     const new_post = {
       title: titleRef.current.value,
       content: contentRef.current.value,
-      nickname: 'username',
+      nickname: username,
       category: 'testing',
     }
     dispatch(postActions.addPostDB(new_post));

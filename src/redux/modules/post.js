@@ -40,6 +40,7 @@ const setOnePostDB = (id) => {
   // 개별 게시글 불러오는 함수
   return function (dispatch) {
     const postId = id;
+    // const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
       .get(`/posts/${postId}`, {
         postId: postId,
@@ -61,17 +62,18 @@ const addPostDB = (new_post) => {
     const content = new_post.content;
     const nickname = new_post.nickname;
     const category = new_post.category;
-    console.log(new_post);
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+    console.log(headers);
     instance
       .post('/posts', {
         title: title,
         content: content,
         nickname: nickname,
         category: category,
-      })
+      }, {headers: headers})
       .then((response) => {
+        console.log(response);
         dispatch(addPost(response.data));
-        history.goBack();
       })
       .catch((err) => {
         console.error(`게시글 추가하기 에러 발생: ${err}`);

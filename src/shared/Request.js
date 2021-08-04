@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://15.165.76.96',
+  baseURL: 'http://3.36.53.121',
+  // headers: {'authorization': localStorage.getItem('token')}
 });
-
-const token = localStorage.getItem('token');
-instance.defaults.headers.common['Authorization'] = token;
 
 export default instance;

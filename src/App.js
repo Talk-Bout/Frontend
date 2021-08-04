@@ -62,7 +62,7 @@ function App() {
         <Route path="/boot" exact component={BootMain} />
         <Route path="/boot/review" exact component={BootReview} />
         <Route path="/boot/community" exact component={BootCommu} />
-        <Route path="/boot/post" exact component={BootPost} />
+        <Route path="/boot/post/:id" exact component={BootPost} />
         <Route path="/boot/review/write" exact component={BootReviewWrite} />
         <Route path="/test" exact component={Test} />
         

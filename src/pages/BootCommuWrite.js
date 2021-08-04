@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -8,8 +8,22 @@ import { BiImageAdd } from 'react-icons/bi';
 import { RiAtLine } from 'react-icons/ri';
 import { FiHash } from 'react-icons/fi';
 import { history } from '../redux/ConfigureStore';
+import { useDispatch } from 'react-redux';
+import { actionCreators as postActions } from '../redux/modules/post';
 
 const BootCommuWrite = (props) => {
+  const dispatch = useDispatch();
+  const titleRef = useRef('');
+  const contentRef = useRef('');
+  const addPost = () => {
+    const new_post = {
+      title: titleRef.current.value,
+      content: contentRef.current.value,
+      nickname: 'username',
+      category: 'testing',
+    }
+    dispatch(postActions.addPostDB(new_post));
+  }
 
   return (
     <React.Fragment>
@@ -26,12 +40,12 @@ const BootCommuWrite = (props) => {
                   <Text fontSize='2.5vh' fontWeight='700' color='#e5e5e5' lineHeight='7vh'>글쓰기</Text>
                 </Grid>
                 <Grid className='submit-button' width='23.33%' padding='0 25px'>
-                  <Text fontSize='2.5vh' fontWeight='700' color='#848484' lineHeight='7vh' float='right' cursor='pointer'>등록</Text>
+                  <Text fontSize='2.5vh' fontWeight='700' color='#848484' lineHeight='7vh' float='right' cursor='pointer' _onClick={() => addPost()}>등록</Text>
                 </Grid>
               </Grid>
               <BodyBox>
-                <TitleBox><Input placeholder='제목을 입력해주세요'/></TitleBox>
-                <ContentBox><Textarea rows='15' placeholder='내용을 입력해주세요'/></ContentBox>
+                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef}/></TitleBox>
+                <ContentBox><Textarea rows='15' placeholder='내용을 입력해주세요' ref={contentRef}/></ContentBox>
               </BodyBox>
               <FooterBox>
                 <Text fontSize='2.5vh' color='#b3b3b3' margin='0 10px 0 0' cursor='pointer'><BiImageAdd /></Text>

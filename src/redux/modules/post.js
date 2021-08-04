@@ -27,7 +27,7 @@ const setPostDB = () => {
   return function (dispatch) {
     const axios = require('axios');
     axios
-      .get('http://15.165.18.118/posts')
+      .get('http://3.34.141.76/posts')
       .then((response) => {
         dispatch(setPost(response.data));
       })
@@ -43,7 +43,9 @@ const setOnePostDB = (id) => {
     const postId = id;
     const axios = require('axios');
     axios
-      .get(`http://15.165.18.118/posts/${postId}`)
+      .get(`http://3.34.141.76/posts/${postId}`, {
+        postId: postId,
+      })
       .then((response) => {
         dispatch(setOnePost(response.data));
       })
@@ -63,16 +65,14 @@ const addPostDB = (new_post) => {
     const axios = require('axios');
     console.log(new_post);
     axios
-      .post('http://15.165.18.118/posts', {
+      .post('http://3.34.141.76/posts', {
         title: title,
         content: content,
         nickname: nickname,
         category: category,
       })
       .then((response) => {
-        console.log(response);
-        // dispatch(addPost(response.data));
-        // history.push('/');
+        dispatch(addPost(response.data));
       })
       .catch((err) => {
         console.error(`게시글 추가하기 에러 발생: ${err}`);
@@ -89,15 +89,15 @@ const editPostDB = (edited_post) => {
     const postId = edited_post.postId;
     const axios = require('axios');
     axios
-      .patch(`http://15.165.18.118/posts/${postId}`, {
+      .patch(`http://3.34.141.76/posts/${postId}`, {
         title: title,
         content: content,
       })
       .then((response) => {
         dispatch(editPost(response.data));
-        if (edited_post.board_name === 'question') {
-          history.push(`/question/detail/${postId}`);
-        }
+        // if (edited_post.board_name === 'question') {
+        //   history.push(`/question/detail/${postId}`);
+        // }
         // history.push('/review/list');
       })
       .catch((err) => {

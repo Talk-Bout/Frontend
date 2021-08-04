@@ -2,8 +2,13 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Grid, Input, Text } from '../elements';
+import Sidebar from '../components/Sidebar';
+import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
-
+import { BsX } from 'react-icons/bs';
+import { BiImageAdd } from 'react-icons/bi';
+import { RiAtLine } from 'react-icons/ri';
+import { FiHash } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/post';
 
@@ -17,6 +22,7 @@ const QuestionWrite = (props) => {
   const [edit_mode, setEditMode] = React.useState(false);
   const question_id = props.match.params.id; //작성페이지, 수정페이지인지 구분할 수 있는 부분
   const board_name = 'question';
+  console.log(question_id);
 
   //setOnePost 불러오기
   useEffect(() => {
@@ -25,13 +31,13 @@ const QuestionWrite = (props) => {
     }
   }, []);
 
+  console.log(edit_mode);
+
   const question_list = useSelector((state) => state.post.list);
   const old_question = question_list.find((post) => post.postId == question_id);
   console.log(old_question);
-
   //포스트 작성
   const addQuestion = () => {
-    console.log(title, content);
     const new_post = {
       postId: question_id,
       title: title,
@@ -40,102 +46,176 @@ const QuestionWrite = (props) => {
       category: 'testing',
       board_name: board_name,
     };
-    //동시에 3가지 액션을 띄우려고 하니 다른 페이지로 이동해서 바로 새로고침이 되고 새로운 데이터가 들어가는 것을 보여줄 시간이 없다.
-    // history.push, window.alert를 다른 곳에서 지정해줘야 한다.
     if (edit_mode) {
       dispatch(questionActions.editPostDB(new_post));
-      // history.push(`/question/detail/${old_question.postId}`);
-    }
-    // window.alert('질문이 수정되었습니다');
-    // history.push(`/question/detail/${old_question.postId}`);
-    else {
+    } else {
       dispatch(questionActions.addPostDB(new_post));
-      // window.alert('질문이 등록되었습니다');
-      // history.goBack();
+      history.goBack();
     }
   };
 
   return (
     <React.Fragment>
-      <Grid backgroundColor="gray" height="100vh" padding="15vh">
-        <Grid backgroundColor="#fff" width="45vw" height="65vh" margin="auto">
-          <WindowInner>
-            <HeaderBox>
-              <Button width="7%" _onClick={() => history.goBack()}>
-                X
-              </Button>
-              <Text
-                margin="0 13vw"
-                fontSize="2vh"
-                fontWeight="700"
-                lineHeight="4vh"
+      <Grid
+        className="background"
+        display="flex"
+        backgroundColor="#17181b"
+        minHeight="100vh"
+      >
+        <Sidebar />
+        <Body>
+          <Grid className="body-inner" height="110%" padding="5vh 0 0">
+            <Window>
+              <Grid
+                className="header-box"
+                height="10%"
+                display="flex"
+                borderBottom="1px solid #8f9091"
               >
-                질문 작성
-              </Text>
-              <Button
-                width="7%"
-                _onClick={() => {
-                  addQuestion();
-                }}
-              >
-                {edit_mode ? '수정' : '등록'}
-              </Button>
-            </HeaderBox>
-            <hr style={{ margin: '1vh 0', borderTop: '1px solid #eee' }} />
-            <BodyBox>
-              <Row>
-                <Key>제목</Key>
-                <input
-                  placeholder={'제목을 입력해주세요'}
-                  defaultValue={edit_mode ? old_question.title : null}
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
-                ></input>
-              </Row>
-
-              <Row>
-                <Key>내용</Key>
-                <input
-                  multiLine
-                  placeholder={'무엇을 질문하고 싶나요?'}
-                  defaultValue={edit_mode ? old_question.content : null}
-                  onChange={(e) => {
-                    setContent(e.target.value);
-                  }}
-                ></input>
-              </Row>
-            </BodyBox>
-          </WindowInner>
-        </Grid>
+                <Grid className="exit-button" width="23.33%" padding="0 25px">
+                  <Text
+                    fontSize="4vh"
+                    color="#e5e5e5"
+                    lineHeight="7.5vh"
+                    cursor="pointer"
+                    _onClick={() => history.push('/question')}
+                  >
+                    <BsX />
+                  </Text>
+                </Grid>
+                <Grid className="title" width="53.33%" is_center>
+                  <Text
+                    fontSize="2.5vh"
+                    fontWeight="700"
+                    color="#e5e5e5"
+                    lineHeight="7vh"
+                  >
+                    질문하기
+                  </Text>
+                </Grid>
+                <Grid className="submit-button" width="23.33%" padding="0 25px">
+                  <Text
+                    fontSize="2.5vh"
+                    fontWeight="700"
+                    color="#848484"
+                    lineHeight="7vh"
+                    float="right"
+                    cursor="pointer"
+                    _onClick={() => addQuestion()}
+                  >
+                    {edit_mode ? '수정' : '등록'}
+                  </Text>
+                </Grid>
+              </Grid>
+              <BodyBox>
+                <TitleBox>
+                  <TitleInput
+                    placeholder="제목을 입력해주세요"
+                    defaultValue={edit_mode ? old_question.title : null}
+                  />
+                </TitleBox>
+                <ContentBox>
+                  <Textarea
+                    rows="15"
+                    placeholder="내용을 입력해주세요"
+                    defaultValue={edit_mode ? old_question.content : null}
+                  />
+                </ContentBox>
+              </BodyBox>
+              <FooterBox>
+                <Text
+                  fontSize="2.5vh"
+                  color="#b3b3b3"
+                  margin="0 10px 0 0"
+                  cursor="pointer"
+                >
+                  <BiImageAdd />
+                </Text>
+                <Text
+                  fontSize="2.5vh"
+                  color="#b3b3b3"
+                  margin="0 10px 0"
+                  cursor="pointer"
+                >
+                  <RiAtLine />
+                </Text>
+                <Text
+                  fontSize="2.5vh"
+                  color="#b3b3b3"
+                  margin="0 0 0 10px"
+                  cursor="pointer"
+                >
+                  <FiHash />
+                </Text>
+              </FooterBox>
+            </Window>
+          </Grid>
+        </Body>
       </Grid>
     </React.Fragment>
   );
 };
 
-const WindowInner = styled.div`
-  padding: 2vh 2vw;
-`;
-
-const HeaderBox = styled.div`
-  width: 100%;
-  height: 4vh;
-  display: flex;
-  justify-content: space-evenly;
+const Window = styled.div`
+  background-color: #383838;
+  width: 60%;
+  height: 90%;
+  margin: auto;
 `;
 
 const BodyBox = styled.div`
-  padding: 1vh 0;
+  height: 80%;
+  padding: 40px 40px;
 `;
 
-const Row = styled.div`
-  margin: 2vh 0;
+const TitleBox = styled.div`
+  height: 5vh;
+  border-bottom: 1px solid #8f9091;
+  padding-bottom: 20px;
 `;
 
-const Key = styled.span`
-  font-size: 1.8vh;
-  font-weight: 700;
-  margin-right: 2vw;
+const ContentBox = styled.div`
+  height: 40vh;
+  padding-top: 20px;
+`;
+
+const TitleInput = styled.input`
+  background-color: #383838;
+  padding: 10px;
+  font-size: 1.7vh;
+  color: #e5e5e5;
+  width: 97.7%;
+  border: none;
+  &::placeholder {
+    color: #8f9091;
+    font-size: 1.7vh;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Textarea = styled.textarea`
+  width: 97.7%;
+  resize: none;
+  padding: 10px;
+  font-size: 1.7vh;
+  background-color: #383838;
+  border: none;
+  color: #e5e5e5;
+  &::placeholder {
+    color: #8f9091;
+    font-size: 1.7vh;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+const FooterBox = styled.div`
+  background-color: #414141;
+  height: 10%;
+  padding: 20px 40px 20px;
 `;
 
 export default QuestionWrite;

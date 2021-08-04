@@ -11,12 +11,14 @@ import { BiLike, BiComment } from "react-icons/bi";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const BootCommu = (props) => {
-  // const dispatch = useDispatch();
-  // const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
+  const dispatch = useDispatch();
+  const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
+  console.log(post_list);
 
-  // useEffect(() => {
-  //   dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
-  // }, [])
+
+  useEffect(() => {
+    dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
+  }, []);
 
   return (
     <React.Fragment>
@@ -47,11 +49,11 @@ const BootCommu = (props) => {
                   <TitleBox><Text p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
                   <Text p className='sort' fontSize='1.7vh' color='#757577' margin='3vh 0 0'>인기순 | 최신순</Text>
                 </Grid>
-                {[1, 2, 3, 4, 5].map((n) => {
+                {post_list.map((n) => {
                   return (
-                    <Post onClick={() => history.push('/boot/post')}>
-                      <Text p fontSize='2vh' fontWeight='700' color='#dadce0'>항해99 궁금한 게 있어용</Text>
-                      <Text p color='#80868b'>독학한 지 1년 6개월 정도입니다. 자바스크립트와 리액트 공부 중이에요. 부트캠프 하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각 중인데, 제가 프론트보다는 백엔드 쪽으로 하고 싶어서요. 적절한 선택일까요?</Text>
+                    <Post key={n.postId} onClick={() => history.push(`/boot/post/${n.postId}`)}>
+                      <Text p fontSize='2vh' fontWeight='700' color='#dadce0'>{n.title}</Text>
+                      <Text p color='#80868b'>{n.content}</Text>
                       <Text p color='#bdc1c6'><BiLike /> 17  <BiComment /> 5  <AiOutlineEye /> 354</Text>
                     </Post>
                   )
@@ -72,7 +74,7 @@ const BootCommu = (props) => {
               {[1, 2, 3, 4].map((c) => {
                 return (
                   <Camp onClick={() => history.push('/boot/review')}>
-                    <ImgBox><Image size='5.5' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
+                    <ImgBox><Image size='4.5' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
                     <CampBox>
                       <Text className='camp-name' p fontSize='2vh' fontWeight='700' color='#f1f3f4' margin='20px 0 0'>부트캠프명</Text>
                       <Text className='camp-star' p fontSize='1.5vh' color='#a5a5a5' margin='0' >★★☆☆☆ 2.2</Text>
@@ -167,6 +169,7 @@ const Camp = styled.div`
 const ImgBox = styled.div`
   height: 100%;
   width: 100px;
+  overflow: hidden;
 `;
 
 const CampBox = styled.div`

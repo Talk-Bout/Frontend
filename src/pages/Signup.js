@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import SmallWindow from '../components/SmallWindow';
-import { Grid, Text } from '../elements';
+import { Grid, Text, Image } from '../elements';
 import styled from 'styled-components';
 
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
+
+import Logo from '../image/Logo.png';
 
 const Signup = (props) => {
   const dispatch = useDispatch();
@@ -49,28 +51,35 @@ const Signup = (props) => {
   return (
     <SmallWindow>
       <Grid height="100%">
-        <Grid height="15%">
-          <Grid height="30%" />
-          <Grid is_center height="50%">
-            <Text fontSize="3vh">LOGO</Text>
-          </Grid>
+        <Grid is_center height="13%">
+          <Image src={Logo} width="60%" margin="auto" />
         </Grid>
-        <Grid height="10%">
+        <Grid height="8%">
           <TextBox>
-            <Text lineHeight="6vh" fontSize="2vh" fontWeight="700">
+            <Text
+              lineHeight="6vh"
+              fontSize="2vh"
+              fontWeight="700"
+              color="#F8F9FA"
+            >
               회원가입
             </Text>
           </TextBox>
         </Grid>
-        <Grid height="15%">
+        <Grid height="18%">
           {/* 회원가입 작성 폼 */}
           <form>
             <TextBox>
               <label>
-                <Text fontSize="1.5vh" fontWeight="700">
+                <Text fontSize="1.5vh" fontWeight="700" color="#80868b">
                   이메일
                 </Text>
               </label>
+            </TextBox>
+            <TextBox>
+              <Text fontSize="1.2vh" color="#80868b">
+                (알파벳/숫자, 4 - 10자)
+              </Text>
             </TextBox>
             <InputBox>
               <Input
@@ -78,9 +87,10 @@ const Signup = (props) => {
                   setId(e.target.value);
                 }}
               />
-              <Text margin="0 5px">@</Text>
+              <Text margin="0 5px" color="#80868b">
+                @
+              </Text>
               <Select ref={selectMail}>
-                <option value="">선택</option>
                 <option value="gmail.com">gmail.com</option>
                 <option value="naver.com">naver.com</option>
                 <option value="hanmail.net">hanmail.net</option>
@@ -95,13 +105,15 @@ const Signup = (props) => {
           <form>
             <TextBox>
               <label>
-                <Text fontSize="1.5vh" fontWeight="700">
+                <Text fontSize="1.5vh" fontWeight="700" color="#80868b">
                   비밀번호
                 </Text>
               </label>
             </TextBox>
             <TextBox>
-              <Text fontSize="1.2vh">8자 이상 입력해주세요</Text>
+              <Text fontSize="1.2vh" color="#80868b">
+                (알파벳/ 숫자/ 특수문자(!@#$%^&*) 포함, 8자 이상)
+              </Text>
             </TextBox>
             <InputBox>
               <Input
@@ -118,7 +130,7 @@ const Signup = (props) => {
           <form>
             <TextBox>
               <label>
-                <Text fontSize="1.5vh" fontWeight="700">
+                <Text fontSize="1.5vh" fontWeight="700" color="#80868b">
                   비밀번호 확인
                 </Text>
               </label>
@@ -141,7 +153,7 @@ const Signup = (props) => {
           <form>
             <TextBox>
               <label>
-                <Text fontSize="1.5vh" fontWeight="700">
+                <Text fontSize="1.5vh" fontWeight="700" color="#80868b">
                   닉네임
                 </Text>
               </label>
@@ -159,7 +171,7 @@ const Signup = (props) => {
             이미 사용중인 닉네임입니다.
           </Text>
         </Grid>
-        <Grid height="15%">
+        <Grid height="10%">
           <Button onClick={() => signup()}>
             <Text fontSize="1.5vh" color="white">
               회원가입 완료
@@ -180,23 +192,34 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
-  width: 44.5%;
+  width: 44%;
   height: 3vh;
-  border: 1px solid #ccc;
+  border: 1px solid #80868b;
+  border-radius: 5px;
+  background-color: transparent;
   outline: none;
+  caret-color: #80868b;
 `;
 
 const Select = styled.select`
   width: 45%;
   height: 3.5vh;
-  border: 1px solid #ccc;
+  border: 1px solid #80868b;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #ffffff;
+  :focus {
+    outline: none;
+  }
 `;
 
 const Button = styled.button`
   width: 100%;
-  height: 60%;
-  background-color: #444;
+  height: 90%;
+  background-color: #7879f1;
   border: none;
+  border-radius: 5px;
+  margin-top: 2%;
 `;
 
 export default Signup;

@@ -74,14 +74,14 @@ const CommonBoardList = (props) => {
                 <Notice>
                   <NoticeHead>공지</NoticeHead>
                   <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                  <Text color="#9AA0A6" fontSize="1.5vh" lineHeight="4.5vh">2021.08.03</Text>
+                  <Text color="#9AA0A6" fontSize="1.5vh" margin="0.2% 0 0 0" lineHeight="5vh">2021.08.03</Text>
                 </Notice>
               </Grid>
               <Grid display="flex" width="100%">
                 <Notice>
                   <NoticeHead>공지</NoticeHead>
                   <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                  <Text color="#9AA0A6" fontSize="1.5vh" lineHeight="4.5vh">2021.08.03</Text>
+                  <Text color="#9AA0A6" fontSize="1.5vh" margin="0.2% 0 0 0"lineHeight="5vh">2021.08.03</Text>
                 </Notice>
               </Grid>
             </Grid>

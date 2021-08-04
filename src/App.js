@@ -17,6 +17,7 @@ import MainN from './pages/MainN';
 //로그인 회원가입 페이지
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ChangeInfo from './pages/ChangeInfo';
 
 //자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
@@ -51,6 +52,7 @@ function App() {
           <Route path="/" exact component={MainN} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
+          <Route path="/changeInfo" exact component={ChangeInfo} />
           <Route path="/common/list" exact component={CommonList} />
           <Route path="/common/detail/:id" exact component={CommonDetail} />
           <Route path="/common/write" exact component={CommonWrite} />

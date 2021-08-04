@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import SmallWindow from '../components/SmallWindow';
-import { Grid, Input, Text } from '../elements';
+import { Grid, Input, Text, Image } from '../elements';
 import { TextField } from '@material-ui/core';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
+
+//로고
+import Logo from '../image/Logo.png';
+import google_logo from '../image/google_logo.png';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -14,6 +18,7 @@ const Login = (props) => {
   const [password, setPwd] = React.useState('');
 
   const login = () => {
+    console.log(email, password);
     if (email === '' || password === '') {
       window.alert('이메일과 비밀번호를 입력해주세요');
       return;
@@ -26,31 +31,27 @@ const Login = (props) => {
     <SmallWindow>
       <Grid height="100%">
         <Grid height="25%">
-          <Grid height="50%" />
+          <Grid height="40%" />
           <Grid is_center height="50%">
-            <Text fontSize="3vh">LOGO</Text>
+            <Image src={Logo} width="60%" margin="auto" />
           </Grid>
         </Grid>
         <Grid height="30%">
-          <form noValidate autoComplete="off">
-            <TextField
-              id="outlined-basic"
-              label="이메일"
-              variant="outlined"
-              fullWidth
-              required
-              margin="normal"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="비밀번호"
-              variant="outlined"
-              fullWidth
+          <form>
+            <InputBox>
+              <InformInput
+                style={{ width: '98%' }}
+                type="email"
+                placeholder="이메일"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </InputBox>
+            <InformInput
+              style={{ width: '98%' }}
               type="password"
-              required
+              placeholder="비밀번호"
               onChange={(e) => {
                 setPwd(e.target.value);
               }}
@@ -61,7 +62,7 @@ const Login = (props) => {
           </Text>
         </Grid>
         <Grid height="20%">
-          <Button onClick={() => login()}>
+          <Button onClick={() => login()} color="#a5a6af">
             <Text fontSize="1.5vh" color="white">
               로그인
             </Text>
@@ -70,14 +71,7 @@ const Login = (props) => {
             <HelpDiv>
               <A onClick={() => {}}>
                 <Text fontSize="1.3vh" color="#555">
-                  아이디 찾기
-                </Text>
-              </A>
-            </HelpDiv>
-            <HelpDiv>
-              <A onClick={() => {}}>
-                <Text fontSize="1.3vh" color="#555">
-                  비밀번호 찾기
+                  비밀번호 재설정
                 </Text>
               </A>
             </HelpDiv>
@@ -91,7 +85,7 @@ const Login = (props) => {
           </Grid>
         </Grid>
         <Grid height="25%">
-          <Button style={{ backgroundColor: '#888' }}>
+          <Button style={{ backgroundColor: '#2e3134' }}>
             <AiFillGoogleCircle
               size="2vh"
               style={{ marginRight: '0.3vw', verticalAlign: 'middle' }}
@@ -109,12 +103,31 @@ const Login = (props) => {
 const A = styled.a`
   cursor: pointer;
 `;
+const TextBox = styled.div`
+  text-align: left;
+`;
 
+const InputBox = styled.div`
+  width: 100%;
+  margin-bottom: 5%;
+`;
+
+const InformInput = styled.input`
+  width: 44%;
+  height: 5vh;
+  border: 1px solid #80868b;
+  border-radius: 5px;
+  background-color: transparent;
+  outline: none;
+  caret-color: #80868b;
+  padding: 1%;
+`;
 const Button = styled.button`
   width: 100%;
-  height: 40%;
-  background-color: #444;
+  height: 5vh;
+  background-color: #7879f1;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
 `;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Switch } from "react-router-dom";
+import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
@@ -47,38 +47,50 @@ function App() {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/" exact component={MainN} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/signup" exact component={Signup} />
-        <Route path="/common/list" exact component={CommonList} />
-        <Route path="/common/detail/:id" exact component={CommonDetail} />
-        <Route path="/common/write" exact component={CommonWrite} />
-        <Route path="/question" exact component={QuestionList} />
-        <Route path="/question/write" exact component={QuestionWrite} />
-        <Route path="/question/write/:id" exact component={QuestionWrite} />
-        <Route path="/question/detail/:id" exact component={QuestionDetail} />
-        <Route path="/boot" exact component={BootMain} />
-        <Route path="/boot/review" exact component={BootReview} />
-        <Route path="/boot/community" exact component={BootCommu} />
-        <Route path="/boot/post/:id" exact component={BootPost} />
-        <Route path="/boot/review/write" exact component={BootReviewWrite} />
+        <Switch>
+          <Route path="/" exact component={MainN} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/common/list" exact component={CommonList} />
+          <Route path="/common/detail/:id" exact component={CommonDetail} />
+          <Route path="/common/write" exact component={CommonWrite} />
+          <Route path="/question" exact component={QuestionList} />
+          <Route path="/question/write" exact component={QuestionWrite} />
+          <Route path="/question/write/:id" exact component={QuestionWrite} />
+          <Route path="/question/detail/:id" exact component={QuestionDetail} />
+          <Route path="/boot" exact component={BootMain} />
+          <Route path="/boot/review" exact component={BootReview} />
+          <Route path="/boot/community" exact component={BootCommu} />
+          <Route path="/boot/post/:id" exact component={BootPost} />
+          <Route path="/boot/review/write" exact component={BootReviewWrite} />
 
-        <Route
-          path="/boot/review/write/:id"
-          exact
-          component={BootReviewWrite}
-        />
+          <Route
+            path="/boot/review/write/:id"
+            exact
+            component={BootReviewWrite}
+          />
 
-        <Route path="/boot/review/write/:id" exact component={BootReviewWrite} />
-        <Route path="/boot/community/write" exact component={BootCommuWrite} />
-        <Route path="/boot/community/write/:id" exact component={BootCommuWrite} />
+          <Route
+            path="/boot/review/write/:id"
+            exact
+            component={BootReviewWrite}
+          />
+          <Route
+            path="/boot/community/write"
+            exact
+            component={BootCommuWrite}
+          />
+          <Route
+            path="/boot/community/write/:id"
+            exact
+            component={BootCommuWrite}
+          />
 
-        <Route path="/news/list" exact component={NewsList} />
-        <Route path="/mypage" exact component={Mypage} />
-        <Route path="/mypage/edit" exact component={MyPageEdit} />
-        <Route path="/template" exact component={templateN} />
-        <Route render={(props) => (<NotFound history={props.history}/>)} />
+          <Route path="/news/list" exact component={NewsList} />
+          <Route path="/mypage" exact component={Mypage} />
+          <Route path="/mypage/edit" exact component={MyPageEdit} />
+          <Route path="/template" exact component={templateN} />
+          <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>
     </React.Fragment>

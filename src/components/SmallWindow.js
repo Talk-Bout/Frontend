@@ -14,10 +14,10 @@ const SmallWindow = (props) => {
         <Grid backgroundColor="#18181A" height="93vh" padding="7vh 15vh">
           <Grid
             backgroundColor="#212123"
-            width="20vw"
-            height="70vh"
+            width="25vw"
+            height="75vh"
             margin="auto"
-            padding="3vh 2vw"
+            padding="3vh 2.5vw"
           >
             {children}
           </Grid>
@@ -31,10 +31,10 @@ const SmallWindow = (props) => {
       <Grid backgroundColor="#18181A" height="100vh" padding="15vh">
         <Grid
           backgroundColor="#212123"
-          width="30vw"
-          height="65vh"
+          width="25vw"
+          height="75vh"
           margin="auto"
-          padding="4%"
+          padding="3vh 2.5vw"
         >
           {children}
         </Grid>

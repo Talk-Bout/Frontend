@@ -25,8 +25,12 @@ const logInDB = (email, password) => {
     instance
       .post('/login', { email: email, password: password })
       .then((response) => {
-        console.log(response);
-        dispatch(logIn(response.data));
+        const user_info = {
+          email: response.data.email,
+          nickname: response.data.nickname,
+        }
+        dispatch(logIn(user_info));
+        localStorage.setItem('token', response.data.token);
         window.alert('로그인 완료!');
         history.push('/');
       })

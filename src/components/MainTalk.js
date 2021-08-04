@@ -18,7 +18,7 @@ const MainTalk = (props) => {
           {/* 자유게시판 게시물 목록 */}
           {[1, 2, 3, 4].map((n, idx) => {
             return (
-              <QuestionBox onClick={() => history.push('/question/detail')}>
+              <QuestionBox key={idx} onClick={() => history.push('/question/detail')}>
                 <Grid display="flex" flexDirection="rows">
                   <Text padding="3%" fontWeight="700" fontSize="2vh" color='#F8F9FA'>
                     질문 제목

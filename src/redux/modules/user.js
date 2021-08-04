@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
+import instance from '../../shared/Request';
 
 //액션 타입
 const LOG_IN = 'LOG_IN'; //로그인하기
@@ -21,10 +22,10 @@ const initialState = {
 //액션함수
 const logInDB = (email, password) => {
   return function (dispatch) {
-    const axios = require('axios');
-    axios
-      .post('http://3.34.141.76/login', { email, password })
+    instance
+      .post('/login', { email: email, password: password })
       .then((response) => {
+        console.log(response);
         dispatch(logIn(response.data));
         window.alert('로그인 완료!');
         history.push('/');
@@ -37,15 +38,16 @@ const logInDB = (email, password) => {
 
 const signUpDB = (new_user) => {
   return function (dispatch) {
-    const axios = require('axios');
-    axios
-      .post('http://3.34.141.76/users', {
+    console.log(new_user);
+    instance
+      .post('/users', {
         email: new_user.user_mail,
         password: new_user.password,
         nickname: new_user.nickname,
         confirmPassword: new_user.confirm_password,
       })
       .then((response) => {
+        console.log(response.data);
         window.alert('회원가입 완료!');
         history.push('/login');
       })

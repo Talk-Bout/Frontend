@@ -13,8 +13,6 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 const BootCommu = (props) => {
   const dispatch = useDispatch();
   const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
-  console.log(post_list);
-
 
   useEffect(() => {
     dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
@@ -49,9 +47,9 @@ const BootCommu = (props) => {
                   <TitleBox><Text p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
                   <Text p className='sort' fontSize='1.7vh' color='#757577' margin='3vh 0 0'>인기순 | 최신순</Text>
                 </Grid>
-                {post_list.map((n) => {
+                {post_list.map((n, idx) => {
                   return (
-                    <Post key={n.postId} onClick={() => history.push(`/boot/post/${n.postId}`)}>
+                    <Post key={idx} onClick={() => history.push(`/boot/post/${n.postId}`)}>
                       <Text p fontSize='2vh' fontWeight='700' color='#dadce0'>{n.title}</Text>
                       <Text p color='#80868b'>{n.content}</Text>
                       <Text p color='#bdc1c6'><BiLike /> 17  <BiComment /> 5  <AiOutlineEye /> 354</Text>
@@ -71,9 +69,9 @@ const BootCommu = (props) => {
             </Grid>
             <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='450px' position='absolute'>
               <Text className='other-camps' p fontSize='2vh' fontWeight='700' color='#e2e2e2' margin='20px 20px 0'>다른 부트캠프</Text>
-              {[1, 2, 3, 4].map((c) => {
+              {[1, 2, 3, 4].map((c, idx) => {
                 return (
-                  <Camp onClick={() => history.push('/boot/review')}>
+                  <Camp key={idx} onClick={() => history.push('/boot/review')}>
                     <ImgBox><Image size='4.5' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
                     <CampBox>
                       <Text className='camp-name' p fontSize='2vh' fontWeight='700' color='#f1f3f4' margin='20px 0 0'>부트캠프명</Text>

@@ -1,6 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import {history} from '../ConfigureStore';
+import instance from '../../shared/Request';
 
 // API
 // 해당 게시물의 댓글 불러오기 /posts/:postId/comments
@@ -31,8 +32,7 @@ const initialState = {
 // 액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
 return function (dispatch) {
-  const axios = require('axios');
-  axios.get(`http://3.34.141.76/posts/${postId}/comments`)
+  instance.get(`/posts/${postId}/comments`)
   .then((response) => {
     // console.log('setPostDB 함수 호출 성공!');
     // console.log(response);
@@ -49,11 +49,8 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
 return function (dispatch, {history}) {
   const nickname = new_comment.nickname;
   const content = new_comment.content;
-  //
   const postId = new_comment.postId;
-  //
-  const axios = require('axios');
-  axios.post(`http://3.34.141.76/posts/${postId}/comments`,
+  instance.post(`/posts/${postId}/comments`,
   {
       nickname: nickname,
       content: content,
@@ -70,9 +67,7 @@ const editCommentDB = (edit_comment, commentId, postId) => {           // 댓글
 return function (dispatch, getState, { history }) {
 const nickname = edit_comment.nickname;
 const content = edit_comment.content;
-
-const axios = require('axios');
-axios.patch(`http://3.34.141.76/posts/${postId}/comments/${commentId}`,
+instance.patch(`/posts/${postId}/comments/${commentId}`,
 { 
     nickname: nickname,
     content: content,
@@ -86,9 +81,7 @@ axios.patch(`http://3.34.141.76/posts/${postId}/comments/${commentId}`,
 
 const deleteCommentDB = (postId, commentId) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
-const axios = require('axios');
-axios
-.delete(`http://3.34.141.76/posts/${postId}/comments/${commentId}`)
+instance.delete(`/posts/${postId}/comments/${commentId}`)
 .then((response) => {
         // console.log('deleteCommentDB 함수 호출 성공!');
         dispatch(deleteComment(commentId))

@@ -29,8 +29,8 @@ const CommonWrite = (props) => {
     if (_addTitleRef === '') {
       window.alert('제목을 입력해주세요!');
       return;
-    }else if (_addContentRef === "") {
-      window.alert("제목을 입력해주세요!");
+    } else if (_addContentRef === '') {
+      window.alert('제목을 입력해주세요!');
       return;
     }
   };

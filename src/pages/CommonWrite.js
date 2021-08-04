@@ -85,7 +85,6 @@ const CommonWrite = (props) => {
               {/* 기능 */}
             <BoardFooter>
               <Icon><VscFileMedia size={27}/></Icon>
-              <Icon><VscMention size={27}/></Icon>
               <Icon><VscSymbolNumeric size={27}/></Icon> 
             </BoardFooter>
             </Grid>
@@ -125,7 +124,7 @@ const BoardFooter = styled.div`
 display: flex;
 align-items: center;
 height: 7vh;
-margin: 0 0 0 5.5%;
+margin: 0 0 0 3%;
 `;
 
 const Icon = styled.span`

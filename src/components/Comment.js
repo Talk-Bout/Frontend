@@ -34,14 +34,13 @@ const all_comment = comment_list.slice(0, comment_list.length)
     console.log(addCommentRef);
     const new_comment = {
       content : addCommentRef,
-      nickname : "username",
+      nickname : "song",
+      postId : postId,
   }
-
     if (addCommentRef === "") {
       window.alert("댓글을 입력해주세요!");
       return;
     }
-    
   dispatch(commentActions.addCommentDB(new_comment, postId));
   addRef.current.value = "";
   }

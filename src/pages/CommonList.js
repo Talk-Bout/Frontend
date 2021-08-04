@@ -10,6 +10,7 @@ import { actionCreators as commentActions} from "../redux/modules/comment";
 import { actionCreators as postActions} from "../redux/modules/post";
 //icons
 import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -108,9 +109,13 @@ const CommonBoardList = (props) => {
               </Grid>     
             </Grid>
             <Grid height="3%">
-              <Page>
-              &lt; &nbsp; 01 &nbsp; 02 &nbsp; 03 &nbsp; &gt;
-              </Page>
+              <PageBox>
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronLeft /></Page></Text>
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page>01</Page></Text>
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page>02</Page></Text>
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page>03</Page></Text>
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronRight /></Page></Text>
+              </PageBox>
             </Grid>
           </Grid>    
         </Body>
@@ -219,11 +224,19 @@ height: 10%;
 padding: 3%;
 `;
 
-const Page = styled.div`
-color: #FFFFFF;
+const PageBox = styled.div`
 text-align: center;
 font-size: 1.8vh;;
 /* margin: 2% 0 0 0; */
+`;
+
+const Page = styled.span`
+opacity: 0.5;
+cursor: pointer;
+color: #F8F9FA;
+&:hover {
+    opacity: 1;
+  }
 `;
 
 export default CommonBoardList;

@@ -7,7 +7,6 @@ import { history } from './redux/ConfigureStore';
 
 // NotFound 페이지
 import NotFound from './shared/NotFound';
-import Test from './pages/Test';
 
 //템플릿 페이지
 import templateN from './components/templateN';
@@ -64,8 +63,6 @@ function App() {
         <Route path="/boot/community" exact component={BootCommu} />
         <Route path="/boot/post" exact component={BootPost} />
         <Route path="/boot/review/write" exact component={BootReviewWrite} />
-        <Route path="/test" exact component={Test} />
-        
 
         <Route
           path="/boot/review/write/:id"

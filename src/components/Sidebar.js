@@ -44,8 +44,6 @@ const LogoImg = styled.img`
 const Image = styled.img`
   cursor: pointer;
   width: 100px;
-  -webkit-filter: opacity(.5) drop-shadow(0 0 0 #80868b);
-  filter: opacity(.5) drop-shadow(0 0 0 #80868b);
 `;
 
 export default Sidebar;

@@ -11,9 +11,10 @@ const CommentEdit = (props) => {
 
   const dispatch = useDispatch();
   // const postId = props.postId;
-  const {commentId, nickname, content, postId} = props;
+  const {commentId, content, postId} = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
+  const username = useSelector(state => state.user.user.user.nickname);
 
   // 댓글 삭제
   const deleteComment = (postId, commentId) => {
@@ -24,7 +25,7 @@ const CommentEdit = (props) => {
   const editComment = () => {
   // const editCommentRef = editRef.current.value;
   const edit_comment = {
-    nickname : nickname,
+    nickname : username,
     content : commentValue,
   };
 

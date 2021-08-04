@@ -12,23 +12,26 @@ import {actionCreators as commentActions} from '../redux/modules/comment';
 import {history} from '../redux/ConfigureStore';
 
 const BootPost = (props) => {
-  // const dispatch = useDispatch();
-  // const post_id = window.location.pathname.split('/boot/post/')[1];
-  // const post_list = useSelector(state => state.post.list);
-  // const post_found = post_list.find((post) => post.postId == post_id);
+  const dispatch = useDispatch();
+  const post_id = window.location.pathname.split('/boot/post/')[1];
+  // const username = useSelector(state => state.user.user.user.nickname);
+  const username = 'test';
+  const post_list = useSelector(state => state.post.list);
+  const post_found = post_list.find((post) => post.postId == post_id);
+  // console.log(post_found);
 
   // const comment_list = useSelector(state => state.comment.list);
 
   // const commentInput = useRef(null);
 
-  // useEffect(() => {
-  //   if (post_found) {
-  //     dispatch(commentActions.setCommentDB(post_id));
-  //     return;
-  //   }
-  //   dispatch(postActions.setOnePostDB(post_id));
-  //   dispatch(commentActions.setCommentDB(post_id));
-  // }, []);
+  useEffect(() => {
+    if (post_found) {
+    //   dispatch(commentActions.setCommentDB(post_id));
+      return;
+    }
+    dispatch(postActions.setOnePostDB(post_id));
+    // dispatch(commentActions.setCommentDB(post_id));
+  }, []);
 
   // const addComment = () => {
   //   const content = commentInput.current.value;
@@ -44,11 +47,20 @@ const BootPost = (props) => {
   //   dispatch(commentActions.deleteCommentDB(post_id, comment_id));
   // }
 
-  // if (!post_found) {
-  //   return (
-  //     <></>
-  //   );
-  // };
+  const deletePost = () => {
+    // const deleted_post = {
+    //   postId: post_id,
+    //   nickname: username,
+    // };
+    // dispatch(postActions.deletePostDB(deleted_post));
+    console.log('삭제!');
+  }
+
+  if (!post_found) {
+    return (
+      <></>
+    );
+  };
 
   return (
     <React.Fragment>
@@ -66,11 +78,11 @@ const BootPost = (props) => {
                       <PostBtn><Text fontSize='1.5vh' color='#f1f3f4'>삭제</Text></PostBtn>
                     </Grid>
                   </Grid>
-                  <Text p fontSize='2.5vh' color='#f1f3f4' fontWeight='700' margin='15px 0'>항해99 궁금한 게 있어용</Text>
-                  <Text fontSize='1.5vh' color='#7A7E82'>2021.08.02</Text>
+                  <Text p fontSize='2.5vh' color='#f1f3f4' fontWeight='700' margin='15px 0'>{post_found.title}</Text>
+                  <Text fontSize='1.5vh' color='#7A7E82'>{post_found.createdAt}</Text>
                 </TitleBox>
                 <ContentBox>
-                  <Text p fontSize='1.7vh' color='#dadce0'>부트캠프 참여하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각중인데, 제가 프론트보다는 백엔드쪽으로 하고 싶은데 괜찮을까요?부트캠프 참여하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각중인데, 제가 프론트보다는 백엔드쪽으로 하고 싶은데 괜찮을까요?부트캠프 참여하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각중인데, 제가 프론트보다는 백엔드쪽으로 하고 싶은데 괜찮을까요?부트캠프 참여하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각중인데, 제가 프론트보다는 백엔드쪽으로 하고 싶은데 괜찮을까요?부트캠프 참여하려고 알아보는 중인데 궁금한 게 있습니다. 항해99 생각중인데, 제가 프론트보다는 백엔드쪽으로 하고 싶은데 괜찮을까요?</Text>
+                  <Text p fontSize='1.7vh' color='#dadce0'>{post_found.content}</Text>
                 </ContentBox>
                 <IconBox>
                   <span style={{backgroundColor: '#202124', padding: '10px', margin: '', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='2vh' fontWeight='700'><BiLike /> 17</Text></span>
@@ -86,14 +98,14 @@ const BootPost = (props) => {
                 </InputWrap>
               </CommentInput>
               <CommentList>
-                {[1, 2, 3, 4, 5].map((n) => {
+                {[1, 2, 3, 4, 5].map((n, idx) => {
                   return (
-                    <Comment>
+                    <Comment key={idx}>
                       <Grid display='flex' justify_content='space-between'>
                         <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명1</Text><Text fontSize='1.5vh' color='#BDC1C6'>2021.08.02</Text></NameTime>
                         <Buttons>
                           <PostBtn style={{margin: '0 10px 0'}}><Text fontSize='1.5vh' color='#dadce0'>수정</Text></PostBtn>
-                          <PostBtn><Text fontSize='1.5vh' color='#dadce0'>삭제</Text></PostBtn>
+                          <PostBtn onClick={() => deletePost()}><Text fontSize='1.5vh' color='#dadce0'>삭제</Text></PostBtn>
                         </Buttons>
                       </Grid>
                       <Word><Text fontSize='1.7vh' color='#F1F3F4'>둘 다 역량을 키워서 한쪽을 선택할 수 있게 합니다.</Text></Word>

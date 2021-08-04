@@ -13,7 +13,7 @@ const MainNews = (props) => {
           <CardList>
             {[1, 2, 3, 4].map((n, idx) => {
               return (
-                <NewsCard onClick={() => {}}>
+                <NewsCard key={idx} onClick={() => {}}>
                   <Grid width="100%">
                     <div><Text p fontSize="2vh" fontWeight="700" margin="3% 0%" color='#F8F9FA'>
                         여기에 내용이 들어갑니다

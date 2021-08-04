@@ -143,7 +143,11 @@ const Button = styled.button`
   height: 30%;
   background-color: #444;
   border: none;
+
   border-radius: 5px;
+
+  cursor: pointer;
+
 `;
 
 const HelpDiv = styled.div`

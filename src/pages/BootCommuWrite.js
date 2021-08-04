@@ -13,7 +13,8 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
-  const username = useSelector(state => state.user.user.user.nickname);
+  // const username = useSelector(state => state.user.user.user.nickname);
+  const username = 'test';
   const titleRef = useRef('');
   const contentRef = useRef('');
   const addPost = () => {

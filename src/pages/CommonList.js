@@ -162,12 +162,13 @@ background-color: #FFFFFF;
 font-size: 1.5vh;
 margin: 4%;
 border: none;
-color: #80868B;
+color: #4D4E93;
 cursor: pointer;
 width: 70%;
-border-radius: 40vh;
+border-radius: 10vh;
 font-weight: bold;
 height: 4vh;
+border: 1px solid #4D4E93;
 &:hover {
   background-color: #282A2D;
   color: #F1F3F4;;

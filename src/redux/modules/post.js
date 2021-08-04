@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
+import instance from '../../shared/Request';
 
 // 액션타입
 const SET_POST = 'SET_POST'; // 게시글 전체 불러오기
@@ -25,9 +26,7 @@ const initialState = {
 const setPostDB = () => {
   // 전체 게시글 불러오는 함수
   return function (dispatch) {
-    const axios = require('axios');
-    axios
-      .get('http://3.34.141.76/posts')
+    instance.get('/posts')
       .then((response) => {
         dispatch(setPost(response.data));
       })
@@ -41,12 +40,12 @@ const setOnePostDB = (id) => {
   // 개별 게시글 불러오는 함수
   return function (dispatch) {
     const postId = id;
-    const axios = require('axios');
-    axios
-      .get(`http://3.34.141.76/posts/${postId}`, {
+    instance
+      .get(`/posts/${postId}`, {
         postId: postId,
       })
       .then((response) => {
+        console.log(response.data);
         dispatch(setOnePost(response.data));
       })
       .catch((err) => {
@@ -62,10 +61,9 @@ const addPostDB = (new_post) => {
     const content = new_post.content;
     const nickname = new_post.nickname;
     const category = new_post.category;
-    const axios = require('axios');
     console.log(new_post);
-    axios
-      .post('http://3.34.141.76/posts', {
+    instance
+      .post('/posts', {
         title: title,
         content: content,
         nickname: nickname,
@@ -73,6 +71,7 @@ const addPostDB = (new_post) => {
       })
       .then((response) => {
         dispatch(addPost(response.data));
+        history.goBack();
       })
       .catch((err) => {
         console.error(`게시글 추가하기 에러 발생: ${err}`);
@@ -89,9 +88,8 @@ const editPostDB = (edited_post) => {
     const postId = edited_post.postId;
     const category = edited_post.category;
     const nickname = edited_post.nickname;
-    const axios = require('axios');
-    axios
-      .patch(`http://3.34.141.76/posts/${postId}`, {
+    instance
+      .patch(`/posts/${postId}`, {
         title: title,
         content: content,
         postId: postId,
@@ -111,15 +109,19 @@ const editPostDB = (edited_post) => {
   };
 };
 
-const deletePostDB = (id) => {
+const deletePostDB = (deleted_post) => {
   // 게시글 삭제하는 함수
   return function (dispatch) {
-    const postId = id;
-    const axios = require('axios');
-    axios
-      .delete('url')
+    const postId = deleted_post.id;
+    const nickname = deleted_post.nickname;
+    instance
+      .delete(`/posts/${postId}`, {
+        postId: postId,
+        nickname: nickname,
+      })
       .then((response) => {
-        console.log('deletePostDB 함수 호출 성공!');
+        console.log(response.data);
+        dispatch(deletePost(deleted_post));
         // history.push('/');
       })
       .catch((err) => {
@@ -143,6 +145,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list.unshift(action.payload.post);
       }),
+    [DELETE_POST]: (state, action) =>
+    produce(state, (draft) => {
+      console.log(action.payload.post);
+    }),
   },
   initialState
 );

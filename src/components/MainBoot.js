@@ -14,7 +14,7 @@ const MainBoot = (props) => {
           <CardList>
             {[1, 2, 3, 4, 5, 6].map((n, idx) => {
               return (
-                <CampCard
+                <CampCard key={idx}
                   onClick={() => {
                     history.push('/boot/review');
                   }}

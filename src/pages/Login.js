@@ -36,24 +36,13 @@ const Login = (props) => {
             <Image src={Logo} width="60%" margin="auto" />
           </Grid>
         </Grid>
-        <Grid height="30%" backgroundColor="blue">
+        <Grid height="30%">
           <form>
-            <TextBox>
-              <label>
-                <Text fontSize="1.5vh" fontWeight="700" color="#80868b">
-                  이메일
-                </Text>
-              </label>
-            </TextBox>
-            <TextBox>
-              <Text fontSize="1.2vh" color="#80868b">
-                (알파벳/숫자, 4 - 10자)
-              </Text>
-            </TextBox>
             <InputBox>
               <InformInput
                 style={{ width: '98%' }}
                 type="email"
+                placeholder="이메일"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
@@ -62,6 +51,7 @@ const Login = (props) => {
             <InformInput
               style={{ width: '98%' }}
               type="password"
+              placeholder="비밀번호"
               onChange={(e) => {
                 setPwd(e.target.value);
               }}
@@ -71,8 +61,8 @@ const Login = (props) => {
             가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
           </Text>
         </Grid>
-        <Grid height="20%" backgroundColor="purple">
-          <Button onClick={() => login()}>
+        <Grid height="20%">
+          <Button onClick={() => login()} color="#a5a6af">
             <Text fontSize="1.5vh" color="white">
               로그인
             </Text>
@@ -81,14 +71,7 @@ const Login = (props) => {
             <HelpDiv>
               <A onClick={() => {}}>
                 <Text fontSize="1.3vh" color="#555">
-                  아이디 찾기
-                </Text>
-              </A>
-            </HelpDiv>
-            <HelpDiv>
-              <A onClick={() => {}}>
-                <Text fontSize="1.3vh" color="#555">
-                  비밀번호 찾기
+                  비밀번호 재설정
                 </Text>
               </A>
             </HelpDiv>
@@ -101,13 +84,12 @@ const Login = (props) => {
             </HelpDiv>
           </Grid>
         </Grid>
-        <Grid height="25%" backgroundColor="orange">
+        <Grid height="25%">
           <Button style={{ backgroundColor: '#2e3134' }}>
-            {/* <AiFillGoogleCircle
+            <AiFillGoogleCircle
               size="2vh"
               style={{ marginRight: '0.3vw', verticalAlign: 'middle' }}
-            /> */}
-            {/* <Image src={google_logo} /> */}
+            />
             <Text fontSize="1.5vh" color="#ddd">
               Google로 로그인
             </Text>
@@ -127,23 +109,26 @@ const TextBox = styled.div`
 
 const InputBox = styled.div`
   width: 100%;
+  margin-bottom: 5%;
 `;
 
 const InformInput = styled.input`
   width: 44%;
-  height: 3vh;
+  height: 5vh;
   border: 1px solid #80868b;
   border-radius: 5px;
   background-color: transparent;
   outline: none;
   caret-color: #80868b;
+  padding: 1%;
 `;
 const Button = styled.button`
   width: 100%;
-  height: 30%;
-  background-color: #444;
+  height: 5vh;
+  background-color: #7879f1;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const HelpDiv = styled.div`

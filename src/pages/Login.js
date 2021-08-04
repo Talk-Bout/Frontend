@@ -115,6 +115,7 @@ const Button = styled.button`
   height: 40%;
   background-color: #444;
   border: none;
+  cursor: pointer;
 `;
 
 const HelpDiv = styled.div`

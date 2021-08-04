@@ -19,13 +19,13 @@ const CommonWrite = (props) => {
     const _addContentRef = addContentRef.current.value;
     console.log(addTitleRef);
     console.log(addContentRef);
-    const new_post = {
-      postId: common_id,
-      title: title,
-      content: content,
-      nickname: 'username',
-      category: 'testing',
-    }
+    // const new_post = {
+    //   postId: common_id,
+    //   title: title,
+    //   content: content,
+    //   nickname: 'username',
+    //   category: 'testing',
+    // }
 
     if (_addTitleRef === "") {
       window.alert("제목을 입력해주세요!");

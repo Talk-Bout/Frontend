@@ -1,5 +1,5 @@
 //질문 업로드 임의 게시판
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Button, Grid, Input, Text } from '../elements';
 import Sidebar from '../components/Sidebar';
@@ -15,9 +15,13 @@ import { actionCreators as questionActions } from '../redux/modules/post';
 const QuestionWrite = (props) => {
   const dispatch = useDispatch();
   //리뷰 콘텐츠 작성
-  const [title, setTitle] = React.useState('');
-  const [content, setContent] = React.useState('');
+  // const [title, setTitle] = React.useState('');
+  // const [content, setContent] = React.useState('');
+  const titleInput = useRef(null);
+  const contentInput = useRef(null);
 
+  //title, title을 변경할 수 있는 setTitle
+  // 수정하고 목록으로 돌아가면 ,setPost 됨. 서버의 내용을 도로 가져오는 함수가 있기 때문에
   // 콘텐츠 수정
   const [edit_mode, setEditMode] = React.useState(false);
   const question_id = props.match.params.id; //작성페이지, 수정페이지인지 구분할 수 있는 부분
@@ -30,18 +34,16 @@ const QuestionWrite = (props) => {
       setEditMode(true);
     }
   }, []);
-
-  console.log(edit_mode);
-
   const question_list = useSelector((state) => state.post.list);
   const old_question = question_list.find((post) => post.postId == question_id);
   console.log(old_question);
   //포스트 작성
   const addQuestion = () => {
+    console.log(titleInput, contentInput);
     const new_post = {
       postId: question_id,
-      title: title,
-      content: content,
+      title: titleInput.current.value,
+      content: contentInput.current.value,
       nickname: 'username',
       category: 'testing',
       board_name: board_name,
@@ -111,6 +113,7 @@ const QuestionWrite = (props) => {
                 <TitleBox>
                   <TitleInput
                     placeholder="제목을 입력해주세요"
+                    ref={titleInput}
                     defaultValue={edit_mode ? old_question.title : null}
                   />
                 </TitleBox>
@@ -118,6 +121,7 @@ const QuestionWrite = (props) => {
                   <Textarea
                     rows="15"
                     placeholder="내용을 입력해주세요"
+                    ref={contentInput}
                     defaultValue={edit_mode ? old_question.content : null}
                   />
                 </ContentBox>

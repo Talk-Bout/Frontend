@@ -16,17 +16,19 @@ import { RiEditCircleFill } from 'react-icons/ri';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
-
-  const question_id = window.location.pathname.split('/question/detail/')[1];
+  const question_id = window.location.pathname.split('/question/detail/')[1]; //ㅇㅋ
   const question_list = useSelector((state) => state.post.list);
   const question_found = question_list.find(
     (post) => post.postId == question_id
   );
-  console.log(question_found);
+  console.log(question_list);
   console.log(question_id);
-
+  //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
+  // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
-    dispatch(questionActions.setOnePostDB(question_id));
+    if (!question_found) {
+      dispatch(questionActions.setOnePostDB(question_id));
+    }
   }, []);
 
   const editBtn = () => {
@@ -36,6 +38,7 @@ const QuestionDetail = (props) => {
   if (!question_found) {
     return <></>;
   }
+
   return (
     <React.Fragment>
       <Grid display="flex">

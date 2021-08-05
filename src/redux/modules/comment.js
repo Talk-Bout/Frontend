@@ -49,7 +49,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
     return function (dispatch, {history}) {
         const nickname = new_comment.nickname;
         const content = new_comment.content;
-        const postId = parseInt(new_comment.postId);
+        const postId = new_comment.postId;
         console.log(new_comment);
         const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
         instance.post(`/posts/${postId}/comments`,
@@ -59,7 +59,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
             postId: postId,
         }, {headers: headers}).then((response) => {
             console.log(response.data);
-            //   dispatch(addComment(response.data));
+            dispatch(addComment(response.data));
             }).catch((err) => {
                 console.error(`댓글 추가하기 에러 발생: ${err}`);
             });
@@ -85,7 +85,7 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
 const deleteCommentDB = (postId, commentId, nickname) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
 instance.delete(`/posts/${postId}/comments/${commentId}`, {
-    commentId: parseInt(commentId),
+    commentId: commentId,
     nickname: nickname,
 })
 .then((response) => {

@@ -34,7 +34,7 @@ const Login = (props) => {
                   가입 시 입력한 이메일을 입력해주세요.
                 </Text>
               </Grid>
-              <Grid height="30%" padding="9% 0%">
+              <Grid height="28%" padding="9% 0 0 0">
                 <Text color="#80868B"  margin="3% 0%">이메일</Text>
                 <Grid display="flex" margin="5% 0" width="100%">
                   <Input border="1px solid #80868B" color="#F8F9FA" border_radius="1vh" width="31%" font_size="2vh" placeholder="이메일"
@@ -48,9 +48,9 @@ const Login = (props) => {
                   </Select>
                 </Grid>     
               </Grid>
-              <Grid height="20%" padding="3% 0">
-                <Text p margin="0" color="#FF7070" fontSize="1.8vh">입력한 정보와 일치하는 회원이 없습니다.</Text>
-                <Text p margin="0" color="#FF7070" fontSize="1.8vh">이메일을 다시 확인하시거나 회원가입을 진행해 주세요.</Text>
+              <Grid height="20%" padding="2% 0 3% 0" width="100%">
+                <Text p margin="0" color="#FF7070" fontSize="1.5vh">입력한 정보와 일치하는 회원이 없습니다.</Text>
+                <Text p margin="2% 0" color="#FF7070" fontSize="1.5vh">이메일을 다시 확인하시거나 회원가입을 진행해 주세요.</Text>
               </Grid>
               <Grid height="25%">
                 <Button height="55%" font_size="2.3vh" bg="#7879F1" border="none" color="#F8F9FA" border_radius="2vh">이메일로 비밀번호 찾기</Button>

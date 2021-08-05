@@ -64,10 +64,11 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
                 console.error(`댓글 추가하기 에러 발생: ${err}`);
             });
         };
-};
+    };
 
-const editCommentDB = (edit_comment, commentId, postId) => {           // 댓글 수정하는 함수
+const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하는 함수
 return function (dispatch, getState, { history }) {
+const commentId = edit_comment.commentId;
 const nickname = edit_comment.nickname;
 const content = edit_comment.content;
 instance.patch(`/posts/${postId}/comments/${commentId}`,
@@ -83,17 +84,15 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
 };
 };
 
-const deleteCommentDB = (postId, commentId, nickname) => {           // 댓글 삭제하는 함수
+
+const deleteCommentDB = (commentId, postId) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
-    console.log(postId, commentId, nickname);
-instance.delete(`/posts/${postId}/comments/${commentId}`, {
-    commentId: parseInt(commentId),
-    nickname: nickname,
-})
+instance.delete(`/posts/${postId}/comments/${commentId}`
+)
 .then((response) => {
-        // console.log('deleteCommentDB 함수 호출 성공!');
-        dispatch(deleteComment(commentId))
-        // dispatch(deleteComment(response.data));
+        console.log('deleteCommentDB 함수 호출 성공!');
+        console.log(response.data);
+        dispatch(deleteComment(commentId));
     }).catch((err) => {
         console.error(`댓글 삭제하기 에러 발생: ${err}`);
     });
@@ -110,7 +109,7 @@ export default handleActions({
 
 [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
     draft.list.unshift(action.payload.comment);
-    // console.log(action.payload.comment);
+    console.log(action.payload.comment);
 }),
 
 [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
@@ -118,6 +117,7 @@ export default handleActions({
         if(ct.commentId !== action.payload.comment){
     return ct
     }
+    console.log(action.payload);
 })
     draft.list = new_comment_list;
 }),

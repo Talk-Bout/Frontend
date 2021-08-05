@@ -12,10 +12,10 @@ import CommentEdit from '../components/CommentEdit';
 const Comment = (props) => {
   
 const dispatch = useDispatch();
-const username = useSelector(state => state.user.user.user.nickname);
+const username = useSelector(state => state.user.user.nickname);
 const comment_list = useSelector(state => state.comment.list);
 const addRef = useRef(null);
-const postId = props.postId;
+const postId = parseInt(props.postId);
 
 // 댓글 조회
 useEffect(() => {
@@ -32,14 +32,11 @@ const all_comment = comment_list.slice(0, comment_list.length)
   //댓글 등록
   const addComment = () => {
     const addCommentRef = addRef.current.value;
-    console.log(addCommentRef);
 
     const new_comment = {
       content : addCommentRef,
       nickname : username,
-      //
       postId : postId,
-      //
   }
   console.log(new_comment);
   
@@ -48,6 +45,7 @@ const all_comment = comment_list.slice(0, comment_list.length)
       return;
     }
   dispatch(commentActions.addCommentDB(new_comment));
+  // console.log(dispatch(commentActions.addCommentDB(new_comment)));
   addRef.current.value = "";
   }
 

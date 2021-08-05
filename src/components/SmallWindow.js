@@ -26,13 +26,31 @@ const SmallWindow = (props) => {
     );
   }
 
+  if (url === '/signup') {
+    return (
+      <React.Fragment>
+        <Grid backgroundColor="#18181A" height="100vh" padding="10vh">
+          <Grid
+            backgroundColor="#212123"
+            width="25vw"
+            height="80vh"
+            margin="auto"
+            padding="3vh 2.5vw"
+          >
+            {children}
+          </Grid>
+        </Grid>
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
-      <Grid backgroundColor="#18181A" height="100vh" padding="15vh">
+      <Grid backgroundColor="#18181A" height="100vh" padding="10vh 15vh">
         <Grid
           backgroundColor="#212123"
           width="25vw"
-          height="75vh"
+          height="70vh"
           margin="auto"
           padding="3vh 2.5vw"
         >

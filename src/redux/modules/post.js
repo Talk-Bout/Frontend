@@ -71,7 +71,7 @@ const addPostDB = (new_post) => {
         category: category,
       }, {headers: headers})
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         dispatch(addPost(response.data));
       })
       .catch((err) => {
@@ -116,14 +116,9 @@ const deletePostDB = (deleted_post) => {
   // 게시글 삭제하는 함수
   return function (dispatch) {
     const postId = parseInt(deleted_post.postId);
-    const nickname = deleted_post.nickname;
-    console.log(postId, nickname);
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
-      .delete(`/posts/${postId}`, {
-        postId: postId,
-        nickname: nickname,
-      }, {headers: headers})
+      .delete(`/posts/${postId}`, {headers: headers})
       .then((response) => {
         console.log(response.data);
         dispatch(deletePost(deleted_post));

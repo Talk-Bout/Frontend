@@ -49,7 +49,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
     return function (dispatch, {history}) {
         const nickname = new_comment.nickname;
         const content = new_comment.content;
-        const postId = new_comment.postId;
+        const postId = parseInt(new_comment.postId);
         console.log(new_comment);
         const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
         instance.post(`/posts/${postId}/comments`,
@@ -72,6 +72,7 @@ const nickname = edit_comment.nickname;
 const content = edit_comment.content;
 instance.patch(`/posts/${postId}/comments/${commentId}`,
 { 
+    commentId: commentId,
     nickname: nickname,
     content: content,
 }).then((response) => {
@@ -84,8 +85,9 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
 
 const deleteCommentDB = (postId, commentId, nickname) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
+    console.log(postId, commentId, nickname);
 instance.delete(`/posts/${postId}/comments/${commentId}`, {
-    commentId: commentId,
+    commentId: parseInt(commentId),
     nickname: nickname,
 })
 .then((response) => {

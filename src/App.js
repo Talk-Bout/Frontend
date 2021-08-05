@@ -44,6 +44,7 @@ import NewsList from './pages/NewsList';
 //마이 페이지
 import Mypage from './pages/Mypage';
 import MyPageEdit from './pages/MyPageEdit';
+import DeleteUser from './pages/DeleteUser';
 
 function App() {
   return (
@@ -91,6 +92,7 @@ function App() {
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/edit" exact component={MyPageEdit} />
+          <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>

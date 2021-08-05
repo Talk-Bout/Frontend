@@ -14,11 +14,7 @@ const MainBoot = (props) => {
           <CardList>
             {[1, 2, 3, 4, 5, 6].map((n, idx) => {
               return (
-                <CampCard key={idx}
-                  onClick={() => {
-                    history.push('/boot/review');
-                  }}
-                >
+                <CampCard key={idx}>
                   <Grid width="30%">
                     <ImageDiv>
                       <Text fontSize="1.5vh" color='#F8F9FA'>LOGO</Text>
@@ -26,7 +22,7 @@ const MainBoot = (props) => {
                   </Grid>
                   <Grid width="70%" margin="auto 5%">
                     <Grid margin="1% auto">
-                      <Text p fontSize="1.7vh" fontWeight="700" margin="3% 0%" color='#F8F9FA'>
+                      <Text p fontSize="1.7vh" fontWeight="700" margin="3% 0%" color='#F8F9FA' cursor='pointer' _onClick={() => history.push('/boot/info')}>
                         부트캠프명
                       </Text>
                       <Text fontSize="1.3vh" color="#DADCE0">
@@ -34,10 +30,10 @@ const MainBoot = (props) => {
                       </Text>
                     </Grid>
                     <Grid display="flex" margin="5% auto 0">
-                      <Text p fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED" _onClick={() => history.push('/boot/review')}>
+                      <Text p fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED" cursor='pointer' _onClick={() => history.push('/boot/review')}>
                         리뷰
                       </Text>
-                      <Text fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED" _onClick={() => history.push('/boot/community')}>
+                      <Text fontSize="1.3vh" margin="3% 3% 0 0" color="#E8EAED" cursor='pointer' _onClick={() => history.push('/boot/community')}>
                         커뮤니티
                       </Text>
                     </Grid>
@@ -78,7 +74,6 @@ const CampCard = styled.div`
   display: flex;
   margin-bottom: 10px;
   border-radius: 10px;
-  cursor: pointer;
   &:hover {
     opacity: 0.7;
   }

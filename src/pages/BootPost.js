@@ -18,22 +18,25 @@ const BootPost = (props) => {
   const dispatch = useDispatch();
   const post_id = window.location.pathname.split('/boot/post/')[1];
   // const username = useSelector(state => state.user.user.user.nickname);
-  const username = 'test';
+  const username = 'realmot';
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
   const [MenuLink, setMenuLink] = useState(null);
+  const [EditComment, setEditComment] = useState(null);
 
-  // const comment_list = useSelector(state => state.comment.list);
+  const comment_list = useSelector(state => state.comment.list);
+  const comment_found = comment_list.filter((comment) => comment.postId == post_id);
 
-  // const commentInput = useRef(null);
+  const commentInput = useRef(null);
+  const commentEdit = useRef(null);
 
   useEffect(() => {
     if (post_found) {
-      // dispatch(commentActions.setCommentDB(post_id));
+      dispatch(commentActions.setCommentDB(post_id));
       return;
     }
     dispatch(postActions.setOnePostDB(post_id));
-    // dispatch(commentActions.setCommentDB(post_id));
+    dispatch(commentActions.setCommentDB(post_id));
   }, []);
 
   const handleClick = (e) => {
@@ -44,27 +47,37 @@ const BootPost = (props) => {
     setMenuLink(null);
   }
 
-  // const addComment = () => {
-  //   const content = commentInput.current.value;
-  //   const new_comment = {
-  //     nickname: 'username',
-  //     content: content,
-  //   }
-  //   dispatch(commentActions.addCommentDB(new_comment, post_id));
-  //   commentInput.current.value = '';
-  // }
+  const addComment = () => {
+    const content = commentInput.current.value;
+    const new_comment = {
+      nickname: username,
+      content: content,
+      postId: post_id,
+    }
+    dispatch(commentActions.addCommentDB(new_comment));
+    commentInput.current.value = '';
+  }
 
-  // const deleteComment = (post_id, comment_id) => {
-  //   dispatch(commentActions.deleteCommentDB(post_id, comment_id));
-  // }
+  const editComment = (comment_id) => {
+    const content = commentEdit.current.value;
+    const edited_comment = {
+
+    }
+    dispatch(commentActions.editCommentDB(edited_comment, comment_id, post_id))
+  }
+
+  const deleteComment = (comment_id) => {
+    const nickname = username;
+    dispatch(commentActions.deleteCommentDB(post_id, comment_id, nickname));
+  }
 
   const deletePost = () => {
-    // const deleted_post = {
-    //   postId: post_id,
-    //   nickname: username,
-    // };
-    // dispatch(postActions.deletePostDB(deleted_post));
-    console.log('삭제!');
+    const deleted_post = {
+      postId: post_id,
+      nickname: username,
+    };
+    dispatch(postActions.deletePostDB(deleted_post));
+    history.push('/boot/community');
   }
 
   if (!post_found) {
@@ -75,15 +88,16 @@ const BootPost = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto' height='auto'>
+      <Grid className='background' display='flex' overflow='auto' height='100vh'>
         <Sidebar />
         <Body header>
           <BodyInner>
             <div className='post-box' style={{padding: '0 10px 0 0'}}>
+              {/* 게시글 */}
               <Post>
                 <TitleBox>
                   <Grid>
-                    <Text fontSize='1.7vh' color='#dadce0'>부트캠프 &gt; 커뮤니티</Text>
+                    <Text fontSize='1.7vh' color='#dadce0'>부트캠프 &gt; 커뮤니티 / 작성자:{post_found.nickname}</Text>
                   </Grid>
                   <Grid display='flex' justify_content='space-between' padding='10px 0 0'>
                     <Text fontSize='3vh' color='#f1f3f4' fontWeight='700'>{post_found.title}</Text>
@@ -99,8 +113,8 @@ const BootPost = (props) => {
                         open={Boolean(MenuLink)}
                         onClose={handleClose}
                       >
-                        <MenuItem onClick={() => {}}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
-                        <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                        <MenuItem onClick={() => history.push(`/boot/community/write/${post_id}`)}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                        <MenuItem onClick={() => {handleClose(); deletePost()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
                       </Menu>
                     </div>
                   </Grid>
@@ -115,32 +129,42 @@ const BootPost = (props) => {
                   <Text color='#BDC1C6' fontSize='1.7vh' margin='0 10px 0'><AiOutlineEye /> 354</Text>
                 </IconBox>
               </Post>
+              {/* 댓글 입력란 */}
               <CommentInput>
                 <Text p fontSize='1.7vh' color='#E1E1E1'>댓글 15</Text>
                 <InputWrap>
-                  <Input placeholder='댓글을 남겨주세요'></Input>
-                  <CommentBtn><Text fontSize='1.7vh' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
+                  <Input placeholder='댓글을 남겨주세요' ref={commentInput}></Input>
+                  <CommentBtn onClick={() => addComment()}><Text fontSize='1.7vh' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
                 </InputWrap>
               </CommentInput>
+              {/* 댓글 리스트 */}
               <CommentList>
-                {[1, 2, 3, 4, 5].map((n, idx) => {
-                  return (
+                {comment_found && comment_found.map((n, idx) => {
+                  EditComment === n.commentId ?
                     <Comment key={idx}>
                       <Grid display='flex' justify_content='space-between'>
-                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명1</Text><Text fontSize='1.5vh' color='#BDC1C6'>2021.08.02</Text></NameTime>
-                        <Buttons>
-                          <PostBtn style={{margin: '0 20px 0'}}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
-                          <PostBtn onClick={() => deletePost()}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
-                        </Buttons>
+                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명{idx}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
                       </Grid>
-                      <Word><Text fontSize='1.7vh' color='#F1F3F4'>둘 다 역량을 키워서 한쪽을 선택할 수 있게 합니다.</Text></Word>
+                      <Word><input ref={commentEdit} defaultValue={n.content} /><button onClick={() => editComment(n.commentId)}/></Word>
                       <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
                     </Comment>
-                  )
+                  :
+                    <Comment key={idx}>
+                      <Grid display='flex' justify_content='space-between'>
+                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명{idx}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
+                        <Buttons>
+                          <PostBtn style={{margin: '0 20px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                          <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
+                        </Buttons>
+                      </Grid>
+                      <Word><Text fontSize='1.7vh' color='#F1F3F4'>{n.content}</Text></Word>
+                      <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
+                    </Comment>
                 })}
                 <MoreBtn><Text fontSize='1.6vh' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn>
               </CommentList>
             </div>
+            {/* 다른 게시글 목록 */}
             <OthersBox>
               <BoxInner>
                 <Text p fontSize='2vh' fontWeight='700' color='#E8EAED'>커뮤니티 내 다른 게시글</Text>

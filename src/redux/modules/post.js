@@ -39,8 +39,8 @@ const setPostDB = () => {
 const setOnePostDB = (id) => {
   // 개별 게시글 불러오는 함수
   return function (dispatch) {
-    const postId = id;
-    // const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+    const postId = parseInt(id);
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
       .get(`/posts/${postId}`, {
         postId: postId,
@@ -63,7 +63,6 @@ const addPostDB = (new_post) => {
     const nickname = new_post.nickname;
     const category = new_post.category;
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
-    console.log(headers);
     instance
       .post('/posts', {
         title: title,
@@ -72,7 +71,7 @@ const addPostDB = (new_post) => {
         category: category,
       }, {headers: headers})
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         dispatch(addPost(response.data));
       })
       .catch((err) => {
@@ -87,9 +86,11 @@ const editPostDB = (edited_post) => {
   return function (dispatch) {
     const title = edited_post.title;
     const content = edited_post.content;
-    const postId = edited_post.postId;
+    const postId = parseInt(edited_post.postId);
     const category = edited_post.category;
     const nickname = edited_post.nickname;
+    console.log(edited_post);
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
       .patch(`/posts/${postId}`, {
         title: title,
@@ -97,7 +98,7 @@ const editPostDB = (edited_post) => {
         postId: postId,
         category: category,
         nickname: nickname,
-      })
+      }, {headers: headers})
       .then((response) => {
         dispatch(editPost(response.data));
         // if (edited_post.board_name === 'question') {
@@ -114,13 +115,10 @@ const editPostDB = (edited_post) => {
 const deletePostDB = (deleted_post) => {
   // 게시글 삭제하는 함수
   return function (dispatch) {
-    const postId = deleted_post.id;
-    const nickname = deleted_post.nickname;
+    const postId = parseInt(deleted_post.postId);
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
-      .delete(`/posts/${postId}`, {
-        postId: postId,
-        nickname: nickname,
-      })
+      .delete(`/posts/${postId}`, {headers: headers})
       .then((response) => {
         console.log(response.data);
         dispatch(deletePost(deleted_post));

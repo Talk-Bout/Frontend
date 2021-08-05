@@ -32,7 +32,11 @@ const initialState = {
 // 액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
 return function (dispatch) {
-  instance.get(`/posts/${postId}/comments`)
+  const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+  console.log(postId);
+  instance.get(`/posts/${postId}/comments`, {
+    postId: postId,
+  }, {headers: headers})
   .then((response) => {
     // console.log('setPostDB 함수 호출 성공!');
     // console.log(response);
@@ -49,7 +53,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
     return function (dispatch, {history}) {
         const nickname = new_comment.nickname;
         const content = new_comment.content;
-        const postId = new_comment.postId;
+        const postId = parseInt(new_comment.postId);
         console.log(new_comment);
         const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
         instance.post(`/posts/${postId}/comments`,
@@ -87,9 +91,8 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
 
 const deleteCommentDB = (commentId, postId) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
-instance.delete(`/posts/${postId}/comments/${commentId}`,{
-    commentId: commentId,
-})
+instance.delete(`/posts/${postId}/comments/${commentId}`
+)
 .then((response) => {
         console.log('deleteCommentDB 함수 호출 성공!');
         console.log(response.data);

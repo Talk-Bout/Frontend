@@ -2,58 +2,51 @@ import React, { useRef } from 'react';
 import SmallWindow from '../components/SmallWindow';
 import { Grid, Text, Image } from '../elements';
 import styled from 'styled-components';
-
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import Logo from '../image/Logo.png';
 
 const Signup = (props) => {
   const dispatch = useDispatch();
 
-  const [id, setId] = React.useState('');
-  const [password, setPwd] = React.useState('');
-  const [nickname, setNickname] = React.useState('');
-  const [confirm_password, setConfirmPwd] = React.useState('');
-  const nickNameInfoUl = useRef(),
-    nickNameInfo = useRef(),
-    pwInfoLen = useRef(),
-    pwInfoMatch = useRef(),
-    pwInfoContinuos = useRef(),
-    pwInfoUl = useRef(),
-    rePwInfoUl = useRef(),
-    rePwInfoLiT = useRef();
+  const formik = useFormik({
+    initialValues: {
+      id: '',
+      password: '',
+      confirmPassword: '',
+      nickname: '',
+    },
+    validationSchema: Yup.object({
+      id: Yup.string().required('아이디를 입력해주세요.'),
+      password: Yup.string()
+        .min(8, '8자 이상 입력해주세요')
+        .matches(
+          /[a-zA-Z]/,
+          '비밀번호는 영어, 숫자, 특수문자를 포함해야 합니다.'
+        )
+        .required('비밀번호를 입력해주세요'),
+      confirmPassword: Yup.string()
+        .min(8, '8자 이상 입력해주세요')
+        .matches(
+          /[a-zA-Z]/,
+          '비밀번호는 영어, 숫자, 특수문자를 포함해야 합니다.'
+        )
+        .required('비밀번호를 한 번 더 입력해주세요')
+        .oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않습니다.'),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+      // dispatch(userAcions.__signup(values));
+      // setLoginMode(true);
+    },
+  });
   //select 값 가져오기
   const selectMail = useRef(null);
 
-  const signup = () => {
-    const user_mail = String(id + '@' + selectMail.current.value);
-    const new_user = {
-      user_mail,
-      password,
-      nickname,
-      confirm_password,
-    };
-
-    if (
-      id === '' ||
-      password === '' ||
-      nickname === '' ||
-      confirm_password === ''
-    ) {
-      window.alert('모든 정보를 입력해주세요');
-      return;
-    }
-
-    if (password === confirm_password) {
-      dispatch(userActions.signUpDB(new_user));
-    } else {
-      window.alert('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-
-    dispatch(userActions.signUpDB(new_user));
-  };
+  const signup = () => {};
 
   return (
     <SmallWindow>
@@ -75,7 +68,7 @@ const Signup = (props) => {
         </Grid>
         <Grid height="18%">
           {/* 회원가입 작성 폼 */}
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <TextBox>
               <label>
                 <Text fontSize="1.5vh" fontWeight="700" color="#80868b">
@@ -89,23 +82,19 @@ const Signup = (props) => {
               </Text>
             </TextBox>
             <InputBox>
-              <Input
-                type="Email"
-                onChange={(e) => {
-                  setId(e.target.value);
-                }}
-              />
+              <Input type="Email" placeholder="이메일" />
               <Text margin="0 5px" color="#80868b">
                 @
               </Text>
               <Select ref={selectMail}>
+                <option value="">선택해주세요</option>
                 <option value="gmail.com">gmail.com</option>
                 <option value="naver.com">naver.com</option>
                 <option value="hanmail.net">hanmail.net</option>
               </Select>
             </InputBox>
           </form>
-          <Text fontSize="1.2vh" color="red">
+          <Text fontSize="1.2vh" color="#ff7070">
             이미 사용중인 이메일입니다.
           </Text>
         </Grid>
@@ -127,9 +116,7 @@ const Signup = (props) => {
               <Input
                 style={{ width: '98%' }}
                 type="password"
-                onChange={(e) => {
-                  setPwd(e.target.value);
-                }}
+                placeholder="비밀번호"
               />
             </InputBox>
           </form>
@@ -147,18 +134,10 @@ const Signup = (props) => {
               <Input
                 style={{ width: '98%' }}
                 type="password"
-                onChange={(e) => {
-                  setConfirmPwd(e.target.value);
-                }}
+                placeholder="비밀번호 확인"
               />
             </InputBox>
           </form>
-          {/* <Text fontSize="1.2vh" color="red">
-            비밀번호가 일치하지 않습니다.
-          </Text> */}
-          <InfoUl className="checkPw" ref={nickNameInfoUl}>
-            <li ref={nickNameInfo}>·한글,영문,숫자만 2~6자리 가능</li>
-          </InfoUl>
         </Grid>
         <Grid height="15%">
           <form>
@@ -172,9 +151,7 @@ const Signup = (props) => {
             <InputBox>
               <Input
                 style={{ width: '98%' }}
-                onChange={(e) => {
-                  setNickname(e.target.value);
-                }}
+                placeholder="닉네임"
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     signup();
@@ -183,7 +160,7 @@ const Signup = (props) => {
               />
             </InputBox>
           </form>
-          <Text fontSize="1.2vh" color="red">
+          <Text fontSize="1.2vh" color="#ff7070">
             이미 사용중인 닉네임입니다.
           </Text>
         </Grid>
@@ -243,18 +220,6 @@ const Button = styled.button`
     box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
     position: relative;
     top: 2px;
-  }
-`;
-
-const InfoUl = styled.ul`
-  font-size: 12px;
-  color: #666666;
-  position: relative;
-  left: 0;
-  margin-top: 4px;
-  font-weight: 400;
-  & li {
-    margin-top: 4px;
   }
 `;
 

@@ -1,6 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
-import {history} from '../configureStore';
+import {history} from '../ConfigureStore';
 
 // 액션타입
 const SET_NEWS = 'SET_NEWS';

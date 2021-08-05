@@ -1,15 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import {Grid, Text} from '../elements';
 import { GoPrimitiveDot } from 'react-icons/go';
-import { BiLike, BiComment } from "react-icons/bi";
+import { BiLike, BiComment, BiPencil, BiTrashAlt } from "react-icons/bi";
 import { AiOutlineEye } from 'react-icons/ai';
+import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 import {actionCreators as commentActions} from '../redux/modules/comment';
 import {history} from '../redux/ConfigureStore';
+import { AiOutlineCaretDown } from 'react-icons/ai';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const BootPost = (props) => {
   const dispatch = useDispatch();
@@ -18,7 +21,7 @@ const BootPost = (props) => {
   const username = 'test';
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
-  // console.log(post_found);
+  const [MenuLink, setMenuLink] = useState(null);
 
   // const comment_list = useSelector(state => state.comment.list);
 
@@ -26,12 +29,20 @@ const BootPost = (props) => {
 
   useEffect(() => {
     if (post_found) {
-    //   dispatch(commentActions.setCommentDB(post_id));
+      // dispatch(commentActions.setCommentDB(post_id));
       return;
     }
     dispatch(postActions.setOnePostDB(post_id));
     // dispatch(commentActions.setCommentDB(post_id));
   }, []);
+
+  const handleClick = (e) => {
+    setMenuLink(e.currentTarget);
+  }
+
+  const handleClose = () => {
+    setMenuLink(null);
+  }
 
   // const addComment = () => {
   //   const content = commentInput.current.value;
@@ -71,18 +82,32 @@ const BootPost = (props) => {
             <div className='post-box' style={{padding: '0 10px 0 0'}}>
               <Post>
                 <TitleBox>
-                  <Grid display='flex' justify_content='space-between'>
-                    <div><Text fontSize='1.7vh' color='#dadce0'>부트캠프 &gt; 커뮤니티</Text></div>
-                    <Grid width='auto'>
-                      <PostBtn style={{margin: '0 10px 0'}}><Text fontSize='1.5vh' color='#f1f3f4'>수정</Text></PostBtn>
-                      <PostBtn><Text fontSize='1.5vh' color='#f1f3f4'>삭제</Text></PostBtn>
-                    </Grid>
+                  <Grid>
+                    <Text fontSize='1.7vh' color='#dadce0'>부트캠프 &gt; 커뮤니티</Text>
                   </Grid>
-                  <Text p fontSize='2.5vh' color='#f1f3f4' fontWeight='700' margin='15px 0'>{post_found.title}</Text>
+                  <Grid display='flex' justify_content='space-between' padding='10px 0 0'>
+                    <Text fontSize='3vh' color='#f1f3f4' fontWeight='700'>{post_found.title}</Text>
+                    <div style={{height: '5vh'}}>
+                      <Text color='#9aa0a6' fontSize='3vh' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
+                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        <Text color='#9AA0A6' fontSize='3vh' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={MenuLink}
+                        keepMounted
+                        open={Boolean(MenuLink)}
+                        onClose={handleClose}
+                      >
+                        <MenuItem onClick={() => {}}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                        <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                      </Menu>
+                    </div>
+                  </Grid>
                   <Text fontSize='1.5vh' color='#7A7E82'>{post_found.createdAt}</Text>
                 </TitleBox>
                 <ContentBox>
-                  <Text p fontSize='1.7vh' color='#dadce0'>{post_found.content}</Text>
+                  <Text p fontSize='2vh' color='#dadce0'>{post_found.content}</Text>
                 </ContentBox>
                 <IconBox>
                   <span style={{backgroundColor: '#202124', padding: '10px', margin: '', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='2vh' fontWeight='700'><BiLike /> 17</Text></span>
@@ -94,7 +119,7 @@ const BootPost = (props) => {
                 <Text p fontSize='1.7vh' color='#E1E1E1'>댓글 15</Text>
                 <InputWrap>
                   <Input placeholder='댓글을 남겨주세요'></Input>
-                  <Button><Text fontSize='1.7vh' fontWeight='700' color='#121212'>등록하기</Text></Button>
+                  <CommentBtn><Text fontSize='1.7vh' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
                 </InputWrap>
               </CommentInput>
               <CommentList>
@@ -104,8 +129,8 @@ const BootPost = (props) => {
                       <Grid display='flex' justify_content='space-between'>
                         <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명1</Text><Text fontSize='1.5vh' color='#BDC1C6'>2021.08.02</Text></NameTime>
                         <Buttons>
-                          <PostBtn style={{margin: '0 10px 0'}}><Text fontSize='1.5vh' color='#dadce0'>수정</Text></PostBtn>
-                          <PostBtn onClick={() => deletePost()}><Text fontSize='1.5vh' color='#dadce0'>삭제</Text></PostBtn>
+                          <PostBtn style={{margin: '0 20px 0'}}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                          <PostBtn onClick={() => deletePost()}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
                         </Buttons>
                       </Grid>
                       <Word><Text fontSize='1.7vh' color='#F1F3F4'>둘 다 역량을 키워서 한쪽을 선택할 수 있게 합니다.</Text></Word>
@@ -119,9 +144,9 @@ const BootPost = (props) => {
             <OthersBox>
               <BoxInner>
                 <Text p fontSize='2vh' fontWeight='700' color='#E8EAED'>커뮤니티 내 다른 게시글</Text>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => {
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n, idx) => {
                   return (
-                    <Text p fontSize='1.7vh' color='#DADCE0' _onClick={() => history.push('/boot/post')} cursor='pointer' hover='opacity: 0.7'><GoPrimitiveDot style={{height: '1.2vh'}} />부트캠프 질문 드립니다!</Text>
+                    <Text key={idx} p fontSize='1.7vh' color='#DADCE0' _onClick={() => history.push('/boot/post')} cursor='pointer' hover='opacity: 0.7'><GoPrimitiveDot style={{height: '1.2vh'}} />부트캠프 질문 드립니다!</Text>
                   )
                 })}
               </BoxInner>
@@ -155,10 +180,9 @@ const TitleBox = styled.div`
 const PostBtn = styled.button`
   background-color: transparent;
   box-sizing: border-box;
-  border: 1px solid #f1f3f4;
-  border-radius: 5px;
-  padding: 2px 10px;
+  padding: 2px 0;
   cursor: pointer;
+  border: none;
   &:active {
     opacity: 0.7;
   }
@@ -193,6 +217,7 @@ const Input = styled.input`
   border: 1.9px solid #9AA0A6;
   border-radius: 10px;
   padding: 20px;
+  margin-right: 20px;
   font-size: 1.7vh;
   caret-color: #5F6368;
   color: #e1e1e1;
@@ -204,9 +229,9 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button`
+const CommentBtn = styled.button`
   width: 15%;
-  background-color: #E1E1E1;
+  background-color: #7879F1;
   border-radius: 10px;
   border: none;
   cursor: pointer;

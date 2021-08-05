@@ -153,20 +153,13 @@ const CommonWrite = (props) => {
                   ></Input>
                 </Grid>
               </Grid>
-              <Grid width="100%" height="12%" backgroundColor="#2E3134">
-                {/* 기능 */}
-                <BoardFooter>
-                  <Icon>
-                    <VscFileMedia size={27} />
-                  </Icon>
-                  <Icon>
-                    <VscMention size={27} />
-                  </Icon>
-                  <Icon>
-                    <VscSymbolNumeric size={27} />
-                  </Icon>
-                </BoardFooter>
-              </Grid>
+            </Grid>
+            <Grid width="100%" height="12%" backgroundColor="#2E3134">
+              {/* 기능 */}
+            <BoardFooter>
+              <Icon><VscFileMedia size={27}/></Icon>
+              <Icon><VscSymbolNumeric size={27}/></Icon> 
+            </BoardFooter>
             </Grid>
           </Grid>
         </Body>
@@ -199,10 +192,10 @@ const Hr = styled.hr`
 `;
 
 const BoardFooter = styled.div`
-  display: flex;
-  align-items: center;
-  height: 7vh;
-  margin: 0 0 0 5.5%;
+display: flex;
+align-items: center;
+height: 7vh;
+margin: 0 0 0 3%;
 `;
 
 const Icon = styled.span`

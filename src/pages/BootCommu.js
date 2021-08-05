@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BiLike, BiComment } from "react-icons/bi";
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 
 const BootCommu = (props) => {
   const dispatch = useDispatch();
@@ -29,23 +29,24 @@ const BootCommu = (props) => {
           <Grid className='info-button' height='15%' padding='40px 0'>
             <InfoBtn>
               <Text fontSize='3.5vh' color='#F8F9FA' fontWeight='700'>부트캠프명</Text>
-              <Button><Text fontSize='1.6vh' color='#121212' fontWeight='700'>홈페이지 바로가기</Text></Button>
+              <Button><Text fontSize='1.6vh' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
             </InfoBtn>
             <Text fontSize='1.6vh' color='#80868B'>★ 2.2 (164개 리뷰)</Text>
           </Grid>
           <Grid className='nav-box' height='80px' margin='20px 0 0' borderBottom='2px solid #5F6368'>
+            <Menu><Text fontSize='2.5vh' color='#5F6368'_onClick={() => history.push('/boot/info')}>정보</Text></Menu>
             <Menu><Text fontSize='2.5vh' color='#5F6368'_onClick={() => history.push('/boot/review')}>리뷰</Text></Menu>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='2.5vh' color='#e8eaed'>커뮤니티</Text></Menu>
           </Grid>
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='0 40px'>
               <PostList>
-                {/* <Grid className='temp-button' height='auto' display='inline-block' padding='20px 0 0'> */}
-                <WriteBtn onClick={() => history.push('/boot/community/write')}><Text fontSize='1.6vh' color='#e8eaed' fontWeight='700'>글쓰기</Text></WriteBtn>
-                {/* </Grid> */}
-                <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091'>
+                <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091' padding='20px 0'>
                   <TitleBox><Text p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>스파르타코딩클럽 커뮤니티</Text></TitleBox>
-                  <Text p className='sort' fontSize='1.7vh' color='#757577' margin='3vh 0 0'>인기순 | 최신순</Text>
+                  <Grid width='auto'>
+                    <Text className='sort' fontSize='1.7vh' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text>
+                    <WriteBtn onClick={() => history.push('/boot/community/write')}><Text fontSize='1.4vh' color='#7879f1'><span style={{fontSize: '2.5vh', verticalAlign: 'middle', marginRight: '5px'}}><BsPlus /></span>글쓰기</Text></WriteBtn>
+                  </Grid>
                 </Grid>
                 {post_list.map((n, idx) => {
                   return (
@@ -110,7 +111,7 @@ const Button = styled.button`
   padding: 0 40px;
   border: none;
   border-radius: 8px;
-  background-color: #BDC1C6;
+  background-color: #2E3134;
   cursor: pointer;
   &:active {
     opacity: 0.7;
@@ -131,11 +132,11 @@ const PostList = styled.div`
 `;
 
 const WriteBtn = styled.button`
-  float: right;
-  margin-top: 20px;
-  padding: 5px 10px;
+  /* float: right; */
+  margin: 20px 0;
+  padding: 5px 15px 0 10px;
   background-color: transparent;
-  border: 2px solid #e8eaed;
+  border: 1px solid #7879F1;
   border-radius: 7px;
   cursor: pointer;
   &:active {

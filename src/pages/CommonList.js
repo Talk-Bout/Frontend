@@ -9,8 +9,9 @@ import { useDispatch} from 'react-redux';
 import { actionCreators as commentActions} from "../redux/modules/comment";
 import { actionCreators as postActions} from "../redux/modules/post";
 //icons
-import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
+import { BiTimeFive, BiLike, BiComment, BiSort} from 'react-icons/bi';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { FaPlus } from "react-icons/fa";
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -31,7 +32,7 @@ const CommonBoardList = (props) => {
         <Sidebar />
         <Body header>
         <Grid height="100%" >
-          <Grid height="7%">
+          <Grid height="5vh">
               <Text p fontSize="2.2vh;" padding="0 1%" color="#F8F9FA">
                 부트톡톡
               </Text>
@@ -49,25 +50,43 @@ const CommonBoardList = (props) => {
                   })}
                   </Categories>
                   {/* 글쓰기, 인기순 */}
-                    <Grid width="10%">
+                <Grid width="10%" >
+                  <SelectButton type="select">
+                  <Options>인기순</Options>
+                  <Options>최신순</Options>
+                  </SelectButton>
+                </Grid>
+                <Grid width="10%">
                     <WriteBox>
                       <WriteButton
                         onClick={() => history.push('/common/write')}
                       >
-                        글쓰기
+                        <FaPlus/>&nbsp; 글쓰기
                       </WriteButton>
                     </WriteBox>
                   </Grid>
-                <Grid width="10%" >
-                  <SelectButton type="select">
-                    <Options>인기순</Options>
-                    <Options>최신순</Options>
-                  </SelectButton>
-                </Grid>
+              </Grid>
+            </Grid>
+            {/* 공지 */}
+            <hr/>
+            <Grid height="10vh">
+              <Grid display="flex" width="100%" >
+                <Notice>
+                  <NoticeHead>공지</NoticeHead>
+                  <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
+                  <Text color="#9AA0A6" fontSize="1.5vh" margin="0.2% 0 0 0" lineHeight="5vh">2021.08.03</Text>
+                </Notice>
+              </Grid>
+              <Grid display="flex" width="100%">
+                <Notice>
+                  <NoticeHead>공지</NoticeHead>
+                  <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
+                  <Text color="#9AA0A6" fontSize="1.5vh" margin="0.2% 0 0 0"lineHeight="5vh">2021.08.03</Text>
+                </Notice>
               </Grid>
             </Grid>
             {/* 자유게시판 게시물  */}
-            <Grid height="77%">
+            <Grid height="85vh">
               <Grid width="100%" height="100%">
               <Contents>
                 {common_list.map((c, idx) => {
@@ -158,14 +177,13 @@ const WriteBox = styled.div`
 `;
 
 const WriteButton = styled.button`
-background-color: #FFFFFF;
+background-color: transparent;
 font-size: 1.5vh;
-margin: 4%;
 border: none;
-color: #4D4E93;
+color: #7879F1;
 cursor: pointer;
-width: 70%;
-border-radius: 10vh;
+width: 100%;
+border-radius: 1vh;
 font-weight: bold;
 height: 4vh;
 border: 1px solid #4D4E93;
@@ -178,7 +196,7 @@ border: 1px solid #4D4E93;
 const SelectButton = styled.select`
 border: none;
 background-color: #17181B;
-font-size: 1rem;
+font-size: 1.5vh;
 color: #F1F3F4;
 height: 3vh;
 margin: 5%;
@@ -189,8 +207,37 @@ const Options = styled.option`
 
 `;
 
+const Notice = styled.div`
+grid-template-rows: repeat(2, minmax(auto, auto));
+grid-template-columns: repeat(1, 1fr);
+display: flex;
+width: 100%;
+height: 50%;
+border-bottom: 1px solid #9AA0A6;
+margin: 0 2%;
+`;
+
+const NoticeHead = styled.span`
+width: 8%;
+font-size: 1.7vh;
+border: 2px solid #7879F1;
+border-radius: 1vh;
+margin: 0.6% 1% 0.6% 0;
+text-align: center;
+line-height: 3.2vh;
+color: #7879F1;
+`;
+
+const NoticeText = styled.span`
+width: 80%;
+font-weight: bold;
+font-size: 1.8vh;
+margin: 1% 1%;
+color: #7879F1;
+`;
+
 const Contents = styled.div`
-  grid-template-rows: repeat(5, minmax(auto, auto));
+  grid-template-rows: repeat(4, minmax(auto, auto));
   grid-template-columns: repeat(2, 1fr);
   display: grid;
   align-items: center;
@@ -198,7 +245,7 @@ const Contents = styled.div`
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border-top: 1.5px solid #F1F3F4;
+  /* border-top: 1.5px solid #F1F3F4; */
   cursor: pointer;
   // 나중에 페이징하면 수정
   overflow: hidden;

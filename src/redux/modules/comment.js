@@ -85,18 +85,15 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
 };
 
 
-const deleteCommentDB = (delete_comment, postId) => {           // 댓글 삭제하는 함수
+const deleteCommentDB = (commentId, postId) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
-const commentId = delete_comment.commentId;
-const nickname = delete_comment.nickname;
 instance.delete(`/posts/${postId}/comments/${commentId}`,{
     commentId: commentId,
-    nickname: nickname,
 })
 .then((response) => {
         console.log('deleteCommentDB 함수 호출 성공!');
         console.log(response.data);
-        dispatch(deleteComment(delete_comment));
+        dispatch(deleteComment(commentId));
     }).catch((err) => {
         console.error(`댓글 삭제하기 에러 발생: ${err}`);
     });

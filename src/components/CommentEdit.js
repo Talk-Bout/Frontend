@@ -17,13 +17,9 @@ const CommentEdit = (props) => {
   const username = useSelector(state => state.user.user.nickname);
 
   // 댓글 삭제
-  const deleteComment = () => {
-    const delete_comment = {
-      commentId : commentId,
-      nickname : username,
-    }
-    console.log(delete_comment);
-    dispatch(commentActions.deleteCommentDB(delete_comment, postId));
+  const deleteComment = (commentId) => {
+    dispatch(commentActions.deleteCommentDB(commentId, postId));
+    console.log(commentId);
   }
 
   // 댓글 수정

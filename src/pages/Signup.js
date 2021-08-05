@@ -15,7 +15,14 @@ const Signup = (props) => {
   const [password, setPwd] = React.useState('');
   const [nickname, setNickname] = React.useState('');
   const [confirm_password, setConfirmPwd] = React.useState('');
-
+  const nickNameInfoUl = useRef(),
+    nickNameInfo = useRef(),
+    pwInfoLen = useRef(),
+    pwInfoMatch = useRef(),
+    pwInfoContinuos = useRef(),
+    pwInfoUl = useRef(),
+    rePwInfoUl = useRef(),
+    rePwInfoLiT = useRef();
   //select 값 가져오기
   const selectMail = useRef(null);
 
@@ -41,7 +48,7 @@ const Signup = (props) => {
     if (password === confirm_password) {
       dispatch(userActions.signUpDB(new_user));
     } else {
-      window.alert('비밀번호를 다시 확인해주세요');
+      window.alert('비밀번호가 일치하지 않습니다.');
       return;
     }
 
@@ -83,6 +90,7 @@ const Signup = (props) => {
             </TextBox>
             <InputBox>
               <Input
+                type="Email"
                 onChange={(e) => {
                   setId(e.target.value);
                 }}
@@ -145,9 +153,12 @@ const Signup = (props) => {
               />
             </InputBox>
           </form>
-          <Text fontSize="1.2vh" color="red">
+          {/* <Text fontSize="1.2vh" color="red">
             비밀번호가 일치하지 않습니다.
-          </Text>
+          </Text> */}
+          <InfoUl className="checkPw" ref={nickNameInfoUl}>
+            <li ref={nickNameInfo}>·한글,영문,숫자만 2~6자리 가능</li>
+          </InfoUl>
         </Grid>
         <Grid height="15%">
           <form>
@@ -163,6 +174,11 @@ const Signup = (props) => {
                 style={{ width: '98%' }}
                 onChange={(e) => {
                   setNickname(e.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    signup();
+                  }
                 }}
               />
             </InputBox>
@@ -192,18 +208,20 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
-  width: 44%;
-  height: 3vh;
+  width: 43.5%;
+  height: 3.5vh;
   border: 1px solid #80868b;
   border-radius: 5px;
   background-color: transparent;
   outline: none;
   caret-color: #80868b;
+  color: #ffffff;
+  padding: 1%;
 `;
 
 const Select = styled.select`
   width: 45%;
-  height: 3.5vh;
+  height: 4vh;
   border: 1px solid #80868b;
   border-radius: 5px;
   background-color: transparent;
@@ -220,6 +238,24 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   margin-top: 2%;
+  cursor: pointer;
+  :active {
+    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+    position: relative;
+    top: 2px;
+  }
+`;
+
+const InfoUl = styled.ul`
+  font-size: 12px;
+  color: #666666;
+  position: relative;
+  left: 0;
+  margin-top: 4px;
+  font-weight: 400;
+  & li {
+    margin-top: 4px;
+  }
 `;
 
 export default Signup;

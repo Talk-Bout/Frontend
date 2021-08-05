@@ -7,11 +7,13 @@ import instance from '../../shared/Request';
 const LOG_IN = 'LOG_IN'; //로그인하기
 const LOG_OUT = 'LOG_OUT'; //로그아웃하기
 const SIGN_UP = 'SIGN_UP'; //회원가입
+const LOG_CHECK = 'LOG_CHECK'; //로그인 확인
 
 //액션 생성함수
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
 const signUp = createAction(SIGN_UP, (user) => ({ user }));
+// const logCheck = createAction(LOG_CHECK, (user) => ({ user }));
 
 //기본값 정하기
 const initialState = {
@@ -28,7 +30,7 @@ const logInDB = (email, password) => {
         const user_info = {
           email: response.data.email,
           nickname: response.data.nickname,
-        }
+        };
         dispatch(logIn(user_info));
         localStorage.setItem('token', response.data.token);
         window.alert('로그인 완료!');
@@ -51,7 +53,7 @@ const signUpDB = (new_user) => {
         confirmPassword: new_user.confirm_password,
       })
       .then((response) => {
-        console.log(response.dat);
+        console.log(response.data);
         window.alert('회원가입 완료!');
         history.push('/login');
       })
@@ -60,6 +62,24 @@ const signUpDB = (new_user) => {
       });
   };
 };
+
+// const logInCheckDB = 토큰 => 유저정보 api.
+// 로그인 action그대로 쓰기
+// const logInCheckDB = () => {
+//   return function (dispatch, getState, { history }) {
+//     const token = localStorage.getItem('token');
+//     console.log(token);
+//     instance
+//     .get('')
+//     .then((response) => {
+
+//     .catch((err) => {
+//         window.alert('로그인 정보를 확인해주세요')
+//         console.log(err);
+//       })
+//     })
+//   };
+// };
 
 export default handleActions(
   {

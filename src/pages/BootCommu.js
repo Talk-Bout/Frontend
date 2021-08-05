@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import {Grid, Text, Image} from '../elements';
 import Sidebar from '../components/Sidebar';
@@ -12,7 +12,23 @@ import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 
 const BootCommu = (props) => {
   const dispatch = useDispatch();
-  const post_list = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
+  const [start, setStart] = useState(0);                    // 한 페이지에 불러올 첫 게시글 번호 0번
+  const [end, setEnd] = useState(5);                       // 한 페이지에 불러올 게시글 개수 5개
+  const [page, setPage] = useState(1);                      // 페이지 번호는 1부터 시작
+  const all_post = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
+  const post_list = all_post.slice(start, end);               // 0부터 (end-1)번째까지 출력
+
+  const toPrePage = () => {
+    setPage(page - 1);
+    setStart(start - 5);
+    setEnd(end - 5);
+  }
+
+  const toNextPage = () => {
+    setPage(page + 1);
+    setStart(start + 5);
+    setEnd(end + 5);
+  }
 
   useEffect(() => {
     dispatch(postActions.setPostDB());        // post 모듈에서 게시글 불러오는 함수 호출
@@ -59,11 +75,15 @@ const BootCommu = (props) => {
                 })}
               </PostList>
               <Grid className='pagination' height='8vh' is_center>
+                {/* 페이지네이션 */}
                 <PageBox>
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronLeft /></Page></Text>
-                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>01</Page></Text>
-                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>02</Page></Text>
-                  <Text lineHeight='8vh' margin='0 1vw 0'><Page>03</Page></Text>
+                  {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
+                  {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page style={{opacity: 1}}>{page}</Page></Text>
+                  {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page onClick={() => toNextPage()}>{all_post.length > page * 5 ? page + 1 : ''}</Page></Text>
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronRight /></Page></Text>
                 </PageBox>
               </Grid>

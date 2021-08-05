@@ -86,7 +86,7 @@ const CommonBoardList = (props) => {
             </Grid>
             {/* 자유게시판 게시물  */}
             <Grid height="85vh">
-              <Grid width="100%" height="100%">
+              <Grid width="100%" height="100%" margin="2% 0 0 0">
               <Contents>
                 {common_list.map((c, idx) => {
                 return (

@@ -18,22 +18,23 @@ const BootPost = (props) => {
   const dispatch = useDispatch();
   const post_id = window.location.pathname.split('/boot/post/')[1];
   // const username = useSelector(state => state.user.user.user.nickname);
-  const username = 'test';
+  const username = 'coalla';
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
   const [MenuLink, setMenuLink] = useState(null);
 
-  // const comment_list = useSelector(state => state.comment.list);
+  const comment_list = useSelector(state => state.comment.list);
+  const comment_found = comment_list.filter((comment) => comment.postId == post_id);
 
-  // const commentInput = useRef(null);
+  const commentInput = useRef(null);
 
   useEffect(() => {
     if (post_found) {
-      // dispatch(commentActions.setCommentDB(post_id));
+      dispatch(commentActions.setCommentDB(post_id));
       return;
     }
     dispatch(postActions.setOnePostDB(post_id));
-    // dispatch(commentActions.setCommentDB(post_id));
+    dispatch(commentActions.setCommentDB(post_id));
   }, []);
 
   const handleClick = (e) => {
@@ -44,27 +45,28 @@ const BootPost = (props) => {
     setMenuLink(null);
   }
 
-  // const addComment = () => {
-  //   const content = commentInput.current.value;
-  //   const new_comment = {
-  //     nickname: 'username',
-  //     content: content,
-  //   }
-  //   dispatch(commentActions.addCommentDB(new_comment, post_id));
-  //   commentInput.current.value = '';
-  // }
+  const addComment = () => {
+    const content = commentInput.current.value;
+    const new_comment = {
+      nickname: username,
+      content: content,
+      postId: post_id,
+    }
+    dispatch(commentActions.addCommentDB(new_comment));
+    commentInput.current.value = '';
+  }
 
-  // const deleteComment = (post_id, comment_id) => {
-  //   dispatch(commentActions.deleteCommentDB(post_id, comment_id));
-  // }
+  const deleteComment = (post_id, comment_id) => {
+    const nickname = username;
+    dispatch(commentActions.deleteCommentDB(post_id, comment_id, nickname));
+  }
 
   const deletePost = () => {
-    // const deleted_post = {
-    //   postId: post_id,
-    //   nickname: username,
-    // };
-    // dispatch(postActions.deletePostDB(deleted_post));
-    console.log('삭제!');
+    const deleted_post = {
+      postId: post_id,
+      nickname: username,
+    };
+    dispatch(postActions.deletePostDB(deleted_post));
   }
 
   if (!post_found) {
@@ -75,7 +77,7 @@ const BootPost = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto' height='auto'>
+      <Grid className='background' display='flex' overflow='auto' height='100vh'>
         <Sidebar />
         <Body header>
           <BodyInner>
@@ -99,8 +101,8 @@ const BootPost = (props) => {
                         open={Boolean(MenuLink)}
                         onClose={handleClose}
                       >
-                        <MenuItem onClick={() => {}}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
-                        <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                        <MenuItem onClick={() => history.push(`/boot/community/write/${post_id}`)}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                        <MenuItem onClick={() => {handleClose(); deletePost()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
                       </Menu>
                     </div>
                   </Grid>
@@ -118,22 +120,22 @@ const BootPost = (props) => {
               <CommentInput>
                 <Text p fontSize='1.7vh' color='#E1E1E1'>댓글 15</Text>
                 <InputWrap>
-                  <Input placeholder='댓글을 남겨주세요'></Input>
-                  <CommentBtn><Text fontSize='1.7vh' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
+                  <Input placeholder='댓글을 남겨주세요' ref={commentInput}></Input>
+                  <CommentBtn onClick={() => addComment()}><Text fontSize='1.7vh' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
                 </InputWrap>
               </CommentInput>
               <CommentList>
-                {[1, 2, 3, 4, 5].map((n, idx) => {
+                {comment_found && comment_found.map((n, idx) => {
                   return (
                     <Comment key={idx}>
                       <Grid display='flex' justify_content='space-between'>
-                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명1</Text><Text fontSize='1.5vh' color='#BDC1C6'>2021.08.02</Text></NameTime>
+                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명{idx}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
                         <Buttons>
                           <PostBtn style={{margin: '0 20px 0'}}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
-                          <PostBtn onClick={() => deletePost()}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
+                          <PostBtn onClick={() => deleteComment()}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
                         </Buttons>
                       </Grid>
-                      <Word><Text fontSize='1.7vh' color='#F1F3F4'>둘 다 역량을 키워서 한쪽을 선택할 수 있게 합니다.</Text></Word>
+                      <Word><Text fontSize='1.7vh' color='#F1F3F4'>{n.content}</Text></Word>
                       <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
                     </Comment>
                   )

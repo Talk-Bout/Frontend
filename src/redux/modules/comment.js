@@ -40,30 +40,31 @@ return function (dispatch) {
         // console.log(setComment(response.data));
     })
     .catch((err) => {
-        console.log(`에러 발생: ${err}`);
+        console.error(`댓글 불러오기 에러 발생: ${err}`);
     });
 };
 };
 
-const addCommentDB = (new_comment) => {       // 댓글 추가하는 함수
-return function (dispatch, {history}) {
-  const nickname = new_comment.nickname;
-  console.log(nickname);
-  const content = new_comment.content;
-  const postId = new_comment.postId;
-  instance.post(`/posts/${postId}/comments`,
-  {
-      nickname: nickname,
-      content: content,
-      postId: postId,
-  }).then((response) => {
-          console.log(response.data);
-          dispatch(addComment(response.data));
-      }).catch((err) => {
-          console.log(`댓글 추가하기 에러 발생: ${err}`);
-      });
-};
-};
+const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
+    return function (dispatch, {history}) {
+        const nickname = new_comment.nickname;
+        const content = new_comment.content;
+        const postId = new_comment.postId;
+        console.log(new_comment);
+        const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+        instance.post(`/posts/${postId}/comments`,
+        {
+            nickname: nickname,
+            content: content,
+            postId: postId,
+        }, {headers: headers}).then((response) => {
+            console.log(response.data);
+            dispatch(addComment(response.data));
+            }).catch((err) => {
+                console.error(`댓글 추가하기 에러 발생: ${err}`);
+            });
+        };
+    };
 
 const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하는 함수
 return function (dispatch, getState, { history }) {
@@ -78,10 +79,11 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
 }).then((response) => {
         dispatch(editComment(response.data));
     }).catch((err) => {
-        console.log(`댓글 수정하기 에러 발생: ${err}`);
+        console.error(`댓글 수정하기 에러 발생: ${err}`);
     });
 };
 };
+
 
 const deleteCommentDB = (delete_comment, postId) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
@@ -96,7 +98,7 @@ instance.delete(`/posts/${postId}/comments/${commentId}`,{
         console.log(response.data);
         dispatch(deleteComment(delete_comment));
     }).catch((err) => {
-        console.log(`댓글 삭제하기 에러 발생: ${err}`);
+        console.error(`댓글 삭제하기 에러 발생: ${err}`);
     });
 }; 
 };

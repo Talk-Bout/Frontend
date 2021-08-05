@@ -10,7 +10,7 @@ import { actionCreators as userActions } from '../redux/modules/user';
 
 //로고
 import Logo from '../image/Logo.png';
-import google_logo from '../image/google_logo.png';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -55,6 +55,11 @@ const Login = (props) => {
               onChange={(e) => {
                 setPwd(e.target.value);
               }}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  login();
+                }
+              }}
             />
           </form>
           <Text fontSize="1.2vh" color="red">
@@ -70,14 +75,14 @@ const Login = (props) => {
           <Grid is_flex padding="0 10px" margin="5px 0 0">
             <HelpDiv>
               <A onClick={() => {}}>
-                <Text fontSize="1.3vh" color="#555">
+                <Text fontSize="1.5vh" color="#555">
                   비밀번호 재설정
                 </Text>
               </A>
             </HelpDiv>
             <HelpDiv>
               <A onClick={() => history.push('/signup')}>
-                <Text fontSize="1.3vh" color="#555">
+                <Text fontSize="1.5vh" color="#555">
                   회원가입
                 </Text>
               </A>
@@ -86,7 +91,7 @@ const Login = (props) => {
         </Grid>
         <Grid height="25%">
           <Button style={{ backgroundColor: '#2e3134' }}>
-            <AiFillGoogleCircle
+            <FcGoogle
               size="2vh"
               style={{ marginRight: '0.3vw', verticalAlign: 'middle' }}
             />
@@ -120,6 +125,7 @@ const InformInput = styled.input`
   background-color: transparent;
   outline: none;
   caret-color: #80868b;
+  color: #ffffff;
   padding: 1%;
 `;
 const Button = styled.button`
@@ -129,6 +135,11 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  :active {
+    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+    position: relative;
+    top: 2px;
+  }
 `;
 
 const HelpDiv = styled.div`

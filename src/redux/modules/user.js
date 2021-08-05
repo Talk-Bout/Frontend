@@ -31,6 +31,7 @@ const logInDB = (email, password) => {
           email: response.data.email,
           nickname: response.data.nickname,
         };
+        console.log(response.data);
         dispatch(logIn(user_info));
         localStorage.setItem('token', response.data.token);
         window.alert('로그인 완료!');

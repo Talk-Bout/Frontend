@@ -51,7 +51,7 @@ const signUpDB = (new_user) => {
         confirmPassword: new_user.confirm_password,
       })
       .then((response) => {
-        console.log(response.dat);
+        console.log(response.date);
         window.alert('회원가입 완료!');
         history.push('/login');
       })

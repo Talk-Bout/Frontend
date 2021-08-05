@@ -18,7 +18,6 @@ import Body from '../components/Body';
 
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
-
   // 게시글 리스트 조회
   const common_list = useSelector(state => state.post.list);
 
@@ -91,7 +90,7 @@ const CommonBoardList = (props) => {
               <Contents>
                 {common_list.map((c, idx) => {
                 return (
-                <Content key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
+                <Content common_list={common_list} key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
                 >
                 <Text p color="#F1F3F4" fontSize="2.6vh" margin="0px" padding="2% 2% 1% 2%" fontWeight="bold">
                  {c.title}

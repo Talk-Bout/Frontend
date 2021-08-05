@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { history } from '../redux/ConfigureStore';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 import { Text, Button, Grid, Input } from '../elements/index';
@@ -7,33 +8,26 @@ import { VscMention, VscSymbolNumeric, VscFileMedia } from 'react-icons/vsc';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
+import { actionCreators as postActions } from '../redux/modules/post';
 
 const CommonWrite = (props) => {
-  const addTitleRef = useRef(null);
-  const addContentRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const addTitleRef = useRef('');
+  const addContentRef = useRef('');
+  const username = useSelector(state => state.user.user.nickname);
+
   // 게시글 추가
-
   const addCommon = () => {
-    const _addTitleRef = addTitleRef.current.value;
-    const _addContentRef = addContentRef.current.value;
-    console.log(addTitleRef);
-    console.log(addContentRef);
-    // const new_post = {
-    //   postId: common_id,
-    //   title: title,
-    //   content: content,
-    //   nickname: 'username',
-    //   category: 'testing',
-    // }
-
-    if (_addTitleRef === '') {
-      window.alert('제목을 입력해주세요!');
-      return;
-    } else if (_addContentRef === '') {
-      window.alert('제목을 입력해주세요!');
-      return;
+    const new_post = {
+      title: addTitleRef.current.value,
+      content: addContentRef.current.value,
+      nickname: username,
+      category: 'testing',
     }
+    dispatch(postActions.addPostDB(new_post));
   };
+
   return (
     <React.Fragment>
       <Grid
@@ -92,7 +86,7 @@ const CommonWrite = (props) => {
                     cursor="pointer"
                     font_size="2.5vh"
                     color="#FFFFFF"
-                    onClick={() => {
+                    _onClick={() => {
                       addCommon();
                     }}
                   >
@@ -133,7 +127,6 @@ const CommonWrite = (props) => {
                     placeholder="제목을 입력해주세요"
                     border="none"
                     _ref={addTitleRef}
-                    onSubmit={addCommon}
                   ></Input>
                 </Grid>
                 <Hr />
@@ -149,7 +142,6 @@ const CommonWrite = (props) => {
                     placeholder="내용을 입력해주세요"
                     border="none"
                     _ref={addContentRef}
-                    onSubmit={addCommon}
                   ></Input>
                 </Grid>
               </Grid>

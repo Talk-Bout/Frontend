@@ -16,16 +16,14 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const BootPost = (props) => {
   const dispatch = useDispatch();
-  const post_id = window.location.pathname.split('/boot/post/')[1];
-  // const username = useSelector(state => state.user.user.user.nickname);
-  const username = 'realmot';
+  const post_id = parseInt(window.location.pathname.split('/boot/post/')[1]);
+  // const username = useSelector(state => state.user.user.nickname);
+  const username = 'coalla';
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
+  const comment_list = useSelector(state => state.comment.list);
   const [MenuLink, setMenuLink] = useState(null);
   const [EditComment, setEditComment] = useState(null);
-
-  const comment_list = useSelector(state => state.comment.list);
-  const comment_found = comment_list.filter((comment) => comment.postId == post_id);
 
   const commentInput = useRef(null);
   const commentEdit = useRef(null);
@@ -63,12 +61,12 @@ const BootPost = (props) => {
     const edited_comment = {
 
     }
-    dispatch(commentActions.editCommentDB(edited_comment, comment_id, post_id))
+    dispatch(commentActions.editCommentDB(edited_comment, parseInt(comment_id), post_id))
   }
 
   const deleteComment = (comment_id) => {
     const nickname = username;
-    dispatch(commentActions.deleteCommentDB(post_id, comment_id, nickname));
+    dispatch(commentActions.deleteCommentDB(post_id, parseInt(comment_id), nickname));
   }
 
   const deletePost = () => {
@@ -139,27 +137,18 @@ const BootPost = (props) => {
               </CommentInput>
               {/* 댓글 리스트 */}
               <CommentList>
-                {comment_found && comment_found.map((n, idx) => {
-                  EditComment === n.commentId ?
-                    <Comment key={idx}>
-                      <Grid display='flex' justify_content='space-between'>
-                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명{idx}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
-                      </Grid>
-                      <Word><input ref={commentEdit} defaultValue={n.content} /><button onClick={() => editComment(n.commentId)}/></Word>
-                      <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
-                    </Comment>
-                  :
-                    <Comment key={idx}>
-                      <Grid display='flex' justify_content='space-between'>
-                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명{idx}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
-                        <Buttons>
-                          <PostBtn style={{margin: '0 20px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
-                          <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
-                        </Buttons>
-                      </Grid>
-                      <Word><Text fontSize='1.7vh' color='#F1F3F4'>{n.content}</Text></Word>
-                      <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
-                    </Comment>
+                {comment_list && comment_list.map((n, idx) => {
+                  <Comment key={idx}>
+                    <Grid display='flex' justify_content='space-between'>
+                      <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명{idx + 1}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
+                      <Buttons>
+                        <PostBtn style={{margin: '0 20px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                        <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
+                      </Buttons>
+                    </Grid>
+                    <Word><Text fontSize='1.7vh' color='#F1F3F4'>{n.content}</Text></Word>
+                    <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
+                  </Comment>
                 })}
                 <MoreBtn><Text fontSize='1.6vh' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn>
               </CommentList>

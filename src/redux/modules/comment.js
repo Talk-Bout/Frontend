@@ -32,7 +32,11 @@ const initialState = {
 // 액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
 return function (dispatch) {
-  instance.get(`/posts/${postId}/comments`)
+  const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+  console.log(postId);
+  instance.get(`/posts/${postId}/comments`, {
+    postId: postId,
+  }, {headers: headers})
   .then((response) => {
     // console.log('setPostDB 함수 호출 성공!');
     // console.log(response);

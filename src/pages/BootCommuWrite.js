@@ -14,17 +14,31 @@ import { actionCreators as postActions } from '../redux/modules/post';
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
   // const username = useSelector(state => state.user.user.user.nickname);
-  const username = 'tester';
+  const username = 'coalla';
+  const post_id = window.location.pathname.split('/write/')[1];
+  const post_list = useSelector(state => state.post.list);
+  const post_found = post_list.find((p) => p.postId == post_id);
   const titleRef = useRef('');
   const contentRef = useRef('');
   const addPost = () => {
-    const new_post = {
-      title: titleRef.current.value,
-      content: contentRef.current.value,
-      nickname: username,
-      category: 'testing',
+    if (post_id) {
+      const edited_post = {
+        title: titleRef.current.value,
+        content: contentRef.current.value,
+        nickname: username,
+        category: 'testing',
+        postId: post_id,
+      }
+      dispatch(postActions.editPostDB(edited_post));
+    } else {
+      const new_post = {
+        title: titleRef.current.value,
+        content: contentRef.current.value,
+        nickname: username,
+        category: 'testing',
+      }
+      dispatch(postActions.addPostDB(new_post));
     }
-    dispatch(postActions.addPostDB(new_post));
   }
 
   return (
@@ -46,12 +60,11 @@ const BootCommuWrite = (props) => {
                 </Grid>
               </Grid>
               <BodyBox>
-                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef}/></TitleBox>
-                <ContentBox><Textarea rows='15' placeholder='내용을 입력해주세요' ref={contentRef}/></ContentBox>
+                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} defaultValue={post_id ? post_found.title : null}/></TitleBox>
+                <ContentBox><Textarea rows='15' placeholder='내용을 입력해주세요' ref={contentRef} defaultValue={post_id ? post_found.content : null}/></ContentBox>
               </BodyBox>
               <FooterBox>
                 <Text fontSize='2.5vh' color='#b3b3b3' margin='0 10px 0 0' cursor='pointer'><BiImageAdd /></Text>
-                <Text fontSize='2.5vh' color='#b3b3b3' margin='0 10px 0' cursor='pointer'><RiAtLine /></Text>
                 <Text fontSize='2.5vh' color='#b3b3b3' margin='0 0 0 10px' cursor='pointer'><FiHash /></Text>
               </FooterBox>
             </Window>

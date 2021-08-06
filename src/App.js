@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from './redux/modules/user';
 
 // NotFound 페이지
 import NotFound from './shared/NotFound';
@@ -16,7 +18,7 @@ import MainN from './pages/MainN';
 
 //로그인 회원가입 페이지
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Signup from './pages/SignUpOrigin';
 import ChangeInfo from './pages/ChangeInfo';
 
 //자유 게시판 페이지
@@ -47,8 +49,13 @@ import MyPageEdit from './pages/MyPageEdit';
 import DeleteUser from './pages/DeleteUser';
 import PageEdit from './pages/PageEdit';
 
-
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userActions.logInCheckDB());
+  }, []);
+
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>

@@ -11,7 +11,7 @@ const Body = (props) => {
       <Grid
         className="whole-body"
         backgroundColor="#17181b"
-        height="100%"
+        minHeight="100vh"
         width="93vw"
       >
         {header ? <HeaderN /> : ''}

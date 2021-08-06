@@ -18,7 +18,8 @@ import MainN from './pages/MainN';
 
 //로그인 회원가입 페이지
 import Login from './pages/Login';
-import Signup from './pages/SignUpOrigin';
+// import Signup from './pages/SignUpOrigin';
+import Signup from './pages/Signup';
 import ChangeInfo from './pages/ChangeInfo';
 
 //자유 게시판 페이지
@@ -75,6 +76,9 @@ function App() {
           <Route path="/boot/info" exact component={BootInfo} />
           <Route path="/boot/review" exact component={BootReview} />
           <Route path="/boot/community" exact component={BootCommu} />
+          <Route path="/boot/camp/:name/info" exact component={BootInfo} />
+          <Route path="/boot/camp/:name/review" exact component={BootReview} />
+          <Route path="/boot/camp/:name/community" exact component={BootCommu} />
           <Route path="/boot/post/:id" exact component={BootPost} />
           <Route path="/boot/review/write" exact component={BootReviewWrite} />
           <Route
@@ -89,12 +93,12 @@ function App() {
             component={BootReviewWrite}
           />
           <Route
-            path="/boot/community/write"
+            path="/boot/camp/:name/community/write"
             exact
             component={BootCommuWrite}
           />
           <Route
-            path="/boot/community/write/:id"
+            path="/boot/camp/:name/community/write/:id"
             exact
             component={BootCommuWrite}
           />

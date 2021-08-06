@@ -55,7 +55,7 @@ const signUpDB = (new_user) => {
       })
       .then((response) => {
         console.log(response.data);
-        window.alert('회원가입 완료!');
+        // window.alert('회원가입 완료!');
         history.push('/login');
       })
       .catch((err) => {
@@ -74,7 +74,7 @@ const logInCheckDB = () => {
 
     const token = localStorage.getItem('token'); // token이라는 이름의 저장된 것을 불러오기
     console.log(token);
-    if (token === null) {
+    if (!token) {
       return;
     }
 

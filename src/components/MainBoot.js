@@ -21,8 +21,8 @@ const MainBoot = (props) => {
                     </ImageDiv>
                   </Grid>
                   <Grid width="70%" margin="auto 5%">
-                    <Grid margin="1% auto">
-                      <Text p fontSize="1.7vh" fontWeight="700" margin="3% 0%" color='#F8F9FA' cursor='pointer' _onClick={() => history.push('/boot/info')}>
+                    <Grid margin="1% auto" cursor='pointer' _onClick={() => history.push('/boot/info')}>
+                      <Text p fontSize="1.7vh" fontWeight="700" margin="3% 0%" color='#F8F9FA'>
                         부트캠프명
                       </Text>
                       <Text fontSize="1.3vh" color="#DADCE0">

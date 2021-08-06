@@ -73,6 +73,7 @@ function App() {
           <Route path="/question/detail/:id" exact component={QuestionDetail} />
           <Route path="/boot" exact component={BootMain} />
           <Route path="/boot/info" exact component={BootInfo} />
+          <Route path="/boot/info/:name" exact component={BootInfo} />
           <Route path="/boot/review" exact component={BootReview} />
           <Route path="/boot/community" exact component={BootCommu} />
           <Route path="/boot/post/:id" exact component={BootPost} />

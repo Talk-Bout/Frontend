@@ -9,6 +9,9 @@ import { history } from '../redux/ConfigureStore';
 
 import Logo from '../image/Logo.png';
 
+//toast notification
+import toast, { Toaster } from 'react-hot-toast';
+
 const SignUpOrigin = (props) => {
   const dispatch = useDispatch();
 
@@ -18,6 +21,7 @@ const SignUpOrigin = (props) => {
   const [confirm_password, setConfirmPwd] = React.useState('');
   const [isPwdCorrect, setIsPwdCorrect] = React.useState(false);
 
+  const notify = () => toast('가입이 완료되었습니다');
   //select 값 가져오기
   const selectMail = useRef(null);
 
@@ -48,13 +52,31 @@ const SignUpOrigin = (props) => {
     // }
 
     dispatch(userActions.signUpDB(new_user));
+    notify();
   };
 
   return (
     <SmallWindow>
+      <div>
+        <Toaster
+          toastOptions={{
+            style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#b2f37f',
+            },
+          }}
+        />
+      </div>
       <Grid height="100%">
         <Grid is_center height="13%">
-          <Image src={Logo} width="60%" margin="auto" _onClick={() => history.push('/')} cursor='pointer'/>
+          <Image
+            src={Logo}
+            width="60%"
+            margin="auto"
+            _onClick={() => history.push('/')}
+            cursor="pointer"
+          />
         </Grid>
         <Grid height="8%">
           <TextBox>

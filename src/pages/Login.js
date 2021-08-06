@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import SmallWindow from '../components/SmallWindow';
 import { Grid, Input, Text, Image } from '../elements';
 import { TextField } from '@material-ui/core';
-import { AiFillGoogleCircle } from 'react-icons/ai';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
+
+//Formik, YUP
+import { Formik, useFormik } from 'formik';
+import * as Yup from 'yup';
 
 //로고
 import Logo from '../image/Logo.png';
@@ -17,14 +20,14 @@ const Login = (props) => {
   const [email, setEmail] = React.useState('');
   const [password, setPwd] = React.useState('');
 
-  const login = () => {
-    console.log(email, password);
-    if (email === '' || password === '') {
-      window.alert('이메일과 비밀번호를 입력해주세요');
-      return;
-    }
-    dispatch(userActions.logInDB(email, password));
-  };
+  // const login = () => {
+  //   console.log(email, password);
+  //   if (email === '' || password === '') {
+  //     window.alert('이메일과 비밀번호를 입력해주세요');
+  //     return;
+  //   }
+  //   dispatch(userActions.logInDB(email, password));
+  // };
 
   //onChange의 e.target.value안찍힐때 버튼에 콘솔로그 해보기!
   return (
@@ -33,11 +36,18 @@ const Login = (props) => {
         <Grid height="25%">
           <Grid height="40%" />
           <Grid is_center height="50%">
-            <Image src={Logo} width="60%" margin="auto" _onClick={() => history.push('/')} cursor='pointer'/>
+            <Image
+              src={Logo}
+              width="60%"
+              margin="auto"
+              _onClick={() => history.push('/')}
+              cursor="pointer"
+            />
           </Grid>
         </Grid>
         <Grid height="30%">
           <form>
+            {/* 이메일 입력란 */}
             <InputBox>
               <InformInput
                 style={{ width: '98%' }}
@@ -48,6 +58,8 @@ const Login = (props) => {
                 }}
               />
             </InputBox>
+
+            {/* 비밀번호 입력란 */}
             <InformInput
               style={{ width: '98%' }}
               type="password"
@@ -57,22 +69,28 @@ const Login = (props) => {
               }}
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
-                  login();
+                  // login();
                 }
               }}
             />
           </form>
+
+          {/* 경고문 */}
           <Text fontSize="1.2vh" color="#ff7070">
-            {/* 가입하지 않은 아이디이거나, 잘못된 비밀번호입니다. */}
+            가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
           </Text>
         </Grid>
+
         <Grid height="20%">
-          <Button onClick={() => login()} color="#a5a6af">
+          {/* 로그인 버튼 => 누르면 toast 나옴*/}
+          {/* <Button onClick={() => login()} color="#a5a6af"> */}
+          <Button color="#a5a6af">
             <Text fontSize="1.5vh" color="white">
               로그인
             </Text>
           </Button>
           <Grid is_flex padding="0 10px" margin="5px 0 0">
+            {/* 비밀번호 재설정 페이지 이동 버튼 */}
             <HelpDiv>
               <A onClick={() => {}}>
                 <Text fontSize="1.5vh" color="#555">
@@ -81,6 +99,7 @@ const Login = (props) => {
               </A>
             </HelpDiv>
             <HelpDiv>
+              {/* 회원가입 페이지 이동 버튼 */}
               <A onClick={() => history.push('/signup')}>
                 <Text fontSize="1.5vh" color="#555">
                   회원가입
@@ -90,6 +109,7 @@ const Login = (props) => {
           </Grid>
         </Grid>
         <Grid height="25%">
+          {/* 구글 로그인 버튼 */}
           <Button style={{ backgroundColor: '#2e3134' }}>
             <FcGoogle
               size="2vh"

@@ -18,7 +18,8 @@ import MainN from './pages/MainN';
 
 //로그인 회원가입 페이지
 import Login from './pages/Login';
-import Signup from './pages/SignUpOrigin';
+// import Signup from './pages/SignUpOrigin';
+import Signup from './pages/Signup';
 import ChangeInfo from './pages/ChangeInfo';
 
 //자유 게시판 페이지

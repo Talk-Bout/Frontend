@@ -7,13 +7,13 @@ import instance from '../../shared/Request';
 const LOG_IN = 'LOG_IN'; //로그인하기
 const LOG_OUT = 'LOG_OUT'; //로그아웃하기
 const SIGN_UP = 'SIGN_UP'; //회원가입
-const LOG_CHECK = 'LOG_CHECK'; //로그인 확인
+const LOGIN_CHECK = 'LOGIN_CHECK'; //로그인 상태 유지
 
 //액션 생성함수
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
 const signUp = createAction(SIGN_UP, (user) => ({ user }));
-// const logCheck = createAction(LOG_CHECK, (user) => ({ user }));
+const logInCheck = createAction(LOGIN_CHECK, (nickname) => ({ nickname }));
 
 //기본값 정하기
 const initialState = {
@@ -33,7 +33,7 @@ const logInDB = (email, password) => {
         };
         console.log(response.data);
         dispatch(logIn(user_info));
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.data.token); //token이름으로 response.data.token 저장
         window.alert('로그인 완료!');
         history.push('/');
       })
@@ -63,24 +63,35 @@ const signUpDB = (new_user) => {
       });
   };
 };
-
-// const logInCheckDB = 토큰 => 유저정보 api.
+// 토큰 => 유저정보 api.
 // 로그인 action그대로 쓰기
-// const logInCheckDB = () => {
-//   return function (dispatch, getState, { history }) {
-//     const token = localStorage.getItem('token');
-//     console.log(token);
-//     instance
-//     .get('')
-//     .then((response) => {
 
-//     .catch((err) => {
-//         window.alert('로그인 정보를 확인해주세요')
-//         console.log(err);
-//       })
-//     })
-//   };
-// };
+const logInCheckDB = () => {
+  return function (dispatch) {
+    const headers = {
+      authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    const token = localStorage.getItem('token'); // token이라는 이름의 저장된 것을 불러오기
+    console.log(token);
+    if (token === null) {
+      return;
+    }
+
+    instance
+      .get('/tokenUser', {
+        headers: headers,
+      })
+      .then((response) => {
+        console.log(response.data); //nickname 예상
+
+        dispatch(logInCheck(response.data));
+      })
+      .catch((err) => {
+        console.error(`로그인 유지 에러: ${err}`);
+      });
+  };
+};
 
 export default handleActions(
   {
@@ -92,9 +103,14 @@ export default handleActions(
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.is_login = false;
+        localStorage.removeItem('token');
         window.alert('로그아웃 완료!');
       }),
     [SIGN_UP]: (state, action) => produce(state, (draft) => {}),
+    [LOGIN_CHECK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_login = true;
+      }),
   },
   initialState
 );
@@ -104,8 +120,10 @@ const actionCreators = {
   logIn,
   logOut,
   signUp,
+  logInCheck,
   logInDB,
   signUpDB,
+  logInCheckDB,
 };
 
 export { actionCreators };

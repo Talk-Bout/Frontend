@@ -18,7 +18,7 @@ const BootPost = (props) => {
   const dispatch = useDispatch();
   const post_id = parseInt(window.location.pathname.split('/boot/post/')[1]);
   // const username = useSelector(state => state.user.user.nickname);
-  const username = 'coalla';
+  const username = 'test';
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
   const comment_list = useSelector(state => state.comment.list);
@@ -29,11 +29,9 @@ const BootPost = (props) => {
   const commentEdit = useRef(null);
 
   useEffect(() => {
-    if (post_found) {
-      dispatch(commentActions.setCommentDB(post_id));
-      return;
+    if (!post_found) {
+      dispatch(postActions.setOnePostDB(post_id));
     }
-    dispatch(postActions.setOnePostDB(post_id));
     dispatch(commentActions.setCommentDB(post_id));
   }, []);
 

@@ -61,15 +61,6 @@ const BootCommuWrite = (props) => {
   const uploadFile = () => {                            // 게시글 등록 버튼 누르면, 이미지 저장 함수 실행
     const uploaded_image = imageRef.current.files[0];
     console.log(uploaded_image);
-    // let formData = new FormData();      // FormData로 변환하기
-    // formData.append('file', uploaded_image);
-    // for (var key of formData.keys()) {      // formData의 key 확인
-    //   console.log(key);
-    // }
-    // for (var value of formData.values()) {   // formData의 value 확인
-    //   console.log(value);
-    // }
-    // dispatch(imageActions.uploadImageDB(formData));   // formData를 보내기
     dispatch(imageActions.uploadImageDB(uploaded_image)); // 파일 객체를 보내기
     dispatch(imageActions.getPreview(null));                    // 게시글 등록이 끝나면 이미지 미리보기 초기화
     titleRef.current.value = '';                                // 게시글 등록이 끝나면 제목 초기화

@@ -18,13 +18,13 @@ const BootCommu = (props) => {
   const all_post = useSelector(state => state.post.list);    // post 모듈의 list를 가져온다
   const post_list = all_post.slice(start, end);               // 0부터 (end-1)번째까지 출력
 
-  const toPrePage = () => {
+  const toPrePage = () => {                               // 앞 페이지로 가는 함수
     setPage(page - 1);
     setStart(start - 5);
     setEnd(end - 5);
   }
 
-  const toNextPage = () => {
+  const toNextPage = () => {                             // 다음 페이지로 가는 함수
     setPage(page + 1);
     setStart(start + 5);
     setEnd(end + 5);
@@ -77,14 +77,16 @@ const BootCommu = (props) => {
               <Grid className='pagination' height='8vh' is_center>
                 {/* 페이지네이션 */}
                 <PageBox>
-                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronLeft /></Page></Text>
+                  {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
                   {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
                   {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page style={{opacity: 1}}>{page}</Page></Text>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
                   <Text lineHeight='8vh' margin='0 1vw 0'><Page onClick={() => toNextPage()}>{all_post.length > page * 5 ? page + 1 : ''}</Page></Text>
-                  <Text lineHeight='8vh' margin='0 1vw 0'><Page><BsChevronRight /></Page></Text>
+                  {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
+                  <Text lineHeight='8vh' margin='0 1vw 0'><Page onClick={() => toNextPage()}>{all_post.length > page * 5 ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>

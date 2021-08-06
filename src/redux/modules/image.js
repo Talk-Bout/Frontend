@@ -35,17 +35,17 @@ const getPreview = (e) => {
 }
 
 const uploadImageDB = (formData) => {
-  // 선택한 이미지를 서버에 저장하는 함수(아직 구현 못함)
   return function (dispatch) {
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`,
-    // 'content-type': 'multipart/form-data'     // formData 형식으로 보낼 때 사용하기
   };
-    instance.post('/boottalk/images', formData, {headers: headers}).then((response) => {
-      console.log(response);                  // 아직 404 에러 납니다...
-      // dispatch(uploadImage(response.data));
+    instance.post('/images', formData, {headers: headers}).then((response) => {
+      dispatch(uploadImage(response.data));
     })
     .catch((err) => {
       console.error(`이미지 업로드 에러 발생: ${err}`);
+      if (err.response.status === 413) {
+        window.alert('이미지 용량 한도를 초과했습니다!');
+      }
     });
   };
 };
@@ -55,6 +55,10 @@ export default handleActions({
       // state의 preview를 선택한 이미지로 설정
         draft.preview = action.payload.preview;
     }),
+    [UPLOAD_IMAGE]: (state, action) => produce(state, (draft) => {
+      // state의 image_url을 서버에 저장된 url로 설정
+      draft.image_url = action.payload.image_url;
+    })
 }, initialState);
 
 

@@ -104,7 +104,7 @@ border: none;
 color: #121212;
 cursor: pointer;
 width: 8%;
-border-radius: 40vh;
+border-radius: 5px;
 font-weight: bold;
 height: 2.3vh;
 &:hover {

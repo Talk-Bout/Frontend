@@ -59,7 +59,7 @@ return (
     </Grid>
     <Grid width="100%" height="65%" >
     <CommentBox>
-    <Input padding="0 3%" outline="none" color="#DADCE0" width="100%" border="1px solid #DADCE0" bg="transparent" font_size="1.3vh"  border_radius="20vh" height="50%"
+    <Input padding="0 3%" outline="none" color="#DADCE0" width="100%" border="1px solid #DADCE0" bg="transparent" font_size="1.3vh"  border_radius="5px" height="50%"
     placeholder="댓글을 남겨주세요" _ref={addRef} onSubmit={addComment}/>
     <WriteButton onClick={()=> {addComment()}}>
       등록하기
@@ -103,7 +103,7 @@ border: none;
 color: #121212;
 cursor: pointer;
 width: 13%;
-border-radius: 40vh;
+border-radius: 5px;
 font-weight: bold;
 &:hover {
   background-color: #282A2D;

@@ -51,7 +51,7 @@ const HeaderN = (props) => {
                 open={Boolean(MenuLink)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={() => {}}>정보수정</MenuItem>
+                <MenuItem onClick={() => history.push('/mypage')}>정보수정</MenuItem>
                 <MenuItem onClick={() => {handleClose(); logOutBtn();}}>로그아웃</MenuItem>
               </Menu>
           </Grid>

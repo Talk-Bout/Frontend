@@ -147,7 +147,7 @@ border: none;
 color: #121212;
 cursor: pointer;
 width: 13%;
-border-radius: 40vh;
+border-radius: 5px;
 font-weight: bold;
 &:hover {
   background-color: #282A2D;

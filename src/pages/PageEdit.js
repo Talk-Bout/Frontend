@@ -1,4 +1,6 @@
 import React from 'react';
+import { history } from '../redux/ConfigureStore';
+
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -15,7 +17,10 @@ const PageEdit = (props) => {
           <Grid height='100%'>
           <Grid height='10%' display="flex" width="100%" justify_content="space-between">
             <TextBox><Text width="50%" color="#F8F9FA" lineHeight='6vh' fontSize='2.7vh' fontWeight='700'>회원정보 수정</Text></TextBox>
-            <TextBox><Button bg="transparent" border="none" width="4.5vw" color="#80868B" lineHeight='6vh' fontSize='1.5vh' fontWeight='700'>회원탈퇴</Button></TextBox>
+            <TextBox>
+              <Button _onClick={() => history.push('/mypage/deleteuser')}
+              bg="transparent" border="none" width="4.5vw" color="#80868B" lineHeight='6vh' fontSize='1.5vh' fontWeight='700'>회원탈퇴
+              </Button></TextBox>
           </Grid>
           <Grid height='13%'>
             <form>
@@ -39,7 +44,7 @@ const PageEdit = (props) => {
               <TextBox><label><Text color="#80868B" fontSize='1.7vh' fontWeight='700'>비밀번호 확인</Text></label></TextBox>
               <InputBox><Input style={{width: '98%'}} type='password'/></InputBox>
             </form>
-            <Text fontSize='1.2vh' color='red'>비밀번호가 일치하지 않습니다.</Text>
+            {/* <Text fontSize='1.2vh' color='red'>비밀번호가 일치하지 않습니다.</Text> */}
             {/* <RightText >비밀번호가 일치합니다.</RightText> */}
           </Grid>
           <Grid height='14%'>
@@ -47,7 +52,7 @@ const PageEdit = (props) => {
               <TextBox><label><Text color="#80868B" fontSize='1.7vh' fontWeight='700'>닉네임</Text></label></TextBox>
               <InputBox><Input style={{width: '98%'}} /></InputBox>
             </form>
-            <Text fontSize='1.2vh' color='red'>이미 사용중인 닉네임입니다.</Text>
+            {/* <Text fontSize='1.2vh' color='red'>이미 사용중인 닉네임입니다.</Text> */}
             {/* <RightText>사용가능한 닉네임입니다.</RightText> */}
           </Grid>
           <Grid height='26%' margin="4% 0 0 0">
@@ -79,9 +84,10 @@ const InputBox = styled.div`
 const Input = styled.input`
   width: 44.5%;
   height: 5vh;
-  border: 1px solid #ccc;
+  border: 1px solid #80868B;
   outline: none;
   border-radius: 1vh;
+  background-color: transparent;
 `;
 
 const RightText = styled.div`

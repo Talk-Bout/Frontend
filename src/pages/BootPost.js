@@ -83,7 +83,7 @@ const BootPost = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto' minHeight='100vh'>
+      <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
         <Body header>
           <BodyInner>

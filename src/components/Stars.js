@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IoStar } from 'react-icons/io5';
+import { Text } from '../elements';
 
 const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴포넌트
   const {score} = props;            // score라는 이름으로 평점 props를 받는다.
@@ -20,7 +21,7 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
   return (
     <React.Fragment>
       {/* countingStar()에서 만든 별 5개와 함께 평점을 보여준다. */}
-      {countingStar()} {score}
+      {countingStar()} <Text color='#e5e5e5' fontSize='1.7vh' margin='0 5px 0' vertical_align='middle'>{score}</Text>
     </React.Fragment>
   )
 };

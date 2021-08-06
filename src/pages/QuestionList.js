@@ -27,7 +27,7 @@ const QuestionList = (props) => {
 
   return (
     <React.Fragment>
-      <Grid display="flex">
+      <Grid display="flex" height='100vh'>
         <Sidebar />
         <Body header>
           <Grid className="body-inner" height="100%">

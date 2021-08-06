@@ -6,7 +6,7 @@ import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
 
 const BootInfo = (props) => {
-
+  const camp_name = props.match.params.name;
 
   return (
     <React.Fragment>
@@ -18,15 +18,15 @@ const BootInfo = (props) => {
           </Grid>
           <Grid className='info-button' height='15%' padding='40px 0'>
             <InfoBtn>
-              <Text fontSize='3.5vh' color='#F8F9FA' fontWeight='700'>부트캠프명</Text>
+              <Text fontSize='3.5vh' color='#F8F9FA' fontWeight='700'>{camp_name}</Text>
               <Button><Text fontSize='1.6vh' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
             </InfoBtn>
             <Text fontSize='1.6vh' color='#80868B'>★ 2.2 (164개 리뷰)</Text>
           </Grid>
           <Grid className='nav-box' height='80px' margin='20px 0 0' borderBottom='2px solid #5F6368'>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='2.5vh' color='#e8eaed'>정보</Text></Menu>
-            <Menu><Text fontSize='2.5vh' color='#5F6368' _onClick={() => history.push('/boot/review')}>리뷰</Text></Menu>
-            <Menu><Text fontSize='2.5vh' color='#5F6368' _onClick={() => history.push('/boot/community')}>커뮤니티</Text></Menu>
+            <Menu><Text fontSize='2.5vh' color='#5F6368' _onClick={() => history.push(`/boot/camp/${camp_name}/review`)}>리뷰</Text></Menu>
+            <Menu><Text fontSize='2.5vh' color='#5F6368' _onClick={() => history.push(`/boot/camp/${camp_name}/community`)}>커뮤니티</Text></Menu>
           </Grid>
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' height='100%' padding='40px'>

@@ -6,7 +6,7 @@ import post from './modules/post';
 import comment from './modules/comment';
 import question from './modules/question';
 import image from './modules/image';
-
+import bootcamp from './modules/bootcamp';
 import user from './modules/user';
 
 export const history = createBrowserHistory();
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
     user: user,
     question: question,
     image: image,
+    bootcamp: bootcamp,
     router : connectRouter(history),
 });
 

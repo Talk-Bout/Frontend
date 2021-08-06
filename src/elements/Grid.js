@@ -49,6 +49,7 @@ const Grid = (props) => {
     borderCollapse,
     alignItems,
     alignSelf,
+    cursor,
   } = props;
 
   const styles = {
@@ -93,6 +94,7 @@ const Grid = (props) => {
     borderCollapse: borderCollapse,
     alignItems: alignItems,
     alignSelf: alignSelf,
+    cursor: cursor,
   };
 
   return (
@@ -204,6 +206,7 @@ const GridBox = styled.div`
   border-collapse: ${(props) => props.borderCollapse};
   align-items: ${(props) => props.alignItems};
   align-self: ${(props) => props.alignSelf};
+  cursor: ${(props) => props.cursor};
 `;
 
 export default Grid;

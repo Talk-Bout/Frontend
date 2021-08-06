@@ -13,6 +13,7 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const HeaderN = (props) => {
   const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
   const token = localStorage.getItem('token');
   const [MenuLink, setMenuLink] = useState(null);
 

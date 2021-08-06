@@ -33,7 +33,7 @@ const Login = (props) => {
         <Grid height="25%">
           <Grid height="40%" />
           <Grid is_center height="50%">
-            <Image src={Logo} width="60%" margin="auto" />
+            <Image src={Logo} width="60%" margin="auto" _onClick={() => history.push('/')} cursor='pointer'/>
           </Grid>
         </Grid>
         <Grid height="30%">

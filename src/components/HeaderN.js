@@ -14,7 +14,8 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const HeaderN = (props) => {
   const dispatch = useDispatch();
-  const is_login = useSelector((state) => state.user.is_login);
+  // const is_login = useSelector((state) => state.user.is_login);
+  const token = localStorage.getItem('token');
   const [MenuLink, setMenuLink] = useState(null);
 
   const handleClick = (e) => {
@@ -30,7 +31,7 @@ const HeaderN = (props) => {
     history.push('/');
   };
 
-  if (is_login) {
+  if (token) {
     return (
       <React.Fragment>
         <Grid className='header' width='100%' height='80px' borderBottom='1px solid #80868b' display='flex' justify_content='space-between' padding='1vh 40px 1vh 40px'>

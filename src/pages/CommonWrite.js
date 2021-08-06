@@ -12,7 +12,6 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 const CommonWrite = (props) => {
   const dispatch = useDispatch();
-
   const addTitleRef = useRef('');
   const addContentRef = useRef('');
   const username = useSelector(state => state.user.user.nickname);
@@ -25,6 +24,8 @@ const CommonWrite = (props) => {
       nickname: username,
       category: 'testing',
     }
+    
+    console.log(new_post);
     dispatch(postActions.addPostDB(new_post));
   };
 

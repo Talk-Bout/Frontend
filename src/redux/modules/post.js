@@ -47,7 +47,7 @@ const setOnePostDB = (id) => {
         postId: postId,
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(setOnePost(response.data));
       })
       .catch((err) => {
@@ -72,7 +72,7 @@ const addPostDB = (new_post) => {
         category: category,
       }, {headers: headers})
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         dispatch(addPost(response.data));
       })
       .catch((err) => {

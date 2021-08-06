@@ -54,7 +54,7 @@ const signUpDB = (new_user) => {
         confirmPassword: new_user.confirm_password,
       })
       .then((response) => {
-        console.log(response.date);
+        console.log(response.data);
         window.alert('회원가입 완료!');
         history.push('/login');
       })
@@ -83,7 +83,7 @@ const logInCheckDB = () => {
         headers: headers,
       })
       .then((response) => {
-        console.log(response.data); //nickname 예상
+        // console.log(response.data); //nickname 예상
 
         dispatch(logInCheck(response.data));
       })

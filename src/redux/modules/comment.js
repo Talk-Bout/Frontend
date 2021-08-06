@@ -29,11 +29,10 @@ const initialState = {
   is_edit: false,
 };
 
-// 액션함수
+//액션함수
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
 return function (dispatch) {
   const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
-  console.log(postId);
   instance.get(`/posts/${postId}/comments`, {
     postId: postId,
   }, {headers: headers})

@@ -45,7 +45,7 @@ const BootMain = (props) => {
             <CardList>
               {camp_list.map((camp, idx) => {
                 return (
-                  <Card key={idx} onClick={() => history.push('/boot/info')}>
+                  <Card key={idx} onClick={() => history.push(`/boot/info/${camp.bootcampName}`)}>
                     <ImageDiv>
                       <img src={camp.logo} alt={camp.bootcampName}></img>
                     </ImageDiv>
@@ -56,7 +56,7 @@ const BootMain = (props) => {
                       {camp.desc}
                     </Text>
                     <Text p fontSize="1.8vh" color='#E8EAED'>
-                      {camp.review[0] ? <Stars score={camp.review[0].stars} /> : '별점/리뷰 없음'}
+                      {camp.review[0] ? <Stars score={camp.review[0].stars} size='1.7vh' withScore/> : '별점/리뷰 없음'}
                     </Text>
                   </Card>
                 );

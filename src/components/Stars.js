@@ -4,7 +4,7 @@ import { IoStar } from 'react-icons/io5';
 import { Text } from '../elements';
 
 const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴포넌트
-  const {score} = props;            // score라는 이름으로 평점 props를 받는다.
+  const {score, size, withScore} = props;            // score라는 이름으로 평점 props를 받는다.
   const countingStar = () => {      
     const star_full = parseInt(score).toFixed(0);     // 별점 개수는 평점에서 소수점 이하 자리를 제외한다.
     const star_empty = 5 - star_full;       // 빈 별 개수는 총 5개에서 별점 개수를 뺀 나머지로 한다.
@@ -20,19 +20,24 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
 
   return (
     <React.Fragment>
-      {/* countingStar()에서 만든 별 5개와 함께 평점을 보여준다. */}
-      {countingStar()} <Text color='#e5e5e5' fontSize='1.7vh' margin='0 5px 0' vertical_align='middle'>{score}</Text>
+      {/* countingStar()에서 만든 별 5개를 (평점과 함께) 보여준다. */}
+      {countingStar()} 
+      {withScore ?
+      <Text color='#e5e5e5' fontSize={size} margin='0 5px 0' vertical_align='middle'>{score}</Text>
+      : ''}
     </React.Fragment>
   )
 };
 
 const StarFull = styled.span`
+  ${(props) => props.size ? `font-size: ${props.size}` : ''};
   font-weight: 700;
   color: #e5e5e5;
   vertical-align: middle;
 `;
 
 const StarEmpty = styled.span`
+  ${(props) => props.size ? `font-size: ${props.size}` : ''};
   font-weight: 700;
   color: #848484;
   vertical-align: middle;

@@ -16,7 +16,7 @@ const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
   // const username = useSelector(state => state.user.user.user.nickname);      // 로그인 상태일 때 리덕스에서 닉네임 가져오기
   const username = 'realmot';   // 로그인 안 해도 테스트할 수 있도록 임시로 설정한 닉네임(실제 유저 닉네임)
-  const post_id = window.location.pathname.split('/write/')[1];
+  const post_id = parseInt(window.location.pathname.split('/write/')[1]);
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((p) => p.postId == post_id);
 

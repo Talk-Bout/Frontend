@@ -84,7 +84,7 @@ const BootPost = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto' height='100vh'>
+      <Grid className='background' display='flex' overflow='auto' minHeight='100vh'>
         <Sidebar />
         <Body header>
           <BodyInner>
@@ -136,17 +136,19 @@ const BootPost = (props) => {
               {/* 댓글 리스트 */}
               <CommentList>
                 {comment_list && comment_list.map((n, idx) => {
-                  <Comment key={idx}>
-                    <Grid display='flex' justify_content='space-between'>
-                      <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명{idx + 1}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
-                      <Buttons>
-                        <PostBtn style={{margin: '0 20px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
-                        <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
-                      </Buttons>
-                    </Grid>
-                    <Word><Text fontSize='1.7vh' color='#F1F3F4'>{n.content}</Text></Word>
-                    <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
-                  </Comment>
+                  return (
+                    <Comment>
+                      <Grid display='flex' justify_content='space-between'>
+                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>{n.nickname}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
+                        <Buttons>
+                          <PostBtn style={{margin: '0 20px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                          <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
+                        </Buttons>
+                      </Grid>
+                      <Word><Text fontSize='1.7vh' color='#F1F3F4'>{n.content}</Text></Word>
+                      <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
+                    </Comment>
+                  )
                 })}
                 <MoreBtn><Text fontSize='1.6vh' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn>
               </CommentList>

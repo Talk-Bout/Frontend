@@ -18,8 +18,7 @@ const initialState = {
 const setCampsDB = () => {
   return function (dispatch) {
     instance.get('/bootcamp').then((response) => {
-      console.log(response.data)
-      // dispatch(setCamps(response.data));
+      dispatch(setCamps(response.data));
     })
     .catch((err) => {
       console.error(`부트캠프 전체 불러오기 에러 발생: ${err} ### ${err.response}`);

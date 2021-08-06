@@ -148,6 +148,11 @@ const Warning = styled.div`
   border: 1px solid #5f6368;
   box-sizing: border-box;
   border-radius: 5px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
 `;
 
 const FeedBackBox = styled.div`

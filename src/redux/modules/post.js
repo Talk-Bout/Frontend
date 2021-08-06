@@ -41,13 +41,8 @@ const setOnePostDB = (id) => {
   return function (dispatch) {
     const postId = parseInt(id);
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
-    console.log(postId);
-    instance
-      .get(`/posts/${postId}`, {
-        postId: postId,
-      })
+    instance.get(`/posts/${postId}`)
       .then((response) => {
-        console.log(response.data);
         dispatch(setOnePost(response.data));
       })
       .catch((err) => {

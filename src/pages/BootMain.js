@@ -17,7 +17,7 @@ const BootMain = (props) => {
   const all_camp = useSelector(state => state.bootcamp.camp_list);
   const camp_list = all_camp.slice(start, end);               // 0부터 (end-1)번째까지 출력
 
-    // const baseURL = 'http://13.209.12.149/'     // 서버 URL - camp.logo 앞에 붙였으나 이미지 불러오기 실패
+    // const baseURL = 'http://13.209.12.149/'     // 서버 URL ; camp.logo 앞에 붙였으나 이미지 불러오기 실패
 
   useEffect(() => {
     dispatch(campActions.setCampsDB());

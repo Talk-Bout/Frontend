@@ -63,7 +63,7 @@ const Login = (props) => {
             />
           </form>
           <Text fontSize="1.2vh" color="#ff7070">
-            가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
+            {/* 가입하지 않은 아이디이거나, 잘못된 비밀번호입니다. */}
           </Text>
         </Grid>
         <Grid height="20%">

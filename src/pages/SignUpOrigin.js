@@ -102,7 +102,7 @@ const SignUpOrigin = (props) => {
             </InputBox>
           </form>
           <Text fontSize="1.2vh" color="#ff7070">
-            이미 사용중인 이메일입니다.
+            {/* 이미 사용중인 이메일입니다. */}
           </Text>
         </Grid>
         <Grid height="15%">
@@ -153,7 +153,7 @@ const SignUpOrigin = (props) => {
             </InputBox>
           </form>
 
-          {password === confirm_password ? (
+          {/* {password === confirm_password ? (
             <Text fontSize="1.2vh" color="#b2f37f">
               비밀번호가 일치합니다.
             </Text>
@@ -161,7 +161,7 @@ const SignUpOrigin = (props) => {
             <Text fontSize="1.2vh" color="#ff7070">
               비밀번호가 일치하지 않습니다.
             </Text>
-          )}
+          )} */}
         </Grid>
         <Grid height="15%">
           <form>
@@ -188,7 +188,7 @@ const SignUpOrigin = (props) => {
             </InputBox>
           </form>
           <Text fontSize="1.2vh" color="#ff7070">
-            이미 사용중인 닉네임입니다.
+            {/* 이미 사용중인 닉네임입니다. */}
           </Text>
         </Grid>
         <Grid height="10%">

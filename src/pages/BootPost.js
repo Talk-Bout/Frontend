@@ -17,8 +17,7 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 const BootPost = (props) => {
   const dispatch = useDispatch();
   const post_id = parseInt(window.location.pathname.split('/boot/post/')[1]);
-  // const username = useSelector(state => state.user.user.nickname);
-  const username = 'test';
+  const username = useSelector(state => state.user.user.nickname);
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
   const comment_list = useSelector(state => state.comment.list);

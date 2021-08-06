@@ -73,7 +73,7 @@ const logInCheckDB = () => {
     };
 
     const token = localStorage.getItem('token'); // token이라는 이름의 저장된 것을 불러오기
-
+    console.log(token);
     if (token === null) {
       return;
     }
@@ -103,6 +103,7 @@ export default handleActions(
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.is_login = false;
+        localStorage.removeItem('token');
         window.alert('로그아웃 완료!');
       }),
     [SIGN_UP]: (state, action) => produce(state, (draft) => {}),

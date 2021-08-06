@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import Profile from '../image/profile_small.png';
+import Badge from '../image/badge 1.png';
 import { Text, Button, Grid, Input, Image } from '../elements/index';
-import { BiTimeFive} from 'react-icons/bi';
+import { BiTimeFive, BiBadgeCheck} from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
 import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 
@@ -22,13 +23,22 @@ const templateN = (props) => {
           <Grid height="100%" width="25%">
             <Grid backgroundColor="#202124" height="48vh" width="90%" margin="auto"
             border="1px solid #202124" borderRadius="5px" >
+              {/* 인증 안됐을 때 */}
+              {/* <ProfileBox>
+                <Image margin="15% auto" shape='BigProfileImage' src='https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80' size='7.5'></Image>
+              </ProfileBox> */}
+               {/* 인증 됐을 때 */}
               <ProfileBox>
                 <Image margin="15% auto" shape='BigProfileImage' src='https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80' size='7.5'></Image>
               </ProfileBox>
+
               <Grid height="30%">
-                <Text p color="#F8F9FA" text_align="center" margin="0" fontSize="4.5vh" fontWeight="bold">스파르타</Text>
+                <Text p color="#F8F9FA" text_align="center" margin="0" fontSize="4.2vh" fontWeight="bold">
+                  스파르타 <Text fontSize="5vh" color="#7879F1"><img src={Badge} alt='배지'/></Text>
+                </Text>
                 <Text p color="#5F6368" text_align="center" margin="0" fontSize="2.2vh">sparta@coding.kr</Text>
               </Grid>
+              {/* 인증 안됐을 때 */}
               <Grid height="30%" margin="auto">
                 <TextBox>
                   <Button _onClick={() => history.push('/mypage/edit')}
@@ -36,6 +46,13 @@ const templateN = (props) => {
                   <Button font_size="1.8vh" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">부트캠프 인증하기</Button>
                 </TextBox>
               </Grid>
+              {/* 인증 됐을 때 */}
+              {/* <Grid height="30%" margin="auto">
+                <TextBox>
+                  <Button _onClick={() => history.push('/mypage/edit')}
+                   font_size="1.8vh" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">정보 수정</Button>
+                </TextBox>
+              </Grid> */}
             </Grid>
           </Grid>
           {/* 북마크된 부트캠프, 글들 */}
@@ -68,7 +85,7 @@ const templateN = (props) => {
                     <Grid padding="6% 0" height="100%" width="67%">
                       <Grid padding="0 8.5% 0 0" display="flex" justify_content="space-between">
                       <Text p margin="0" color="#F1F3F4" fontSize="2.2vh">부트캠프명</Text>
-                      <Text cursor="pointer" color="#FFFFFF" fontSize="2.5vh"><BsHeart/></Text>
+                      <Text cursor="pointer" color="#7879F1" fontSize="2.5vh"><BsHeartFill/></Text>
                       </Grid>
                       
                       <Text p margin="0" color="#F1F3F4" fontSize="2.2vh">★★☆☆☆ 2.2</Text>
@@ -88,7 +105,7 @@ const templateN = (props) => {
                 </Grid>
                 {/* 게시글이 없을 경우 */}
                 {/* <Grid display="flex" margin="1% 0" justify_content="space-between" height="80%" width="100%">
-                  <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px">
+                  <Grid height="80%" width="100%" border="5px dotted #2E3134" borderRadius="5px">
                     <Grid margin="auto" height="100%" width="100%" padding="7% 34%">
                     <Text fontSize="2.6vh" color="#FFFFFF">북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                     </Grid>
@@ -115,7 +132,7 @@ const templateN = (props) => {
                     <hr/>
                     <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
                       <Text p margin="0" color="#BDC1C6" fontSize="2vh">부트톡톡 <AiOutlineRight/> 정보게시판</Text>
-                      <Text cursor="pointer" color="#FFFFFF" fontSize="2.5vh"><BsBookmark/></Text>
+                      <Text cursor="pointer" color="#7879F1" fontSize="2.5vh"><BsBookmarkFill/></Text>
                     </Grid>
                   </Grid>
                );
@@ -132,7 +149,7 @@ const templateN = (props) => {
                 </Grid>
                 {/* 게시글이 없을 경우 */}
                 <Grid display="flex" margin="1% 0" justify_content="space-between" height="80%" width="100%">
-                  <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px">
+                  <Grid height="80%" width="100%" border="5px dotted #2E3134" borderRadius="5px">
                     <Grid margin="auto" height="100%" width="100%" padding="7% 36%">
                     <Text fontSize="2.6vh" color="#FFFFFF">글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                     </Grid>
@@ -170,6 +187,9 @@ const templateN = (props) => {
 
 const ProfileBox = styled.div`
 height: 35%;
+`;
+
+const AuthImageBox = styled.span`
 `;
 
 const TextBox = styled.div`

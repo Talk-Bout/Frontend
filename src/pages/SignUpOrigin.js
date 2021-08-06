@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { nicknameCheck, pwContinuous, pwMatch } from '../shared/Common';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
+import { history } from '../redux/ConfigureStore';
 
 import Logo from '../image/Logo.png';
 
@@ -53,7 +54,7 @@ const SignUpOrigin = (props) => {
     <SmallWindow>
       <Grid height="100%">
         <Grid is_center height="13%">
-          <Image src={Logo} width="60%" margin="auto" />
+          <Image src={Logo} width="60%" margin="auto" _onClick={() => history.push('/')} cursor='pointer'/>
         </Grid>
         <Grid height="8%">
           <TextBox>

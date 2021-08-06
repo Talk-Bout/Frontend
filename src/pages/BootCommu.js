@@ -51,8 +51,8 @@ const BootCommu = (props) => {
             <Text fontSize='1.6vh' color='#80868B'>★ 2.2 (164개 리뷰)</Text>
           </Grid>
           <Grid className='nav-box' height='80px' margin='20px 0 0' borderBottom='2px solid #5F6368'>
-            <Menu><Text fontSize='2.5vh' color='#5F6368'_onClick={() => history.push(`/boot/info/${camp_name}`)}>정보</Text></Menu>
-            <Menu><Text fontSize='2.5vh' color='#5F6368'_onClick={() => history.push(`/boot/review/${camp_name}`)}>리뷰</Text></Menu>
+            <Menu><Text fontSize='2.5vh' color='#5F6368'_onClick={() => history.push(`/boot/camp/${camp_name}/info`)}>정보</Text></Menu>
+            <Menu><Text fontSize='2.5vh' color='#5F6368'_onClick={() => history.push(`/boot/camp/${camp_name}/review`)}>리뷰</Text></Menu>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='2.5vh' color='#e8eaed'>커뮤니티</Text></Menu>
           </Grid>
           <Grid className='contents-box' height='55%' padding='40px 0' display='flex' justify_content='space-between' position='relative'>

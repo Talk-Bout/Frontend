@@ -45,7 +45,7 @@ const BootMain = (props) => {
             <CardList>
               {camp_list.map((camp, idx) => {
                 return (
-                  <Card key={idx} onClick={() => history.push(`/boot/info/${camp.bootcampName}`)}>
+                  <Card key={idx} onClick={() => history.push(`/boot/camp/${camp.bootcampName}/info`)}>
                     <ImageDiv>
                       <img src={camp.logo} alt={camp.bootcampName}></img>
                     </ImageDiv>

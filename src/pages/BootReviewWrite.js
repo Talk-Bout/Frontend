@@ -8,6 +8,7 @@ import { BsX } from 'react-icons/bs';
 import { IoStar } from 'react-icons/io5';
 import { history } from '../redux/ConfigureStore';
 import { actionCreators as postActions } from '../redux/modules/post';
+import StarRatingComponent from 'react-star-rating-component';
 
 const BootReviewWrite = (props) => {
   // const dispatch = useDispatch();
@@ -38,6 +39,14 @@ const BootReviewWrite = (props) => {
   //   }
   // };
 
+  let star = 0;
+  const [rating, setRating] = useState('');
+  const onClickStar = (e) => {
+    // console.log(e);
+    star = e;
+    console.log(star);
+  }
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' backgroundColor='#17181b' minHeight='100vh'>
@@ -62,11 +71,11 @@ const BootReviewWrite = (props) => {
                 <div style={{padding: '25px 0 0'}}><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>기수</Text></div>
                 <div><Input placeholder='수강중'/></div>
                 <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>총 평점</Text></div>
-                <div><Text fontSize='3vh' fontWeight='700' color='#e5e5e5'><IoStar /> <IoStar /> <span style={{color: '#848484'}}><IoStar /> <IoStar /> <IoStar /></span></Text></div>
+                <div><Text fontSize='3vh' fontWeight='700' color='#848484'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#e5e5e5' emptyStarColor='#848484'/></Text></div>
                 <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프의 장점<br /></Text><Text fontSize='1.7vh' color='#848484'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder='부트캠프의 장점을 입력해주세요'/></div>
+                <div><Textarea rows='5' minlength='40' placeholder='부트캠프의 장점을 입력해주세요'/></div>
                 <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프의 단점<br /></Text><Text fontSize='1.7vh' color='#848484'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder='부트캠프의 단점을 입력해주세요'/></div>
+                <div><Textarea rows='5' minlength='40' placeholder='부트캠프의 단점을 입력해주세요'/></div>
               </BodyBox>
             </Window>
           </Grid>

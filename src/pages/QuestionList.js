@@ -19,7 +19,7 @@ import QnaCard from '../components/QnaCard';
 const QuestionList = (props) => {
   const dispatch = useDispatch();
   const qna_list = useSelector((state) => state.post.list);
-  console.log(qna_list);
+  // console.log(qna_list);
 
   useEffect(() => {
     dispatch(questionActions.setPostDB());

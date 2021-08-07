@@ -21,8 +21,8 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (post) => post.postId == question_id
   );
-  console.log(question_list);
-  console.log(question_id);
+  // console.log(question_list);
+  // console.log(question_id);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {

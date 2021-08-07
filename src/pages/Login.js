@@ -84,7 +84,8 @@ const Login = (props) => {
         <Grid height="20%">
           {/* 로그인 버튼 => 누르면 toast 나옴*/}
           <Button onClick={() => login()} color="#a5a6af">
-            {/* <Button color="#a5a6af"> */}
+
+          {/* <Button color="#a5a6af"> */}
             <Text fontSize="1.5vh" color="white">
               로그인
             </Text>

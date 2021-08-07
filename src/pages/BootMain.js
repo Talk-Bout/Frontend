@@ -11,11 +11,11 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const BootMain = (props) => {
   const dispatch = useDispatch();
-  const [start, setStart] = useState(0);        // 한 페이지에 불러올 첫 게시글 번호 0번
-  const [end, setEnd] = useState(12);            // 한 페이지에 불러올 게시글 개수 12개
+  const [start, setStart] = useState(0);        // 한 페이지에 불러올 첫 부트캠프 번호 0번
+  const [end, setEnd] = useState(12);            // 한 페이지에 불러올 부트캠프 개수 12개
   const [page, setPage] = useState(1);          // 페이지 번호는 1부터 시작
   const all_camp = useSelector(state => state.bootcamp.camp_list);
-  const camp_list = all_camp.slice(start, end);               // 0부터 (end-1)번째까지 출력
+  const camp_list = all_camp.slice(start, end);               // 0부터 (end-1)번째까지 부트캠프 목록 출력
 
     // const baseURL = 'http://13.209.12.149/'     // 서버 URL ; camp.logo 앞에 붙였으나 이미지 불러오기 실패
 

@@ -90,6 +90,7 @@ const logInCheckDB = () => {
       })
       .then((response) => {
         console.log(response.data); //nickname 예상
+
         dispatch(logInCheck(response.data));
       })
       .catch((err) => {

@@ -113,12 +113,12 @@ const Signup = (props) => {
                   이메일
                 </Text>
               </label>
-              <DoubleCheckBtn
+              {/* <DoubleCheckBtn
                 type="button"
-                onClick={() => emailCheck(formik.values.id)}
+                
               >
                 중복 확인
-              </DoubleCheckBtn>
+              </DoubleCheckBtn> */}
             </TextBox>
             <TextBox>
               <Text fontSize="1.2vh" color="#80868b">
@@ -136,6 +136,7 @@ const Signup = (props) => {
                   placeholder="이메일"
                   onChange={formik.handleChange}
                   value={formik.values.id}
+                  onFocus={() => emailCheck(formik.values.id)}
                 />
                 <Text margin="0 5px" color="#80868b">
                   @

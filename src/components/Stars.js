@@ -14,7 +14,7 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
     const star_empty = 5 - star_full;       // 빈 별 개수는 총 5개에서 별점 개수를 뺀 나머지로 한다.
     let result = [];
     for (let i = 0; i < star_full; i++) {     // 별점 개수만큼 꽉 찬 별을 만든다.
-      result.push(<StarFull {...styles} onClick={_onClick} key={i}><IoStar /></StarFull>);
+      result.push(<StarFull {...styles} onClick={_onClick} key={i+5}><IoStar /></StarFull>);
     }
     for (let i = 0; i < star_empty; i++) {    // 빈 별 개수만큼 빈 별을 만든다.
       result.push(<StarEmpty {...styles} onClick={_onClick} key={i}><IoStar /></StarEmpty>);

@@ -59,12 +59,12 @@ const BootReview = (props) => {
               <PostList>
                 <Grid className='review-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091' padding='20px 0'>
                   <TitleBox><Text p fontSize='2.5vh' fontWeight='700' color='#e8eaed'>{camp_name} 리뷰</Text></TitleBox>
-                  <WriteBtn onClick={() => history.push('/boot/review/write')}><Text fontSize='1.4vh' color='#7879F1'><span style={{fontSize: '2.5vh', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
+                  <WriteBtn onClick={() => history.push({pathname: '/boot/review/write', state: {camp_name: camp_name}})}><Text fontSize='1.4vh' color='#7879F1'><span style={{fontSize: '2.5vh', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
                 </Grid>
                 {review_list && review_list.map((review, idx) => {
                   if ((idx + 1) % 3 === 0 || (idx + 1) === review_list.length) {
                     return (
-                      <Post>
+                      <Post key={review.reviewId}>
                         <StarBox>
                           <Text className='score' p fontSize='2vh' fontWeight='700' color='#e8eaed' margin='0'>{review.stars}</Text>
                           <Text className='star' p fontSize='2vh' color='#e8eaed' margin='0'><Stars score={review.stars} size='2vh'/></Text>
@@ -116,9 +116,9 @@ const BootReview = (props) => {
             </Grid>
             <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='450px' position='absolute'>
               <Text className='other-camps' p fontSize='2vh' fontWeight='700' color='#e2e2e2' margin='20px 20px 0'>다른 부트캠프</Text>
-              {[1, 2, 3, 4].map((c) => {
+              {[1, 2, 3, 4].map((c, idx) => {
                 return (
-                  <Camp onClick={() => history.push('/boot/info')}>
+                  <Camp key={idx} onClick={() => history.push('/boot/info')}>
                     <ImgBox><Image size='4.5' margin='10px' src='https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'></Image></ImgBox>
                     <CampBox>
                       <Text className='camp-name' p fontSize='2vh' fontWeight='700' color='#f1f3f4' margin='20px 0 0'>부트캠프명</Text>

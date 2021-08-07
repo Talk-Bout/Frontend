@@ -9,9 +9,11 @@ import Comment from '../components/Comment';
 import PopBootContents from '../components/PopBootContents';
 
 import styled from 'styled-components';
-import {Text, Button, Grid, Input, Image} from "../elements/index";
-import { BiTimeFive, BiLike, BiComment, BiShow } from 'react-icons/bi';
+import {Text, Grid, Input, Image} from "../elements/index";
+import { BiTimeFive, BiLike, BiComment, BiShow, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
+import { Button, Menu, MenuItem } from '@material-ui/core';
+import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -21,6 +23,8 @@ const CommonDetail = (props) => {
   const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
   console.log(common_find);
   const username = useSelector(state => state.user.user.nickname);
+  const [MenuLink, setMenuLink] = useState(null);
+  
 
   React.useEffect(() => {
     if (common_find){
@@ -28,6 +32,14 @@ const CommonDetail = (props) => {
     }
     dispatch(postActions.setOnePostDB(postId));
   }, []);
+
+  const handleClick = (e) => {
+    setMenuLink(e.currentTarget);
+  }
+
+  const handleClose = () => {
+    setMenuLink(null);
+  }
 
   // 게시글 삭제
   const deleteCommon = () => {
@@ -54,11 +66,31 @@ return (
         <Grid width="100%" height="45vh">
           <Grid width="100%" height="45%">
             <Grid width="100%" height="100%">
-              <Grid padding="2% 0" width="100%" height="60%">
+              <Grid padding="2% 0" width="100%" height="15%">
               <Text fontSize="1.3vh" color="#BDC1C6"> 부트톡톡 &gt; 정보게시판</Text>
-              <Text p margin="0" fontSize="2.5vh" color="#F1F3F4" fontWeight="bold">
-              {common_find.title}
-              </Text>
+              </Grid>
+              <Grid justify_content="space-between" display="flex" padding="2% 0" width="100%" height="45%">
+                <Grid width="20%" height="100%">
+                <Text p margin="0" fontSize="2.5vh" color="#F1F3F4" fontWeight="bold">
+                {common_find.title}
+                </Text>
+                </Grid>
+                <Grid padding="" display="flex" width="13%" height="100%">
+                  <Text color='#9aa0a6' fontSize='3vh' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
+                  <Button margin="0 0 0 20px" width="30%" bg="transparent" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                    <Text color='#9AA0A6' fontSize='3vh' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
+                  </Button>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={MenuLink}
+                    keepMounted
+                    open={Boolean(MenuLink)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={() => {history.push(`/common/write/${postId}`)}}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                    <MenuItem onClick={() => {handleClose(); deleteCommon()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                  </Menu>
+                </Grid>
               </Grid>
               <Grid width="100%" height="50%">
               <Grid display="flex" width="100%" height="100%">
@@ -66,15 +98,15 @@ return (
                   <Image margin="5%" size="3"/>
                 </Grid>
                 <Grid width="30%" height="80%" >
-                <Text p margin="0 0 0 6%" fontSize="1.2vh" color="#BDC1C6">
+                <Text p margin="0 0 0 6%" fontSize="1.4vh" color="#BDC1C6">
                 {common_find.nickname}
                 </Text>
-                <Text p margin="0 0 0 6%" fontSize="1.2vh" color="#BDC1C6">
+                <Text p margin="0 0 0 6%" fontSize="1.4vh" color="#BDC1C6">
                 {common_find.createdAt}
                 </Text>
                 </Grid>
                 <Grid width="63.5%" height="80%" >
-                  <ButtonBox>
+                  {/* <ButtonBox>
                     <EditDeleteButton
                     onClick={() => {deleteCommon()}}>
                       삭제
@@ -83,7 +115,7 @@ return (
                     onClick={() => {history.push(`/common/write/${postId}`)}}>
                       수정
                     </EditDeleteButton>
-                  </ButtonBox>
+                  </ButtonBox> */}
                 </Grid>
               </Grid>
               </Grid>
@@ -100,10 +132,10 @@ return (
           <HistoryButton>
             <BiLike/> &nbsp; 17
           </HistoryButton>
-          <HistoryButton>
+          <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="2vh">
             <BiComment/> &nbsp;  15
-          </HistoryButton>
-          <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="1.5vh">
+          </Text>
+          <Text margin="0 0 0 3%" color="#DADCE0" width="10%" height="100%" fontSize="2vh">
             <AiOutlineEye/> &nbsp;  354
           </Text>
           </Grid>
@@ -130,7 +162,7 @@ return (
 const HistoryButton = styled.button`
 width: 8%;
 height: 10%;
-font-size: 1.5vh;
+font-size: 2vh;
 background-color: transparent;
 border-radius: 40vh;
 border: none;
@@ -138,7 +170,7 @@ cursor: pointer;
 color: #DADCE0;
 &:hover {
   background-color: #282A2D;
-  color: #DADCE0;
+  color: #7879F1;
   }
 `;
 

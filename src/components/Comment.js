@@ -51,15 +51,15 @@ const all_comment = comment_list.slice(0, comment_list.length)
 
 return (
   <React.Fragment>
-  <Grid width="100%" height="90%" >
-    <Grid width="100%" height="20%"   >
-      <Text p color="#DADCE0" margin="2% 0 0 0.5%" fontWeight="bold" fontSize="1.5vh">
+  <Grid width="100%" height="100%" >
+    <Grid width="100%" height="5%"   >
+      <Text p color="#DADCE0" margin="2% 0 0 0.5%" fontWeight="bold" fontSize="2vh">
       댓글 &nbsp; 15
       </Text>
     </Grid>
-    <Grid width="100%" height="65%" >
+    <Grid width="100%" height="95%">
     <CommentBox>
-    <Input padding="0 3%" outline="none" color="#DADCE0" width="100%" border="1px solid #DADCE0" bg="transparent" font_size="1.3vh"  border_radius="5px" height="50%"
+    <Input padding="0 3%" outline="none" color="#DADCE0" width="100%" border="1px solid #DADCE0" bg="transparent" font_size="2vh"  border_radius="5px" height="50%"
     placeholder="댓글을 남겨주세요" _ref={addRef} onSubmit={addComment}/>
     <WriteButton onClick={()=> {addComment()}}>
       등록하기
@@ -73,13 +73,6 @@ return (
     <CommentEdit  key={ct.commentId} {...ct}/>
   )
   })}
-  <Grid width="100%" height="6vh">
-    <Grid width="100%" height="6vh">
-      <CommentListButton>
-        댓글 더보기 (1/2)
-      </CommentListButton>
-    </Grid>
-  </Grid>
   </Grid>
   </React.Fragment>
   )    
@@ -96,9 +89,9 @@ margin: auto;
 
 const WriteButton = styled.button`
 height: 50%;
-background-color: #FFFFFF;
+background-color: #7879F1;
 margin: 0 1%;
-font-size: 1.3vh;
+font-size: 1.7vh;
 border: none;
 color: #121212;
 cursor: pointer;

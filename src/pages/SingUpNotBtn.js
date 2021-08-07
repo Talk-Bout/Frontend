@@ -36,7 +36,6 @@ const Signup = (props) => {
         .min(4, ' 4자 이상 입력해주세요')
         .max(10, ' 10자 이하 입력해주세요')
         .required('아이디를 입력해주세요.'),
-      // .concat(is_exist?)
       password: Yup.string()
         .min(8, '8자 이상 입력해주세요')
         .matches(
@@ -64,11 +63,6 @@ const Signup = (props) => {
   //로그인 중복 확인
   const emailCheck = (id) => {
     console.log(id);
-    if (id === '') {
-      window.alert('아이디를 입력해주세요');
-      return;
-    }
-
     const email = String(id + '@' + selectMail.current.value);
     console.log(email);
 
@@ -113,12 +107,6 @@ const Signup = (props) => {
                   이메일
                 </Text>
               </label>
-              <DoubleCheckBtn
-                type="button"
-                onClick={() => emailCheck(formik.values.id)}
-              >
-                중복 확인
-              </DoubleCheckBtn>
             </TextBox>
             <TextBox>
               <Text fontSize="1.2vh" color="#80868b">
@@ -126,8 +114,33 @@ const Signup = (props) => {
               </Text>
             </TextBox>
             {/* 이메일 입력 창 */}
-            {/* 변수이름 = true, value 값이 있을때 */}
-            {formik.values.id && is_exist ? (
+            if(is_exist)
+            {
+              <InputBox>
+                <Input
+                  id="id"
+                  name="id"
+                  type="id"
+                  placeholder="이메일"
+                  onChange={formik.handleChange}
+                  onChange={() => emailCheck()}
+                  value={formik.values.id}
+                />
+                <Text margin="0 5px" color="#80868b">
+                  @
+                </Text>
+                <Select ref={selectMail}>
+                  <option value="">선택해주세요</option>
+                  <option value="gmail.com">gmail.com</option>
+                  <option value="naver.com">naver.com</option>
+                  <option value="hanmail.net">hanmail.net</option>
+                </Select>
+                <Text fontSize="1.2vh" color="#B2F37F">
+                  사용가능한 이메일입니다.
+                </Text>
+              </InputBox>
+            }
+            {
               <InputBox>
                 <Input
                   id="id"
@@ -151,36 +164,13 @@ const Signup = (props) => {
                     {formik.errors.id}
                   </Text>
                 )}
-                {/* {formik.touched.id && !formik.errors.id && (
+                {formik.touched.id && !formik.errors.id && (
                   <Text fontSize="1.2vh" color="#B2F37F">
                     사용가능한 이메일입니다.
                   </Text>
-                )} */}
+                )}
               </InputBox>
-            ) : (
-              <InputBox>
-                <Input
-                  id="id"
-                  name="id"
-                  type="id"
-                  placeholder="이메일"
-                  onChange={formik.handleChange}
-                  value={formik.values.id}
-                />
-                <Text margin="0 5px" color="#80868b">
-                  @
-                </Text>
-                <Select ref={selectMail}>
-                  <option value="">선택해주세요</option>
-                  <option value="gmail.com">gmail.com</option>
-                  <option value="naver.com">naver.com</option>
-                  <option value="hanmail.net">hanmail.net</option>
-                </Select>
-                <Text fontSize="1.2vh" color="#B2F37F">
-                  사용가능한 이메일입니다.
-                </Text>
-              </InputBox>
-            )}
+            }
           </Grid>
           <Grid margin="2% 0%">
             <TextBox>
@@ -251,7 +241,6 @@ const Signup = (props) => {
                   닉네임
                 </Text>
               </label>
-              <DoubleCheckBtn type="button">중복 확인</DoubleCheckBtn>
             </TextBox>
             {/* 닉네임 입력창 */}
             <InputBox>
@@ -285,11 +274,11 @@ const Signup = (props) => {
             </Text> */}
           </Grid>
           <Grid>
-            <SingUpButton type="submit">
+            <Button type="submit">
               <Text fontSize="1.5vh" fontWeight="600" color="white">
                 회원가입 완료
               </Text>
-            </SingUpButton>
+            </Button>
           </Grid>
         </form>
       </Grid>
@@ -299,8 +288,6 @@ const Signup = (props) => {
 
 const TextBox = styled.div`
   text-align: left;
-  display: flex;
-  margin: 2% 0%;
 `;
 
 const InputBox = styled.div`
@@ -331,19 +318,7 @@ const Select = styled.select`
   }
 `;
 
-const DoubleCheckBtn = styled.button`
-  width: 30%;
-  font-size: 1.2vh;
-  font-weight: 600;
-  color: #ffffff;
-  border: 1px solid #7879f1;
-  border-radius: 5px;
-  background-color: transparent;
-  cursor: pointer;
-  margin-left: auto;
-`;
-
-const SingUpButton = styled.button`
+const Button = styled.button`
   width: 100%;
   height: 40px;
   background-color: #7879f1;

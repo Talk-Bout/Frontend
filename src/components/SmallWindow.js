@@ -33,7 +33,7 @@ const SmallWindow = (props) => {
           <Grid
             backgroundColor="#212123"
             width="25vw"
-            height="80vh"
+            height="85vh"
             margin="auto"
             padding="3vh 2.5vw"
           >

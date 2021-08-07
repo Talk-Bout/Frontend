@@ -20,7 +20,7 @@ const IS_EDIT = 'IS_EDIT';
 const setComment = createAction(SET_COMMENT, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
-const deleteComment = createAction(DELETE_COMMENT, (comment) => ({comment}));
+const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
 const isEdit = createAction(IS_EDIT, (is_edit) => ({is_edit}));
 
 // 기본값 정하기
@@ -116,13 +116,14 @@ export default handleActions({
 }),
 
 [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
-    let new_comment_list = draft.list.filter((ct) => {
-        if(ct.commentId !== action.payload.comment){
-    return ct
-    }
-    console.log(action.payload);
-})
-    draft.list = new_comment_list;
+//     let new_comment_list = draft.list.filter((ct) => {
+//         if(ct.commentId !== action.payload.commentId){
+//     return ct
+//     }
+// })
+//    console.log(new_comment_list);
+    let idx = draft.list.findIndex((ct)=> ct.commentId === action.payload.commentId);
+    draft.list.splice(idx, 1);
 }),
 
 [EDIT_COMMENT]: (state, action) =>

@@ -51,7 +51,7 @@ const CommonWrite = (props) => {
         category: 'testing',
       }
       dispatch(postActions.addPostDB(new_post));
-      history.push(`/common/detail/${postId}`)
+      history.push(`/common/list`)
     }
     
   };

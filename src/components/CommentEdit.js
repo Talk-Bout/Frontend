@@ -11,15 +11,18 @@ const CommentEdit = (props) => {
 
   const dispatch = useDispatch();
   // const postId = props.postId;
+  console.log(props, "props");
   const {commentId, content, postId} = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
   const username = useSelector(state => state.user.user.nickname);
+  console.log(commentId);
 
   // 댓글 삭제
-  const deleteComment = (commentId) => {
+  const deleteComment = () => {
     dispatch(commentActions.deleteCommentDB(commentId, postId));
-    console.log(commentId);
+    console.log(commentId, "commentId");
+    console.log(postId, "postId");
   }
 
   // 댓글 수정
@@ -51,7 +54,7 @@ return (
     ) : (
       <>
       <EditButton
-      onClick={()=>(deleteComment(postId, props.commentId))}
+      onClick={()=>(deleteComment())}
       >
       삭제
     </EditButton>

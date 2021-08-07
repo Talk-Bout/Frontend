@@ -25,6 +25,12 @@ const CommonBoardList = (props) => {
     dispatch(postActions.setPostDB());
   }, []);
 
+  // 게시물 최신순으로 구현하는 함수
+const all_common = common_list.slice(0, common_list.length)
+.sort(function(a, b) {
+  const timeA = a.createdAt; const timeB = b.createdAt; 
+  if (timeA < timeB) return 1; if (timeA > timeB) return -1; });
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -88,9 +94,9 @@ const CommonBoardList = (props) => {
             <Grid height="85vh">
               <Grid width="100%" height="100%" margin="2% 0 0 0">
               <Contents>
-                {common_list.map((c, idx) => {
+                {all_common.map((c, idx) => {
                 return (
-                <Content common_list={common_list} key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
+                <Content common_list={all_common} key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
                 >
                 <Text p color="#F1F3F4" fontSize="2.6vh" margin="0px" padding="2% 2% 1% 2%" fontWeight="bold">
                  {c.title}

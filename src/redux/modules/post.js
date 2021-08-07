@@ -29,6 +29,7 @@ const setPostDB = () => {
     instance.get('/posts')
       .then((response) => {
         dispatch(setPost(response.data));
+        console.log(response.data);
       })
       .catch((err) => {
         console.error(`전체 게시글 불러오기 에러 발생: ${err}`);
@@ -43,7 +44,9 @@ const setOnePostDB = (id) => {
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance.get(`/posts/${postId}`)
       .then((response) => {
+        console.log(response.data);
         dispatch(setOnePost(response.data));
+
       })
       .catch((err) => {
         console.error(`개별 게시글 불러오기 에러 발생: ${err}`);
@@ -67,7 +70,7 @@ const addPostDB = (new_post) => {
         category: category,
       }, {headers: headers})
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         dispatch(addPost(response.data));
       })
       .catch((err) => {
@@ -96,6 +99,7 @@ const editPostDB = (edited_post) => {
         nickname: nickname,
       }, {headers: headers})
       .then((response) => {
+        
         const  data = {
           title: title,
           content: content,
@@ -103,8 +107,9 @@ const editPostDB = (edited_post) => {
           category: category,
           nickname: nickname,
         }
+        console.log(response.data);
         dispatch(editPost(data));
-        console.log(data);
+        // console.log(data);
         // if (edited_post.board_name === 'question') {
         //   history.push(`/question/detail/${postId}`);
         // }
@@ -124,9 +129,9 @@ const deletePostDB = (deleted_post) => {
     instance
       .delete(`/posts/${postId}`, {headers: headers})
       .then((response) => {
-        
+        console.log(response.data);
         dispatch(deletePost(postId));
-        console.log(postId);
+        // console.log(postId);
         // history.push('/');
       })
       .catch((err) => {
@@ -141,6 +146,7 @@ export default handleActions(
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.post_list;
+        // draft.list.push(...action.payload.post_list);
       }),
     [SET_ONE_POST]: (state, action) =>
       produce(state, (draft) => {

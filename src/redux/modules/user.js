@@ -8,17 +8,22 @@ const LOG_IN = 'LOG_IN'; //로그인하기
 const LOG_OUT = 'LOG_OUT'; //로그아웃하기
 const SIGN_UP = 'SIGN_UP'; //회원가입
 const LOGIN_CHECK = 'LOGIN_CHECK'; //로그인 상태 유지
+const DOUBLE_EMAIL_CHECK = 'DOUBLE_EMAIL_CHECK'; //이메일 중복 확인
 
 //액션 생성함수
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
 const signUp = createAction(SIGN_UP, (user) => ({ user }));
-const logInCheck = createAction(LOGIN_CHECK, (nickname) => ({ nickname }));
+const logInCheck = createAction(LOGIN_CHECK, (user) => ({ user }));
+const doubleEmailCheck = createAction(DOUBLE_EMAIL_CHECK, (isExist) => ({
+  isExist,
+}));
 
 //기본값 정하기
 const initialState = {
   user: [],
   is_login: false,
+  is_exist: false,
 };
 
 //액션함수
@@ -63,6 +68,7 @@ const signUpDB = (new_user) => {
       });
   };
 };
+
 // 토큰 => 유저정보 api.
 // 로그인 action그대로 쓰기
 
@@ -84,11 +90,27 @@ const logInCheckDB = () => {
       })
       .then((response) => {
         console.log(response.data); //nickname 예상
-
         dispatch(logInCheck(response.data));
       })
       .catch((err) => {
         console.error(`로그인 유지 에러: ${err}`);
+      });
+  };
+};
+
+const emailCheckDB = (email) => {
+  console.log(email);
+  return function (dispatch) {
+    instance
+      .get(`/users/email/${email}`, {
+        email: email,
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch(doubleEmailCheck(response.data));
+      })
+      .catch((err) => {
+        console.error(`이메일 중복확인 에러: ${err}`);
       });
   };
 };
@@ -109,7 +131,15 @@ export default handleActions(
     [SIGN_UP]: (state, action) => produce(state, (draft) => {}),
     [LOGIN_CHECK]: (state, action) =>
       produce(state, (draft) => {
+        draft.user = action.payload.user;
+        console.log(action.payload.user);
         draft.is_login = true;
+      }),
+    [DOUBLE_EMAIL_CHECK]: (state, action) =>
+      produce(state, (draft) => {
+        // true로 바꿔주지 말고, 그냥 서버에서 전해주는 값 전달
+        console.log(action.payload.isExist.isExist);
+        draft.is_exist = action.payload.isExist.isExist;
       }),
   },
   initialState
@@ -121,9 +151,11 @@ const actionCreators = {
   logOut,
   signUp,
   logInCheck,
+  doubleEmailCheck,
   logInDB,
   signUpDB,
   logInCheckDB,
+  emailCheckDB,
 };
 
 export { actionCreators };

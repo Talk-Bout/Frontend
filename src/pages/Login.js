@@ -20,14 +20,14 @@ const Login = (props) => {
   const [email, setEmail] = React.useState('');
   const [password, setPwd] = React.useState('');
 
-  // const login = () => {
-  //   console.log(email, password);
-  //   if (email === '' || password === '') {
-  //     window.alert('이메일과 비밀번호를 입력해주세요');
-  //     return;
-  //   }
-  //   dispatch(userActions.logInDB(email, password));
-  // };
+  const login = () => {
+    console.log(email, password);
+    if (email === '' || password === '') {
+      window.alert('이메일과 비밀번호를 입력해주세요');
+      return;
+    }
+    dispatch(userActions.logInDB(email, password));
+  };
 
   //onChange의 e.target.value안찍힐때 버튼에 콘솔로그 해보기!
   return (
@@ -69,7 +69,7 @@ const Login = (props) => {
               }}
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
-                  // login();
+                  login();
                 }
               }}
             />
@@ -83,8 +83,8 @@ const Login = (props) => {
 
         <Grid height="20%">
           {/* 로그인 버튼 => 누르면 toast 나옴*/}
-          {/* <Button onClick={() => login()} color="#a5a6af"> */}
-          <Button color="#a5a6af">
+          <Button onClick={() => login()} color="#a5a6af">
+            {/* <Button color="#a5a6af"> */}
             <Text fontSize="1.5vh" color="white">
               로그인
             </Text>

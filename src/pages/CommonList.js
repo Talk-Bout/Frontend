@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import { history } from '../redux/ConfigureStore';
 import { Text, Button, Grid, Image } from '../elements/index';
-import { useSelector } from 'react-redux';
-import { useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { actionCreators as commentActions} from "../redux/modules/comment";
 import { actionCreators as postActions} from "../redux/modules/post";
@@ -15,6 +14,8 @@ import { FaPlus } from "react-icons/fa";
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
+import CommonPostList from '../components/CommonPostList';
+import Pagination from '../components/Pagination';
 
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
@@ -90,57 +91,30 @@ const all_common = common_list.slice(0, common_list.length)
                 </Notice>
               </Grid>
             </Grid>
-            {/* 자유게시판 게시물  */}
+            {/* import 부트톡톡 게시물  */}
             <Grid height="85vh">
               <Grid width="100%" height="100%" margin="2% 0 0 0">
               <Contents>
                 {all_common.map((c, idx) => {
                 return (
-                <Content common_list={all_common} key={c.postId} onClick={() => history.push(`/common/detail/${c.postId}`)}
-                >
-                <Text p color="#F1F3F4" fontSize="2.6vh" margin="0px" padding="2% 2% 1% 2%" fontWeight="bold">
-                 {c.title}
-                </Text>
-                <Text p color="#9AA0A6" fontSize="2.1vh" margin="0px" padding="0% 2%">
-                 {c.content}
-               </Text>
-              <ProfileImage>
-                <Image margin="0 0 3% 0" size="2"/>
-                <Text fontSize="1.8vh" color="#9AA0A6" margin="0 0 0 2%" >
-                {c.nickname}
-                </Text>
-              </ProfileImage>
-            
-              {/* 게시한 날짜, 좋아요, 댓글 */}
-            <Grid width="100%" float="left">
-            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" >
-              <BiTimeFive/> &nbsp;
-              {c.createdAt}
-              </Text>
-            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%">
-              <BiLike/> &nbsp;
-              {c.likes}
-              </Text>
-            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" >
-              <BiComment/> &nbsp; 2
-            </Text>
-            <hr/>
-            </Grid>
-            </Content>
+                <CommonPostList key={c.commentId} {...c}/>
             );
               })}
           </Contents>
               </Grid>     
             </Grid>
-            <Grid height="3%">
-              <PageBox>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronLeft /></Page></Text>
+            
+            {/* <Grid height="3%"> */}
+              {/* <PageBox>
+                <Pagination postsPerPage={postsPerPage} totalPosts={all_common.length} paginate={setCurrentPage}></Pagination>
+                {/* <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronLeft /></Page></Text>
                 <Text margin="0 0.7%" fontSize="2.3vh"><Page>01</Page></Text>
                 <Text margin="0 0.7%" fontSize="2.3vh"><Page>02</Page></Text>
                 <Text margin="0 0.7%" fontSize="2.3vh"><Page>03</Page></Text>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronRight /></Page></Text>
-              </PageBox>
-            </Grid>
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronRight /></Page></Text> */}
+              {/* </PageBox> */}
+            {/* </Grid>  */}
+            
           </Grid>    
         </Body>
       </Grid>
@@ -253,7 +227,7 @@ const Contents = styled.div`
   /* border-top: 1.5px solid #F1F3F4; */
   cursor: pointer;
   // 나중에 페이징하면 수정
-  overflow: hidden;
+  overflow: auto;
   margin: 0.5% 0 0 0;
 `;
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions} from "../redux/modules/post";
@@ -24,7 +24,7 @@ const CommonDetail = (props) => {
   console.log(common_find);
   const username = useSelector(state => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
-  
+
 
   React.useEffect(() => {
     if (common_find){
@@ -75,6 +75,7 @@ return (
                 {common_find.title}
                 </Text>
                 </Grid>
+                {/* 북마크와 수정 삭제 */}
                 <Grid padding="" display="flex" width="13%" height="100%">
                   <Text color='#9aa0a6' fontSize='3vh' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
                   <Button margin="0 0 0 20px" width="30%" bg="transparent" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -106,21 +107,12 @@ return (
                 </Text>
                 </Grid>
                 <Grid width="63.5%" height="80%" >
-                  {/* <ButtonBox>
-                    <EditDeleteButton
-                    onClick={() => {deleteCommon()}}>
-                      삭제
-                    </EditDeleteButton>
-                    <EditDeleteButton
-                    onClick={() => {history.push(`/common/write/${postId}`)}}>
-                      수정
-                    </EditDeleteButton>
-                  </ButtonBox> */}
                 </Grid>
               </Grid>
               </Grid>
             </Grid>
           </Grid>
+          {/* 게시물 본문 */}
           <Grid width="70%" height="41%" >
           <Grid padding="0 1% 2% 1%" >
             <Text fontSize="1.5vh" color="#DADCE0" style={{wordBreak:"break-all"}}>
@@ -140,14 +132,14 @@ return (
           </Text>
           </Grid>
         </Grid>
-        {/* 댓글 작성과 리스트 */}
+        {/* import 댓글 작성과 리스트 */}
         <Grid width="97%" height="15vh" borderTop="1.5px solid #DADCE0">
           <Comment postId={postId}  />
         </Grid>
         <Grid width="100%" height="40vh">
         </Grid>
       </Grid>
-      {/* 인기 부트톡톡 */}
+      {/* import 인기 부트톡톡 */}
       <Grid width="27%" height="100%" >
         <PopBootContents/>
       </Grid>

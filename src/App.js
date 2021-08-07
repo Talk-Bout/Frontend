@@ -46,7 +46,7 @@ import NewsList from './pages/NewsList';
 
 //마이 페이지
 import Mypage from './pages/Mypage';
-import MyPageEdit from './pages/MyPageEdit';
+// import MyPageEdit from './pages/MyPageEdit';
 import DeleteUser from './pages/DeleteUser';
 import PageEdit from './pages/PageEdit';
 
@@ -68,6 +68,7 @@ function App() {
           <Route path="/common/list" exact component={CommonList} />
           <Route path="/common/detail/:id" exact component={CommonDetail} />
           <Route path="/common/write" exact component={CommonWrite} />
+          <Route path="/common/write/:id" exact component={CommonWrite} />
           <Route path="/question" exact component={QuestionList} />
           <Route path="/question/write" exact component={QuestionWrite} />
           <Route path="/question/write/:id" exact component={QuestionWrite} />

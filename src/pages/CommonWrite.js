@@ -12,22 +12,50 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 const CommonWrite = (props) => {
   const dispatch = useDispatch();
+
+  const postId = parseInt(window.location.pathname.split('/common/write/')[1]);
+  const common_list = useSelector(state => state.post.list);
+  const post_found = common_list.find((p) => p.postId == postId);
+  const username = useSelector(state => state.user.user.nickname);
+
   const addTitleRef = useRef('');
   const addContentRef = useRef('');
-  const username = useSelector(state => state.user.user.nickname);
+  
 
   // 게시글 추가
   const addCommon = () => {
-    const new_post = {
-      title: addTitleRef.current.value,
-      content: addContentRef.current.value,
-      nickname: username,
-      category: 'testing',
+    if (addTitleRef.current.value === '') {
+      window.alert('제목을 입력해주세요.');
+      return;
+    }
+    if (addContentRef.current.value === '') {
+      window.alert('내용을 입력해주세요.');
+      return;
+    }
+    if(postId) {
+      const edited_post = {
+        title: addTitleRef.current.value,
+        content: addContentRef.current.value,
+        nickname: username,
+        category: 'testing',
+        postId: postId,
+      }
+      dispatch(postActions.editPostDB(edited_post));
+      history.push(`/common/detail/${postId}`)
+      
+    } else {
+      const new_post = {
+        title: addTitleRef.current.value,
+        content: addContentRef.current.value,
+        nickname: username,
+        category: 'testing',
+      }
+      dispatch(postActions.addPostDB(new_post));
+      history.push(`/common/detail/${postId}`)
     }
     
-    console.log(new_post);
-    dispatch(postActions.addPostDB(new_post));
   };
+
 
   return (
     <React.Fragment>
@@ -128,6 +156,7 @@ const CommonWrite = (props) => {
                     placeholder="제목을 입력해주세요"
                     border="none"
                     _ref={addTitleRef}
+                    _defaultValue={postId ? post_found.title : null}
                   ></Input>
                 </Grid>
                 <Hr />
@@ -143,12 +172,13 @@ const CommonWrite = (props) => {
                     placeholder="내용을 입력해주세요"
                     border="none"
                     _ref={addContentRef}
+                    _defaultValue={postId ? post_found.content : null}
                   ></Input>
                 </Grid>
               </Grid>
             </Grid>
             <Grid width="100%" height="12%" backgroundColor="#2E3134">
-              {/* 기능 */}
+              {/* 파일 업로드, 해시태그 */}
             <BoardFooter>
               <Icon><VscFileMedia size={27}/></Icon>
               <Icon><VscSymbolNumeric size={27}/></Icon> 

@@ -15,11 +15,11 @@ import { AiOutlineEye } from 'react-icons/ai';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
+  //게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const postId = props.match.params.id;
-
-  //리덕스 : 게시글 상세 조회, 해당 게시물 댓글 리스트 조회
   const common_list = useSelector(state => state.post.list);
   const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
+  const username = useSelector(state => state.user.user.nickname);
 
   React.useEffect(() => {
     if (common_find){
@@ -28,12 +28,20 @@ const CommonDetail = (props) => {
     dispatch(postActions.setOnePostDB(postId));
   }, []);
 
+  // 게시글 삭제
+  const deleteCommon = () => {
+    const deleted_post = {
+      postId: postId,
+    };
+    dispatch(postActions.deletePostDB(deleted_post));
+    history.push('/common/list');
+  }
+
   if (!common_find){
     return(
       <></>
-    )
-  }
-
+    );
+  };
 return (
   <React.Fragment>
   <Grid className='background' overflow="auto" display='flex' backgroundColor="#17181B">
@@ -66,10 +74,12 @@ return (
                 </Grid>
                 <Grid width="63.5%" height="80%" >
                   <ButtonBox>
-                    <EditDeleteButton>
+                    <EditDeleteButton
+                    onClick={() => {deleteCommon()}}>
                       삭제
                     </EditDeleteButton>
-                    <EditDeleteButton>
+                    <EditDeleteButton
+                    onClick={() => {history.push(`/common/write/${postId}`)}}>
                       수정
                     </EditDeleteButton>
                   </ButtonBox>

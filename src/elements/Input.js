@@ -20,6 +20,7 @@ const Input = (props) => {
     padding,
     height,
     color,
+    _defaultValue,
   } = props;
 
 
@@ -35,6 +36,7 @@ const Input = (props) => {
         height: height,
         color: color,
       padding: padding,
+      _defaultValue: _defaultValue,
         
     }
 
@@ -47,6 +49,7 @@ const Input = (props) => {
         placeholder={placeholder}
         onChange={_onChange}
         ref={_ref}
+        defaultValue={_defaultValue}
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
             onsubmit(e);
@@ -63,6 +66,7 @@ const Input = (props) => {
         placeholder={placeholder}
         onChange={_onChange}
         ref={_ref}
+        defaultValue={_defaultValue}
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
             onSubmit(e);
@@ -89,6 +93,7 @@ Input.defaultProps = {
   padding: null,
   height: null,
   color: null,
+  _defaultValue: () => {},
  
   // is_submit: false,
   // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크

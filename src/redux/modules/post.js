@@ -96,7 +96,15 @@ const editPostDB = (edited_post) => {
         nickname: nickname,
       }, {headers: headers})
       .then((response) => {
-        dispatch(editPost(response.data));
+        const  data = {
+          title: title,
+          content: content,
+          postId: postId,
+          category: category,
+          nickname: nickname,
+        }
+        dispatch(editPost(data));
+        console.log(data);
         // if (edited_post.board_name === 'question') {
         //   history.push(`/question/detail/${postId}`);
         // }
@@ -116,8 +124,9 @@ const deletePostDB = (deleted_post) => {
     instance
       .delete(`/posts/${postId}`, {headers: headers})
       .then((response) => {
-        console.log(response.data);
-        dispatch(deletePost(deleted_post));
+        
+        dispatch(deletePost(postId));
+        console.log(postId);
         // history.push('/');
       })
       .catch((err) => {
@@ -143,8 +152,17 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
     produce(state, (draft) => {
-      console.log(action.payload.post);
+      const deleted_list = draft.list.filter((post) => {
+        if(post.postId !== action.payload.post){
+          return post;
+        }
+      })
+      draft.list = deleted_list;
     }),
+    [EDIT_POST]: (state, action) =>
+    produce(state, (draft) =>{
+      draft.list = [action.payload.post];
+    })
   },
   initialState
 );

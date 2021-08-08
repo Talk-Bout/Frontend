@@ -26,7 +26,7 @@ const MainQna = (props) => {
               {/* 질문 제목 */}
               <Text fontSize='18px' fontWeight='700' color='#f1f3f4' margin='0 0 16px'>Q 개발자 이직 고민</Text>
               {/* 질문 내용 */}
-              <Text p fontSize='14px' letterSpacing='0.2px' color='#9aa0a6'>안녕하세요. 저는 29살 직장인입니다. 현재 소기업에서 플랫폼을 개발하고 있는 백엔드 개발자로 이제 4년차 되었습니다. 사용하는 기술은 자바를 사용하고 있습니다. 현재 이직 준비를 하고 있지만 제일 문제가 되는 게 코딩테스트입니다. 준비한...</Text>
+              <Text p fontSize='14px' letterSpacing='0.2px' color='#9aa0a6' overflow='hidden' display='-webkit-box' wlc='4' wbo='vertical'>안녕하세요. 저는 29살 직장인입니다. 현재 소기업에서 플랫폼을 개발하고 있는 백엔드 개발자로 이제 4년차 되었습니다. 사용하는 기술은 자바를 사용하고 있습니다. 현재 이직 준비를 하고 있지만 제일 문제가 되는 게 코딩테스트입니다. 이제 4년차 되었습니다. 사용하는 기술은 자바를 사용하고 있습니다. 현재 이직 준비를 하고 있지만 제일 문제가 되는 게 코딩테스트입니다.</Text>
               <div style={{marginTop: '24px', height: '24px'}}>
                 {/* 작성자 프로필 이미지 */}
                 <ProfileImg src={Profile} alt='프로필'/>

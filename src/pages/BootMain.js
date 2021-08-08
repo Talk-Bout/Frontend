@@ -50,7 +50,7 @@ const BootMain = (props) => {
             {camp_list.map((camp, idx) => {
               return (
                 <Card key={idx} onClick={() => history.push({
-                  pathname: '/boot/camp/info',
+                  pathname: '/boot/info',
                   state: {camp_name: camp.bootcampName, camp_desc: camp.desc}
                 })}>
                   {/* 부트캠프 로고 */}

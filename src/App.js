@@ -74,32 +74,13 @@ function App() {
           <Route path="/question/write/:id" exact component={QuestionWrite} />
           <Route path="/question/detail/:id" exact component={QuestionDetail} />
           <Route path="/boot" exact component={BootMain} />
-          <Route path="/boot/camp/info" exact component={BootInfo} />
-          <Route path="/boot/camp/review" exact component={BootReview} />
-          <Route path="/boot/camp/community" exact component={BootCommu} />
-          <Route path="/boot/post/:id" exact component={BootPost} />
+          <Route path="/boot/info" exact component={BootInfo} />
+          <Route path="/boot/review" exact component={BootReview} />
+          <Route path="/boot/community" exact component={BootCommu} />
           <Route path="/boot/review/write" exact component={BootReviewWrite} />
-          <Route
-            path="/boot/review/write/:id"
-            exact
-            component={BootReviewWrite}
-          />
-
-          <Route
-            path="/boot/review/write/:id"
-            exact
-            component={BootReviewWrite}
-          />
-          <Route
-            path="/boot/camp/:name/community/write"
-            exact
-            component={BootCommuWrite}
-          />
-          <Route
-            path="/boot/camp/:name/community/write/:id"
-            exact
-            component={BootCommuWrite}
-          />
+          <Route path="/boot/community/write" exact component={BootCommuWrite}/>
+          <Route path="/boot/community/write/:id" exact component={BootCommuWrite}/>
+          <Route path="/boot/community/post/:id" exact component={BootPost} />
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />

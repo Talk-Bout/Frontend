@@ -11,6 +11,7 @@ import Stars from '../components/Stars';
 
 const BootReview = (props) => {
   const dispatch = useDispatch();
+
   // 부트캠프 정보를 props로 받는다.
   const camp_name = props.location.state.camp_name;
   const camp_desc = props.location.state.camp_desc;     
@@ -66,8 +67,8 @@ const BootReview = (props) => {
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>리뷰</Text></Menu>
             <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/camp/community', state: {camp_name: camp_name, camp_desc: camp_desc}})}>커뮤니티</Text></Menu>
           </Grid>
+          {/* 리뷰 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
-            {/* 리뷰 페이지 */}
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' padding='40px 40px 0 40px'>
               <Grid className='review-title' display='flex' justify_content='space-between' padding='0 0 40px' borderBottom='1px solid #8f9091'>
                 {/* 리뷰 페이지 타이틀 */}
@@ -123,19 +124,19 @@ const BootReview = (props) => {
                   </Post>
                 )
               })}
-              <Grid className='pagination' height='8vh' is_center borderTop='1px solid #8f9091'>
+              <Grid className='pagination' is_center borderTop='1px solid #8f9091'>
                 {/* 페이지네이션 */}
-            <PageBox>
-              {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
-              {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
-              {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
-              {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > page * 3 ? page + 1 : ''}</Page></Text>
-              {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > page * 3 ? <BsChevronRight /> : ''}</Page></Text>
+                <PageBox>
+                  {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
+                  {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
+                  {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
+                  <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
+                  {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > page * 3 ? page + 1 : ''}</Page></Text>
+                  {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > page * 3 ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>
@@ -228,9 +229,8 @@ const PostBoxThird = styled.div`
 `;
 
 const Camp = styled.div`
-  height: 100px;
+  height: 104px;
   display: flex;
-  border-bottom: 1px solid #8f9091;
   cursor: pointer;
   &:hover {
     opacity: 0.7;
@@ -248,7 +248,7 @@ const ImageDiv = styled.div`
 const PageBox = styled.div`
   display: inline-block;
   height: 100%;
-  margin: 32px 0 0;
+  margin: 32px 0;
 `;
 
 const Page = styled.span`

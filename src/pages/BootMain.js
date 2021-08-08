@@ -73,7 +73,7 @@ const BootMain = (props) => {
               );
             })}
           </CardList>
-          <Grid className='pagination' height='7vh' is_center>
+          <Grid className='pagination' is_center>
             {/* 페이지네이션 */}
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
@@ -125,7 +125,7 @@ const ImageDiv = styled.div`
 const PageBox = styled.div`
   display: inline-block;
   height: 100%;
-  margin: 32px 0 0;
+  margin: 32px 0;
 `;
 
 const Page = styled.span`

@@ -12,7 +12,10 @@ import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 
 const BootCommu = (props) => {
   const dispatch = useDispatch();
-  const camp_name = props.match.params.name;
+  // 부트캠프 정보를 props로 받는다
+  const camp_name = props.location.state.camp_name;
+  const camp_desc = props.location.state.camp_desc;
+  
   const [start, setStart] = useState(0);                    // 한 페이지에 불러올 첫 게시글 번호 0번
   const [end, setEnd] = useState(5);                       // 한 페이지에 불러올 게시글 개수 5개
   const [page, setPage] = useState(1);                      // 페이지 번호는 1부터 시작

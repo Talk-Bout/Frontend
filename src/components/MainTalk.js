@@ -80,7 +80,7 @@ const Questions = styled.div`
 //여기 다시 체크! margin과 비율
 const QuestionBox = styled.div`
   height: fit-content;
-  width: 620px;
+  width: 49%;
   padding: 24px;
   border-bottom: 1px solid #b5b5b5;
   box-sizing: border-box;

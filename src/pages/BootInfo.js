@@ -7,7 +7,7 @@ import Stars from '../components/Stars';
 import { history } from '../redux/ConfigureStore';
 
 const BootInfo = (props) => {
-  // 부트캠프 정보를 props로 받는다
+  // 부트캠프 정보를 props로 받는다.
   const camp_name = props.location.state.camp_name;
   const camp_desc = props.location.state.camp_desc;
 
@@ -36,12 +36,12 @@ const BootInfo = (props) => {
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>정보</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push(`/boot/camp/${camp_name}/review`)}>리뷰</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push(`/boot/camp/${camp_name}/community`)}>커뮤니티</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/camp/review', state: {camp_name: camp_name, camp_desc: camp_desc}})}>리뷰</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/camp/community', state: {camp_name: camp_name, camp_desc: camp_desc}})}>커뮤니티</Text></Menu>
           </Grid>
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             {/* 부트캠프 정보 */}
-            <Grid className='contents-info' backgroundColor='#202124' width='832px' padding='40px'>
+            <Grid className='contents-info' backgroundColor='#202124' width='64%' padding='40px'>
               <InfoList>
                 <div><Text fontSize='16px' color='#9AA0A6'>코스</Text></div>
                 <div><Text fontSize='16px' color='#DADCE0'>14주</Text></div>
@@ -71,7 +71,7 @@ const BootInfo = (props) => {
               </InfoList>
             </Grid>
             {/* 다른 부트캠프 목록 */}
-            <Grid className='contents-bootcamp' backgroundColor='#202124' width='408px' height='491px' padding='24px'>
+            <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='491px' padding='24px'>
               <Text fontSize='18px' fontWeight='700' color='#e8eaed'>다른 부트캠프</Text>
               {[1, 2, 3, 4].map((c, idx) => {
                 return (

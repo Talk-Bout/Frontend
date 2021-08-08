@@ -46,7 +46,7 @@ const CardList = styled.div`
 
 const NewsCard = styled.div`
   background-color: #202124;
-  width: 302px;
+  width: 24%;
   height: 335px;
   box-sizing: border-box;
   text-align: left;

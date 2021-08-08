@@ -14,7 +14,7 @@ const Body = (props) => {
         width="100vw"
       >
         {header ? <HeaderN /> : ''}
-        <Grid className="body" width="100%" padding="42px">
+        <Grid className="body" width="100%" padding="0 42px">
           {children}
         </Grid>
       </Grid>

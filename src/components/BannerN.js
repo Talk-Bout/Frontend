@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 
 const BannerN = (props) => {
+  // title1: 제목 첫 줄, title2: 제목 둘째 줄, description: 설명
   const {title1, title2, description} = props;
   return (
     <React.Fragment>
-      <Grid className='banner' backgroundColor='#e5e5e5' height='40vh' margin='0 0 40px'>
+      <Grid className='banner' backgroundColor='#e5e5e5' height='300px' margin='42px 0 0'>
         <Grid height='60%'></Grid>
         <TextBox>
           <Text p className='banner-title-1' fontSize='3vh' fontWeight='700' color='#0e1013' margin='0'>{title1}</Text>

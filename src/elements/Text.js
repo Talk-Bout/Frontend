@@ -23,6 +23,7 @@ const Text = (props) => {
     top,
     cursor,
     hover,
+    letterSpacing,
   } = props;
 
 
@@ -43,6 +44,7 @@ const Text = (props) => {
     top:top,
     cursor: cursor,
     hover: hover,
+    letterSpacing: letterSpacing,
   };
 
   if (p) {
@@ -82,7 +84,6 @@ Text.defaultProps = {
     vertical_align: null,
     top: null,
     _onClick: () => {},
-
   };
   
   const TextBoxP = styled.p`
@@ -104,6 +105,7 @@ Text.defaultProps = {
     &:hover {
       ${(props) => props.hover};
     }
+    letter-spacing: ${(props) => props.letterSpacing};
   `;
 
   const TextBoxS = styled.span`
@@ -124,7 +126,8 @@ Text.defaultProps = {
     cursor: ${(props) => props.cursor};
     &:hover {
       ${(props) => props.hover};
-    }
+    };
+    letter-spacing: ${(props) => props.letterSpacing};
 `;
 
 export default Text;

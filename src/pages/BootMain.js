@@ -11,25 +11,26 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const BootMain = (props) => {
   const dispatch = useDispatch();
-  const [start, setStart] = useState(0);        // 한 페이지에 불러올 첫 부트캠프 번호 0번
-  const [end, setEnd] = useState(12);            // 한 페이지에 불러올 부트캠프 개수 12개
-  const [page, setPage] = useState(1);          // 페이지 번호는 1부터 시작
-  const all_camp = useSelector(state => state.bootcamp.camp_list);
-  const camp_list = all_camp.slice(start, end);               // 0부터 (end-1)번째까지 부트캠프 목록 출력
-
-    // const baseURL = 'http://13.209.12.149/'     // 서버 URL ; camp.logo 앞에 붙였으나 이미지 불러오기 실패
-
   useEffect(() => {
     dispatch(campActions.setCampsDB());
   }, []);
 
-  const toPrePage = () => {                        // 앞 페이지로 가는 함수
+  // const baseURL = 'http://13.209.12.149/'     // 서버 URL ; camp.logo 앞에 붙였으나 이미지 불러오기 실패
+
+  // 페이지네이션
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(12);
+  const [page, setPage] = useState(1);
+  const all_camp = useSelector(state => state.bootcamp.camp_list);
+  const camp_list = all_camp.slice(start, end);
+  // 앞 페이지로 가는 함수
+  const toPrePage = () => {
     setPage(page - 1);
     setStart(start - 12);
     setEnd(end - 12);
   }
-
-  const toNextPage = () => {                      // 다음 페이지로 가는 함수
+  // 다음 페이지로 가는 함수
+  const toNextPage = () => {
     setPage(page + 1);
     setStart(start + 12);
     setEnd(end + 12);
@@ -38,25 +39,33 @@ const BootMain = (props) => {
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
+        {/* 사이드바 */}
         <Sidebar />
+        {/* 헤더 포함한 바디 */}
         <Body header>
-          <Grid className='body-inner' minHeight='80.5vh'>
-            <Text p color='#F8F9FA' fontSize='3vh' fontWeight='700'>부트캠프</Text>
+          <Grid padding='40px 0 0'>
+            {/* 부트캠프 */}
+            <Text color='#F8F9FA' fontSize='32px' fontWeight='700'>부트캠프</Text>
+            {/* 부트캠프 목록 */}
             <CardList>
               {camp_list.map((camp, idx) => {
                 return (
                   <Card key={idx} onClick={() => history.push(`/boot/camp/${camp.bootcampName}/info`)}>
+                    {/* 부트캠프 로고 */}
                     <ImageDiv>
                       <img src={camp.logo} alt={camp.bootcampName}></img>
                     </ImageDiv>
-                    <Text p fontSize="2vh" fontWeight="700" margin="10vh 0 0" color='#F8F9FA'>
+                    {/* 부트캠프 이름 */}
+                    <Text p fontSize="18px" fontWeight="700" margin="16px 0 0" color='#F8F9FA'>
                       {camp.bootcampName}
                     </Text>
-                    <Text fontSize="1.5vh" color="#BDC1C6" margin="1px 0 0">
+                    {/* 부트캠프 설명 */}
+                    <Text p fontSize="14px" color="#BDC1C6" margin="3px 0 24px">
                       {camp.desc}
                     </Text>
-                    <Text p fontSize="1.8vh" color='#E8EAED'>
-                      {camp.review[0] ? <Stars score={camp.review[0].stars} size='1.7vh' withScore/> : '별점/리뷰 없음'}
+                    {/* 부트캠프 별점 */}
+                    <Text fontSize="14px" color='#E8EAED'>
+                      {camp.review[0] ? <Stars score={camp.review[0].stars} size='16px' marginRight='4px' withScore/> : '별점/리뷰 없음'}
                     </Text>
                   </Card>
                 );
@@ -89,19 +98,17 @@ const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  margin-top: 24px;
 `;
 
 const Card = styled.div`
   background-color: #202124;
-  width: 32.5%;
-  height: 35vh;
-  border: 0.5vh solid #202124;
+  width: 408px;
+  height: 240px;
   border-radius: 8px;
-  margin: 0 0 30px;
+  padding: 24px 36px;
+  margin: 0 0 24px;
   box-sizing: border-box;
-  padding: 5vh 2vw 0;
-  text-align: left;
   cursor: pointer;
   &:hover {
     opacity: 0.7;
@@ -110,7 +117,8 @@ const Card = styled.div`
 
 const ImageDiv = styled.div`
   text-align: center;
-  margin-top: 3vh;
+  width: 344px;
+  height: 86px;
 `;
 
 const PageBox = styled.div`

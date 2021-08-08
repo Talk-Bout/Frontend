@@ -6,7 +6,7 @@ const MainNews = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='top-boot' padding='48px 0 0'>
+      <Grid className='top-boot' padding='48px 0 19px'>
         {/* 최신 뉴스 */}
         <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>최신 뉴스</Text>
         <TextBox>

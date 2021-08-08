@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Button, Grid, Text } from '../elements';
+import { Grid, Text } from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import { BsX } from 'react-icons/bs';
@@ -62,39 +62,47 @@ const BootReviewWrite = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' backgroundColor='#17181b' minHeight='100vh'>
+      <Grid className='background' display='flex' backgroundColor='#17181b'>
+        {/* 사이드바 */}
         <Sidebar />
-        <Body>
-          <Grid className='body-inner' height='110%' padding='5vh 0 0'>
+        {/* 헤더 포함한 바디 */}
+        <Body header>
+          <Grid className='body-inner' padding='24px 0 0'>
             <Window>
-              <Grid className='header-box' height='10%' display='flex' borderBottom='1px solid #8f9091'>
-                <Grid className='exit-button' width='23.33%' padding='0 25px'>
-                  <Text fontSize='4vh' color='#e5e5e5' lineHeight='7.5vh' cursor='pointer' _onClick={() => history.push('/boot/review')}><BsX /></Text>
+              {/* 작성 페이지 헤더 */}
+              <Grid height='84px' display='flex' borderBottom='1px solid #5f6368'>
+                {/* 나가기 버튼 */}
+                <Grid width='23.33%' padding='0 40px'>
+                  <Text fontSize='35px' color='#e5e5e5' lineHeight='84px' cursor='pointer' _onClick={() => history.goBack()}><BsX /></Text>
                 </Grid>
-                <Grid className='title' width='53.33%' is_center>
-                  <Text fontSize='2.5vh' fontWeight='700' color='#e5e5e5' lineHeight='7vh'>{camp_name} 리뷰작성</Text>
+                {/* 타이틀 */}
+                <Grid width='53.33%' is_center>
+                  <Text fontSize='24px' fontWeight='700' color='#e5e5e5' lineHeight='84px'>{camp_name} 리뷰작성</Text>
                 </Grid>
-                <Grid className='submit-button' width='23.33%' padding='0 25px'>
-                  <Text fontSize='2.5vh' fontWeight='700' color='#848484' lineHeight='7vh' float='right' cursor='pointer' _onClick={() => addReview()}>등록</Text>
+                {/* 등록 버튼 */}
+                <Grid width='23.33%' padding='0 40px'>
+                  <Text fontSize='24px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => addReview()}>등록</Text>
                 </Grid>
               </Grid>
               <BodyBox>
-                <div style={{padding: '25px 0 0'}}><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프명</Text></div>
-                <div><Input value={camp_name} readOnly/></div>
-                <div style={{padding: '25px 0 0'}}><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>수료 여부</Text></div>
-                <div>
+                {/* 총 평점 */}
+                <div style={{lineHeight: '32px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>총 평점</Text></div>
+                <div style={{lineHeight: '32px'}}><Text fontSize='32px' fontWeight='700'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#dadce0' emptyStarColor='#3c4043'/></Text></div>
+                {/* 수료 여부 */}
+                <div style={{marginTop: '-8px', lineHeight: '52px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>수료 여부</Text></div>
+                <div style={{marginTop: '-8px'}}>
                   <Select ref={courseInput}>
                     <option value=''>선택해주세요</option>
                     <option value='수강중'>수강중</option>
                     <option value='수료'>수료</option>
                   </Select>
                 </div>
-                <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>총 평점</Text></div>
-                <div><Text fontSize='3vh' fontWeight='700' color='#848484'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#e5e5e5' emptyStarColor='#848484'/></Text></div>
-                <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프의 장점<br /></Text><Text fontSize='1.7vh' color='#848484'>최소 20자</Text></div>
-                <div><Textarea rows='5' minlength='40' placeholder='부트캠프의 장점을 입력해주세요' ref={prosInput}/></div>
-                <div><Text fontSize='2vh' fontWeight='700' color='#e5e5e5'>부트캠프의 단점<br /></Text><Text fontSize='1.7vh' color='#848484'>최소 20자</Text></div>
-                <div><Textarea rows='5' minlength='40' placeholder='부트캠프의 단점을 입력해주세요' ref={consInput}/></div>
+                {/* 부트캠프의 장점 */}
+                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>부트캠프의 장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
+                <div><Textarea rows='5' placeholder='부트캠프의 장점을 입력해주세요' ref={prosInput}/></div>
+                {/* 부트캠프의 단점 */}
+                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>부트캠프의 단점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
+                <div><Textarea rows='5' placeholder='부트캠프의 단점을 입력해주세요' ref={consInput}/></div>
               </BodyBox>
             </Window>
           </Grid>
@@ -105,64 +113,46 @@ const BootReviewWrite = (props) => {
 };
 
 const Window = styled.div`
-  background-color: #383838;
-  width: 60%;
-  height: 90%;
+  background-color: #282a2d;
+  width: 1044px;
+  height: fit-content;
   margin: auto;
 `;
 
 const BodyBox = styled.div`
-  height: 90%;
   display: grid;
-  padding: 20px 40px;
-  grid-template-columns: 30% 70%;
+  padding: 40px 40px 0;
+  grid-template-columns: 160px 804px;
   & > div {
-    padding: 20px 0;
-  }
-`;
-
-const Input = styled.input`
-  border: 1px solid #8f9091;
-  background-color: #383838;
-  padding: 10px;
-  font-size: 1.7vh;
-  color: #e5e5e5;
-  width: 50%;
-  &::placeholder {
-    color: #8f9091;
-    font-size: 1.7vh;
-  }
-  &:focus {
-    outline: none;
+    margin-bottom: 40px;
   }
 `;
 
 const Select = styled.select`
-  border: 1px solid #8f9091;
-  background-color: #383838;
+  height: 52px;
+  width: 216px;
+  border: 1px solid #5f6368;
+  box-sizing: border-box;
+  background-color: #282A2D;
   padding: 10px;
-  font-size: 1.7vh;
-  color: #e5e5e5;
-  width: 50%;
+  font-size: 16px;
+  color: #e8eaed;
   &:focus {
     outline: none;
-  }
-  & > option {
-    font-size: 1.5vh;
   }
 `;
 
 const Textarea = styled.textarea`
-  border: 1px solid #8f9091;
-  width: 90%;
+  border: 1px solid #5f6368;
+  width: 750px;
   resize: none;
-  padding: 10px;
-  font-size: 1.7vh;
-  background-color: #383838;
+  padding: 12px 16px;
+  font-size: 16px;
+  background-color: #282A2D;
   color: #e5e5e5;
   &::placeholder {
     color: #8f9091;
-    font-size: 1.7vh;
+    font-size: 16px;
   }
   &:focus {
     outline: none;

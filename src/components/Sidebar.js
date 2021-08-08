@@ -21,28 +21,21 @@ const Sidebar = (props) => {
     <React.Fragment>
       <Grid className='sidebar' backgroundColor='#202124' width='100px'>
         <Grid className='sidebar-inner' is_center>
-          <ImageBox className='logo' onClick={() => history.push('/')}><LogoImg src={Logo}></LogoImg></ImageBox>
-          <ImageBox className='home' onClick={() => history.push('/')}>{url === '' ? <Image src={Home_white} /> : <Image src={Home} />}</ImageBox>
-          <ImageBox className='boot' onClick={() => history.push('/boot')}>{url === 'boot' ? <Image src={Boot_white} /> : <Image src={Boot} />}</ImageBox>
-          <ImageBox className='qna' onClick={() => history.push('/question')}>{url === 'question' ? <Image src={Qna_white} /> : <Image src={Qna} />}</ImageBox>
-          <ImageBox className='news' onClick={() => history.push('/news/list')}>{url === 'news' ? <Image src={News_white} /> : <Image src={News} />}</ImageBox>
-          <ImageBox className='talk' onClick={() => history.push('/common/list')}>{url === 'common' ? <Image src={Talk_white} /> : <Image src={Talk} />}</ImageBox>
+          <Image src={Logo} onClick={() => history.push('/')}></Image>
+          <Image src={url === '' ? Home_white : Home} onClick={() => history.push('/')}/>
+          <Image src={url === 'boot' ? Boot_white : Boot} onClick={() => history.push('/boot')}/>
+          <Image src={url === 'question' ? Qna_white : Qna} onClick={() => history.push('/question')} />
+          <Image src={url === 'news' ? News_white : News} onClick={() => history.push('/news/list')} />
+          <Image src={url === 'common' ? Talk_white : Talk} onClick={() => history.push('/common/list')} />
         </Grid>
       </Grid>
     </React.Fragment>
   );
 };
 
-const ImageBox = styled.div`
-  cursor: pointer;
-`;
-
-const LogoImg = styled.img`
-  width: 100px;
-`;
-
 const Image = styled.img`
   width: 100px;
+  cursor: pointer;
 `;
 
 export default Sidebar;

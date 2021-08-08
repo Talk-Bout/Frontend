@@ -9,7 +9,7 @@ const MainQna = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='top-boot' height='400px' padding='49px 0 0'>
+      <Grid className='top-boot' height='fit-content' padding='49px 0 16px'>
         {/* 인기 Q&A */}
         <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>인기 Q&A</Text>
         <TextBox>
@@ -75,8 +75,8 @@ const CardList = styled.div`
 const QuestionCard = styled.div`
   background-color: #202124;
   width: 408px;
-  height: 250px;
-  padding: 24px;
+  height: fit-content;
+  padding: 24px 24px 8px;
   box-sizing: border-box;
   border-radius: 12px;
   cursor: pointer;

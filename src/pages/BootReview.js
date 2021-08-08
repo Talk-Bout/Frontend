@@ -63,9 +63,9 @@ const BootReview = (props) => {
           </Grid>
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/camp/info', state: {camp_name: camp_name, camp_desc: camp_desc}})}>정보</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/info', state: {camp_name: camp_name, camp_desc: camp_desc}})}>정보</Text></Menu>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>리뷰</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/camp/community', state: {camp_name: camp_name, camp_desc: camp_desc}})}>커뮤니티</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/community', state: {camp_name: camp_name, camp_desc: camp_desc}})}>커뮤니티</Text></Menu>
           </Grid>
           {/* 리뷰 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>

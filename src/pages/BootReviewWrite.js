@@ -77,7 +77,7 @@ const BootReviewWrite = (props) => {
                 </Grid>
                 {/* 타이틀 */}
                 <Grid width='53.33%' is_center>
-                  <Text fontSize='24px' fontWeight='700' color='#e5e5e5' lineHeight='84px'>{camp_name} 리뷰작성</Text>
+                  <Text fontSize='24px' fontWeight='700' color='#e5e5e5' lineHeight='84px'>{camp_name} 리뷰 작성</Text>
                 </Grid>
                 {/* 등록 버튼 */}
                 <Grid width='23.33%' padding='0 40px'>

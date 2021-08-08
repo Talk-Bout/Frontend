@@ -77,7 +77,7 @@ const CardList = styled.div`
 
 const CampCard = styled.div`
   background-color: #202124;
-  width: fit-content;
+  width: 32.5%;
   height: 124px;
   margin-bottom: 16px;
   box-sizing: border-box;

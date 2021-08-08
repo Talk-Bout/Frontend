@@ -13,16 +13,7 @@ import StarRatingComponent from 'react-star-rating-component';
 const BootReviewWrite = (props) => {
   const dispatch = useDispatch();
   const camp_name = props.location.state.camp_name;
-  // const [edit_mode, setEditMode] = useState(false);
-  // const post_id = props.match.params.id;
-  // useEffect(() => {
-  //   if (post_id) {
-  //     setEditMode(true);
-  //   }
-  // }, []);
-  // const post_list = useSelector((state) => state.post.list);
-  // const old_post = post_list.find((post) => post.postId == post_id);
-  // console.log(post_list, old_post);
+  const user_name = useSelector(state => state.user.user);
 
   // 별점을 state에 저장하기
   const [stars, setStars] = useState(0);
@@ -58,7 +49,7 @@ const BootReviewWrite = (props) => {
       return;
     }
     const new_review = {
-      nickname: 'realmot',
+      nickname: user_name,
       bootcampName: camp_name,
       season: courseInput.current.value,
       pros: prosInput.current.value,
@@ -66,11 +57,7 @@ const BootReviewWrite = (props) => {
       stars: stars,
     };
     dispatch(campActions.addReviewDB(new_review));
-    // if (edit_mode) {
-  //     dispatch(postActions.editPostDB(new_post));
-  //   } else {
-      // dispatch(postActions.addPostDB(new_post));
-  //   }
+    
   };
 
   return (

@@ -8,7 +8,7 @@ const BannerN = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='banner' backgroundColor='#e5e5e5' height='300px' margin='42px 0 0'>
+      <Grid className='banner' backgroundColor='#e5e5e5' height='300px'>
         <Grid height='126px'></Grid>
         <TextBox>
           <Text className='banner-title-1' fontSize='32px' fontWeight='700' color='#0e1013'>{title1}</Text>

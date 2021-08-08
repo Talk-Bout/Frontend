@@ -148,7 +148,7 @@ const Input = styled.input`
   border: none;
   width: 831px;
   height: 48px;
-  background-color: #17181b;
+  background-color: transparent;
   color: #80868b;
   &::placeholder {
     color: #80868b;

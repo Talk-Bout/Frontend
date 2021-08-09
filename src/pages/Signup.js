@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import SmallWindow from '../components/SmallWindow';
 import { Grid, Text, Image } from '../elements';
 import styled from 'styled-components';
+import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import _ from 'lodash';
@@ -96,7 +97,12 @@ const Signup = (props) => {
       </div>
       <Grid height="100%">
         <Grid is_center height="13%">
-          <Image src={Logo} width="60%" margin="auto" />
+          <Image
+            src={Logo}
+            width="60%"
+            margin="auto"
+            _onClick={() => history.push('/')}
+          />
         </Grid>
         <Grid height="8%">
           <TextBox>

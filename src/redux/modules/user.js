@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/Request';
+import { isError } from 'lodash-es';
 
 //액션 타입
 const LOG_IN = 'LOG_IN'; //로그인하기
@@ -23,11 +24,12 @@ const doubleEmailCheck = createAction(DOUBLE_EMAIL_CHECK, (isExist) => ({
 const doubleNicknameCheck = createAction(DOUBLE_NICKNAME_CHECK, (isExist) => ({
   isExist,
 }));
-const logInCheck = createAction(LOGIN_CHECK, (user) => ({ user }));
+const loginCheck = createAction(LOGIN_CHECK, (is_error) => ({ is_error }));
 
 //기본값 정하기
 const initialState = {
   user: [],
+  is_error: false,
   is_login: false,
   email_exist: false,
   nickname_exist: null,
@@ -46,11 +48,12 @@ const logInDB = (email, password) => {
         console.log(response.data);
         dispatch(logIn(user_info));
         localStorage.setItem('token', response.data.token); //token이름으로 response.data.token 저장
-        window.alert('로그인 완료!');
         history.push('/');
       })
       .catch((err) => {
         console.log(`로그인 에러 발생: ${err}`);
+        console.log(err.response);
+        dispatch(loginCheck(err.response.status));
       });
   };
 };
@@ -139,13 +142,6 @@ const nicknameCheckDB = (nickname) => {
   };
 };
 
-const logInCheckDB = (email, password) => {
-  console.log(email, password);
-  return function (dispatch) {
-    instance.post('/login', {});
-  };
-};
-
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
@@ -176,6 +172,13 @@ export default handleActions(
         // true로 바꿔주지 말고, 그냥 서버에서 전해주는 값 전달
         console.log(action.payload.isExist.isExist);
         draft.nickname_exist = action.payload.isExist.isExist;
+      }),
+    [LOGIN_CHECK]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.is_error);
+        if (action.payload.is_error === 400) {
+          draft.is_error = true;
+        }
       }),
   },
   initialState

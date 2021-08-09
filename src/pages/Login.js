@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import SmallWindow from '../components/SmallWindow';
 import { Grid, Input, Text, Image } from '../elements';
@@ -15,15 +16,8 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const [email, setEmail] = React.useState('');
   const [password, setPwd] = React.useState('');
-
-  //로그인 확인
-  const [warning, serWarning] = React.useState({
-    email_wrong: false,
-    password_wrong: false,
-    wrong: false,
-  });
-
-  const { email_wrong, password_wrong, wrong } = warning;
+  const email_exist = useSelector((state) => state.user.email_exist);
+  const nickname_exist = useSelector((state) => state.user.nickname_exist);
 
   const login = () => {
     // console.log(email, password);

@@ -10,7 +10,8 @@ import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 
 //icons
-import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
+import { RiArrowUpDownFill } from 'react-icons/ri';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { Group } from '../image/Group.png';
 
 //게시물 하나 카드
@@ -27,73 +28,83 @@ const QuestionList = (props) => {
 
   return (
     <React.Fragment>
-      <Grid display="flex" height='100vh'>
+      <Grid display="flex">
+        {/* 사이드바 */}
         <Sidebar />
+        {/* 헤더 포함한 바디 */}
         <Body header>
-          <Grid className="body-inner" height="100%">
-            <Button
-              width="10%"
-              margin="0 0 0 auto"
-              _onClick={() => history.push('question/write')}
-            >
-              글쓰기
-            </Button>
-            <Grid height="100%" padding="0 40px"></Grid>
-            <Grid padding="3% 0" display="flex">
-              <Text color="#F8F9FA" fontWeight="700" fontSize="3vh">
-                Q&A
-              </Text>
-
-              <Text color="#F8F9FA" margin="0 0 0 auto">
-                인기순
-              </Text>
-            </Grid>
-
-            <CardList>
-              {qna_list.map((q, idx) => {
-                return (
-                  <QnaCard
-                    qna_id={q.postId}
-                    {...q}
-                    _onClick={() =>
-                      history.push(`/question/detail/${q.postId}`)
-                    }
-                  />
-                ); //props 넘기기(이름포함)
-              })}
-            </CardList>
-            <Grid height="7vh" is_center>
-              <PageBox>
-                <Text lineHeight="8vh" margin="0 1vw 0">
-                  <Page>&lt;</Page>
-                </Text>
-                <Text lineHeight="8vh" margin="0 1vw 0">
-                  <Page>01</Page>
-                </Text>
-                <Text lineHeight="8vh" margin="0 1vw 0">
-                  <Page>02</Page>
-                </Text>
-                <Text lineHeight="8vh" margin="0 1vw 0">
-                  <Page>03</Page>
-                </Text>
-                <Text lineHeight="8vh" margin="0 1vw 0">
-                  <Page>&gt;</Page>
-                </Text>
-              </PageBox>
-            </Grid>
+          <Grid className='Title-btn' display='flex' justify_content='space-between'>
+            {/* Q&A 게시판 타이틀 */}
+            <Text p color="#F8F9FA" fontWeight="700" fontSize="32px" margin='0'>
+              Q&A
+            </Text>
+            <div style={{width: '200px', padding: '10px 0 0', textAlign: 'right'}}>
+              {/* 인기순 정렬 버튼 */}
+              <Text fontSize='16px' color="#F8F9fA" lineHeight='32px' margin='0 16px' cursor='pointer'><span style={{fontSize: '20px', marginRight: '8px', verticalAlign: 'middle'}}><RiArrowUpDownFill /></span>인기순</Text>
+              {/* 글쓰기 버튼 */}
+              <WriteBtn onClick={() => history.push('/question/write')}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
+            </div>
           </Grid>
+          {/* Q&A 게시글 목록 */}
+          <CardList>
+            {qna_list.map((q, idx) => {
+              return (
+                <QnaCard
+                  qna_id={q.postId}
+                  {...q}
+                  _onClick={() =>
+                    history.push(`/question/detail/${q.postId}`)
+                  }
+                />
+              ); //props 넘기기(이름포함)
+            })}
+          </CardList>
+          {/* 페이지네이션 필요 */}
+          <Grid height="7vh" is_center margin='8px 0 0'>
+            <PageBox>
+              <Text fontSize='14px' margin='0 20px 0 0'>
+                <Page><BsChevronLeft /></Page>
+              </Text>
+              <Text fontSize='14px' margin="0 20px 0">
+                <Page>01</Page>
+              </Text>
+              <Text fontSize='14px' margin="0 20px 0">
+                <Page>02</Page>
+              </Text>
+              <Text fontSize='14px' margin="0 20px 0">
+                <Page>03</Page>
+              </Text>
+              <Text fontSize='14px' margin="0 0 0 20px">
+                <Page><BsChevronRight /></Page>
+              </Text>
+            </PageBox>
+          </Grid>
+        
         </Body>
       </Grid>
     </React.Fragment>
   );
 };
 
+const WriteBtn = styled.button`
+  height: 40px;
+  width: 80px;
+  background-color: transparent;
+  border: 1px solid #7879F1;
+  border-radius: 7px;
+  cursor: pointer;
+  vertical-align: middle;
+  &:active {
+    opacity: 0.7;
+  }
+`;
+
 const CardList = styled.div`
+  margin: 24px 0 0;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
 `;
 
 const PageBox = styled.div`
@@ -104,7 +115,8 @@ const PageBox = styled.div`
 const Page = styled.span`
   opacity: 0.5;
   cursor: pointer;
-  color: #f8f9fa;
+  /* color: rgba(255, 255, 255, 0.87); // 선택된 페이지 색깔 */
+  color: rgba(255, 255, 255, 0.33); // 선택되지 않은 페이지 색깔
   &:hover {
     opacity: 1;
   }

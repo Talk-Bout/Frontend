@@ -23,7 +23,12 @@ const Text = (props) => {
     top,
     cursor,
     hover,
-  } = props;
+    letterSpacing,
+    wordWrap,
+    wlc,                  // -webkit-line-clamp: 콘텐츠 줄 수 제한
+    wbo,                  // -webkit-box-orient: 콘텐츠 정렬 방향
+    overflow,
+    } = props;
 
 
   const styles = {
@@ -43,6 +48,11 @@ const Text = (props) => {
     top:top,
     cursor: cursor,
     hover: hover,
+    letterSpacing: letterSpacing,
+    wordWrap: wordWrap,
+    wlc: wlc,
+    wbo: wbo,
+    overflow: overflow,
   };
 
   if (p) {
@@ -82,7 +92,6 @@ Text.defaultProps = {
     vertical_align: null,
     top: null,
     _onClick: () => {},
-
   };
   
   const TextBoxP = styled.p`
@@ -104,6 +113,11 @@ Text.defaultProps = {
     &:hover {
       ${(props) => props.hover};
     }
+    letter-spacing: ${(props) => props.letterSpacing};
+    word-wrap: ${(props) => props.wordWrap};
+    -webkit-line-clamp: ${(props) => props.wlc};
+    -webkit-box-orient: ${(props) => props.wbo};
+    overflow: ${(props) => props.overflow};
   `;
 
   const TextBoxS = styled.span`
@@ -124,7 +138,12 @@ Text.defaultProps = {
     cursor: ${(props) => props.cursor};
     &:hover {
       ${(props) => props.hover};
-    }
+    };
+    letter-spacing: ${(props) => props.letterSpacing};
+    word-wrap: ${(props) => props.wordWrap};
+    -webkit-line-clamp: ${(props) => props.wlc};
+    -webkit-box-orient: ${(props) => props.wbo};
+    overflow: ${(props) => props.overflow};
 `;
 
 export default Text;

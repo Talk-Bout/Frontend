@@ -199,7 +199,7 @@ display: flex;
 height: 50%; */
 margin: 5px 0 5px 0;
 border-bottom: 1px solid #9AA0A6;
-width: 1256px;
+width: 100%;
 height: 55px;
 left: 142px;
 top: 346px;
@@ -253,7 +253,7 @@ const Contents = styled.div`
   cursor: pointer;
   // 나중에 페이징하면 수정
   overflow: auto;
-  width: 1240px;
+  width: 100%;
   height: 1050px;
   left: 284px;
   top: 826px;

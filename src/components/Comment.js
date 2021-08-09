@@ -38,7 +38,7 @@ const all_comment = comment_list.slice(0, comment_list.length)
       nickname : username,
       postId : postId,
   }
-  console.log(new_comment);
+  // console.log(new_comment);
   
     if (addCommentRef === "") {
       window.alert("댓글을 입력해주세요!");
@@ -51,13 +51,13 @@ const all_comment = comment_list.slice(0, comment_list.length)
 
 return (
   <React.Fragment>
-  <Grid width="100%" height="100%" >
-    <Grid width="100%" height="5%"   >
-      <Text p color="#DADCE0" margin="2% 0 0 0.5%" fontWeight="bold" fontSize="2vh">
-      댓글 &nbsp; 15
+  <Grid width="100%" height="80%" >
+    <Grid width="100%" height="20%"   >
+      <Text p color="#DADCE0" margin="5px 0 20px 0" fontWeight="bold" fontSize="14px" lineHeight="18px">
+      댓글
       </Text>
     </Grid>
-    <Grid width="100%" height="95%">
+    <Grid width="100%" height="60%">
     <CommentBox>
     <CommentInput placeholder="댓글을 남겨주세요" ref={addRef} onSubmit={addComment}/>
     <WriteButton onClick={()=> {addComment()}}>
@@ -86,8 +86,8 @@ align-items: center;
 margin: auto;
 `;
 
-const CommentInput = styled.input`
-width: 690px;
+const CommentInput = styled.textarea`
+width: 100%;
 height: 48px;
 left: 0px;
 top: 430px;
@@ -96,6 +96,7 @@ border: 1px solid #9AA0A6;
 box-sizing: border-box;
 border-radius: 8px;
 background-color: transparent;
+color: #DADCE0;
 
 `;
 
@@ -103,7 +104,7 @@ const WriteButton = styled.button`
 /* height: 50%;
 width: 13%; */
 background-color: #7879F1;
-margin: 0 1%;
+margin: 0 0 0 8px;
 font-size: 1.7vh;
 border: none;
 color: #121212;

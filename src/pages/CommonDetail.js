@@ -131,10 +131,10 @@ return (
           <HistoryButton>
             <BiLike/> &nbsp; 17
           </HistoryButton>
-          <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="12px" lineHeight="16px">
+          <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="14px" lineHeight="18px">
             <BiComment/> &nbsp;  15
           </Text>
-          <Text margin="0 0 0 3%" color="#DADCE0" width="10%" height="100%" fontSize="12px" lineHeight="16px">
+          <Text margin="0 0 0 3%" color="#DADCE0" width="10%" height="100%" fontSize="14px" lineHeight="18px">
             <AiOutlineEye/> &nbsp;  354
           </Text>
           </Grid>
@@ -147,7 +147,7 @@ return (
         </Grid>
       </Grid>
       {/* import 인기 부트톡톡 */}
-      <Grid width="27%" height="100%" >
+      <Grid width="30%" height="100%" >
         <PopBootContents/>
       </Grid>
     </Grid>
@@ -163,8 +163,8 @@ const HistoryButton = styled.button`
 height: 10%; */
 width: 69px;
 height: 40px;
-font-size: 12px;
-line-height: 16px;
+font-size: 14px;
+line-height: 18px;
 background-color: transparent;
 border-radius: 12px;
 border: none;

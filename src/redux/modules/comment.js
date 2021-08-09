@@ -53,7 +53,6 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
         const nickname = new_comment.nickname;
         const content = new_comment.content;
         const postId = parseInt(new_comment.postId);
-        console.log(new_comment);
         const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
         instance.post(`/posts/${postId}/comments`,
         {
@@ -63,6 +62,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
         }, {headers: headers}).then((response) => {
             console.log(response.data);
             dispatch(addComment(response.data));
+
             }).catch((err) => {
                 console.error(`댓글 추가하기 에러 발생: ${err}`);
             });
@@ -80,6 +80,7 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
     nickname: nickname,
     content: content,
 }).then((response) => {
+        console.log(response.data);
         dispatch(editComment(response.data));
     }).catch((err) => {
         console.error(`댓글 수정하기 에러 발생: ${err}`);
@@ -93,7 +94,7 @@ return function (dispatch) {
 instance.delete(`/posts/${postId}/comments/${commentId}`
 )
 .then((response) => {
-        console.log('deleteCommentDB 함수 호출 성공!');
+        // console.log('deleteCommentDB 함수 호출 성공!');
         console.log(response.data);
         dispatch(deleteComment(commentId));
     }).catch((err) => {
@@ -112,7 +113,7 @@ export default handleActions({
 
 [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
     draft.list.unshift(action.payload.comment);
-    console.log(action.payload.comment);
+    // console.log(action.payload.comment);
 }),
 
 [DELETE_COMMENT]: (state, action) => produce(state,(draft) => {

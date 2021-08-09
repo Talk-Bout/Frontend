@@ -8,8 +8,8 @@ const PopBootContents = () => {
 return(
   <React.Fragment>
     <Grid  width="100%" height="55%" >
-      <Grid padding="7% 4%" width="90%" height="auto%" backgroundColor="#202124">
-        <Text padding="0 4%" color="#E8EAED" fontSize="2vh" fontWeight="bold">
+      <Grid padding="7% 4%" width="100%" height="auto%" backgroundColor="#202124">
+        <Text padding="0 4%" color="#E8EAED" fontSize="18xp" lineHeight="27px" fontWeight="bold">
           인기 부트톡톡 <br/>
         </Text>
       <Grid>
@@ -29,7 +29,8 @@ const BootContents = styled.div`
 padding: 2% 4%;
 margin: 2% 0;
 border: none;
-font-size: 1.4vh;
+font-size: 16px;
+line-height: 24px;
 color: #DADCE0;
 `;
 

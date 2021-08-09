@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/post';
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
+import { AiOutlineEye } from 'react-icons/ai';
 import { Group } from '../image/Group.png';
 import profile_small from '../image/profile_small.png';
 
@@ -22,78 +23,42 @@ const QnaCard = (props) => {
   return (
     <React.Fragment>
       <QnaListCard onClick={_onClick}>
-        {/* 질문 내용 */}
+        {/* 질문 글 */}
         <QuestionSection>
-          <Grid display="flex">
-            <Grid width="1.5vw">
-              <Text fontSize="2vh" fontWeight="600" color="#F8F9FA">
-                Q
-              </Text>
-            </Grid>
-            <Grid>
-              <Text fontSize="2vh" fontWeight="600" color="#F8F9FA">
-                {question_found.title}
-              </Text>
-            </Grid>
-          </Grid>
-
-          <Text p fontSize="1.7vh" color="#9AA0A6">
+          {/* 질문 제목 */}
+          <Text fontSize="18px" fontWeight="700" color="#F8F9FA">
+            <span style={{marginRight: '8px'}}>Q</span>{question_found.title}
+          </Text>
+          {/* 질문 내용 */}
+          <Text p fontSize="14px" color="#9AA0A6" overflow='hidden' display='-webkit-box' wlc='4' wbo='vertical'>
             {question_found.content}
           </Text>
-
-          <Grid display="flex" margin="8% 0">
-            <div style={{ display: 'flex', margin: '0 5% 0 0' }}>
-              <div>
-                <Image src={profile_small} size="1.4"></Image>
-              </div>
-
-              <Text fontSize="1.6vh" color="#C4C4C4" fontSize="1.6vh">
-                {question_found.nickname}
-              </Text>
-            </div>
-
-            <Text fontSize="1.6vh" color="#C4C4C4" fontSize="1.6vh">
-              <BiTimeFive />
+          <div style={{position: 'absolute', bottom: '16px', display: 'flex'}}>
+            {/* 작성자 프로필 이미지 */}
+            <Image src={profile_small} width='24px' height='24px'/>
+            {/* 작성자 닉네임 */}
+            <Text fontSize="12px" color="#80868b" lineHeight='24px' margin='0 8px'>
+              {question_found.nickname}
+            </Text>
+            {/* 작성일자 */}
+            <Text fontSize="12px" color="#80868b" lineHeight='24px'>
+              <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '4px'}}><BiTimeFive /></span>
               {question_found.createdAt}
             </Text>
-          </Grid>
-        </QuestionSection>
-        <hr width="100%" />
-
-        {/* 답변 내용 */}
-        <AnswerSection>
-          <div>
-            <Text fontSize="1.6vh" color="#C4C4C4" margin="0% 3% 0 0">
-              <BiLike />
-              추천 갯수
-            </Text>
-
-            <Text fontSize="1.6vh" color="#C4C4C4">
-              <BiComment /> 답변 1
-            </Text>
           </div>
-
-          <div style={{ margin: '3% 3% 0 0' }}>
-            <div style={{ display: 'flex' }}>
-              <div style={{ margin: ' 0 3% 0 0%' }}>
-                <Image src={profile_small} size="3"></Image>
-              </div>
-
-              <div width="60%">
-                <Text
-                  fontSize="1.6vh"
-                  color="#9AA0A6"
-                  fontSize="1.6vh"
-                  fontWeight="700"
-                >
-                  답변자 닉네임
-                </Text>
-                <Text p fontSize="1.7vh" color="#9AA0A6">
-                  Cillum in amet cillum irure ullamco. Cupidatat occaecat ad ex
-                  minim ullamco dolore eiusmod velit eu fugiat excepteur.
-                </Text>
-              </div>
-            </div>
+        </QuestionSection>
+        <AnswerSection>
+          <div style={{paddingTop: '16px'}}>
+            {/* 추천 수 */}
+            <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0'>
+              <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiLike /></span>17
+            </Text>
+            {/* 댓글 수 */}
+            <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
+              <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>1</Text>
+            {/* 조회수 */}
+            <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px'>
+              <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><AiOutlineEye /></span>354</Text>
           </div>
         </AnswerSection>
       </QnaListCard>
@@ -102,13 +67,13 @@ const QnaCard = (props) => {
 };
 
 const QnaListCard = styled.div`
-  width: 33%;
-  height: 50%;
+  width: 32.5%;
+  height: 250px;
   background-color: #202124;
-  border-radius: 3%;
+  border-radius: 12px;
   box-sizing: border-box;
-  padding: 3vh 2vw 0;
-  margin: 0 0 2%;
+  padding: 24px 24px 0;
+  margin: 0 0 24px;
   cursor: pointer;
   &:hover {
     opacity: 0.7;
@@ -116,11 +81,14 @@ const QnaListCard = styled.div`
 `;
 
 const QuestionSection = styled.div`
-  height: 60%;
+  height: 170px;
+  position: relative;
+  border-bottom: 1px solid #282a2d;
+  box-sizing: border-box;
 `;
 
 const AnswerSection = styled.div`
-  height: 30%;
+  height: 50px;
 `;
 
 QnaCard.defaultProps = {

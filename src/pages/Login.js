@@ -1,8 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import SmallWindow from '../components/SmallWindow';
 import { Grid, Input, Text, Image } from '../elements';
-import { TextField } from '@material-ui/core';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
@@ -16,21 +16,9 @@ const Login = (props) => {
   const [email, setEmail] = React.useState('');
   const [password, setPwd] = React.useState('');
 
-  //로그인 확인
-  const [warning, serWarning] = React.useState({
-    email_wrong: false,
-    password_wrong: false,
-    wrong: false,
-  });
-
-  const { email_wrong, password_wrong, wrong } = warning;
+  const login_check = useSelector((state) => state.user.is_error);
 
   const login = () => {
-    // console.log(email, password);
-    // setWarning({ email_wrong: false, password_wrong: false });
-    // if (!email && !password) {
-    //   setWarning({});
-    // }
     dispatch(userActions.logInDB(email, password));
   };
 
@@ -63,7 +51,6 @@ const Login = (props) => {
                 }}
               />
             </InputBox>
-
             {/* 비밀번호 입력란 */}
             <InformInput
               style={{ width: '98%' }}
@@ -78,18 +65,12 @@ const Login = (props) => {
                 }
               }}
             />
+            {login_check ? (
+              <Text fontSize="1.2vh" color="#ff7070">
+                가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
+              </Text>
+            ) : null}
           </form>
-          {/* 경고문 */}
-          {/* {email === '' || password === '' ? (
-            <Text fontSize="1.2vh" color="#ff7070">
-              아이디와 비밀번호를 입력해주세요
-            </Text>
-          ) : null} */}
-          {/* {email === '' || password === '' ? (
-            <Text fontSize="1.2vh" color="#ff7070">
-              가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
-            </Text>
-          ) : null} */}
         </Grid>
 
         <Grid height="20%">

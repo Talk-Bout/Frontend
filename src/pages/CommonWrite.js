@@ -53,7 +53,6 @@ const CommonWrite = (props) => {
       dispatch(postActions.addPostDB(new_post));
       history.push(`/common/list`)
     }
-    
   };
 
 
@@ -72,7 +71,7 @@ const CommonWrite = (props) => {
               margin="auto"
               width="100vh"
               height="60vh"
-              backgroundColor="#3C4043"
+              backgroundColor="#2E3134"
             >
               <Grid
                 display="flex"
@@ -84,7 +83,7 @@ const CommonWrite = (props) => {
                 <Grid width="auto" height="100%">
                   <Button
                     border="none"
-                    bg="#3C4043"
+                    bg="#2E3134"
                     cursor="pointer"
                     font_size="3vh"
                     color="#FFFFFF"
@@ -100,7 +99,6 @@ const CommonWrite = (props) => {
                   align_items="center"
                 >
                   <Text
-                    bg="#3C4043"
                     fontSize="2.5vh"
                     fontWeight="bold"
                     color="#FFFFFF"
@@ -111,10 +109,10 @@ const CommonWrite = (props) => {
                 <Grid width="auto" height="100%" backgroundColor="red">
                   <Button
                     border="none"
-                    bg="#3C4043"
+                    bg="#2E3134"
                     cursor="pointer"
                     font_size="2.5vh"
-                    color="#FFFFFF"
+                    color="#7879F1"
                     _onClick={() => {
                       addCommon();
                     }}
@@ -150,7 +148,7 @@ const CommonWrite = (props) => {
                     font_size="1.5vh"
                     width="80%"
                     margin="0 0 0 3.5%"
-                    bg="#3C4043"
+                    bg="#2E3134"
                     outline="none"
                     color="#FFFFFF"
                     placeholder="제목을 입력해주세요"
@@ -167,7 +165,7 @@ const CommonWrite = (props) => {
                     outline="none"
                     width="80%"
                     margin="0 0 0 5%"
-                    bg="#3C4043"
+                    bg="#2E3134"
                     color="#FFFFFF"
                     placeholder="내용을 입력해주세요"
                     border="none"
@@ -176,13 +174,13 @@ const CommonWrite = (props) => {
                   ></Input>
                 </Grid>
               </Grid>
-            </Grid>
-            <Grid width="100%" height="12%" backgroundColor="#2E3134">
+              <Grid width="100%" height="12%" backgroundColor="#2E3134">
               {/* 파일 업로드, 해시태그 */}
             <BoardFooter>
               <Icon><VscFileMedia size={27}/></Icon>
               <Icon><VscSymbolNumeric size={27}/></Icon> 
             </BoardFooter>
+            </Grid>
             </Grid>
           </Grid>
         </Body>
@@ -194,20 +192,25 @@ const CommonWrite = (props) => {
 const SelectBox = styled.select`
   width: 100%;
   height: 7.5vh;
-  background-color: #3c4043;
+  background-color: #2E3134;
   border: none;
   color: #ffffff;
   outline: none;
-  font-size: 1.8vh;
+  font-size: 2vh;
   display: block;
   /* text-align-last: center;
 text-align: center; */
   padding: 0 5%;
   appearance: none;
+  
 `;
 
 const Option = styled.option`
-  font-size: 1.7vh;
+  font-size: 2vh;
+  &:hover {
+  background-color: #282A2D;
+  color: #7879F1;
+  }
 `;
 
 const Hr = styled.hr`
@@ -225,6 +228,10 @@ const Icon = styled.span`
   cursor: pointer;
   margin: 2%;
   color: #ffffff;
+  &:hover {
+  background-color: #282A2D;
+  color: #7879F1;
+  }
 `;
 
 export default CommonWrite;

@@ -77,36 +77,10 @@ function App() {
           <Route path="/boot/info" exact component={BootInfo} />
           <Route path="/boot/review" exact component={BootReview} />
           <Route path="/boot/community" exact component={BootCommu} />
-          <Route path="/boot/camp/:name/info" exact component={BootInfo} />
-          <Route path="/boot/camp/:name/review" exact component={BootReview} />
-          <Route
-            path="/boot/camp/:name/community"
-            exact
-            component={BootCommu}
-          />
-          <Route path="/boot/post/:id" exact component={BootPost} />
           <Route path="/boot/review/write" exact component={BootReviewWrite} />
-          <Route
-            path="/boot/review/write/:id"
-            exact
-            component={BootReviewWrite}
-          />
-
-          <Route
-            path="/boot/review/write/:id"
-            exact
-            component={BootReviewWrite}
-          />
-          <Route
-            path="/boot/camp/:name/community/write"
-            exact
-            component={BootCommuWrite}
-          />
-          <Route
-            path="/boot/camp/:name/community/write/:id"
-            exact
-            component={BootCommuWrite}
-          />
+          <Route path="/boot/community/write" exact component={BootCommuWrite}/>
+          <Route path="/boot/community/write/:id" exact component={BootCommuWrite}/>
+          <Route path="/boot/community/post/:id" exact component={BootPost} />
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />

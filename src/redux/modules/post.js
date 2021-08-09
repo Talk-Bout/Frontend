@@ -131,8 +131,6 @@ const deletePostDB = (deleted_post) => {
       .then((response) => {
         console.log(response.data);
         dispatch(deletePost(postId));
-        // console.log(postId);
-        // history.push('/');
       })
       .catch((err) => {
         console.error(`게시글 삭제하기 에러 발생: ${err}`);
@@ -146,7 +144,6 @@ export default handleActions(
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.post_list;
-        // draft.list.push(...action.payload.post_list);
       }),
     [SET_ONE_POST]: (state, action) =>
       produce(state, (draft) => {

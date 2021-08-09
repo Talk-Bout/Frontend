@@ -13,6 +13,8 @@ const Image = (props) => {
     padding,
     align_items,
     _onClick,
+    borderRadius,
+    display,
   } = props;
 
   const styles = {
@@ -24,6 +26,8 @@ const Image = (props) => {
     margin: margin,
     padding: padding,
     align_items: align_items,
+    borderRadius: borderRadius,
+    display: display,
   };
 
   if (shape === 'BigProfileImage') {
@@ -71,6 +75,8 @@ const ImageDefault = styled.div`
   background-repeat: no-repeat;
   align-items: ${(props) => props.align_items};
   margin: ${(props) => props.margin};
+  border-radius: ${(props) => props.borderRadius};
+  display: ${(props) => props.display};
 `;
 
 // 마이페이지(정보수정) 프로필 이미지

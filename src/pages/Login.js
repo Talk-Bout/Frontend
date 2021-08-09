@@ -7,10 +7,6 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
-//Formik, YUP
-import { Formik, useFormik } from 'formik';
-import * as Yup from 'yup';
-
 //로고
 import Logo from '../image/Logo.png';
 import { FcGoogle } from 'react-icons/fc';
@@ -20,12 +16,21 @@ const Login = (props) => {
   const [email, setEmail] = React.useState('');
   const [password, setPwd] = React.useState('');
 
+  //로그인 확인
+  const [warning, serWarning] = React.useState({
+    email_wrong: false,
+    password_wrong: false,
+    wrong: false,
+  });
+
+  const { email_wrong, password_wrong, wrong } = warning;
+
   const login = () => {
-    console.log(email, password);
-    if (email === '' || password === '') {
-      window.alert('이메일과 비밀번호를 입력해주세요');
-      return;
-    }
+    // console.log(email, password);
+    // setWarning({ email_wrong: false, password_wrong: false });
+    // if (!email && !password) {
+    //   setWarning({});
+    // }
     dispatch(userActions.logInDB(email, password));
   };
 
@@ -74,18 +79,23 @@ const Login = (props) => {
               }}
             />
           </form>
-
           {/* 경고문 */}
-          <Text fontSize="1.2vh" color="#ff7070">
-            가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
-          </Text>
+          {/* {email === '' || password === '' ? (
+            <Text fontSize="1.2vh" color="#ff7070">
+              아이디와 비밀번호를 입력해주세요
+            </Text>
+          ) : null} */}
+          {/* {email === '' || password === '' ? (
+            <Text fontSize="1.2vh" color="#ff7070">
+              가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
+            </Text>
+          ) : null} */}
         </Grid>
 
         <Grid height="20%">
           {/* 로그인 버튼 => 누르면 toast 나옴*/}
           <Button onClick={() => login()} color="#a5a6af">
-
-          {/* <Button color="#a5a6af"> */}
+            {/* <Button color="#a5a6af"> */}
             <Text fontSize="1.5vh" color="white">
               로그인
             </Text>

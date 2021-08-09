@@ -85,7 +85,7 @@ const BootCommu = (props) => {
               {/* 커뮤니티 게시글 목록 */}
               {post_list.map((n, idx) => {
                 return (
-                  <Post key={idx} onClick={() => history.push(`/boot/post/${n.postId}`)}>
+                  <Post key={idx} onClick={() => history.push(`/boot/community/post/${n.postId}`)}>
                     {/* 제목 */}
                     <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0'>{n.title}</Text>
                     {/* 내용 */}

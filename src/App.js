@@ -54,7 +54,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userActions.logInCheckDB());
+    dispatch(userActions.stayLogInDB());
   }, []);
 
   return (

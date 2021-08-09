@@ -21,7 +21,7 @@ const CommonDetail = (props) => {
   const postId = props.match.params.id;
   const common_list = useSelector(state => state.post.list);
   const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
-  console.log(common_find);
+  // console.log(common_find);
   const username = useSelector(state => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/ConfigureStore';
 
+import Profile from '../image/profile_small.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { Text, Button, Grid, Image } from '../elements/index';
 import { BiTimeFive, BiLike, BiComment, BiSort} from 'react-icons/bi';
@@ -22,32 +23,33 @@ const all_common = common_list.slice(0, common_list.length)
     <React.Fragment>
       <Content common_list={all_common} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}
                 >
-                <Text p color="#F1F3F4" fontSize="2.6vh" margin="0px" padding="2% 2% 1% 2%" fontWeight="bold">
+                <Text p color="#F1F3F4" lineHeight="27px" fontSize="18px" fontWeight="bold">
                  {props.title}
                 </Text>
-                <Text p color="#9AA0A6" fontSize="2.1vh" margin="0px" padding="0% 2%">
+                <Text p color="#9AA0A6" lineHeight="18px" fontSize="14px" >
                  {props.content}
                </Text>
               <ProfileImage>
-                <Image margin="0 0 3% 0" size="2"/>
-                <Text fontSize="1.8vh" color="#9AA0A6" margin="0 0 0 2%" >
+                <img src={Profile} alt='프로필' style={{margin: "0 8px 0 0"}}/>
+                <Text lineHeight="16px" fontSize="12px" color="#9AA0A6" margin= "0px 8px">
                 {props.nickname}
+                </Text>
+                <Text color="#9AA0A6" fontSize="12px" margin= "0px 8px"  >
+                  <BiTimeFive/> &nbsp; {props.createdAt}
                 </Text>
               </ProfileImage>
             
-              {/* 게시한 날짜, 좋아요, 댓글 */}
+              {/* 게시한 좋아요, 댓글 */}
             <Grid width="100%" float="left">
-            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" >
-              <BiTimeFive/> &nbsp;
-              {props.createdAt}
+            <LikeAndCountBox>
+              <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0 8px 0 0">
+                <BiLike/> &nbsp; {props.likes}
+                </Text>
+              <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0px 8px">
+                <BiComment/> &nbsp; 2
               </Text>
-            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%">
-              <BiLike/> &nbsp;
-              {props.likes}
-              </Text>
-            <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" >
-              <BiComment/> &nbsp; 2
-            </Text>
+            </LikeAndCountBox>
+            
             <hr/>
             </Grid>
             </Content>
@@ -60,7 +62,7 @@ const Content = styled.div`
   align-content: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: auto;
   background-size: cover;
   box-sizing: border-box;
   padding: 0% 3%;
@@ -71,8 +73,20 @@ const Content = styled.div`
 
 const ProfileImage = styled.div`
 display: flex;
-height: 10%;
-padding: 3%;
+/* height: 10%;
+padding: 3%; */
+width: 400px;
+height: 24px;
+left: 24px;
+top: 111px;
+`;
+
+const LikeAndCountBox = styled.div`
+width: 140px;
+height: 16px;
+left: 24px;
+top: 151px;
+margin: 10px 0 0 0;
 `;
 
 export default CommonPostList;

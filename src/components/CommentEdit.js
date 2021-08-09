@@ -5,7 +5,7 @@ import {Text, Button, Grid, Input, Image} from "../elements/index";
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as commentActions} from "../redux/modules/comment";
-import { BiTimeFive, BiLike, BiComment, BiCommentEdit } from 'react-icons/bi';
+import { BiTimeFive, BiLike, BiComment, BiCommentEdi, BiPencil, BiTrashAlt } from 'react-icons/bi';
 
 const CommentEdit = (props) => {
 
@@ -53,24 +53,24 @@ return (
       ""
     ) : (
       <>
-      <EditButton
+      <EditText
       onClick={()=>(deleteComment())}
       >
-      삭제
-    </EditButton>
-      <EditButton
+      <BiTrashAlt />
+    </EditText>
+      <EditText
       onClick={()=>(setIsEditMode(true))}
       >
-      수정
-      </EditButton>
+      <BiPencil />
+      </EditText>
       </>
     )}
   {isEditMode? (
     <>
     <EditInput
     defaultValue={commentValue} onChange={(e) => setCommentValue(e.target.value)} />
-    <EditButton onClick={() => (setIsEditMode(false))}>수정취소</EditButton>
-    <EditButton onClick={() => (editComment())}>수정완료</EditButton>
+    <EditText onClick={() => (setIsEditMode(false))}>수정취소</EditText>
+    <EditText onClick={() => (editComment())}>수정완료</EditText>
     </>
   ):(
     <Text p margin="0% 1%" padding="0% 2%" fontSize="1.5vh" color="#BDC1C6"> {commentValue}</Text>
@@ -91,29 +91,26 @@ color: #DADCE0;
 border: 1px solid #DADCE0;
 background-color: transparent;
 font-size: 1.3vh;
-border-radius: 20vh;
+border-radius: 5px;
 margin-left: 3%;
 height: 2.5vh;
 width:50vh;
 
 `;
 
-const EditButton = styled.button`
+const EditText = styled.text`
 float: right;
-background-color: #FFFFFF;
-margin: 0 1%;
-font-size: 1.2vh;
 border: none;
-color: #121212;
+color: #9AA0A6;
 cursor: pointer;
-width: 8%;
-border-radius: 5px;
-font-weight: bold;
-height: 2.3vh;
+/* width: 8%; */
+width: 48px;
+height: 16px;
 &:hover {
   background-color: #282A2D;
   color: #DADCE0;
   }
+
 `;
 
 export default CommentEdit;

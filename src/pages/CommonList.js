@@ -44,8 +44,8 @@ const all_common = common_list.slice(0, common_list.length)
               </Text>
             </Grid>
             {/* 게시판 카테고리 */}
-            <Grid display="flex" height="7%"  >
-                <Grid display="flex" height="100%" width="100%">
+            <Grid display="flex" height="7%">
+                <Grid display="flex" height="100%" width="100%" justify_content="space-between">
                   <Categories >
                   {[1, 2, 3, 4].map((n, idx) => {
                     return (
@@ -55,13 +55,7 @@ const all_common = common_list.slice(0, common_list.length)
                     );
                   })}
                   </Categories>
-                  {/* 글쓰기, 인기순 */}
-                <Grid width="10%" >
-                  <SelectButton type="select">
-                  <Options>인기순</Options>
-                  <Options>최신순</Options>
-                  </SelectButton>
-                </Grid>
+                  {/* 글쓰기버튼 */}
                 <Grid width="10%">
                     <WriteBox>
                       <WriteButton
@@ -71,25 +65,29 @@ const all_common = common_list.slice(0, common_list.length)
                       </WriteButton>
                     </WriteBox>
                   </Grid>
+                  {/* 인기순 셀렉트 */}
+                  <Grid width="6%" >
+                  <SelectButton type="select">
+                  <Options>인기순</Options>
+                  <Options>최신순</Options>
+                  </SelectButton>
+                </Grid>
               </Grid>
             </Grid>
             {/* 공지 */}
             <hr/>
             <Grid height="10vh">
-              <Grid display="flex" width="100%" >
-                <Notice>
-                  <NoticeHead>공지</NoticeHead>
-                  <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                  <Text color="#9AA0A6" fontSize="1.5vh" margin="0.2% 0 0 0" lineHeight="5vh">2021.08.03</Text>
-                </Notice>
-              </Grid>
-              <Grid display="flex" width="100%">
-                <Notice>
-                  <NoticeHead>공지</NoticeHead>
-                  <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                  <Text color="#9AA0A6" fontSize="1.5vh" margin="0.2% 0 0 0"lineHeight="5vh">2021.08.03</Text>
-                </Notice>
-              </Grid>
+              {[1, 2].map((n, idx) => {
+                  return (
+                <Grid display="flex" width="100%">
+                  <Notice>
+                    <NoticeHead>공지</NoticeHead>
+                    <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
+                    <Text color="#9AA0A6" fontSize="14px" margin="0.2% 0 0 0" lineHeight="18px">2021.08.03</Text>
+                  </Notice>
+                </Grid>
+                );
+              })}
             </Grid>
             {/* import 부트톡톡 게시물  */}
             <Grid height="85vh">
@@ -104,16 +102,15 @@ const all_common = common_list.slice(0, common_list.length)
               </Grid>     
             </Grid>
             
-            {/* <Grid height="3%"> */}
-              {/* <PageBox>
-                <Pagination postsPerPage={postsPerPage} totalPosts={all_common.length} paginate={setCurrentPage}></Pagination>
-                {/* <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronLeft /></Page></Text>
+            <Grid height="3%">
+              <PageBox>
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronLeft /></Page></Text>
                 <Text margin="0 0.7%" fontSize="2.3vh"><Page>01</Page></Text>
                 <Text margin="0 0.7%" fontSize="2.3vh"><Page>02</Page></Text>
                 <Text margin="0 0.7%" fontSize="2.3vh"><Page>03</Page></Text>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronRight /></Page></Text> */}
-              {/* </PageBox> */}
-            {/* </Grid>  */}
+                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronRight /></Page></Text>
+              </PageBox>
+            </Grid> 
             
           </Grid>    
         </Body>
@@ -126,23 +123,29 @@ const Categories = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  width: 100%;
+  /* width: 100%;
   height: 15%;
   left: 8vw;
-  top: 8vh;
+  top: 8vh; */
+  width: 450px;
+  height: 44px;
+  left: 142px;
+  top: 210px;
 `;
 
 const CategoryButton = styled.div`
 cursor: pointer;
 background-color: #202124;
 border: none;
-border-radius: 40vh;
-width: 9%;
-height: 4vh;
-margin: 0.6%;
+border-radius: 100px;
+margin: 0px 10px;
+width: 110px;
+height: 38px;
+left: 0px;
+top: 0px;
 color: #80868B;
 text-align: center;
-font-size: 1.3vh;
+font-size: 16px;
 line-height: 4vh;
 &:hover {
   background-color: #BDC1C6;
@@ -175,71 +178,102 @@ border: 1px solid #4D4E93;
 const SelectButton = styled.select`
 border: none;
 background-color: #17181B;
-font-size: 1.5vh;
 color: #F1F3F4;
-height: 3vh;
-margin: 5%;
-width: 70%;
+width: 73px;
+height: 24px;
+left: 1325px;
+top: 220px;
+font-size: 16px;
+line-height: 24px;
+
 `;
 
 const Options = styled.option`
-
 `;
 
 const Notice = styled.div`
 grid-template-rows: repeat(2, minmax(auto, auto));
 grid-template-columns: repeat(1, 1fr);
 display: flex;
-width: 100%;
-height: 50%;
+/* width: 100%;
+height: 50%; */
+margin: 5px 0 5px 0;
 border-bottom: 1px solid #9AA0A6;
-margin: 0 2%;
+width: 1256px;
+height: 55px;
+left: 142px;
+top: 346px;
+
 `;
 
 const NoticeHead = styled.span`
-width: 8%;
-font-size: 1.7vh;
-border: 2px solid #7879F1;
-border-radius: 1vh;
-margin: 0.6% 1% 0.6% 0;
+/* width: 8%; */
+/* margin: 0.6% 1% 0.6% 0; */
 text-align: center;
-line-height: 3.2vh;
 color: #7879F1;
+padding: 8px 32px;
+width: 95px;
+height: 34px;
+left: 24px;
+top: 17px;
+border: 1px solid #7879F1;
+box-sizing: border-box;
+border-radius: 8px;
+
+margin: 0px 10px;
+font-size: 14px;
+line-height: 18px;
 `;
 
 const NoticeText = styled.span`
-width: 80%;
+/* width: 80%; */
 font-weight: bold;
-font-size: 1.8vh;
-margin: 1% 1%;
+/* font-size: 1.8vh; */
+margin: 0% 1%;
 color: #7879F1;
+width: 82%;
+height: 27px;
+left: 138px;
+top: 20px;
+font-size: 18px;
+line-height: 27px;
+letter-spacing: 0.2px;
 `;
 
 const Contents = styled.div`
-  grid-template-rows: repeat(4, minmax(auto, auto));
+  grid-template-rows: repeat(8, minmax(auto, auto));
   grid-template-columns: repeat(2, 1fr);
   display: grid;
   align-items: center;
   place-items: center;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
+  /* margin: 0.5% 0 0 0; */
   box-sizing: border-box;
-  /* border-top: 1.5px solid #F1F3F4; */
   cursor: pointer;
   // 나중에 페이징하면 수정
   overflow: auto;
-  margin: 0.5% 0 0 0;
+  width: 1240px;
+  height: 1050px;
+  left: 284px;
+  top: 826px;
 `;
 
 const Content = styled.div`
   z-index: 1;
   align-content: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
+  /* padding: 0% 3%; */
+  width: 620px;
+  height: 191px;
+  left: 142px;
+  top: 986px;
+
   background-size: cover;
   box-sizing: border-box;
-  padding: 0% 3%;
+ 
   &:hover {
     opacity: 0.7;
   }

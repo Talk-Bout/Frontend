@@ -14,6 +14,9 @@ import { BiTimeFive, BiLike, BiComment, BiShow, BiPencil, BiTrashAlt } from 'rea
 import { AiOutlineEye } from 'react-icons/ai';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import Profile from '../image/profile_small.png';
+
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -67,19 +70,22 @@ return (
           <Grid width="100%" height="45%">
             <Grid width="100%" height="100%">
               <Grid padding="2% 0" width="100%" height="15%">
-              <Text fontSize="1.3vh" color="#BDC1C6"> 부트톡톡 &gt; 정보게시판</Text>
+              <Text fontSize="14px" lineHeight="18px" margin="0 4x 0 0" color="#BDC1C6"> 부트톡톡 <BsChevronLeft /></Text>
+              <Text fontSize="14px" lineHeight="18px" margin="0 2px" color="#BDC1C6"> 정보게시판 </Text>
               </Grid>
               <Grid justify_content="space-between" display="flex" padding="2% 0" width="100%" height="45%">
                 <Grid width="20%" height="100%">
-                <Text p margin="0" fontSize="2.5vh" color="#F1F3F4" fontWeight="bold">
+                <Text p margin="0" fontSize="24px" lineHeight="35px" color="#F1F3F4" fontWeight="bold">
                 {common_find.title}
                 </Text>
                 </Grid>
                 {/* 북마크와 수정 삭제 */}
-                <Grid padding="" display="flex" width="13%" height="100%">
-                  <Text color='#9aa0a6' fontSize='3vh' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
-                  <Button margin="0 0 0 20px" width="30%" bg="transparent" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                    <Text color='#9AA0A6' fontSize='3vh' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
+                <Grid display="flex" width="14%" height="100%">
+                <Button padding="0" width="16.33px" height="21px">
+                <Text padding="0" color='#9aa0a6' fontSize='24px' lineHeight="35px" vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
+                  </Button>
+                  <Button padding="0"  width="16.33px" height="21px" bg="transparent" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                    <Text padding="0" color='#9AA0A6' fontSize='24px' lineHeight="35px" hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -96,13 +102,14 @@ return (
               <Grid width="100%" height="50%">
               <Grid display="flex" width="100%" height="100%">
                 <Grid width="4.5%" height="80%" >
-                  <Image margin="5%" size="3"/>
+                  <img src={Profile} alt='프로필'/>
                 </Grid>
                 <Grid width="30%" height="80%" >
-                <Text p margin="0 0 0 6%" fontSize="1.4vh" color="#BDC1C6">
+                <Text p margin="0 6px" fontSize="12px" lineHeight="16px" color="#BDC1C6">
                 {common_find.nickname}
                 </Text>
-                <Text p margin="0 0 0 6%" fontSize="1.4vh" color="#BDC1C6">
+                
+                <Text p margin="0 6px" fontSize="12px" lineHeight="16px" color="#BDC1C6">
                 {common_find.createdAt}
                 </Text>
                 </Grid>
@@ -115,7 +122,7 @@ return (
           {/* 게시물 본문 */}
           <Grid width="70%" height="41%" >
           <Grid padding="0 1% 2% 1%" >
-            <Text fontSize="1.5vh" color="#DADCE0" style={{wordBreak:"break-all"}}>
+            <Text fontSize="16px" lineHeight="24px" color="#DADCE0" style={{wordBreak:"break-all"}}>
             {common_find.content}
             </Text>
           </Grid>
@@ -124,10 +131,10 @@ return (
           <HistoryButton>
             <BiLike/> &nbsp; 17
           </HistoryButton>
-          <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="2vh">
+          <Text margin="0 0 0 2%" color="#DADCE0" width="10%" height="100%" fontSize="12px" lineHeight="16px">
             <BiComment/> &nbsp;  15
           </Text>
-          <Text margin="0 0 0 3%" color="#DADCE0" width="10%" height="100%" fontSize="2vh">
+          <Text margin="0 0 0 3%" color="#DADCE0" width="10%" height="100%" fontSize="12px" lineHeight="16px">
             <AiOutlineEye/> &nbsp;  354
           </Text>
           </Grid>
@@ -152,11 +159,14 @@ return (
 
 
 const HistoryButton = styled.button`
-width: 8%;
-height: 10%;
-font-size: 2vh;
+/* width: 9%;
+height: 10%; */
+width: 69px;
+height: 40px;
+font-size: 12px;
+line-height: 16px;
 background-color: transparent;
-border-radius: 40vh;
+border-radius: 12px;
 border: none;
 cursor: pointer;
 color: #DADCE0;

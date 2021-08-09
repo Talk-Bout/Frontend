@@ -136,7 +136,7 @@ const HeaderN = (props) => {
           <Input placeholder="검색어를 입력하세요." />
         </Grid>
         {/* 로그인 버튼 */}
-          <LoginBtn type='button' onClick={() => history.push('/login')}><Text fontSize="16px" color="#f8f9fa" lineHeight='24px'>
+          <LoginBtn type='button' onClick={() => history.push('/login')}><Text fontSize="16px" color="#f8f9fa" cursor='pointer' lineHeight='24px'>
             로그인
           </Text></LoginBtn>
       </Grid>

@@ -11,12 +11,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as postActions} from '../redux/modules/post';
 import {actionCreators as commentActions} from '../redux/modules/comment';
 import {history} from '../redux/ConfigureStore';
-import { AiOutlineCaretDown } from 'react-icons/ai';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const BootPost = (props) => {
   const dispatch = useDispatch();
-  const post_id = parseInt(window.location.pathname.split('/boot/post/')[1]);
+  const post_id = parseInt(window.location.pathname.split('/boot/community/post/')[1]);
   const username = useSelector(state => state.user.user.nickname);
   const post_list = useSelector(state => state.post.list);
   const post_found = post_list.find((post) => post.postId == post_id);
@@ -83,85 +82,102 @@ const BootPost = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto'>
+      <Grid className='background' display='flex'>
+        {/* 사이드바 */}
         <Sidebar />
+        {/* 헤더 포함한 바디 */}
         <Body header>
           <BodyInner>
             <div className='post-box' style={{padding: '0 10px 0 0'}}>
               {/* 게시글 */}
               <Post>
-                <TitleBox>
-                  <Grid>
-                    <Text fontSize='1.7vh' color='#dadce0'>부트캠프 &gt; 커뮤니티 / 작성자:{post_found.nickname}</Text>
-                  </Grid>
-                  <Grid display='flex' justify_content='space-between' padding='10px 0 0'>
-                    <Text fontSize='3vh' color='#f1f3f4' fontWeight='700'>{post_found.title}</Text>
-                    <div style={{height: '5vh'}}>
-                      <Text color='#9aa0a6' fontSize='3vh' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
-                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        <Text color='#9AA0A6' fontSize='3vh' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
-                      </Button>
-                      <Menu
-                        id="simple-menu"
-                        anchorEl={MenuLink}
-                        keepMounted
-                        open={Boolean(MenuLink)}
-                        onClose={handleClose}
-                      >
-                        <MenuItem onClick={() => history.push(`/boot/community/write/${post_id}`)}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
-                        <MenuItem onClick={() => {handleClose(); deletePost()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
-                      </Menu>
-                    </div>
-                  </Grid>
-                  <Text fontSize='1.5vh' color='#7A7E82'>{post_found.createdAt}</Text>
-                </TitleBox>
-                <ContentBox>
-                  <Text p fontSize='2vh' color='#dadce0'>{post_found.content}</Text>
-                </ContentBox>
+                {/* 게시글 카테고리 */}
+                <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; 커뮤니티 / 작성자:{post_found.nickname}</Text>
+                <Grid display='flex' justify_content='space-between' padding='12px 0 0'>
+                  {/* 제목 */}
+                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' vertical_align='middle'>{post_found.title}</Text>
+                  <div style={{height: 'fit-content'}}>
+                    {/* 북마크 버튼 */}
+                    <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
+                    {/* 드롭다운 메뉴 버튼 */}
+                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                      <Text color='#9AA0A6' fontSize='28px' lineHeight='28px' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
+                    </Button>
+                    <Menu
+                      id="simple-menu"
+                      anchorEl={MenuLink}
+                      keepMounted
+                      open={Boolean(MenuLink)}
+                      onClose={handleClose}
+                    >
+                      {/* 수정하기 */}
+                      <MenuItem onClick={() => history.push(`/boot/community/write/${post_id}`)}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                      {/* 삭제하기 */}
+                      <MenuItem onClick={() => {handleClose(); deletePost()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                    </Menu>
+                  </div>
+                </Grid>
+                {/* 작성일자 */}
+                <Text p fontSize='12px' color='#BDC1C6' margin='5px 0 0'>{post_found.createdAt}</Text>
+                {/* 내용 */}
+                <Text p fontSize='16px' color='#dadce0' margin='32px 0 0'>{post_found.content}</Text>
                 <IconBox>
-                  <span style={{backgroundColor: '#202124', padding: '10px', margin: '', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='2vh' fontWeight='700'><BiLike /> 17</Text></span>
-                  <Text color='#BDC1C6' fontSize='1.7vh' margin='0 10px 0 20px'><BiComment /> 15</Text>
-                  <Text color='#BDC1C6' fontSize='1.7vh' margin='0 10px 0'><AiOutlineEye /> 354</Text>
+                  {/* 추천 버튼 */}
+                  <span style={{backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px'><span style={{fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px'}}><BiLike /></span>17</Text></span>
+                  {/* 댓글 수 */}
+                  <Text color='#BDC1C6' fontSize='12px' margin='0 16px 0'><span style={{fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle'}}><BiComment /></span>15</Text>
+                  {/* 조회수 */}
+                  <Text color='#BDC1C6' fontSize='12px'><span style={{fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle'}}><AiOutlineEye /></span>354</Text>
                 </IconBox>
               </Post>
               {/* 댓글 입력란 */}
               <CommentInput>
-                <Text p fontSize='1.7vh' color='#E1E1E1'>댓글 15</Text>
+                <Text p fontSize='14px' color='#E8eaed' margin='16px 0'>댓글</Text>
                 <InputWrap>
-                  <Input placeholder='댓글을 남겨주세요' ref={commentInput}></Input>
-                  <CommentBtn onClick={() => addComment()}><Text fontSize='1.7vh' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
+                  <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
+                  <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
                 </InputWrap>
               </CommentInput>
               {/* 댓글 리스트 */}
-              <CommentList>
-                {comment_list && comment_list.map((n, idx) => {
-                  return (
-                    <Comment>
-                      <Grid display='flex' justify_content='space-between'>
-                        <NameTime><Text fontSize='1.7vh' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>{n.nickname}</Text><Text fontSize='1.5vh' color='#BDC1C6'>{n.createdAt}</Text></NameTime>
-                        <Buttons>
-                          <PostBtn style={{margin: '0 20px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiPencil /></Text></PostBtn>
-                          <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='2vh' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
-                        </Buttons>
-                      </Grid>
-                      <Word><Text fontSize='1.7vh' color='#F1F3F4'>{n.content}</Text></Word>
-                      <Like><Text fontSize='1.5vh' color='#BDC1C6' margin='0 10px 0 0'><BiLike /> 17</Text><Text fontSize='1.5vh' color='#BDC1C6'><BiComment /> 0</Text></Like>
-                    </Comment>
-                  )
-                })}
-                <MoreBtn><Text fontSize='1.6vh' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn>
-              </CommentList>
+              {comment_list && comment_list.map((n, idx) => {
+                return (
+                  <Comment>
+                    <Grid display='flex' justify_content='space-between'>
+                      <NameTime>
+                        {/* 작성자 닉네임 */}
+                        <Text fontSize='14px' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>{n.nickname}</Text>
+                        {/* 작성일자 */}
+                        <Text fontSize='12px' color='#BDC1C6'>{n.createdAt}</Text>
+                      </NameTime>
+                      <Buttons>
+                        {/* 수정 버튼 */}
+                        <PostBtn style={{margin: '0 16px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='16px' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                        {/* 삭제 버튼 */}
+                        <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='16px' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
+                      </Buttons>
+                    </Grid>
+                    {/* 댓글 내용 */}
+                    <Text p fontSize='16px' color='#F1F3F4' margin='0 0 16px'>{n.content}</Text>
+                    <Like>
+                      {/* 추천 수 */}
+                      <Text fontSize='16px' color='#BDC1C6' margin='0 16px 0 0'><BiLike /><span style={{fontSize: '12px', marginLeft: '6px'}}>17</span></Text>
+                      {/* 대댓글 수 */}
+                      <Text fontSize='16px' color='#BDC1C6'><BiComment /><span style={{fontSize: '12px', marginLeft: '6px'}}>0</span></Text>
+                    </Like>
+                  </Comment>
+                )
+              })}
+              {/* 댓글 더보기 버튼 */}
+              <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn>
             </div>
             {/* 다른 게시글 목록 */}
             <OthersBox>
-              <BoxInner>
-                <Text p fontSize='2vh' fontWeight='700' color='#E8EAED'>커뮤니티 내 다른 게시글</Text>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n, idx) => {
-                  return (
-                    <Text key={idx} p fontSize='1.7vh' color='#DADCE0' _onClick={() => history.push('/boot/post')} cursor='pointer' hover='opacity: 0.7'><GoPrimitiveDot style={{height: '1.2vh'}} />부트캠프 질문 드립니다!</Text>
-                  )
-                })}
-              </BoxInner>
+              <Text fontSize='18px' fontWeight='700' color='#E8EAED'>커뮤니티 내 다른 게시글</Text>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n, idx) => {
+                return (
+                  <Text key={idx} p fontSize='16px' margin='8px 0 0' color='#DADCE0' _onClick={() => history.push('/boot/community/post')} cursor='pointer' hover='opacity: 0.7'><GoPrimitiveDot style={{height: '10px'}} />부트캠프 질문 드립니다!</Text>
+                )
+              })}
             </OthersBox>
           </BodyInner>
         </Body>
@@ -174,19 +190,12 @@ const BodyInner = styled.div`
   width: 100%;
   height: auto;
   display: grid;
-  grid-template-columns: 69% 29%;
+  grid-template-columns: 65% 34%;
 `;
 
 const Post = styled.div`
-  width: 99%;
-  height: auto;
   border-bottom: 1px solid #5F6368;
   padding: 0 0 20px;
-`;
-
-const TitleBox = styled.div`
-  width: 99%;
-  height: auto;
 `;
 
 const PostBtn = styled.button`
@@ -200,41 +209,34 @@ const PostBtn = styled.button`
   }
 `;
 
-const ContentBox = styled.div`
-  width: 100%;
-  height: auto;
-`;
-
 const IconBox = styled.div`
-  width: 100%;
-  height: auto;
-  margin-top: 5%;
+  margin: 56px 0 0;
 `;
 
 const CommentInput = styled.div`
-  width: 99%;
   border-bottom: 1px solid #5F6368;
-  padding-bottom: 40px;
+  padding-bottom: 34px;
 `;
 
 const InputWrap = styled.div`
-  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
 const Input = styled.input`
   width: 80%;
+  height: 48px;
   background-color: #17181B;
-  border: 1.9px solid #9AA0A6;
-  border-radius: 10px;
-  padding: 20px;
-  margin-right: 20px;
-  font-size: 1.7vh;
+  border: 1px solid #9AA0A6;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-right: 8px;
+  font-size: 14px;
   caret-color: #5F6368;
   color: #e1e1e1;
   &::placeholder {
-    color: #5F6368 ;
+    color: #5F6368;
   }
   &:focus {
     outline: none;
@@ -242,9 +244,9 @@ const Input = styled.input`
 `;
 
 const CommentBtn = styled.button`
-  width: 15%;
+  width: 17%;
   background-color: #7879F1;
-  border-radius: 10px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   &:active {
@@ -252,38 +254,28 @@ const CommentBtn = styled.button`
   }
 `;
 
-const CommentList = styled.div`
-  width: 99%;
-  height: auto;  
-`;
-
 const Comment = styled.div`
-  width: 97%;
   border-bottom: 1px solid #5F6368;
-  padding: 15px 10px 15px 20px;
+  padding: 16px 24px;
 `;
 
 const NameTime = styled.div`
   width: auto;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 `;
 
 const Buttons = styled.div`
   width: auto;
 `;
 
-const Word = styled.div`
-  width: 100%;
-`;
-
 const Like = styled.div`
-  width: 100%;
-  padding-top: 10px;
+  line-height: 20px;
 `;
 
 const MoreBtn = styled.button`
   width: 100%;
-  padding: 2.5% 0;
+  padding: 23px 0;
+  margin: 0 0 64px;
   background-color: #282A2D;
   border: none;
   cursor: pointer;
@@ -292,15 +284,10 @@ const MoreBtn = styled.button`
   }
 `;
 
-const OthersBox = styled.div``;
-
-const BoxInner = styled.div`
-  width: 100%;
-  height: auto;
+const OthersBox = styled.div`
+  height: fit-content;
   background-color: #202124;
-  padding: 20px;
+  padding: 24px;
 `;
-
-
 
 export default BootPost;

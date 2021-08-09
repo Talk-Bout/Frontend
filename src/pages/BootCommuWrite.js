@@ -5,7 +5,6 @@ import Body from '../components/Body';
 import { Grid, Text } from '../elements';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
-import { RiAtLine } from 'react-icons/ri';
 import { FiHash } from 'react-icons/fi';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';

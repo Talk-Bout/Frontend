@@ -55,7 +55,7 @@ const HeaderN = (props) => {
             <Image src={Search} alt="검색" />
             <Input placeholder="검색어를 입력하세요." />
           </Grid>
-          <Grid className="menu" height='fit-content' width="auto" margin='36px 50px'>
+          <Grid height='fit-content' width="auto" margin='36px 50px'>
             {/* 북마크 메뉴 */}
             <Text
               color="#5F6368"
@@ -146,7 +146,7 @@ const HeaderN = (props) => {
 
 const Input = styled.input`
   border: none;
-  width: 831px;
+  width: 600px;
   height: 48px;
   background-color: transparent;
   color: #80868b;

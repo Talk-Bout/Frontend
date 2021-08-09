@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import SmallWindow from '../components/SmallWindow';
 import { Grid, Text, Image } from '../elements';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import instance from '../shared/Request';
+import _ from 'lodash';
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -16,9 +16,21 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Signup = (props) => {
   const dispatch = useDispatch();
-  const [id, setId] = React.useState('');
+  const email_exist = useSelector((state) => state.user.email_exist);
+  const nickname_exist = useSelector((state) => state.user.nickname_exist);
   const [nickname, setNickname] = React.useState('');
-  const is_exist = useSelector((state) => state.user.is_exist);
+  //닉네임을 바꿔주는 함수: setNickname은 이벤트가 일어날때마다 닉네임 0.5초마다 바뀜. (입력)
+  const debounceNickname = _.debounce((e) => {
+    setNickname(e.target.value);
+  }, 500);
+  // console.log(nickname);
+
+  //닉네임이 실행되어야 요청(useEffectrk 0.5초마다 실행됨)
+  useEffect(() => {
+    if (nickname) {
+      dispatch(userActions.nicknameCheckDB(nickname));
+    }
+  }, [nickname]);
 
   const notify = () => toast('가입이 완료되었습니다');
   //select 값 가져오기
@@ -47,31 +59,25 @@ const Signup = (props) => {
       confirm_password: Yup.string()
         .required('비밀번호를 한 번 더 입력해주세요')
         .oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않습니다.'),
-      nickname: Yup.string().required('닉네임을 입력해주세요'),
     }),
     onSubmit: (values) => {
+      console.log(values);
       const user_mail = String(values.id + '@' + selectMail.current.value);
       //dictionary 안에 key를 만들고 value를 넣어줌
       //values['key'] = value;
       values['user_mail'] = user_mail;
-      console.log(values);
+      values['nickname'] = nickname;
+      console.log(values.nickname);
+
       dispatch(userActions.signUpDB(values));
       notify();
-      // setLoginMode(true);
     },
   });
 
   //로그인 중복 확인
   const emailCheck = (id) => {
     console.log(id);
-    if (id === '') {
-      window.alert('아이디를 입력해주세요');
-      return;
-    }
-
     const email = String(id + '@' + selectMail.current.value);
-    console.log(email);
-
     dispatch(userActions.emailCheckDB(email));
   };
 
@@ -113,12 +119,6 @@ const Signup = (props) => {
                   이메일
                 </Text>
               </label>
-              {/* <DoubleCheckBtn
-                type="button"
-                
-              >
-                중복 확인
-              </DoubleCheckBtn> */}
             </TextBox>
             <TextBox>
               <Text fontSize="1.2vh" color="#80868b">
@@ -127,7 +127,8 @@ const Signup = (props) => {
             </TextBox>
             {/* 이메일 입력 창 */}
             {/* 변수이름 = true, value 값이 있을때 */}
-            {formik.values.id && is_exist ? (
+            {/* 값이 있음 - is_exist(중복여부) : true(이미 존재함) / false(사용가능함) */}
+            {formik.values.id && email_exist ? (
               <InputBox>
                 <Input
                   id="id"
@@ -136,7 +137,6 @@ const Signup = (props) => {
                   placeholder="이메일"
                   onChange={formik.handleChange}
                   value={formik.values.id}
-                  onFocus={() => emailCheck(formik.values.id)}
                 />
                 <Text margin="0 5px" color="#80868b">
                   @
@@ -147,16 +147,9 @@ const Signup = (props) => {
                   <option value="naver.com">naver.com</option>
                   <option value="hanmail.net">hanmail.net</option>
                 </Select>
-                {formik.touched.id && formik.errors.id && (
-                  <Text fontSize="1.2vh" color="#ff7070">
-                    {formik.errors.id}
-                  </Text>
-                )}
-                {/* {formik.touched.id && !formik.errors.id && (
-                  <Text fontSize="1.2vh" color="#B2F37F">
-                    사용가능한 이메일입니다.
-                  </Text>
-                )} */}
+                <Text fontSize="1.2vh" color="#ff7070">
+                  이미 사용중인 이메일입니다.
+                </Text>
               </InputBox>
             ) : (
               <InputBox>
@@ -177,9 +170,15 @@ const Signup = (props) => {
                   <option value="naver.com">naver.com</option>
                   <option value="hanmail.net">hanmail.net</option>
                 </Select>
-                <Text fontSize="1.2vh" color="#B2F37F">
-                  사용가능한 이메일입니다.
-                </Text>
+                {formik.values.id ? (
+                  <Text fontSize="1.2vh" color="#B2F37F">
+                    사용가능한 이메일입니다.
+                  </Text>
+                ) : (
+                  <Text fontSize="1.2vh" color="#ff7070">
+                    {formik.errors.id}
+                  </Text>
+                )}
               </InputBox>
             )}
           </Grid>
@@ -205,6 +204,7 @@ const Signup = (props) => {
                 placeholder="비밀번호"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onFocus={() => emailCheck(formik.values.id)}
               />
               {formik.errors.password && formik.touched.password && (
                 <Text fontSize="1.2vh" color="#ff7070">
@@ -252,24 +252,35 @@ const Signup = (props) => {
                   닉네임
                 </Text>
               </label>
-              <DoubleCheckBtn type="button">중복 확인</DoubleCheckBtn>
             </TextBox>
             {/* 닉네임 입력창 */}
             <InputBox>
               <Input
                 style={{ width: '98%' }}
                 placeholder="닉네임"
+                id="nickname"
+                // value={nickname} //실시간으로 들어감(setNickname: 변경시, 작동하면서 nickname이 변함)
                 name="nickname"
-                value={formik.values.nickname}
-                onChange={formik.handleChange}
+                type="nickname"
+                onChange={(e) => debounceNickname(e)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     formik();
                   }
                 }}
               />
+              {nickname.length === 0 ? null : nickname_exist ? (
+                <Text fontSize="1.2vh" color="#ff7070">
+                  이미 존재하는 닉네임입니다.
+                </Text>
+              ) : (
+                <Text fontSize="1.2vh" color="#B2F37F">
+                  사용가능한 닉네임입니다.
+                </Text>
+              )}
+            </InputBox>
 
-              {formik.errors.nickname && formik.touched.nickname && (
+            {/* {formik.errors.nickname && formik.touched.nickname && (
                 <Text fontSize="1.2vh" color="#ff7070">
                   {formik.errors.nickname}
                 </Text>
@@ -278,12 +289,17 @@ const Signup = (props) => {
                 <Text fontSize="1.2vh" color="#B2F37F">
                   사용가능한 닉네임입니다.
                 </Text>
+              )} */}
+            {/* {email_exist ? (
+                <Text fontSize="1.2vh" color="#ff7070">
+                  사용불가능한 닉네임입니다.
+                </Text>
+              ) : (
+                <Text fontSize="1.2vh" color="#B2F37F">
+                  사용가능한 닉네임입니다.
+                </Text>
               )}
-            </InputBox>
-
-            {/* <Text fontSize="1.2vh" color="#ff7070">
-              이미 사용중인 닉네임입니다.
-            </Text> */}
+            </InputBox> */}
           </Grid>
           <Grid>
             <SingUpButton type="submit">
@@ -330,18 +346,6 @@ const Select = styled.select`
   :focus {
     outline: none;
   }
-`;
-
-const DoubleCheckBtn = styled.button`
-  width: 30%;
-  font-size: 1.2vh;
-  font-weight: 600;
-  color: #ffffff;
-  border: 1px solid #7879f1;
-  border-radius: 5px;
-  background-color: transparent;
-  cursor: pointer;
-  margin-left: auto;
 `;
 
 const SingUpButton = styled.button`

@@ -54,7 +54,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userActions.logInCheckDB());
+    dispatch(userActions.stayLogInDB());
   }, []);
 
   return (
@@ -79,7 +79,11 @@ function App() {
           <Route path="/boot/community" exact component={BootCommu} />
           <Route path="/boot/camp/:name/info" exact component={BootInfo} />
           <Route path="/boot/camp/:name/review" exact component={BootReview} />
-          <Route path="/boot/camp/:name/community" exact component={BootCommu} />
+          <Route
+            path="/boot/camp/:name/community"
+            exact
+            component={BootCommu}
+          />
           <Route path="/boot/post/:id" exact component={BootPost} />
           <Route path="/boot/review/write" exact component={BootReviewWrite} />
           <Route

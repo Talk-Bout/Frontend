@@ -16,6 +16,7 @@ const EDIT_COMMU = 'EDIT_COMMU'; // 커뮤니티글 수정하기
 // const DELETE_COMMU = 'DELETE_COMMU'; // 커뮤니티글 삭제하기
 
 const SET_COMMENTS = 'SET_COMMENTS'; // 커뮤니티 댓글 불러오기
+const ADD_COMMENT = 'ADD_COMMENT'; // 커뮤니티 댓글 작성하기
 
 // 액션생성함수
 const setCamps = createAction(SET_CAMPS, (camp_list) => ({camp_list}));
@@ -27,6 +28,7 @@ const addCommu = createAction(ADD_COMMU, (commu) => ({commu}));
 const editCommu = createAction(EDIT_COMMU, (commu) => ({commu}));
 // const deleteCommu = createAction(DELETE_COMMU, (commu) => ({commu}));
 const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}));
+const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 
 
 // 기본값 정하기
@@ -166,6 +168,22 @@ const setCommentsDB = (camp_name, commu_id) => {
   };
 };
 
+const addCommentDB = (new_comment) => {
+  // 서버에 커뮤니티글의 댓글 저장하는 함수
+  return function (dispatch) {
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
+    instance.post(`/bootcamp/${new_comment.bootcampName}/community/${new_comment.communityId}/comments`, {
+      content: new_comment.content,
+      nickname: new_comment.nickname,
+      communityId: new_comment.communityId,
+    }, {headers: headers}).then((response) => {
+      dispatch(addComment(response.data));
+    }).catch((err) => {
+      console.error(`부트캠프 커뮤니티 댓글 작성하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
 export default handleActions({
     [SET_CAMPS]: (state, action) => produce(state, (draft) => {
       draft.camp_list = [...action.payload.camp_list];
@@ -188,6 +206,10 @@ export default handleActions({
     }),
     [SET_COMMENTS]: (state, action) => produce(state, (draft) => {
       draft.comment_list = [...action.payload.comment_list];
+    }),
+    [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
+      console.log(action.payload.comment);
+      // draft.comment_list.unshift(action.payload.comment);
     })
 }, initialState);
 
@@ -203,6 +225,7 @@ const actionCreators = {
     editCommuDB,
     deleteCommuDB,
     setCommentsDB,
+    addCommentDB,
 }
 
 export {

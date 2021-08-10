@@ -10,6 +10,7 @@ const ADD_REVIEW = 'ADD_REVIEW'; // 리뷰 작성하기
 const SET_COMMUS = 'SET_COMMUS'; // 커뮤니티글 전체 목록 불러오기
 const SET_ONECOMMU = 'SET_ONECOMMU' // 커뮤니티글 상세페이지 불러오기
 const ADD_COMMU = 'ADD_COMMU'; // 커뮤니티글 작성하기
+const EDIT_COMMU = 'EDIT_COMMU'; // 커뮤니티글 수정하기
 
 // 액션생성함수
 const setCamps = createAction(SET_CAMPS, (camp_list) => ({camp_list}));
@@ -18,13 +19,14 @@ const addReview = createAction(ADD_REVIEW, (review) => ({review}));
 const setCommus = createAction(SET_COMMUS, (commu_list) => ({commu_list}));
 const setOneCommu = createAction(SET_ONECOMMU, (commu) => ({commu}));
 const addCommu = createAction(ADD_COMMU, (commu) => ({commu}));
+const editCommu = createAction(EDIT_COMMU, (commu) => ({commu}));
 
 // 기본값 정하기
 const initialState = {
     camp_list: [],    // 부트캠프 전체 목록을 담을 배열
     review_list: [],    // 리뷰 목록을 담을 배열
     commu_list: [],   // 커뮤니티글 목록을 담을 배열
-    comment_list: [], // 커뮤니티글의 댓글 목록만 담을 배열
+    comment_list: [], // 커뮤니티글의 댓글 목록을 담을 배열
 };
 
 // 액션함수
@@ -113,6 +115,22 @@ const addCommuDB = (new_commu) => {
   };
 };
 
+const editCommuDB = (edited_commu) => {
+  // 서버에 저장된 커뮤니티글을 수정하는 함수
+  return function (dispatch) {
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
+    instance.patch(`/bootcamp/${edited_commu.bootcampName}/community/${edited_commu.communityId}`, {
+      title: edited_commu.title,
+      content: edited_commu.content
+    }, {headers: headers}).then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.error(`부트캠프 커뮤니티글 수정하기 에러 발생: ${err} ### ${err.response}`);
+    })
+  }
+}
+
 export default handleActions({
     [SET_CAMPS]: (state, action) => produce(state, (draft) => {
       draft.camp_list = [...action.payload.camp_list];
@@ -145,6 +163,7 @@ const actionCreators = {
     setCommusDB,
     setOneCommuDB,
     addCommuDB,
+    editCommuDB,
 }
 
 export {

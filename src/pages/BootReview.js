@@ -62,9 +62,9 @@ const BootReview = (props) => {
           </Grid>
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/info', state: {camp: props.location.state.camp}})}>정보</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/info`, state: {camp: props.location.state.camp}})}>정보</Text></Menu>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>리뷰</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/community', state: {camp: props.location.state.camp}})}>커뮤니티</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/community`, state: {camp: props.location.state.camp}})}>커뮤니티</Text></Menu>
           </Grid>
           {/* 리뷰 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
@@ -73,7 +73,7 @@ const BootReview = (props) => {
                 {/* 리뷰 페이지 타이틀 */}
                 <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{bootcampName} 리뷰</Text>
                 {/* 리뷰 남기기 버튼 */}
-                <WriteBtn onClick={() => history.push({pathname: '/boot/review/write', state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
+                <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/review/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
               </Grid>
               {/* 부트캠프 리뷰 목록 */}
               {review_list && review_list.map((review, idx) => {

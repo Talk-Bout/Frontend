@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -20,12 +20,6 @@ const BootCommuWrite = (props) => {
   const edited_id = parseInt(window.location.pathname.split('/write/')[1]);
   const commu_list = useSelector(state => state.bootcamp.commu_list);
   const commu_found = commu_list.find((commu) => commu.communityId === edited_id);
-  // let camp_name;
-  // if (commu_id) {
-  //   camp_name = commu_found.bootcampName;
-  // } else {
-  //   camp_name = props.location.state.camp_name;
-  // }
 
   const titleRef = useRef('');
   const contentRef = useRef('');
@@ -48,7 +42,7 @@ const BootCommuWrite = (props) => {
     dispatch(imageActions.getPreview(null));
   }
 
-  // 게시글 등록
+  // 게시글 등록(수정)
   const addPost = () => {
     if (titleRef.current.value === '') {
       window.alert('제목을 입력해주세요.');

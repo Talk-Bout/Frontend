@@ -35,8 +35,8 @@ const BootInfo = (props) => {
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>정보</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/review', state: {camp: props.location.state.camp}})}>리뷰</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/community', state: {camp: props.location.state.camp}})}>커뮤니티</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/review`, state: {camp: props.location.state.camp}})}>리뷰</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/community`, state: {camp: props.location.state.camp}})}>커뮤니티</Text></Menu>
           </Grid>
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             {/* 부트캠프 정보 */}
@@ -74,7 +74,7 @@ const BootInfo = (props) => {
               <Text fontSize='18px' fontWeight='700' color='#e8eaed'>다른 부트캠프</Text>
               {[1, 2, 3, 4].map((c, idx) => {
                 return (
-                  <Camp key={idx} onClick={() => history.push('/boot/info')}>
+                  <Camp key={idx} onClick={() => history.push(`/boot/${bootcampName}/info`)}>
                     {/* 다른 부트캠프 로고 */}
                     <ImageDiv style={{backgroundImage: `url('https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')`}}/>
                     <div style={{padding: '29px 16px'}}>

@@ -64,8 +64,8 @@ const BootCommu = (props) => {
           </Grid>
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/info', state: {camp: props.location.state.camp}})}>정보</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/review', state: {camp: props.location.state.camp}})}>리뷰</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/info`, state: {camp: props.location.state.camp}})}>정보</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/review`, state: {camp: props.location.state.camp}})}>리뷰</Text></Menu>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>커뮤니티</Text></Menu>
           </Grid>
           {/* 커뮤니티 페이지 */}
@@ -78,13 +78,13 @@ const BootCommu = (props) => {
                   {/* 인기순, 최신순 정렬 */}
                   <Text fontSize='14px' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text>
                   {/* 글쓰기 버튼 */}
-                  <WriteBtn onClick={() => history.push({pathname: '/boot/community/write', state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
+                  <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/community/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
                 </Grid>
               </Grid>
               {/* 커뮤니티 게시글 목록 */}
               {commu_list.map((c, idx) => {
                 return (
-                  <Post key={idx} onClick={() => history.push(`/boot/post/${bootcampName}/${c.communityId}`)}>
+                  <Post key={idx} onClick={() => history.push(`/boot/${bootcampName}/post/${c.communityId}`)}>
                     {/* 제목 */}
                     <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0'>{c.title}</Text>
                     {/* 내용 */}

@@ -15,8 +15,8 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const BootPost = (props) => {
   const dispatch = useDispatch();
-  const camp_name = window.location.pathname.split('/')[3];
-  const commu_id = parseInt(window.location.pathname.split(`/post/${camp_name}/`)[1]);
+  const camp_name = window.location.pathname.split('/')[2];
+  const commu_id = parseInt(window.location.pathname.split(`/${camp_name}/post/`)[1]);
   const username = useSelector(state => state.user.user);
   const commu_list = useSelector(state => state.bootcamp.commu_list);
   const commu_found = commu_list.find((commu) => commu.communityId === commu_id);
@@ -117,8 +117,7 @@ const BootPost = (props) => {
                       >
                         {/* 수정하기 */}
                         <MenuItem onClick={() => history.push(history.push({
-                          pathname: `/boot/community/write/${commu_found.communityId}`,
-                          // state: {commu_found: commu_found}
+                          pathname: `/boot/${camp_name}/community/write/${commu_found.communityId}`,
                           }))}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
                         {/* 삭제하기 */}
                         <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>

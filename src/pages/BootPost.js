@@ -9,7 +9,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
-import {actionCreators as commentActions} from '../redux/modules/comment';
 import {history} from '../redux/ConfigureStore';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
@@ -32,7 +31,7 @@ const BootPost = (props) => {
     if (!commu_found) {
       dispatch(campActions.setOneCommuDB(camp_name, commu_id));
     }
-    // dispatch(commentActions.setCommentDB(commu_id));
+    dispatch(campActions.setCommentsDB(camp_name, commu_id));
   }, []);
 
   const handleClick = (e) => {

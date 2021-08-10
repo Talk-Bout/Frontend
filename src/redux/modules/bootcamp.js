@@ -15,6 +15,8 @@ const ADD_COMMU = 'ADD_COMMU'; // 커뮤니티글 작성하기
 const EDIT_COMMU = 'EDIT_COMMU'; // 커뮤니티글 수정하기
 // const DELETE_COMMU = 'DELETE_COMMU'; // 커뮤니티글 삭제하기
 
+const SET_COMMENTS = 'SET_COMMENTS'; // 커뮤니티 댓글 불러오기
+
 // 액션생성함수
 const setCamps = createAction(SET_CAMPS, (camp_list) => ({camp_list}));
 const setReviews = createAction(SET_REVIEWS, (review_list) => ({review_list}));
@@ -24,6 +26,8 @@ const setOneCommu = createAction(SET_ONECOMMU, (commu) => ({commu}));
 const addCommu = createAction(ADD_COMMU, (commu) => ({commu}));
 const editCommu = createAction(EDIT_COMMU, (commu) => ({commu}));
 // const deleteCommu = createAction(DELETE_COMMU, (commu) => ({commu}));
+const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}));
+
 
 // 기본값 정하기
 const initialState = {
@@ -132,9 +136,9 @@ const editCommuDB = (edited_commu) => {
     })
     .catch((err) => {
       console.error(`부트캠프 커뮤니티글 수정하기 에러 발생: ${err} ### ${err.response}`);
-    })
-  }
-}
+    });
+  };
+};
 
 const deleteCommuDB = (deleted_commu) => {
   // 서버에 저장된 커뮤니티글을 삭제하는 함수
@@ -145,9 +149,22 @@ const deleteCommuDB = (deleted_commu) => {
       history.goBack();
     }).catch((err) => {
       console.error(`부트캠프 커뮤니티글 삭제하기 에러 발생: ${err} ### ${err.response}`);
-    })
-  }
-}
+    });
+  };
+};
+
+const setCommentsDB = (camp_name, commu_id) => {
+  // 서버로부터 커뮤니티글의 댓글 목록 불러오는 함수
+  return function (dispatch) {
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
+    instance.get(`/bootcamp/${camp_name}/community/${commu_id}/comments`,
+    {headers: headers}).then((response) => {
+      dispatch(setComments(response.data));
+    }).catch((err) => {
+      console.error(`부트캠프 커뮤니티 댓글 불러오기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
 
 export default handleActions({
     [SET_CAMPS]: (state, action) => produce(state, (draft) => {
@@ -165,10 +182,12 @@ export default handleActions({
     }),
     [SET_ONECOMMU]: (state, action) => produce(state, (draft) => {
       draft.commu_list = [action.payload.commu];
-      draft.comment_list = [...action.payload.commu.communityComment];
     }),
     [ADD_COMMU]: (state, action) => produce(state, (draft) => {
       draft.commu_list.unshift(action.payload.commu);
+    }),
+    [SET_COMMENTS]: (state, action) => produce(state, (draft) => {
+      draft.comment_list = [...action.payload.comment_list];
     })
 }, initialState);
 
@@ -183,6 +202,7 @@ const actionCreators = {
     addCommuDB,
     editCommuDB,
     deleteCommuDB,
+    setCommentsDB,
 }
 
 export {

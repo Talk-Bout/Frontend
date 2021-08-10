@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {Grid, Text, Image} from '../elements';
+import {Grid, Text} from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import Stars from '../components/Stars';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
-import {actionCreators as postActions} from '../redux/modules/post';
+import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BiLike, BiComment } from "react-icons/bi";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
@@ -15,19 +15,18 @@ const BootCommu = (props) => {
   const dispatch = useDispatch();
 
   // 부트캠프 정보를 props로 받는다
-  const camp_name = props.location.state.camp_name;
-  const camp_desc = props.location.state.camp_desc;
+  const {bootcampName, desc, review} = props.location.state.camp;
 
   useEffect(() => {
-    dispatch(postActions.setPostDB());
+    dispatch(campActions.setCommusDB(bootcampName));
   }, []);
   
   // 페이지네이션
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(5);
   const [page, setPage] = useState(1);
-  const all_post = useSelector(state => state.post.list);
-  const post_list = all_post.slice(start, end);
+  const all_commu = useSelector(state => state.bootcamp.commu_list);
+  const commu_list = all_commu.slice(start, end);
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);
@@ -54,19 +53,19 @@ const BootCommu = (props) => {
             <InfoBtn>
               <div>
               {/* 부트캠프 이름 */}
-              <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{camp_name}</Text>
-              <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{camp_desc}</Text>
+              <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{bootcampName}</Text>
+              <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{desc}</Text>
               </div>
               {/* 홈페이지 바로가기 버튼 */}
               <Button><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
             </InfoBtn>
             {/* 부트캠프 평점, 리뷰 개수 */}
-            <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>2.2</span>(164개 리뷰)</Text>
+            <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{review[0].stars}</span>(164개 리뷰)</Text>
           </Grid>
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/info', state: {camp_name: camp_name, camp_desc: camp_desc}})}>정보</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/review', state: {camp_name: camp_name, camp_desc: camp_desc}})}>리뷰</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/info', state: {camp: props.location.state.camp}})}>정보</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/review', state: {camp: props.location.state.camp}})}>리뷰</Text></Menu>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>커뮤니티</Text></Menu>
           </Grid>
           {/* 커뮤니티 페이지 */}
@@ -74,7 +73,7 @@ const BootCommu = (props) => {
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' padding='40px 40px 0 40px'>
               <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091' padding='0 0 40px'>
                 {/* 커뮤니티 페이지 타이틀 */}
-                <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{camp_name} 커뮤니티</Text>
+                <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{bootcampName} 커뮤니티</Text>
                 <Grid width='auto' height='fit-content'>
                   {/* 인기순, 최신순 정렬 */}
                   <Text fontSize='14px' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text>
@@ -83,24 +82,24 @@ const BootCommu = (props) => {
                 </Grid>
               </Grid>
               {/* 커뮤니티 게시글 목록 */}
-              {post_list.map((n, idx) => {
+              {commu_list.map((c, idx) => {
                 return (
-                  <Post key={idx} onClick={() => history.push(`/boot/community/post/${n.postId}`)}>
+                  <Post key={idx} onClick={() => history.push(`/boot/community/post/${c.communityId}`)}>
                     {/* 제목 */}
-                    <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0'>{n.title}</Text>
+                    <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0'>{c.title}</Text>
                     {/* 내용 */}
-                    <Text p fontSize='14px' color='#80868b' margin='16px 0 0' overflow='hidden' display='-webkit-box' wlc='2' wbo='vertical'>{n.content}</Text>
+                    <Text p fontSize='14px' color='#80868b' margin='16px 0 0' overflow='hidden' display='-webkit-box' wlc='2' wbo='vertical'>{c.content}</Text>
                     <div style={{height: 'fit-content', marginTop: '16px'}}>
                       {/* 추천 수 */}
                       <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0'>
-                        <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiLike /></span>17
+                        <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiLike /></span>{c.communityLike ? c.communityLike.length : '0'}
                       </Text>
                       {/* 댓글 수 */}
                       <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
-                        <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>1</Text>
+                        <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>{c.communityComment ? c.communityComment.length : '0'}</Text>
                       {/* 조회수 */}
                       <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px'>
-                        <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><AiOutlineEye /></span>354</Text>
+                        <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><AiOutlineEye /></span>{c.viewCount}</Text>
                     </div>
                   </Post>
                 )
@@ -115,9 +114,9 @@ const BootCommu = (props) => {
                   {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
                   <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > page * 5 ? page + 1 : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_commu.length > page * 5 ? page + 1 : ''}</Page></Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > page * 5 ? <BsChevronRight /> : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_commu.length > page * 5 ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>

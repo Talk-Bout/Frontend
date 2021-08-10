@@ -1,6 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import {history} from '../ConfigureStore';
+import instance from '../../shared/Request';
 
 // 액션타입
 const SET_NEWS = 'SET_NEWS';
@@ -16,8 +17,8 @@ const initialState = {
 // 액션함수
 const setNewsDB = () => {
     return function (dispatch) {
-        const axios = require('axios');
-        axios.get('url').then((response) => {
+        instance.get('/')
+      .then((response) => {
                 dispatch(setNews(response.data));
             })
             .catch((err) => {

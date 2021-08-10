@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { history } from '../redux/ConfigureStore';
-
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -11,8 +10,21 @@ import { Text, Button, Grid, Input, Image } from '../elements/index';
 import { BiTimeFive, BiBadgeCheck} from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
 import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { useDispatch, useSelector } from 'react-redux';
+import {actionCreators as mypageActions} from '../redux/modules/mypage';
 
-const templateN = (props) => {
+const Mypage = (props) => {
+  const dispatch = useDispatch();
+  // console.log(props);
+
+  const username = useSelector((state) => state.user.user.nickname);
+  console.log(username, "username");
+  const mypost_list = useSelector((state) => state.mypage.mypost_list);
+  console.log(mypost_list, "mypost_list");
+
+  useEffect(()  => {
+    dispatch(mypageActions.setMyPostDB(username));
+  }, []);
   
   return (
     <React.Fragment>
@@ -145,15 +157,15 @@ const templateN = (props) => {
                   </BookMarkBox>
                   <Button color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%">더보기 <AiOutlineRight/></Button>   
                 </Grid>
-                {/* 게시글이 없을 경우 */}
+                {/* 게시글이 없을 경우
                 <Grid margin="12px 0" height="203px" width="100%">
                   <Grid display="flex" align_items="center" text_align="center" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
                     <Text fontSize="18px" color="#FFFFFF" >글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                   </Grid>
-                </Grid>
-                {/* 게시글이 있을 경우
+                </Grid> */}
+                {/* 게시글이 있을 경우 */}
                 <Grid display="flex" margin="12px 0" justify_content="space-between" height="211px" width="100%">
-                {[1, 2, 3].map((n, idx) => {
+                {mypost_list.map((n, idx) => {
               return (
                   <Grid padding="0 1.5%" height="203px" width="32%" backgroundColor="#202124" borderRadius="5px">
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
@@ -176,7 +188,7 @@ const templateN = (props) => {
                   </Grid>
                );
               })}
-                </Grid> */}
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -226,4 +238,4 @@ justify-content: middle;
 margin: auto;
 `;
 
-export default templateN;
+export default Mypage;

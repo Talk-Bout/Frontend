@@ -51,7 +51,7 @@ const BootReviewWrite = (props) => {
     const new_review = {
       nickname: user_name,
       bootcampName: camp_name,
-      season: courseInput.current.value,
+      status: courseInput.current.value,
       pros: prosInput.current.value,
       cons: consInput.current.value,
       stars: stars,

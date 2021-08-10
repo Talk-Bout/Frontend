@@ -8,8 +8,7 @@ import { history } from '../redux/ConfigureStore';
 
 const BootInfo = (props) => {
   // 부트캠프 정보를 props로 받는다.
-  const camp_name = props.location.state.camp_name;
-  const camp_desc = props.location.state.camp_desc;
+  const {bootcampName, desc, review} = props.location.state.camp;
 
   return (
     <React.Fragment>
@@ -24,20 +23,20 @@ const BootInfo = (props) => {
             <InfoBtn>
               <div>
               {/* 부트캠프 이름 */}
-              <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{camp_name}</Text>
-              <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{camp_desc}</Text>
+              <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{bootcampName}</Text>
+              <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{desc}</Text>
               </div>
               {/* 홈페이지 바로가기 버튼 */}
               <Button><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
             </InfoBtn>
             {/* 부트캠프 평점, 리뷰 개수 */}
-            <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>2.2</span>(164개 리뷰)</Text>
+            <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{review[0].stars}</span>(164개 리뷰)</Text>
           </Grid>
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
             <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>정보</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/review', state: {camp_name: camp_name, camp_desc: camp_desc}})}>리뷰</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/community', state: {camp_name: camp_name, camp_desc: camp_desc}})}>커뮤니티</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/review', state: {camp: props.location.state.camp}})}>리뷰</Text></Menu>
+            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: '/boot/community', state: {camp: props.location.state.camp}})}>커뮤니티</Text></Menu>
           </Grid>
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             {/* 부트캠프 정보 */}

@@ -17,7 +17,15 @@ const BootCommuWrite = (props) => {
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
   const username = useSelector(state => state.user.user);
 
-  const camp_name = props.location.state.camp_name;
+  const edited_id = parseInt(window.location.pathname.split('/write/')[1]);
+  const commu_list = useSelector(state => state.bootcamp.commu_list);
+  const commu_found = commu_list.find((commu) => commu.communityId === edited_id);
+  // let camp_name;
+  // if (commu_id) {
+  //   camp_name = commu_found.bootcampName;
+  // } else {
+  //   camp_name = props.location.state.camp_name;
+  // }
 
   const titleRef = useRef('');
   const contentRef = useRef('');
@@ -50,26 +58,25 @@ const BootCommuWrite = (props) => {
       window.alert('내용을 입력해주세요.');
       return;
     }
-    // if (post_id) {
-    //   const edited_post = {
-    //     title: titleRef.current.value,
-    //     content: contentRef.current.value,
-    //     nickname: username,
-    //     category: 'testing',
-    //     postId: post_id,
-    //   }
-    //   dispatch(postActions.editPostDB(edited_post));
-    // } else {
+    if (edited_id) {
+      const edited_commu = {
+        title: titleRef.current.value,
+        content: contentRef.current.value,
+        bootcampName: commu_found.bootcampName,
+        communityId: commu_found.communityId,
+      }
+      dispatch(campActions.editCommuDB(edited_commu));
+    } else {
       const new_commu = {
         nickname: username,
-        bootcampName: camp_name,
+        bootcampName: props.location.state.camp_name,
         title: titleRef.current.value,
         content: contentRef.current.value,
       }
       dispatch(campActions.addCommuDB(new_commu));
       titleRef.current.value = '';
       contentRef.current.value = '';
-    // }
+    }
   }
 
   return (
@@ -98,15 +105,12 @@ const BootCommuWrite = (props) => {
               </Grid>
               <BodyBox>
                 {/* 제목 입력 칸 */}
-                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} /></TitleBox>
+                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} defaultValue={edited_id ? commu_found.title : null}/></TitleBox>
                 {/* 내용 입력 칸 */}
-                {/* 이미지 preview가 있으면 textarea 크기 줄이기 */}
-                {preview ? 
-                <ContentBox><Textarea rows='5' placeholder='내용을 입력해주세요' ref={contentRef} /></ContentBox>
-                :
-                <ContentBox><Textarea rows='15' placeholder='내용을 입력해주세요' ref={contentRef} /></ContentBox>
-                }
-                {/* 이미지 preview가 있으면 preview와 파일명을 보여주기*/}
+                {/* 이미지 preview가 있으면 입력 칸 크기 줄이고, preview와 파일명을 보여주기*/}
+                <ContentBox>
+                  <Textarea rows={preview ? '5' : '15'} placeholder='내용을 입력해주세요' ref={contentRef} defaultValue={edited_id ? commu_found.content : null}/>
+                </ContentBox>
                 {preview ?
                 <div style={{textAlign: 'center'}}>
                   <Preview><Img src={preview}/></Preview>

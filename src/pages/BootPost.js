@@ -17,7 +17,7 @@ const BootPost = (props) => {
   const dispatch = useDispatch();
   const camp_name = window.location.pathname.split('/')[3];
   const commu_id = parseInt(window.location.pathname.split(`/post/${camp_name}/`)[1]);
-  // const username = useSelector(state => state.user.user);
+  const username = useSelector(state => state.user.user);
   const commu_list = useSelector(state => state.bootcamp.commu_list);
   const commu_found = commu_list.find((commu) => commu.communityId === commu_id);
   const comment_list = useSelector(state => state.bootcamp.comment_list);
@@ -102,21 +102,31 @@ const BootPost = (props) => {
                     {/* 북마크 버튼 */}
                     <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
                     {/* 드롭다운 메뉴 버튼 */}
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                      <Text color='#9AA0A6' fontSize='28px' lineHeight='28px' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
-                    </Button>
-                    <Menu
-                      id="simple-menu"
-                      anchorEl={MenuLink}
-                      keepMounted
-                      open={Boolean(MenuLink)}
-                      onClose={handleClose}
-                    >
-                      {/* 수정하기 */}
-                      <MenuItem onClick={() => history.push(`/boot/community/write/${commu_id}`)}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
-                      {/* 삭제하기 */}
-                      <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
-                    </Menu>
+                    {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 활성화 */}
+                    {commu_found.nickname === username ?
+                    <>
+                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        <Text color='#9AA0A6' fontSize='28px' lineHeight='28px' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
+                      </Button>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={MenuLink}
+                        keepMounted
+                        open={Boolean(MenuLink)}
+                        onClose={handleClose}
+                      >
+                        {/* 수정하기 */}
+                        <MenuItem onClick={() => history.push(history.push({
+                          pathname: `/boot/community/write/${commu_found.communityId}`,
+                          // state: {commu_found: commu_found}
+                          }))}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                        {/* 삭제하기 */}
+                        <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                      </Menu>
+                    </>
+                    :
+                    ''
+                    }
                   </div>
                 </Grid>
                 {/* 작성일자 */}

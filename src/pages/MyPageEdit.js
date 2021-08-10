@@ -2,8 +2,8 @@
 // import styled from 'styled-components';
 // import SmallWindow from '../components/SmallWindow';
 // import Header from '../components/Header';
-// import { Grid, Text, Image } from '../elements';
-
+// // import { Grid, Text, Image } from '../elements';
+// import { Image } from '../elements';
 // const MyPageEdit = (props) => {
 
 //   return (
@@ -52,9 +52,9 @@
 //           </Grid>
 //           <Grid height='25%'>
 //             <TextBox><Text fontSize='1.5vh' fontWeight='700'>프로필 이미지</Text></TextBox>
-//             <ImageBox>
-//               <Image shape='BigProfileImage' src='https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80' size='6'></Image>
-//             </ImageBox>
+            // <ImageBox>
+            //   <Image shape='BigProfileImage' size='6' src='https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80' ></Image>
+            // </ImageBox>
 //           </Grid>
 //           <Grid height='15%'>
 //             <Button><Text fontSize='1.5vh' color='white'>수정 완료</Text></Button>

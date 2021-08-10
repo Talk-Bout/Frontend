@@ -36,7 +36,7 @@ const CommentEdit = (props) => {
 
 return (
 <React.Fragment>
-  <Grid overflow="hidden" width="100%" height="12vh">
+  <Grid overflow="hidden" width="100%">
   <Grid display="flex" height="33.3%" borderTop="0.2vh solid #DADCE0"  width="100%">
     <Grid width="50%" height="100%">
       <Text fontSize="1.3vh" color="#BDC1C6">{props.nickname}</Text>

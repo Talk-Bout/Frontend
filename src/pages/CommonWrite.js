@@ -98,10 +98,18 @@ const CommonWrite = (props) => {
                 </Grid>
                 {/* 등록 버튼 */}
                 <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='24px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => {addCommon(); uploadFile()}}>등록</Text>
+                  <Text fontSize='24px' fontWeight='700' color='#7879F1' lineHeight='84px' float='right' cursor='pointer' _onClick={() => {addCommon(); uploadFile()}}>등록</Text>
                 </Grid>
               </Grid>
               <BodyBox>
+                 {/* 카테고리 선택 */}
+                 <SelectBox>
+                  {/* <Dropdown
+              // onChange={this._onSelect}/> */}
+                  <Option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
+                  <Option value="정보">정보게시판</Option>
+                  <Option value="잡담">잡담방</Option>
+                </SelectBox>
                 {/* 제목 입력 칸 */}
                 <TitleBox><Input placeholder='제목을 입력해주세요' ref={addTitleRef} defaultValue={postId ? post_found.title : null}/></TitleBox>
                 {/* 내용 입력 칸 */}
@@ -119,9 +127,9 @@ const CommonWrite = (props) => {
               {/* 작성 페이지 푸터 */}
               <FooterBox>
                 {/* 이미지 추가 버튼 */}
-                <label for='file'><Text fontSize='24px' color='#b3b3b3' margin='0 32px 0 0' cursor='pointer'><BiImageAdd /></Text><ImgInput type='file' ref={imageRef} onChange={selectFile} accept='image/*' id='file'/></label>
+                <label for='file'><ImageButton><BiImageAdd /></ImageButton><ImgInput type='file' ref={imageRef} onChange={selectFile} accept='image/*' id='file'/></label>
                 {/* 해시태그 추가 버튼 */}
-                <Text fontSize='24px' color='#b3b3b3' cursor='pointer'><FiHash /></Text>
+                <HashButton><FiHash /></HashButton>
               </FooterBox>
             </Window>
           </Grid>
@@ -140,6 +148,24 @@ const Window = styled.div`
 
 const BodyBox = styled.div`
   padding: 0 40px;
+`;
+
+const SelectBox = styled.select`
+  width: 100%;
+  height: 7.5vh;
+  background-color: #282a2d;
+  border: none;
+  color: #5f6368;
+  outline: none;
+  font-size: 18px;
+  display: block;
+  appearance: none;
+  
+`;
+
+const Option = styled.option`
+  font-size: 18px;
+  color: #FFFFFF; 
 `;
 
 const TitleBox = styled.div`
@@ -207,6 +233,18 @@ const FooterBox = styled.div`
   background-color: #2E3134;
   height: 24px;
   padding: 28px 40px;
+  
+`;
+
+const ImageButton = styled.text`
+font-size: 24px;
+color: #b3b3b3;
+margin: 0 32px 0 0;
+cursor: pointer;
+&:hover {
+  background-color: #282A2D;
+  color: #7879F1;
+  }
 `;
 
 // 이미지 파일 선택하는 기본 버튼 숨기기
@@ -216,6 +254,16 @@ const ImgInput = styled.input`
   padding: 0;
   margin: -1px;
   overflow: hidden;
+`;
+
+const HashButton = styled.text`
+font-size: 24px;
+color: #b3b3b3;
+cursor: pointer;
+&:hover {
+  background-color: #282A2D;
+  color: #7879F1;
+  }
 `;
 
 export default CommonWrite;

@@ -67,14 +67,13 @@ const BootPost = (props) => {
   //   dispatch(commentActions.deleteCommentDB(post_id, parseInt(comment_id), nickname));
   // }
 
-  // const deletePost = () => {
-  //   const deleted_post = {
-  //     postId: post_id,
-  //     nickname: username,
-  //   };
-  //   dispatch(postActions.deletePostDB(deleted_post));
-  //   history.push('/boot/community');
-  // }
+  const deleteCommu = () => {
+    const deleted_commu = {
+      bootcampName: camp_name,
+      communityId: commu_id,
+    };
+    dispatch(campActions.deleteCommuDB(deleted_commu));
+  }
 
   if (!commu_found) {
     return (
@@ -120,7 +119,7 @@ const BootPost = (props) => {
                           pathname: `/boot/${camp_name}/community/write/${commu_found.communityId}`,
                           }))}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
                         {/* 삭제하기 */}
-                        <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                        <MenuItem onClick={() => {deleteCommu(); handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
                       </Menu>
                     </>
                     :

@@ -5,12 +5,15 @@ import instance from '../../shared/Request';
 
 // 액션타입
 const SET_CAMPS = 'SET_CAMPS'; // 부트캠프 전체 목록 불러오기
+
 const SET_REVIEWS = 'SET_REVIEWS'; // 리뷰 불러오기
 const ADD_REVIEW = 'ADD_REVIEW'; // 리뷰 작성하기
+
 const SET_COMMUS = 'SET_COMMUS'; // 커뮤니티글 전체 목록 불러오기
 const SET_ONECOMMU = 'SET_ONECOMMU' // 커뮤니티글 상세페이지 불러오기
 const ADD_COMMU = 'ADD_COMMU'; // 커뮤니티글 작성하기
 const EDIT_COMMU = 'EDIT_COMMU'; // 커뮤니티글 수정하기
+// const DELETE_COMMU = 'DELETE_COMMU'; // 커뮤니티글 삭제하기
 
 // 액션생성함수
 const setCamps = createAction(SET_CAMPS, (camp_list) => ({camp_list}));
@@ -20,6 +23,7 @@ const setCommus = createAction(SET_COMMUS, (commu_list) => ({commu_list}));
 const setOneCommu = createAction(SET_ONECOMMU, (commu) => ({commu}));
 const addCommu = createAction(ADD_COMMU, (commu) => ({commu}));
 const editCommu = createAction(EDIT_COMMU, (commu) => ({commu}));
+// const deleteCommu = createAction(DELETE_COMMU, (commu) => ({commu}));
 
 // 기본값 정하기
 const initialState = {
@@ -108,6 +112,7 @@ const addCommuDB = (new_commu) => {
       content: new_commu.content,
     }, {headers: headers}).then((response) => {
       dispatch(addCommu(response.data));
+      history.goBack();
     })
     .catch((err) => {
       console.error(`부트캠프 커뮤니티글 작성하기 에러 발생: ${err} ### ${err.response}`);
@@ -127,6 +132,19 @@ const editCommuDB = (edited_commu) => {
     })
     .catch((err) => {
       console.error(`부트캠프 커뮤니티글 수정하기 에러 발생: ${err} ### ${err.response}`);
+    })
+  }
+}
+
+const deleteCommuDB = (deleted_commu) => {
+  // 서버에 저장된 커뮤니티글을 삭제하는 함수
+  return function (dispatch) {
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
+    instance.delete(`/bootcamp/${deleted_commu.bootcampName}/community/${deleted_commu.communityId}`,
+    {headers: headers}).then((response) => {
+      history.goBack();
+    }).catch((err) => {
+      console.error(`부트캠프 커뮤니티글 삭제하기 에러 발생: ${err} ### ${err.response}`);
     })
   }
 }
@@ -164,6 +182,7 @@ const actionCreators = {
     setOneCommuDB,
     addCommuDB,
     editCommuDB,
+    deleteCommuDB,
 }
 
 export {

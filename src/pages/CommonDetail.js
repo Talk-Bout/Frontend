@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions} from "../redux/modules/post";
+import { actionCreators as BookmarkActions } from '../redux/modules/bookmark';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -13,8 +14,7 @@ import {Text, Grid, Input, Image} from "../elements/index";
 import { BiTimeFive, BiLike, BiComment, BiShow, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { BsThreeDotsVertical, BsBookmark, BsChevronLeft, BsBookmarkFill } from 'react-icons/bs';
 import Profile from '../image/profile_small.png';
 
 
@@ -24,7 +24,6 @@ const CommonDetail = (props) => {
   const postId = props.match.params.id;
   const common_list = useSelector(state => state.post.list);
   const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
-  // console.log(common_find);
   const username = useSelector(state => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
 
@@ -52,6 +51,23 @@ const CommonDetail = (props) => {
     dispatch(postActions.deletePostDB(deleted_post));
     history.push('/common/list');
   }
+
+  // 게시글 북마크
+  const [bookmark, setBookmark] = useState(false);
+
+  const handleBookmark = () => {
+    setBookmark(!bookmark);
+
+    if (!bookmark) {
+      const add_bookmark = {
+        postId : postId,
+        nickname : username,
+      }
+      dispatch(BookmarkActions.addBookmarkDB(add_bookmark));
+    }
+    return;
+  };
+  console.log(bookmark);
 
   if (!common_find){
     return(
@@ -81,8 +97,14 @@ return (
                 </Grid>
                 {/* 북마크와 수정 삭제 */}
                 <Grid display="flex" width="14%" height="100%">
-                <Button padding="0" width="16.33px" height="21px">
-                <Text padding="0" color='#9aa0a6' fontSize='24px' lineHeight="35px" vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
+                <Button padding="0" width="16.33px" height="21px" onClick={handleBookmark}>
+                  {bookmark ? (
+                    <Text padding="0" color='#9aa0a6' fontSize='24px' lineHeight="35px" vertical_align='middle' cursor='pointer' hover='opacity: 0.7'
+                    ><BsBookmarkFill /></Text>
+                  ) : (
+                    <Text padding="0" color='#9aa0a6' fontSize='24px' lineHeight="35px" vertical_align='middle' cursor='pointer' hover='opacity: 0.7'
+                ><BsBookmark /></Text>
+                  )}
                   </Button>
                   <Button padding="0"  width="16.33px" height="21px" bg="transparent" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                     <Text padding="0" color='#9AA0A6' fontSize='24px' lineHeight="35px" hover='opacity: 0.8'><BsThreeDotsVertical /></Text>

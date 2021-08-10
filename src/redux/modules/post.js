@@ -29,7 +29,7 @@ const setPostDB = () => {
     instance.get('/posts')
       .then((response) => {
         dispatch(setPost(response.data));
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((err) => {
         console.error(`전체 게시글 불러오기 에러 발생: ${err}`);
@@ -44,7 +44,7 @@ const setOnePostDB = (id) => {
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance.get(`/posts/${postId}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(setOnePost(response.data));
 
       })
@@ -70,7 +70,7 @@ const addPostDB = (new_post) => {
         category: category,
       }, {headers: headers})
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(addPost(response.data));
       })
       .catch((err) => {
@@ -80,7 +80,6 @@ const addPostDB = (new_post) => {
 };
 
 const editPostDB = (edited_post) => {
-  console.log(edited_post);
   // 게시글 수정하는 함수
   return function (dispatch) {
     const title = edited_post.title;
@@ -88,7 +87,7 @@ const editPostDB = (edited_post) => {
     const postId = parseInt(edited_post.postId);
     const category = edited_post.category;
     const nickname = edited_post.nickname;
-    console.log(edited_post);
+    // console.log(edited_post);
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
       .patch(`/posts/${postId}`, {
@@ -107,7 +106,7 @@ const editPostDB = (edited_post) => {
           category: category,
           nickname: nickname,
         }
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(editPost(data));
         // console.log(data);
         // if (edited_post.board_name === 'question') {
@@ -129,7 +128,7 @@ const deletePostDB = (deleted_post) => {
     instance
       .delete(`/posts/${postId}`, {headers: headers})
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(deletePost(postId));
       })
       .catch((err) => {

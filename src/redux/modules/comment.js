@@ -60,7 +60,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
             content: content,
             postId: postId,
         }, {headers: headers}).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             dispatch(addComment(response.data));
 
             }).catch((err) => {
@@ -80,7 +80,7 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
     nickname: nickname,
     content: content,
 }).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(editComment(response.data));
     }).catch((err) => {
         console.error(`댓글 수정하기 에러 발생: ${err}`);
@@ -95,7 +95,7 @@ instance.delete(`/posts/${postId}/comments/${commentId}`
 )
 .then((response) => {
         // console.log('deleteCommentDB 함수 호출 성공!');
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(deleteComment(commentId));
     }).catch((err) => {
         console.error(`댓글 삭제하기 에러 발생: ${err}`);
@@ -129,14 +129,15 @@ export default handleActions({
 
 [EDIT_COMMENT]: (state, action) =>
 produce(state, (draft) => {
-    let idx = draft.list.findIndex(
-    (ct) => ct.commentId === action.payload.comment.commentId
-    );
+    let idx = draft.list.findIndex((ct) => ct.commentId === action.payload.comment.commentId);
     draft.list[idx] = {
         ...draft.list[idx],
         ...action.payload.comment,
+        
     };
+   
 }),
+
 
 [IS_EDIT] : (state, action) => produce(state, (draft)=> {
     draft.is_edit = action.payload.is_edit

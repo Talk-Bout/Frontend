@@ -10,9 +10,6 @@ import { actionCreators as userActions } from './redux/modules/user';
 // NotFound 페이지
 import NotFound from './shared/NotFound';
 
-//템플릿 페이지
-import templateN from './components/templateN';
-
 //메인 페이지
 import MainN from './pages/MainN';
 
@@ -80,7 +77,7 @@ function App() {
           <Route path="/boot/review/write" exact component={BootReviewWrite} />
           <Route path="/boot/community/write" exact component={BootCommuWrite}/>
           <Route path="/boot/community/write/:id" exact component={BootCommuWrite}/>
-          <Route path="/boot/community/post/:id" exact component={BootPost} />
+          <Route path="/boot/post/:name/:id" exact component={BootPost} />
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />

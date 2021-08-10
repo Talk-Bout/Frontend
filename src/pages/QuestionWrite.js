@@ -73,6 +73,7 @@ const QuestionWrite = (props) => {
                 height="10%"
                 display="flex"
                 borderBottom="1px solid #8f9091"
+                backgroundColor="#212123"
               >
                 <Grid className="exit-button" width="23.33%" padding="0 25px">
                   <Text
@@ -111,8 +112,11 @@ const QuestionWrite = (props) => {
               </Grid>
               <BodyBox>
                 <TitleBox>
+                  <Text margin="auto 0%" color="#e5e5e5">
+                    Q
+                  </Text>
                   <TitleInput
-                    placeholder="제목을 입력해주세요"
+                    placeholder="제목을 입력해주세요."
                     ref={titleInput}
                     defaultValue={edit_mode ? old_question.title : null}
                   />
@@ -120,7 +124,7 @@ const QuestionWrite = (props) => {
                 <ContentBox>
                   <Textarea
                     rows="15"
-                    placeholder="내용을 입력해주세요"
+                    placeholder="내용을 입력해주세요."
                     ref={contentInput}
                     defaultValue={edit_mode ? old_question.content : null}
                   />
@@ -135,14 +139,7 @@ const QuestionWrite = (props) => {
                 >
                   <BiImageAdd />
                 </Text>
-                <Text
-                  fontSize="2.5vh"
-                  color="#b3b3b3"
-                  margin="0 10px 0"
-                  cursor="pointer"
-                >
-                  <RiAtLine />
-                </Text>
+
                 <Text
                   fontSize="2.5vh"
                   color="#b3b3b3"
@@ -162,25 +159,30 @@ const QuestionWrite = (props) => {
 
 const Window = styled.div`
   background-color: #383838;
-  width: 60%;
+  width: 80%;
   height: 90%;
   margin: auto;
 `;
 
 const BodyBox = styled.div`
   height: 80%;
-  padding: 40px 40px;
+  padding: 20px 40px;
+  background-color: #282a2d;
 `;
 
 const TitleBox = styled.div`
   height: 5vh;
   border-bottom: 1px solid #8f9091;
   padding-bottom: 20px;
+  display: flex;
+  text-align: center;
+  background-color: #282a2d;
 `;
 
 const ContentBox = styled.div`
   height: 40vh;
   padding-top: 20px;
+  background-color: #282a2d;
 `;
 
 const TitleInput = styled.input`
@@ -188,7 +190,8 @@ const TitleInput = styled.input`
   padding: 10px;
   font-size: 1.7vh;
   color: #e5e5e5;
-  width: 97.7%;
+  background-color: #282a2d;
+  width: 80%;
   border: none;
   &::placeholder {
     color: #8f9091;
@@ -203,8 +206,9 @@ const Textarea = styled.textarea`
   width: 97.7%;
   resize: none;
   padding: 10px;
+  margin-left: 10px;
   font-size: 1.7vh;
-  background-color: #383838;
+  background-color: #282a2d;
   border: none;
   color: #e5e5e5;
   &::placeholder {
@@ -217,7 +221,7 @@ const Textarea = styled.textarea`
 `;
 
 const FooterBox = styled.div`
-  background-color: #414141;
+  background-color: #2e3134;
   height: 10%;
   padding: 20px 40px 20px;
 `;

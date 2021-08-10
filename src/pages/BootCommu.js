@@ -78,13 +78,13 @@ const BootCommu = (props) => {
                   {/* 인기순, 최신순 정렬 */}
                   <Text fontSize='14px' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text>
                   {/* 글쓰기 버튼 */}
-                  <WriteBtn onClick={() => history.push('/boot/community/write')}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
+                  <WriteBtn onClick={() => history.push({pathname: '/boot/community/write', state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
                 </Grid>
               </Grid>
               {/* 커뮤니티 게시글 목록 */}
               {commu_list.map((c, idx) => {
                 return (
-                  <Post key={idx} onClick={() => history.push(`/boot/community/post/${c.communityId}`)}>
+                  <Post key={idx} onClick={() => history.push(`/boot/post/${bootcampName}/${c.communityId}`)}>
                     {/* 제목 */}
                     <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0'>{c.title}</Text>
                     {/* 내용 */}

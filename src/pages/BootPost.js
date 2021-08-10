@@ -8,29 +8,31 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from "react-icons/bi";
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import {actionCreators as postActions} from '../redux/modules/post';
+import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import {actionCreators as commentActions} from '../redux/modules/comment';
 import {history} from '../redux/ConfigureStore';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const BootPost = (props) => {
   const dispatch = useDispatch();
-  const post_id = parseInt(window.location.pathname.split('/boot/community/post/')[1]);
-  const username = useSelector(state => state.user.user.nickname);
-  const post_list = useSelector(state => state.post.list);
-  const post_found = post_list.find((post) => post.postId == post_id);
-  const comment_list = useSelector(state => state.comment.list);
+  const camp_name = window.location.pathname.split('/')[3];
+  const commu_id = parseInt(window.location.pathname.split(`/post/${camp_name}/`)[1]);
+  // const username = useSelector(state => state.user.user);
+  const commu_list = useSelector(state => state.bootcamp.commu_list);
+  const commu_found = commu_list.find((commu) => commu.communityId === commu_id);
+  const comment_list = useSelector(state => state.bootcamp.comment_list);
+
   const [MenuLink, setMenuLink] = useState(null);
-  const [EditComment, setEditComment] = useState(null);
+  // const [EditComment, setEditComment] = useState(null);
 
   const commentInput = useRef(null);
-  const commentEdit = useRef(null);
+  // const commentEdit = useRef(null);
 
   useEffect(() => {
-    if (!post_found) {
-      dispatch(postActions.setOnePostDB(post_id));
+    if (!commu_found) {
+      dispatch(campActions.setOneCommuDB(camp_name, commu_id));
     }
-    dispatch(commentActions.setCommentDB(post_id));
+    // dispatch(commentActions.setCommentDB(commu_id));
   }, []);
 
   const handleClick = (e) => {
@@ -41,40 +43,40 @@ const BootPost = (props) => {
     setMenuLink(null);
   }
 
-  const addComment = () => {
-    const content = commentInput.current.value;
-    const new_comment = {
-      nickname: username,
-      content: content,
-      postId: post_id,
-    }
-    dispatch(commentActions.addCommentDB(new_comment));
-    commentInput.current.value = '';
-  }
+  // const addComment = () => {
+  //   const content = commentInput.current.value;
+  //   const new_comment = {
+  //     nickname: username,
+  //     content: content,
+  //     postId: post_id,
+  //   }
+  //   dispatch(commentActions.addCommentDB(new_comment));
+  //   commentInput.current.value = '';
+  // }
 
-  const editComment = (comment_id) => {
-    const content = commentEdit.current.value;
-    const edited_comment = {
+  // const editComment = (comment_id) => {
+  //   const content = commentEdit.current.value;
+  //   const edited_comment = {
 
-    }
-    dispatch(commentActions.editCommentDB(edited_comment, parseInt(comment_id), post_id))
-  }
+  //   }
+  //   dispatch(commentActions.editCommentDB(edited_comment, parseInt(comment_id), post_id))
+  // }
 
-  const deleteComment = (comment_id) => {
-    const nickname = username;
-    dispatch(commentActions.deleteCommentDB(post_id, parseInt(comment_id), nickname));
-  }
+  // const deleteComment = (comment_id) => {
+  //   const nickname = username;
+  //   dispatch(commentActions.deleteCommentDB(post_id, parseInt(comment_id), nickname));
+  // }
 
-  const deletePost = () => {
-    const deleted_post = {
-      postId: post_id,
-      nickname: username,
-    };
-    dispatch(postActions.deletePostDB(deleted_post));
-    history.push('/boot/community');
-  }
+  // const deletePost = () => {
+  //   const deleted_post = {
+  //     postId: post_id,
+  //     nickname: username,
+  //   };
+  //   dispatch(postActions.deletePostDB(deleted_post));
+  //   history.push('/boot/community');
+  // }
 
-  if (!post_found) {
+  if (!commu_found) {
     return (
       <></>
     );
@@ -92,10 +94,10 @@ const BootPost = (props) => {
               {/* 게시글 */}
               <Post>
                 {/* 게시글 카테고리 */}
-                <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; 커뮤니티 / 작성자:{post_found.nickname}</Text>
+                <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; 커뮤니티 / 작성자:{commu_found.nickname}</Text>
                 <Grid display='flex' justify_content='space-between' padding='12px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' vertical_align='middle'>{post_found.title}</Text>
+                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' vertical_align='middle'>{commu_found.title}</Text>
                   <div style={{height: 'fit-content'}}>
                     {/* 북마크 버튼 */}
                     <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
@@ -111,23 +113,23 @@ const BootPost = (props) => {
                       onClose={handleClose}
                     >
                       {/* 수정하기 */}
-                      <MenuItem onClick={() => history.push(`/boot/community/write/${post_id}`)}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                      <MenuItem onClick={() => history.push(`/boot/community/write/${commu_id}`)}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
                       {/* 삭제하기 */}
-                      <MenuItem onClick={() => {handleClose(); deletePost()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                      <MenuItem onClick={() => {handleClose()}}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
                     </Menu>
                   </div>
                 </Grid>
                 {/* 작성일자 */}
-                <Text p fontSize='12px' color='#BDC1C6' margin='5px 0 0'>{post_found.createdAt}</Text>
+                <Text p fontSize='12px' color='#BDC1C6' margin='5px 0 0'>{commu_found.createdAt}</Text>
                 {/* 내용 */}
-                <Text p fontSize='16px' color='#dadce0' margin='32px 0 0'>{post_found.content}</Text>
+                <Text p fontSize='16px' color='#dadce0' margin='32px 0 0'>{commu_found.content}</Text>
                 <IconBox>
                   {/* 추천 버튼 */}
-                  <span style={{backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px'><span style={{fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px'}}><BiLike /></span>17</Text></span>
+                  <span style={{backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px'><span style={{fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px'}}><BiLike /></span>{commu_found.communityLike ? commu_found.communityLike.length : 0}</Text></span>
                   {/* 댓글 수 */}
-                  <Text color='#BDC1C6' fontSize='12px' margin='0 16px 0'><span style={{fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle'}}><BiComment /></span>15</Text>
+                  <Text color='#BDC1C6' fontSize='12px' margin='0 16px 0'><span style={{fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle'}}><BiComment /></span>{commu_found.communityComment ? commu_found.communityComment.length : 0}</Text>
                   {/* 조회수 */}
-                  <Text color='#BDC1C6' fontSize='12px'><span style={{fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle'}}><AiOutlineEye /></span>354</Text>
+                  <Text color='#BDC1C6' fontSize='12px'><span style={{fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle'}}><AiOutlineEye /></span>{commu_found.viewCount}</Text>
                 </IconBox>
               </Post>
               {/* 댓글 입력란 */}
@@ -135,29 +137,29 @@ const BootPost = (props) => {
                 <Text p fontSize='14px' color='#E8eaed' margin='16px 0'>댓글</Text>
                 <InputWrap>
                   <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
-                  <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
+                  <CommentBtn onClick={() => {}}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
                 </InputWrap>
               </CommentInput>
               {/* 댓글 리스트 */}
-              {comment_list && comment_list.map((n, idx) => {
+              {comment_list && comment_list.map((cm, idx) => {
                 return (
                   <Comment>
                     <Grid display='flex' justify_content='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}
-                        <Text fontSize='14px' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>{n.nickname}</Text>
+                        <Text fontSize='14px' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>{cm.nickname}</Text>
                         {/* 작성일자 */}
-                        <Text fontSize='12px' color='#BDC1C6'>{n.createdAt}</Text>
+                        <Text fontSize='12px' color='#BDC1C6'>{cm.createdAt}</Text>
                       </NameTime>
                       <Buttons>
                         {/* 수정 버튼 */}
-                        <PostBtn style={{margin: '0 16px 0'}} onClick={() => setEditComment(n.commentId)}><Text fontSize='16px' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                        <PostBtn style={{margin: '0 16px 0'}} onClick={() => {}}><Text fontSize='16px' color='#9AA0A6'><BiPencil /></Text></PostBtn>
                         {/* 삭제 버튼 */}
-                        <PostBtn onClick={() => deleteComment(n.commentId)}><Text fontSize='16px' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
+                        <PostBtn onClick={() => {}}><Text fontSize='16px' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
                       </Buttons>
                     </Grid>
                     {/* 댓글 내용 */}
-                    <Text p fontSize='16px' color='#F1F3F4' margin='0 0 16px'>{n.content}</Text>
+                    <Text p fontSize='16px' color='#F1F3F4' margin='0 0 16px'>{cm.content}</Text>
                     <Like>
                       {/* 추천 수 */}
                       <Text fontSize='16px' color='#BDC1C6' margin='0 16px 0 0'><BiLike /><span style={{fontSize: '12px', marginLeft: '6px'}}>17</span></Text>
@@ -168,7 +170,7 @@ const BootPost = (props) => {
                 )
               })}
               {/* 댓글 더보기 버튼 */}
-              <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn>
+              {comment_list.length > 5 ? <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn> : ''}
             </div>
             {/* 다른 게시글 목록 */}
             <OthersBox>

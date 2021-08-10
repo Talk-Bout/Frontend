@@ -8,7 +8,7 @@ import { BiImageAdd } from 'react-icons/bi';
 import { FiHash } from 'react-icons/fi';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { actionCreators as imageActions } from '../redux/modules/image';
 
 const BootCommuWrite = (props) => {
@@ -16,9 +16,8 @@ const BootCommuWrite = (props) => {
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
   const username = useSelector(state => state.user.user);
-  const post_id = parseInt(window.location.pathname.split('/write/')[1]);
-  const post_list = useSelector(state => state.post.list);
-  const post_found = post_list.find((p) => p.postId == post_id);
+
+  const camp_name = props.location.state.camp_name;
 
   const titleRef = useRef('');
   const contentRef = useRef('');
@@ -51,26 +50,26 @@ const BootCommuWrite = (props) => {
       window.alert('내용을 입력해주세요.');
       return;
     }
-    if (post_id) {
-      const edited_post = {
+    // if (post_id) {
+    //   const edited_post = {
+    //     title: titleRef.current.value,
+    //     content: contentRef.current.value,
+    //     nickname: username,
+    //     category: 'testing',
+    //     postId: post_id,
+    //   }
+    //   dispatch(postActions.editPostDB(edited_post));
+    // } else {
+      const new_commu = {
+        nickname: username,
+        bootcampName: camp_name,
         title: titleRef.current.value,
         content: contentRef.current.value,
-        nickname: username,
-        category: 'testing',
-        postId: post_id,
       }
-      dispatch(postActions.editPostDB(edited_post));
-    } else {
-      const new_post = {
-        title: titleRef.current.value,
-        content: contentRef.current.value,
-        nickname: username,
-        category: 'testing',
-      }
-      dispatch(postActions.addPostDB(new_post));
+      dispatch(campActions.addCommuDB(new_commu));
       titleRef.current.value = '';
-    contentRef.current.value = '';
-    }
+      contentRef.current.value = '';
+    // }
   }
 
   return (
@@ -99,18 +98,23 @@ const BootCommuWrite = (props) => {
               </Grid>
               <BodyBox>
                 {/* 제목 입력 칸 */}
-                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} defaultValue={post_id ? post_found.title : null}/></TitleBox>
+                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} /></TitleBox>
                 {/* 내용 입력 칸 */}
-                <ContentBox><Textarea rows='5' placeholder='내용을 입력해주세요' ref={contentRef} defaultValue={post_id ? post_found.content : null}/></ContentBox>
-                {/* 이미지 미리보기 */}
+                {/* 이미지 preview가 있으면 textarea 크기 줄이기 */}
+                {preview ? 
+                <ContentBox><Textarea rows='5' placeholder='내용을 입력해주세요' ref={contentRef} /></ContentBox>
+                :
+                <ContentBox><Textarea rows='15' placeholder='내용을 입력해주세요' ref={contentRef} /></ContentBox>
+                }
+                {/* 이미지 preview가 있으면 preview와 파일명을 보여주기*/}
+                {preview ?
                 <div style={{textAlign: 'center'}}>
-                  {/* 이미지 preview가 있으면 preview와 파일명을 보여주고, 없으면 빈 칸 보여주기 */}
-                  {preview ?
-                  <><Preview><Img src={preview}/></Preview><Text p fontSize='16px' color='#5f6368' margin='0 auto 80px'>{imageRef.current.files[0].name}</Text></>
-                  :
-                  <Preview style={{margin: '0 auto 80px'}}><Text fontSize='16px' color='#5f6368' lineHeight='500px'>이미지 미리보기</Text></Preview>
-                  }
+                  <Preview><Img src={preview}/></Preview>
+                  <Text p fontSize='16px' color='#5f6368' margin='0 auto 80px'>{imageRef.current.files[0].name}</Text>
                 </div>
+                :
+                ''
+                }                
               </BodyBox>
               {/* 작성 페이지 푸터 */}
               <FooterBox>
@@ -144,7 +148,7 @@ const TitleBox = styled.div`
 `;
 
 const ContentBox = styled.div`
-  height: 144px;
+  height: fit-content;
   margin: 0 0 80px;
 `;
 
@@ -178,6 +182,20 @@ const Textarea = styled.textarea`
   }
   &:focus {
     outline: none;
+  }
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #5f6368;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
   }
 `;
 

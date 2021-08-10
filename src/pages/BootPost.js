@@ -42,16 +42,16 @@ const BootPost = (props) => {
     setMenuLink(null);
   }
 
-  // const addComment = () => {
-  //   const content = commentInput.current.value;
-  //   const new_comment = {
-  //     nickname: username,
-  //     content: content,
-  //     postId: post_id,
-  //   }
-  //   dispatch(commentActions.addCommentDB(new_comment));
-  //   commentInput.current.value = '';
-  // }
+  const addComment = () => {
+    const content = commentInput.current.value;
+    const new_comment = {
+      nickname: username,
+      content: content,
+      communityId: commu_id,
+    }
+    dispatch(campActions.addCommentDB(new_comment));
+    commentInput.current.value = '';
+  }
 
   // const editComment = (comment_id) => {
   //   const content = commentEdit.current.value;
@@ -144,7 +144,7 @@ const BootPost = (props) => {
                 <Text p fontSize='14px' color='#E8eaed' margin='16px 0'>댓글</Text>
                 <InputWrap>
                   <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
-                  <CommentBtn onClick={() => {}}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
+                  <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
                 </InputWrap>
               </CommentInput>
               {/* 댓글 리스트 */}

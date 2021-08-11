@@ -17,6 +17,7 @@ const EDIT_COMMU = 'EDIT_COMMU'; // 커뮤니티글 수정하기
 
 const SET_COMMENTS = 'SET_COMMENTS'; // 커뮤니티 댓글 불러오기
 const ADD_COMMENT = 'ADD_COMMENT'; // 커뮤니티 댓글 작성하기
+const EDIT_COMMENT = 'EDIT_COMMENT'; // 커뮤니티 댓글 수정하기
 
 // 액션생성함수
 const setCamps = createAction(SET_CAMPS, (camp_list) => ({camp_list}));
@@ -29,6 +30,7 @@ const editCommu = createAction(EDIT_COMMU, (commu) => ({commu}));
 // const deleteCommu = createAction(DELETE_COMMU, (commu) => ({commu}));
 const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
+const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
 
 
 // 기본값 정하기
@@ -40,10 +42,10 @@ const initialState = {
 };
 
 // 액션함수
-const setCampsDB = () => {
-  // 서버로부터 부트캠프 전체 목록 불러오는 함수
+const setCampsDB = (page) => {
+  // 서버로부터 부트캠프 전체 목록 불러오는 함수(페이징)
   return function (dispatch) {
-    instance.get('/bootcamp').then((response) => {
+    instance.get(`/bootcamp?page=${page}`).then((response) => {
       dispatch(setCamps(response.data));
     })
     .catch((err) => {
@@ -127,7 +129,7 @@ const addCommuDB = (new_commu) => {
 };
 
 const editCommuDB = (edited_commu) => {
-  // 서버에 저장된 커뮤니티글을 수정하는 함수
+  // 서버의 커뮤니티글을 수정하는 함수
   return function (dispatch) {
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
     instance.patch(`/bootcamp/${edited_commu.bootcampName}/community/${edited_commu.communityId}`, {
@@ -143,7 +145,7 @@ const editCommuDB = (edited_commu) => {
 };
 
 const deleteCommuDB = (deleted_commu) => {
-  // 서버에 저장된 커뮤니티글을 삭제하는 함수
+  // 서버의 커뮤니티글을 삭제하는 함수
   return function (dispatch) {
     const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
     instance.delete(`/bootcamp/${deleted_commu.bootcampName}/community/${deleted_commu.communityId}`,
@@ -184,6 +186,21 @@ const addCommentDB = (new_comment) => {
   };
 };
 
+const editCommentDB = (edited_comment) => {
+  // 서버의 커뮤니티 댓글 수정하는 함수
+  return function (dispatch) {
+    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
+    instance.patch(`/bootcamp/${edited_comment.bootcampName}/community/${edited_comment.communityId}/comments/${edited_comment.communityCommentId}`, {
+      content: edited_comment.content,
+    }, {headers: headers})
+    .then((response) => {
+      console.log(response.data);
+    }).catch((err) => {
+      console.error(`부트캠프 커뮤니티 댓글 수정하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
 export default handleActions({
     [SET_CAMPS]: (state, action) => produce(state, (draft) => {
       draft.camp_list = [...action.payload.camp_list];
@@ -210,6 +227,9 @@ export default handleActions({
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
       console.log(action.payload.comment);
       // draft.comment_list.unshift(action.payload.comment);
+    }),
+    [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
+      console.log(action.payload.comment);
     })
 }, initialState);
 
@@ -226,6 +246,7 @@ const actionCreators = {
     deleteCommuDB,
     setCommentsDB,
     addCommentDB,
+    editCommentDB,
 }
 
 export {

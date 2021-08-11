@@ -54,11 +54,12 @@ const setCampsDB = (page) => {
   };
 };
 
-const setReviewsDB = (camp_name) => {
-  // 서버로부터 리뷰 불러오는 함수
+const setReviewsDB = (camp_name, page) => {
+  // 서버로부터 리뷰 불러오는 함수(페이징)
   return function (dispatch) {
-    instance.get(`/bootcamp/${camp_name}/review`).then((response) => {
+    instance.get(`/bootcamp/${camp_name}/review?page=${page}`).then((response) => {
       dispatch(setReviews(response.data));
+      console.log(response.data);
     })
     .catch((err) => {
       console.error(`부트캠프 리뷰 불러오기 에러 발생: ${err} ### ${err.response}`);
@@ -69,7 +70,7 @@ const setReviewsDB = (camp_name) => {
 const addReviewDB = (new_review) => {
   // 서버에 리뷰 저장하는 함수
   return function (dispatch) {
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
+    // const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`};
     instance.post(`/bootcamp/${new_review.bootcampName}/review`, {
       nickname: new_review.nickname,
       bootcampName: new_review.bootcampName,
@@ -77,7 +78,8 @@ const addReviewDB = (new_review) => {
       pros: new_review.pros,
       cons: new_review.cons,
       stars: new_review.stars,
-    }, {headers: headers}).then((response) => {
+      title: new_review.title,
+    }).then((response) => {
       console.log(response.data);
     }).catch((err) => {
       console.error(`부트캠프 리뷰 작성하기 에러 발생: ${err} ### ${err.response}`);
@@ -209,8 +211,7 @@ export default handleActions({
       draft.review_list = [...action.payload.review_list];
     }),
     [ADD_REVIEW]: (state, action) => produce(state, (draft) => {
-      console.log(action.payload.review);
-      // draft.review_list.unshift(action.payload.review);
+      draft.review_list.unshift(action.payload.review);
     }),
     [SET_COMMUS]: (state, action) => produce(state, (draft) => {
       draft.commu_list = [...action.payload.commu_list];

@@ -21,19 +21,24 @@ const BootReviewWrite = (props) => {
     setStars(e);
   }
 
-  // 수료 여부, 장점, 단점에 useRef 설정
+  // 리뷰 제목, 수료 여부, 장점, 단점에 useRef 설정
+  const titleInput = useRef(null);
   const courseInput = useRef(null); 
   const prosInput = useRef(null);
   const consInput = useRef(null);
 
   // 리뷰 [등록] 버튼 누르면 호출되는 함수
   const addReview = () => {
+    if (stars === 0) {
+      window.alert('평점을 매겨주세요.')
+      return;
+    }
     if (courseInput.current.value === '') {
       window.alert('수료 여부를 선택해주세요.')
       return;
     }
-    if (stars === 0) {
-      window.alert('평점을 매겨주세요.')
+    if (titleInput.current.value === '') {
+      window.alert('제목을 입력해주세요.')
       return;
     }
     if (prosInput.current.value === '') {
@@ -52,6 +57,7 @@ const BootReviewWrite = (props) => {
       nickname: user_name,
       bootcampName: camp_name,
       status: courseInput.current.value,
+      title: titleInput.current.value,
       pros: prosInput.current.value,
       cons: consInput.current.value,
       stars: stars,
@@ -97,6 +103,9 @@ const BootReviewWrite = (props) => {
                     <option value='수료'>수료</option>
                   </Select>
                 </div>
+                {/* 리뷰 제목 */}
+                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed' lineHeight='50px'>제목</Text></div>
+                <div><Input placeholder='제목을 입력해주세요' ref={titleInput}/></div>
                 {/* 부트캠프의 장점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>부트캠프의 장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
                 <div><Textarea rows='5' placeholder='부트캠프의 장점을 입력해주세요' ref={prosInput}/></div>
@@ -137,6 +146,22 @@ const Select = styled.select`
   padding: 10px;
   font-size: 16px;
   color: #e8eaed;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Input = styled.input`
+  border: 1px solid #5f6368;
+  width: 400px;
+  padding: 12px 16px;
+  font-size: 16px;
+  background-color: #282A2D;
+  color: #e5e5e5;
+  &::placeholder {
+    color: #8f9091;
+    font-size: 16px;
+  }
   &:focus {
     outline: none;
   }

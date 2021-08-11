@@ -11,15 +11,17 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const BootMain = (props) => {
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(campActions.setCampsDB(page));
   }, []);
+
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
 
   // const baseURL = 'http://13.209.12.149/'     // 서버 URL ; camp.logo 앞에 붙였으나 이미지 불러오기 실패
 
   // 페이지네이션
   const [page, setPage] = useState(1);
-  const camp_list = useSelector(state => state.bootcamp.camp_list);
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);

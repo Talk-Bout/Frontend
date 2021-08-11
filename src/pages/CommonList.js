@@ -15,7 +15,6 @@ import { FaPlus } from "react-icons/fa";
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import CommonPostList from '../components/CommonPostList';
-import Pagination from '../components/Pagination';
 
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
@@ -38,8 +37,8 @@ const all_common = common_list.slice(0, common_list.length)
         <Sidebar />
         <Body header>
         <Grid height="100%" >
-          <Grid height="5vh">
-              <Text p fontSize="2.2vh;" padding="0 1%" color="#F8F9FA">
+          <Grid height="3%">
+              <Text p fontSize="32px" padding="0 1%" color="#F8F9FA">
                 부트톡톡
               </Text>
             </Grid>

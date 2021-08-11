@@ -26,6 +26,11 @@ const CommonWrite = (props) => {
   const addTitleRef = useRef('');
   const addContentRef = useRef('');
   
+  // 카테고리 셀렉트
+  // const onSelect = (e) => {
+  //   dispatch()
+  // }
+
   const addCommon = () => {
     if (addTitleRef.current.value === '') {
       window.alert('제목을 입력해주세요.');
@@ -57,6 +62,7 @@ const CommonWrite = (props) => {
       history.push(`/common/list`)
     }
   };
+  
 
   // 이미지 업로드
   const imageRef = useRef();
@@ -103,12 +109,12 @@ const CommonWrite = (props) => {
               </Grid>
               <BodyBox>
                  {/* 카테고리 선택 */}
-                 <SelectBox>
-                  {/* <Dropdown
-              // onChange={this._onSelect}/> */}
-                  <Option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
-                  <Option value="정보">정보게시판</Option>
-                  <Option value="잡담">잡담방</Option>
+                 <SelectBox 
+                //  onChange={onSelect}
+                >
+                  <Option value="none"> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
+                  <Option value="info">정보게시판</Option>
+                  <Option value="chitchat">잡담방</Option>
                 </SelectBox>
                 {/* 제목 입력 칸 */}
                 <TitleBox><Input placeholder='제목을 입력해주세요' ref={addTitleRef} defaultValue={postId ? post_found.title : null}/></TitleBox>

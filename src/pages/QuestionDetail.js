@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Image } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { history } from '../redux/ConfigureStore';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
-import QnaAnswerCard from '../components/QnaAnswerCard';
+import AnswerCard from '../components/AnswerCard';
 //icons
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye } from 'react-icons/bs';
@@ -22,16 +22,21 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
+  const user_name = useSelector((state) => state.user.user);
   const [MenuLink, setMenuLink] = useState(null);
+  //Answer 작성
+  const answerInput = useRef(null);
+  const answer_list = useSelector((state) => state.question.answer_list);
+  // const answer_count = answer_list.length > 0;
+  const [page, setPage] = React.useState(1);
 
-  // console.log(question_list);
-  // console.log(question_id);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
     if (!question_found) {
       dispatch(questionActions.setOneQuestionDB(question_id));
     }
+    dispatch(questionActions.setAnswerDB(question_id, page));
   }, []);
 
   if (!question_found) {
@@ -41,16 +46,34 @@ const QuestionDetail = (props) => {
   const handleClick = (e) => {
     setMenuLink(e.currentTarget);
   };
-  const editBtn = () => {
-    history.push(`/question/write/${question_id}`);
-  };
 
   const handleClose = () => {
     setMenuLink(null);
   };
 
+  const editBtn = () => {
+    history.push(`/question/write/${question_id}`);
+  };
+
   const deleteBtn = () => {
     dispatch(questionActions.deleteQuestionDB(question_id));
+    history.push(`/question`);
+  };
+
+  // 답변 작성
+  const createAnswerBtn = () => {
+    const new_answer = {
+      content: answerInput.current.value,
+      nickname: user_name,
+      questionId: question_id,
+    };
+
+    if (answerInput.current.value === '') {
+      window.alert('내용을 입력해주세요.');
+      return;
+    }
+    dispatch(questionActions.createAnswerDB(new_answer));
+    answerInput.current.value = '';
   };
 
   return (
@@ -168,7 +191,7 @@ const QuestionDetail = (props) => {
                 </LikeCommentBtn>
 
                 <Text color="#C4C4C4" margin="auto 1%">
-                  <BiComment /> 3
+                  <BiComment /> {answer_list.length}
                 </Text>
 
                 <Text color="#C4C4C4" margin="auto 1%">
@@ -183,22 +206,24 @@ const QuestionDetail = (props) => {
             {/* 답변 등록 input */}
             <AddAnswerSection>
               <Text p fontWeight="600" color="#E2E2E3">
-                답변 3
+                답변 {answer_list.length}
               </Text>
               <ACommentBox>
                 <AInput
                   rows="5"
                   placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
 답변을 남긴 이후에는 수정 및 삭제가 불가하오니 신중하게 써주시길 부탁드립니다."
+                  ref={answerInput}
                 />
-                <AnswerSaveButton>답변 추가하기</AnswerSaveButton>
+                <AnswerSaveButton onClick={() => createAnswerBtn()}>
+                  답변 추가하기
+                </AnswerSaveButton>
               </ACommentBox>
             </AddAnswerSection>
             {/* 새롭게 작성되는 답변 내용  */}
-            {[1, 2, 3].map((q, idx) => {
-              return <QnaAnswerCard />;
+            {answer_list.map((answer, idx) => {
+              return <AnswerCard key={answer.answerId} {...answer} />;
             })}
-            ;
           </AnswerBox>
         </Body>
       </Grid>
@@ -208,7 +233,7 @@ const QuestionDetail = (props) => {
 
 //Answer Section
 const AnswerBox = styled.div`
-  height: 100%;
+  min-height: 100vh;
   /* transform: translateX(-40px); */
   margin: 0 -40px 0 -40px;
   background-color: #282a2d;
@@ -232,6 +257,7 @@ const AInput = styled.textarea`
   border: none;
   border-radius: 12px;
   background-color: #212123;
+  color: #dadce0;
   resize: none;
   padding: 2%;
   width: 96%;

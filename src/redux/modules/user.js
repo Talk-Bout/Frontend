@@ -145,7 +145,7 @@ export default handleActions(
   {
     [LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        draft.user = action.payload.user;
+        draft.user = action.payload.user.nickname;
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>

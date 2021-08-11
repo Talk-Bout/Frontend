@@ -5,55 +5,49 @@ import { Button, Grid, Input, Text } from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import { history } from '../redux/ConfigureStore';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as questionActions } from '../redux/modules/question';
+
+//icons
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
-import { RiAtLine } from 'react-icons/ri';
 import { FiHash } from 'react-icons/fi';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/post';
 
 const QuestionWrite = (props) => {
   const dispatch = useDispatch();
   //리뷰 콘텐츠 작성
-  // const [title, setTitle] = React.useState('');
-  // const [content, setContent] = React.useState('');
   const titleInput = useRef(null);
   const contentInput = useRef(null);
+  const user_name = useSelector((state) => state.user.user);
 
   //title, title을 변경할 수 있는 setTitle
   // 수정하고 목록으로 돌아가면 ,setPost 됨. 서버의 내용을 도로 가져오는 함수가 있기 때문에
   // 콘텐츠 수정
   const [edit_mode, setEditMode] = React.useState(false);
   const question_id = props.match.params.id; //작성페이지, 수정페이지인지 구분할 수 있는 부분
-  const board_name = 'question';
-  console.log(question_id);
-
+  const question_list = useSelector((state) => state.question.list);
+  console.log(question_list);
   //setOnePost 불러오기
   useEffect(() => {
     if (question_id) {
       setEditMode(true);
     }
   }, []);
-  const question_list = useSelector((state) => state.post.list);
-  const old_question = question_list.find((post) => post.postId == question_id);
-  console.log(old_question);
+
   //포스트 작성
-  const addQuestion = () => {
-    console.log(titleInput, contentInput);
-    const new_post = {
-      postId: question_id,
+  const create_question = () => {
+    const new_question = {
+      questionId: question_id,
       title: titleInput.current.value,
       content: contentInput.current.value,
-      nickname: 'username',
-      category: 'testing',
-      board_name: board_name,
+      nickname: user_name,
     };
     if (edit_mode) {
-      dispatch(questionActions.editPostDB(new_post));
-    } else {
-      dispatch(questionActions.addPostDB(new_post));
-      history.goBack();
+      dispatch(questionActions.editQuestionDB(new_question));
     }
+    console.log(new_question);
+    dispatch(questionActions.createQuestionDB(new_question));
   };
 
   return (
@@ -104,7 +98,7 @@ const QuestionWrite = (props) => {
                     lineHeight="7vh"
                     float="right"
                     cursor="pointer"
-                    _onClick={() => addQuestion()}
+                    _onClick={() => create_question()}
                   >
                     {edit_mode ? '수정' : '등록'}
                   </Text>
@@ -118,7 +112,7 @@ const QuestionWrite = (props) => {
                   <TitleInput
                     placeholder="제목을 입력해주세요."
                     ref={titleInput}
-                    defaultValue={edit_mode ? old_question.title : null}
+                    // defaultValue={edit_mode? }
                   />
                 </TitleBox>
                 <ContentBox>
@@ -126,7 +120,6 @@ const QuestionWrite = (props) => {
                     rows="15"
                     placeholder="내용을 입력해주세요."
                     ref={contentInput}
-                    defaultValue={edit_mode ? old_question.content : null}
                   />
                 </ContentBox>
               </BodyBox>

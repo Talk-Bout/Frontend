@@ -17,6 +17,7 @@ const BootPost = (props) => {
   const camp_name = window.location.pathname.split('/')[2];
   const commu_id = parseInt(window.location.pathname.split(`/${camp_name}/post/`)[1]);
   const username = useSelector(state => state.user.user);
+  
   const commu_list = useSelector(state => state.bootcamp.commu_list);
   const commu_found = commu_list.find((commu) => commu.communityId === commu_id);
   const comment_list = useSelector(state => state.bootcamp.comment_list);

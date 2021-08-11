@@ -44,6 +44,7 @@ const initialState = {
 // 액션함수
 const setCampsDB = (page) => {
   // 서버로부터 부트캠프 전체 목록 불러오는 함수(페이징)
+  console.log(page);
   return function (dispatch) {
     instance.get(`/bootcamp?page=${page}`).then((response) => {
       dispatch(setCamps(response.data));

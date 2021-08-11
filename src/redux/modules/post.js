@@ -1,6 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { history } from '../ConfigureStore';
 import instance from '../../shared/Request';
 
 // 액션타입
@@ -21,7 +20,7 @@ const editPost = createAction(EDIT_POST, (post) => ({ post }));
 const deletePost = createAction(DELETE_POST, (post) => ({ post }));
 // 북마크
 const addBookmark = createAction(ADD_BOOKMARK, (bookmark) => ({bookmark}));
-const deleteBookmark = createAction(ADD_BOOKMARK, (bookmark) => ({bookmark}));
+const deleteBookmark = createAction(ADD_BOOKMARK, (postBookmarkId) => ({postBookmarkId}));
 
 // 기본값 정하기
 const initialState = {
@@ -30,13 +29,14 @@ const initialState = {
 };
 
 // 액션함수
-const setPostDB = (page) => {
+const setPostDB = (page, category) => {
   // 전체 게시글 불러오는 함수
   return function (dispatch) {
-    instance.get(`/posts?page=${page}&category=test`)
+    instance.get(`/posts?page=${page}&category=${category}`)
       .then((response) => {
         dispatch(setPost(response.data));
-        // console.log(response.data);
+        console.log(response);
+        console.log(response.data);
       })
       .catch((err) => {
         console.error(`전체 게시글 불러오기 에러 발생: ${err}`);
@@ -67,14 +67,13 @@ const addPostDB = (new_post) => {
     const content = new_post.content;
     const nickname = new_post.nickname;
     const category = new_post.category;
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
       .post('/posts', {
         title: title,
         content: content,
         nickname: nickname,
         category: category,
-      }, {headers: headers})
+      })
       .then((response) => {
         // console.log(response.data);
         dispatch(addPost(response.data));
@@ -94,7 +93,6 @@ const editPostDB = (edited_post) => {
     const category = edited_post.category;
     const nickname = edited_post.nickname;
     // console.log(edited_post);
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
       .patch(`/posts/${postId}`, {
         title: title,
@@ -102,9 +100,8 @@ const editPostDB = (edited_post) => {
         postId: postId,
         category: category,
         nickname: nickname,
-      }, {headers: headers})
+      })
       .then((response) => {
-        
         const  data = {
           title: title,
           content: content,
@@ -125,9 +122,8 @@ const deletePostDB = (deleted_post) => {
   // 게시글 삭제하는 함수
   return function (dispatch) {
     const postId = parseInt(deleted_post.postId);
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance
-      .delete(`/posts/${postId}`, {headers: headers})
+      .delete(`/posts/${postId}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(deletePost(postId));
@@ -209,9 +205,10 @@ export default handleActions(
     [DELETE_BOOKMARK]: (state, action) =>
     produce(state, (draft) => {
       const deleted_bookmark = draft.bookmark_list.filter((bookmark) => {
-        if(bookmark.bookmarkId !== action.payload.bookmark){
+        if(bookmark.bookmarkId !== action.payload.postBookmarkId){
           return bookmark;
         }
+        // console.log(action.payload.postBookmarkId);
       })
       draft.list = deleted_bookmark;
     }),

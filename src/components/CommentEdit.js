@@ -1,31 +1,30 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
-import {Text, Button, Grid, Input, Image} from "../elements/index";
+import {Text, Grid} from "../elements/index";
 
-import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as commentActions} from "../redux/modules/comment";
-import { BiTimeFive, BiLike, BiComment, BiCommentEdi, BiPencil, BiTrashAlt } from 'react-icons/bi';
+import { BiTimeFive, BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 
 const CommentEdit = (props) => {
 
   const dispatch = useDispatch();
   // const postId = props.postId;
-  const {commentId, content, postId} = props;
+  const {postCommentId, content, postId} = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
   const username = useSelector(state => state.user.user.nickname);
 
   // 댓글 삭제
   const deleteComment = () => {
-    dispatch(commentActions.deleteCommentDB(commentId, postId));
+    dispatch(commentActions.deleteCommentDB(postCommentId, postId));
   }
 
   // 댓글 수정
   const editComment = () => {
   // const editCommentRef = editRef.current.value;
   const edit_comment = {
-    commentId : commentId,
+    postCommentId : postCommentId,
     nickname : username,
     content : commentValue,
   };

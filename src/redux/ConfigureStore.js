@@ -9,7 +9,6 @@ import image from './modules/image';
 import bootcamp from './modules/bootcamp';
 import user from './modules/user';
 import mypage from './modules/mypage';
-import bookmark from './modules/bookmark';
 
 export const history = createBrowserHistory();
 
@@ -21,7 +20,6 @@ const rootReducer = combineReducers({
     image: image,
     bootcamp: bootcamp,
     mypage: mypage,
-    bookmark: bookmark,
     router : connectRouter(history),
 });
 

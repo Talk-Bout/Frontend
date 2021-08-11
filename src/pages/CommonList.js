@@ -8,7 +8,7 @@ import { actionCreators as postActions} from "../redux/modules/post";
 //icons
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { FaPlus } from "react-icons/fa";
-import { RiArrowUpDownFill, RiPagesLine } from 'react-icons/ri';
+import { RiArrowUpDownFill} from 'react-icons/ri';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -16,23 +16,12 @@ import CommonPostList from '../components/CommonPostList';
 
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
+  const common_list = useSelector(state => state.post.list);
+  console.log(common_list);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
-  const common_list = useSelector(state => state.post.list);
 
-  // 게시글 리스트 조회
-  React.useEffect(() => {
-    dispatch(postActions.setPostDB(RiPagesLine));
-  }, []);
-
-  // 게시물 최신순으로 구현하는 함수
-const all_common = common_list.slice(0, common_list.length)
-.sort(function(a, b) {
-  const timeA = a.createdAt; const timeB = b.createdAt; 
-  if (timeA < timeB) return 1; if (timeA > timeB) return -1; });
-
-  
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);
@@ -41,7 +30,20 @@ const all_common = common_list.slice(0, common_list.length)
   const toNextPage = () => {
     setPage(page + 1);
   }
-  
+  // 카테고리 정보방 게시물 (default)
+  const info_category = () => {
+    dispatch(postActions.setPostDB(page, 'info'));
+  }
+  // 카테고리 잡담방 게시물
+  const cc_category = () => {
+    dispatch(postActions.setPostDB(page, 'chitchat'));
+  }
+
+  // 게시물 리스트 조회 (default : 정보방)
+  React.useEffect(() => {
+    dispatch(postActions.setPostDB(page, 'info'));
+  }, []);
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -56,17 +58,12 @@ const all_common = common_list.slice(0, common_list.length)
             {/* 게시판 카테고리 */}
                 <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 25px 0">
                   <Categories >
-                  {/* {[1, 2, 3, 4].map((n, idx) => {
-                    return (
-                    <CategoryButton>
-                      정보게시판
-                    </CategoryButton>
-                    );
-                  })} */}
-                  <CategoryButton>
+                  <CategoryButton
+                  onClick={()=>info_category()}>
                     정보방
                   </CategoryButton>
-                  <CategoryButton>
+                  <CategoryButton
+                  onClick={()=>cc_category()}>
                     잡담방
                   </CategoryButton>
                   </Categories>
@@ -109,7 +106,7 @@ const all_common = common_list.slice(0, common_list.length)
             <Grid height="85vh">
               <Grid width="100%" height="100%" margin="2% 0 0 0">
               <Contents>
-                {all_common.map((c, idx) => {
+                {common_list.map((c, idx) => {
                 return (
                 <CommonPostList key={c.commentId} {...c}/>
             );
@@ -127,9 +124,9 @@ const all_common = common_list.slice(0, common_list.length)
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_common.length > page * 12 ? page + 1 : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{common_list.length > page * 12 ? page + 1 : ''}</Page></Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_common.length > page * 12 ? <BsChevronRight /> : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{common_list.length > page * 12 ? <BsChevronRight /> : ''}</Page></Text>
             </PageBox>
             </Grid> 
         </Body>

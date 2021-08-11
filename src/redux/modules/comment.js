@@ -1,6 +1,5 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
-import {history} from '../ConfigureStore';
 import instance from '../../shared/Request';
 
 // API
@@ -30,10 +29,10 @@ const initialState = {
 };
 
 //액션함수
-const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
+const setCommentDB = (postId, page) => {                        // 댓글 불러오는 함수
 return function (dispatch) {
   const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
-  instance.get(`/posts/${postId}/postComments?page=1`, {
+  instance.get(`/posts/${postId}/postComments?page=${page}`, {
     postId: postId,
   }, {headers: headers})
   .then((response) => {
@@ -71,13 +70,13 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
 
 const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하는 함수
 return function (dispatch, getState, { history }) {
-const postCommentId = edit_comment.commentId;
+const postCommentId = edit_comment.postCommentId;
 const nickname = edit_comment.nickname;
 const content = edit_comment.content;
 instance.patch(`/posts/${postId}/postComments/${postCommentId}`,
 { 
-    // commentId: postCommentId,
-    // nickname: nickname,
+    postCommentId: postCommentId,
+    nickname: nickname,
     content: content,
 }).then((response) => {
         // console.log(response.data);
@@ -133,7 +132,6 @@ produce(state, (draft) => {
     draft.list[idx] = {
         ...draft.list[idx],
         ...action.payload.comment,
-        
     };
    
 }),

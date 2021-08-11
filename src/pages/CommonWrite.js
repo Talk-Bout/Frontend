@@ -25,13 +25,17 @@ const CommonWrite = (props) => {
   // 게시글 등록
   const addTitleRef = useRef('');
   const addContentRef = useRef('');
-  
-  // 카테고리 셀렉트
-  // const onSelect = (e) => {
-  //   dispatch()
-  // }
+
+  // 카테고리 설정
+  const categoryRef = useRef('');
+
+ 
 
   const addCommon = () => {
+    if (categoryRef.current.value === '') {
+      window.alert('카테고리를 설정해주세요.');
+      return;
+    }
     if (addTitleRef.current.value === '') {
       window.alert('제목을 입력해주세요.');
       return;
@@ -45,7 +49,7 @@ const CommonWrite = (props) => {
         title: addTitleRef.current.value,
         content: addContentRef.current.value,
         nickname: username,
-        category: 'testing',
+        category: categoryRef.current.value,
         postId: postId,
       }
       dispatch(postActions.editPostDB(edited_post));
@@ -56,17 +60,18 @@ const CommonWrite = (props) => {
         title: addTitleRef.current.value,
         content: addContentRef.current.value,
         nickname: username,
-        category: 'testing',
+        category: categoryRef.current.value,
       }
       dispatch(postActions.addPostDB(new_post));
       history.push(`/common/list`)
     }
   };
-  
+  console.log(categoryRef.current.value);
 
   // 이미지 업로드
   const imageRef = useRef();
   const preview = useSelector(state => state.image.preview);
+  
   // 이미지 미리보기 실행 함수
   const selectFile = (e) => {
       dispatch(imageActions.getPreview(e));
@@ -110,10 +115,10 @@ const CommonWrite = (props) => {
               <BodyBox>
                  {/* 카테고리 선택 */}
                  <SelectBox 
-                //  onChange={onSelect}
+                 ref={categoryRef}
                 >
-                  <Option value="none"> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
-                  <Option value="info">정보게시판</Option>
+                  <Option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
+                  <Option value="info">정보방</Option>
                   <Option value="chitchat">잡담방</Option>
                 </SelectBox>
                 {/* 제목 입력 칸 */}

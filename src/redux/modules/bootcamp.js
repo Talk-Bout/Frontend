@@ -5,6 +5,9 @@ import instance from '../../shared/Request';
 
 // 액션타입
 const SET_CAMPS = 'SET_CAMPS'; // 부트캠프 전체 목록 불러오기
+const SET_MY_CAMP = 'SET_MY_CAMP'; // 북마크한 부트캠프 목록 불러오기
+const ADD_MY_CAMP = 'ADD_MY_CAMP'; // 부트캠프 북마크하기
+const DELETE_MY_CAMP = 'DELETE_MY_CAMP'; // 부트캠프 북마크 해제하기
 
 const SET_REVIEWS = 'SET_REVIEWS'; // 리뷰 불러오기
 const ADD_REVIEW = 'ADD_REVIEW'; // 리뷰 작성하기
@@ -31,6 +34,9 @@ const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
+const setMyCamp = createAction(SET_MY_CAMP, (camp_list) => ({camp_list}));
+const addMyCamp = createAction(ADD_MY_CAMP, (camp) => ({camp}));
+const deleteMyCamp = createAction(DELETE_MY_CAMP, (bookmark_id) => ({bookmark_id}));
 
 
 // 기본값 정하기
@@ -39,6 +45,7 @@ const initialState = {
     review_list: [],    // 리뷰 목록을 담을 배열
     commu_list: [],   // 커뮤니티글 목록을 담을 배열
     comment_list: [], // 커뮤니티글의 댓글 목록을 담을 배열
+    my_camp_list: [], // 북마크한 부트캠프 목록을 담을 배열
 };
 
 // 액션함수
@@ -159,7 +166,7 @@ const deleteCommuDB = (deleted_commu) => {
 };
 
 const setCommentsDB = (commu_id, page) => {
-  // 서버로부터 커뮤니티글의 댓글 목록 불러오는 함수
+  // 서버로부터 커뮤니티글의 댓글 목록 불러오는 함수(페이징)
   return function (dispatch) {
     instance.get(`/community/${commu_id}/communityComments?page=${page}`).then((response) => {
       dispatch(setComments(response.data));
@@ -208,6 +215,42 @@ const deleteCommentDB = (deleted_comment) => {
   };
 };
 
+const setMyCampDB = (nickname) => {
+  // 서버에 저장된 부트캠프 북마크 여부 확인하는 함수
+  return function (dispatch) {
+    instance.get(`/users/${nickname}/bootcampBookmarks`).then((response) => {
+      dispatch(setMyCamp(response.data));
+    }).catch((err) => {
+      console.error(`북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
+const addMyCampDB = (nickname, bootcampName) => {
+  // 부트캠프 북마크 표시하는 함수
+  return function (dispatch) {
+    instance.post(`/bootcamp/${bootcampName}/bootcampBookmarks`, {
+      nickname: nickname,
+      bootcampName: bootcampName,
+    }).then((response) => {
+      dispatch(addMyCamp(response.data));
+    }).catch((err) => {
+      console.error(`부트캠프 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
+const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
+  // 부트캠프 북마크 해제하는 함수
+  return function (dispatch) {
+    instance.delete(`/bootcamp/${bootcampName}/bootcampBookmarks/${bootcampBookmarkId}`).then(
+      dispatch(deleteMyCamp(bootcampBookmarkId))
+    ).catch((err) => {
+      console.error(`부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
 export default handleActions({
     [SET_CAMPS]: (state, action) => produce(state, (draft) => {
       draft.camp_list = [...action.payload.camp_list];
@@ -247,6 +290,16 @@ export default handleActions({
     [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
       let idx = draft.comment_list.findIndex((comment) => comment.communityCommentId === action.payload.commentId);
       draft.comment_list.splice(idx, 1);
+    }),
+    [SET_MY_CAMP]: (state, action) => produce(state, (draft) => {
+      draft.my_camp_list = [...action.payload.camp_list];
+    }),
+    [ADD_MY_CAMP]: (state,action) => produce(state, (draft) => {
+      draft.my_camp_list.unshift(action.payload.camp);
+    }),
+    [DELETE_MY_CAMP]: (state, action) => produce(state, (draft) => {
+      let idx = draft.my_camp_list.findIndex((camp) => camp.bootcampBookmarkId === action.payload.bookmark_id);
+      draft.my_camp_list.splice(idx, 1);
     })
 }, initialState);
 
@@ -265,6 +318,9 @@ const actionCreators = {
     addCommentDB,
     editCommentDB,
     deleteCommentDB,
+    addMyCampDB,
+    setMyCampDB,
+    deleteMyCampDB,
 }
 
 export {

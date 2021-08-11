@@ -11,6 +11,7 @@ import { actionCreators as postActions} from "../redux/modules/post";
 import { BiTimeFive, BiLike, BiComment, BiSort} from 'react-icons/bi';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { FaPlus } from "react-icons/fa";
+import { RiArrowUpDownFill } from 'react-icons/ri';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -37,14 +38,13 @@ const all_common = common_list.slice(0, common_list.length)
         <Sidebar />
         <Body header>
         <Grid height="100%" >
-          <Grid height="3%">
-              <Text p fontSize="32px" padding="0 1%" color="#F8F9FA">
-                부트톡톡
-              </Text>
-            </Grid>
+          <Grid height="3%" margin="0 0 24px 0">
+            <Text fontSize="32px" padding="0 1%" color="#F8F9FA" fontWeight="bold">
+              부트톡톡
+            </Text>
+          </Grid>
             {/* 게시판 카테고리 */}
-            <Grid display="flex" height="7%">
-                <Grid display="flex" height="100%" width="100%" justify_content="space-between">
+                <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 25px 0">
                   <Categories >
                   {[1, 2, 3, 4].map((n, idx) => {
                     return (
@@ -54,25 +54,26 @@ const all_common = common_list.slice(0, common_list.length)
                     );
                   })}
                   </Categories>
-                  {/* 글쓰기버튼 */}
-                <Grid width="10%">
-                    <WriteBox>
-                      <WriteButton
-                        onClick={() => history.push('/common/write')}
-                      >
-                        <FaPlus/>&nbsp; 글쓰기
-                      </WriteButton>
-                    </WriteBox>
+                 
+                  <Grid width="17%" display="flex">
+                    {/* 인기순 셀렉트 */}
+                   <div style={{color: "#F1F3F4", lineHeight: "48px", marginRight: "10px" }}><RiArrowUpDownFill /></div> 
+                    <SelectButton type="select">
+                        <Options>인기순</Options>
+                        <Options>최신순</Options>
+                      </SelectButton>
+                      {/* 글쓰기버튼 */}
+                      <div>
+                        <WriteButton
+                          onClick={() => history.push('/common/write')}
+                        >
+                          <FaPlus/>&nbsp; 글쓰기
+                        </WriteButton>
+                      </div>
                   </Grid>
-                  {/* 인기순 셀렉트 */}
-                  <Grid width="6%" >
-                  <SelectButton type="select">
-                  <Options>인기순</Options>
-                  <Options>최신순</Options>
-                  </SelectButton>
                 </Grid>
-              </Grid>
             </Grid>
+            
             {/* 공지 */}
             <hr/>
             <Grid height="10vh">
@@ -110,8 +111,6 @@ const all_common = common_list.slice(0, common_list.length)
                 <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronRight /></Page></Text>
               </PageBox>
             </Grid> 
-            
-          </Grid>    
         </Body>
       </Grid>
     </React.Fragment>
@@ -139,7 +138,7 @@ border: none;
 border-radius: 100px;
 margin: 0px 10px;
 width: 110px;
-height: 38px;
+height: 44px;
 left: 0px;
 top: 0px;
 color: #80868B;
@@ -152,21 +151,32 @@ line-height: 4vh;
   }
 `;
 
-const WriteBox = styled.div`
- width: 100%;
- height: 100%;
+const SelectButton = styled.select`
+border: none;
+background-color: #17181B;
+color: #F1F3F4;
+width: fit-content;
+height: 48px;
+font-size: 16px;
+margin-right: 16px;
+appearance: none;
+`;
+
+const Options = styled.option`
 `;
 
 const WriteButton = styled.button`
 background-color: transparent;
-font-size: 1.5vh;
+font-size: 16px;
 border: none;
 color: #7879F1;
 cursor: pointer;
 width: 100%;
-border-radius: 1vh;
+border-radius: 8px;
 font-weight: bold;
-height: 4vh;
+width: 120px;
+height: 48px;
+padding: 10px 0px;
 border: 1px solid #4D4E93;
 &:hover {
   background-color: #282A2D;
@@ -174,21 +184,9 @@ border: 1px solid #4D4E93;
   }
 `;
 
-const SelectButton = styled.select`
-border: none;
-background-color: #17181B;
-color: #F1F3F4;
-width: 73px;
-height: 24px;
-left: 1325px;
-top: 220px;
-font-size: 16px;
-line-height: 24px;
 
-`;
 
-const Options = styled.option`
-`;
+
 
 const Notice = styled.div`
 grid-template-rows: repeat(2, minmax(auto, auto));

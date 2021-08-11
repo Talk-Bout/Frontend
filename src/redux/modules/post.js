@@ -41,7 +41,6 @@ const setOnePostDB = (id) => {
   // 개별 게시글 불러오는 함수
   return function (dispatch) {
     const postId = parseInt(id);
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
     instance.get(`/posts/${postId}`)
       .then((response) => {
         // console.log(response.data);
@@ -108,11 +107,6 @@ const editPostDB = (edited_post) => {
         }
         // console.log(response.data);
         dispatch(editPost(data));
-        // console.log(data);
-        // if (edited_post.board_name === 'question') {
-        //   history.push(`/question/detail/${postId}`);
-        // }
-        // history.push('/review/list');
       })
       .catch((err) => {
         console.error(`게시글 수정하기 에러 발생: ${err}`);

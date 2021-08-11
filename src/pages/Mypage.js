@@ -15,15 +15,18 @@ import {actionCreators as mypageActions} from '../redux/modules/mypage';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
-  // console.log(props);
+  const nickname = useSelector((state) => state.user.user);
+  const mytalk_list = useSelector((state) => state.mypage.mytalk_list);
+  const myboot_list = useSelector((state) => state.mypage.myboot_list);
+  console.log(mytalk_list);
 
-  const username = useSelector((state) => state.user.user.nickname);
-  console.log(username, "username");
-  const mypost_list = useSelector((state) => state.mypage.mypost_list);
-  console.log(mypost_list, "mypost_list");
+  // mypost 3개 추출
+  const mytalk = mytalk_list.slice(0,3);
 
+  // 부트캠프, 부트톡톡 북마크
   useEffect(()  => {
-    dispatch(mypageActions.setMyPostDB(username));
+    dispatch(mypageActions.setMyTalkDB(nickname));
+    dispatch(mypageActions.setMyBootDB(nickname));
   }, []);
   
   return (
@@ -88,7 +91,7 @@ const Mypage = (props) => {
                 </Grid> */}
                 {/* 게시글이 있을 경우 */}
                 <Grid display="flex" margin="12px 0" justify_content="space-between" height="65%" width="100%">
-                {[1, 2, 3].map((n, idx) => {
+                {myboot_list.map((b, idx) => {
               return (
                   <Grid display="flex" padding="0 1.5%" height="96px" width="32%" backgroundColor="#202124"  borderRadius="5px">
                     <ImageBox>
@@ -96,7 +99,7 @@ const Mypage = (props) => {
                     </ImageBox>
                     <Grid padding="18px 0" width="67%">
                       <Grid display="flex" justify_content="space-between">
-                      <Text p margin="0 0 5px 10px" color="#F1F3F4" fontSize="18px">부트캠프명</Text>
+                      <Text p margin="0 0 5px 10px" color="#F1F3F4" fontSize="18px">{b.bootcampName}</Text>
                       <Text cursor="pointer" color="#7879F1" fontSize="18px"><BsHeartFill/></Text>
                       </Grid>
                       
@@ -123,7 +126,7 @@ const Mypage = (props) => {
                 </Grid> */}
                 {/* 게시글이 있을 경우 */}
                 <Grid display="flex" margin="12px 0" justify_content="space-between" height="211px" width="100%">
-                {[1, 2, 3].map((n, idx) => {
+                {mytalk.map((n, idx) => {
               return (
                   <Grid padding="0 1.5%" height="211px" width="32%" backgroundColor="#202124" borderRadius="5px">
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
@@ -155,7 +158,9 @@ const Mypage = (props) => {
                    <Text fontSize="18px" color="#F1F3F4">내가 쓴 글</Text>
                     <Count> (5) </Count>
                   </BookMarkBox>
-                  <Button color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%">더보기 <AiOutlineRight/></Button>   
+                  <Button color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%"
+                  // _onClick={()=>{history.push(`/mypage/mypost/${postId}`)}}
+                  >더보기 <AiOutlineRight/></Button>   
                 </Grid>
                 {/* 게시글이 없을 경우
                 <Grid margin="12px 0" height="203px" width="100%">
@@ -165,7 +170,7 @@ const Mypage = (props) => {
                 </Grid> */}
                 {/* 게시글이 있을 경우 */}
                 <Grid display="flex" margin="12px 0" justify_content="space-between" height="211px" width="100%">
-                {mypost_list.map((n, idx) => {
+                {[1, 2, 3].map((p, idx) => {
               return (
                   <Grid padding="0 1.5%" height="203px" width="32%" backgroundColor="#202124" borderRadius="5px">
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >

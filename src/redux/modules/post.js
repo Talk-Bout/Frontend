@@ -9,24 +9,31 @@ const SET_ONE_POST = 'SET_ONE_POST'; // 게시글 하나 불러오기
 const ADD_POST = 'ADD_POST'; // 게시글 추가하기
 const EDIT_POST = 'EDIT_POST'; // 게시글 수정하기
 const DELETE_POST = 'DELETE_POST'; // 게시글 삭제하기
+const ADD_BOOKMARK = 'ADD_BOOKMARK'; // 북마크 추가하기
+const DELETE_BOOKMARK = 'DELETE_BOOKMARK'; // 북마크 삭제하기
 
 // 액션생성함수
+// 게시물
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const setOnePost = createAction(SET_ONE_POST, (post) => ({ post }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const editPost = createAction(EDIT_POST, (post) => ({ post }));
 const deletePost = createAction(DELETE_POST, (post) => ({ post }));
+// 북마크
+const addBookmark = createAction(ADD_BOOKMARK, (bookmark) => ({bookmark}));
+const deleteBookmark = createAction(ADD_BOOKMARK, (bookmark) => ({bookmark}));
 
 // 기본값 정하기
 const initialState = {
   list: [],
+  bookmark_list: [],
 };
 
 // 액션함수
-const setPostDB = () => {
+const setPostDB = (page) => {
   // 전체 게시글 불러오는 함수
   return function (dispatch) {
-    instance.get('/posts')
+    instance.get(`/posts?page=${page}&category=test`)
       .then((response) => {
         dispatch(setPost(response.data));
         // console.log(response.data);
@@ -131,6 +138,43 @@ const deletePostDB = (deleted_post) => {
   };
 };
 
+const addBookmarkDB = (add_bookmark) => {
+  console.log(add_bookmark);
+    return function (dispatch) {
+      const postId = parseInt(add_bookmark.postId);
+      const nickname = add_bookmark.nickname;
+        instance.post(`/posts/${postId}/postBookmarks`,{
+          postId : postId,
+          nickname : nickname,
+        })
+      .then((response) => {
+                dispatch(addBookmark(response.data));
+            })
+            .catch((err) => {
+                console.log(`에러 발생: ${err}`);
+            });
+    };
+};
+
+const deleteBookmarkDB = (deleted_bookmark) => {
+  console.log(deleted_bookmark);
+  return function (dispatch) {
+    const postId = deleted_bookmark.postId;
+    const postBookmarkId = deleted_bookmark.postBookmarkId;
+    
+      instance.delete(`/posts/${postId}/postBookmarks/${postBookmarkId}`,{
+        postBookmarkId : postBookmarkId,
+      })
+    .then((response) => {
+              dispatch(deleteBookmark(response.data));
+              console.log(response.data);
+          })
+          .catch((err) => {
+              console.log(`에러 발생: ${err}`);
+          });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
@@ -158,7 +202,19 @@ export default handleActions(
     [EDIT_POST]: (state, action) =>
     produce(state, (draft) =>{
       draft.list = [action.payload.post];
-    })
+    }),
+    [ADD_BOOKMARK]: (state, action) => produce(state, (draft) => {
+      draft.bookmark_list.unshift(action.payload.bookmark);
+    }),
+    [DELETE_BOOKMARK]: (state, action) =>
+    produce(state, (draft) => {
+      const deleted_bookmark = draft.bookmark_list.filter((bookmark) => {
+        if(bookmark.bookmarkId !== action.payload.bookmark){
+          return bookmark;
+        }
+      })
+      draft.list = deleted_bookmark;
+    }),
   },
   initialState
 );
@@ -170,6 +226,8 @@ const actionCreators = {
   addPostDB,
   editPostDB,
   deletePostDB,
+  addBookmarkDB,
+  deleteBookmarkDB,
 };
 
 export { actionCreators };

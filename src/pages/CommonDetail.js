@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions} from "../redux/modules/post";
-import { actionCreators as BookmarkActions } from '../redux/modules/bookmark';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -10,8 +9,8 @@ import Comment from '../components/Comment';
 import PopBootContents from '../components/PopBootContents';
 
 import styled from 'styled-components';
-import {Text, Grid, Input, Image} from "../elements/index";
-import { BiTimeFive, BiLike, BiComment, BiShow, BiPencil, BiTrashAlt } from 'react-icons/bi';
+import {Text, Grid, } from "../elements/index";
+import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { BsThreeDotsVertical, BsBookmark, BsChevronLeft, BsBookmarkFill } from 'react-icons/bs';
@@ -26,7 +25,6 @@ const CommonDetail = (props) => {
   const common_find = common_list.find((comment)=> comment.postId === parseInt(postId));
   const username = useSelector(state => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
-
 
   React.useEffect(() => {
     if (common_find){
@@ -54,6 +52,10 @@ const CommonDetail = (props) => {
 
   // 게시글 북마크
   const [bookmark, setBookmark] = useState(false);
+  const bookmark_list = useSelector(state => state.post.bookmark_list);
+  const postBookmarkId = useSelector(state => state.post.bookmark_list.postBookmarkId);
+  // let idx = bookmark_list.findIndex((b)=> b.postBookmarkId === postBookmarkId);
+  console.log(bookmark_list);
 
   const handleBookmark = () => {
     setBookmark(!bookmark);
@@ -63,9 +65,13 @@ const CommonDetail = (props) => {
         postId : postId,
         nickname : username,
       }
-      dispatch(BookmarkActions.addBookmarkDB(add_bookmark));
+      dispatch(postActions.addBookmarkDB(add_bookmark));
+    } else {
+      const deleted_bookmark = {
+        postId : postId,
+      }
+      dispatch(postActions.deleteBookmarkDB(deleted_bookmark, postBookmarkId));
     }
-    return;
   };
   console.log(bookmark);
 

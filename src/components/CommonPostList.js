@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import { history } from '../redux/ConfigureStore';
 
 import Profile from '../image/profile_small.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { Text, Button, Grid, Image } from '../elements/index';
-import { BiTimeFive, BiLike, BiComment, BiSort} from 'react-icons/bi';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FaPlus } from "react-icons/fa";
+import { useSelector, } from 'react-redux';
+import { Text, Grid} from '../elements/index';
+import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
 
 const CommonPostList = (props) => {
 

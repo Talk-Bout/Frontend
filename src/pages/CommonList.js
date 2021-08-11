@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
 import { history } from '../redux/ConfigureStore';
-import { Text, Button, Grid, Image } from '../elements/index';
+import { Text, Grid} from '../elements/index';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { actionCreators as commentActions} from "../redux/modules/comment";
 import { actionCreators as postActions} from "../redux/modules/post";
 //icons
-import { BiTimeFive, BiLike, BiComment, BiSort} from 'react-icons/bi';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { FaPlus } from "react-icons/fa";
-import { RiArrowUpDownFill } from 'react-icons/ri';
+import { RiArrowUpDownFill, RiPagesLine } from 'react-icons/ri';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -19,11 +16,14 @@ import CommonPostList from '../components/CommonPostList';
 
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
-  // 게시글 리스트 조회
+
+  // 페이지네이션
+  const [page, setPage] = useState(1);
   const common_list = useSelector(state => state.post.list);
 
+  // 게시글 리스트 조회
   React.useEffect(() => {
-    dispatch(postActions.setPostDB());
+    dispatch(postActions.setPostDB(RiPagesLine));
   }, []);
 
   // 게시물 최신순으로 구현하는 함수
@@ -32,6 +32,16 @@ const all_common = common_list.slice(0, common_list.length)
   const timeA = a.createdAt; const timeB = b.createdAt; 
   if (timeA < timeB) return 1; if (timeA > timeB) return -1; });
 
+  
+  // 앞 페이지로 가는 함수
+  const toPrePage = () => {
+    setPage(page - 1);
+  }
+  // 다음 페이지로 가는 함수
+  const toNextPage = () => {
+    setPage(page + 1);
+  }
+  
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -46,13 +56,19 @@ const all_common = common_list.slice(0, common_list.length)
             {/* 게시판 카테고리 */}
                 <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 25px 0">
                   <Categories >
-                  {[1, 2, 3, 4].map((n, idx) => {
+                  {/* {[1, 2, 3, 4].map((n, idx) => {
                     return (
                     <CategoryButton>
                       정보게시판
                     </CategoryButton>
                     );
-                  })}
+                  })} */}
+                  <CategoryButton>
+                    정보방
+                  </CategoryButton>
+                  <CategoryButton>
+                    잡담방
+                  </CategoryButton>
                   </Categories>
                  
                   <Grid width="17%" display="flex">
@@ -102,14 +118,19 @@ const all_common = common_list.slice(0, common_list.length)
               </Grid>     
             </Grid>
             
-            <Grid height="3%">
-              <PageBox>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronLeft /></Page></Text>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page>01</Page></Text>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page>02</Page></Text>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page>03</Page></Text>
-                <Text margin="0 0.7%" fontSize="2.3vh"><Page><BsChevronRight /></Page></Text>
-              </PageBox>
+            <Grid height="3%" is_center>
+            <PageBox>
+              {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
+              {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
+              {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
+              {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_common.length > page * 12 ? page + 1 : ''}</Page></Text>
+              {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_common.length > page * 12 ? <BsChevronRight /> : ''}</Page></Text>
+            </PageBox>
             </Grid> 
         </Body>
       </Grid>
@@ -121,10 +142,6 @@ const Categories = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  /* width: 100%;
-  height: 15%;
-  left: 8vw;
-  top: 8vh; */
   width: 450px;
   height: 44px;
   left: 142px;
@@ -184,10 +201,6 @@ border: 1px solid #4D4E93;
   }
 `;
 
-
-
-
-
 const Notice = styled.div`
 grid-template-rows: repeat(2, minmax(auto, auto));
 grid-template-columns: repeat(1, 1fr);
@@ -243,9 +256,6 @@ const Contents = styled.div`
   display: grid;
   align-items: center;
   place-items: center;
-  /* width: 100%;
-  height: 100%; */
-  /* margin: 0.5% 0 0 0; */
   box-sizing: border-box;
   cursor: pointer;
   // 나중에 페이징하면 수정
@@ -256,36 +266,11 @@ const Contents = styled.div`
   top: 826px;
 `;
 
-const Content = styled.div`
-  z-index: 1;
-  align-content: center;
-  justify-content: center;
-  /* width: 100%;
-  height: 100%; */
-  /* padding: 0% 3%; */
-  width: 620px;
-  height: 191px;
-  left: 142px;
-  top: 986px;
-
-  background-size: cover;
-  box-sizing: border-box;
- 
-  &:hover {
-    opacity: 0.7;
-  }
-`;
-
-const ProfileImage = styled.div`
-display: flex;
-height: 10%;
-padding: 3%;
-`;
-
 const PageBox = styled.div`
-text-align: center;
-font-size: 1.8vh;;
-/* margin: 2% 0 0 0; */
+font-size: 14px;
+display: inline-block;
+height: 100%;
+margin: 32px 0;
 `;
 
 const Page = styled.span`

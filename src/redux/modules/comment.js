@@ -33,7 +33,7 @@ const initialState = {
 const setCommentDB = (postId) => {                        // 댓글 불러오는 함수
 return function (dispatch) {
   const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
-  instance.get(`/posts/${postId}/comments`, {
+  instance.get(`/posts/${postId}/postComments?page=1`, {
     postId: postId,
   }, {headers: headers})
   .then((response) => {
@@ -54,7 +54,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
         const content = new_comment.content;
         const postId = parseInt(new_comment.postId);
         const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
-        instance.post(`/posts/${postId}/comments`,
+        instance.post(`/posts/${postId}/postComments`,
         {
             nickname: nickname,
             content: content,
@@ -71,13 +71,13 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
 
 const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하는 함수
 return function (dispatch, getState, { history }) {
-const commentId = edit_comment.commentId;
+const postCommentId = edit_comment.commentId;
 const nickname = edit_comment.nickname;
 const content = edit_comment.content;
-instance.patch(`/posts/${postId}/comments/${commentId}`,
+instance.patch(`/posts/${postId}/postComments/${postCommentId}`,
 { 
-    commentId: commentId,
-    nickname: nickname,
+    // commentId: postCommentId,
+    // nickname: nickname,
     content: content,
 }).then((response) => {
         // console.log(response.data);
@@ -89,14 +89,14 @@ instance.patch(`/posts/${postId}/comments/${commentId}`,
 };
 
 
-const deleteCommentDB = (commentId, postId) => {           // 댓글 삭제하는 함수
+const deleteCommentDB = (postCommentId, postId) => {           // 댓글 삭제하는 함수
 return function (dispatch) {
-instance.delete(`/posts/${postId}/comments/${commentId}`
+instance.delete(`/posts/${postId}/postComments/${postCommentId}`
 )
 .then((response) => {
         // console.log('deleteCommentDB 함수 호출 성공!');
         // console.log(response.data);
-        dispatch(deleteComment(commentId));
+        dispatch(deleteComment(postCommentId));
     }).catch((err) => {
         console.error(`댓글 삭제하기 에러 발생: ${err}`);
     });

@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/Request';
-import { isError } from 'lodash-es';
 
 //액션 타입
 const LOG_IN = 'LOG_IN'; //로그인하기

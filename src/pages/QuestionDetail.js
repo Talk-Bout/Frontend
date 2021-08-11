@@ -1,43 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button, Input, Image } from '../elements';
+import { Grid, Text, Input, Image } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/post';
+import { actionCreators as questionActions } from '../redux/modules/question';
 import { history } from '../redux/ConfigureStore';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import QnaAnswerCard from '../components/QnaAnswerCard';
 //icons
-import { BiTimeFive, BiLike, BiComment, BiNoEntry } from 'react-icons/bi';
-import { GrView } from 'react-icons/gr';
+import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye } from 'react-icons/bs';
-import { RiEditCircleFill } from 'react-icons/ri';
+import { Button, Menu, MenuItem } from '@material-ui/core';
+import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
+import profile_medium from '../image/profile_medium.png';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
-  const question_id = window.location.pathname.split('/question/detail/')[1]; //ㅇㅋ
-  const question_list = useSelector((state) => state.post.list);
+  const question_id = window.location.pathname.split('/question/detail/')[1];
+  const question_list = useSelector((state) => state.question.list);
   const question_found = question_list.find(
-    (post) => post.postId == question_id
+    (question) => question.questionId == parseInt(question_id)
   );
+  const [MenuLink, setMenuLink] = useState(null);
+
   // console.log(question_list);
   // console.log(question_id);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
     if (!question_found) {
-      dispatch(questionActions.setOnePostDB(question_id));
+      dispatch(questionActions.setOneQuestionDB(question_id));
     }
   }, []);
-
-  const editBtn = () => {
-    history.push(`/question/write/${question_id}`);
-  };
 
   if (!question_found) {
     return <></>;
   }
+
+  const handleClick = (e) => {
+    setMenuLink(e.currentTarget);
+  };
+  const editBtn = () => {
+    history.push(`/question/write/${question_id}`);
+  };
+
+  const handleClose = () => {
+    setMenuLink(null);
+  };
+
+  const deleteBtn = () => {
+    dispatch(questionActions.deleteQuestionDB(question_id));
+  };
 
   return (
     <React.Fragment>
@@ -61,15 +75,75 @@ const QuestionDetail = (props) => {
                     {question_found.title}
                   </Text>
                 </Grid>
-                <Grid width="20%" display="flex" margin="0 0 0 auto">
-                  <Button _onClick={editBtn}>수정하기</Button>
-                  <Button>삭제하기</Button>
+                {/* 북마크와 수정 삭제 */}
+                <Grid display="flex" width="14%" margin="0 0 0 auto">
+                  <Button padding="0" width="16.33px" height="21px">
+                    <Text
+                      padding="0"
+                      color="#9aa0a6"
+                      fontSize="24px"
+                      lineHeight="35px"
+                      vertical_align="middle"
+                      cursor="pointer"
+                      hover="opacity: 0.7"
+                    >
+                      <BsBookmark />
+                    </Text>
+                  </Button>
+                  <Button
+                    padding="0"
+                    width="16.33px"
+                    height="21px"
+                    bg="transparent"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    <Text
+                      padding="0"
+                      color="#9AA0A6"
+                      fontSize="24px"
+                      lineHeight="35px"
+                      hover="opacity: 0.8"
+                    >
+                      <BsThreeDotsVertical />
+                    </Text>
+                  </Button>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={MenuLink}
+                    keepMounted
+                    open={Boolean(MenuLink)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem
+                      onClick={() => {
+                        editBtn();
+                      }}
+                    >
+                      수정하기
+                      <Text margin="0 0 0 10px">
+                        <BiPencil />
+                      </Text>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        deleteBtn();
+                      }}
+                    >
+                      삭제하기
+                      <Text margin="0 0 0 10px">
+                        <BiTrashAlt />
+                      </Text>
+                    </MenuItem>
+                  </Menu>
                 </Grid>
               </Grid>
 
               <Grid display="flex" margin="3% 0">
                 <Grid width="3vw">
-                  <Image size="5"></Image>
+                  <Image src={profile_medium} size="5"></Image>
                 </Grid>
 
                 <Grid width="40%">
@@ -112,7 +186,11 @@ const QuestionDetail = (props) => {
                 답변 3
               </Text>
               <ACommentBox>
-                <AInput rows="5" placeholder="댓글을 남겨주세요" />
+                <AInput
+                  rows="5"
+                  placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
+답변을 남긴 이후에는 수정 및 삭제가 불가하오니 신중하게 써주시길 부탁드립니다."
+                />
                 <AnswerSaveButton>답변 추가하기</AnswerSaveButton>
               </ACommentBox>
             </AddAnswerSection>
@@ -143,22 +221,25 @@ const AddAnswerSection = styled.div`
 `;
 
 const ACommentBox = styled.div`
-  /* color: #5d6065;
-  background-color: #212123; */
-  border-radius: 5px;
+  /* color: #5d6065; */
+  background-color: #212123;
+  border-radius: 12px;
   border: 1px solid #9aa0a6;
   width: 100%;
 `;
 
 const AInput = styled.textarea`
   border: none;
-  border-radius: 5px;
-  background-color: transparent;
+  border-radius: 12px;
+  background-color: #212123;
   resize: none;
-  padding: 1%;
-  width: 98%;
+  padding: 2%;
+  width: 96%;
   :focus {
     outline: none;
+  }
+  ::placeholder {
+    color: #4e5357;
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -8,7 +8,7 @@ import { BiImageAdd } from 'react-icons/bi';
 import { FiHash } from 'react-icons/fi';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { actionCreators as imageActions } from '../redux/modules/image';
 
 const BootCommuWrite = (props) => {
@@ -16,9 +16,10 @@ const BootCommuWrite = (props) => {
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
   const username = useSelector(state => state.user.user);
-  const post_id = parseInt(window.location.pathname.split('/write/')[1]);
-  const post_list = useSelector(state => state.post.list);
-  const post_found = post_list.find((p) => p.postId == post_id);
+
+  const edited_id = parseInt(window.location.pathname.split('/write/')[1]);
+  const commu_list = useSelector(state => state.bootcamp.commu_list);
+  const commu_found = commu_list.find((commu) => commu.communityId === edited_id);
 
   const titleRef = useRef('');
   const contentRef = useRef('');
@@ -41,7 +42,7 @@ const BootCommuWrite = (props) => {
     dispatch(imageActions.getPreview(null));
   }
 
-  // 게시글 등록
+  // 게시글 등록(수정)
   const addPost = () => {
     if (titleRef.current.value === '') {
       window.alert('제목을 입력해주세요.');
@@ -51,25 +52,24 @@ const BootCommuWrite = (props) => {
       window.alert('내용을 입력해주세요.');
       return;
     }
-    if (post_id) {
-      const edited_post = {
+    if (edited_id) {
+      const edited_commu = {
         title: titleRef.current.value,
         content: contentRef.current.value,
-        nickname: username,
-        category: 'testing',
-        postId: post_id,
+        bootcampName: commu_found.bootcampName,
+        communityId: commu_found.communityId,
       }
-      dispatch(postActions.editPostDB(edited_post));
+      dispatch(campActions.editCommuDB(edited_commu));
     } else {
-      const new_post = {
+      const new_commu = {
+        nickname: username,
+        bootcampName: props.location.state.camp_name,
         title: titleRef.current.value,
         content: contentRef.current.value,
-        nickname: username,
-        category: 'testing',
       }
-      dispatch(postActions.addPostDB(new_post));
+      dispatch(campActions.addCommuDB(new_commu));
       titleRef.current.value = '';
-    contentRef.current.value = '';
+      contentRef.current.value = '';
     }
   }
 
@@ -99,18 +99,20 @@ const BootCommuWrite = (props) => {
               </Grid>
               <BodyBox>
                 {/* 제목 입력 칸 */}
-                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} defaultValue={post_id ? post_found.title : null}/></TitleBox>
+                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} defaultValue={edited_id ? commu_found.title : null}/></TitleBox>
                 {/* 내용 입력 칸 */}
-                <ContentBox><Textarea rows='5' placeholder='내용을 입력해주세요' ref={contentRef} defaultValue={post_id ? post_found.content : null}/></ContentBox>
-                {/* 이미지 미리보기 */}
+                {/* 이미지 preview가 있으면 입력 칸 크기 줄이고, preview와 파일명을 보여주기*/}
+                <ContentBox>
+                  <Textarea rows={preview ? '5' : '15'} placeholder='내용을 입력해주세요' ref={contentRef} defaultValue={edited_id ? commu_found.content : null}/>
+                </ContentBox>
+                {preview ?
                 <div style={{textAlign: 'center'}}>
-                  {/* 이미지 preview가 있으면 preview와 파일명을 보여주고, 없으면 빈 칸 보여주기 */}
-                  {preview ?
-                  <><Preview><Img src={preview}/></Preview><Text p fontSize='16px' color='#5f6368' margin='0 auto 80px'>{imageRef.current.files[0].name}</Text></>
-                  :
-                  <Preview style={{margin: '0 auto 80px'}}><Text fontSize='16px' color='#5f6368' lineHeight='500px'>이미지 미리보기</Text></Preview>
-                  }
+                  <Preview><Img src={preview}/></Preview>
+                  <Text p fontSize='16px' color='#5f6368' margin='0 auto 80px'>{imageRef.current.files[0].name}</Text>
                 </div>
+                :
+                ''
+                }                
               </BodyBox>
               {/* 작성 페이지 푸터 */}
               <FooterBox>
@@ -144,7 +146,7 @@ const TitleBox = styled.div`
 `;
 
 const ContentBox = styled.div`
-  height: 144px;
+  height: fit-content;
   margin: 0 0 80px;
 `;
 
@@ -178,6 +180,20 @@ const Textarea = styled.textarea`
   }
   &:focus {
     outline: none;
+  }
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #5f6368;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
   }
 `;
 

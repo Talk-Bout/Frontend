@@ -10,9 +10,6 @@ import { actionCreators as userActions } from './redux/modules/user';
 // NotFound 페이지
 import NotFound from './shared/NotFound';
 
-//템플릿 페이지
-import templateN from './components/templateN';
-
 //메인 페이지
 import MainN from './pages/MainN';
 
@@ -74,13 +71,13 @@ function App() {
           <Route path="/question/write/:id" exact component={QuestionWrite} />
           <Route path="/question/detail/:id" exact component={QuestionDetail} />
           <Route path="/boot" exact component={BootMain} />
-          <Route path="/boot/info" exact component={BootInfo} />
-          <Route path="/boot/review" exact component={BootReview} />
-          <Route path="/boot/community" exact component={BootCommu} />
-          <Route path="/boot/review/write" exact component={BootReviewWrite} />
-          <Route path="/boot/community/write" exact component={BootCommuWrite}/>
-          <Route path="/boot/community/write/:id" exact component={BootCommuWrite}/>
-          <Route path="/boot/community/post/:id" exact component={BootPost} />
+          <Route path="/boot/:name/info" exact component={BootInfo} />
+          <Route path="/boot/:name/review" exact component={BootReview} />
+          <Route path="/boot/:name/community" exact component={BootCommu} />
+          <Route path="/boot/:name/review/write" exact component={BootReviewWrite} />
+          <Route path="/boot/:name/community/write" exact component={BootCommuWrite}/>
+          <Route path="/boot/:name/community/write/:id" exact component={BootCommuWrite}/>
+          <Route path="/boot/:name/post/:id" exact component={BootPost} />
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />

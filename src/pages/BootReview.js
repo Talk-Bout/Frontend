@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Grid, Text, Image} from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
+import BootRoot from '../components/BootRoot';
 import { history } from '../redux/ConfigureStore';
 import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +15,14 @@ const BootReview = (props) => {
 
   // 부트캠프 정보를 props로 받는다.
   const {bootcampName, desc, review} = props.location.state.camp;
+  const url = props.location.pathname.split('/')[3];
+
+  const camp = {
+    bootcampName: bootcampName,
+    desc: desc,
+    review: review,
+    url: url,
+  }
 
   useEffect(() => {
     dispatch(campActions.setReviewsDB(bootcampName, page));
@@ -39,27 +48,7 @@ const BootReview = (props) => {
         <Sidebar />
         {/* 헤더 포함한 바디 */}
         <Body header>
-          {/* 부트캠프 로고 */}
-          <LogoBox>로고</LogoBox>
-          <Grid className='info-button' padding='24px 0'>
-            <InfoBtn>
-              <div>
-              {/* 부트캠프 이름 */}
-              <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{bootcampName}</Text>
-              <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{desc}</Text>
-              </div>
-              {/* 홈페이지 바로가기 버튼 */}
-              <Button><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
-            </InfoBtn>
-            {/* 부트캠프 평점, 리뷰 개수 */}
-            <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{review[0].stars}</span>(164개 리뷰)</Text>
-          </Grid>
-          {/* 정보, 리뷰, 커뮤니티 탭 */}
-          <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/info`, state: {camp: props.location.state.camp}})}>정보</Text></Menu>
-            <Menu style={{borderBottom: '4px solid #e8eaed'}}><Text fontSize='24px' color='#e8eaed'>리뷰</Text></Menu>
-            <Menu><Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/community`, state: {camp: props.location.state.camp}})}>커뮤니티</Text></Menu>
-          </Grid>
+        <BootRoot camp={camp}/>
           {/* 리뷰 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' padding='40px 40px 0 40px'>
@@ -167,37 +156,6 @@ const BootReview = (props) => {
     </React.Fragment>
   )
 };
-
-const LogoBox = styled.div`
-  height: 112px;
-  width: 190px;
-  border: 1px solid whitesmoke; // 로고 있으면 없애기
-  align-items: center;
-`;
-
-const InfoBtn = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Button = styled.button`
-  width: 204px;
-  height: 50px;
-  border: none;
-  border-radius: 8px;
-  background-color: #2E3134;
-  cursor: pointer;
-  &:active {
-    opacity: 0.7;
-  }
-`;
-
-const Menu = styled.div`
-  display: inline-block;
-  margin-right: 48px;
-  cursor: pointer;
-  padding-bottom: 16px;
-`;
 
 const WriteBtn = styled.button`
   height: 40px;

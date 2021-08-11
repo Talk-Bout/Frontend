@@ -6,7 +6,7 @@ import {Grid, Text} from '../elements';
 import { GoPrimitiveDot } from 'react-icons/go';
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from "react-icons/bi";
 import { AiOutlineEye } from 'react-icons/ai';
-import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
+import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import {history} from '../redux/ConfigureStore';
@@ -89,7 +89,7 @@ const BootPost = (props) => {
     setCommentPage(comment_page + 1);
   }
 
-  if (!commu_found || !comment_list) {
+  if (!commu_found) {
     return (
       <></>
     );
@@ -115,7 +115,7 @@ const BootPost = (props) => {
                     {/* 북마크 버튼 */}
                     <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
                     {/* 드롭다운 메뉴 버튼 */}
-                    {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 활성화 */}
+                    {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
                     {commu_found.nickname === username ?
                     <>
                       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -175,6 +175,9 @@ const BootPost = (props) => {
                         {/* 작성일자 */}
                         <Text fontSize='12px' color='#BDC1C6'>{cm.createdAt}</Text>
                       </NameTime>
+                      {/* 댓글 수정, 삭제 버튼 */}
+                      {/* 댓글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
+                      {cm.nickname === username ?
                       <Buttons>
                         {/* 수정 버튼 */}
                         {cm.communityCommentId === edit_comment ?
@@ -185,6 +188,9 @@ const BootPost = (props) => {
                         {/* 삭제 버튼 */}
                         <PostBtn onClick={() => deleteComment(cm.communityCommentId)}><Text fontSize='16px' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
                       </Buttons>
+                      :
+                      ''
+                      }
                     </Grid>
                     {/* 댓글 내용 */}
                     {/* 수정 버튼을 누른 경우, input 창으로 바뀜 */}

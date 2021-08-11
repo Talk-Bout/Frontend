@@ -20,6 +20,7 @@ const BootCommuWrite = (props) => {
   const edited_id = parseInt(window.location.pathname.split('/write/')[1]);
   const commu_list = useSelector(state => state.bootcamp.commu_list);
   const commu_found = commu_list.find((commu) => commu.communityId === edited_id);
+  const image_url = useSelector(state => state.image.image_url);
 
   const titleRef = useRef('');
   const contentRef = useRef('');
@@ -27,16 +28,14 @@ const BootCommuWrite = (props) => {
   // 이미지 업로드
   const imageRef = useRef();
   const preview = useSelector(state => state.image.preview);
-  // 이미지 미리보기 실행 함수
+  // 이미지 미리보기 실행 및 서버 업로드 함수
   const selectFile = (e) => {
-      dispatch(imageActions.getPreview(e));
-  };
-  // 이미지 저장 실행 함수
-  const uploadFile = () => {
     const uploaded_image = imageRef.current.files[0];
-    dispatch(imageActions.uploadImageDB(uploaded_image));
-    dispatch(imageActions.getPreview(null));
-  }
+    const formData = new FormData();
+    formData.append('image', uploaded_image);
+    dispatch(imageActions.getPreview(e));
+    dispatch(imageActions.uploadImageDB(formData));
+  };
   // 이미지 미리보기 삭제 함수
   const exitPage = () => {
     dispatch(imageActions.getPreview(null));
@@ -66,8 +65,10 @@ const BootCommuWrite = (props) => {
         bootcampName: props.location.state.camp_name,
         title: titleRef.current.value,
         content: contentRef.current.value,
+        image: image_url,
       }
       dispatch(campActions.addCommuDB(new_commu));
+      dispatch(imageActions.getPreview(null));
       titleRef.current.value = '';
       contentRef.current.value = '';
     }
@@ -92,9 +93,9 @@ const BootCommuWrite = (props) => {
                 <Grid width='53.33%' is_center>
                   <Text fontSize='24px' fontWeight='700' color='#e5e5e5' lineHeight='84px'>글쓰기</Text>
                 </Grid>
-                {/* 등록 버튼 */}
+                {/* 등록(수정) 버튼 */}
                 <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='24px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => {addPost(); uploadFile()}}>등록</Text>
+                  <Text fontSize='24px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => addPost()}>{edited_id ? '수정' : '등록'}</Text>
                 </Grid>
               </Grid>
               <BodyBox>
@@ -117,7 +118,7 @@ const BootCommuWrite = (props) => {
               {/* 작성 페이지 푸터 */}
               <FooterBox>
                 {/* 이미지 추가 버튼 */}
-                <label for='file'><Text fontSize='24px' color='#b3b3b3' margin='0 32px 0 0' cursor='pointer'><BiImageAdd /></Text><ImgInput type='file' ref={imageRef} onChange={selectFile} accept='image/*' id='file'/></label>
+                <form><label for='file'><Text fontSize='24px' color='#b3b3b3' margin='0 32px 0 0' cursor='pointer'><BiImageAdd /></Text><ImgInput type='file' ref={imageRef} onChange={selectFile} accept='image/*' id='file'/></label></form>
                 {/* 해시태그 추가 버튼 */}
                 <Text fontSize='24px' color='#b3b3b3' cursor='pointer'><FiHash /></Text>
               </FooterBox>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button } from '../elements';
+import { Grid, Text } from '../elements';
 
 //icons
 import { BiTimeFive } from 'react-icons/bi';

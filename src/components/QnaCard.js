@@ -1,21 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button, Image } from '../elements';
-import { history } from '../redux/ConfigureStore';
+import { Text, Image } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/question';
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
-import { Group } from '../image/Group.png';
 import profile_small from '../image/profile_small.png';
 
 const QnaCard = (props) => {
-  const dispatch = useDispatch();
   const { _onClick } = props;
   const question_id = props.questionId;
   const question_list = useSelector((state) => state.question.list);
-
   const question_found = question_list.find(
     (question) => question.questionId == question_id
   );
@@ -120,13 +115,14 @@ const QnaCard = (props) => {
 };
 
 const QnaListCard = styled.div`
-  width: 32.5%;
+  width: 31.5%;
   height: 250px;
+  float: left;
   background-color: #202124;
   border-radius: 12px;
   box-sizing: border-box;
   padding: 24px 24px 0;
-  margin: 0 0 24px;
+  margin: 0 10px 24px;
   cursor: pointer;
   &:hover {
     opacity: 0.7;

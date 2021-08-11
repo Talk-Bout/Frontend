@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {Text, Button, Grid, Input} from "../elements/index";
+import {Text, Grid} from "../elements/index";
 
 
 const PopBootContents = () => {

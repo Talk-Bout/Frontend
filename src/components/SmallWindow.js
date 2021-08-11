@@ -1,7 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Button, Grid, Input, Text } from '../elements';
-import { history } from '../redux/ConfigureStore';
+import { Grid } from '../elements';
 
 const SmallWindow = (props) => {
   const { children } = props;
@@ -33,7 +31,7 @@ const SmallWindow = (props) => {
           <Grid
             backgroundColor="#212123"
             width="25vw"
-            height="85vh"
+            height="75vh"
             margin="auto"
             padding="3vh 2.5vw"
           >

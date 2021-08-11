@@ -1,7 +1,7 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
-import Logo from '../image/talkbout_logo.png';
+import talkbout_final_logo from '../image/talkbout_final_logo.png';
 import Home from '../image/Home.png';
 import Home_white from '../image/Home_white.png';
 import Boot from '../image/Bootcamp.png';
@@ -19,14 +19,32 @@ const Sidebar = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='sidebar' backgroundColor='#202124' width='100px'>
-        <Grid className='sidebar-inner' is_center>
-          <Image src={Logo} onClick={() => history.push('/')}></Image>
-          <Image src={url === '' ? Home_white : Home} onClick={() => history.push('/')}/>
-          <Image src={url === 'boot' ? Boot_white : Boot} onClick={() => history.push('/boot')}/>
-          <Image src={url === 'question' ? Qna_white : Qna} onClick={() => history.push('/question')} />
-          <Image src={url === 'news' ? News_white : News} onClick={() => history.push('/news/list')} />
-          <Image src={url === 'common' ? Talk_white : Talk} onClick={() => history.push('/common/list')} />
+      <Grid className="sidebar" backgroundColor="#202124" width="100px">
+        <Grid className="sidebar-inner" is_center>
+          <Image
+            src={talkbout_final_logo}
+            onClick={() => history.push('/')}
+          ></Image>
+          <Image
+            src={url === '' ? Home_white : Home}
+            onClick={() => history.push('/')}
+          />
+          <Image
+            src={url === 'boot' ? Boot_white : Boot}
+            onClick={() => history.push('/boot')}
+          />
+          <Image
+            src={url === 'question' ? Qna_white : Qna}
+            onClick={() => history.push('/question')}
+          />
+          <Image
+            src={url === 'news' ? News_white : News}
+            onClick={() => history.push('/news/list')}
+          />
+          <Image
+            src={url === 'common' ? Talk_white : Talk}
+            onClick={() => history.push('/common/list')}
+          />
         </Grid>
       </Grid>
     </React.Fragment>

@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
 //로고
-import Logo from '../image/Logo.png';
+import talkbout_logo_title from '../image/talkbout_logo_title.png';
 import { FcGoogle } from 'react-icons/fc';
 
 const Login = (props) => {
@@ -30,7 +30,7 @@ const Login = (props) => {
           <Grid height="40%" />
           <Grid is_center height="50%">
             <Image
-              src={Logo}
+              src={talkbout_logo_title}
               width="60%"
               margin="auto"
               _onClick={() => history.push('/')}

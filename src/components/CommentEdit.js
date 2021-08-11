@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import {Text, Grid} from "../elements/index";
-
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as commentActions} from "../redux/modules/comment";
 import { BiTimeFive, BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';

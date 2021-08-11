@@ -16,26 +16,20 @@ const BootReview = (props) => {
   const {bootcampName, desc, review} = props.location.state.camp;
 
   useEffect(() => {
-    dispatch(campActions.setReviewsDB(bootcampName));
-  }, [])
+    dispatch(campActions.setReviewsDB(bootcampName, page));
+  }, []);
+
+  const review_list = useSelector(state => state.bootcamp.review_list);
 
   // 페이지네이션
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(3);
   const [page, setPage] = useState(1);
-  const all_review = useSelector(state => state.bootcamp.review_list);
-  const review_list = all_review.slice(start, end);
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);
-    setStart(start - 3);
-    setEnd(end - 3);
   }
   // 다음 페이지로 가는 함수
   const toNextPage = () => {
     setPage(page + 1);
-    setStart(start + 3);
-    setEnd(end + 3);
   }
 
   return (
@@ -89,9 +83,14 @@ const BootReview = (props) => {
                       {/* 리뷰 */}
                       <PostBoxThird>
                         {/* 리뷰 제목 */}
-                        <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>리뷰 제목</Text>
+                        <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>{review.title}</Text>
                         {/* 작성자 닉네임, 작성일자 */}
-                        <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>수료자 : {review.nickname[0]}{review.nickname[1]}***** - {review.createdAt}</Text>
+                        {/* 닉네임은 탈퇴, 수료, 수강중 상태로 구분해서 띄움 */}
+                        <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>
+                          {review.nickname === null ? '탈퇴한 사용자 ' :
+                          review.status === '수료' ? `수료자 : ${review.nickname[0]}${review.nickname[1]}***** ` : `작성자 : ${review.nickname[0]}${review.nickname[1]}***** `}
+                          - {review.createdAt}
+                        </Text>
                         {/* 장점 */}
                         <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0'>장점</Text>
                         <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0'>{review.pros}</Text>
@@ -113,7 +112,12 @@ const BootReview = (props) => {
                       {/* 리뷰 제목 */}
                       <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>리뷰 제목</Text>
                       {/* 작성자 닉네임, 작성일자 */}
-                      <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>수료자 : {review.nickname[0]}{review.nickname[1]}***** - {review.createdAt}</Text>
+                      {/* 닉네임은 탈퇴, 수료, 수강중 상태로 구분해서 띄움 */}
+                      <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>
+                        {review.nickname === null ? '탈퇴한 사용자 ' :
+                        review.status === '수료' ? `수료자 : ${review.nickname[0]}${review.nickname[1]}***** ` : `작성자 : ${review.nickname[0]}${review.nickname[1]}***** `}
+                        - {review.createdAt}
+                      </Text>
                       {/* 장점 */}
                       <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0'>장점</Text>
                       <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0'>{review.pros}</Text>
@@ -133,9 +137,9 @@ const BootReview = (props) => {
                   {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
                   <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > page * 3 ? page + 1 : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{review_list.length > page * 3 ? page + 1 : ''}</Page></Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > page * 3 ? <BsChevronRight /> : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{review_list.length > page * 3 ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>
@@ -215,15 +219,19 @@ const Post = styled.div`
 const StarBox = styled.div`
   height: 100%;
   width: fit-content;
+  min-width: 100px;
 `;
 
 const PostBox = styled.div`
-  width: 80%;
+  width: 90%;
+  min-width: 300px;
   border-bottom: 1px solid #8f9091;
   padding: 0 0 40px 24px;
 `;
 
 const PostBoxThird = styled.div`
+  width: 80%;
+  min-width: 300px;
   padding: 0 0 40px 24px;
 `;
 

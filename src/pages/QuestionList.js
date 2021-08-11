@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Image } from '../elements';
 
@@ -20,11 +20,19 @@ import QnaCard from '../components/QnaCard';
 const QuestionList = (props) => {
   const dispatch = useDispatch();
   const qna_list = useSelector((state) => state.question.list);
-  // console.log(qna_list);
 
   useEffect(() => {
-    dispatch(questionActions.setQuestionDB());
+    dispatch(questionActions.setQuestionDB(page));
   }, []);
+
+  const [page, setPage] = useState(1);
+  //이전 페이지로 이동
+  const toPrePage = () => {
+    setPage(page - 1);
+  };
+  const toNextPage = () => {
+    setPage(page + 1);
+  };
 
   return (
     <React.Fragment>
@@ -77,6 +85,7 @@ const QuestionList = (props) => {
             </div>
           </Grid>
           {/* Q&A 게시글 목록 */}
+
           <CardList>
             {qna_list.map((q, idx) => {
               return (
@@ -90,26 +99,33 @@ const QuestionList = (props) => {
               ); //props 넘기기(이름포함)
             })}
           </CardList>
-          {/* 페이지네이션 필요 */}
+          {/* 페이지네이션 */}
           <Grid height="7vh" is_center margin="8px 0 0">
             <PageBox>
+              {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
               <Text fontSize="14px" margin="0 20px 0 0">
-                <Page>
-                  <BsChevronLeft />
+                <Page onClick={() => toPrePage()}>
+                  {page === 1 ? '' : <BsChevronLeft />}
                 </Page>
               </Text>
+              {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
               <Text fontSize="14px" margin="0 20px 0">
-                <Page>01</Page>
+                <Page>{page === 1 ? '' : page - 1}</Page>
               </Text>
+              {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
               <Text fontSize="14px" margin="0 20px 0">
-                <Page>02</Page>
+                <Page style={{ opacity: 1 }}>{page}</Page>
               </Text>
+              {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
               <Text fontSize="14px" margin="0 20px 0">
-                <Page>03</Page>
+                <Page onClick={() => toNextPage()}>
+                  {qna_list.length > page * 12 ? page + 1 : ''}
+                </Page>
               </Text>
+              {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
               <Text fontSize="14px" margin="0 0 0 20px">
-                <Page>
-                  <BsChevronRight />
+                <Page onClick={() => toNextPage()}>
+                  {qna_list.length > page * 12 ? <BsChevronRight /> : ''}
                 </Page>
               </Text>
             </PageBox>
@@ -138,7 +154,6 @@ const CardList = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 const PageBox = styled.div`

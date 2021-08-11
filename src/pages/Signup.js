@@ -11,7 +11,7 @@ import _ from 'lodash';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import Logo from '../image/Logo.png';
+import talkbout_logo_title from '../image/talkbout_logo_title.png';
 //toast notification
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -96,9 +96,9 @@ const Signup = (props) => {
         />
       </div>
       <Grid height="100%">
-        <Grid is_center height="13%">
+        <Grid is_center height="10%">
           <Image
-            src={Logo}
+            src={talkbout_logo_title}
             width="60%"
             margin="auto"
             _onClick={() => history.push('/')}
@@ -285,27 +285,6 @@ const Signup = (props) => {
                 </Text>
               )}
             </InputBox>
-
-            {/* {formik.errors.nickname && formik.touched.nickname && (
-                <Text fontSize="1.2vh" color="#ff7070">
-                  {formik.errors.nickname}
-                </Text>
-              )}
-              {!formik.errors.nickname && formik.touched.nickname && (
-                <Text fontSize="1.2vh" color="#B2F37F">
-                  사용가능한 닉네임입니다.
-                </Text>
-              )} */}
-            {/* {email_exist ? (
-                <Text fontSize="1.2vh" color="#ff7070">
-                  사용불가능한 닉네임입니다.
-                </Text>
-              ) : (
-                <Text fontSize="1.2vh" color="#B2F37F">
-                  사용가능한 닉네임입니다.
-                </Text>
-              )}
-            </InputBox> */}
           </Grid>
           <Grid>
             <SingUpButton type="submit">
@@ -323,7 +302,7 @@ const Signup = (props) => {
 const TextBox = styled.div`
   text-align: left;
   display: flex;
-  margin: 2% 0%;
+  margin: 4% 0%;
 `;
 
 const InputBox = styled.div`
@@ -358,7 +337,7 @@ const SingUpButton = styled.button`
   width: 100%;
   height: 40px;
   background-color: #7879f1;
-  margin-top: 4%;
+  margin-top: 7%;
   border: none;
   border-radius: 5px;
   cursor: pointer;

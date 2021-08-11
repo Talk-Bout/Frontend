@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Input, Image } from '../elements';
+import { Grid, Text, Image } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { history } from '../redux/ConfigureStore';

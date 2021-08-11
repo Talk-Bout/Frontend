@@ -13,7 +13,10 @@ const Main = (props) => {
   return (
     <React.Fragment>
       <Header />
-      <Banner title='수강생들의 100% 리얼 후기!' description='부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요.'/>
+      <Banner
+        title="수강생들의 100% 리얼 후기!"
+        description="부트캠퍼들이 평가하는 부트캠프는 어떤지 확인해보세요."
+      />
       {/* 부트캠프 게시판 */}
       <Grid padding="5% 10% 0% 10%">
         <Grid display="flex" flexDirection="row">

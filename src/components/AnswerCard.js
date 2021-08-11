@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Input, Image } from '../elements';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/post';
 //icons
 import { BiTimeFive, BiLike, BiComment, BiNoEntry } from 'react-icons/bi';
 import profile_medium from '../image/profile_medium.png';
 
-const QnaAnswerCard = (props) => {
+const AnswerCard = (props) => {
+  console.log(props);
+
   return (
     <React.Fragment>
-      <AnswerCard>
+      <AnswerBox>
         <Grid padding="3%">
           <Grid display="flex">
             <Text fontSize="3vh" fontWeight="600" color="#ffffff">
@@ -22,25 +22,16 @@ const QnaAnswerCard = (props) => {
 
             <Grid width="40%">
               <Text p margin="auto" fontWeight="600" color="#C4C4C4">
-                닉네임님의 답변
+                {props.nickname}님의 답변
               </Text>
               <Text p margin="auto" color="#C4C4C4">
-                2021-07-25 20:32:09 작성
+                {props.created}
               </Text>
             </Grid>
           </Grid>
           <Grid margin="3% 0%">
             <Text p color="#C4C4C4">
-              {/* {question_found.content} */}
-              Cillum in amet cillum irure ullamco. Cupidatat occaecat ad ex
-              minim ullamco dolore eiusmod velit eu fugiat excepteur. Culpa amet
-              aliqua consectetur culpa consectetur ad cillum non cillum proident
-              velit Lorem do id. Exercitation aliquip incididunt aute officia in
-              in excepteur. Cillum in amet cillum irure ullamco. Cupidatat
-              occaecat ad ex minim ullamco dolore eiusmod velit eu fugiat
-              excepteur. Culpa amet aliqua consectetur culpa consectetur ad
-              cillum non cillum proident velit Lorem do id. Exercitation aliquip
-              incididunt aute officia in in excepteur.
+              {props.content}
             </Text>
           </Grid>
 
@@ -51,11 +42,11 @@ const QnaAnswerCard = (props) => {
             </LikeCommentBtn>
           </Grid>
         </Grid>
-      </AnswerCard>
+      </AnswerBox>
     </React.Fragment>
   );
 };
-const AnswerCard = styled.div`
+const AnswerBox = styled.div`
   width: 70vw;
   margin: 3% auto;
   background-color: #202124;
@@ -74,4 +65,4 @@ const LikeCommentBtn = styled.button`
   margin-right: 1%;
 `;
 
-export default QnaAnswerCard;
+export default AnswerCard;

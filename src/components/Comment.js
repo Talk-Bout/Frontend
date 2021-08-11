@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Text, Button, Grid, Input } from '../elements/index';
-import Header from '../components/Header';
+import { Text, Grid } from '../elements/index';
 import { actionCreators as commentActions } from '../redux/modules/comment';
 //icons
 import CommentEdit from '../components/CommentEdit';

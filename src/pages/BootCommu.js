@@ -18,26 +18,26 @@ const BootCommu = (props) => {
   const {bootcampName, desc, review} = props.location.state.camp;
 
   useEffect(() => {
-    dispatch(campActions.setCommusDB(bootcampName));
+    dispatch(campActions.setCommusDB(bootcampName, page));
   }, []);
   
   // 페이지네이션
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(5);
+  // const [start, setStart] = useState(0);
+  // const [end, setEnd] = useState(5);
   const [page, setPage] = useState(1);
-  const all_commu = useSelector(state => state.bootcamp.commu_list);
-  const commu_list = all_commu.slice(start, end);
+  const commu_list = useSelector(state => state.bootcamp.commu_list);
+  // const commu_list = all_commu.slice(start, end);
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);
-    setStart(start - 5);
-    setEnd(end - 5);
+    // setStart(start - 5);
+    // setEnd(end - 5);
   }
   // 다음 페이지로 가는 함수
   const toNextPage = () => {
     setPage(page + 1);
-    setStart(start + 5);
-    setEnd(end + 5);
+    // setStart(start + 5);
+    // setEnd(end + 5);
   }
 
   return (
@@ -114,9 +114,9 @@ const BootCommu = (props) => {
                   {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
                   <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_commu.length > page * 5 ? page + 1 : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{commu_list.length > page * 5 ? page + 1 : ''}</Page></Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_commu.length > page * 5 ? <BsChevronRight /> : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{commu_list.length > page * 5 ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>

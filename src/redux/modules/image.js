@@ -19,7 +19,7 @@ const initialState = {
 
 // 액션함수
 const getPreview = (e) => {
-  // 게시글 작성 페이지로부터 선택한 이미지 받아오는 함수
+  // 게시글 작성 페이지로부터 받은 이미지의 preview를 만드는 함수
   return function (dispatch) {
     if (e === null) {
       dispatch(setPreview(null));
@@ -35,10 +35,10 @@ const getPreview = (e) => {
 }
 
 const uploadImageDB = (formData) => {
+  // 서버에 이미지를 저장하고, url을 반환하는 함수
   return function (dispatch) {
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`,
-  };
-    instance.post('/images', formData, {headers: headers}).then((response) => {
+    instance.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
+      console.log(response);
       dispatch(uploadImage(response.data));
     })
     .catch((err) => {

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
 import Logo from '../image/talkbout_logo.png';

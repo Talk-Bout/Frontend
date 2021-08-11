@@ -1,7 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Button, Grid, Input, Text } from '../elements';
-import { history } from '../redux/ConfigureStore';
+import { Grid } from '../elements';
 
 const SmallWindow = (props) => {
   const { children } = props;

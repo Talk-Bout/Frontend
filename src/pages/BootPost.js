@@ -21,28 +21,38 @@ const BootPost = (props) => {
   const commu_list = useSelector(state => state.bootcamp.commu_list);
   const commu_found = commu_list.find((commu) => commu.communityId === commu_id);
   const comment_list = useSelector(state => state.bootcamp.comment_list);
-
+  const [comment_page, setCommentPage] = useState(1);
   const [MenuLink, setMenuLink] = useState(null);
-  // const [EditComment, setEditComment] = useState(null);
+  const [edit_comment, setEditComment] = useState(null);
 
   const commentInput = useRef(null);
-  // const commentEdit = useRef(null);
+  const commentEdit = useRef(null);
 
   useEffect(() => {
     if (!commu_found) {
       dispatch(campActions.setOneCommuDB(camp_name, commu_id));
     }
-    dispatch(campActions.setCommentsDB(camp_name, commu_id));
+    dispatch(campActions.setCommentsDB(commu_id, comment_page));
   }, []);
 
+  // 드롭다운 메뉴(수정하기, 삭제하기)
   const handleClick = (e) => {
     setMenuLink(e.currentTarget);
   }
-
   const handleClose = () => {
     setMenuLink(null);
   }
 
+  // 게시글 삭제하기
+  const deleteCommu = () => {
+    const deleted_commu = {
+      bootcampName: camp_name,
+      communityId: commu_id,
+    };
+    dispatch(campActions.deleteCommuDB(deleted_commu));
+  }
+
+  // 댓글 추가하기
   const addComment = () => {
     const content = commentInput.current.value;
     const new_comment = {
@@ -54,28 +64,32 @@ const BootPost = (props) => {
     commentInput.current.value = '';
   }
 
-  // const editComment = (comment_id) => {
-  //   const content = commentEdit.current.value;
-  //   const edited_comment = {
-
-  //   }
-  //   dispatch(commentActions.editCommentDB(edited_comment, parseInt(comment_id), post_id))
-  // }
-
-  // const deleteComment = (comment_id) => {
-  //   const nickname = username;
-  //   dispatch(commentActions.deleteCommentDB(post_id, parseInt(comment_id), nickname));
-  // }
-
-  const deleteCommu = () => {
-    const deleted_commu = {
-      bootcampName: camp_name,
+  // 댓글 수정하기
+  const editComment = (comment_id) => {
+    const content = commentEdit.current.value;
+    const edited_comment = {
       communityId: commu_id,
-    };
-    dispatch(campActions.deleteCommuDB(deleted_commu));
+      communityCommentId: comment_id,
+      content: content,
+    }
+    dispatch(campActions.editCommentDB(edited_comment));
+    setEditComment(null);
   }
 
-  if (!commu_found) {
+  // 댓글 삭제하기
+  const deleteComment = (comment_id) => {
+    const deleted_comment = {
+      communityId: commu_id,
+      communityCommentId: comment_id,
+    }
+    dispatch(campActions.deleteCommentDB(deleted_comment));
+  }
+
+  const moreComment = () => {
+    setCommentPage(comment_page + 1);
+  }
+
+  if (!commu_found || !comment_list) {
     return (
       <></>
     );
@@ -130,7 +144,9 @@ const BootPost = (props) => {
                 {/* 작성일자 */}
                 <Text p fontSize='12px' color='#BDC1C6' margin='5px 0 0'>{commu_found.createdAt}</Text>
                 {/* 내용 */}
-                <Text p fontSize='16px' color='#dadce0' margin='32px 0 0'>{commu_found.content}</Text>
+                {/* 이미지가 있을 경우 내용 위에 보여주기 */}
+                {commu_found.image ? <ImageBox><Image src={`http://13.209.12.149${commu_found.image}`}/></ImageBox> : ''}
+                <Text p fontSize='16px' color='#dadce0' margin={commu_found.image ? '' : '32px 0 0'}>{commu_found.content}</Text>
                 <IconBox>
                   {/* 추천 버튼 */}
                   <span style={{backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px'><span style={{fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px'}}><BiLike /></span>{commu_found.communityLike ? commu_found.communityLike.length : 0}</Text></span>
@@ -161,31 +177,43 @@ const BootPost = (props) => {
                       </NameTime>
                       <Buttons>
                         {/* 수정 버튼 */}
-                        <PostBtn style={{margin: '0 16px 0'}} onClick={() => {}}><Text fontSize='16px' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                        {cm.communityCommentId === edit_comment ?
+                        <PostBtn style={{margin: '0 16px 0'}} onClick={() => editComment(cm.communityCommentId)}><Text fontSize='16px' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                        :
+                        <PostBtn style={{margin: '0 16px 0'}} onClick={() => setEditComment(cm.communityCommentId)}><Text fontSize='16px' color='#9AA0A6'><BiPencil /></Text></PostBtn>
+                        }
                         {/* 삭제 버튼 */}
-                        <PostBtn onClick={() => {}}><Text fontSize='16px' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
+                        <PostBtn onClick={() => deleteComment(cm.communityCommentId)}><Text fontSize='16px' color='#9AA0A6'><BiTrashAlt /></Text></PostBtn>
                       </Buttons>
                     </Grid>
                     {/* 댓글 내용 */}
+                    {/* 수정 버튼을 누른 경우, input 창으로 바뀜 */}
+                    {cm.communityCommentId === edit_comment ?
+                    <Input edit_mode ref={commentEdit} defaultValue={cm.content}/>
+                    :
                     <Text p fontSize='16px' color='#F1F3F4' margin='0 0 16px'>{cm.content}</Text>
-                    <Like>
+                    }
+                    {/* <Like> */}
                       {/* 추천 수 */}
-                      <Text fontSize='16px' color='#BDC1C6' margin='0 16px 0 0'><BiLike /><span style={{fontSize: '12px', marginLeft: '6px'}}>17</span></Text>
+                      {/* <Text fontSize='16px' color='#BDC1C6' margin='0 16px 0 0'><BiLike /><span style={{fontSize: '12px', marginLeft: '6px'}}>17</span></Text> */}
                       {/* 대댓글 수 */}
-                      <Text fontSize='16px' color='#BDC1C6'><BiComment /><span style={{fontSize: '12px', marginLeft: '6px'}}>0</span></Text>
-                    </Like>
+                      {/* <Text fontSize='16px' color='#BDC1C6'><BiComment /><span style={{fontSize: '12px', marginLeft: '6px'}}>0</span></Text> */}
+                    {/* </Like> */}
                   </Comment>
                 )
               })}
               {/* 댓글 더보기 버튼 */}
-              {comment_list.length > 5 ? <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기(1/2)</Text></MoreBtn> : ''}
+              {commu_found.communityComment.length <= 5 ?
+              <MoreBtn disabled><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>
+              :
+              <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>}
             </div>
             {/* 다른 게시글 목록 */}
             <OthersBox>
               <Text fontSize='18px' fontWeight='700' color='#E8EAED'>커뮤니티 내 다른 게시글</Text>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n, idx) => {
                 return (
-                  <Text key={idx} p fontSize='16px' margin='8px 0 0' color='#DADCE0' _onClick={() => history.push('/boot/community/post')} cursor='pointer' hover='opacity: 0.7'><GoPrimitiveDot style={{height: '10px'}} />부트캠프 질문 드립니다!</Text>
+                  <Text key={idx} p fontSize='16px' margin='8px 0 0' color='#DADCE0' _onClick={() => history.push('/boot/community/post')} cursor='pointer' hover='opacity: 0.7' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'><GoPrimitiveDot style={{height: '10px'}} />부트캠프 질문 드립니다!</Text>
                 )
               })}
             </OthersBox>
@@ -219,6 +247,23 @@ const PostBtn = styled.button`
   }
 `;
 
+const ImageBox = styled.div`
+  width: 70%;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 32px auto;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  object-fit: contain;
+`;
+
 const IconBox = styled.div`
   margin: 56px 0 0;
 `;
@@ -235,14 +280,14 @@ const InputWrap = styled.div`
 
 const Input = styled.input`
   width: 80%;
-  height: 48px;
+  height: ${(props) => props.edit_mode ? '20px' : '48px'};
   background-color: #17181B;
   border: 1px solid #9AA0A6;
   box-sizing: border-box;
   border-radius: 8px;
-  padding: 15px 20px;
-  margin-right: 8px;
-  font-size: 14px;
+  padding: ${(props) => props.edit_mode ? '15px 10px' : '15px 20px'};
+  margin: ${(props) => props.edit_mode ? '0 0 10px' : '0 8px 0 0'};
+  font-size: 16px;
   caret-color: #5F6368;
   color: #e1e1e1;
   &::placeholder {
@@ -266,7 +311,7 @@ const CommentBtn = styled.button`
 
 const Comment = styled.div`
   border-bottom: 1px solid #5F6368;
-  padding: 16px 24px;
+  padding: 16px 24px 10px;
 `;
 
 const NameTime = styled.div`

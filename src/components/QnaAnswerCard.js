@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button, Input, Image } from '../elements';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/post';
+import { Grid, Text, Image } from '../elements';
 //icons
-import { BiTimeFive, BiLike, BiComment, BiNoEntry } from 'react-icons/bi';
+import { BiLike } from 'react-icons/bi';
 import profile_medium from '../image/profile_medium.png';
 
 const QnaAnswerCard = (props) => {

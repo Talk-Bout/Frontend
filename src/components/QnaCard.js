@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button, Image } from '../elements';
-import { history } from '../redux/ConfigureStore';
+import { Text, Image } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/question';
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
-import { Group } from '../image/Group.png';
 import profile_small from '../image/profile_small.png';
 
 const QnaCard = (props) => {

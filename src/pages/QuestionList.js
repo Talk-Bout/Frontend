@@ -4,7 +4,7 @@ import { Grid, Text, Button, Image } from '../elements';
 
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/post';
+import { actionCreators as questionActions } from '../redux/modules/question';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -19,11 +19,11 @@ import QnaCard from '../components/QnaCard';
 
 const QuestionList = (props) => {
   const dispatch = useDispatch();
-  const qna_list = useSelector((state) => state.post.list);
+  const qna_list = useSelector((state) => state.question.list);
   // console.log(qna_list);
 
   useEffect(() => {
-    dispatch(questionActions.setPostDB());
+    dispatch(questionActions.setQuestionDB());
   }, []);
 
   return (
@@ -33,16 +33,47 @@ const QuestionList = (props) => {
         <Sidebar />
         {/* 헤더 포함한 바디 */}
         <Body header>
-          <Grid className='Title-btn' display='flex' justify_content='space-between'>
+          <Grid
+            className="Title-btn"
+            display="flex"
+            justify_content="space-between"
+          >
             {/* Q&A 게시판 타이틀 */}
-            <Text p color="#F8F9FA" fontWeight="700" fontSize="32px" margin='0'>
+            <Text p color="#F8F9FA" fontWeight="700" fontSize="32px" margin="0">
               Q&A
             </Text>
-            <div style={{width: '200px', padding: '10px 0 0', textAlign: 'right'}}>
+            <div
+              style={{
+                width: '200px',
+                padding: '10px 0 0',
+                textAlign: 'right',
+              }}
+            >
               {/* 인기순 정렬 버튼 */}
-              <Text fontSize='16px' color="#F8F9fA" lineHeight='32px' margin='0 16px' cursor='pointer'><span style={{fontSize: '20px', marginRight: '8px', verticalAlign: 'middle'}}><RiArrowUpDownFill /></span>인기순</Text>
+              <Text
+                fontSize="16px"
+                color="#F8F9fA"
+                lineHeight="32px"
+                margin="0 16px"
+                cursor="pointer"
+              >
+                <span
+                  style={{
+                    fontSize: '20px',
+                    marginRight: '8px',
+                    verticalAlign: 'middle',
+                  }}
+                >
+                  <RiArrowUpDownFill />
+                </span>
+                인기순
+              </Text>
               {/* 글쓰기 버튼 */}
-              <WriteBtn onClick={() => history.push('/question/write')}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
+              <WriteBtn onClick={() => history.push('/question/write')}>
+                <Text fontSize="14px" color="#7879F1">
+                  글쓰기
+                </Text>
+              </WriteBtn>
             </div>
           </Grid>
           {/* Q&A 게시글 목록 */}
@@ -50,36 +81,39 @@ const QuestionList = (props) => {
             {qna_list.map((q, idx) => {
               return (
                 <QnaCard
-                  qna_id={q.postId}
+                  qna_id={q.questionId}
                   {...q}
                   _onClick={() =>
-                    history.push(`/question/detail/${q.postId}`)
+                    history.push(`/question/detail/${q.questionId}`)
                   }
                 />
               ); //props 넘기기(이름포함)
             })}
           </CardList>
           {/* 페이지네이션 필요 */}
-          <Grid height="7vh" is_center margin='8px 0 0'>
+          <Grid height="7vh" is_center margin="8px 0 0">
             <PageBox>
-              <Text fontSize='14px' margin='0 20px 0 0'>
-                <Page><BsChevronLeft /></Page>
+              <Text fontSize="14px" margin="0 20px 0 0">
+                <Page>
+                  <BsChevronLeft />
+                </Page>
               </Text>
-              <Text fontSize='14px' margin="0 20px 0">
+              <Text fontSize="14px" margin="0 20px 0">
                 <Page>01</Page>
               </Text>
-              <Text fontSize='14px' margin="0 20px 0">
+              <Text fontSize="14px" margin="0 20px 0">
                 <Page>02</Page>
               </Text>
-              <Text fontSize='14px' margin="0 20px 0">
+              <Text fontSize="14px" margin="0 20px 0">
                 <Page>03</Page>
               </Text>
-              <Text fontSize='14px' margin="0 0 0 20px">
-                <Page><BsChevronRight /></Page>
+              <Text fontSize="14px" margin="0 0 0 20px">
+                <Page>
+                  <BsChevronRight />
+                </Page>
               </Text>
             </PageBox>
           </Grid>
-        
         </Body>
       </Grid>
     </React.Fragment>
@@ -90,7 +124,7 @@ const WriteBtn = styled.button`
   height: 40px;
   width: 80px;
   background-color: transparent;
-  border: 1px solid #7879F1;
+  border: 1px solid #7879f1;
   border-radius: 7px;
   cursor: pointer;
   vertical-align: middle;

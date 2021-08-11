@@ -16,7 +16,7 @@ const QnaAnswerCard = (props) => {
             <Text fontSize="3vh" fontWeight="600" color="#ffffff">
               A
             </Text>
-            <Grid width="3vw" height="3vh" margin="auto 0% auto 2%">
+            <Grid width="4vw" height="4vh" margin="auto 0% auto 2%">
               <Image src={profile_medium} size="5"></Image>
             </Grid>
 

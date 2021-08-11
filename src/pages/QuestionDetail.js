@@ -2,64 +2,56 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Input, Image } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionCreators as questionActions } from '../redux/modules/post';
+import { actionCreators as questionActions } from '../redux/modules/question';
 import { history } from '../redux/ConfigureStore';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import QnaAnswerCard from '../components/QnaAnswerCard';
 //icons
-import {
-  BiTimeFive,
-  BiLike,
-  BiComment,
-  BiNoEntry,
-  BiShow,
-  BiPencil,
-  BiTrashAlt,
-} from 'react-icons/bi';
-import { GrView } from 'react-icons/gr';
+import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye } from 'react-icons/bs';
-import { AiOutlineEye } from 'react-icons/ai';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import profile_medium from '../image/profile_medium.png';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
-  const question_id = window.location.pathname.split('/question/detail/')[1]; //ㅇㅋ
-  const question_list = useSelector((state) => state.post.list);
+  const question_id = window.location.pathname.split('/question/detail/')[1];
+  const question_list = useSelector((state) => state.question.list);
   const question_found = question_list.find(
-    (post) => post.postId == question_id
+    (question) => question.questionId == parseInt(question_id)
   );
-
   const [MenuLink, setMenuLink] = useState(null);
 
-  const handleClick = (e) => {
-    setMenuLink(e.currentTarget);
-  };
-
-  const handleClose = () => {
-    setMenuLink(null);
-  };
   // console.log(question_list);
   // console.log(question_id);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
     if (!question_found) {
-      dispatch(questionActions.setOnePostDB(question_id));
+      dispatch(questionActions.setOneQuestionDB(question_id));
     }
   }, []);
-
-  const editBtn = () => {
-    history.push(`/question/write/${question_id}`);
-  };
 
   if (!question_found) {
     return <></>;
   }
+
+  const handleClick = (e) => {
+    setMenuLink(e.currentTarget);
+  };
+  const editBtn = () => {
+    history.push(`/question/write/${question_id}`);
+  };
+
+  const handleClose = () => {
+    setMenuLink(null);
+  };
+
+  const deleteBtn = () => {
+    dispatch(questionActions.deleteQuestionDB(question_id));
+  };
 
   return (
     <React.Fragment>
@@ -125,9 +117,9 @@ const QuestionDetail = (props) => {
                     onClose={handleClose}
                   >
                     <MenuItem
-                    // onClick={() => {
-                    //   history.push(`/common/write/${postId}`);
-                    // }}
+                      onClick={() => {
+                        editBtn();
+                      }}
                     >
                       수정하기
                       <Text margin="0 0 0 10px">
@@ -135,10 +127,10 @@ const QuestionDetail = (props) => {
                       </Text>
                     </MenuItem>
                     <MenuItem
-                    // onClick={() => {
-                    //   handleClose();
-                    //   deleteCommon();
-                    // }}
+                      onClick={() => {
+                        handleClose();
+                        deleteBtn();
+                      }}
                     >
                       삭제하기
                       <Text margin="0 0 0 10px">

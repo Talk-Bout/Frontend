@@ -8,11 +8,9 @@ import { AiOutlineEye } from 'react-icons/ai';
 import profile_small from '../image/profile_small.png';
 
 const QnaCard = (props) => {
-  const dispatch = useDispatch();
   const { _onClick } = props;
   const question_id = props.questionId;
   const question_list = useSelector((state) => state.question.list);
-  console.log(question_list);
   const question_found = question_list.find(
     (question) => question.questionId == question_id
   );

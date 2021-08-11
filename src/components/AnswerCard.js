@@ -6,8 +6,6 @@ import { BiLike } from 'react-icons/bi';
 import profile_medium from '../image/profile_medium.png';
 
 const AnswerCard = (props) => {
-  console.log(props);
-
   return (
     <React.Fragment>
       <AnswerBox>

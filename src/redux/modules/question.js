@@ -146,7 +146,6 @@ const setAnswerDB = (question_id, page) => {
     instance
       .get(`/questions/${questionId}/answers?page=${page}`)
       .then((response) => {
-        console.log(response);
         dispatch(setAnswer(response.data));
       })
       .catch((err) => {

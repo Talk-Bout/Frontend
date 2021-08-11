@@ -67,8 +67,6 @@ const CommonDetail = (props) => {
   const [bookmark, setBookmark] = useState(false);
   const bookmark_list = useSelector(state => state.post.bookmark_list);
   const postBookmarkId = useSelector(state => state.post.bookmark_list.postBookmarkId);
-  // let idx = bookmark_list.findIndex((b)=> b.postBookmarkId === postBookmarkId);
-  console.log(bookmark_list);
 
   const handleBookmark = () => {
     setBookmark(!bookmark);

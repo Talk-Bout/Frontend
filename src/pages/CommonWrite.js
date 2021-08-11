@@ -29,8 +29,6 @@ const CommonWrite = (props) => {
   // 카테고리 설정
   const categoryRef = useRef('');
 
- 
-
   const addCommon = () => {
     if (categoryRef.current.value === '') {
       window.alert('카테고리를 설정해주세요.');

@@ -35,8 +35,8 @@ const setPostDB = (page, category) => {
     instance.get(`/posts?page=${page}&category=${category}`)
       .then((response) => {
         dispatch(setPost(response.data));
-        console.log(response);
-        console.log(response.data);
+        // console.log(response);
+        // console.log(response.data);
       })
       .catch((err) => {
         console.error(`전체 게시글 불러오기 에러 발생: ${err}`);
@@ -163,7 +163,7 @@ const deleteBookmarkDB = (deleted_bookmark) => {
       })
     .then((response) => {
               dispatch(deleteBookmark(response.data));
-              console.log(response.data);
+              // console.log(response.data);
           })
           .catch((err) => {
               console.log(`에러 발생: ${err}`);

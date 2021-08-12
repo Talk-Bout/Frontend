@@ -108,10 +108,10 @@ const BootReviewWrite = (props) => {
                 <div><Input placeholder='제목을 입력해주세요' ref={titleInput}/></div>
                 {/* 부트캠프의 장점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>부트캠프의 장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder='부트캠프의 장점을 입력해주세요' ref={prosInput}/></div>
+                <div><Textarea rows='5' placeholder='부트캠프의 장점을 입력해주세요.&#13;&#10;리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.' ref={prosInput}/></div>
                 {/* 부트캠프의 단점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>부트캠프의 단점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder='부트캠프의 단점을 입력해주세요' ref={consInput}/></div>
+                <div><Textarea rows='5' placeholder='부트캠프의 단점을 입력해주세요.&#13;&#10;리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.' ref={consInput}/></div>
               </BodyBox>
             </Window>
           </Grid>

@@ -20,7 +20,7 @@ const BootRoot = (props) => {
   const this_camp = my_camps.find((camp) => camp.bootcampName === bootcampName);
 
   useEffect(() => {
-    dispatch(campActions.setMyCampDB(username));
+    dispatch(campActions.setMyCampDB());
   }, []);
   
   // 부트캠프 북마크 표시

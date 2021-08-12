@@ -83,7 +83,7 @@ const setMyCampDB = () => {
   return function (dispatch) {
       instance.get('/tokenUser')
       .then((response) => {
-        const nickname = response.data;
+        const nickname = response.data.nickname;
         instance.get(`/users/${nickname}/bootcampBookmarks`).then((response) => {
           dispatch(setMyCamp(response.data));
         }).catch((err) => {
@@ -187,7 +187,7 @@ const addCommuDB = (new_commu) => {
       image: new_commu.image,
     }).then((response) => {
       dispatch(addCommu(response.data));
-      history.goBack();
+      history.push(`/boot/${response.data.bootcampName}/post/${response.data.communityId}`);
     })
     .catch((err) => {
       console.error(`부트캠프 커뮤니티글 작성하기 에러 발생: ${err} ### ${err.response}`);
@@ -200,7 +200,8 @@ const editCommuDB = (edited_commu) => {
   return function (dispatch) {
     instance.patch(`/bootcamp/${edited_commu.bootcampName}/community/${edited_commu.communityId}`, {
       title: edited_commu.title,
-      content: edited_commu.content
+      content: edited_commu.content,
+      image: edited_commu.image,
     }).then((response) => {
       dispatch(editCommu(response.data));
       history.push(`/boot/${edited_commu.bootcampName}/post/${edited_commu.communityId}`);
@@ -227,9 +228,10 @@ const setMyCommuDB = () => {
   return function (dispatch) {
     instance.get('/tokenUser')
     .then((response) => {
-      const nickname = response.data;
-      instance.get(`/users/${nickname}/communityBookmarks`).then((response) => {
-        dispatch(setMyCommu(response.data));
+      const nickname = response.data.nickname;
+      instance.get(`/users/${nickname}/communityBookmarks`).then((result) => {
+        console.log(result.data);
+        dispatch(setMyCommu(result.data));
       }).catch((err) => {
         console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
       });
@@ -257,7 +259,7 @@ const deleteMyCommuDB = (communityId, communityBookmarkId) => {
   // 커뮤니티글 북마크 해제하는 함수
   return function (dispatch) {
     instance.delete(`/community/${communityId}/communityBookmarks/${communityBookmarkId}`).then((response) => {
-      dispatch(deleteMyCommu(response.data));
+      dispatch(deleteMyCommu(communityBookmarkId));
     }).catch((err) => {
       console.error(`부트캠프 커뮤니티글 북마크 해제하기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -398,11 +400,12 @@ export default handleActions({
       draft.comment_list = [...draft.comment_list].concat(action.payload.comment_list);
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      // draft.comment_list.push(action.payload.comment);
+      if (draft.comment_list.length % 5 !== 0) {
+        draft.comment_list.push(action.payload.comment)
+      }
       draft.one_commu.communityComment.push(action.payload.comment);
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
-      console.log(action.payload.comment);
       let idx = draft.comment_list.findIndex((comment) => comment.communityCommentId === action.payload.comment.communityCommentId);
       draft.comment_list[idx] = action.payload.comment;
     }),

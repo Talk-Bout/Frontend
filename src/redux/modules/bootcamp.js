@@ -294,7 +294,7 @@ const setCommentsDB = (commu_id, page) => {
   return function (dispatch) {
     instance.get(`/community/${commu_id}/communityComments?page=${page}`).then((response) => {
       dispatch(setComments(response.data));
-      if (response.data.length === 0) {
+      if (page !== 1 && response.data.length === 0) {
         window.alert('마지막 댓글입니다.');
         return;
       }

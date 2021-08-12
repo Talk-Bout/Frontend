@@ -8,7 +8,7 @@ import { history } from '../redux/ConfigureStore';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
-
+import { actionCreators as imageActions } from '../redux/modules/image';
 //icons
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
@@ -16,11 +16,33 @@ import { FiHash } from 'react-icons/fi';
 
 const QuestionWrite = (props) => {
   const dispatch = useDispatch();
+
   //리뷰 콘텐츠 작성
   const titleInput = useRef(null);
   const contentInput = useRef(null);
   const user_name = useSelector((state) => state.user.user);
-  console.log(user_name);
+
+  //이미지 불러오기
+  const image_url = useSelector((state) => state.image.image_url);
+  console.log(image_url);
+
+  // 이미지 업로드
+  const imageRef = useRef();
+  const preview = useSelector((state) => state.image.preview);
+
+  // 이미지 미리보기 실행 및 서버 업로드 함수
+  const selectFile = (e) => {
+    const uploaded_image = imageRef.current.files[0];
+    const formData = new FormData();
+    formData.append('image', uploaded_image);
+    dispatch(imageActions.getPreview(e));
+    dispatch(imageActions.uploadImageDB(formData));
+  };
+  // 이미지 미리보기 삭제 함수
+  const exitPage = () => {
+    dispatch(imageActions.getPreview(null));
+  };
+
   //setOnePost 불러오기
   useEffect(() => {
     if (question_id) {
@@ -31,7 +53,6 @@ const QuestionWrite = (props) => {
   // 수정하고 목록으로 돌아가면 ,setPost 됨. 서버의 내용을 도로 가져오는 함수가 있기 때문에
   // 콘텐츠 수정
   const [edit_mode, setEditMode] = React.useState(false);
-  console.log(edit_mode);
   const question_id = props.match.params.id; //작성페이지, 수정페이지인지 구분할 수 있는 부분
   const question_list = useSelector((state) => state.question.list);
   //수정 전 게시물
@@ -46,6 +67,7 @@ const QuestionWrite = (props) => {
       title: titleInput.current.value,
       content: contentInput.current.value,
       nickname: user_name,
+      image: image_url,
     };
     if (edit_mode) {
       dispatch(questionActions.editQuestionDB(new_question));
@@ -64,7 +86,7 @@ const QuestionWrite = (props) => {
       >
         <Sidebar />
         <Body>
-          <Grid className="body-inner" height="110%" padding="5vh 0 0">
+          <Grid className="body-inner" height="100%" padding="5vh 0 0">
             <Window>
               <Grid
                 className="header-box"
@@ -79,7 +101,10 @@ const QuestionWrite = (props) => {
                     color="#e5e5e5"
                     lineHeight="7.5vh"
                     cursor="pointer"
-                    _onClick={() => history.push('/question')}
+                    _onClick={() => {
+                      history.goBack();
+                      exitPage();
+                    }}
                   >
                     <BsX />
                   </Text>
@@ -96,14 +121,16 @@ const QuestionWrite = (props) => {
                 </Grid>
                 <Grid className="submit-button" width="23.33%" padding="0 25px">
                   <Text
-                    fontSize="2.5vh"
+                    fontSize="24px"
                     fontWeight="700"
                     color="#848484"
-                    lineHeight="7vh"
+                    lineHeight="84px"
                     float="right"
-                    cursor="pointer"
-                    _onClick={() => create_question()}
-                    focus
+                    hover="color= '#7879F1'" // 호버 확인!!!!!!!!
+                    _onClick={() => {
+                      create_question();
+                      history.goBack();
+                    }}
                   >
                     {edit_mode ? '수정' : '등록'}
                   </Text>
@@ -122,22 +149,51 @@ const QuestionWrite = (props) => {
                 </TitleBox>
                 <ContentBox>
                   <Textarea
-                    rows="15"
+                    rows={preview ? '5' : '10'}
                     placeholder="내용을 입력해주세요."
                     ref={contentInput}
                     defaultValue={edit_mode ? old_question.content : null}
                   />
                 </ContentBox>
+                {preview ? (
+                  <div style={{ textAlign: 'center' }}>
+                    <Preview>
+                      <Img src={preview} />
+                    </Preview>
+                    <Text
+                      p
+                      fontSize="16px"
+                      color="#5f6368"
+                      margin="0 auto 80px"
+                    >
+                      {imageRef.current.files[0].name}
+                    </Text>
+                  </div>
+                ) : (
+                  ''
+                )}
               </BodyBox>
               <FooterBox>
-                <Text
-                  fontSize="2.5vh"
-                  color="#b3b3b3"
-                  margin="0 10px 0 0"
-                  cursor="pointer"
-                >
-                  <BiImageAdd />
-                </Text>
+                {/* 이미지 추가 버튼 */}
+                <form>
+                  <label for="file">
+                    <Text
+                      fontSize="24px"
+                      color="#b3b3b3"
+                      margin="0 32px 0 0"
+                      cursor="pointer"
+                    >
+                      <BiImageAdd />
+                    </Text>
+                    <ImgInput
+                      type="file"
+                      ref={imageRef}
+                      onChange={selectFile}
+                      accept="image/*"
+                      id="file"
+                    />
+                  </label>
+                </form>
 
                 <Text
                   fontSize="2.5vh"
@@ -161,6 +217,15 @@ const Window = styled.div`
   width: 80%;
   height: 90%;
   margin: auto;
+`;
+
+const saveBtn = styled.text`
+  font-size: 2.5vh;
+  font-weight: 700;
+  color: #848484;
+  line-height: 7vh;
+  float: right;
+  cursor: pointer;
 `;
 
 const BodyBox = styled.div`
@@ -218,11 +283,36 @@ const Textarea = styled.textarea`
     outline: none;
   }
 `;
+const Preview = styled.div`
+  width: 884px;
+  height: 500px;
+  border: 1px solid #5f6368;
+  box-sizing: border-box;
+  text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 0 auto 16px;
+`;
 
+const Img = styled.img`
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;
 const FooterBox = styled.div`
   background-color: #2e3134;
   height: 10%;
   padding: 20px 40px 20px;
+  display: flex;
+`;
+// 이미지 파일 선택하는 기본 버튼 숨기기
+const ImgInput = styled.input`
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
 `;
 
 export default QuestionWrite;

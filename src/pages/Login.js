@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import SmallWindow from '../components/SmallWindow';
 import { Grid, Input, Text, Image } from '../elements';
 import { history } from '../redux/ConfigureStore';
-import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
 //로고
@@ -77,7 +76,7 @@ const Login = (props) => {
           {/* 로그인 버튼 => 누르면 toast 나옴*/}
           <Button onClick={() => login()} color="#a5a6af">
             {/* <Button color="#a5a6af"> */}
-            <Text fontSize="1.5vh" color="white">
+            <Text fontSize="1.5vh" fontWeight="600" color="white">
               로그인
             </Text>
           </Button>
@@ -143,14 +142,17 @@ const InformInput = styled.input`
 const Button = styled.button`
   width: 100%;
   height: 5vh;
-  background-color: #7879f1;
+  background-color: #a5a6f6;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  :active {
+  /* :active {
     box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
     position: relative;
     top: 2px;
+  } */
+  :hover {
+    background-color: #7879f1;
   }
 `;
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Image } from '../elements';
+import { Grid, Text } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { history } from '../redux/ConfigureStore';
@@ -24,6 +24,8 @@ const QuestionDetail = (props) => {
   );
   const user_name = useSelector((state) => state.user.user);
   const [MenuLink, setMenuLink] = useState(null);
+  const is_login = useSelector((state) => state.user.is_login);
+  console.log(is_login);
   //Answer 작성
   const answerInput = useRef(null);
   const answer_list = useSelector((state) => state.question.answer_list);
@@ -68,10 +70,16 @@ const QuestionDetail = (props) => {
       questionId: question_id,
     };
 
+    if (!is_login) {
+      window.alert('로그인 후에 이용 가능합니다.');
+      return;
+    }
+
     if (answerInput.current.value === '') {
       window.alert('내용을 입력해주세요.');
       return;
     }
+
     dispatch(questionActions.createAnswerDB(new_answer));
     answerInput.current.value = '';
   };
@@ -81,7 +89,7 @@ const QuestionDetail = (props) => {
       <Grid display="flex">
         <Sidebar />
         <Body header>
-          <Grid height="50%">
+          <Grid>
             {/* 질문 카드 */}
             <Grid width="70vw" height="100%" margin="auto">
               <Grid display="flex">
@@ -113,25 +121,30 @@ const QuestionDetail = (props) => {
                       <BsBookmark />
                     </Text>
                   </Button>
-                  <Button
-                    padding="0"
-                    width="16.33px"
-                    height="21px"
-                    bg="transparent"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                  >
-                    <Text
+                  {is_login && question_found.nickname === user_name ? (
+                    <Button
                       padding="0"
-                      color="#9AA0A6"
-                      fontSize="24px"
-                      lineHeight="35px"
-                      hover="opacity: 0.8"
+                      width="16.33px"
+                      height="21px"
+                      bg="transparent"
+                      aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      onClick={handleClick}
                     >
-                      <BsThreeDotsVertical />
-                    </Text>
-                  </Button>
+                      <Text
+                        padding="0"
+                        color="#9AA0A6"
+                        fontSize="24px"
+                        lineHeight="35px"
+                        hover="opacity: 0.8"
+                      >
+                        <BsThreeDotsVertical />
+                      </Text>
+                    </Button>
+                  ) : (
+                    ''
+                  )}
+
                   <Menu
                     id="simple-menu"
                     anchorEl={MenuLink}
@@ -178,11 +191,18 @@ const QuestionDetail = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-
               {/* 콘텐츠마다 달라지는 위치값 고정하기 */}
               <Text p margin="5% 0%" color="#C4C4C4">
                 {question_found.content}
               </Text>
+
+              {question_found.image ? (
+                <ImageBox>
+                  <Image src={`http://13.209.12.149${question_found.image}`} />
+                </ImageBox>
+              ) : (
+                ''
+              )}
 
               <Grid display="flex" margin="3% 0%" vertical-align="center">
                 <LikeCommentBtn>
@@ -196,7 +216,7 @@ const QuestionDetail = (props) => {
 
                 <Text color="#C4C4C4" margin="auto 1%">
                   <BsEye />
-                  254
+                  {question_found.viewCount}
                 </Text>
               </Grid>
             </Grid>
@@ -251,6 +271,22 @@ const ACommentBox = styled.div`
   border-radius: 12px;
   border: 1px solid #9aa0a6;
   width: 100%;
+`;
+const ImageBox = styled.div`
+  width: 70%;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 32px auto;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  object-fit: contain; //가로세로 비율 콘텐츠 박스 크기에 맞춤
 `;
 
 const AInput = styled.textarea`

@@ -4,14 +4,14 @@ import { history } from '../ConfigureStore';
 import instance from '../../shared/Request';
 
 //액션 타입
-const LOG_IN = 'LOG_IN'; //로그인하기
-const LOG_OUT = 'LOG_OUT'; //로그아웃하기
-const SIGN_UP = 'SIGN_UP'; //회원가입
-const STAY_LOGIN = 'STAY_LOGIN'; //로그인 상태 유지
-const DOUBLE_EMAIL_CHECK = 'DOUBLE_EMAIL_CHECK'; //이메일 중복 확인
-const DOUBLE_NICKNAME_CHECK = 'DOUBLE_NICKNAME_CHECK'; //닉네임 중복 확인
-const LOGIN_CHECK = 'LOGIN_CHECK'; //로그인 페이지 id, pwd 체크
-const DELETE_USER = 'DELETE_USER'; //회원 탈퇴
+const LOG_IN = 'user/LOG_IN'; //로그인하기
+const LOG_OUT = 'user/LOG_OUT'; //로그아웃하기
+const SIGN_UP = 'user/SIGN_UP'; //회원가입
+const STAY_LOGIN = 'user/STAY_LOGIN'; //로그인 상태 유지
+const DOUBLE_EMAIL_CHECK = 'user/DOUBLE_EMAIL_CHECK'; //이메일 중복 확인
+const DOUBLE_NICKNAME_CHECK = 'USER/DOUBLE_NICKNAME_CHECK'; //닉네임 중복 확인
+const LOGIN_CHECK = 'user/LOGIN_CHECK'; //로그인 페이지 id, pwd 체크
+const DELETE_USER = 'user/DELETE_USER'; //회원 탈퇴
 
 //액션 생성함수
 const logIn = createAction(LOG_IN, (user) => ({ user }));
@@ -199,10 +199,7 @@ export default handleActions(
       }),
     [DELETE_USER]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.is_deleted);
         draft.is_deleted = true;
-        localStorage.removeItem('token');
-        console.log('token');
         draft.is_login = false;
       }),
   },

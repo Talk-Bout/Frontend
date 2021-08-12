@@ -19,11 +19,18 @@ const AnswerCard = (props) => {
             </Grid>
 
             <Grid width="40%">
-              <Text p margin="auto" fontWeight="600" color="#C4C4C4">
-                {props.nickname}님의 답변
-              </Text>
+              {props.nickname === null ? (
+                <Text p margin="auto" fontWeight="600" color="#C4C4C4">
+                  탈퇴한 회원입니다.
+                </Text>
+              ) : (
+                <Text p margin="auto" fontWeight="600" color="#C4C4C4">
+                  {props.nickname}님의 답변
+                </Text>
+              )}
+
               <Text p margin="auto" color="#C4C4C4">
-                {props.created}
+                {props.createdAt}
               </Text>
             </Grid>
           </Grid>
@@ -36,7 +43,7 @@ const AnswerCard = (props) => {
           <Grid>
             <LikeCommentBtn>
               <BiLike />
-              17
+              {/* {props.answerLike.length} */}
             </LikeCommentBtn>
           </Grid>
         </Grid>

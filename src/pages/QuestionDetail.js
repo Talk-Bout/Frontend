@@ -8,12 +8,14 @@ import { history } from '../redux/ConfigureStore';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import AnswerCard from '../components/AnswerCard';
+
 //icons
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
 import profile_medium from '../image/profile_medium.png';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
@@ -22,29 +24,29 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
-  const user_name = useSelector((state) => state.user.user);
+  const user_name = useSelector((state) => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
-  console.log(is_login);
+
   //Answer 작성
   const answerInput = useRef(null);
   const answer_list = useSelector((state) => state.question.answer_list);
-  // const answer_count = answer_list.length > 0;
-  const [page, setPage] = React.useState(1);
-
+  const [answer_page, setAnswerPage] = useState(1);
+  console.log(answer_page);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
     if (!question_found) {
       dispatch(questionActions.setOneQuestionDB(question_id));
     }
-    dispatch(questionActions.setAnswerDB(question_id, page));
+    dispatch(questionActions.setAnswerDB(question_id, 1));
   }, []);
 
   if (!question_found) {
     return <></>;
   }
 
+  // 수정 삭제 버튼
   const handleClick = (e) => {
     setMenuLink(e.currentTarget);
   };
@@ -84,6 +86,15 @@ const QuestionDetail = (props) => {
     answerInput.current.value = '';
   };
 
+  //Answer 더보기
+  // const moreAnswer = async () => {
+  //   const result = await setAnswerPage(answer_page + 1);
+  //   console.log(result);
+  //   dispatch(questionActions.setAnswerDB(question_id, answer_page));
+  // };
+
+  async function moreAnswer() {}
+
   return (
     <React.Fragment>
       <Grid display="flex">
@@ -121,6 +132,8 @@ const QuestionDetail = (props) => {
                       <BsBookmark />
                     </Text>
                   </Button>
+
+                  {/* 드롭 다운 버튼 */}
                   {is_login && question_found.nickname === user_name ? (
                     <Button
                       padding="0"
@@ -183,9 +196,16 @@ const QuestionDetail = (props) => {
                 </Grid>
 
                 <Grid width="40%">
-                  <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
-                    {question_found.nickname}
-                  </Text>
+                  {question_found.nickname === null ? (
+                    <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
+                      탈퇴한 회원입니다.
+                    </Text>
+                  ) : (
+                    <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
+                      {question_found.nickname}
+                    </Text>
+                  )}
+
                   <Text p margin="auto 4%" color="#C4C4C4">
                     {question_found.createdAt}
                   </Text>
@@ -207,7 +227,7 @@ const QuestionDetail = (props) => {
               <Grid display="flex" margin="3% 0%" vertical-align="center">
                 <LikeCommentBtn>
                   <BiLike />
-                  17
+                  {question_found.questionLike.length}
                 </LikeCommentBtn>
 
                 <Text color="#C4C4C4" margin="auto 1%">
@@ -244,6 +264,14 @@ const QuestionDetail = (props) => {
             {answer_list.map((answer, idx) => {
               return <AnswerCard key={answer.answerId} {...answer} />;
             })}
+
+            <Grid margin="auto" width="10%">
+              {answer_list.length < 5 ? null : (
+                <Button onClick={() => moreAnswer()}>
+                  <MdKeyboardArrowDown size="40" color="#F2F3F4" />
+                </Button>
+              )}
+            </Grid>
           </AnswerBox>
         </Body>
       </Grid>

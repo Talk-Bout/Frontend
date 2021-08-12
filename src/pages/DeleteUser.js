@@ -22,8 +22,9 @@ const DeleteUser = (props) => {
   console.log(user_name);
 
   const [state, setState] = useState({
-    checked: true,
+    checked: false,
   });
+  console.log(state.checked);
 
   const [charcter, setCharcter] = useState(0);
 
@@ -33,7 +34,13 @@ const DeleteUser = (props) => {
 
   const deleteUserBtn = () => {
     // console.log(user_name);
+    if (state.checked === false) {
+      window.alert('게시물 관리 조항을 확인해주세요.');
+      return;
+    }
     dispatch(userActions.userDeleteDB(user_name));
+    localStorage.removeItem('token');
+    history.push('/');
   };
 
   return (

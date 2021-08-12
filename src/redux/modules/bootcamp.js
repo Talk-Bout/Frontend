@@ -2,6 +2,7 @@ import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import {history} from '../ConfigureStore';
 import instance from '../../shared/Request';
+import { concat } from 'lodash-es';
 
 // 액션타입
 const SET_CAMPS = 'bootcamp/SET_CAMPS'; // 부트캠프 전체 목록 불러오기
@@ -293,6 +294,10 @@ const setCommentsDB = (commu_id, page) => {
   return function (dispatch) {
     instance.get(`/community/${commu_id}/communityComments?page=${page}`).then((response) => {
       dispatch(setComments(response.data));
+      if (response.data.length === 0) {
+        window.alert('마지막 댓글입니다.');
+        return;
+      }
     }).catch((err) => {
       console.error(`부트캠프 커뮤니티 댓글 불러오기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -390,12 +395,11 @@ export default handleActions({
       draft.commu_like_list.splice(like_idx, 1);
     }),
     [SET_COMMENTS]: (state, action) => produce(state, (draft) => {
-      draft.comment_list = [...action.payload.comment_list];
+      draft.comment_list = [...draft.comment_list].concat(action.payload.comment_list);
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-      draft.comment_list.push(action.payload.comment);
-      let idx = draft.commu_list.findIndex((commu) => commu.communityId === action.payload.comment.communityId);
-      draft.commu_list[idx].communityComment.push(action.payload.comment);
+      // draft.comment_list.push(action.payload.comment);
+      draft.one_commu.communityComment.push(action.payload.comment);
     }),
     [EDIT_COMMENT]: (state, action) => produce(state, (draft) => {
       console.log(action.payload.comment);

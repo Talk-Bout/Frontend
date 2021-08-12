@@ -20,7 +20,7 @@ const QuestionWrite = (props) => {
   //리뷰 콘텐츠 작성
   const titleInput = useRef(null);
   const contentInput = useRef(null);
-  const user_name = useSelector((state) => state.user.user);
+  const user_name = useSelector((state) => state.user.user.nickname);
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);

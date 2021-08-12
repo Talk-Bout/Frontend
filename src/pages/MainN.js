@@ -5,7 +5,7 @@ import Body from '../components/Body';
 import BannerN from '../components/BannerN';
 import MainBoot from '../components/MainBoot';
 import MainQna from '../components/MainQna';
-import MainNews from '../components/MainNews';
+// import MainNews from '../components/MainNews';
 import MainTalk from '../components/MainTalk';
 
 const MainN = (props) => {
@@ -23,7 +23,7 @@ const MainN = (props) => {
             />
             <MainBoot />
             <MainQna />
-            <MainNews />
+            {/* <MainNews /> */}
             <MainTalk />
           </Grid>
         </Body>

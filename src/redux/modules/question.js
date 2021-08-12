@@ -2,18 +2,23 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/Request';
-import { bindActionCreators } from 'redux';
 
 // QUESTION 액션타입
-const SET_QUESTION = 'SET_QUESTION';
-const SET_ONE_QUESTION = 'SET_ONE_QUESTION';
-const CREATE_QUESTION = 'CREATE_QUESTION';
-const EDIT_QUESTION = 'EDIT_QUESTION';
-const DELETE_QUESTION = 'DELETE_QUESTION';
+const SET_QUESTION = 'question/SET_QUESTION';
+const SET_ONE_QUESTION = 'question/SET_ONE_QUESTION';
+const CREATE_QUESTION = 'question/CREATE_QUESTION';
+const EDIT_QUESTION = 'question/EDIT_QUESTION';
+const DELETE_QUESTION = 'question/DELETE_QUESTION';
 
 //ANSWER 액션타입
-const SET_ANSWER = 'SET_ANSWER';
-const CREATE_ANSWER = 'CREATE_ANSWER';
+const SET_ANSWER = 'question/SET_ANSWER';
+const CREATE_ANSWER = 'question/CREATE_ANSWER';
+const SET_NEXT_ANSWER = 'question/SET_NEXT_ANSWER';
+
+//북마크 액션타입
+const SET_QUESTION_BOOKMARK = 'SET_QUESTION_BOOKMARK';
+const ADD_QUESTION_BOOKMARK = 'ADD_QUESTION_BOOKMARK';
+const DELETE_QUESTION_BOOKMARK = 'DELETE_QUESTION_BOOKMARK';
 
 // QUESTION 액션생성함수
 const setQuestion = createAction(SET_QUESTION, (question_list) => ({
@@ -30,14 +35,32 @@ const deleteQuestion = createAction(DELETE_QUESTION, (question) => ({
   question,
 }));
 
-// QUESTION 액션생성함수
+// ANSWER 액션생성함수
 const setAnswer = createAction(SET_ANSWER, (answer_list) => ({ answer_list }));
 const createAnswer = createAction(CREATE_ANSWER, (answer) => ({ answer }));
+const setNextAnswer = createAction(SET_NEXT_ANSWER, (answer_list) => ({
+  answer_list,
+}));
+
+// BOOKMARK 액션생성함수
+const setQuestionBookmark = createAction(
+  SET_QUESTION_BOOKMARK,
+  (bookmark_list) => ({ bookmark_list })
+);
+const addQuestionBookmark = createAction(
+  ADD_QUESTION_BOOKMARK,
+  (question_bookmark) => ({ question_bookmark })
+);
+const deleteQuestionBookmark = createAction(
+  DELETE_QUESTION_BOOKMARK,
+  (question_bookmark) => ({ question_bookmark })
+);
 
 // 기본값 정하기
 const initialState = {
   list: [],
   answer_list: [],
+  bookmark_list: [],
 };
 
 // 액션함수
@@ -89,8 +112,8 @@ const createQuestionDB = (new_question) => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response.data);
-        // dispatch(createQuestion(response.data));
+        // console.log(response.data);
+        dispatch(createQuestion(response.data));
       })
       .catch((err) => {
         console.error(`질문 작성하기 에러: ${err}`);
@@ -146,16 +169,37 @@ const deleteQuestionDB = (question_id) => {
 const setAnswerDB = (question_id, page) => {
   return function (dispatch) {
     const questionId = parseInt(question_id);
+    console.log(page);
     instance
       .get(`/questions/${questionId}/answers?page=${page}`)
       .then((response) => {
-        dispatch(setAnswer(response.data));
+        page >= 2 && response.data.length > 0
+          ? dispatch(setNextAnswer(response.data))
+          : dispatch(setAnswer(response.data));
       })
       .catch((err) => {
         console.error(`질문 불러오기 에러 발생 : ${err}`);
       });
   };
 };
+
+// const setNextAnswerDB = (question_id, page) => {
+//   return function (dispatch) {
+//     const questionId = parseInt(question_id);
+//     console.log(page);
+//     instance
+//       .get(`/questions/${questionId}/answers?page=${page}`)
+//       .then((response) => {
+//         console.log(response.data);
+//         response.data.length > 5
+//           ? dispatch(setNextAnswer(response.data))
+//           : dispatch(setAnswer(response.data));
+//       })
+//       .catch((err) => {
+//         console.error(`질문 불러오기 에러 발생 : ${err}`);
+//       });
+//   };
+// };
 
 const createAnswerDB = (new_answer) => {
   return function (dispatch) {
@@ -183,6 +227,16 @@ const createAnswerDB = (new_answer) => {
       });
   };
 };
+
+// const setQuestionBookmarkDB = (nickname) => {
+//   return function (dispatch){
+//     instance
+//     .get(`/`)
+//   }
+// }
+
+// const addQuestionBookmarkDB = ()
+
 export default handleActions(
   {
     [SET_QUESTION]: (state, action) =>
@@ -214,9 +268,16 @@ export default handleActions(
       produce(state, (draft) => {
         draft.answer_list = action.payload.answer_list;
       }),
+    [SET_NEXT_ANSWER]: (state, action) =>
+      produce(state, (draft) => {
+        draft.answer_list = draft.answer_list.concat(
+          action.payload.answer_list
+        );
+        console.log(draft.answer_list);
+      }),
     [CREATE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
-        draft.answer_list.unshift(action.payload.answer);
+        draft.answer_list.push(action.payload.answer);
       }),
   },
   initialState
@@ -230,6 +291,7 @@ const actionCreators = {
   deleteQuestionDB,
   editQuestionDB,
   setAnswerDB,
+  // setNextAnswerDB,
   createAnswerDB,
 };
 

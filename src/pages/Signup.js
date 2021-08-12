@@ -102,6 +102,7 @@ const Signup = (props) => {
             width="60%"
             margin="auto"
             _onClick={() => history.push('/')}
+            cursor="pointer"
           />
         </Grid>
         <Grid height="8%">
@@ -269,11 +270,6 @@ const Signup = (props) => {
                 name="nickname"
                 type="nickname"
                 onChange={(e) => debounceNickname(e)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    formik();
-                  }
-                }}
               />
               {nickname.length === 0 ? null : nickname_exist ? (
                 <Text fontSize="1.2vh" color="#ff7070">

@@ -11,7 +11,7 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
     marginRight: marginRight,
   }
   const countingStar = () => {      
-    const star_full = parseInt(score).toFixed(0);     // 별점 개수는 평점에서 소수점 이하 자리를 제외한다.
+    const star_full = parseInt(score);     // 별점 개수는 평점에서 소수점 이하 자리를 제외한다.
     const star_empty = 5 - star_full;       // 빈 별 개수는 총 5개에서 별점 개수를 뺀 나머지로 한다.
     let result = [];
     for (let i = 0; i < star_full; i++) {     // 별점 개수만큼 꽉 찬 별을 만든다.
@@ -28,7 +28,7 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
       {/* countingStar()에서 만든 별 5개를 (평점과 함께) 보여준다. */}
       {countingStar()} 
       {withScore ?
-      <Text color='#e5e5e5' fontSize={size} margin='0 5px 0' vertical_align='middle'>{score}</Text>
+      <Text color='#e5e5e5' fontSize={size} margin='0 5px 0' vertical_align='middle'>{Number(score).toFixed(1)}</Text>
       : ''}
     </React.Fragment>
   )

@@ -17,7 +17,7 @@ const BootPost = (props) => {
   const camp_name = window.location.pathname.split('/')[2];
   const commu_id = parseInt(window.location.pathname.split(`/${camp_name}/post/`)[1]);
   // 현재 접속 중인 사용자 닉네임
-  const username = useSelector(state => state.user.user);
+  const username = useSelector(state => state.user.user.nickname);
   // 사용자가 북마크한 커뮤니티글 목록
   const my_commu_list = useSelector(state => state.bootcamp.my_commu_list);
   // 북마크한 커뮤니티글 목록에 이 글이 있으면, this_commu에 넣는다.

@@ -13,7 +13,7 @@ const Comment = (props) => {
   const comment_list = useSelector((state) => state.comment.list);
   const addRef = useRef(null);
   const postId = parseInt(props.postId);
-
+  
   // 댓글 조회
   useEffect(() => {
     dispatch(commentActions.setCommentDB(postId));

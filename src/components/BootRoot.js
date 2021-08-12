@@ -10,9 +10,10 @@ const BootRoot = (props) => {
   const dispatch = useDispatch();
 
   // 부트캠프 이름, 설명, 리뷰(별점), 현재 탭 url 주소를 props로 받는다.
-  const {bootcampName, desc, review, url} = props.camp;
+  const {bootcampName, desc, review, url, url_word, reviewNumber, star, camp_page} = props.camp;
   // 현재 접속 중인 사용자의 닉네임
-  const username = useSelector(state => state.user.user);
+  const username = useSelector(state => state.user.user.nickname);
+
   // 사용자가 북마크한 부트캠프 목록
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
   // 사용자가 이 부트캠프를 북마크했다면, this_camp에 넣는다.
@@ -49,38 +50,29 @@ const BootRoot = (props) => {
           <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{desc}</Text>
           </div>
           {/* 홈페이지 바로가기 버튼 */}
-          <Button><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
+          <Button onClick={() => window.open(`${url}`, '_blank')}><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
         </InfoBtn>
         {/* 부트캠프 평점, 리뷰 개수 */}
-        <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{review[0].stars}</span>(164개 리뷰)</Text>
+        <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{Number(star).toFixed(1)}</span>({reviewNumber}개 리뷰)</Text>
       </Grid>
       {/* 정보, 리뷰, 커뮤니티 탭 */}
       {/* url에 따라 메뉴 CSS 달라지게 함 */}
       <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
-        <Menu url={url === 'info' && 'white'}>
-          <Text fontSize='24px' color='#e8eaed' _onClick={() => history.push({pathname: `/boot/${bootcampName}/info`, state: {camp: props.camp}})}>
+        <Menu url={url_word === 'info' && 'white'}>
+          <Text fontSize='24px' color={url_word === 'info' ? '#e8eaed' : '#5f6368'} _onClick={() => history.push({pathname: `/boot/${bootcampName}/info`, state: {camp: props.camp}})}>
             정보</Text>
         </Menu>
-        <Menu url={url === 'review' && 'white'}>
-          <Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/review`, state: {camp: props.camp}})}>
+        <Menu url={url_word === 'review' && 'white'}>
+          <Text fontSize='24px' color={url_word === 'review' ? '#e8eaed' : '#5f6368'} _onClick={() => history.push({pathname: `/boot/${bootcampName}/review`, state: {camp: props.camp}})}>
             리뷰</Text>
         </Menu>
-        <Menu url={url === 'community' && 'white'}>
-          <Text fontSize='24px' color='#5F6368' _onClick={() => history.push({pathname: `/boot/${bootcampName}/community`, state: {camp: props.camp}})}>
+        <Menu url={url_word === 'community' && 'white'}>
+          <Text fontSize='24px' color={url_word === 'community' ? '#e8eaed' : '#5f6368'} _onClick={() => history.push({pathname: `/boot/${bootcampName}/community`, state: {camp: props.camp}})}>
             커뮤니티</Text>
         </Menu>
       </Grid>
     </React.Fragment>
   )
-};
-BootRoot.defaultProps = {
-  bootcampName: '부트캠프명',
-  desc: '부트캠프 설명',
-  review: [
-    {
-      stars: 5
-    }
-  ]
 };
 
 const LogoBox = styled.div`

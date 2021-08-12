@@ -36,7 +36,8 @@ const CommonDetail = (props) => {
   const common_find = common_list.find(
     (comment) => comment.postId === parseInt(postId)
   );
-  const username = useSelector((state) => state.user.user.nickname);
+  const username = useSelector((state) => state.user.user);
+
   const [MenuLink, setMenuLink] = useState(null);
 
   React.useEffect(() => {
@@ -84,7 +85,6 @@ const CommonDetail = (props) => {
       dispatch(postActions.deleteBookmarkDB(deleted_bookmark, postBookmarkId));
     }
   };
-  console.log(bookmark);
 
   if (!common_find) {
     return <></>;

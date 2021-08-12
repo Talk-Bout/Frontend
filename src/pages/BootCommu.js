@@ -17,6 +17,7 @@ const BootCommu = (props) => {
 
   // 부트캠프 정보를 props로 받는다
   const {bootcampName, desc, review} = props.location.state.camp;
+  console.log(props);
   const url = props.location.pathname.split('/')[3];
 
   const camp = {

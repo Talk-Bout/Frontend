@@ -20,7 +20,7 @@ const CommonWrite = (props) => {
   const postId = parseInt(window.location.pathname.split('/common/write/')[1]);
   const common_list = useSelector(state => state.post.list);
   const post_found = common_list.find((p) => p.postId == postId);
-  const username = useSelector(state => state.user.user.nickname);
+  const username = useSelector(state => state.user.user);
 
   // 게시글 등록
   const addTitleRef = useRef('');
@@ -64,7 +64,6 @@ const CommonWrite = (props) => {
       history.push(`/common/list`)
     }
   };
-  console.log(categoryRef.current.value);
 
   // 이미지 업로드
   const imageRef = useRef();

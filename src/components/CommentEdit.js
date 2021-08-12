@@ -12,7 +12,8 @@ const CommentEdit = (props) => {
   const {postCommentId, content, postId} = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
-  const username = useSelector(state => state.user.user.nickname);
+  // 현재 접속 중인 사용자 닉네임
+  const username = useSelector(state => state.user.user);
 
   // 댓글 삭제
   const deleteComment = () => {
@@ -24,13 +25,13 @@ const CommentEdit = (props) => {
   // const editCommentRef = editRef.current.value;
   const edit_comment = {
     postCommentId : postCommentId,
-    nickname : username,
     content : commentValue,
   };
 
   dispatch(commentActions.editCommentDB(edit_comment, postId));
   setIsEditMode(false);
   };
+ 
 
 return (
 <React.Fragment>
@@ -42,7 +43,21 @@ return (
     </Grid>
   </Grid>
   <Grid height="50%" width="100%"  >
-  {isEditMode ? (
+    {props.nickname === username ?
+      <>
+        <EditText
+          onClick={()=>(deleteComment())}
+          >
+          <BiTrashAlt />
+        </EditText>
+        <EditText
+          onClick={()=>(setIsEditMode(true))}
+          >
+          <BiPencil />
+        </EditText>
+      </>
+    :""}
+    {/* {isEditMode ? (
       ""
     ) : (
       <>
@@ -57,7 +72,7 @@ return (
       <BiPencil />
       </EditText>
       </>
-    )}
+    )} */}
   {isEditMode? (
     <Grid display="flex" width="100%" height="20%">
     <EditInput

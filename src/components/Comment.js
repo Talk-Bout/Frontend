@@ -9,26 +9,11 @@ import CommentEdit from '../components/CommentEdit';
 
 const Comment = (props) => {
   const dispatch = useDispatch();
-  const username = useSelector((state) => state.user.user.nickname);
+  const nickname = useSelector((state) => state.user.user);
+  const is_login = useSelector((state) => state.user.user.is_login);
   const comment_list = useSelector((state) => state.comment.list);
   const addRef = useRef(null);
   const postId = parseInt(props.postId);
-
-  // 댓글 조회
-  useEffect(() => {
-    dispatch(commentActions.setCommentDB(postId));
-    // dispatch(commentActions.isEdit(true));
-  }, []);
-
-  // 댓글 최신순으로 구현하는 함수
-  const all_comment = comment_list
-    .slice(0, comment_list.length)
-    .sort(function (a, b) {
-      const timeA = a.createdAt;
-      const timeB = b.createdAt;
-      if (timeA < timeB) return 1;
-      if (timeA > timeB) return -1;
-    });
 
   //댓글 등록
   const addComment = () => {
@@ -36,19 +21,28 @@ const Comment = (props) => {
 
     const new_comment = {
       content: addCommentRef,
-      nickname: username,
+      nickname: nickname,
       postId: postId,
     };
-    // console.log(new_comment);
-
+    if (is_login) {
+      window.alert('로그인 후 이용해주세요!');
+      return;
+    };
     if (addCommentRef === '') {
       window.alert('댓글을 입력해주세요!');
       return;
-    }
+    };
+
     dispatch(commentActions.addCommentDB(new_comment));
-    // console.log(dispatch(commentActions.addCommentDB(new_comment)));
     addRef.current.value = '';
   };
+  
+  // 댓글 조회
+  useEffect(() => {
+    dispatch(commentActions.setCommentDB(postId));
+    // dispatch(commentActions.isEdit(true));
+  }, []);
+  
 
   return (
     <React.Fragment>
@@ -83,8 +77,8 @@ const Comment = (props) => {
         </Grid>
       </Grid>
       <Grid width="100%" height="40vh">
-        {all_comment &&
-          all_comment.map((ct, index) => {
+        {comment_list &&
+          comment_list.map((ct, index) => {
             return <CommentEdit key={ct.commentId} {...ct} />;
           })}
       </Grid>

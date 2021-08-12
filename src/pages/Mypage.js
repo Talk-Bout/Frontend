@@ -18,7 +18,6 @@ const Mypage = (props) => {
   const nickname = useSelector((state) => state.user.user);
   const mytalk_list = useSelector((state) => state.mypage.mytalk_list);
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
-  console.log(mytalk_list);
 
   // mypost 3개 추출
   const mytalk = mytalk_list.slice(0,3);

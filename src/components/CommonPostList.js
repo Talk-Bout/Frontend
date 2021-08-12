@@ -6,20 +6,15 @@ import Profile from '../image/profile_small.png';
 import { useSelector, } from 'react-redux';
 import { Text, Grid} from '../elements/index';
 import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
+import { AiOutlineEye } from 'react-icons/ai';
 
 const CommonPostList = (props) => {
 
   const common_list = useSelector(state => state.post.list);
 
-  // 게시물 최신순으로 구현하는 함수
-const all_common = common_list.slice(0, common_list.length)
-.sort(function(a, b) {
-  const timeA = a.createdAt; const timeB = b.createdAt; 
-  if (timeA < timeB) return 1; if (timeA > timeB) return -1; });
-
   return (
     <React.Fragment>
-      <Content common_list={all_common} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}
+      <Content common_list={common_list} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}
                 >
                 <Text p color="#F1F3F4" lineHeight="27px" fontSize="18px" fontWeight="bold">
                  {props.title}
@@ -37,15 +32,21 @@ const all_common = common_list.slice(0, common_list.length)
                 </Text>
               </ProfileImage>
             
-              {/* 게시한 좋아요, 댓글 */}
             <Grid width="100%" float="left">
             <LikeAndCountBox>
+              {/* 좋아요 */}
               <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0 8px 0 0">
                 <BiLike/> &nbsp; {props.likes}
                 </Text>
+              {/* 댓글 수 */}
               <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0px 8px">
                 <BiComment/> &nbsp; 2
               </Text>
+              {/* 조회수 */}
+              <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0px 8px">
+              <AiOutlineEye /> <span>{props.viewCount}</span>
+              </Text>
+              
             </LikeAndCountBox>
             
             <hr/>
@@ -80,7 +81,7 @@ top: 111px;
 `;
 
 const LikeAndCountBox = styled.div`
-width: 140px;
+width: 170px;
 height: 16px;
 left: 24px;
 top: 151px;

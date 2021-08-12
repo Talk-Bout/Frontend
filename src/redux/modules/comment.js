@@ -31,18 +31,15 @@ const initialState = {
 //액션함수
 const setCommentDB = (postId, page) => {                        // 댓글 불러오는 함수
 return function (dispatch) {
-  const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
-  instance.get(`/posts/${postId}/postComments?page=${page}`, {
+  instance.get(`/posts/${postId}/postComments?page=1`, {
     postId: postId,
-  }, {headers: headers})
+  })
   .then((response) => {
-    // console.log('setPostDB 함수 호출 성공!');
-    // console.log(response);
         dispatch(setComment(response.data));
-        // console.log(setComment(response.data));
+        console.log(setComment(response.data));
     })
     .catch((err) => {
-        console.error(`댓글 불러오기 에러 발생: ${err}`);
+        console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);
     });
 };
 };
@@ -59,11 +56,10 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
             content: content,
             postId: postId,
         }, {headers: headers}).then((response) => {
-            // console.log(response.data);
             dispatch(addComment(response.data));
 
             }).catch((err) => {
-                console.error(`댓글 추가하기 에러 발생: ${err}`);
+                console.error(`부트톡톡 댓글 추가하기 에러 발생: ${err}`);
             });
         };
     };
@@ -71,18 +67,15 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
 const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하는 함수
 return function (dispatch, getState, { history }) {
 const postCommentId = edit_comment.postCommentId;
-const nickname = edit_comment.nickname;
 const content = edit_comment.content;
 instance.patch(`/posts/${postId}/postComments/${postCommentId}`,
 { 
-    postCommentId: postCommentId,
-    nickname: nickname,
     content: content,
 }).then((response) => {
         // console.log(response.data);
         dispatch(editComment(response.data));
     }).catch((err) => {
-        console.error(`댓글 수정하기 에러 발생: ${err}`);
+        console.error(`부트톡톡 댓글 수정하기 에러 발생: ${err}`);
     });
 };
 };
@@ -97,7 +90,7 @@ instance.delete(`/posts/${postId}/postComments/${postCommentId}`
         // console.log(response.data);
         dispatch(deleteComment(postCommentId));
     }).catch((err) => {
-        console.error(`댓글 삭제하기 에러 발생: ${err}`);
+        console.error(`부트톡톡 댓글 삭제하기 에러 발생: ${err}`);
     });
 }; 
 };
@@ -106,24 +99,22 @@ instance.delete(`/posts/${postId}/postComments/${postCommentId}`
 // 리듀서
 export default handleActions({
 [SET_COMMENT]: (state, action) => produce(state, (draft) => {
-    draft.list = [...action.payload.comment_list];
-    // console.log(action.payload.comment_list);
+    draft.list = action.payload.comment_list;
 }),
 
 [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
     draft.list.unshift(action.payload.comment);
-    // console.log(action.payload.comment);
 }),
 
-[DELETE_COMMENT]: (state, action) => produce(state,(draft) => {
-//     let new_comment_list = draft.list.filter((ct) => {
-//         if(ct.commentId !== action.payload.commentId){
-//     return ct
-//     }
-// })
-//    console.log(new_comment_list);
-    let idx = draft.list.findIndex((ct)=> ct.commentId === action.payload.commentId);
-    draft.list.splice(idx, 1);
+[DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
+    const new_comment_list = draft.list.filter((ct) => {
+        if(ct.commentId !== action.payload.commentId){
+    return ct
+    }
+})
+   draft.list = new_comment_list;
+    // let idx = draft.list.findIndex((ct)=> ct.commentId === action.payload.commentId);
+    // draft.list.splice(idx, 1);
 }),
 
 [EDIT_COMMENT]: (state, action) =>

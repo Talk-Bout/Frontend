@@ -204,13 +204,13 @@ export default handleActions(
     }),
     [DELETE_BOOKMARK]: (state, action) =>
     produce(state, (draft) => {
-      const deleted_bookmark = draft.bookmark_list.filter((bookmark) => {
+      const new_bookmark = draft.bookmark_list.filter((bookmark) => {
         if(bookmark.bookmarkId !== action.payload.postBookmarkId){
           return bookmark;
         }
         // console.log(action.payload.postBookmarkId);
       })
-      draft.list = deleted_bookmark;
+      draft.list = new_bookmark;
     }),
   },
   initialState

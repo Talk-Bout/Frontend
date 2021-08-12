@@ -13,13 +13,16 @@ const SET_REVIEWS = 'SET_REVIEWS'; // 리뷰 불러오기
 const ADD_REVIEW = 'ADD_REVIEW'; // 리뷰 작성하기
 
 const SET_COMMUS = 'SET_COMMUS'; // 커뮤니티글 전체 목록 불러오기
-const SET_ONECOMMU = 'SET_ONECOMMU' // 커뮤니티글 상세페이지 불러오기
+const SET_ONE_COMMU = 'SET_ONECOMMU' // 커뮤니티글 상세페이지 불러오기
 const ADD_COMMU = 'ADD_COMMU'; // 커뮤니티글 작성하기
 const EDIT_COMMU = 'EDIT_COMMU'; // 커뮤니티글 수정하기
 
 const SET_MY_COMMU = 'SET_MY_COMMU'; // 북마크한 커뮤니티글 목록 불러오기
 const ADD_MY_COMMU = 'ADD_MY_COMMU'; // 커뮤니티글 북마크하기
 const DELETE_MY_COMMU = 'DELETE_MY_COMMU'; // 커뮤니티글 북마크 해제하기
+
+const LIKE_COMMU = 'LIKE_COMMU'; // 커뮤니티글 좋아요 표시하기
+const UNLIKE_COMMU = 'UNLIKE_COMMU'; // 커뮤니티글 좋아요 해제하기
 
 const SET_COMMENTS = 'SET_COMMENTS'; // 커뮤니티 댓글 불러오기
 const ADD_COMMENT = 'ADD_COMMENT'; // 커뮤니티 댓글 작성하기
@@ -34,12 +37,14 @@ const deleteMyCamp = createAction(DELETE_MY_CAMP, (bookmark_id) => ({bookmark_id
 const setReviews = createAction(SET_REVIEWS, (review_list) => ({review_list}));
 const addReview = createAction(ADD_REVIEW, (review) => ({review}));
 const setCommus = createAction(SET_COMMUS, (commu_list) => ({commu_list}));
-const setOneCommu = createAction(SET_ONECOMMU, (commu) => ({commu}));
+const setOneCommu = createAction(SET_ONE_COMMU, (commu) => ({commu}));
 const addCommu = createAction(ADD_COMMU, (commu) => ({commu}));
 const editCommu = createAction(EDIT_COMMU, (commu) => ({commu}));
 const setMyCommu = createAction(SET_MY_COMMU, (commu_list) => ({commu_list}));
 const addMyCommu = createAction(ADD_MY_COMMU, (commu) => ({commu}));
 const deleteMyCommu = createAction(DELETE_MY_COMMU, (bookmark_id) => ({bookmark_id}));
+const likeCommu = createAction(LIKE_COMMU, (like) => ({like}));
+const unlikeCommu = createAction(UNLIKE_COMMU, (like) => ({like}));
 const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
@@ -52,7 +57,9 @@ const initialState = {
   my_camp_list: [], // 북마크한 부트캠프 목록
   review_list: [],    // 리뷰 목록
   commu_list: [],   // 커뮤니티글 목록
+  one_commu: null, // 개별 커뮤니티글
   my_commu_list: [], // 북마크한 커뮤니티글 목록
+  commu_like_list: [], // 커뮤니티글 좋아요 한 사용자 목록
   comment_list: [], // 커뮤니티글의 댓글 목록
 };
 
@@ -69,14 +76,20 @@ const setCampsDB = (page) => {
   };
 };
 
-const setMyCampDB = (nickname) => {
+const setMyCampDB = () => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
-    instance.get(`/users/${nickname}/bootcampBookmarks`).then((response) => {
-      dispatch(setMyCamp(response.data));
-    }).catch((err) => {
-      console.error(`북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+      instance.get('/tokenUser')
+      .then((response) => {
+        const nickname = response.data;
+        instance.get(`/users/${nickname}/bootcampBookmarks`).then((response) => {
+          dispatch(setMyCamp(response.data));
+        }).catch((err) => {
+          console.error(`북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
+        });
+      }).catch((err) => {
+        console.error(`사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`);
+      })
   };
 };
 
@@ -110,7 +123,6 @@ const setReviewsDB = (camp_name, page) => {
   return function (dispatch) {
     instance.get(`/bootcamp/${camp_name}/review?page=${page}`).then((response) => {
       dispatch(setReviews(response.data));
-      console.log(response.data);
     })
     .catch((err) => {
       console.error(`부트캠프 리뷰 불러오기 에러 발생: ${err} ### ${err.response}`);
@@ -208,14 +220,20 @@ const deleteCommuDB = (deleted_commu) => {
   };
 };
 
-const setMyCommuDB = (nickname) => {
+const setMyCommuDB = () => {
   // 서버로부터 북마크한 커뮤니티글 목록 불러오는 함수
   return function (dispatch) {
-    instance.get(`/users/${nickname}/communityBookmarks`).then((response) => {
-      dispatch(setMyCommu(response.data));
+    instance.get('/tokenUser')
+    .then((response) => {
+      const nickname = response.data;
+      instance.get(`/users/${nickname}/communityBookmarks`).then((response) => {
+        dispatch(setMyCommu(response.data));
+      }).catch((err) => {
+        console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
+      });
     }).catch((err) => {
-      console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+      console.error(`사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`);
+    })
   };
 };
 
@@ -240,6 +258,31 @@ const deleteMyCommuDB = (communityId, communityBookmarkId) => {
       dispatch(deleteMyCommu(response.data));
     }).catch((err) => {
       console.error(`부트캠프 커뮤니티글 북마크 해제하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
+const likeCommuDB = (communityId, nickname) => {
+  // 커뮤니티글 좋아요 표시하는 함수
+  return function (dispatch) {
+    instance.post(`/community/${communityId}/communityLikes`, {
+      communityId: communityId,
+      nickname: nickname,
+    }).then((response) => {
+      dispatch(likeCommu(response.data));
+    }).catch((err) => {
+      console.error(`부트캠프 커뮤니티글 좋아요 표시하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
+const unlikeCommuDB = (communityId, communityLikeId) => {
+  // 커뮤니티글 좋아요 해제하는 함수
+  return function (dispatch) {
+    instance.delete(`/community/${communityId}/communityLikes/${communityLikeId}`).then(
+      dispatch(unlikeCommu(communityId, communityLikeId))
+    ).catch((err) => {
+      console.error(`부트캠프 커뮤니티글 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`);
     });
   };
 };
@@ -317,8 +360,9 @@ export default handleActions({
     [SET_COMMUS]: (state, action) => produce(state, (draft) => {
       draft.commu_list = [...action.payload.commu_list];
     }),
-    [SET_ONECOMMU]: (state, action) => produce(state, (draft) => {
-      draft.commu_list = [action.payload.commu];
+    [SET_ONE_COMMU]: (state, action) => produce(state, (draft) => {
+      draft.one_commu = action.payload.commu;
+      draft.commu_like_list = action.payload.commu.communityLike;
     }),
     [ADD_COMMU]: (state, action) => produce(state, (draft) => {
       draft.commu_list.push(action.payload.commu);
@@ -328,7 +372,7 @@ export default handleActions({
       draft.commu_list[idx] = action.payload.commu;
     }),
     [SET_MY_COMMU]: (state, action) => produce(state, (draft) => {
-      draft.my_commu_list = action.payload.commu_list;
+      draft.my_commu_list = [...action.payload.commu_list];
     }),
     [ADD_MY_COMMU]: (state, action) => produce(state, (draft) => {
       draft.my_commu_list.push(action.payload.commu);
@@ -337,8 +381,15 @@ export default handleActions({
       let idx = draft.my_commu_list.findIndex((camp) => camp.communityBookmarkId === action.payload.bookmark_id);
       draft.my_commu_list.splice(idx, 1);
     }),
+    [LIKE_COMMU]: (state, action) => produce(state, (draft) => {
+      draft.commu_like_list.push(action.payload.like);
+    }),
+    [UNLIKE_COMMU]: (state, action) => produce(state, (draft) => {
+      let like_idx = draft.commu_like_list.findIndex((like) => like.communityLikeId === action.payload.like.communityId);
+      draft.commu_like_list.splice(like_idx, 1);
+    }),
     [SET_COMMENTS]: (state, action) => produce(state, (draft) => {
-      draft.comment_list = action.payload.comment_list;
+      draft.comment_list = [...action.payload.comment_list];
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
       draft.comment_list.push(action.payload.comment);
@@ -373,6 +424,8 @@ const actionCreators = {
     setMyCommuDB,
     addMyCommuDB,
     deleteMyCommuDB,
+    likeCommuDB,
+    unlikeCommuDB,
     setCommentsDB,
     addCommentDB,
     editCommentDB,

@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import { Grid } from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import BannerN from '../components/BannerN';
@@ -9,13 +8,12 @@ import MainQna from '../components/MainQna';
 import MainNews from '../components/MainNews';
 import MainTalk from '../components/MainTalk';
 
-//헤더가 필요하면 바디 안에 header넣기, 아니면 body만
 const MainN = (props) => {
   return (
     <React.Fragment>
       <Grid className="background" display='flex'>
         <Sidebar />
-        {/* //헤더가 필요하면 바디 안에 header넣기, 아니면 body만 */}
+        {/* 헤더가 필요하면 바디 안에 header넣기, 아니면 body만 */}
         <Body header>
           <Grid className="body-inner" height="100%">
             <BannerN

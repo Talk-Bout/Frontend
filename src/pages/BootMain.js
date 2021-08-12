@@ -31,6 +31,7 @@ const BootMain = (props) => {
     setPage(page + 1);
   }
 
+  console.log(camp_list);
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>

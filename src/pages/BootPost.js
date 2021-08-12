@@ -16,7 +16,12 @@ const BootPost = (props) => {
   const dispatch = useDispatch();
   const camp_name = window.location.pathname.split('/')[2];
   const commu_id = parseInt(window.location.pathname.split(`/${camp_name}/post/`)[1]);
+  // 현재 접속 중인 사용자 닉네임
   const username = useSelector(state => state.user.user);
+  // 사용자가 북마크한 커뮤니티글 목록
+  const my_commu_list = useSelector(state => state.bootcamp.my_commu_list);
+  // 북마크한 커뮤니티글 목록에 이 글이 있으면, this_commu에 넣는다.
+  const this_commu = my_commu_list.find((commu) => commu.communityId === commu_id);
   
   const commu_list = useSelector(state => state.bootcamp.commu_list);
   const commu_found = commu_list.find((commu) => commu.communityId === commu_id);
@@ -33,7 +38,18 @@ const BootPost = (props) => {
       dispatch(campActions.setOneCommuDB(camp_name, commu_id));
     }
     dispatch(campActions.setCommentsDB(commu_id, comment_page));
+    dispatch(campActions.setMyCommuDB(username));
   }, []);
+
+  // 게시글 북마크 표시
+  const markCommu = () => {
+    dispatch(campActions.addMyCommuDB(username, commu_id));
+  }
+
+  // 게시글 북마크 해제
+  const unmarkCommu = (bookmark_id) => {
+    dispatch(campActions.deleteMyCommuDB(commu_id, bookmark_id));
+  }
 
   // 드롭다운 메뉴(수정하기, 삭제하기)
   const handleClick = (e) => {
@@ -85,6 +101,7 @@ const BootPost = (props) => {
     dispatch(campActions.deleteCommentDB(deleted_comment));
   }
 
+  // 댓글 더보기
   const moreComment = () => {
     setCommentPage(comment_page + 1);
   }
@@ -113,7 +130,10 @@ const BootPost = (props) => {
                   <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' vertical_align='middle'>{commu_found.title}</Text>
                   <div style={{height: 'fit-content'}}>
                     {/* 북마크 버튼 */}
-                    <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7'><BsBookmark /></Text>
+                    {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
+                    {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
+                    {this_commu ? <Text color='#7879F1' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkCommu(this_commu.communityBookmarkId)}><BsBookmarkFill /></Text>
+                    : <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markCommu()}><BsBookmark /></Text> }
                     {/* 드롭다운 메뉴 버튼 */}
                     {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
                     {commu_found.nickname === username ?

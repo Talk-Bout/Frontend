@@ -42,8 +42,8 @@ const BootRoot = (props) => {
           {/* 부트캠프 이름, 북마크 표시 */}
           <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{bootcampName}
             {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
-            {/* 이 부트캠프를 북마크하지 않았다면, 하트를 클릭했을 때 북마크 표시 함수 호출 */}
             {this_camp ? <Heart check onClick={() => unmarkBoot(this_camp.bootcampBookmarkId)}><HiHeart /></Heart>
+
             : <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>}
           </Text>
           <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{desc}</Text>

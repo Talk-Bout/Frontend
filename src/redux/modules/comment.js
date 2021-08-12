@@ -10,7 +10,7 @@ import instance from '../../shared/Request';
 
 // 액션타입
 const SET_COMMENT = 'SET_COMMENT';               // 댓글 불러오기
-const ADD_COMMENT = 'ADD_COMMNET';              // 댓글 추가하기
+const ADD_COMMENT = 'ADD_COMMENT';              // 댓글 추가하기
 const EDIT_COMMENT = 'EDIT_COMMENT';            // 댓글 수정하기
 const DELETE_COMMENT = 'DELETE_COMMENT';        // 댓글 삭제하기
 const IS_EDIT = 'IS_EDIT';
@@ -57,7 +57,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
             postId: postId,
         }, {headers: headers}).then((response) => {
             dispatch(addComment(response.data));
-
+            console.log(response.data);
             }).catch((err) => {
                 console.error(`부트톡톡 댓글 추가하기 에러 발생: ${err}`);
             });
@@ -99,7 +99,7 @@ instance.delete(`/posts/${postId}/postComments/${postCommentId}`
 // 리듀서
 export default handleActions({
 [SET_COMMENT]: (state, action) => produce(state, (draft) => {
-    draft.list = action.payload.comment_list;
+    draft.list = [...action.payload.comment_list];
 }),
 
 [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
@@ -107,14 +107,14 @@ export default handleActions({
 }),
 
 [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
-    const new_comment_list = draft.list.filter((ct) => {
-        if(ct.commentId !== action.payload.commentId){
-    return ct
-    }
-})
-   draft.list = new_comment_list;
-    // let idx = draft.list.findIndex((ct)=> ct.commentId === action.payload.commentId);
-    // draft.list.splice(idx, 1);
+//     const new_comment_list = draft.list.filter((ct) => {
+//         if(ct.commentId !== action.payload.commentId){
+//     return ct
+//     }
+// })
+//    draft.list = new_comment_list;
+    let idx = draft.list.findIndex((ct)=> ct.commentId === action.payload.commentId);
+    draft.list.splice(idx, 1);
 }),
 
 [EDIT_COMMENT]: (state, action) =>
@@ -126,7 +126,6 @@ produce(state, (draft) => {
     };
    
 }),
-
 
 [IS_EDIT] : (state, action) => produce(state, (draft)=> {
     draft.is_edit = action.payload.is_edit

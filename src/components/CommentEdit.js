@@ -22,7 +22,6 @@ const CommentEdit = (props) => {
 
   // 댓글 수정
   const editComment = () => {
-  // const editCommentRef = editRef.current.value;
   const edit_comment = {
     postCommentId : postCommentId,
     content : commentValue,

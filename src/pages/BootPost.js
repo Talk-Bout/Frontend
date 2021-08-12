@@ -30,14 +30,18 @@ const BootPost = (props) => {
   // 이 커뮤니티글 좋아요 한 사람들 목록에 사용자 닉네임이 있으면, like_found에 넣는다.
   const like_found = commu_likes.find((like) => like.nickname === username);
 
-  const comment_list = useSelector(state => state.bootcamp.comment_list);
+  // 서버에서 불러온 댓글 목록
+  const all_comment = useSelector(state => state.bootcamp.comment_list);
+  // 이 커뮤니티글의 댓글이 맞는지 재확인
+  const comment_list = all_comment.filter((comment) => comment.communityId === commu_id);
+
   const [MenuLink, setMenuLink] = useState(null);
   const [edit_comment, setEditComment] = useState(null);
 
   const commentInput = useRef(null);
   const commentEdit = useRef(null);
 
-  // 페이지네이션
+  // 댓글 페이지네이션
   const [next_page, setNextPage] = useState(2);
 
   useEffect(() => {

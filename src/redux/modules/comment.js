@@ -9,10 +9,10 @@ import instance from '../../shared/Request';
 // 댓글 삭제 "DELETE" /posts/:postId/comments/:commentId
 
 // 액션타입
-const SET_COMMENT = 'comment/SET_COMMENT';               // 댓글 불러오기
-const ADD_COMMENT = 'comment/ADD_COMMENT';              // 댓글 추가하기
-const EDIT_COMMENT = 'comment/EDIT_COMMENT';            // 댓글 수정하기
-const DELETE_COMMENT = 'comment/DELETE_COMMENT';        // 댓글 삭제하기
+const SET_COMMENT = 'comment/SET_COMMENT';         // 댓글 불러오기
+const ADD_COMMENT = 'comment/ADD_COMMENT';         // 댓글 추가하기
+const EDIT_COMMENT = 'comment/EDIT_COMMENT';       // 댓글 수정하기
+const DELETE_COMMENT = 'comment/DELETE_COMMENT';   // 댓글 삭제하기
 const IS_EDIT = 'IS_EDIT';
 
 // 액션생성함수
@@ -86,7 +86,6 @@ return function (dispatch) {
 instance.delete(`/posts/${postId}/postComments/${postCommentId}`
 )
 .then((response) => {
-        // console.log('deleteCommentDB 함수 호출 성공!');
         // console.log(response.data);
         dispatch(deleteComment(postCommentId));
     }).catch((err) => {

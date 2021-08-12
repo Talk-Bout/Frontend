@@ -29,20 +29,20 @@ import Profile from '../image/profile_small.png';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
-  //게시글 상세 조회, 해당 게시물 댓글 리스트 조회
-  const postId = props.match.params.id;
+  // 부트톡톡 게시물 리스트
   const common_list = useSelector((state) => state.post.list);
-  const common_find = common_list.find(
-    (post) => post.postId === parseInt(postId)
-  );
+  // 해당 게시물
+  const one_post = useSelector(state => state.post.one_post);
   const nickname = useSelector((state) => state.user.user.nickname);
-
+  const postId = parseInt(props.match.params.id);
+  // 게시물 수정, 삭제 버튼
   const [MenuLink, setMenuLink] = useState(null);
 
+  // 게시물 조회
   React.useEffect(() => {
-    if (!common_find) {
-      dispatch(postActions.setOnePostDB(postId));
+    if (!one_post) {
     }
+    dispatch(postActions.setOnePostDB(postId));
     dispatch(postActions.setBookmarkDB(nickname));
     dispatch(commentActions.setCommentDB(postId));
   }, []);
@@ -64,24 +64,38 @@ const CommonDetail = (props) => {
     history.push('/common/list');
   };
 
-  // 게시글 북마크
+
   // 북마크 리스트 조회
   const bookmark_list = useSelector(state => state.post.my_bookmark_list);
-  console.log(bookmark_list);
-
+  // 해당 게시글 조회
   const post_bookmark = bookmark_list.find((post) => post.postId === parseInt(postId));
-  console.log(post_bookmark);
-
+  // 해당 게시글 북마크 표시
   const markPost = () => {
     dispatch(postActions.addBookmarkDB(postId, nickname));
   }
-
+  // 해당 게시글 북마크 해제
   const unmarkPost = (postBookmarkId) => {
       dispatch(postActions.deleteBookmarkDB(postId, postBookmarkId));
     }
-  
 
-  if (!common_find) {
+  // 해당 게시글 좋아요 한 사람들 목록
+  const my_like = useSelector(state => state.post.my_like_list);
+ 
+  // 해당 게시글 좋아요 한 사람들 목록에 사용자 닉네임이 있으면, like_find에 추가.
+  const like_find = my_like.find((like_post) => like_post.nickname === nickname);
+
+
+  // 해당 게시글 좋아요 표시
+  const likePost = () => {
+    dispatch(postActions.likePostDB(nickname, postId));
+  };
+  
+  // 해당 게시글 좋아요 해제
+  const unlikePost = (postLikeId) => {
+    dispatch(postActions.unlikePostDB(postId, postLikeId));
+  };
+  
+  if (!one_post) {
     return (
     <></>
     );
@@ -139,7 +153,7 @@ const CommonDetail = (props) => {
                           color="#F1F3F4"
                           fontWeight="bold"
                         >
-                          {common_find.title}
+                          {one_post.title}
                         </Text>
                       </Grid>
                       {/* 북마크와 수정 삭제 */}
@@ -255,7 +269,7 @@ const CommonDetail = (props) => {
                             lineHeight="16px"
                             color="#BDC1C6"
                           >
-                            {common_find.nickname}
+                            {one_post.nickname}
                           </Text>
 
                           <Text
@@ -265,7 +279,7 @@ const CommonDetail = (props) => {
                             lineHeight="16px"
                             color="#BDC1C6"
                           >
-                            {common_find.createdAt}
+                            {one_post.createdAt}
                           </Text>
                         </Grid>
                         <Grid width="63.5%" height="80%"></Grid>
@@ -282,14 +296,34 @@ const CommonDetail = (props) => {
                       color="#DADCE0"
                       style={{ wordBreak: 'break-all' }}
                     >
-                      {common_find.content}
+                      {one_post.content}
                     </Text>
                   </Grid>
                 </Grid>
                 <Grid width="100%" height="100%">
-                  <HistoryButton>
-                    <BiLike /> &nbsp; 17
-                  </HistoryButton>
+                  {like_find ?
+                  <span>
+                  <UnlikeButton 
+                  onClick={()=>unlikePost(like_find.postLikeId)}
+                  >
+                  
+                    <BiLike/> {my_like.length}
+                  </UnlikeButton>
+                  </span>
+                  :
+                  <span>
+                  <LikeButton
+                  onClick={()=>likePost()}
+                  >
+                    <BiLike /> {my_like.length}
+                  </LikeButton>
+                  </span>
+                  }
+                  {/* <HistoryButton
+                  onClick={()=>likePost()}
+                  >
+                    <BiLike /> {my_like.length}
+                  </HistoryButton> */}
                   <Text
                     margin="0 0 0 2%"
                     color="#DADCE0"
@@ -308,7 +342,7 @@ const CommonDetail = (props) => {
                     fontSize="14px"
                     lineHeight="18px"
                   >
-                    <AiOutlineEye /> {common_find.viewCount}
+                    <AiOutlineEye /> {one_post.viewCount}
                   </Text>
                 </Grid>
               </Grid>
@@ -329,9 +363,7 @@ const CommonDetail = (props) => {
   );
 };
 
-const HistoryButton = styled.button`
-  /* width: 9%;
-height: 10%; */
+const LikeButton = styled.button`
   width: 69px;
   height: 40px;
   font-size: 14px;
@@ -347,28 +379,17 @@ height: 10%; */
   }
 `;
 
-const ButtonBox = styled.div`
-  width: 100%;
-  height: 100%;
-  margin: 0 1% 0 0;
+const UnlikeButton = styled.button`
+width: 69px;
+  height: 40px;
+  font-size: 14px;
+  line-height: 18px;
+  background-color: #282a2d;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  color: #7879f1;
 `;
 
-const EditDeleteButton = styled.button`
-  float: right;
-  background-color: #ffffff;
-  margin: 0 3% 0 0;
-  font-size: 1.5vh;
-  height: 50%;
-  border: none;
-  color: #121212;
-  cursor: pointer;
-  width: 13%;
-  border-radius: 5px;
-  font-weight: bold;
-  &:hover {
-    background-color: #282a2d;
-    color: #dadce0;
-  }
-`;
 
 export default CommonDetail;

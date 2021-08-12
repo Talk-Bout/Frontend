@@ -13,6 +13,9 @@ const SET_BOOKMARK = 'post/SET_BOOKMARK' // 북마크 불러오기
 const ADD_BOOKMARK = 'post/ADD_BOOKMARK'; // 북마크 추가하기
 const DELETE_BOOKMARK = 'post/DELETE_BOOKMARK'; // 북마크 삭제하기
 
+const LIKE_POST = 'post/LIKE_POST' // 좋아요 표시하기
+const UNLIKE_POST = 'post/UNLIKE_POST' // 좋아요 해제하기
+
 // 액션생성함수
 // 게시물
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
@@ -24,11 +27,17 @@ const deletePost = createAction(DELETE_POST, (post) => ({ post }));
 const setBookmark = createAction(SET_BOOKMARK, (bookmark_list) => ({bookmark_list}));
 const addBookmark = createAction(ADD_BOOKMARK, (bookmark) => ({bookmark}));
 const deleteBookmark = createAction(DELETE_BOOKMARK, (bookmarkId) => ({bookmarkId}));
+// 좋아요
+const likePost = createAction(LIKE_POST, (like_post) => ({like_post}));
+const unlikePost = createAction(UNLIKE_POST, (unlike_post) => ({unlike_post}));
 
 // 기본값 정하기
 const initialState = {
   list: [],
+  one_post: [],
   my_bookmark_list: [],
+  my_like_list: [],
+  
 };
 
 // 액션함수
@@ -47,10 +56,9 @@ const setPostDB = (page, category) => {
   };
 };
 
-const setOnePostDB = (id) => {
+const setOnePostDB = (postId) => {
   // 개별 게시글 불러오는 함수
   return function (dispatch) {
-    const postId = parseInt(id);
     instance.get(`/posts/${postId}`)
       .then((response) => {
         // console.log(response.data);
@@ -138,7 +146,7 @@ const deletePostDB = (deleted_post) => {
 };
 
 const setBookmarkDB = (nickname) => {
-  // 서버로부터 북마크한 커뮤니티글 목록 불러오는 함수
+  // 부트톡톡 북마크 불러오기
   return function (dispatch) {
     instance.get(`/users/${nickname}/postBookmarks`).then((response) => {
       dispatch(setBookmark(response.data));
@@ -149,8 +157,7 @@ const setBookmarkDB = (nickname) => {
 };
 
 const addBookmarkDB = (postId, nickname) => {
-  console.log(postId, nickname);
-
+  // 부트톡톡 북마크 추가하기
     return function (dispatch) {
         instance.post(`/posts/${postId}/postBookmarks`,{
           postId: parseInt(postId),
@@ -168,6 +175,7 @@ const addBookmarkDB = (postId, nickname) => {
 };
 
 const deleteBookmarkDB = (postId, postBookmarkId) => {
+  // 부트톡톡 북마크 삭제하기
   return function (dispatch) {
       instance.delete(`/posts/${postId}/postBookmarks/${postBookmarkId}`)
     .then((response) => {
@@ -180,6 +188,32 @@ const deleteBookmarkDB = (postId, postBookmarkId) => {
   };
 };
 
+const likePostDB = (nickname, postId) => {
+  // 부트톡톡 좋아요 표시하기
+  return function (dispatch) {
+    instance.post(`/posts/${postId}/postLikes`, {
+      nickname: nickname,
+      postId: postId,
+    }).then((response) => {
+      dispatch(likePost(response.data));
+    }).catch((err) => {
+      console.error(`부트톡톡 좋아요 표시하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
+const unlikePostDB = (postId, postLikeId) => {
+  // 부트톡톡 좋아요 해제하기
+  return function (dispatch) {
+    instance.delete(`/posts/${postId}/postLikes/${postLikeId}`)
+    .then((response) => {
+      dispatch(unlikePost(postId, postLikeId));
+    }).catch((err) => {
+      console.error(`부트톡톡 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
 // 리듀서
 export default handleActions(
   {
@@ -189,7 +223,9 @@ export default handleActions(
       }),
     [SET_ONE_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = [action.payload.post];
+        draft.one_post = action.payload.post;
+        draft.my_like_list = action.payload.post.postLike;
+
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
@@ -224,9 +260,15 @@ export default handleActions(
       })
       draft.list = new_bookmark;
     }),
-  },
-  initialState
-);
+    [LIKE_POST] :  (state, action) => produce(state, (draft) => {
+      draft.my_like_list.push(action.payload.like_post);
+    }),
+
+    [UNLIKE_POST] : (state, action) => produce(state, (draft) => {
+      let like_idx = draft.my_like_list.findIndex((like) => like.postLikeId === action.payload.unlike_post);
+      draft.my_like_list.splice(like_idx, 1);
+    }),
+}, initialState);
 
 // 액션 생성자
 const actionCreators = {
@@ -238,6 +280,8 @@ const actionCreators = {
   addBookmarkDB,
   deleteBookmarkDB,
   setBookmarkDB,
+  likePostDB,
+  unlikePostDB,
 };
 
 export { actionCreators };

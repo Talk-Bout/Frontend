@@ -24,14 +24,14 @@ const Comment = (props) => {
   }, []);
 
   // 댓글 최신순으로 구현하는 함수
-  const all_comment = comment_list
-    .slice(0, comment_list.length)
-    .sort(function (a, b) {
-      const timeA = a.createdAt;
-      const timeB = b.createdAt;
-      if (timeA < timeB) return 1;
-      if (timeA > timeB) return -1;
-    });
+  // const all_comment = comment_list
+  //   .slice(0, comment_list.length)
+  //   .sort(function (a, b) {
+  //     const timeA = a.createdAt;
+  //     const timeB = b.createdAt;
+  //     if (timeA < timeB) return 1;
+  //     if (timeA > timeB) return -1;
+  //   });
 
   //댓글 등록
   const addComment = () => {

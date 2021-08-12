@@ -25,11 +25,14 @@ const BootPost = (props) => {
   
   // 이 커뮤니티글
   const commu_found = useSelector(state => state.bootcamp.one_commu);
+  console.log(commu_found);
   // 이 커뮤니티글 좋아요 한 사람들 목록
   const commu_likes = useSelector(state => state.bootcamp.commu_like_list);
+  console.log(commu_likes);
   // 이 커뮤니티글 좋아요 한 사람들 목록에 사용자 닉네임이 있으면, like_found에 넣는다.
   const like_found = commu_likes.find((like) => like.nickname === username);
-
+  console.log(like_found);
+  
   const comment_list = useSelector(state => state.bootcamp.comment_list);
   const [comment_page, setCommentPage] = useState(1);
   const [MenuLink, setMenuLink] = useState(null);

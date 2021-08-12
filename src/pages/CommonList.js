@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useEffect, useState, } from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/ConfigureStore';
 import { Text, Grid} from '../elements/index';
@@ -16,11 +16,21 @@ import CommonPostList from '../components/CommonPostList';
 
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
-  const common_list = useSelector(state => state.post.list);
   const is_login = useSelector((state) => state.user.is_login);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
+
+  // 페이지 번호가 바뀔 때마다 커뮤니티글 목록 불러오는 함수 호출
+  //게시물 리스트 조회 (default : 전체)
+  useEffect(() => {
+    dispatch(postActions.setPostDB(page, ''));
+  }, [page]);
+
+  // 불러오는 3페이지짜리 커뮤니티글 목록
+  const all_post = useSelector(state => state.post.list);
+  // 1페이지에 보여줄 개수로만 자른 목록
+  const post_list = all_post.slice(0, 12);
 
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
@@ -39,10 +49,7 @@ const CommonBoardList = (props) => {
     dispatch(postActions.setPostDB(page, 'chitchat'));
   }
 
-  // 게시물 리스트 조회 (default : 전체)
-  React.useEffect(() => {
-    dispatch(postActions.setPostDB(page, ''));
-  }, []);
+  
 
   return (
     <React.Fragment>
@@ -108,7 +115,7 @@ const CommonBoardList = (props) => {
             <Grid height="85vh">
               <Grid width="100%" height="100%" margin="2% 0 0 0">
               <Contents>
-                {common_list.map((c, idx) => {
+                {post_list.map((c, idx) => {
                 return (
                 <CommonPostList key={c.postId} {...c}/>
             );
@@ -126,9 +133,9 @@ const CommonBoardList = (props) => {
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{common_list.length > page * 12 ? page + 1 : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 12 ?  page + 1 : ''}</Page></Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{common_list.length > page * 12 ? <BsChevronRight /> : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 12 ? <BsChevronRight /> : ''}</Page></Text>
             </PageBox>
             </Grid> 
         </Body>
@@ -250,17 +257,16 @@ letter-spacing: 0.2px;
 `;
 
 const Contents = styled.div`
-  grid-template-rows: repeat(8, minmax(auto, auto));
+  grid-template-rows: repeat(5, minmax(auto, auto));
   grid-template-columns: repeat(2, 1fr);
   display: grid;
   align-items: center;
   place-items: center;
   box-sizing: border-box;
   cursor: pointer;
-  // 나중에 페이징하면 수정
   overflow: auto;
   width: 100%;
-  height: 1050px;
+  height: 900px;
   left: 284px;
   top: 826px;
 `;

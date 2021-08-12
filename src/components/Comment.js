@@ -11,27 +11,11 @@ const Comment = (props) => {
   const dispatch = useDispatch();
   const nickname = useSelector((state) => state.user.user.nickname);
   const is_login = useSelector((state) => state.user.is_login);
-  const comment_list = useSelector((state) => state.comment.list);
+  // const comment_list = useSelector((state) => state.comment.list);
   const addRef = useRef(null);
   const postId = parseInt(props.postId);
   
   const [comment_page, setCommentPage] = useState(1);
-  
-  // 댓글 조회
-  useEffect(() => {
-    dispatch(commentActions.setCommentDB(postId));
-    // dispatch(commentActions.isEdit(true));
-  }, []);
-
-  // 댓글 최신순으로 구현하는 함수
-  // const all_comment = comment_list
-  //   .slice(0, comment_list.length)
-  //   .sort(function (a, b) {
-  //     const timeA = a.createdAt;
-  //     const timeB = b.createdAt;
-  //     if (timeA < timeB) return 1;
-  //     if (timeA > timeB) return -1;
-  //   });
 
   //댓글 등록
   const addComment = () => {
@@ -55,18 +39,28 @@ const Comment = (props) => {
     addRef.current.value = '';
   };
   
-  // 댓글 조회
-  // useEffect(() => {
-  //   dispatch(commentActions.setCommentDB(postId));
-  //   // dispatch(commentActions.isEdit(true));
-  // }, []);
+  // 서버에서 불러온 댓글 목록
+  const all_comment = useSelector(state => state.comment.list);
+  console.log(all_comment);
+  // 이 커뮤니티글의 댓글이 맞는지 재확인
+  const comment_check = all_comment.filter((comment) => comment.postId === postId);
+  console.log(comment_check);
+  // 댓글 페이지네이션
+  const [next_page, setNextPage] = useState(2);
   
+  useEffect(() => {
+    dispatch(commentActions.setCommentDB(postId, 1));
+  }, []);
+
   // 댓글 더보기
   const moreComment = () => {
-    setCommentPage(comment_page + 1);
+    dispatch(commentActions.setCommentDB(postId, next_page));
+    setNextPage(next_page + 1);
   }
+  console.log(next_page);
+  
 
-  if (!comment_list) {
+  if (!comment_check) {
     return (
       <></>
     );
@@ -74,7 +68,7 @@ const Comment = (props) => {
   return (
     <React.Fragment>
       <Grid width="100%" height="80%">
-        <Grid width="100%" height="20%">
+        <Grid width="100%" height="20%" margin="16px 0 0 0">
           <Text
             p
             color="#DADCE0"
@@ -103,21 +97,15 @@ const Comment = (props) => {
           </CommentBox>
         </Grid>
       </Grid>
-      <Grid width="100%" height="40vh">
-        {comment_list &&
-          comment_list.map((ct, index) => {
+      <Grid width="100%" height="40vh" >
+        {comment_check &&
+          comment_check.map((ct, index) => {
             return <CommentEdit key={ct.commentId} {...ct} />;
           })}
       </Grid>
       {/* 댓글 더보기 버튼 */}
-      {comment_list ?
-      <>
-              <MoreBtn disabled><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>
-              </>
-              :
-              <>
-              <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>
-              </>}
+      {/* 댓글 더보기 버튼 */}
+      <MoreBtn onClick={() => moreComment()}><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기</Text></MoreBtn>
               
     </React.Fragment>
   );

@@ -33,7 +33,7 @@ const CommonDetail = (props) => {
   const common_list = useSelector((state) => state.post.list);
   // 해당 게시물
   const one_post = useSelector(state => state.post.one_post);
-  const nickname = useSelector((state) => state.user.user.nickname);
+  const username = useSelector((state) => state.user.user.nickname);
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
   const [MenuLink, setMenuLink] = useState(null);
@@ -43,8 +43,7 @@ const CommonDetail = (props) => {
     if (!one_post) {
     }
     dispatch(postActions.setOnePostDB(postId));
-    dispatch(postActions.setBookmarkDB(nickname));
-    dispatch(commentActions.setCommentDB(postId));
+    dispatch(postActions.setBookmarkDB(username));
   }, []);
 
   const handleClick = (e) => {
@@ -71,7 +70,7 @@ const CommonDetail = (props) => {
   const post_bookmark = bookmark_list.find((post) => post.postId === parseInt(postId));
   // 해당 게시글 북마크 표시
   const markPost = () => {
-    dispatch(postActions.addBookmarkDB(postId, nickname));
+    dispatch(postActions.addBookmarkDB(postId, username));
   }
   // 해당 게시글 북마크 해제
   const unmarkPost = (postBookmarkId) => {
@@ -82,12 +81,12 @@ const CommonDetail = (props) => {
   const my_like = useSelector(state => state.post.my_like_list);
  
   // 해당 게시글 좋아요 한 사람들 목록에 사용자 닉네임이 있으면, like_find에 추가.
-  const like_find = my_like.find((like_post) => like_post.nickname === nickname);
+  const like_find = my_like.find((like_post) => like_post.nickname === username);
 
 
   // 해당 게시글 좋아요 표시
   const likePost = () => {
-    dispatch(postActions.likePostDB(nickname, postId));
+    dispatch(postActions.likePostDB(username, postId));
   };
   
   // 해당 게시글 좋아요 해제
@@ -156,7 +155,9 @@ const CommonDetail = (props) => {
                           {one_post.title}
                         </Text>
                       </Grid>
-                      {/* 북마크와 수정 삭제 */}
+                      {/* 북마크 버튼 */}
+                    {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
+                    {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
                       <Grid display="flex" width="14%" height="100%">
                         
                       {post_bookmark ? (
@@ -206,6 +207,10 @@ const CommonDetail = (props) => {
                             </>
                           )}
                        
+                        {/* 드롭다운 메뉴 버튼 */}
+                    {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
+                        {one_post.nickname === username ?
+                        <>
                         <Button
                           padding="0"
                           width="16.33px"
@@ -254,6 +259,11 @@ const CommonDetail = (props) => {
                             </Text>
                           </MenuItem>
                         </Menu>
+                        </>
+                        :
+                        ""
+                        }
+                        
                       </Grid>
                     </Grid>
                     <Grid width="100%" height="50%">
@@ -319,11 +329,6 @@ const CommonDetail = (props) => {
                   </LikeButton>
                   </span>
                   }
-                  {/* <HistoryButton
-                  onClick={()=>likePost()}
-                  >
-                    <BiLike /> {my_like.length}
-                  </HistoryButton> */}
                   <Text
                     margin="0 0 0 2%"
                     color="#DADCE0"

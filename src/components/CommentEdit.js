@@ -34,11 +34,11 @@ const CommentEdit = (props) => {
 
 return (
 <React.Fragment>
-  <Grid overflow="hidden" width="100%">
+  <Grid height="86px" width="100%" >
   <Grid display="flex" height="33.3%" borderTop="0.2vh solid #DADCE0"  width="100%">
-    <Grid width="50%" height="100%">
-      <Text fontSize="1.3vh" color="#BDC1C6">{props.nickname}</Text>
-      <Text padding="0 0 0 1%" width="33.3%" fontSize="1.3vh" color="#BDC1C6"><BiTimeFive/>{props.createdAt}</Text>
+    <Grid width="50%" height="100%" >
+      <Text fontWeight="bold" fontSize="14px" color="#BDC1C6">{props.nickname}</Text>
+      <Text padding="0 0 0 1%" width="33.3%" fontSize="12px" color="#BDC1C6"><BiTimeFive/>{props.createdAt}</Text>
     </Grid>
   </Grid>
   <Grid height="50%" width="100%"  >
@@ -56,22 +56,6 @@ return (
         </EditText>
       </>
     :""}
-    {/* {isEditMode ? (
-      ""
-    ) : (
-      <>
-      <EditText
-      onClick={()=>(deleteComment())}
-      >
-      <BiTrashAlt />
-    </EditText>
-      <EditText
-      onClick={()=>(setIsEditMode(true))}
-      >
-      <BiPencil />
-      </EditText>
-      </>
-    )} */}
   {isEditMode? (
     <Grid display="flex" width="100%" height="20%">
     <EditInput
@@ -81,12 +65,14 @@ return (
     <CancelButton onClick={() => (setIsEditMode(false))}>취소</CancelButton>
     </Grid>
   ):(
-    <Text p margin="0% 1%" fontSize="1.5vh" color="#BDC1C6"> {commentValue}</Text>
+    <Text p margin="0% 1%" fontSize="16px" color="#BDC1C6" fontWeight="bold"> {commentValue}</Text>
     )} 
     </Grid>
+    
     <Grid width="100%" height="40%">
+    {/* 댓글의 댓글, 좋아요
     <Text padding="0 2%" width="33.3%" fontSize="1.5vh" color="#BDC1C6"><BiLike/> 10</Text>
-    <Text width="33.3%" fontSize="1.5vh" color="#BDC1C6"><BiComment/> 2</Text>
+    <Text width="33.3%" fontSize="1.5vh" color="#BDC1C6"><BiComment/> 2</Text> */}
   </Grid>
 </Grid>
 </React.Fragment>

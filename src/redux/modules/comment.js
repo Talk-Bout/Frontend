@@ -29,14 +29,19 @@ const initialState = {
 };
 
 //액션함수
-const setCommentDB = (postId, page) => {                        // 댓글 불러오는 함수
+const setCommentDB = (postId, page) => {
+// 댓글 불러오는 함수
+console.log(postId, page);
 return function (dispatch) {
-  instance.get(`/posts/${postId}/postComments?page=1`, {
-    postId: postId,
+  instance.get(`/posts/${postId}/postComments?page=${page}`, {
   })
   .then((response) => {
         dispatch(setComment(response.data));
-        // console.log(setComment(response.data));
+        if (page !== 1 && response.data.length === 0) {
+            window.alert('마지막 댓글입니다.');
+            return;
+          }
+        console.log(setComment(response.data));
     })
     .catch((err) => {
         console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);
@@ -98,7 +103,7 @@ instance.delete(`/posts/${postId}/postComments/${postCommentId}`
 // 리듀서
 export default handleActions({
 [SET_COMMENT]: (state, action) => produce(state, (draft) => {
-    draft.list = [...action.payload.comment_list];
+    draft.list = [...draft.list].concat(action.payload.comment_list);
 }),
 
 [ADD_COMMENT]: (state, action) => produce(state, (draft) => {

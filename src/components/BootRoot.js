@@ -8,9 +8,14 @@ import { actionCreators as campActions} from '../redux/modules/bootcamp';
 
 const BootRoot = (props) => {
   const dispatch = useDispatch();
+
+  // 부트캠프 이름, 설명, 리뷰(별점), 현재 탭 url 주소를 props로 받는다.
   const {bootcampName, desc, review, url} = props.camp;
+  // 현재 접속 중인 사용자의 닉네임
   const username = useSelector(state => state.user.user);
+  // 사용자가 북마크한 부트캠프 목록
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
+  // 사용자가 이 부트캠프를 북마크했다면, this_camp에 넣는다.
   const this_camp = my_camps.find((camp) => camp.bootcampName === bootcampName);
 
   useEffect(() => {
@@ -22,6 +27,7 @@ const BootRoot = (props) => {
     dispatch(campActions.addMyCampDB(username, bootcampName));
   }
 
+  // 부트캠프 북마크 해제
   const unmarkBoot = (bookmark_id) => {
     dispatch(campActions.deleteMyCampDB(bootcampName, bookmark_id));
   }
@@ -33,8 +39,10 @@ const BootRoot = (props) => {
       <Grid className='info-button' padding='24px 0'>
         <InfoBtn>
           <div>
-          {/* 부트캠프 이름 */}
+          {/* 부트캠프 이름, 북마크 표시 */}
           <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{bootcampName}
+            {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
+            {/* 이 부트캠프를 북마크하지 않았다면, 하트를 클릭했을 때 북마크 표시 함수 호출 */}
             {this_camp ? <Heart check onClick={() => unmarkBoot(this_camp.bootcampBookmarkId)}><HiHeart /></Heart>
             : <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>}
           </Text>
@@ -47,6 +55,7 @@ const BootRoot = (props) => {
         <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{review[0].stars}</span>(164개 리뷰)</Text>
       </Grid>
       {/* 정보, 리뷰, 커뮤니티 탭 */}
+      {/* url에 따라 메뉴 CSS 달라지게 함 */}
       <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
         <Menu url={url === 'info' && 'white'}>
           <Text fontSize='24px' color='#e8eaed' _onClick={() => history.push({pathname: `/boot/${bootcampName}/info`, state: {camp: props.camp}})}>

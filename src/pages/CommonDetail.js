@@ -111,11 +111,11 @@ const CommonDetail = (props) => {
         <Sidebar />
         <Body header>
           <Grid display="flex" width="100%">
-            <Grid width="70%" height="100vh">
+            <Grid width="70%" height="98vh">
               {/* 게시물 */}
-              <Grid width="100%" height="45vh">
-                <Grid width="100%" height="45%">
-                  <Grid width="100%" height="100%">
+              <Grid width="100%" height="45vh" >
+                <Grid width="100%" height="45%" >
+                  <Grid width="100%" height="100%" >
                     <Grid padding="2% 0" width="100%" height="15%">
                       <Text
                         fontSize="14px"
@@ -352,10 +352,10 @@ const CommonDetail = (props) => {
                 </Grid>
               </Grid>
               {/* import 댓글 작성과 리스트 */}
-              <Grid width="97%" height="15vh" borderTop="1.5px solid #DADCE0">
+              <Grid width="97%" height="15vh" borderTop="1.5px solid #DADCE0" >
                 <Comment postId={postId} />
               </Grid>
-              <Grid width="100%" height="40vh"></Grid>
+              {/* <Grid width="100%" height="40vh" backgroundColor="tomato"></Grid> */}
             </Grid>
             {/* import 인기 부트톡톡 */}
             <Grid width="30%" height="100%">

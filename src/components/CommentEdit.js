@@ -26,7 +26,6 @@ const CommentEdit = (props) => {
     postCommentId : postCommentId,
     content : commentValue,
   };
-
   dispatch(commentActions.editCommentDB(edit_comment, postId));
   setIsEditMode(false);
   };
@@ -34,7 +33,7 @@ const CommentEdit = (props) => {
 
 return (
 <React.Fragment>
-  <Grid height="86px" width="100%" >
+  <Grid height="86px" width="100%">
   <Grid display="flex" height="33.3%" borderTop="0.2vh solid #DADCE0"  width="100%">
     <Grid width="50%" height="100%" >
       <Text fontWeight="bold" fontSize="14px" color="#BDC1C6">{props.nickname}</Text>
@@ -74,6 +73,7 @@ return (
     <Text padding="0 2%" width="33.3%" fontSize="1.5vh" color="#BDC1C6"><BiLike/> 10</Text>
     <Text width="33.3%" fontSize="1.5vh" color="#BDC1C6"><BiComment/> 2</Text> */}
   </Grid>
+  
 </Grid>
 </React.Fragment>
 )
@@ -132,6 +132,18 @@ font-size: 14px;
 line-height: 18px;
 color: #121212;
 margin: 0 0 0 8px;
+`;
+
+const MoreBtn = styled.button`
+  width: 100%;
+  padding: 23px 0;
+  margin: 0 0 64px;
+  background-color: #282A2D;
+  border: none;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 export default CommentEdit;

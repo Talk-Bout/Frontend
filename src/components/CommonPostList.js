@@ -35,15 +35,15 @@ const CommonPostList = (props) => {
             <Grid width="100%" float="left">
             <LikeAndCountBox>
               {/* 좋아요 */}
-              <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0 8px 0 0">
+              <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0 8px 0 0">
                 <BiLike/> &nbsp; {props.likes}
                 </Text>
               {/* 댓글 수 */}
-              <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0px 8px">
+              <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">
                 <BiComment/> &nbsp; 2
               </Text>
               {/* 조회수 */}
-              <Text color="#9AA0A6" fontSize="1.6vh" padding="2%" width="33.3%" margin= "0px 8px">
+              <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">
               <AiOutlineEye /> <span>{props.viewCount}</span>
               </Text>
               

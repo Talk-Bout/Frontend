@@ -264,7 +264,6 @@ const Contents = styled.div`
   place-items: center;
   box-sizing: border-box;
   cursor: pointer;
-  overflow: auto;
   width: 100%;
   height: 900px;
   left: 284px;

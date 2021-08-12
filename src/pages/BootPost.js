@@ -37,12 +37,6 @@ const BootPost = (props) => {
   // 이 커뮤니티글의 댓글이 맞는지 재확인
   const comment_list = all_comment.filter((comment) => comment.communityId === commu_id);
 
-  const [MenuLink, setMenuLink] = useState(null);
-  const [edit_comment, setEditComment] = useState(null);
-
-  const commentInput = useRef(null);
-  const commentEdit = useRef(null);
-
   // 댓글 페이지네이션
   const [next_page, setNextPage] = useState(2);
 
@@ -57,6 +51,12 @@ const BootPost = (props) => {
     dispatch(campActions.setCommentsDB(commu_id, next_page));
     setNextPage(next_page + 1);
   }
+
+  const [MenuLink, setMenuLink] = useState(null);
+  const [edit_comment, setEditComment] = useState(null);
+
+  const commentInput = useRef(null);
+  const commentEdit = useRef(null);
 
   // 게시글 북마크 표시
   const markCommu = () => {
@@ -146,7 +146,7 @@ const BootPost = (props) => {
               {/* 게시글 */}
               <Post>
                 {/* 게시글 카테고리 */}
-                <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; 커뮤니티 / 작성자:{commu_found.nickname}</Text>
+                <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; 커뮤니티</Text>
                 <Grid display='flex' justify_content='space-between' padding='12px 0 0'>
                   {/* 제목 */}
                   <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' vertical_align='middle'>{commu_found.title}</Text>

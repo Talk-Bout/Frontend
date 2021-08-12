@@ -15,7 +15,6 @@ const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
-
   const username = useSelector(state => state.user.user.nickname);
 
   const edited_id = parseInt(window.location.pathname.split('/write/')[1]);
@@ -27,6 +26,8 @@ const BootCommuWrite = (props) => {
 
   const titleRef = useRef('');
   const contentRef = useRef('');
+
+  console.log(commu_found);
 
   // 이미지 업로드
   const imageRef = useRef();
@@ -60,6 +61,7 @@ const BootCommuWrite = (props) => {
         content: contentRef.current.value,
         bootcampName: commu_found.bootcampName,
         communityId: commu_found.communityId,
+        image: image_url,
       };
       dispatch(campActions.editCommuDB(edited_commu));
     } else {
@@ -149,15 +151,15 @@ const BootCommuWrite = (props) => {
                 </TitleBox>
                 {/* 내용 입력 칸 */}
                 {/* 이미지 preview가 있으면 입력 칸 크기 줄이고, preview와 파일명을 보여주기*/}
+                {/* 글 수정 중이라면 저장된 제목과 내용 보여주기 */}
                 <ContentBox>
                   <Textarea
                     rows={preview ? '5' : '15'}
                     placeholder="내용을 입력해주세요"
                     ref={contentRef}
-                    defaultValue={edited_id ? commu_found.content : null}
-                  />
+                    defaultValue={edited_id ? commu_found.content : null} />
                 </ContentBox>
-                {preview ? (
+                {preview ?
                   <div style={{ textAlign: 'center' }}>
                     <Preview>
                       <Img src={preview} />
@@ -168,12 +170,10 @@ const BootCommuWrite = (props) => {
                       color="#5f6368"
                       margin="0 auto 80px"
                     >
-                      {imageRef.current.files[0].name}
+                      {preview ? imageRef.current.files[0].name : ''}
                     </Text>
                   </div>
-                ) : (
-                  ''
-                )}
+                    : '' }
               </BodyBox>
               {/* 작성 페이지 푸터 */}
               <FooterBox>

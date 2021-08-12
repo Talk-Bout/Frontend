@@ -8,8 +8,8 @@ import Boot from '../image/Bootcamp.png';
 import Boot_white from '../image/Bootcamp_white.png';
 import Qna from '../image/Qna.png';
 import Qna_white from '../image/qna_white.png';
-import News from '../image/News.png';
-import News_white from '../image/News_white.png';
+// import News from '../image/News.png';
+// import News_white from '../image/News_white.png';
 import Talk from '../image/Board.png';
 import Talk_white from '../image/Board_white.png';
 import { history } from '../redux/ConfigureStore';
@@ -37,10 +37,10 @@ const Sidebar = (props) => {
             src={url === 'question' ? Qna_white : Qna}
             onClick={() => history.push('/question')}
           />
-          <Image
+          {/* <Image
             src={url === 'news' ? News_white : News}
             onClick={() => history.push('/news/list')}
-          />
+          /> */}
           <Image
             src={url === 'common' ? Talk_white : Talk}
             onClick={() => history.push('/common/list')}

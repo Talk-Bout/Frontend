@@ -52,8 +52,8 @@ const HeaderN = (props) => {
             width='auto'
             margin="26px 0 0 42px"
           >
-            <Image src={Search} alt="검색" />
-            <Input placeholder="검색어를 입력하세요." />
+            {/* <Image src={Search} alt="검색" />
+            <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
           <Grid height='fit-content' width="auto" margin='36px 50px'>
             {/* 북마크 메뉴 */}

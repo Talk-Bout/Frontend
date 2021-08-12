@@ -16,19 +16,12 @@ const BootReview = (props) => {
   // 부트캠프 정보를 props로 받는다.
   const {bootcampName, desc, review} = props.location.state.camp;
   const url = props.location.pathname.split('/')[3];
-
   const camp = {
     bootcampName: bootcampName,
     desc: desc,
     review: review,
     url: url,
   }
-
-  useEffect(() => {
-    dispatch(campActions.setReviewsDB(bootcampName, page));
-  }, []);
-
-  const review_list = useSelector(state => state.bootcamp.review_list);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
@@ -40,6 +33,12 @@ const BootReview = (props) => {
   const toNextPage = () => {
     setPage(page + 1);
   }
+
+  useEffect(() => {
+    dispatch(campActions.setReviewsDB(bootcampName, page));
+  }, []);
+
+  const review_list = useSelector(state => state.bootcamp.review_list);
 
   return (
     <React.Fragment>
@@ -74,11 +73,8 @@ const BootReview = (props) => {
                         {/* 리뷰 제목 */}
                         <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>{review.title}</Text>
                         {/* 작성자 닉네임, 작성일자 */}
-                        {/* 닉네임은 탈퇴, 수료, 수강중 상태로 구분해서 띄움 */}
                         <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>
-                          {review.nickname === null ? '탈퇴한 사용자 ' :
-                          review.status === '수료' ? `수료자 : ${review.nickname[0]}${review.nickname[1]}***** ` : `작성자 : ${review.nickname[0]}${review.nickname[1]}***** `}
-                          - {review.createdAt}
+                          {review.nickname === null ? '탈퇴한 사용자 ' :  `${review.nickname}`} - {review.createdAt}
                         </Text>
                         {/* 장점 */}
                         <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0'>장점</Text>
@@ -101,11 +97,8 @@ const BootReview = (props) => {
                       {/* 리뷰 제목 */}
                       <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>리뷰 제목</Text>
                       {/* 작성자 닉네임, 작성일자 */}
-                      {/* 닉네임은 탈퇴, 수료, 수강중 상태로 구분해서 띄움 */}
                       <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>
-                        {review.nickname === null ? '탈퇴한 사용자 ' :
-                        review.status === '수료' ? `수료자 : ${review.nickname[0]}${review.nickname[1]}***** ` : `작성자 : ${review.nickname[0]}${review.nickname[1]}***** `}
-                        - {review.createdAt}
+                      {review.nickname === null ? '탈퇴한 사용자 ' :  `${review.nickname}`} - {review.createdAt}
                       </Text>
                       {/* 장점 */}
                       <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0'>장점</Text>

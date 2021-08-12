@@ -23,8 +23,13 @@ const BootPost = (props) => {
   // 북마크한 커뮤니티글 목록에 이 글이 있으면, this_commu에 넣는다.
   const this_commu = my_commu_list.find((commu) => commu.communityId === commu_id);
   
-  const commu_list = useSelector(state => state.bootcamp.commu_list);
-  const commu_found = commu_list.find((commu) => commu.communityId === commu_id);
+  // 이 커뮤니티글
+  const commu_found = useSelector(state => state.bootcamp.one_commu);
+  // 이 커뮤니티글 좋아요 한 사람들 목록
+  const commu_likes = useSelector(state => state.bootcamp.commu_like_list);
+  // 이 커뮤니티글 좋아요 한 사람들 목록에 사용자 닉네임이 있으면, like_found에 넣는다.
+  const like_found = commu_likes.find((like) => like.nickname === username);
+
   const comment_list = useSelector(state => state.bootcamp.comment_list);
   const [comment_page, setCommentPage] = useState(1);
   const [MenuLink, setMenuLink] = useState(null);
@@ -34,11 +39,9 @@ const BootPost = (props) => {
   const commentEdit = useRef(null);
 
   useEffect(() => {
-    if (!commu_found) {
-      dispatch(campActions.setOneCommuDB(camp_name, commu_id));
-    }
+    dispatch(campActions.setOneCommuDB(camp_name, commu_id));
     dispatch(campActions.setCommentsDB(commu_id, comment_page));
-    dispatch(campActions.setMyCommuDB(username));
+    dispatch(campActions.setMyCommuDB());
   }, []);
 
   // 게시글 북마크 표시
@@ -66,6 +69,16 @@ const BootPost = (props) => {
       communityId: commu_id,
     };
     dispatch(campActions.deleteCommuDB(deleted_commu));
+  }
+
+  // 좋아요 표시하기
+  const likeCommu = () => {
+    dispatch(campActions.likeCommuDB(commu_id, username));
+  }
+
+  // 좋아요 해제하기
+  const unlikeCommu = (communityLikeId) => {
+    dispatch(campActions.unlikeCommuDB(commu_id, communityLikeId));
   }
 
   // 댓글 추가하기
@@ -168,8 +181,29 @@ const BootPost = (props) => {
                 {commu_found.image ? <ImageBox><Image src={`http://13.209.12.149${commu_found.image}`}/></ImageBox> : ''}
                 <Text p fontSize='16px' color='#dadce0' margin={commu_found.image ? '' : '32px 0 0'}>{commu_found.content}</Text>
                 <IconBox>
-                  {/* 추천 버튼 */}
-                  <span style={{backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px'}}><Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px'><span style={{fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px'}}><BiLike /></span>{commu_found.communityLike ? commu_found.communityLike.length : 0}</Text></span>
+                  {/* 좋아요 버튼 */}
+                  {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}
+                  {like_found ? 
+                  <span style={{backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px'}}>
+                    <Text color='#7879F1' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => unlikeCommu(like_found.communityLikeId)}>
+                      <span style={{fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px'}}>
+                        <BiLike />
+                      </span>
+                      {/* 좋아요 개수 */}
+                      {commu_likes.length}
+                    </Text>
+                  </span>
+                  :
+                  <span style={{backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px'}}>
+                    <Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => likeCommu()}>
+                      <span style={{fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px'}}>
+                        <BiLike />
+                      </span>
+                      {/* 좋아요 개수 */}
+                      {commu_likes.length}
+                    </Text>
+                  </span>
+                  }
                   {/* 댓글 수 */}
                   <Text color='#BDC1C6' fontSize='12px' margin='0 16px 0'><span style={{fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle'}}><BiComment /></span>{commu_found.communityComment ? commu_found.communityComment.length : 0}</Text>
                   {/* 조회수 */}

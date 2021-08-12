@@ -32,6 +32,7 @@ const BootPost = (props) => {
 
   const commentInput = useRef(null);
   const commentEdit = useRef(null);
+ 
 
   useEffect(() => {
     if (!commu_found) {

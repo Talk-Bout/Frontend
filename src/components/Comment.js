@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,11 +9,12 @@ import CommentEdit from '../components/CommentEdit';
 
 const Comment = (props) => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.user);
-  const is_login = useSelector((state) => state.user.user.is_login);
+  const nickname = useSelector((state) => state.user.user.nickname);
+  const is_login = useSelector((state) => state.user.is_login);
   const comment_list = useSelector((state) => state.comment.list);
   const addRef = useRef(null);
   const postId = parseInt(props.postId);
+  const [comment_page, setCommentPage] = useState(1);
 
   //댓글 등록
   const addComment = () => {
@@ -24,7 +25,7 @@ const Comment = (props) => {
       nickname: nickname,
       postId: postId,
     };
-    if (is_login) {
+    if (!is_login) {
       window.alert('로그인 후 이용해주세요!');
       return;
     };
@@ -38,12 +39,21 @@ const Comment = (props) => {
   };
   
   // 댓글 조회
-  useEffect(() => {
-    dispatch(commentActions.setCommentDB(postId));
-    // dispatch(commentActions.isEdit(true));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(commentActions.setCommentDB(postId));
+  //   // dispatch(commentActions.isEdit(true));
+  // }, []);
   
+  // 댓글 더보기
+  const moreComment = () => {
+    setCommentPage(comment_page + 1);
+  }
 
+  if (!comment_list) {
+    return (
+      <></>
+    );
+  };
   return (
     <React.Fragment>
       <Grid width="100%" height="80%">
@@ -64,7 +74,7 @@ const Comment = (props) => {
             <CommentInput
               placeholder="댓글을 남겨주세요"
               ref={addRef}
-              onSubmit={addComment}
+              // onSubmit={addComment}
             />
             <WriteButton
               onClick={() => {
@@ -82,6 +92,16 @@ const Comment = (props) => {
             return <CommentEdit key={ct.commentId} {...ct} />;
           })}
       </Grid>
+      {/* 댓글 더보기 버튼 */}
+      {comment_list ?
+      <>
+              <MoreBtn disabled><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>
+              </>
+              :
+              <>
+              <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>
+              </>}
+              
     </React.Fragment>
   );
 };
@@ -141,6 +161,18 @@ const CommentListButton = styled.button`
   &:hover {
     background-color: #ffffff;
     color: #121212;
+  }
+`;
+
+const MoreBtn = styled.button`
+  width: 100%;
+  padding: 23px 0;
+  margin: 0 0 64px;
+  background-color: #282A2D;
+  border: none;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
   }
 `;
 

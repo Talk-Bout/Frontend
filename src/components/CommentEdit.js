@@ -13,7 +13,7 @@ const CommentEdit = (props) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
   // 현재 접속 중인 사용자 닉네임
-  const username = useSelector(state => state.user.user);
+  const username = useSelector(state => state.user.user.nickname);
 
   // 댓글 삭제
   const deleteComment = () => {

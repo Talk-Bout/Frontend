@@ -3,13 +3,15 @@ import { produce } from 'immer';
 import instance from '../../shared/Request';
 
 // 액션타입
-const SET_POST = 'SET_POST'; // 게시글 전체 불러오기
-const SET_ONE_POST = 'SET_ONE_POST'; // 게시글 하나 불러오기
-const ADD_POST = 'ADD_POST'; // 게시글 추가하기
-const EDIT_POST = 'EDIT_POST'; // 게시글 수정하기
-const DELETE_POST = 'DELETE_POST'; // 게시글 삭제하기
-const ADD_BOOKMARK = 'ADD_BOOKMARK'; // 북마크 추가하기
-const DELETE_BOOKMARK = 'DELETE_BOOKMARK'; // 북마크 삭제하기
+const SET_POST = 'post/SET_POST'; // 게시글 전체 불러오기
+const SET_ONE_POST = 'post/SET_ONE_POST'; // 게시글 하나 불러오기
+const ADD_POST = 'post/ADD_POST'; // 게시글 추가하기
+const EDIT_POST = 'post/EDIT_POST'; // 게시글 수정하기
+const DELETE_POST = 'post/DELETE_POST'; // 게시글 삭제하기
+
+const SET_BOOKMARK = 'post/SET_BOOKMARK' // 북마크 불러오기
+const ADD_BOOKMARK = 'post/ADD_BOOKMARK'; // 북마크 추가하기
+const DELETE_BOOKMARK = 'post/DELETE_BOOKMARK'; // 북마크 삭제하기
 
 // 액션생성함수
 // 게시물
@@ -19,13 +21,14 @@ const addPost = createAction(ADD_POST, (post) => ({ post }));
 const editPost = createAction(EDIT_POST, (post) => ({ post }));
 const deletePost = createAction(DELETE_POST, (post) => ({ post }));
 // 북마크
+const setBookmark = createAction(SET_BOOKMARK, (bookmark_list) => ({bookmark_list}));
 const addBookmark = createAction(ADD_BOOKMARK, (bookmark) => ({bookmark}));
-const deleteBookmark = createAction(ADD_BOOKMARK, (postBookmarkId) => ({postBookmarkId}));
+const deleteBookmark = createAction(DELETE_BOOKMARK, (bookmarkId) => ({bookmarkId}));
 
 // 기본값 정하기
 const initialState = {
   list: [],
-  bookmark_list: [],
+  my_bookmark_list: [],
 };
 
 // 액션함수
@@ -39,7 +42,7 @@ const setPostDB = (page, category) => {
         // console.log(response.data);
       })
       .catch((err) => {
-        console.error(`전체 게시글 불러오기 에러 발생: ${err}`);
+        console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
       });
   };
 };
@@ -55,7 +58,7 @@ const setOnePostDB = (id) => {
 
       })
       .catch((err) => {
-        console.error(`개별 게시글 불러오기 에러 발생: ${err}`);
+        console.error(`부트톡톡 개별 게시글 불러오기 에러 발생: ${err}`);
       });
   };
 };
@@ -79,7 +82,7 @@ const addPostDB = (new_post) => {
         dispatch(addPost(response.data));
       })
       .catch((err) => {
-        console.error(`게시글 추가하기 에러 발생: ${err}`);
+        console.error(`부트톡톡 게시글 추가하기 에러 발생: ${err}`);
       });
   };
 };
@@ -113,7 +116,7 @@ const editPostDB = (edited_post) => {
         dispatch(editPost(data));
       })
       .catch((err) => {
-        console.error(`게시글 수정하기 에러 발생: ${err}`);
+        console.error(`부트톡톡 게시글 수정하기 에러 발생: ${err}`);
       });
   };
 };
@@ -129,44 +132,50 @@ const deletePostDB = (deleted_post) => {
         dispatch(deletePost(postId));
       })
       .catch((err) => {
-        console.error(`게시글 삭제하기 에러 발생: ${err}`);
+        console.error(`부트톡톡 게시글 삭제하기 에러 발생: ${err}`);
       });
   };
 };
 
-const addBookmarkDB = (add_bookmark) => {
-  console.log(add_bookmark);
+const setBookmarkDB = (nickname) => {
+  // 서버로부터 북마크한 커뮤니티글 목록 불러오는 함수
+  return function (dispatch) {
+    instance.get(`/users/${nickname}/postBookmarks`).then((response) => {
+      dispatch(setBookmark(response.data));
+    }).catch((err) => {
+      console.error(`부트톡톡 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
+    });
+  };
+};
+
+const addBookmarkDB = (postId, nickname) => {
+  console.log(postId, nickname);
+
     return function (dispatch) {
-      const postId = parseInt(add_bookmark.postId);
-      const nickname = add_bookmark.nickname;
         instance.post(`/posts/${postId}/postBookmarks`,{
-          postId : postId,
-          nickname : nickname,
+          postId: parseInt(postId),
+          nickname: nickname,
         })
       .then((response) => {
+        console.log(response.data);
                 dispatch(addBookmark(response.data));
+                
             })
             .catch((err) => {
-                console.log(`에러 발생: ${err}`);
+              console.error(`부트톡톡 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
             });
     };
 };
 
-const deleteBookmarkDB = (deleted_bookmark) => {
-  console.log(deleted_bookmark);
+const deleteBookmarkDB = (postId, postBookmarkId) => {
   return function (dispatch) {
-    const postId = deleted_bookmark.postId;
-    const postBookmarkId = deleted_bookmark.postBookmarkId;
-    
-      instance.delete(`/posts/${postId}/postBookmarks/${postBookmarkId}`,{
-        postBookmarkId : postBookmarkId,
-      })
+      instance.delete(`/posts/${postId}/postBookmarks/${postBookmarkId}`)
     .then((response) => {
               dispatch(deleteBookmark(response.data));
               // console.log(response.data);
           })
           .catch((err) => {
-              console.log(`에러 발생: ${err}`);
+            console.error(`부트톡톡 북마크 삭제하기 에러 발생: ${err} ### ${err.response}`);
           });
   };
 };
@@ -184,7 +193,7 @@ export default handleActions(
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list.unshift(action.payload.post);
+        draft.list.push(action.payload.post);
       }),
     [DELETE_POST]: (state, action) =>
     produce(state, (draft) => {
@@ -199,16 +208,19 @@ export default handleActions(
     produce(state, (draft) =>{
       draft.list = [action.payload.post];
     }),
+    [SET_BOOKMARK]: (state, action) => produce(state, (draft) => {
+      draft.my_bookmark_list = action.payload.bookmark_list;
+    }
+    ),
     [ADD_BOOKMARK]: (state, action) => produce(state, (draft) => {
-      draft.bookmark_list.unshift(action.payload.bookmark);
+      draft.my_bookmark_list.unshift(action.payload.bookmark);
     }),
     [DELETE_BOOKMARK]: (state, action) =>
     produce(state, (draft) => {
-      const new_bookmark = draft.bookmark_list.filter((bookmark) => {
-        if(bookmark.bookmarkId !== action.payload.postBookmarkId){
+      const new_bookmark = draft.my_bookmark_list.filter((bookmark) => {
+        if(bookmark.postBookmarkId !== action.payload.bookmarkId){
           return bookmark;
         }
-        // console.log(action.payload.postBookmarkId);
       })
       draft.list = new_bookmark;
     }),
@@ -225,6 +237,7 @@ const actionCreators = {
   deletePostDB,
   addBookmarkDB,
   deleteBookmarkDB,
+  setBookmarkDB,
 };
 
 export { actionCreators };

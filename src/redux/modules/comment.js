@@ -9,10 +9,10 @@ import instance from '../../shared/Request';
 // 댓글 삭제 "DELETE" /posts/:postId/comments/:commentId
 
 // 액션타입
-const SET_COMMENT = 'SET_COMMENT';               // 댓글 불러오기
-const ADD_COMMENT = 'ADD_COMMENT';              // 댓글 추가하기
-const EDIT_COMMENT = 'EDIT_COMMENT';            // 댓글 수정하기
-const DELETE_COMMENT = 'DELETE_COMMENT';        // 댓글 삭제하기
+const SET_COMMENT = 'comment/SET_COMMENT';               // 댓글 불러오기
+const ADD_COMMENT = 'comment/ADD_COMMENT';              // 댓글 추가하기
+const EDIT_COMMENT = 'comment/EDIT_COMMENT';            // 댓글 수정하기
+const DELETE_COMMENT = 'comment/DELETE_COMMENT';        // 댓글 삭제하기
 const IS_EDIT = 'IS_EDIT';
 
 // 액션생성함수
@@ -36,7 +36,7 @@ return function (dispatch) {
   })
   .then((response) => {
         dispatch(setComment(response.data));
-        console.log(setComment(response.data));
+        // console.log(setComment(response.data));
     })
     .catch((err) => {
         console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);

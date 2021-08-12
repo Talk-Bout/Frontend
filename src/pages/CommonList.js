@@ -17,7 +17,7 @@ import CommonPostList from '../components/CommonPostList';
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
   const common_list = useSelector(state => state.post.list);
-  console.log(common_list);
+  const is_login = useSelector((state) => state.user.is_login);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
@@ -39,9 +39,9 @@ const CommonBoardList = (props) => {
     dispatch(postActions.setPostDB(page, 'chitchat'));
   }
 
-  // 게시물 리스트 조회 (default : 정보방)
+  // 게시물 리스트 조회 (default : 전체)
   React.useEffect(() => {
-    dispatch(postActions.setPostDB(page, 'info'));
+    dispatch(postActions.setPostDB(page, ''));
   }, []);
 
   return (
@@ -75,14 +75,16 @@ const CommonBoardList = (props) => {
                         <Options>인기순</Options>
                         <Options>최신순</Options>
                       </SelectButton>
-                      {/* 글쓰기버튼 */}
+                      {/* 글쓰기버튼 (로그인 후 이용가능) */}
+                      {is_login ?
                       <div>
-                        <WriteButton
-                          onClick={() => history.push('/common/write')}
-                        >
-                          <FaPlus/>&nbsp; 글쓰기
-                        </WriteButton>
-                      </div>
+                      <WriteButton
+                        onClick={() => history.push('/common/write')}
+                      >
+                        <FaPlus/>&nbsp; 글쓰기
+                      </WriteButton>
+                    </div>
+                      : ""}
                   </Grid>
                 </Grid>
             </Grid>
@@ -108,7 +110,7 @@ const CommonBoardList = (props) => {
               <Contents>
                 {common_list.map((c, idx) => {
                 return (
-                <CommonPostList key={c.commentId} {...c}/>
+                <CommonPostList key={c.postId} {...c}/>
             );
               })}
           </Contents>
@@ -200,7 +202,7 @@ border: 1px solid #4D4E93;
 
 const Notice = styled.div`
 grid-template-rows: repeat(2, minmax(auto, auto));
-grid-template-columns: repeat(1, 1fr);
+grid-template-columns: repeat(6, 1fr);
 display: flex;
 /* width: 100%;
 height: 50%; */

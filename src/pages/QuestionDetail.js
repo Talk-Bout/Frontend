@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Image } from '../elements';
+import { Grid, Text } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { history } from '../redux/ConfigureStore';
@@ -8,12 +8,14 @@ import { history } from '../redux/ConfigureStore';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import AnswerCard from '../components/AnswerCard';
+
 //icons
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
 import profile_medium from '../image/profile_medium.png';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
@@ -22,27 +24,29 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
-  const user_name = useSelector((state) => state.user.user);
+  const user_name = useSelector((state) => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
+  const is_login = useSelector((state) => state.user.is_login);
+
   //Answer 작성
   const answerInput = useRef(null);
   const answer_list = useSelector((state) => state.question.answer_list);
-  // const answer_count = answer_list.length > 0;
-  const [page, setPage] = React.useState(1);
-
+  const [answer_page, setAnswerPage] = useState(1);
+  console.log(answer_page);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
     if (!question_found) {
       dispatch(questionActions.setOneQuestionDB(question_id));
     }
-    dispatch(questionActions.setAnswerDB(question_id, page));
+    dispatch(questionActions.setAnswerDB(question_id, 1));
   }, []);
 
   if (!question_found) {
     return <></>;
   }
 
+  // 수정 삭제 버튼
   const handleClick = (e) => {
     setMenuLink(e.currentTarget);
   };
@@ -68,20 +72,35 @@ const QuestionDetail = (props) => {
       questionId: question_id,
     };
 
+    if (!is_login) {
+      window.alert('로그인 후에 이용 가능합니다.');
+      return;
+    }
+
     if (answerInput.current.value === '') {
       window.alert('내용을 입력해주세요.');
       return;
     }
+
     dispatch(questionActions.createAnswerDB(new_answer));
     answerInput.current.value = '';
   };
+
+  //Answer 더보기
+  // const moreAnswer = async () => {
+  //   const result = await setAnswerPage(answer_page + 1);
+  //   console.log(result);
+  //   dispatch(questionActions.setAnswerDB(question_id, answer_page));
+  // };
+
+  async function moreAnswer() {}
 
   return (
     <React.Fragment>
       <Grid display="flex">
         <Sidebar />
         <Body header>
-          <Grid height="50%">
+          <Grid>
             {/* 질문 카드 */}
             <Grid width="70vw" height="100%" margin="auto">
               <Grid display="flex">
@@ -113,25 +132,32 @@ const QuestionDetail = (props) => {
                       <BsBookmark />
                     </Text>
                   </Button>
-                  <Button
-                    padding="0"
-                    width="16.33px"
-                    height="21px"
-                    bg="transparent"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                  >
-                    <Text
+
+                  {/* 드롭 다운 버튼 */}
+                  {is_login && question_found.nickname === user_name ? (
+                    <Button
                       padding="0"
-                      color="#9AA0A6"
-                      fontSize="24px"
-                      lineHeight="35px"
-                      hover="opacity: 0.8"
+                      width="16.33px"
+                      height="21px"
+                      bg="transparent"
+                      aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      onClick={handleClick}
                     >
-                      <BsThreeDotsVertical />
-                    </Text>
-                  </Button>
+                      <Text
+                        padding="0"
+                        color="#9AA0A6"
+                        fontSize="24px"
+                        lineHeight="35px"
+                        hover="opacity: 0.8"
+                      >
+                        <BsThreeDotsVertical />
+                      </Text>
+                    </Button>
+                  ) : (
+                    ''
+                  )}
+
                   <Menu
                     id="simple-menu"
                     anchorEl={MenuLink}
@@ -170,24 +196,38 @@ const QuestionDetail = (props) => {
                 </Grid>
 
                 <Grid width="40%">
-                  <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
-                    {question_found.nickname}
-                  </Text>
+                  {question_found.nickname === null ? (
+                    <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
+                      탈퇴한 회원입니다.
+                    </Text>
+                  ) : (
+                    <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
+                      {question_found.nickname}
+                    </Text>
+                  )}
+
                   <Text p margin="auto 4%" color="#C4C4C4">
                     {question_found.createdAt}
                   </Text>
                 </Grid>
               </Grid>
-
               {/* 콘텐츠마다 달라지는 위치값 고정하기 */}
               <Text p margin="5% 0%" color="#C4C4C4">
                 {question_found.content}
               </Text>
 
+              {question_found.image ? (
+                <ImageBox>
+                  <Image src={`http://13.209.12.149${question_found.image}`} />
+                </ImageBox>
+              ) : (
+                ''
+              )}
+
               <Grid display="flex" margin="3% 0%" vertical-align="center">
                 <LikeCommentBtn>
                   <BiLike />
-                  17
+                  {question_found.questionLike.length}
                 </LikeCommentBtn>
 
                 <Text color="#C4C4C4" margin="auto 1%">
@@ -196,7 +236,7 @@ const QuestionDetail = (props) => {
 
                 <Text color="#C4C4C4" margin="auto 1%">
                   <BsEye />
-                  254
+                  {question_found.viewCount}
                 </Text>
               </Grid>
             </Grid>
@@ -224,6 +264,14 @@ const QuestionDetail = (props) => {
             {answer_list.map((answer, idx) => {
               return <AnswerCard key={answer.answerId} {...answer} />;
             })}
+
+            <Grid margin="auto" width="10%">
+              {answer_list.length < 5 ? null : (
+                <Button onClick={() => moreAnswer()}>
+                  <MdKeyboardArrowDown size="40" color="#F2F3F4" />
+                </Button>
+              )}
+            </Grid>
           </AnswerBox>
         </Body>
       </Grid>
@@ -251,6 +299,22 @@ const ACommentBox = styled.div`
   border-radius: 12px;
   border: 1px solid #9aa0a6;
   width: 100%;
+`;
+const ImageBox = styled.div`
+  width: 70%;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 32px auto;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  object-fit: contain; //가로세로 비율 콘텐츠 박스 크기에 맞춤
 `;
 
 const AInput = styled.textarea`

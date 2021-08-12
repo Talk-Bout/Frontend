@@ -102,6 +102,7 @@ const Signup = (props) => {
             width="60%"
             margin="auto"
             _onClick={() => history.push('/')}
+            cursor="pointer"
           />
         </Grid>
         <Grid height="8%">
@@ -269,11 +270,6 @@ const Signup = (props) => {
                 name="nickname"
                 type="nickname"
                 onChange={(e) => debounceNickname(e)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    formik();
-                  }
-                }}
               />
               {nickname.length === 0 ? null : nickname_exist ? (
                 <Text fontSize="1.2vh" color="#ff7070">
@@ -336,16 +332,19 @@ const Select = styled.select`
 const SingUpButton = styled.button`
   width: 100%;
   height: 40px;
-  background-color: #7879f1;
   margin-top: 7%;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  :active {
+  background-color: #a5a6f6;
+  :hover {
+    background-color: #7879f1;
+  }
+`;
+/* :active {
     box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
     position: relative;
     top: 2px;
-  }
-`;
+  } */
 
 export default Signup;

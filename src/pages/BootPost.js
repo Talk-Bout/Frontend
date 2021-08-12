@@ -37,6 +37,7 @@ const BootPost = (props) => {
 
   const commentInput = useRef(null);
   const commentEdit = useRef(null);
+ 
 
   useEffect(() => {
     dispatch(campActions.setOneCommuDB(camp_name, commu_id));

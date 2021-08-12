@@ -15,10 +15,9 @@ import {actionCreators as mypageActions} from '../redux/modules/mypage';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.user);
+  const nickname = useSelector((state) => state.user.user.nickname);
   const mytalk_list = useSelector((state) => state.mypage.mytalk_list);
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
-  console.log(mytalk_list);
 
   // mypost 3개 추출
   const mytalk = mytalk_list.slice(0,3);

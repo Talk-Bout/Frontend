@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions} from "../redux/modules/post";
+import { actionCreators as commentActions} from "../redux/modules/comment";
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -9,12 +10,10 @@ import Comment from '../components/Comment';
 import PopBootContents from '../components/PopBootContents';
 
 import styled from 'styled-components';
-import { Text, Grid, Input, Image } from '../elements/index';
+import { Text, Grid } from '../elements/index';
 import {
-  BiTimeFive,
   BiLike,
   BiComment,
-  BiShow,
   BiPencil,
   BiTrashAlt,
 } from 'react-icons/bi';
@@ -34,16 +33,18 @@ const CommonDetail = (props) => {
   const postId = props.match.params.id;
   const common_list = useSelector((state) => state.post.list);
   const common_find = common_list.find(
-    (comment) => comment.postId === parseInt(postId)
+    (post) => post.postId === parseInt(postId)
   );
-  const username = useSelector((state) => state.user.user.nickname);
+  const nickname = useSelector((state) => state.user.user.nickname);
+
   const [MenuLink, setMenuLink] = useState(null);
 
   React.useEffect(() => {
-    if (common_find) {
-      return;
+    if (!common_find) {
+      dispatch(postActions.setOnePostDB(postId));
     }
-    dispatch(postActions.setOnePostDB(postId));
+    dispatch(postActions.setBookmarkDB(nickname));
+    dispatch(commentActions.setCommentDB(postId));
   }, []);
 
   const handleClick = (e) => {
@@ -64,31 +65,28 @@ const CommonDetail = (props) => {
   };
 
   // 게시글 북마크
-  const [bookmark, setBookmark] = useState(false);
-  const bookmark_list = useSelector(state => state.post.bookmark_list);
-  const postBookmarkId = useSelector(state => state.post.bookmark_list.postBookmarkId);
+  // 북마크 리스트 조회
+  const bookmark_list = useSelector(state => state.post.my_bookmark_list);
+  console.log(bookmark_list);
 
-  const handleBookmark = () => {
-    setBookmark(!bookmark);
+  const post_bookmark = bookmark_list.find((post) => post.postId === parseInt(postId));
+  console.log(post_bookmark);
 
-    if (!bookmark) {
-      const add_bookmark = {
-        postId : postId,
-        nickname : username,
-      }
-      dispatch(postActions.addBookmarkDB(add_bookmark));
-    } else {
-      const deleted_bookmark = {
-        postId : postId,
-      }
-      dispatch(postActions.deleteBookmarkDB(deleted_bookmark, postBookmarkId));
+  const markPost = () => {
+    dispatch(postActions.addBookmarkDB(postId, nickname));
+  }
+
+  const unmarkPost = (postBookmarkId) => {
+      dispatch(postActions.deleteBookmarkDB(postId, postBookmarkId));
     }
-  };
-  console.log(bookmark);
+  
 
   if (!common_find) {
-    return <></>;
-  }
+    return (
+    <></>
+    );
+  };
+
   return (
     <React.Fragment>
       <Grid
@@ -146,13 +144,14 @@ const CommonDetail = (props) => {
                       </Grid>
                       {/* 북마크와 수정 삭제 */}
                       <Grid display="flex" width="14%" height="100%">
+                        
+                      {post_bookmark ? (
+                        <>
                         <Button
                           padding="0"
                           width="16.33px"
                           height="21px"
-                          onClick={handleBookmark}
                         >
-                          {bookmark ? (
                             <Text
                               padding="0"
                               color="#9aa0a6"
@@ -161,10 +160,22 @@ const CommonDetail = (props) => {
                               vertical_align="middle"
                               cursor="pointer"
                               hover="opacity: 0.7"
+                              _onClick={()=> unmarkPost(
+                                post_bookmark.postBookmarkId
+                              )}
                             >
                               <BsBookmarkFill />
                             </Text>
+                            </Button>
+                            </>
                           ) : (
+                            <>
+                            <Button
+                          padding="0"
+                          width="16.33px"
+                          height="21px"
+                         
+                        >
                             <Text
                               padding="0"
                               color="#9aa0a6"
@@ -173,11 +184,14 @@ const CommonDetail = (props) => {
                               vertical_align="middle"
                               cursor="pointer"
                               hover="opacity: 0.7"
+                              _onClick={()=> markPost()}
                             >
                               <BsBookmark />
                             </Text>
+                            </Button>
+                            </>
                           )}
-                        </Button>
+                       
                         <Button
                           padding="0"
                           width="16.33px"
@@ -294,7 +308,7 @@ const CommonDetail = (props) => {
                     fontSize="14px"
                     lineHeight="18px"
                   >
-                    <AiOutlineEye /> &nbsp; 354
+                    <AiOutlineEye /> {common_find.viewCount}
                   </Text>
                 </Grid>
               </Grid>

@@ -64,7 +64,6 @@ const CommonWrite = (props) => {
       history.push(`/common/list`)
     }
   };
-  console.log(categoryRef.current.value);
 
   // 이미지 업로드
   const imageRef = useRef();
@@ -84,7 +83,6 @@ const CommonWrite = (props) => {
   const exitPage = () => {
     dispatch(imageActions.getPreview(null));
   }
-
 
   return (
     <React.Fragment>

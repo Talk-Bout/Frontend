@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Button, Image } from '../elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
+import { history } from '../redux/ConfigureStore';
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -14,12 +17,30 @@ import { borderColor } from '@material-ui/system';
 import '../App.css';
 
 const DeleteUser = (props) => {
-  const [state, setState] = React.useState({
-    checked: true,
+  const dispatch = useDispatch();
+  const user_name = useSelector((state) => state.user.user);
+  console.log(user_name);
+
+  const [state, setState] = useState({
+    checked: false,
   });
+  console.log(state.checked);
+
+  const [charcter, setCharcter] = useState(0);
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
+  const deleteUserBtn = () => {
+    // console.log(user_name);
+    if (state.checked === false) {
+      window.alert('게시물 관리 조항을 확인해주세요.');
+      return;
+    }
+    dispatch(userActions.userDeleteDB(user_name));
+    localStorage.removeItem('token');
+    history.push('/');
   };
 
   return (
@@ -59,7 +80,7 @@ const DeleteUser = (props) => {
                       onChange={handleChange}
                       name="checked"
                       color="primary"
-                      borderColor="grey.500"
+                      bordercolor="grey.500"
                     />
                   }
                 />
@@ -110,19 +131,26 @@ const DeleteUser = (props) => {
 
               <FeedBackBox>
                 <FeedBackInput
-                  rows="7"
+                  rows="9"
                   placeholder="불편하셨던 점이나 기능 등 전반적으로 개선되었으면 하는 부분을 자세하게 적어주세요. 다시 돌아오시는 그날엔 발전된 토크부트가 되어있을 수 있도록 부탁드립니다 =)"
                 ></FeedBackInput>
-                <Text fontSize="1.5vh" margin="0 90%" color="#dbdce5">
-                  0/300
-                </Text>
+                <span>
+                  <Text fontSize="1.5vh" margin="0 90%" color="#dbdce5">
+                    0/300
+                  </Text>
+                </span>
               </FeedBackBox>
             </Grid>
             <Grid height="15%" display="flex">
-              <DeleteButton style={{ backgroundColor: '#a5a6f7' }}>
+              <DeleteButton onClick={() => deleteUserBtn()}>
                 탈퇴 신청
               </DeleteButton>
-              <DeleteButton style={{ backgroundColor: '#2e3134' }}>
+              <DeleteButton
+                style={{ backgroundColor: '#2e3134' }}
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
                 취소
               </DeleteButton>
             </Grid>
@@ -135,7 +163,7 @@ const DeleteUser = (props) => {
 
 const Container = styled.div`
   background-color: #212123;
-  width: 20vw;
+  width: 25vw;
   height: 70vh;
   margin: auto;
   padding: 4.5vh 2.5vw;
@@ -170,23 +198,27 @@ const FeedBackInput = styled.textarea`
   resize: none;
   padding: 1%;
   width: 98%;
-  color: #5f6368;
+  color: #dadce0;
   font-size: 1.4vh;
   :focus {
     outline: none;
+  }
+  ::placeholder {
+    color: #4e5357;
   }
 `;
 
 const DeleteButton = styled.button`
   width: 48%;
-  height: 6vh;
+  height: 50px;
   margin: 5% 1%;
   border: none;
   border-radius: 7px;
   box-sizing: border-box;
   color: #ffffff;
   font-weight: 600;
-  :active {
+  background-color: #a5a6f6;
+  :hover {
     background-color: #7879f1;
   }
 `;

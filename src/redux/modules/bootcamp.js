@@ -4,30 +4,30 @@ import {history} from '../ConfigureStore';
 import instance from '../../shared/Request';
 
 // 액션타입
-const SET_CAMPS = 'SET_CAMPS'; // 부트캠프 전체 목록 불러오기
-const SET_MY_CAMP = 'SET_MY_CAMP'; // 북마크한 부트캠프 목록 불러오기
-const ADD_MY_CAMP = 'ADD_MY_CAMP'; // 부트캠프 북마크하기
-const DELETE_MY_CAMP = 'DELETE_MY_CAMP'; // 부트캠프 북마크 해제하기
+const SET_CAMPS = 'bootcamp/SET_CAMPS'; // 부트캠프 전체 목록 불러오기
+const SET_MY_CAMP = 'bootcamp/SET_MY_CAMP'; // 북마크한 부트캠프 목록 불러오기
+const ADD_MY_CAMP = 'bootcamp/ADD_MY_CAMP'; // 부트캠프 북마크하기
+const DELETE_MY_CAMP = 'bootcamp/DELETE_MY_CAMP'; // 부트캠프 북마크 해제하기
 
-const SET_REVIEWS = 'SET_REVIEWS'; // 리뷰 불러오기
-const ADD_REVIEW = 'ADD_REVIEW'; // 리뷰 작성하기
+const SET_REVIEWS = 'bootcamp/SET_REVIEWS'; // 리뷰 불러오기
+const ADD_REVIEW = 'bootcamp/ADD_REVIEW'; // 리뷰 작성하기
 
-const SET_COMMUS = 'SET_COMMUS'; // 커뮤니티글 전체 목록 불러오기
-const SET_ONE_COMMU = 'SET_ONECOMMU' // 커뮤니티글 상세페이지 불러오기
-const ADD_COMMU = 'ADD_COMMU'; // 커뮤니티글 작성하기
-const EDIT_COMMU = 'EDIT_COMMU'; // 커뮤니티글 수정하기
+const SET_COMMUS = 'bootcamp/SET_COMMUS'; // 커뮤니티글 전체 목록 불러오기
+const SET_ONE_COMMU = 'bootcamp/SET_ONECOMMU' // 커뮤니티글 상세페이지 불러오기
+const ADD_COMMU = 'bootcamp/ADD_COMMU'; // 커뮤니티글 작성하기
+const EDIT_COMMU = 'bootcamp/EDIT_COMMU'; // 커뮤니티글 수정하기
 
-const SET_MY_COMMU = 'SET_MY_COMMU'; // 북마크한 커뮤니티글 목록 불러오기
-const ADD_MY_COMMU = 'ADD_MY_COMMU'; // 커뮤니티글 북마크하기
-const DELETE_MY_COMMU = 'DELETE_MY_COMMU'; // 커뮤니티글 북마크 해제하기
+const SET_MY_COMMU = 'bootcamp/SET_MY_COMMU'; // 북마크한 커뮤니티글 목록 불러오기
+const ADD_MY_COMMU = 'bootcamp/ADD_MY_COMMU'; // 커뮤니티글 북마크하기
+const DELETE_MY_COMMU = 'bootcamp/DELETE_MY_COMMU'; // 커뮤니티글 북마크 해제하기
 
-const LIKE_COMMU = 'LIKE_COMMU'; // 커뮤니티글 좋아요 표시하기
-const UNLIKE_COMMU = 'UNLIKE_COMMU'; // 커뮤니티글 좋아요 해제하기
+const LIKE_COMMU = 'bootcamp/LIKE_COMMU'; // 커뮤니티글 좋아요 표시하기
+const UNLIKE_COMMU = 'bootcamp/UNLIKE_COMMU'; // 커뮤니티글 좋아요 해제하기
 
-const SET_COMMENTS = 'SET_COMMENTS'; // 커뮤니티 댓글 불러오기
-const ADD_COMMENT = 'ADD_COMMENT'; // 커뮤니티 댓글 작성하기
-const EDIT_COMMENT = 'EDIT_COMMENT'; // 커뮤니티 댓글 수정하기
-const DELETE_COMMENT = 'DELETE_COMMENT'; // 커뮤니티 댓글 삭제하기
+const SET_COMMENTS = 'bootcamp/SET_COMMENTS'; // 커뮤니티 댓글 불러오기
+const ADD_COMMENT = 'bootcamp/ADD_COMMENT'; // 커뮤니티 댓글 작성하기
+const EDIT_COMMENT = 'bootcamp/EDIT_COMMENT'; // 커뮤니티 댓글 수정하기
+const DELETE_COMMENT = 'bootcamp/DELETE_COMMENT'; // 커뮤니티 댓글 삭제하기
 
 // 액션생성함수
 const setCamps = createAction(SET_CAMPS, (camp_list) => ({camp_list}));
@@ -69,6 +69,7 @@ const setCampsDB = (page) => {
   return function (dispatch) {
     instance.get(`/bootcamp?page=${page}`).then((response) => {
       dispatch(setCamps(response.data));
+      console.log(response.data);
     })
     .catch((err) => {
       console.error(`부트캠프 전체 불러오기 에러 발생: ${err} ### ${err.response}`);

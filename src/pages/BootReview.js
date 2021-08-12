@@ -14,14 +14,18 @@ const BootReview = (props) => {
   const dispatch = useDispatch();
 
   // 부트캠프 정보를 props로 받는다.
-  const {bootcampName, desc, review} = props.location.state.camp;
-  const url = props.location.pathname.split('/')[3];
+  const {bootcampName, desc, review, reviewNumber, star, url, camp_page} = props.location.state.camp;
+  const url_word = props.location.pathname.split('/')[3];
   const camp = {
     bootcampName: bootcampName,
     desc: desc,
     review: review,
+    reviewNumber: reviewNumber,
+    star: star,
     url: url,
-  }
+    url_word: url_word,
+    camp_page: camp_page,
+  };
 
   // 페이지네이션
   const [page, setPage] = useState(1);
@@ -74,7 +78,7 @@ const BootReview = (props) => {
                         <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>{review.title}</Text>
                         {/* 작성자 닉네임, 작성일자 */}
                         <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>
-                          {review.nickname === null ? '탈퇴한 사용자 ' :  `${review.nickname}`} - {review.createdAt}
+                          {review.status === '수료' ? '수료자: ' : '작성자: ' }{review.nickname} - {review.createdAt}
                         </Text>
                         {/* 장점 */}
                         <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0'>장점</Text>

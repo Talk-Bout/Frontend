@@ -9,15 +9,19 @@ import { history } from '../redux/ConfigureStore';
 
 const BootInfo = (props) => {
   // 부트캠프 정보를 props로 받는다.
-  const {bootcampName, desc, review} = props.location.state.camp;
-  const url = props.location.pathname.split('/')[3];
-
+  const {bootcampName, desc, review, reviewNumber, star, url} = props.location.state.camp;
+  const camp_page = props.location.state.camp_page;
+  const url_word = props.location.pathname.split('/')[3];
   const camp = {
     bootcampName: bootcampName,
     desc: desc,
     review: review,
+    reviewNumber: reviewNumber,
+    star: star,
     url: url,
-  }
+    url_word: url_word,
+    camp_page: camp_page,
+  };
 
   return (
     <React.Fragment>

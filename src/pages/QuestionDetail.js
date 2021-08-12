@@ -22,9 +22,10 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
-  console.log(question_found);
   const user_name = useSelector((state) => state.user.user);
   const [MenuLink, setMenuLink] = useState(null);
+  const is_login = useSelector((state) => state.user.is_login);
+  console.log(is_login);
   //Answer 작성
   const answerInput = useRef(null);
   const answer_list = useSelector((state) => state.question.answer_list);
@@ -69,10 +70,16 @@ const QuestionDetail = (props) => {
       questionId: question_id,
     };
 
+    if (!is_login) {
+      window.alert('로그인 후에 이용 가능합니다.');
+      return;
+    }
+
     if (answerInput.current.value === '') {
       window.alert('내용을 입력해주세요.');
       return;
     }
+
     dispatch(questionActions.createAnswerDB(new_answer));
     answerInput.current.value = '';
   };
@@ -114,25 +121,30 @@ const QuestionDetail = (props) => {
                       <BsBookmark />
                     </Text>
                   </Button>
-                  <Button
-                    padding="0"
-                    width="16.33px"
-                    height="21px"
-                    bg="transparent"
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                  >
-                    <Text
+                  {is_login && question_found.nickname === user_name ? (
+                    <Button
                       padding="0"
-                      color="#9AA0A6"
-                      fontSize="24px"
-                      lineHeight="35px"
-                      hover="opacity: 0.8"
+                      width="16.33px"
+                      height="21px"
+                      bg="transparent"
+                      aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      onClick={handleClick}
                     >
-                      <BsThreeDotsVertical />
-                    </Text>
-                  </Button>
+                      <Text
+                        padding="0"
+                        color="#9AA0A6"
+                        fontSize="24px"
+                        lineHeight="35px"
+                        hover="opacity: 0.8"
+                      >
+                        <BsThreeDotsVertical />
+                      </Text>
+                    </Button>
+                  ) : (
+                    ''
+                  )}
+
                   <Menu
                     id="simple-menu"
                     anchorEl={MenuLink}

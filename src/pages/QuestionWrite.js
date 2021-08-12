@@ -121,12 +121,12 @@ const QuestionWrite = (props) => {
                 </Grid>
                 <Grid className="submit-button" width="23.33%" padding="0 25px">
                   <Text
-                    fontSize="2.5vh"
+                    fontSize="24px"
                     fontWeight="700"
                     color="#848484"
-                    lineHeight="7vh"
+                    lineHeight="84px"
                     float="right"
-                    cursor="pointer"
+                    hover="color= '#7879F1'" // 호버 확인!!!!!!!!
                     _onClick={() => {
                       create_question();
                       history.goBack();
@@ -217,6 +217,15 @@ const Window = styled.div`
   width: 80%;
   height: 90%;
   margin: auto;
+`;
+
+const saveBtn = styled.text`
+  font-size: 2.5vh;
+  font-weight: 700;
+  color: #848484;
+  line-height: 7vh;
+  float: right;
+  cursor: pointer;
 `;
 
 const BodyBox = styled.div`

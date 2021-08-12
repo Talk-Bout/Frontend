@@ -11,6 +11,7 @@ const STAY_LOGIN = 'STAY_LOGIN'; //로그인 상태 유지
 const DOUBLE_EMAIL_CHECK = 'DOUBLE_EMAIL_CHECK'; //이메일 중복 확인
 const DOUBLE_NICKNAME_CHECK = 'DOUBLE_NICKNAME_CHECK'; //닉네임 중복 확인
 const LOGIN_CHECK = 'LOGIN_CHECK'; //로그인 페이지 id, pwd 체크
+const DELETE_USER = 'DELETE_USER'; //회원 탈퇴
 
 //액션 생성함수
 const logIn = createAction(LOG_IN, (user) => ({ user }));
@@ -24,12 +25,14 @@ const doubleNicknameCheck = createAction(DOUBLE_NICKNAME_CHECK, (isExist) => ({
   isExist,
 }));
 const loginCheck = createAction(LOGIN_CHECK, (is_error) => ({ is_error }));
+const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
 
 //기본값 정하기
 const initialState = {
   user: [],
   is_error: false,
   is_login: false,
+  is_deleted: false,
   email_exist: false,
   nickname_exist: null,
 };
@@ -125,14 +128,13 @@ const emailCheckDB = (email) => {
 };
 
 const nicknameCheckDB = (nickname) => {
-  console.log(nickname);
   return function (dispatch) {
     instance
       .get(`/users/nickname/${nickname}`, {
         nickname: nickname,
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(doubleNicknameCheck(response.data));
       })
       .catch((err) => {
@@ -141,11 +143,27 @@ const nicknameCheckDB = (nickname) => {
   };
 };
 
+const userDeleteDB = (nickname) => {
+  return function (dispatch) {
+    instance
+      .delete(`/users/${nickname}`, {
+        nickname: nickname,
+      })
+      .then((response) => {
+        dispatch(deleteUser(response.data));
+      })
+      .catch((err) => {
+        console.error(`회원 탈퇴 에러: ${err}`);
+        console.error(err.data);
+      });
+  };
+};
+
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        draft.user = action.payload.user.nickname;
+        draft.user = action.payload.user;
         draft.is_login = true;
       }),
     [LOG_OUT]: (state, action) =>
@@ -179,22 +197,27 @@ export default handleActions(
           draft.is_error = true;
         }
       }),
+    [DELETE_USER]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.is_deleted);
+        draft.is_deleted = true;
+        localStorage.removeItem('token');
+        console.log('token');
+        draft.is_login = false;
+      }),
   },
   initialState
 );
 
 //액션 생성자
 const actionCreators = {
-  logIn,
   logOut,
-  signUp,
-  stayLogIn,
-  doubleNicknameCheck,
   logInDB,
   signUpDB,
   stayLogInDB,
   emailCheckDB,
   nicknameCheckDB,
+  userDeleteDB,
 };
 
 export { actionCreators };

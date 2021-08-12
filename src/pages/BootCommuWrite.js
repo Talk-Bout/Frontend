@@ -15,19 +15,22 @@ const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
-  const username = useSelector(state => state.user.user);
+
+  const username = useSelector(state => state.user.user.nickname);
 
   const edited_id = parseInt(window.location.pathname.split('/write/')[1]);
-  const commu_list = useSelector(state => state.bootcamp.commu_list);
-  const commu_found = commu_list.find((commu) => commu.communityId === edited_id);
-  const image_url = useSelector(state => state.image.image_url);
+  const commu_list = useSelector((state) => state.bootcamp.commu_list);
+  const commu_found = commu_list.find(
+    (commu) => commu.communityId === edited_id
+  );
+  const image_url = useSelector((state) => state.image.image_url);
 
   const titleRef = useRef('');
   const contentRef = useRef('');
 
   // 이미지 업로드
   const imageRef = useRef();
-  const preview = useSelector(state => state.image.preview);
+  const preview = useSelector((state) => state.image.preview);
   // 이미지 미리보기 실행 및 서버 업로드 함수
   const selectFile = (e) => {
     const uploaded_image = imageRef.current.files[0];
@@ -39,7 +42,7 @@ const BootCommuWrite = (props) => {
   // 이미지 미리보기 삭제 함수
   const exitPage = () => {
     dispatch(imageActions.getPreview(null));
-  }
+  };
 
   // 게시글 등록(수정)
   const addPost = () => {
@@ -57,7 +60,7 @@ const BootCommuWrite = (props) => {
         content: contentRef.current.value,
         bootcampName: commu_found.bootcampName,
         communityId: commu_found.communityId,
-      }
+      };
       dispatch(campActions.editCommuDB(edited_commu));
     } else {
       const new_commu = {
@@ -66,61 +69,138 @@ const BootCommuWrite = (props) => {
         title: titleRef.current.value,
         content: contentRef.current.value,
         image: image_url,
-      }
+      };
       dispatch(campActions.addCommuDB(new_commu));
       dispatch(imageActions.getPreview(null));
       titleRef.current.value = '';
       contentRef.current.value = '';
     }
-  }
+  };
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' backgroundColor='#17181b' padding='0 0 42px'>
+      <Grid
+        className="background"
+        display="flex"
+        backgroundColor="#17181b"
+        padding="0 0 42px"
+      >
         {/* 사이드바 */}
         <Sidebar />
         {/* 헤더 포함한 바디 */}
         <Body header>
-          <Grid className='body-inner' padding='24px 0 0'>
+          <Grid className="body-inner" padding="24px 0 0">
             <Window>
               {/* 작성 페이지 헤더 */}
-              <Grid height='84px' display='flex' borderBottom='1px solid #5f6368'>
+              <Grid
+                height="84px"
+                display="flex"
+                borderBottom="1px solid #5f6368"
+              >
                 {/* 나가기 버튼 */}
-                <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='35px' color='#e5e5e5' lineHeight='84px' cursor='pointer' _onClick={() => {history.goBack(); exitPage()}}><BsX /></Text>
+                <Grid width="23.33%" padding="0 40px">
+                  <Text
+                    fontSize="35px"
+                    color="#e5e5e5"
+                    lineHeight="84px"
+                    cursor="pointer"
+                    _onClick={() => {
+                      history.goBack();
+                      exitPage();
+                    }}
+                  >
+                    <BsX />
+                  </Text>
                 </Grid>
                 {/* 타이틀 */}
-                <Grid width='53.33%' is_center>
-                  <Text fontSize='24px' fontWeight='700' color='#e5e5e5' lineHeight='84px'>글쓰기</Text>
+                <Grid width="53.33%" is_center>
+                  <Text
+                    fontSize="24px"
+                    fontWeight="700"
+                    color="#e5e5e5"
+                    lineHeight="84px"
+                  >
+                    글쓰기
+                  </Text>
                 </Grid>
                 {/* 등록(수정) 버튼 */}
-                <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='24px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => addPost()}>{edited_id ? '수정' : '등록'}</Text>
+                <Grid width="23.33%" padding="0 40px">
+                  <Text
+                    fontSize="24px"
+                    fontWeight="700"
+                    color="#848484"
+                    lineHeight="84px"
+                    float="right"
+                    cursor="pointer"
+                    _onClick={() => addPost()}
+                  >
+                    {edited_id ? '수정' : '등록'}
+                  </Text>
                 </Grid>
               </Grid>
               <BodyBox>
                 {/* 제목 입력 칸 */}
-                <TitleBox><Input placeholder='제목을 입력해주세요' ref={titleRef} defaultValue={edited_id ? commu_found.title : null}/></TitleBox>
+                <TitleBox>
+                  <Input
+                    placeholder="제목을 입력해주세요"
+                    ref={titleRef}
+                    defaultValue={edited_id ? commu_found.title : null}
+                  />
+                </TitleBox>
                 {/* 내용 입력 칸 */}
                 {/* 이미지 preview가 있으면 입력 칸 크기 줄이고, preview와 파일명을 보여주기*/}
                 <ContentBox>
-                  <Textarea rows={preview ? '5' : '15'} placeholder='내용을 입력해주세요' ref={contentRef} defaultValue={edited_id ? commu_found.content : null}/>
+                  <Textarea
+                    rows={preview ? '5' : '15'}
+                    placeholder="내용을 입력해주세요"
+                    ref={contentRef}
+                    defaultValue={edited_id ? commu_found.content : null}
+                  />
                 </ContentBox>
-                {preview ?
-                <div style={{textAlign: 'center'}}>
-                  <Preview><Img src={preview}/></Preview>
-                  <Text p fontSize='16px' color='#5f6368' margin='0 auto 80px'>{imageRef.current.files[0].name}</Text>
-                </div>
-                :
-                ''
-                }                
+                {preview ? (
+                  <div style={{ textAlign: 'center' }}>
+                    <Preview>
+                      <Img src={preview} />
+                    </Preview>
+                    <Text
+                      p
+                      fontSize="16px"
+                      color="#5f6368"
+                      margin="0 auto 80px"
+                    >
+                      {imageRef.current.files[0].name}
+                    </Text>
+                  </div>
+                ) : (
+                  ''
+                )}
               </BodyBox>
               {/* 작성 페이지 푸터 */}
               <FooterBox>
                 {/* 이미지 추가 버튼 */}
-                <form><label for='file'><Text fontSize='24px' color='#b3b3b3' margin='0 32px 0 0' cursor='pointer'><BiImageAdd /></Text><ImgInput type='file' ref={imageRef} onChange={selectFile} accept='image/*' id='file'/></label></form>
+                <form>
+                  <label for="file">
+                    <Text
+                      fontSize="24px"
+                      color="#b3b3b3"
+                      margin="0 32px 0 0"
+                      cursor="pointer"
+                    >
+                      <BiImageAdd />
+                    </Text>
+                    <ImgInput
+                      type="file"
+                      ref={imageRef}
+                      onChange={selectFile}
+                      accept="image/*"
+                      id="file"
+                    />
+                  </label>
+                </form>
                 {/* 해시태그 추가 버튼 */}
-                <Text fontSize='24px' color='#b3b3b3' cursor='pointer'><FiHash /></Text>
+                <Text fontSize="24px" color="#b3b3b3" cursor="pointer">
+                  <FiHash />
+                </Text>
               </FooterBox>
             </Window>
           </Grid>
@@ -155,7 +235,7 @@ const Input = styled.input`
   background-color: #282a2d;
   padding: 24px;
   font-size: 16px;
-  color: #DADCE0;
+  color: #dadce0;
   width: 97.7%;
   border: none;
   &::placeholder {
@@ -217,9 +297,10 @@ const Img = styled.img`
 `;
 
 const FooterBox = styled.div`
-  background-color: #2E3134;
+  background-color: #2e3134;
   height: 24px;
   padding: 28px 40px;
+  display: flex;
 `;
 
 // 이미지 파일 선택하는 기본 버튼 숨기기

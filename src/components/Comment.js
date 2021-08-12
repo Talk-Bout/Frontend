@@ -14,7 +14,24 @@ const Comment = (props) => {
   const comment_list = useSelector((state) => state.comment.list);
   const addRef = useRef(null);
   const postId = parseInt(props.postId);
+  
   const [comment_page, setCommentPage] = useState(1);
+  
+  // 댓글 조회
+  useEffect(() => {
+    dispatch(commentActions.setCommentDB(postId));
+    // dispatch(commentActions.isEdit(true));
+  }, []);
+
+  // 댓글 최신순으로 구현하는 함수
+  const all_comment = comment_list
+    .slice(0, comment_list.length)
+    .sort(function (a, b) {
+      const timeA = a.createdAt;
+      const timeB = b.createdAt;
+      if (timeA < timeB) return 1;
+      if (timeA > timeB) return -1;
+    });
 
   //댓글 등록
   const addComment = () => {

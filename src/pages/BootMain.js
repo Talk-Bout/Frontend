@@ -18,8 +18,6 @@ const BootMain = (props) => {
 
   const camp_list = useSelector(state => state.bootcamp.camp_list);
 
-  // const baseURL = 'http://13.209.12.149/'     // 서버 URL ; camp.logo 앞에 붙였으나 이미지 불러오기 실패
-
   // 페이지네이션
   const [page, setPage] = useState(1);
   // 앞 페이지로 가는 함수
@@ -31,7 +29,6 @@ const BootMain = (props) => {
     setPage(page + 1);
   }
 
-  console.log(camp_list);
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -47,7 +44,7 @@ const BootMain = (props) => {
               return (
                 <Card key={idx} onClick={() => history.push({
                   pathname: `/boot/${camp.bootcampName}/info`,
-                  state: {camp: camp}
+                  state: {camp: camp, camp_page: page}
                 })}>
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
@@ -63,7 +60,7 @@ const BootMain = (props) => {
                   </Text>
                   {/* 부트캠프 별점 */}
                   <Text fontSize="14px" color='#E8EAED'>
-                    {camp.review[0] ? <Stars score={camp.review[0].stars} size='16px' marginRight='4px' withScore/> : '별점/리뷰 없음'}
+                    {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' marginRight='4px' withScore/> : '별점/리뷰 없음'}
                   </Text>
                 </Card>
               );

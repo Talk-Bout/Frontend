@@ -336,16 +336,19 @@ const Select = styled.select`
 const SingUpButton = styled.button`
   width: 100%;
   height: 40px;
-  background-color: #7879f1;
   margin-top: 7%;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  :active {
+  background-color: #a5a6f6;
+  :hover {
+    background-color: #7879f1;
+  }
+`;
+/* :active {
     box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
     position: relative;
     top: 2px;
-  }
-`;
+  } */
 
 export default Signup;

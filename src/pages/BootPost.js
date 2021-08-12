@@ -31,22 +31,32 @@ const BootPost = (props) => {
   console.log(commu_likes);
   // 이 커뮤니티글 좋아요 한 사람들 목록에 사용자 닉네임이 있으면, like_found에 넣는다.
   const like_found = commu_likes.find((like) => like.nickname === username);
-  console.log(like_found);
-  
-  const comment_list = useSelector(state => state.bootcamp.comment_list);
-  const [comment_page, setCommentPage] = useState(1);
+
+  // 서버에서 불러온 댓글 목록
+  const all_comment = useSelector(state => state.bootcamp.comment_list);
+  // 이 커뮤니티글의 댓글이 맞는지 재확인
+  const comment_list = all_comment.filter((comment) => comment.communityId === commu_id);
+
   const [MenuLink, setMenuLink] = useState(null);
   const [edit_comment, setEditComment] = useState(null);
 
   const commentInput = useRef(null);
   const commentEdit = useRef(null);
- 
+
+  // 댓글 페이지네이션
+  const [next_page, setNextPage] = useState(2);
 
   useEffect(() => {
     dispatch(campActions.setOneCommuDB(camp_name, commu_id));
-    dispatch(campActions.setCommentsDB(commu_id, comment_page));
+    dispatch(campActions.setCommentsDB(commu_id, 1));
     dispatch(campActions.setMyCommuDB());
   }, []);
+
+  // 댓글 더보기
+  const moreComment = () => {
+    dispatch(campActions.setCommentsDB(commu_id, next_page));
+    setNextPage(next_page + 1);
+  }
 
   // 게시글 북마크 표시
   const markCommu = () => {
@@ -116,11 +126,6 @@ const BootPost = (props) => {
       communityCommentId: comment_id,
     }
     dispatch(campActions.deleteCommentDB(deleted_comment));
-  }
-
-  // 댓글 더보기
-  const moreComment = () => {
-    setCommentPage(comment_page + 1);
   }
 
   if (!commu_found) {
@@ -229,7 +234,7 @@ const BootPost = (props) => {
                     <Grid display='flex' justify_content='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}
-                        <Text fontSize='14px' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>{cm.nickname}</Text>
+                        <Text fontSize='14px' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명의 부트캠퍼{idx+1}</Text>
                         {/* 작성일자 */}
                         <Text fontSize='12px' color='#BDC1C6'>{cm.createdAt}</Text>
                       </NameTime>
@@ -267,10 +272,7 @@ const BootPost = (props) => {
                 )
               })}
               {/* 댓글 더보기 버튼 */}
-              {commu_found.communityComment.length <= 5 ?
-              <MoreBtn disabled><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>
-              :
-              <MoreBtn><Text fontSize='14px' fontWeight='700' color='#A9AAAB' onClick={() => moreComment()}>댓글 더보기(1/2)</Text></MoreBtn>}
+              <MoreBtn onClick={() => moreComment()}><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기</Text></MoreBtn>
             </div>
             {/* 다른 게시글 목록 */}
             <OthersBox>

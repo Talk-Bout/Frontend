@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {Grid, Text, Image} from '../elements';
@@ -29,7 +30,15 @@ const BootReview = (props) => {
 
   // 페이지네이션
   const [page, setPage] = useState(1);
+  // 페이지 번호가 바뀔 때마다 리뷰 목록 불러오는 함수 호출
+  useEffect(() => {
+    dispatch(campActions.setReviewsDB(bootcampName, page));
+  }, [page]);
+  // 불러오는 3페이지짜리 리뷰 목록
+  const all_review = useSelector(state => state.bootcamp.review_list);
   // 앞 페이지로 가는 함수
+  // 1페이지에 보여줄 개수로만 자른 목록
+  const review_list = all_review.slice(0, 5);
   const toPrePage = () => {
     setPage(page - 1);
   }
@@ -37,12 +46,6 @@ const BootReview = (props) => {
   const toNextPage = () => {
     setPage(page + 1);
   }
-
-  useEffect(() => {
-    dispatch(campActions.setReviewsDB(bootcampName, page));
-  }, []);
-
-  const review_list = useSelector(state => state.bootcamp.review_list);
 
   return (
     <React.Fragment>
@@ -123,9 +126,9 @@ const BootReview = (props) => {
                   {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
                   <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{review_list.length > page * 3 ? page + 1 : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length ? page + 1 : ''}</Page></Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{review_list.length > page * 3 ? <BsChevronRight /> : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>

@@ -73,6 +73,7 @@ const createQuestionDB = (new_question) => {
     const title = new_question.title;
     const content = new_question.content;
     const nickname = new_question.nickname;
+    const image = new_question.image;
     const headers = {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     };
@@ -83,11 +84,13 @@ const createQuestionDB = (new_question) => {
           title: title,
           content: content,
           nickname: nickname,
+          image: image,
         },
         { headers: headers }
       )
       .then((response) => {
-        dispatch(createQuestion(response.data));
+        console.log(response.data);
+        // dispatch(createQuestion(response.data));
       })
       .catch((err) => {
         console.error(`질문 작성하기 에러: ${err}`);

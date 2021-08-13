@@ -41,10 +41,10 @@ const Comment = (props) => {
   
   // 서버에서 불러온 댓글 목록
   const all_comment = useSelector(state => state.comment.list);
-
+  console.log(all_comment);
   // 이 커뮤니티글의 댓글이 맞는지 재확인
   const comment_check = all_comment.filter((comment) => comment.postId === postId);
- 
+  console.log(comment_check);
   // 댓글 페이지네이션
   const [next_page, setNextPage] = useState(2);
   
@@ -84,7 +84,6 @@ const Comment = (props) => {
             <CommentInput
               placeholder="댓글을 남겨주세요"
               ref={addRef}
-              // onSubmit={addComment}
             />
             <WriteButton
               onClick={() => {
@@ -97,8 +96,7 @@ const Comment = (props) => {
         </Grid>
       
       <Grid width="100%" height="40vh" >
-        {comment_check &&
-          comment_check.map((ct, index) => {
+        { all_comment.map((ct, index) => {
             return <CommentEdit key={ct.commentId} {...ct} />;
           })}
       
@@ -121,7 +119,7 @@ const CommentBox = styled.div`
   margin: auto;
 `;
 
-const CommentInput = styled.textarea`
+const CommentInput = styled.input`
   width: 100%;
   height: 48px;
   left: 0px;

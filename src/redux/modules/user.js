@@ -47,8 +47,8 @@ const logInDB = (email, password) => {
           email: response.data.email,
           nickname: response.data.nickname,
         };
-        console.log(response.data);
         dispatch(logIn(user_info));
+        
         localStorage.setItem('token', response.data.token); //token이름으로 response.data.token 저장
         history.push('/');
       })
@@ -100,8 +100,7 @@ const stayLogInDB = () => {
         headers: headers,
       })
       .then((response) => {
-        console.log(response.data); //nickname 예상
-
+        // console.log(response.data); //nickname 예상
         dispatch(stayLogIn(response.data));
       })
       .catch((err) => {

@@ -43,7 +43,7 @@ import NewsList from './pages/NewsList';
 
 //마이 페이지
 import Mypage from './pages/Mypage';
-import MypageMypost from './pages/MypageMypost';
+import MypagePost from './pages/MypagePost';
 // import MyPageEdit from './pages/MyPageEdit';
 import DeleteUser from './pages/DeleteUser';
 import PageEdit from './pages/PageEdit';
@@ -81,7 +81,7 @@ function App() {
           <Route path="/boot/:name/post/:id" exact component={BootPost} />
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
-          <Route path="/mypage/mypost/:id" exact component={MypageMypost} />
+          <Route path="/mypage/mypost" exact component={MypagePost} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route path="/mypage/edit" exact component={PageEdit} />
           <Route render={(props) => <NotFound history={props.history} />} />

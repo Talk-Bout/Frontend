@@ -63,6 +63,7 @@ const HeaderN = (props) => {
               vertical_align="middle"
               margin="0 8px 0 0"
               cursor="pointer"
+              // _onClick={() => history.push(`/mypage/mypost/${nickname}`)}
             >
               <BsFillBookmarkFill />
             </Text>

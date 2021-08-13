@@ -5,35 +5,29 @@ import {Grid, Text} from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import BootRoot from '../components/BootRoot';
-import Stars from '../components/Stars';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BiLike, BiComment } from "react-icons/bi";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import BootOthers from '../components/BootOthers';
 
 const BootCommu = (props) => {
   const dispatch = useDispatch();
 
-  // 부트캠프 정보를 props로 받는다
-  const {bootcampName, desc, review, reviewNumber, star, url, camp_page} = props.location.state.camp;
+  // 부트캠프 정보를 props로 받는다.
+  const bootcampName = props.location.pathname.split('/')[2];
   const url_word = props.location.pathname.split('/')[3];
-  const camp = {
-    bootcampName: bootcampName,
-    desc: desc,
-    review: review,
-    reviewNumber: reviewNumber,
-    star: star,
-    url: url,
-    url_word: url_word,
-    camp_page: camp_page,
-  };
+
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const this_camp = camp_list.find((camp) => camp.bootcampName === bootcampName);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
   // 페이지 번호가 바뀔 때마다 커뮤니티글 목록 불러오는 함수 호출
   useEffect(() => {
+    dispatch(campActions.setCampsDB(1));
     dispatch(campActions.setCommusDB(bootcampName, page));
   }, [page]);
   // 불러오는 3페이지짜리 커뮤니티글 목록
@@ -56,7 +50,7 @@ const BootCommu = (props) => {
         <Sidebar />
         {/* 헤더 포함한 바디 */}
         <Body header>
-        <BootRoot camp={camp}/>
+        <BootRoot camp={this_camp} url_word={url_word}/>
           {/* 커뮤니티 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' padding='40px 40px 0 40px'>
@@ -65,7 +59,7 @@ const BootCommu = (props) => {
                 <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{bootcampName} 커뮤니티</Text>
                 <Grid width='auto' height='fit-content'>
                   {/* 인기순, 최신순 정렬 */}
-                  <Text fontSize='14px' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text>
+                  {/* <Text fontSize='14px' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text> */}
                   {/* 글쓰기 버튼 */}
                   <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/community/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
                 </Grid>
@@ -110,23 +104,7 @@ const BootCommu = (props) => {
               </Grid>
             </Grid>
             {/* 다른 부트캠프 목록 */}
-            <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='491px' padding='24px'>
-              <Text fontSize='18px' fontWeight='700' color='#e8eaed'>다른 부트캠프</Text>
-              {[1, 2, 3, 4].map((c, idx) => {
-                return (
-                  <Camp key={idx} onClick={() => history.push('/boot/info')}>
-                    {/* 다른 부트캠프 로고 */}
-                    <ImageDiv style={{backgroundImage: `url('https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')`}}/>
-                    <div style={{padding: '29px 16px'}}>
-                      {/* 다른 부트캠프 이름 */}
-                      <Text p className='camp-name' fontSize='18px' fontWeight='700' color='#f1f3f4' margin='0 0 4px'>부트캠프명</Text>
-                      {/* 다른 부트캠프 별점 */}
-                      <Stars score='2.2' size='16px' marginRight='4px' withScore/>
-                    </div>
-                  </Camp>
-                )
-              })}
-            </Grid>
+            <BootOthers />
           </Grid>
         </Body>
       </Grid>

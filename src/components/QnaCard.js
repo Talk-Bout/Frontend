@@ -15,7 +15,7 @@ const QnaCard = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == question_id
   );
-  console.log(question_found);
+  // console.log(question_found);
 
   return (
     <React.Fragment>
@@ -85,7 +85,7 @@ const QnaCard = (props) => {
             </Text>
             {/* 댓글 수 */}
             <Text fontSize="12px" color="#bdc1c6" margin="0 8px">
-              {question_found.answer.length > 0 ? (
+              {question_found.answer ? (
                 <span
                   style={{
                     fontSize: '16px',

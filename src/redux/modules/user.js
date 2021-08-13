@@ -35,6 +35,7 @@ const initialState = {
   is_deleted: false,
   email_exist: false,
   nickname_exist: null,
+  one_question: null,
 };
 
 //액션함수

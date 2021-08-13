@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import Profile from '../image/profile_small.png';
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
+import { history } from '../redux/ConfigureStore';
 
 const MainQna = (props) => {
+
   return (
     <React.Fragment>
       <Grid className="top-boot" height="fit-content" padding="49px 0 16px">
@@ -20,9 +22,7 @@ const MainQna = (props) => {
             부트캠퍼들이 가장 궁금했던 것들
           </Text>
           {/* Q&A 더보기 버튼 */}
-          <Text fontSize="14px" color="#BDC1C6" cursor="pointer">
-            Q&A 더보기 &gt;
-          </Text>
+          <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>Q&A 더보기 &gt;</Text>
         </TextBox>
         {/* Q&A 목록 */}
         <CardList>

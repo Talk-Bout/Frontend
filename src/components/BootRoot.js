@@ -10,7 +10,8 @@ const BootRoot = (props) => {
   const dispatch = useDispatch();
 
   // 부트캠프 이름, 설명, 리뷰(별점), 현재 탭 url 주소를 props로 받는다.
-  const {bootcampName, desc, review, url, url_word, reviewNumber, star, camp_page} = props.camp;
+  const {bootcampName, desc, review, url, reviewNumber, star} = props.camp;
+  const {url_word} = props;
   // 현재 접속 중인 사용자의 닉네임
   const username = useSelector(state => state.user.user.nickname);
 
@@ -31,6 +32,12 @@ const BootRoot = (props) => {
   // 부트캠프 북마크 해제
   const unmarkBoot = (bookmark_id) => {
     dispatch(campActions.deleteMyCampDB(bootcampName, bookmark_id));
+  }
+
+  if (!props.camp) {
+    return (
+      <></>
+    )
   }
 
   return (

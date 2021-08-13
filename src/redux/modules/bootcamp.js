@@ -84,7 +84,6 @@ const setCampsDB = (page) => {
       .get(`/bootcamp?page=${page}`)
       .then((response) => {
         dispatch(setCamps(response.data));
-        console.log(response.data);
       })
       .catch((err) => {
         console.error(
@@ -189,6 +188,11 @@ const addReviewDB = (new_review) => {
         history.goBack();
       })
       .catch((err) => {
+        if (err.response.status === 500) {
+          window.alert('리뷰는 한 번만 작성할 수 있습니다.');
+          history.goBack();
+          return;
+        }
         console.error(
           `부트캠프 리뷰 작성하기 에러 발생: ${err} ### ${err.response}`
         );
@@ -300,16 +304,11 @@ const setMyCommuDB = () => {
   return function (dispatch) {
     instance.get('/tokenUser').then((response) => {
       const nickname = response.data.nickname;
-      instance
-        .get(`/users/${nickname}/communityBookmarks`)
-        .then((result) => {
-          dispatch(setMyCommu(result.data));
-        })
-        .catch((err) => {
-          console.error(
-            `부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`
-          );
-        });
+      instance.get(`/users/${nickname}/communityBookmarks`).then((result) => {
+        dispatch(setMyCommu(result.data));
+      }).catch((err) => {
+        console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
+      });
     });
   };
 };

@@ -21,9 +21,7 @@ const MainTalk = (props) => {
             부트캠퍼들이 가장 많이 추천한 게시물
           </Text>
           {/* 부트톡톡 더보기 버튼 */}
-          <Text fontSize="14px" color="#BDC1C6" cursor="pointer">
-            부트톡톡 더보기 &gt;
-          </Text>
+          <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/common/list')}>부트톡톡 더보기 &gt;</Text>
         </TextBox>
         {/* 부트톡톡 게시물 목록 */}
         <Questions>

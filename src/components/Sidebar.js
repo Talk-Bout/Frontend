@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
-import talkbout_final_logo from '../image/talkbout_final_logo.png';
+import PointImg from '../image/point.png';
 import Home from '../image/Home.png';
 import Home_white from '../image/Home_white.png';
 import Boot from '../image/Bootcamp.png';
@@ -21,10 +21,8 @@ const Sidebar = (props) => {
     <React.Fragment>
       <Grid className="sidebar" backgroundColor="#202124" width="100px">
         <Grid className="sidebar-inner" is_center>
-          <Image
-            src={talkbout_final_logo}
-            onClick={() => history.push('/')}
-          ></Image>
+          <img
+            src={PointImg} alt='토크부트 로고'/>
           <Image
             src={url === '' ? Home_white : Home}
             onClick={() => history.push('/')}

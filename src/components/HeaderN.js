@@ -4,7 +4,8 @@ import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import Search from '../image/search_black.png';
+// import Search from '../image/search_black.png';
+import LogoImg from '../image/Logo+Type.png';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
 import Profile from '../image/profile_small.png';
 import CaretDown from '../image/CaretDown.png';
@@ -45,6 +46,7 @@ const HeaderN = (props) => {
           display="flex"
           justify_content="space-between"
         >
+          <Logo src={LogoImg} alt='토크부트 로고' />
           {/* 검색창 */}
           <Grid
             className="search"
@@ -144,19 +146,25 @@ const HeaderN = (props) => {
   );
 };
 
-const Input = styled.input`
-  border: none;
-  width: 600px;
-  height: 48px;
-  background-color: transparent;
-  color: #80868b;
-  &::placeholder {
-    color: #80868b;
-    font-size: 16px;
-  }
-  &:focus {
-    outline: none;
-  }
+// const Input = styled.input`
+//   border: none;
+//   width: 600px;
+//   height: 48px;
+//   background-color: transparent;
+//   color: #80868b;
+//   &::placeholder {
+//     color: #80868b;
+//     font-size: 16px;
+//   }
+//   &:focus {
+//     outline: none;
+//   }
+// `;
+
+const Logo = styled.img`
+  height: 80px;
+  width: 210px;
+  margin: 10px 8px;
 `;
 
 const ProfileImg = styled.img`
@@ -165,10 +173,10 @@ const ProfileImg = styled.img`
   cursor: pointer;
 `;
 
-const Image = styled.img`
-  vertical-align: middle;
-  width: 24px;
-`;
+// const Image = styled.img`
+//   vertical-align: middle;
+//   width: 24px;
+// `;
 
 const LoginBtn = styled.button`
   background-color: transparent;

@@ -48,17 +48,17 @@ const QuestionDetail = (props) => {
   const question_bookmark_list = useSelector(
     (state) => state.question.bookmark_list
   );
-  console.log(question_bookmark_list);
   const question_bookmark = question_bookmark_list.find(
     (bookmark) => bookmark.questionId == question_id
   );
 
-  console.log(question_bookmark);
-  // console.log(question_bookmark_id);
-
-  //좋아요 목록
+  // 질문 좋아요 목록
   const question_like_list = useSelector((state) => state.question.like_list);
   console.log(question_like_list);
+  const question_like = question_like_list.find(
+    (like) => like.nickname == user_name
+  );
+  console.log(question_like);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
@@ -115,7 +115,7 @@ const QuestionDetail = (props) => {
 
   //Answer 더보기
   const moreAnswer = () => {
-    dispatch(questionActions.setAnswerDB(question_id, answer_page));
+    dispatch(questionActions.setNextAnswerDB(question_id, answer_page));
     setAnswerPage(answer_page + 1);
   };
 
@@ -134,7 +134,7 @@ const QuestionDetail = (props) => {
 
   //질문 좋아요
   const likeQuestion = () => {
-    // console.log(question_id, user_name);
+    console.log(question_id, user_name);
     dispatch(questionActions.likeQuestionDB(question_id, user_name));
   };
 
@@ -264,7 +264,7 @@ const QuestionDetail = (props) => {
                   </Menu>
                 </Grid>
               </Grid>
-
+              {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" margin="3% 0">
                 <Grid width="3vw">
                   <Image src={profile_medium} size="5"></Image>
@@ -286,7 +286,8 @@ const QuestionDetail = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-              {/* 콘텐츠마다 달라지는 위치값 고정하기 */}
+
+              {/* Question 본문 내용 */}
               <Text p margin="5% 0%" color="#C4C4C4">
                 {question_found.content}
               </Text>
@@ -299,11 +300,16 @@ const QuestionDetail = (props) => {
                 ''
               )}
 
+              {/* 좋아요/ 댓글수/ 조회수 */}
               <Grid display="flex" margin="3% 0%" vertical-align="center">
                 <LikeCommentBtn onClick={() => likeQuestion()}>
                   <BiLike />
                   {question_found.questionLike.length}
                 </LikeCommentBtn>
+
+                {/* <LikeCommentBtn onClick={() => likeQuestion()}>
+                    <BiLike />0
+                  </LikeCommentBtn> */}
 
                 <Text color="#C4C4C4" margin="auto 1%">
                   <BiComment /> {all_answer.length}

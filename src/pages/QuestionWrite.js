@@ -59,20 +59,38 @@ const QuestionWrite = (props) => {
   const old_question = question_list.find(
     (question) => question.questionId == question_id
   );
-
+  console.log(old_question);
   //포스트 작성
   const create_question = () => {
-    const new_question = {
-      questionId: question_id,
-      title: titleInput.current.value,
-      content: contentInput.current.value,
-      nickname: user_name,
-      image: image_url,
-    };
+    if (titleInput.current.value === '') {
+      window.alert('제목을 입력해주세요');
+      return;
+    }
+
+    if (contentInput.current.value === '') {
+      window.alert('내용을 입력해주세요');
+      return;
+    }
+
     if (edit_mode) {
-      dispatch(questionActions.editQuestionDB(new_question));
+      const edit_question = {
+        questionId: question_id,
+        title: titleInput.current.value,
+        content: contentInput.current.value,
+        nickname: user_name,
+        image: image_url,
+      };
+      dispatch(questionActions.editQuestionDB(edit_question));
+      dispatch(imageActions.getPreview(null));
     } else {
+      const new_question = {
+        title: titleInput.current.value,
+        content: contentInput.current.value,
+        nickname: user_name,
+        image: image_url,
+      };
       dispatch(questionActions.createQuestionDB(new_question));
+      dispatch(imageActions.getPreview(null)); //이미지 미리보기를 없애기
     }
   };
 
@@ -166,7 +184,8 @@ const QuestionWrite = (props) => {
                       color="#5f6368"
                       margin="0 auto 80px"
                     >
-                      {imageRef.current.files[0].name}
+                      {preview ? imageRef.current.files[0].name : ''}
+                      {/* {imageRef.current.files[0].name} */}
                     </Text>
                   </div>
                 ) : (

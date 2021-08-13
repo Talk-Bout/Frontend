@@ -235,7 +235,37 @@ const createAnswerDB = (new_answer) => {
 //   }
 // }
 
-// const addQuestionBookmarkDB = ()
+const addQuestionBookmarkDB = (question_id, user_name) => {
+  return function (dispatch) {
+    instance
+      .post(`/questions/${question_id}/questionBookmarks`, {
+        nickname: user_name,
+        questionId: parseInt(question_id),
+      })
+      .then((response) => {
+        dispatch(addQuestionBookmark(response.data));
+      })
+      .catch((err) => {
+        console.error(`질문 북마크 추가 에러: ${err.response}`);
+      });
+  };
+};
+
+const deleteQuestionBookmarkDB = (question_id, questionBookmarkId) => {
+  return function (dispatch) {
+    instance
+      .delete(
+        `/questions/${question_id}/questionBookmarks/${questionBookmarkId}`
+      )
+      .then((response) => {
+        console.log(response.data);
+        dispatch(deleteQuestionBookmark(response.data));
+      })
+      .catch((err) => {
+        console.error(`질문 북마크 삭제 에러: ${err.response}`);
+      });
+  };
+};
 
 export default handleActions(
   {
@@ -279,6 +309,23 @@ export default handleActions(
       produce(state, (draft) => {
         draft.answer_list.push(action.payload.answer);
       }),
+    [ADD_QUESTION_BOOKMARK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.bookmark_list.push(action.payload.question_bookmark);
+      }),
+    [DELETE_QUESTION_BOOKMARK]: (state, action) =>
+      produce(state, (draft) => {
+        const deleted_bookmark = draft.bookmark_list.filter(
+          (question_bookmark) => {
+            if (
+              question_bookmark.bookmarkId !== action.payload.question_bookmark
+            ) {
+              return question_bookmark;
+            }
+            draft.list = deleted_bookmark;
+          }
+        );
+      }),
   },
   initialState
 );
@@ -293,6 +340,7 @@ const actionCreators = {
   setAnswerDB,
   // setNextAnswerDB,
   createAnswerDB,
+  addQuestionBookmarkDB,
 };
 
 export { actionCreators };

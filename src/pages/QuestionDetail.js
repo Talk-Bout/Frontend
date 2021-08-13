@@ -20,22 +20,29 @@ import {
 } from 'react-icons/bs';
 import profile_medium from '../image/profile_medium.png';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { AiOutlineConsoleSql } from 'react-icons/ai';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
-  const question_id = window.location.pathname.split('/question/detail/')[1];
+  const question_id = parseInt(
+    window.location.pathname.split('/question/detail/')[1]
+  );
   const question_list = useSelector((state) => state.question.list);
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
+  console.log(question_found);
   const user_name = useSelector((state) => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
 
   //Answer 작성
   const answerInput = useRef(null);
-  const answer_list = useSelector((state) => state.question.answer_list);
-  const [answer_page, setAnswerPage] = useState(1);
+  const all_answer = useSelector((state) => state.question.answer_list);
+  const answer_list = all_answer.filter(
+    (answer) => answer.questionId === question_id
+  );
+  const [answer_page, setAnswerPage] = useState(2);
 
   //북마크 목록
   const question_bookmark_list = useSelector(
@@ -43,11 +50,15 @@ const QuestionDetail = (props) => {
   );
   console.log(question_bookmark_list);
   const question_bookmark = question_bookmark_list.find(
-    (bookmark) => bookmark.questionId == parseInt(question_id)
+    (bookmark) => bookmark.questionId == question_id
   );
 
   console.log(question_bookmark);
+  // console.log(question_bookmark_id);
 
+  //좋아요 목록
+  const question_like_list = useSelector((state) => state.question.like_list);
+  console.log(question_like_list);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
@@ -55,6 +66,7 @@ const QuestionDetail = (props) => {
       dispatch(questionActions.setOneQuestionDB(question_id));
     }
     dispatch(questionActions.setAnswerDB(question_id, 1));
+    dispatch(questionActions.setQuestionBookmarkDB());
   }, []);
 
   if (!question_found) {
@@ -109,10 +121,26 @@ const QuestionDetail = (props) => {
 
   //북마크
   const add_bookmark = () => {
+    console.log(question_id, user_name);
     dispatch(questionActions.addQuestionBookmarkDB(question_id, user_name));
   };
 
-  const delete_bookmark = () => {};
+  const delete_bookmark = (bookmark_id) => {
+    console.log(bookmark_id);
+    dispatch(
+      questionActions.deleteQuestionBookmarkDB(question_id, bookmark_id)
+    );
+  };
+
+  //질문 좋아요
+  const likeQuestion = () => {
+    // console.log(question_id, user_name);
+    dispatch(questionActions.likeQuestionDB(question_id, user_name));
+  };
+
+  const unlikeQuestion = () => {
+    dispatch(questionActions.unlikeQuestionDB());
+  };
 
   return (
     <React.Fragment>
@@ -143,7 +171,9 @@ const QuestionDetail = (props) => {
                       padding="0"
                       width="16.33px"
                       height="21px"
-                      // onClick={() => add_bookmark()}
+                      onClick={() =>
+                        delete_bookmark(question_bookmark.questionBookmarkId)
+                      }
                     >
                       <Text
                         padding="0"
@@ -270,13 +300,13 @@ const QuestionDetail = (props) => {
               )}
 
               <Grid display="flex" margin="3% 0%" vertical-align="center">
-                <LikeCommentBtn>
+                <LikeCommentBtn onClick={() => likeQuestion()}>
                   <BiLike />
                   {question_found.questionLike.length}
                 </LikeCommentBtn>
 
                 <Text color="#C4C4C4" margin="auto 1%">
-                  <BiComment /> {answer_list.length}
+                  <BiComment /> {all_answer.length}
                 </Text>
 
                 <Text color="#C4C4C4" margin="auto 1%">
@@ -291,7 +321,7 @@ const QuestionDetail = (props) => {
             {/* 답변 등록 input */}
             <AddAnswerSection>
               <Text p fontWeight="600" color="#E2E2E3">
-                답변 {answer_list.length}
+                답변 {all_answer.length}
               </Text>
               <ACommentBox>
                 <AInput
@@ -306,12 +336,13 @@ const QuestionDetail = (props) => {
               </ACommentBox>
             </AddAnswerSection>
             {/* 새롭게 작성되는 답변 내용  */}
-            {answer_list.map((answer, idx) => {
-              return <AnswerCard key={answer.answerId} {...answer} />;
-            })}
+            {answer_list &&
+              answer_list.map((answer, idx) => {
+                return <AnswerCard key={answer.answerId} {...answer} />;
+              })}
 
             <Grid margin="auto" width="10%">
-              {answer_list.length < 5 ? null : (
+              {all_answer.length < 5 ? null : (
                 <Button onClick={() => moreAnswer()}>
                   <MdKeyboardArrowDown size="40" color="#F2F3F4" />
                 </Button>

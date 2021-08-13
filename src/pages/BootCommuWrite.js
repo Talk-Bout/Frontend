@@ -18,16 +18,11 @@ const BootCommuWrite = (props) => {
   const username = useSelector(state => state.user.user.nickname);
 
   const edited_id = parseInt(window.location.pathname.split('/write/')[1]);
-  const commu_list = useSelector((state) => state.bootcamp.commu_list);
-  const commu_found = commu_list.find(
-    (commu) => commu.communityId === edited_id
-  );
+  const commu_found = useSelector((state) => state.bootcamp.one_commu);
   const image_url = useSelector((state) => state.image.image_url);
 
   const titleRef = useRef('');
   const contentRef = useRef('');
-
-  console.log(commu_found);
 
   // 이미지 업로드
   const imageRef = useRef();

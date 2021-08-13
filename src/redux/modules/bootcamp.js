@@ -2,7 +2,6 @@ import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import {history} from '../ConfigureStore';
 import instance from '../../shared/Request';
-import { concat } from 'lodash-es';
 
 // 액션타입
 const SET_CAMPS = 'bootcamp/SET_CAMPS'; // 부트캠프 전체 목록 불러오기
@@ -26,6 +25,7 @@ const LIKE_COMMU = 'bootcamp/LIKE_COMMU'; // 커뮤니티글 좋아요 표시하
 const UNLIKE_COMMU = 'bootcamp/UNLIKE_COMMU'; // 커뮤니티글 좋아요 해제하기
 
 const SET_COMMENTS = 'bootcamp/SET_COMMENTS'; // 커뮤니티 댓글 불러오기
+const SET_NEXT_COMMENTS = 'bootcamp/SET_NEXT_COMMENTS'; // 커뮤니티 다음 페이지 댓글 불러오기(더보기 버튼 눌렀을 때)
 const ADD_COMMENT = 'bootcamp/ADD_COMMENT'; // 커뮤니티 댓글 작성하기
 const EDIT_COMMENT = 'bootcamp/EDIT_COMMENT'; // 커뮤니티 댓글 수정하기
 const DELETE_COMMENT = 'bootcamp/DELETE_COMMENT'; // 커뮤니티 댓글 삭제하기
@@ -47,6 +47,7 @@ const deleteMyCommu = createAction(DELETE_MY_COMMU, (bookmark_id) => ({bookmark_
 const likeCommu = createAction(LIKE_COMMU, (like) => ({like}));
 const unlikeCommu = createAction(UNLIKE_COMMU, (like) => ({like}));
 const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}));
+const setNextComments = createAction(SET_NEXT_COMMENTS, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
@@ -294,10 +295,15 @@ const setCommentsDB = (commu_id, page) => {
   // 서버로부터 커뮤니티글의 댓글 목록 불러오는 함수(페이징)
   return function (dispatch) {
     instance.get(`/community/${commu_id}/communityComments?page=${page}`).then((response) => {
-      dispatch(setComments(response.data));
-      if (page !== 1 && response.data.length === 0) {
-        window.alert('마지막 댓글입니다.');
-        return;
+      if (page !== 1) {
+        if (response.data.length !== 0) {
+          dispatch(setNextComments(response.data));
+        } else {
+          window.alert('마지막 댓글입니다.');
+          return; 
+        }
+      } else {
+        dispatch(setComments(response.data));
       }
     }).catch((err) => {
       console.error(`부트캠프 커뮤니티 댓글 불러오기 에러 발생: ${err} ### ${err.response}`);
@@ -396,6 +402,9 @@ export default handleActions({
       draft.commu_like_list.splice(like_idx, 1);
     }),
     [SET_COMMENTS]: (state, action) => produce(state, (draft) => {
+      draft.comment_list = [...action.payload.comment_list];
+    }),
+    [SET_NEXT_COMMENTS]: (state, action) => produce(state, (draft) => {
       draft.comment_list = [...draft.comment_list].concat(action.payload.comment_list);
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {

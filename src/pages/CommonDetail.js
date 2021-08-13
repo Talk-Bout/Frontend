@@ -169,7 +169,7 @@ const CommonDetail = (props) => {
                         >
                             <Text
                               padding="0"
-                              color="#9aa0a6"
+                              color="#7879F1"
                               fontSize="24px"
                               lineHeight="35px"
                               vertical_align="middle"

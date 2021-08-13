@@ -48,9 +48,9 @@ const CommonBoardList = (props) => {
   const cc_category = () => {
     dispatch(postActions.setPostDB(page, 'chitchat'));
   }
-  // 카테고리 잡담방 게시물
+  // 카테고리 전체 게시물
   const total_category = () => {
-    dispatch(postActions.setPostDB(page, ' '));
+    dispatch(postActions.setPostDB(page, 'talktalk'));
   }
 
   

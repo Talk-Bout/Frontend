@@ -19,6 +19,7 @@ const Mypage = (props) => {
 
   // 관심있는 부트캠프
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
+  console.log(myboot_list);
   // 관심있는 부트캠프 3개 추출
   const myboot = myboot_list.slice(0,3);
 
@@ -76,10 +77,12 @@ const Mypage = (props) => {
                 <img src={Mid_Profile} alt='프로필'/>
               </ProfileBox>
               <Grid height="30%">
+                {/* 닉네임 표시 */}
               <Text p color="#F8F9FA" text_align="center" margin="5px 0 5px 0" fontSize="24px" fontWeight="bold">
                   {nickname} <Text fontSize="24px" color="#7879F1"></Text>
                 </Text>
-                <Text p color="#5F6368" text_align="center" margin="0" fontSize="14px">sparta@coding.kr</Text>
+                {/* 이메일 표시 */}
+                {/* <Text p color="#5F6368" text_align="center" margin="0" fontSize="14px">sparta@coding.kr</Text> */}
               </Grid>
                {/* 인증 됐을 때 */}
               {/* <ProfileBox>

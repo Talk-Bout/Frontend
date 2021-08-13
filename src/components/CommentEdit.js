@@ -12,6 +12,7 @@ const CommentEdit = (props) => {
   const {postCommentId, content, postId} = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
+  console.log(content);
   // 현재 접속 중인 사용자 닉네임
   const username = useSelector(state => state.user.user.nickname);
 
@@ -63,7 +64,7 @@ return (
     <CancelButton onClick={() => (setIsEditMode(false))}>취소</CancelButton>
     </Grid>
   ):(
-    <Text p margin="0% 1%" fontSize="16px" color="#BDC1C6" fontWeight="bold"> {commentValue}</Text>
+    <Text p margin="0% 1%" fontSize="16px" color="#BDC1C6" fontWeight="bold"> {content}</Text>
     )} 
     </Grid>
     

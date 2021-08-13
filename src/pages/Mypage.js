@@ -124,10 +124,10 @@ const Mypage = (props) => {
                 </Grid>
                 {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                 {myboot_list.length !== 0 ?
-                <Grid display="flex" margin="12px 0" justify_content="space-between" height="65%" width="100%">
+                <Grid display="flex" margin="12px 0" height="65%" width="100%">
                 {myboot.map((b, idx) => {
               return (
-                  <Grid margin="0 16px 0 0" display="flex" padding="0 1.5%" height="96px" width="32%" backgroundColor="#202124"  borderRadius="5px"
+                  <Grid margin="0 16px 0 0" display="flex" padding="0 1.5%" height="96px" width="31.5%" backgroundColor="#202124"  borderRadius="5px"
                   _onClick={()=>{history.push(`/boot/${b.bootcampName}/info`)}}
                   >
                     <ImageBox>

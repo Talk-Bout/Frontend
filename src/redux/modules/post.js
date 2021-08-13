@@ -91,12 +91,14 @@ const addPostDB = (new_post) => {
     const content = new_post.content;
     const nickname = new_post.nickname;
     const category = new_post.category;
+    const image = new_post.image;
     instance
       .post('/posts', {
         title: title,
         content: content,
         nickname: nickname,
         category: category,
+        image: image,
       })
       .then((response) => {
         // console.log(response.data);
@@ -116,6 +118,7 @@ const editPostDB = (edited_post) => {
     const postId = parseInt(edited_post.postId);
     const category = edited_post.category;
     const nickname = edited_post.nickname;
+    const image = edited_post.image;
     // console.log(edited_post);
     instance
       .patch(`/posts/${postId}`, {
@@ -124,6 +127,7 @@ const editPostDB = (edited_post) => {
         postId: postId,
         category: category,
         nickname: nickname,
+        image: image,
       })
       .then((response) => {
         const  data = {
@@ -132,6 +136,7 @@ const editPostDB = (edited_post) => {
           postId: postId,
           category: category,
           nickname: nickname,
+          image: image,
         }
         // console.log(response.data);
         dispatch(editPost(data));

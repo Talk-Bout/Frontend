@@ -43,6 +43,8 @@ const BootCommu = (props) => {
     setPage(page + 1);
   }
 
+  const is_login = useSelector(state => state.user.is_login);
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -61,7 +63,10 @@ const BootCommu = (props) => {
                   {/* 인기순, 최신순 정렬 */}
                   {/* <Text fontSize='14px' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text> */}
                   {/* 글쓰기 버튼 */}
+                  {/* 로그인 상태에서만 보여주기 */}
+                  {is_login &&
                   <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/community/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
+                  }
                 </Grid>
               </Grid>
               {/* 커뮤니티 게시글 목록 */}

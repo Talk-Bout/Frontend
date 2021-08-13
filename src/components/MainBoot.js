@@ -6,6 +6,8 @@ import {history} from '../redux/ConfigureStore';
 
 const MainBoot = (props) => {
 
+  
+
   return (
     <React.Fragment>
       <Grid className='top-boot' height='421px'>

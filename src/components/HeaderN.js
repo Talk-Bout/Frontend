@@ -5,8 +5,9 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 // import Search from '../image/search_black.png';
-import LogoImg from '../image/Logo+Type.png';
-import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
+import LogoImg from '../image/Logo.png';
+import { BsFillBookmarkFill } from 'react-icons/bs';
+// import { BsFillBellFill } from 'react-icons/bs';
 import Profile from '../image/profile_small.png';
 import CaretDown from '../image/CaretDown.png';
 import { Button, Menu, MenuItem } from '@material-ui/core';
@@ -70,7 +71,7 @@ const HeaderN = (props) => {
               <BsFillBookmarkFill />
             </Text>
             {/* 알림 메뉴 */}
-            <Text
+            {/* <Text
               color="#5F6368"
               fontSize="18px"
               vertical_align="middle"
@@ -78,7 +79,7 @@ const HeaderN = (props) => {
               cursor="pointer"
             >
               <BsFillBellFill />
-            </Text>
+            </Text> */}
             {/* 프로필 이미지 */}
             <ProfileImg src={Profile} alt="프로필"/>
             {/* 드롭다운 메뉴 */}
@@ -128,6 +129,7 @@ const HeaderN = (props) => {
         display="flex"
         justify_content="space-between"
       >
+        <Logo src={LogoImg} alt='토크부트 로고' />
         {/* 검색창 */}
         <Grid
           className="search"

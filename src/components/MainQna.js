@@ -1,63 +1,125 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {Grid, Text} from '../elements';
+import { Grid, Text } from '../elements';
 import Profile from '../image/profile_small.png';
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { history } from '../redux/ConfigureStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as questionActions } from '../redux/modules/question';
 
 const MainQna = (props) => {
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(questionActions.setQuestionPopDB(1));
+  }, []);
+
+  const qna_list = useSelector(state => state.question.popular_list);
+  const pop_qna = qna_list.slice(0, 3);
+  console.log(pop_qna);
 
   return (
     <React.Fragment>
-      <Grid className='top-boot' height='fit-content' padding='49px 0 16px'>
+      <Grid className="top-boot" height="fit-content" padding="49px 0 16px">
         {/* 인기 Q&A */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>인기 Q&A</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>🔥질문과 답변</Text>
         <TextBox>
-          {/* 부트캠퍼들이 가장 궁금했던 것들 */}
-          <Text fontSize='14px' color='#BDC1C6'>부트캠퍼들이 가장 궁금했던 것들</Text>
+          {/* 질문과 답변 = (question) => { return answer } */}
+          <Text fontSize='14px' color='#BDC1C6'>질문과 답변 = (question) =&gt; &#123; return answer &#125;</Text>
           {/* Q&A 더보기 버튼 */}
-          <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>Q&A 더보기 &gt;</Text>
+          <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>질문과 답변 더보기 &gt;</Text>
         </TextBox>
         {/* Q&A 목록 */}
         <CardList>
-          {[1, 2, 3].map((n, idx) => {
+          {pop_qna.map((pq, idx) => {
             return (
-            <QuestionCard key={idx} onClick={() => {}}>
-              {/* 질문 제목 */}
-              <Text fontSize='18px' fontWeight='700' color='#f1f3f4' margin='0 0 16px'>Q 개발자 이직 고민</Text>
-              {/* 질문 내용 */}
-              <Text p fontSize='14px' letterSpacing='0.2px' color='#9aa0a6' overflow='hidden' display='-webkit-box' wlc='4' wbo='vertical'>안녕하세요. 저는 29살 직장인입니다. 현재 소기업에서 플랫폼을 개발하고 있는 백엔드 개발자로 이제 4년차 되었습니다. 사용하는 기술은 자바를 사용하고 있습니다. 현재 이직 준비를 하고 있지만 제일 문제가 되는 게 코딩테스트입니다. 이제 4년차 되었습니다. 사용하는 기술은 자바를 사용하고 있습니다. 현재 이직 준비를 하고 있지만 제일 문제가 되는 게 코딩테스트입니다.</Text>
-              <div style={{marginTop: '24px', height: '24px'}}>
-                {/* 작성자 프로필 이미지 */}
-                <ProfileImg src={Profile} alt='프로필'/>
-                {/* 작성자 닉네임 */}
-                <Text fontSize='12px' color='#9aa0a6' margin='0 8px' >G******</Text>
-                {/* 작성일자 */}
-                <Text fontSize='12px' color='#80868b' margin='0 4px 0 0'><BiTimeFive /></Text>
-                <Text fontSize='12px' color='#80868b'>2021.08.09</Text>
-              </div>
-                <Line />
-              <div style={{height: 'fit-content'}}>
-                {/* 추천 수 */}
-                <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0'>
-                  <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiLike /></span>17
+              <QuestionCard key={idx} onClick={() => history.push(`/question/detail/${pq.questionId}`)}>
+                {/* 질문 제목 */}
+                <Text
+                  fontSize="18px"
+                  fontWeight="700"
+                  color="#f1f3f4"
+                  margin="0 0 16px"
+                >
+                  Q {pq.title}
                 </Text>
-                {/* 댓글 수 */}
-                <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
-                  <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>1</Text>
-                {/* 조회수 */}
-                <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px'>
-                  <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><AiOutlineEye /></span>354</Text>
-              </div>
-            </QuestionCard>
-          );
-        })}
+                {/* 질문 내용 */}
+                <Text
+                  p
+                  fontSize="14px"
+                  letterSpacing="0.2px"
+                  color="#9aa0a6"
+                  overflow="hidden"
+                  display="-webkit-box"
+                  wlc="4"
+                  wbo="vertical"
+                >{pq.content}
+                </Text>
+                <div style={{ marginTop: '24px', height: '24px' }}>
+                  {/* 작성자 프로필 이미지 */}
+                  <ProfileImg src={pq.user.profilePic ? pq.user.profilePic : Profile} alt="프로필" />
+                  {/* 작성자 닉네임 */}
+                  <Text fontSize="12px" color="#9aa0a6" margin="0 8px">
+                    {pq.nickname}
+                  </Text>
+                  {/* 작성일자 */}
+                  <Text fontSize="12px" color="#80868b" margin="0 4px 0 0">
+                    <BiTimeFive />
+                  </Text>
+                  <Text fontSize="12px" color="#80868b">
+                    {pq.createdAt}
+                  </Text>
+                </div>
+                <Line />
+                <div style={{ height: 'fit-content' }}>
+                  {/* 추천 수 */}
+                  <Text fontSize="12px" color="#bdc1c6" margin="0 8px 0 0">
+                    <span
+                      style={{
+                        fontSize: '16px',
+                        verticalAlign: 'middle',
+                        marginRight: '6px',
+                      }}
+                    >
+                      <BiLike />
+                    </span>
+                    {pq.likeNumber}
+                  </Text>
+                  {/* 댓글 수 */}
+                  {/* <Text fontSize="12px" color="#bdc1c6" margin="0 8px">
+                    <span
+                      style={{
+                        fontSize: '16px',
+                        verticalAlign: 'middle',
+                        marginRight: '6px',
+                      }}
+                    >
+                      <BiComment />
+                    </span>
+                    1
+                  </Text> */}
+                  {/* 조회수 */}
+                  <Text fontSize="12px" color="#bdc1c6" margin="0 0 0 8px">
+                    <span
+                      style={{
+                        fontSize: '16px',
+                        verticalAlign: 'middle',
+                        marginRight: '6px',
+                      }}
+                    >
+                      <AiOutlineEye />
+                    </span>
+                    {pq.viewCount}
+                  </Text>
+                </div>
+              </QuestionCard>
+            );
+          })}
         </CardList>
       </Grid>
     </React.Fragment>
-  )
+  );
 };
 
 const TextBox = styled.div`

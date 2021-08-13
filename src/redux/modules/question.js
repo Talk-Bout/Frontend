@@ -24,12 +24,16 @@ const DELETE_QUESTION_BOOKMARK = 'question/DELETE_QUESTION_BOOKMARK';
 //좋아요 액션타입
 const LIKE_QUESTION = 'question/LIKE_QUESTION';
 const UNLIKE_QUESTION = 'question/UNLIKE_QUESTION';
+const LIKE_ANSWER = 'question/LIKE_ANSWER';
+const UNLIKE_ANSWER = 'question/UNLIKE_ANSWER';
 
 // QUESTION 액션생성함수
 const setQuestion = createAction(SET_QUESTION, (question_list) => ({
   question_list,
 }));
-const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({question_list}));
+const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({
+  question_list,
+}));
 const setOneQuestion = createAction(SET_ONE_QUESTION, (question) => ({
   question,
 }));
@@ -67,6 +71,10 @@ const likeQuestion = createAction(LIKE_QUESTION, (q_like) => ({ q_like }));
 const unlikeQuestion = createAction(UNLIKE_QUESTION, (q_like_id) => ({
   q_like_id,
 }));
+const likeAnswer = createAction(LIKE_ANSWER, (a_like) => ({ a_like }));
+const unlikeAnswer = createAction(UNLIKE_ANSWER, (a_like_id) => ({
+  a_like_id,
+}));
 
 // 기본값 정하기
 const initialState = {
@@ -95,10 +103,14 @@ const setQuestionDB = (page) => {
 const setQuestionPopDB = () => {
   // 질문글 인기순 정렬
   return function (dispatch) {
-    instance.get('/popular/questions').then((response) => {
-    }).catch((err) => {
-      console.error(`질문 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .get('/popular/questions')
+      .then((response) => {})
+      .catch((err) => {
+        console.error(
+          `질문 인기순 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
@@ -267,7 +279,6 @@ const setQuestionBookmarkDB = () => {
       instance
         .get(`/users/${nickname}/questionBookmarks`)
         .then((result) => {
-          console.log(result.data);
           dispatch(setQuestionBookmark(result.data));
         })
         .catch((err) => {
@@ -301,7 +312,6 @@ const deleteQuestionBookmarkDB = (question_id, questionBookmarkId) => {
         `/questions/${question_id}/questionBookmarks/${questionBookmarkId}`
       )
       .then((response) => {
-        console.log(response);
         dispatch(deleteQuestionBookmark(questionBookmarkId));
       })
       .catch((err) => {
@@ -311,7 +321,6 @@ const deleteQuestionBookmarkDB = (question_id, questionBookmarkId) => {
 };
 
 const likeQuestionDB = (question_id, user_name) => {
-  console.log(question_id, user_name);
   return function (dispatch) {
     instance
       .post(`/questions/${question_id}/questionLikes`, {
@@ -319,7 +328,6 @@ const likeQuestionDB = (question_id, user_name) => {
         questionId: question_id,
       })
       .then((response) => {
-        console.log(response);
         dispatch(likeQuestion(response.data));
       })
       .catch((err) => {
@@ -341,15 +349,47 @@ const unlikeQuestionDB = (question_id, questionLikeId) => {
   };
 };
 
+const likeAnswerDB = (answer_id, user_name) => {
+  return function (dispatch) {
+    instance
+      .post(`/answers/${answer_id}/answerLike`, {
+        nickname: user_name,
+        answerId: answer_id,
+      })
+      .then((response) => {
+        console.log(response.data);
+        dispatch(likeAnswer(response.data));
+      })
+      .catch((err) => {
+        console.error(`답변 좋아요추가 에러 : ${err}`);
+      });
+  };
+};
+
+const unlikeAnswerDB = (answer_id, answerLikeId) => {
+  console.log(answer_id, answerLikeId);
+  return function (dispatch) {
+    instance
+      .delete(`/answers/${answer_id}/answerLike/${answerLikeId}`)
+      .then((response) => {
+        dispatch(unlikeAnswer(answerLikeId));
+      })
+      .catch((err) => {
+        console.error(`답변 좋아요삭제 에러 : ${err}`);
+      });
+  };
+};
+
 export default handleActions(
   {
     [SET_QUESTION]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.question_list;
       }),
-    [SET_QUESTION_POP]: (state, action) => produce(state, (draft) => {
-      draft.popular_list = action.payload.question_list;
-    }),
+    [SET_QUESTION_POP]: (state, action) =>
+      produce(state, (draft) => {
+        draft.popular_list = action.payload.question_list;
+      }),
     [SET_ONE_QUESTION]: (state, action) =>
       produce(state, (draft) => {
         draft.list = [action.payload.question.questionDetail];
@@ -376,6 +416,13 @@ export default handleActions(
     [SET_ANSWER]: (state, action) =>
       produce(state, (draft) => {
         draft.answer_list = action.payload.answer_list;
+
+        let answers_like_list = [];
+        action.payload.answer_list.map((answer, idx) => {
+          answers_like_list.push(answer.answerLike);
+        });
+
+        draft.answer_like_list = answers_like_list; //아니면 Push에러 뜬다
       }),
     [SET_NEXT_ANSWER]: (state, action) =>
       produce(state, (draft) => {
@@ -415,6 +462,18 @@ export default handleActions(
         );
         draft.question_like_list.splice(like_idx, 1);
       }),
+    [LIKE_ANSWER]: (state, action) =>
+      produce(state, (draft) => {
+        draft.answer_like_list.push(action.payload.a_like);
+      }),
+    [UNLIKE_ANSWER]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.a_like_id);
+        let like_idx = draft.answer_like_list.findIndex(
+          (info) => info.answerLikeId === action.payload.a_like_id
+        );
+        draft.answer_like_list.splice(like_idx, 1);
+      }),
   },
   initialState
 );
@@ -435,6 +494,8 @@ const actionCreators = {
   deleteQuestionBookmarkDB,
   likeQuestionDB,
   unlikeQuestionDB,
+  likeAnswerDB,
+  unlikeAnswerDB,
 };
 
 export { actionCreators };

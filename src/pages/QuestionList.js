@@ -20,16 +20,21 @@ import QnaCard from '../components/QnaCard';
 const QuestionList = (props) => {
   const dispatch = useDispatch();
   const qna_list = useSelector((state) => state.question.list);
+  const [page, setPage] = useState(1);
 
+  //페이지네이션
   useEffect(() => {
     dispatch(questionActions.setQuestionDB(page));
-  }, []);
+  }, [page]);
 
-  const [page, setPage] = useState(1);
+  //1 페이지
+  const question_page = qna_list.slice(0, 12);
+
   //이전 페이지로 이동
   const toPrePage = () => {
     setPage(page - 1);
   };
+  //다음 페이지로 이동
   const toNextPage = () => {
     setPage(page + 1);
   };
@@ -110,7 +115,9 @@ const QuestionList = (props) => {
               </Text>
               {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
               <Text fontSize="14px" margin="0 20px 0">
-                <Page>{page === 1 ? '' : page - 1}</Page>
+                <Page onClick={() => toPrePage()}>
+                  {page === 1 ? '' : page - 1}
+                </Page>
               </Text>
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
               <Text fontSize="14px" margin="0 20px 0">
@@ -119,13 +126,13 @@ const QuestionList = (props) => {
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
               <Text fontSize="14px" margin="0 20px 0">
                 <Page onClick={() => toNextPage()}>
-                  {qna_list.length > page * 12 ? page + 1 : ''}
+                  {qna_list.length > 12 ? page + 1 : ''}
                 </Page>
               </Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
               <Text fontSize="14px" margin="0 0 0 20px">
                 <Page onClick={() => toNextPage()}>
-                  {qna_list.length > page * 12 ? <BsChevronRight /> : ''}
+                  {qna_list.length > 12 ? <BsChevronRight /> : ''}
                 </Page>
               </Text>
             </PageBox>

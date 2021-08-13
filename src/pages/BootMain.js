@@ -45,24 +45,24 @@ const BootMain = (props) => {
           <CardList>
             {camp_list.map((camp, idx) => {
               return (
-                <Card style={{backgroundImage: `url(http://13.209.12.149${camp.logo})`}} key={idx} onClick={() => history.push({
+                <Card key={idx} onClick={() => history.push({
                   pathname: `/boot/${camp.bootcampName}/info`,
                   state: {camp: camp, camp_page: page}
                 })}>
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
-                    {/* <Logo src={`http://13.209.12.149${camp.logo}`} alt={camp.bootcampName}></Logo> */}
+                    {<Logo src={`http://13.209.12.149${camp.logo}`} alt={camp.bootcampName}></Logo>}
                   </ImageDiv>
                   {/* 부트캠프 이름 */}
-                  <Text p fontSize="18px" fontWeight="700" margin="16px 0 0" color='#F8F9FA'>
+                  <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" margin="0 0 0 15px" color='#F8F9FA'>
                     {camp.bootcampName}
                   </Text>
                   {/* 부트캠프 설명 */}
-                  <Text p fontSize="14px" color="#BDC1C6" margin="3px 0 24px">
+                  <Text p fontSize="14px" fontWeight="500" color="#BDC1C6" position="absolute" top="172px" margin="0 0 0 15px" color='#F8F9FA'>
                     {camp.desc}
                   </Text>
                   {/* 부트캠프 별점 */}
-                  <Text fontSize="14px" color='#E8EAED'>
+                  <Text fontSize="14px" color='#E8EAED' position="absolute" top="200px" margin="0 0 0 15px">
                     {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' marginRight='4px' withScore/> : '별점/리뷰 없음'}
                   </Text>
                 </Card>
@@ -99,26 +99,26 @@ const CardList = styled.div`
 `;
 
 const Card = styled.div`
-  /* background-color: #202124; */
-  background-color: transparent;
-  width: 32.5%;
-  height: 240px;
-  border-radius: 8px;
-  padding: 24px 36px;
-  margin: 0 0 24px;
-  box-sizing: border-box;
-  cursor: pointer;
-  opacity: 0.5;
-  &:hover {
-    opacity: 1;
-  }
-  background-size: cover;
+background-color: #202124;
+background-size: cover;
+width: 32.5%;
+height: 240px;
+border-radius: 8px;
+margin-bottom: 30px;
+box-sizing: border-box;
+cursor: pointer;
+position: relative;
 `;
 
 const ImageDiv = styled.div`
   text-align: center;
-  width: 344px;
-  height: 86px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 const Logo = styled.img`
@@ -137,6 +137,7 @@ const Page = styled.span`
   opacity: 0.5;
   cursor: pointer;
   color: #F8F9FA;
+  
   &:hover {
     opacity: 1;
   }

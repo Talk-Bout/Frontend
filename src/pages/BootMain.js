@@ -4,6 +4,7 @@ import { Grid, Text } from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import Stars from '../components/Stars';
+import CampImg from '../image/talkbout_final_logo.png';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
@@ -51,14 +52,14 @@ const BootMain = (props) => {
                 })}>
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
-                    {<Logo src={`http://13.209.12.149${camp.logo}`} alt={camp.bootcampName}></Logo>}
+                    {<Logo src={camp.logo ? `http://13.209.12.149${camp.logo}` : CampImg} alt={camp.bootcampName}></Logo>}
                   </ImageDiv>
                   {/* 부트캠프 이름 */}
                   <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" margin="0 0 0 15px" color='#F8F9FA'>
                     {camp.bootcampName}
                   </Text>
                   {/* 부트캠프 설명 */}
-                  <Text p fontSize="14px" fontWeight="500" color="#BDC1C6" position="absolute" top="172px" margin="0 0 0 15px" color='#F8F9FA'>
+                  <Text p fontSize="14px" fontWeight="500" position="absolute" top="172px" margin="0 0 0 15px" color='#F8F9FA'>
                     {camp.desc}
                   </Text>
                   {/* 부트캠프 별점 */}
@@ -115,17 +116,16 @@ const ImageDiv = styled.div`
   width: 100%;
   height: 100%;
   opacity: 0.4;
-
   &:hover {
     opacity: 0.9;
   }
 `;
 
-// const Logo = styled.img`
-//   width: 100%;
-//   height: 100%;
-//   size: contain;
-// `;
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
+  size: contain;
+`;
 
 const PageBox = styled.div`
   display: inline-block;
@@ -137,7 +137,6 @@ const Page = styled.span`
   opacity: 0.5;
   cursor: pointer;
   color: #F8F9FA;
-  
   &:hover {
     opacity: 1;
   }

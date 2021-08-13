@@ -23,12 +23,12 @@ const MainBoot = (props) => {
         <Grid padding="57px 0 0">
           {/* 인기 부트캠프 */}
           <Text fontSize="24px" fontWeight="700" color="#F8F9FA">
-            🚀 인기 부트캠프
+            🚀부트캠프
           </Text>
           <TextBox>
             {/* 100% 리얼 실제 리뷰 */}
             <Text fontSize="14px" color="#BDC1C6">
-              100% 리얼 실제 리뷰
+              부트캠프별 정보를 공유하고 별점도 매겨보세요!
             </Text>
             {/* 부트캠프 더보기 버튼 */}
             <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/boot')}>부트캠프 더보기 &gt;</Text>

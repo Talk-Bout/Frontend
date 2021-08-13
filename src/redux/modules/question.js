@@ -5,7 +5,7 @@ import instance from '../../shared/Request';
 
 // QUESTION 액션타입
 const SET_QUESTION = 'question/SET_QUESTION';
-const SET_QUESTION_POP = 'question/SET_QUESTION_POP';
+const SET_QUESTION_POP = 'question/SET_QUESTION_POP';                           // <-- 추가했습니다!!
 const SET_ONE_QUESTION = 'question/SET_ONE_QUESTION';
 const CREATE_QUESTION = 'question/CREATE_QUESTION';
 const EDIT_QUESTION = 'question/EDIT_QUESTION';
@@ -29,7 +29,7 @@ const UNLIKE_QUESTION = 'question/UNLIKE_QUESTION';
 const setQuestion = createAction(SET_QUESTION, (question_list) => ({
   question_list,
 }));
-const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({question_list}));
+const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({question_list}));            // <-- 추가했습니다!!
 const setOneQuestion = createAction(SET_ONE_QUESTION, (question) => ({
   question,
 }));
@@ -71,7 +71,7 @@ const unlikeQuestion = createAction(UNLIKE_QUESTION, (q_like_id) => ({
 // 기본값 정하기
 const initialState = {
   list: [],
-  popular_list: [],
+  popular_list: [], // 인기순 정렬                                                    <-- 추가했습니다!!
   answer_list: [],
   bookmark_list: [],
   question_like_list: [], //질문 좋아요 리스트
@@ -92,10 +92,11 @@ const setQuestionDB = (page) => {
   };
 };
 
-const setQuestionPopDB = () => {
+const setQuestionPopDB = (page) => {                                                  // <-- 추가했습니다!!
   // 질문글 인기순 정렬
   return function (dispatch) {
-    instance.get('/popular/questions').then((response) => {
+    instance.get(`/popular/questions?page=${page}`).then((response) => {
+      dispatch(setQuestionPop(response.data));
     }).catch((err) => {
       console.error(`질문 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -347,7 +348,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.question_list;
       }),
-    [SET_QUESTION_POP]: (state, action) => produce(state, (draft) => {
+    [SET_QUESTION_POP]: (state, action) => produce(state, (draft) => {                               // <-- 추가했습니다!!
       draft.popular_list = action.payload.question_list;
     }),
     [SET_ONE_QUESTION]: (state, action) =>
@@ -422,7 +423,7 @@ export default handleActions(
 // 액션 생성자
 const actionCreators = {
   setQuestionDB,
-  setQuestionPopDB,
+  setQuestionPopDB,                                                                     // <-- 추가했습니다!!
   setOneQuestionDB,
   createQuestionDB,
   deleteQuestionDB,

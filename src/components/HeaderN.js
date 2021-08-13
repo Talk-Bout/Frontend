@@ -132,8 +132,8 @@ const HeaderN = (props) => {
           width='auto'
           margin='26px 0 0 42px'
         >
-          <Image src={Search} alt="검색" />
-          <Input placeholder="검색어를 입력하세요." />
+          {/* <Image src={Search} alt="검색" />
+          <Input placeholder="검색어를 입력하세요." /> */}
         </Grid>
         {/* 로그인 버튼 */}
           <LoginBtn type='button' onClick={() => history.push('/login')}><Text fontSize="16px" color="#f8f9fa" cursor='pointer' lineHeight='24px'>

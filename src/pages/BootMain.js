@@ -11,15 +11,18 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const BootMain = (props) => {
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(campActions.setCampsDB(page));
-  }, []);
-
-  const camp_list = useSelector(state => state.bootcamp.camp_list);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
+  // 페이지 번호가 바뀔 때마다 부트캠프 목록 불러오는 함수 호출
+  useEffect(() => {
+    dispatch(campActions.setCampsDB(page));
+  }, [page]);
+  // 불러오는 3페이지짜리 부트캠프 목록
+  const all_camp = useSelector(state => state.bootcamp.camp_list);
+  console.log(all_camp);
+  // 1페이지에 보여줄 개수로만 자른 목록
+  const camp_list = all_camp.slice(0, 12);
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);
@@ -76,9 +79,9 @@ const BootMain = (props) => {
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{camp_list.length > page * 12 ? page + 1 : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? page + 1 : ''}</Page></Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{camp_list.length > page * 12 ? <BsChevronRight /> : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? <BsChevronRight /> : ''}</Page></Text>
             </PageBox>
           </Grid>
         </Body>

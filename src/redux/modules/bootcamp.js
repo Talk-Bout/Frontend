@@ -230,7 +230,6 @@ const setMyCommuDB = () => {
     .then((response) => {
       const nickname = response.data.nickname;
       instance.get(`/users/${nickname}/communityBookmarks`).then((result) => {
-        console.log(result.data);
         dispatch(setMyCommu(result.data));
       }).catch((err) => {
         console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);

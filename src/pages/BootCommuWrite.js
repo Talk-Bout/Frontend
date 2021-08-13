@@ -56,14 +56,18 @@ const BootCommuWrite = (props) => {
       return;
     }
     if (edited_id) {
+      const edited_image = preview ? image_url : commu_found.image
       const edited_commu = {
         title: titleRef.current.value,
         content: contentRef.current.value,
         bootcampName: commu_found.bootcampName,
         communityId: commu_found.communityId,
-        image: image_url,
+        image: edited_image,
       };
       dispatch(campActions.editCommuDB(edited_commu));
+      dispatch(imageActions.getPreview(null));
+      titleRef.current.value = '';
+      contentRef.current.value = '';
     } else {
       const new_commu = {
         nickname: username,

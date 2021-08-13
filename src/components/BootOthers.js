@@ -5,6 +5,7 @@ import Stars from './Stars';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
+import CampImg from '../image/talkbout_final_logo.png';
 
 // 다른 부트캠프 목록
 const BootOthers = (props) => {
@@ -26,7 +27,9 @@ const BootOthers = (props) => {
         return (
           <Camp key={idx} onClick={() => history.push({pathname: `/boot/${other.bootcampName}/info`, state: {camp: {bootcampName: other.bootcampName}}})}>
             {/* 다른 부트캠프 로고 */}
-            <ImageDiv style={{backgroundImage: `url(${other.logo})`}}/>
+            <ImageDiv>
+              <Image src={other.logo ? `http://13.209.12.149${other.logo}` : CampImg}/>
+            </ImageDiv>
             <div style={{padding: '29px 16px'}}>
               {/* 다른 부트캠프 이름 */}
               <Text p className='camp-name' fontSize='18px' fontWeight='700' color='#f1f3f4' margin='0 0 4px'>{other.bootcampName}</Text>
@@ -54,6 +57,13 @@ const ImageDiv = styled.div`
   width: 72px;
   border-radius: 36px;
   margin-top: 16px;
+  background-size: cover;
+`;
+
+const Image = styled.img`
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
   background-size: cover;
 `;
 

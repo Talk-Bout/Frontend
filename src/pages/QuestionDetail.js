@@ -30,7 +30,7 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
-  console.log(question_found);
+  //  console.log(question_found);
   const user_name = useSelector((state) => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
@@ -41,6 +41,8 @@ const QuestionDetail = (props) => {
   const answer_list = all_answer.filter(
     (answer) => answer.questionId === question_id
   );
+  // console.log(all_answer);
+  // console.log(answer_list);
   const [answer_page, setAnswerPage] = useState(2);
 
   //북마크 목록
@@ -55,11 +57,16 @@ const QuestionDetail = (props) => {
   const question_like_list = useSelector(
     (state) => state.question.question_like_list
   );
-  console.log(question_like_list);
+  // console.log(question_like_list);
   const question_like = question_like_list.find(
     (like) => like.nickname == user_name
   );
-  console.log(question_like);
+
+  // const answer_like_list = useSelector(
+  //   (state) => state.question.answer_like_list
+  // );
+  // console.log(answer_like_list);
+  // console.log(question_like);
   // 콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
@@ -120,12 +127,10 @@ const QuestionDetail = (props) => {
 
   //북마크
   const add_bookmark = () => {
-    console.log(question_id, user_name);
     dispatch(questionActions.addQuestionBookmarkDB(question_id, user_name));
   };
 
   const delete_bookmark = (bookmark_id) => {
-    console.log(bookmark_id);
     dispatch(
       questionActions.deleteQuestionBookmarkDB(question_id, bookmark_id)
     );
@@ -133,12 +138,10 @@ const QuestionDetail = (props) => {
 
   //질문 좋아요
   const likeQuestion = () => {
-    console.log(question_id, user_name);
     dispatch(questionActions.likeQuestionDB(question_id, user_name));
   };
 
   const unlikeQuestion = (questionLikeId) => {
-    console.log(questionLikeId);
     dispatch(questionActions.unlikeQuestionDB(question_id, questionLikeId));
   };
 

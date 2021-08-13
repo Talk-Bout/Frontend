@@ -15,7 +15,6 @@ const QnaCard = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == question_id
   );
-  // console.log(question_found);
 
   return (
     <React.Fragment>
@@ -72,16 +71,28 @@ const QnaCard = (props) => {
           <div style={{ paddingTop: '16px' }}>
             {/* 추천 수 */}
             <Text fontSize="12px" color="#bdc1c6" margin="0 8px 0 0">
-              <span
-                style={{
-                  fontSize: '16px',
-                  verticalAlign: 'middle',
-                  marginRight: '6px',
-                }}
-              >
-                <BiLike />
-              </span>
-              17
+              {question_found.questionLike ? (
+                <span
+                  style={{
+                    fontSize: '16px',
+                    verticalAlign: 'middle',
+                    marginRight: '6px',
+                  }}
+                >
+                  <BiLike />
+                  {question_found.questionLike.length}
+                </span>
+              ) : (
+                <span
+                  style={{
+                    fontSize: '16px',
+                    verticalAlign: 'middle',
+                    marginRight: '6px',
+                  }}
+                >
+                  <BiLike />0
+                </span>
+              )}
             </Text>
             {/* 댓글 수 */}
             <Text fontSize="12px" color="#bdc1c6" margin="0 8px">

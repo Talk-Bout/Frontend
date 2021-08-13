@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import Stars from '../components/Stars';
 import {history} from '../redux/ConfigureStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
 
 const MainBoot = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(campActions.setCampsDB(1));
+  }, []);
+
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const pop_camps = camp_list.slice(0, 6);
+  console.log(pop_camps);
 
   return (
     <React.Fragment>
@@ -16,11 +27,11 @@ const MainBoot = (props) => {
             {/* 100% 리얼 실제 리뷰 */}
             <Text fontSize='14px' color='#BDC1C6'>100% 리얼 실제 리뷰</Text>
             {/* 부트캠프 더보기 버튼 */}
-            <Text fontSize='14px' color='#BDC1C6' cursor='pointer'>부트캠프 더보기 &gt;</Text>
+            <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/boot')}>부트캠프 더보기 &gt;</Text>
           </TextBox>
           {/* 부트캠프 목록 */}
           <CardList>
-            {[1, 2, 3, 4, 5, 6].map((n, idx) => {
+            {pop_camps.map((pc, idx) => {
               return (
                 <CampCard key={idx}>
                   {/* 부트캠프 로고 */}

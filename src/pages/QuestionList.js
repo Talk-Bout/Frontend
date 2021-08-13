@@ -53,7 +53,7 @@ const QuestionList = (props) => {
           >
             {/* Q&A 게시판 타이틀 */}
             <Text p color="#F8F9FA" fontWeight="700" fontSize="32px" margin="0">
-              Q&A
+              질문과 답변
             </Text>
             <div
               style={{
@@ -92,7 +92,7 @@ const QuestionList = (props) => {
           {/* Q&A 게시글 목록 */}
 
           <CardList>
-            {qna_list.map((q, idx) => {
+            {question_page.map((q, idx) => {
               return (
                 <QnaCard
                   qna_id={q.questionId}

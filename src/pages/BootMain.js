@@ -45,13 +45,13 @@ const BootMain = (props) => {
           <CardList>
             {camp_list.map((camp, idx) => {
               return (
-                <Card key={idx} onClick={() => history.push({
+                <Card style={{backgroundImage: `url(http://13.209.12.149${camp.logo})`}} key={idx} onClick={() => history.push({
                   pathname: `/boot/${camp.bootcampName}/info`,
                   state: {camp: camp, camp_page: page}
                 })}>
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
-                    <img src={camp.logo} alt={camp.bootcampName}></img>
+                    {/* <Logo src={`http://13.209.12.149${camp.logo}`} alt={camp.bootcampName}></Logo> */}
                   </ImageDiv>
                   {/* 부트캠프 이름 */}
                   <Text p fontSize="18px" fontWeight="700" margin="16px 0 0" color='#F8F9FA'>
@@ -99,7 +99,8 @@ const CardList = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: #202124;
+  /* background-color: #202124; */
+  background-color: transparent;
   width: 32.5%;
   height: 240px;
   border-radius: 8px;
@@ -107,15 +108,23 @@ const Card = styled.div`
   margin: 0 0 24px;
   box-sizing: border-box;
   cursor: pointer;
+  opacity: 0.5;
   &:hover {
-    opacity: 0.7;
+    opacity: 1;
   }
+  background-size: cover;
 `;
 
 const ImageDiv = styled.div`
   text-align: center;
   width: 344px;
   height: 86px;
+`;
+
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
+  size: contain;
 `;
 
 const PageBox = styled.div`

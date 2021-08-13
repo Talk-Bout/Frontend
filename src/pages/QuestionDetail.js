@@ -13,7 +13,11 @@ import AnswerCard from '../components/AnswerCard';
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
+import {
+  BsThreeDotsVertical,
+  BsBookmark,
+  BsBookmarkFill,
+} from 'react-icons/bs';
 import profile_medium from '../image/profile_medium.png';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -32,7 +36,18 @@ const QuestionDetail = (props) => {
   const answerInput = useRef(null);
   const answer_list = useSelector((state) => state.question.answer_list);
   const [answer_page, setAnswerPage] = useState(1);
-  console.log(answer_page);
+
+  //북마크 목록
+  const question_bookmark_list = useSelector(
+    (state) => state.question.bookmark_list
+  );
+  console.log(question_bookmark_list);
+  const question_bookmark = question_bookmark_list.find(
+    (bookmark) => bookmark.questionId == parseInt(question_id)
+  );
+
+  console.log(question_bookmark);
+
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
@@ -87,13 +102,17 @@ const QuestionDetail = (props) => {
   };
 
   //Answer 더보기
-  // const moreAnswer = async () => {
-  //   const result = await setAnswerPage(answer_page + 1);
-  //   console.log(result);
-  //   dispatch(questionActions.setAnswerDB(question_id, answer_page));
-  // };
+  const moreAnswer = () => {
+    dispatch(questionActions.setAnswerDB(question_id, answer_page));
+    setAnswerPage(answer_page + 1);
+  };
 
-  async function moreAnswer() {}
+  //북마크
+  const add_bookmark = () => {
+    dispatch(questionActions.addQuestionBookmarkDB(question_id, user_name));
+  };
+
+  const delete_bookmark = () => {};
 
   return (
     <React.Fragment>
@@ -119,19 +138,45 @@ const QuestionDetail = (props) => {
                 </Grid>
                 {/* 북마크와 수정 삭제 */}
                 <Grid display="flex" width="14%" margin="0 0 0 auto">
-                  <Button padding="0" width="16.33px" height="21px">
-                    <Text
+                  {question_bookmark ? (
+                    <Button
                       padding="0"
-                      color="#9aa0a6"
-                      fontSize="24px"
-                      lineHeight="35px"
-                      vertical_align="middle"
-                      cursor="pointer"
-                      hover="opacity: 0.7"
+                      width="16.33px"
+                      height="21px"
+                      // onClick={() => add_bookmark()}
                     >
-                      <BsBookmark />
-                    </Text>
-                  </Button>
+                      <Text
+                        padding="0"
+                        color="#7879F1"
+                        fontSize="24px"
+                        lineHeight="35px"
+                        vertical_align="middle"
+                        cursor="pointer"
+                        hover="opacity: 0.7"
+                      >
+                        <BsBookmarkFill />
+                      </Text>
+                    </Button>
+                  ) : (
+                    <Button
+                      padding="0"
+                      width="16.33px"
+                      height="21px"
+                      onClick={() => add_bookmark()}
+                    >
+                      <Text
+                        padding="0"
+                        color="#9aa0a6"
+                        fontSize="24px"
+                        lineHeight="35px"
+                        vertical_align="middle"
+                        cursor="pointer"
+                        hover="opacity: 0.7"
+                      >
+                        <BsBookmark />
+                      </Text>
+                    </Button>
+                  )}
 
                   {/* 드롭 다운 버튼 */}
                   {is_login && question_found.nickname === user_name ? (

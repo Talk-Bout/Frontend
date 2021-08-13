@@ -304,8 +304,7 @@ const deleteCommuDB = (deleted_commu) => {
 const setMyCommuDB = () => {
   // 서버로부터 북마크한 커뮤니티글 목록 불러오는 함수
   return function (dispatch) {
-    instance.get('/tokenUser')
-    .then((response) => {
+    instance.get('/tokenUser').then((response) => {
       const nickname = response.data.nickname;
       instance.get(`/users/${nickname}/communityBookmarks`).then((result) => {
         dispatch(setMyCommu(result.data));
@@ -389,20 +388,25 @@ const unlikeCommuDB = (communityId, communityLikeId) => {
 const setCommentsDB = (commu_id, page) => {
   // 서버로부터 커뮤니티글의 댓글 목록 불러오는 함수(페이징)
   return function (dispatch) {
-    instance.get(`/community/${commu_id}/communityComments?page=${page}`).then((response) => {
-      if (page !== 1) {
-        if (response.data.length !== 0) {
-          dispatch(setNextComments(response.data));
+    instance
+      .get(`/community/${commu_id}/communityComments?page=${page}`)
+      .then((response) => {
+        if (page !== 1) {
+          if (response.data.length !== 0) {
+            dispatch(setNextComments(response.data));
+          } else {
+            window.alert('마지막 댓글입니다.');
+            return;
+          }
         } else {
-          window.alert('마지막 댓글입니다.');
-          return; 
+          dispatch(setComments(response.data));
         }
-      } else {
-        dispatch(setComments(response.data));
-      }
-    }).catch((err) => {
-      console.error(`부트캠프 커뮤니티 댓글 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티 댓글 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 

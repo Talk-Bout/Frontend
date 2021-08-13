@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {Grid, Text} from '../elements';
+import { Grid, Text } from '../elements';
 import Stars from '../components/Stars';
 import {history} from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,15 +19,20 @@ const MainBoot = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='top-boot' height='421px'>
-        <Grid padding='57px 0 0'>
+      <Grid className="top-boot" height="421px">
+        <Grid padding="57px 0 0">
           {/* 인기 부트캠프 */}
-          <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>🚀부트캠프</Text>
+          <Text fontSize="24px" fontWeight="700" color="#F8F9FA">
+            🚀 인기 부트캠프
+          </Text>
           <TextBox>
             {/* 100% 리얼 실제 리뷰 */}
-            <Text fontSize='14px' color='#BDC1C6'>100% 리얼 실제 리뷰</Text>
+            <Text fontSize="14px" color="#BDC1C6">
+              100% 리얼 실제 리뷰
+            </Text>
             {/* 부트캠프 더보기 버튼 */}
             <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/boot')}>부트캠프 더보기 &gt;</Text>
+
           </TextBox>
           {/* 부트캠프 목록 */}
           <CardList>
@@ -35,7 +40,7 @@ const MainBoot = (props) => {
               return (
                 <CampCard key={idx}>
                   {/* 부트캠프 로고 */}
-                  <Grid width="104px" padding='22px 0 0 24px'>
+                  <Grid width="104px" padding="22px 0 0 24px">
                     <ImageDiv>
                       <Logo src={pc.logo ? `http://13.209.12.149${pc.logo}` : CampImg}/>
                     </ImageDiv>
@@ -50,7 +55,7 @@ const MainBoot = (props) => {
                       {/* 부트캠프 별점 */}
                       <Stars size='16px' score={pc.star} withScore />
                     </Grid>
-                    <Grid display="flex" padding='13px 0 0'>
+                    <Grid display="flex" padding="13px 0 0">
                       {/* 부트캠프 리뷰 메뉴 */}
                       <Text fontSize="14px" color="#E8EAED" margin='0 16px 0 0' cursor='pointer' _onClick={() => history.push(`/boot/${pc.bootcampName}/review`)}>
                         리뷰
@@ -60,15 +65,15 @@ const MainBoot = (props) => {
                         커뮤니티
                       </Text>
                     </Grid>
-                </Grid>
-              </CampCard>
-            );
-          })}
+                  </Grid>
+                </CampCard>
+              );
+            })}
           </CardList>
         </Grid>
       </Grid>
     </React.Fragment>
-  )
+  );
 };
 
 const TextBox = styled.div`
@@ -101,7 +106,7 @@ const CampCard = styled.div`
 `;
 
 const ImageDiv = styled.div`
-  background-color: #3C4043;
+  background-color: #3c4043;
   width: 80px;
   height: 80px;
   border-radius: 50%;

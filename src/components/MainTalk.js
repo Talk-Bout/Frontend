@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {Grid, Text} from '../elements';
+import { Grid, Text } from '../elements';
 import Profile from '../image/profile_small.png';
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
@@ -17,10 +17,10 @@ const MainTalk = (props) => {
 
   const post_list = useSelector(state => state.post.pop_list);
   const pop_posts = post_list.slice(0, 4);
-
+  
   return (
     <React.Fragment>
-      <Grid className='top-boot' margin='48px 0'>
+      <Grid className="top-boot" margin="48px 0">
         {/* 인기 부트톡톡 */}
         <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>📣부트톡톡</Text>
         <TextBox>
@@ -31,7 +31,7 @@ const MainTalk = (props) => {
         </TextBox>
         {/* 부트톡톡 게시물 목록 */}
         <Questions>
-        {pop_posts.map((pp, idx) => {
+          {pop_posts.map((pp, idx) => {
           return (
             <QuestionBox key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
               {/* 게시글 제목 */}
@@ -71,7 +71,7 @@ const MainTalk = (props) => {
         </Questions>
       </Grid>
     </React.Fragment>
-  )
+  );
 };
 
 const TextBox = styled.div`

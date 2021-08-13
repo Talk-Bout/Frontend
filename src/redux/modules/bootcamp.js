@@ -1,8 +1,7 @@
-import {createAction, handleActions} from "redux-actions";
-import {produce} from 'immer';
-import {history} from '../ConfigureStore';
+import { createAction, handleActions } from 'redux-actions';
+import { produce } from 'immer';
+import { history } from '../ConfigureStore';
 import instance from '../../shared/Request';
-import { concat } from 'lodash-es';
 
 // 액션타입
 const SET_CAMPS = 'bootcamp/SET_CAMPS'; // 부트캠프 전체 목록 불러오기
@@ -14,7 +13,7 @@ const SET_REVIEWS = 'bootcamp/SET_REVIEWS'; // 리뷰 불러오기
 const ADD_REVIEW = 'bootcamp/ADD_REVIEW'; // 리뷰 작성하기
 
 const SET_COMMUS = 'bootcamp/SET_COMMUS'; // 커뮤니티글 전체 목록 불러오기
-const SET_ONE_COMMU = 'bootcamp/SET_ONECOMMU' // 커뮤니티글 상세페이지 불러오기
+const SET_ONE_COMMU = 'bootcamp/SET_ONECOMMU'; // 커뮤니티글 상세페이지 불러오기
 const ADD_COMMU = 'bootcamp/ADD_COMMU'; // 커뮤니티글 작성하기
 const EDIT_COMMU = 'bootcamp/EDIT_COMMU'; // 커뮤니티글 수정하기
 
@@ -26,6 +25,7 @@ const LIKE_COMMU = 'bootcamp/LIKE_COMMU'; // 커뮤니티글 좋아요 표시하
 const UNLIKE_COMMU = 'bootcamp/UNLIKE_COMMU'; // 커뮤니티글 좋아요 해제하기
 
 const SET_COMMENTS = 'bootcamp/SET_COMMENTS'; // 커뮤니티 댓글 불러오기
+const SET_NEXT_COMMENTS = 'bootcamp/SET_NEXT_COMMENTS'; // 커뮤니티 다음 페이지 댓글 불러오기(더보기 버튼 눌렀을 때)
 const ADD_COMMENT = 'bootcamp/ADD_COMMENT'; // 커뮤니티 댓글 작성하기
 const EDIT_COMMENT = 'bootcamp/EDIT_COMMENT'; // 커뮤니티 댓글 수정하기
 const DELETE_COMMENT = 'bootcamp/DELETE_COMMENT'; // 커뮤니티 댓글 삭제하기
@@ -47,17 +47,17 @@ const deleteMyCommu = createAction(DELETE_MY_COMMU, (bookmark_id) => ({bookmark_
 const likeCommu = createAction(LIKE_COMMU, (like) => ({like}));
 const unlikeCommu = createAction(UNLIKE_COMMU, (like) => ({like}));
 const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}));
+const setNextComments = createAction(SET_NEXT_COMMENTS, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
 
-
 // 기본값 정하기
 const initialState = {
-  camp_list: [],    // 부트캠프 전체 목록
+  camp_list: [], // 부트캠프 전체 목록
   my_camp_list: [], // 북마크한 부트캠프 목록
-  review_list: [],    // 리뷰 목록
-  commu_list: [],   // 커뮤니티글 목록
+  review_list: [], // 리뷰 목록
+  commu_list: [], // 커뮤니티글 목록
   one_commu: null, // 개별 커뮤니티글
   my_commu_list: [], // 북마크한 커뮤니티글 목록
   commu_like_list: [], // 커뮤니티글 좋아요 한 사용자 목록
@@ -68,158 +68,218 @@ const initialState = {
 const setCampsDB = (page) => {
   // 서버로부터 부트캠프 전체 목록 불러오는 함수(페이징)
   return function (dispatch) {
-    instance.get(`/bootcamp?page=${page}`).then((response) => {
-      dispatch(setCamps(response.data));
-      console.log(response.data);
-    })
-    .catch((err) => {
-      console.error(`부트캠프 전체 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .get(`/bootcamp?page=${page}`)
+      .then((response) => {
+        dispatch(setCamps(response.data));
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 전체 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const setMyCampDB = () => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
-      instance.get('/tokenUser')
+    instance
+      .get('/tokenUser')
       .then((response) => {
         const nickname = response.data.nickname;
-        instance.get(`/users/${nickname}/bootcampBookmarks`).then((response) => {
-          dispatch(setMyCamp(response.data));
-        }).catch((err) => {
-          console.error(`북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
-        });
-      }).catch((err) => {
-        console.error(`사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`);
+        instance
+          .get(`/users/${nickname}/bootcampBookmarks`)
+          .then((response) => {
+            dispatch(setMyCamp(response.data));
+          })
+          .catch((err) => {
+            console.error(
+              `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`
+            );
+          });
       })
+      .catch((err) => {
+        console.error(
+          `사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const addMyCampDB = (nickname, bootcampName) => {
   // 부트캠프 북마크 표시하는 함수
   return function (dispatch) {
-    instance.post(`/bootcamp/${bootcampName}/bootcampBookmarks`, {
-      nickname: nickname,
-      bootcampName: bootcampName,
-    }).then((response) => {
-      dispatch(addMyCamp(response.data));
-    }).catch((err) => {
-      console.error(`부트캠프 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .post(`/bootcamp/${bootcampName}/bootcampBookmarks`, {
+        nickname: nickname,
+        bootcampName: bootcampName,
+      })
+      .then((response) => {
+        dispatch(addMyCamp(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 북마크 추가하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
   // 부트캠프 북마크 해제하는 함수
   return function (dispatch) {
-    instance.delete(`/bootcamp/${bootcampName}/bootcampBookmarks/${bootcampBookmarkId}`).then(
-      dispatch(deleteMyCamp(bootcampBookmarkId))
-    ).catch((err) => {
-      console.error(`부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .delete(
+        `/bootcamp/${bootcampName}/bootcampBookmarks/${bootcampBookmarkId}`
+      )
+      .then(dispatch(deleteMyCamp(bootcampBookmarkId)))
+      .catch((err) => {
+        console.error(
+          `부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const setReviewsDB = (camp_name, page) => {
   // 서버로부터 리뷰 불러오는 함수(페이징)
   return function (dispatch) {
-    instance.get(`/bootcamp/${camp_name}/review?page=${page}`).then((response) => {
-      dispatch(setReviews(response.data));
-    })
-    .catch((err) => {
-      console.error(`부트캠프 리뷰 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .get(`/bootcamp/${camp_name}/review?page=${page}`)
+      .then((response) => {
+        dispatch(setReviews(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 리뷰 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const addReviewDB = (new_review) => {
   // 서버에 리뷰 저장하는 함수
   return function (dispatch) {
-    instance.post(`/bootcamp/${new_review.bootcampName}/review`, {
-      nickname: new_review.nickname,
-      bootcampName: new_review.bootcampName,
-      status: new_review.status,
-      pros: new_review.pros,
-      cons: new_review.cons,
-      stars: new_review.stars,
-      title: new_review.title,
-    }).then((response) => {
-      dispatch(addReview(response.data));
-      history.goBack();
-    }).catch((err) => {
-      console.error(`부트캠프 리뷰 작성하기 에러 발생: ${err} ### ${err.response}`);
-    })
-  }
+    instance
+      .post(`/bootcamp/${new_review.bootcampName}/review`, {
+        nickname: new_review.nickname,
+        bootcampName: new_review.bootcampName,
+        status: new_review.status,
+        pros: new_review.pros,
+        cons: new_review.cons,
+        stars: new_review.stars,
+        title: new_review.title,
+      })
+      .then((response) => {
+        dispatch(addReview(response.data));
+        history.goBack();
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 리뷰 작성하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
+  };
 };
 
 const setCommusDB = (camp_name, page) => {
   // 서버로부터 커뮤니티글 목록 불러오는 함수(페이징)
   return function (dispatch) {
-    instance.get(`/bootcamp/${camp_name}/community?page=${page}`).then((response) => {
-      dispatch(setCommus(response.data));
-    })
-    .catch((err) => {
-      console.error(`부트캠프 커뮤니티글 전체 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .get(`/bootcamp/${camp_name}/community?page=${page}`)
+      .then((response) => {
+        dispatch(setCommus(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 전체 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const setOneCommuDB = (camp_name, commu_id) => {
   // 서버로부터 커뮤니티글 하나를 불러오는 함수
   return function (dispatch) {
-    instance.get(`/bootcamp/${camp_name}/community/${commu_id}`).then((response) => {
-      dispatch(setOneCommu(response.data));
-    })
-    .catch((err) => {
-      console.error(`부트캠프 커뮤니티글 하나 불러오기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .get(`/bootcamp/${camp_name}/community/${commu_id}`)
+      .then((response) => {
+        dispatch(setOneCommu(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 하나 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const addCommuDB = (new_commu) => {
   // 서버에 커뮤니티글 저장하는 함수
   return function (dispatch) {
-    instance.post(`/bootcamp/${new_commu.bootcampName}/community`, {
-      nickname: new_commu.nickname,
-      bootcampName: new_commu.bootcampName,
-      title: new_commu.title,
-      content: new_commu.content,
-      image: new_commu.image,
-    }).then((response) => {
-      dispatch(addCommu(response.data));
-      history.push(`/boot/${response.data.bootcampName}/post/${response.data.communityId}`);
-    })
-    .catch((err) => {
-      console.error(`부트캠프 커뮤니티글 작성하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .post(`/bootcamp/${new_commu.bootcampName}/community`, {
+        nickname: new_commu.nickname,
+        bootcampName: new_commu.bootcampName,
+        title: new_commu.title,
+        content: new_commu.content,
+        image: new_commu.image,
+      })
+      .then((response) => {
+        dispatch(addCommu(response.data));
+        history.push(
+          `/boot/${response.data.bootcampName}/post/${response.data.communityId}`
+        );
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 작성하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const editCommuDB = (edited_commu) => {
   // 서버의 커뮤니티글을 수정하는 함수
   return function (dispatch) {
-    instance.patch(`/bootcamp/${edited_commu.bootcampName}/community/${edited_commu.communityId}`, {
-      title: edited_commu.title,
-      content: edited_commu.content,
-      image: edited_commu.image,
-    }).then((response) => {
-      dispatch(editCommu(response.data));
-      history.push(`/boot/${edited_commu.bootcampName}/post/${edited_commu.communityId}`);
-    })
-    .catch((err) => {
-      console.error(`부트캠프 커뮤니티글 수정하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .patch(
+        `/bootcamp/${edited_commu.bootcampName}/community/${edited_commu.communityId}`,
+        {
+          title: edited_commu.title,
+          content: edited_commu.content,
+          image: edited_commu.image,
+        }
+      )
+      .then((response) => {
+        dispatch(editCommu(response.data));
+        history.push(
+          `/boot/${edited_commu.bootcampName}/post/${edited_commu.communityId}`
+        );
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 수정하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const deleteCommuDB = (deleted_commu) => {
   // 서버의 커뮤니티글을 삭제하는 함수
   return function (dispatch) {
-    instance.delete(`/bootcamp/${deleted_commu.bootcampName}/community/${deleted_commu.communityId}`).then(
-      history.goBack()
-    ).catch((err) => {
-      console.error(`부트캠프 커뮤니티글 삭제하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .delete(
+        `/bootcamp/${deleted_commu.bootcampName}/community/${deleted_commu.communityId}`
+      )
+      .then(history.goBack())
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 삭제하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
@@ -230,64 +290,80 @@ const setMyCommuDB = () => {
     .then((response) => {
       const nickname = response.data.nickname;
       instance.get(`/users/${nickname}/communityBookmarks`).then((result) => {
-        console.log(result.data);
         dispatch(setMyCommu(result.data));
       }).catch((err) => {
         console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
       });
-    }).catch((err) => {
-      console.error(`사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`);
-    })
   };
 };
 
 const addMyCommuDB = (nickname, communityId) => {
   // 커뮤니티글 북마크 표시하는 함수
   return function (dispatch) {
-    instance.post(`/community/${communityId}/communityBookmarks`, {
-      nickname: nickname,
-      communityId: communityId,
-    }).then((response) => {
-      dispatch(addMyCommu(response.data));
-    }).catch((err) => {
-      console.error(`부트캠프 커뮤니티글 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .post(`/community/${communityId}/communityBookmarks`, {
+        nickname: nickname,
+        communityId: communityId,
+      })
+      .then((response) => {
+        dispatch(addMyCommu(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 북마크 추가하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const deleteMyCommuDB = (communityId, communityBookmarkId) => {
   // 커뮤니티글 북마크 해제하는 함수
   return function (dispatch) {
-    instance.delete(`/community/${communityId}/communityBookmarks/${communityBookmarkId}`).then((response) => {
-      dispatch(deleteMyCommu(communityBookmarkId));
-    }).catch((err) => {
-      console.error(`부트캠프 커뮤니티글 북마크 해제하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .delete(
+        `/community/${communityId}/communityBookmarks/${communityBookmarkId}`
+      )
+      .then((response) => {
+        dispatch(deleteMyCommu(communityBookmarkId));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 북마크 해제하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const likeCommuDB = (communityId, nickname) => {
   // 커뮤니티글 좋아요 표시하는 함수
   return function (dispatch) {
-    instance.post(`/community/${communityId}/communityLikes`, {
-      communityId: communityId,
-      nickname: nickname,
-    }).then((response) => {
-      dispatch(likeCommu(response.data));
-    }).catch((err) => {
-      console.error(`부트캠프 커뮤니티글 좋아요 표시하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .post(`/community/${communityId}/communityLikes`, {
+        communityId: communityId,
+        nickname: nickname,
+      })
+      .then((response) => {
+        dispatch(likeCommu(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 좋아요 표시하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const unlikeCommuDB = (communityId, communityLikeId) => {
   // 커뮤니티글 좋아요 해제하는 함수
   return function (dispatch) {
-    instance.delete(`/community/${communityId}/communityLikes/${communityLikeId}`).then(
-      dispatch(unlikeCommu(communityId, communityLikeId))
-    ).catch((err) => {
-      console.error(`부트캠프 커뮤니티글 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .delete(`/community/${communityId}/communityLikes/${communityLikeId}`)
+      .then(dispatch(unlikeCommu(communityId, communityLikeId)))
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티글 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
@@ -295,10 +371,15 @@ const setCommentsDB = (commu_id, page) => {
   // 서버로부터 커뮤니티글의 댓글 목록 불러오는 함수(페이징)
   return function (dispatch) {
     instance.get(`/community/${commu_id}/communityComments?page=${page}`).then((response) => {
-      dispatch(setComments(response.data));
-      if (page !== 1 && response.data.length === 0) {
-        window.alert('마지막 댓글입니다.');
-        return;
+      if (page !== 1) {
+        if (response.data.length !== 0) {
+          dispatch(setNextComments(response.data));
+        } else {
+          window.alert('마지막 댓글입니다.');
+          return; 
+        }
+      } else {
+        dispatch(setComments(response.data));
       }
     }).catch((err) => {
       console.error(`부트캠프 커뮤니티 댓글 불러오기 에러 발생: ${err} ### ${err.response}`);
@@ -309,39 +390,57 @@ const setCommentsDB = (commu_id, page) => {
 const addCommentDB = (new_comment) => {
   // 서버에 커뮤니티글의 댓글 저장하는 함수
   return function (dispatch) {
-    instance.post(`/community/${new_comment.communityId}/communityComments`, {
-      content: new_comment.content,
-      nickname: new_comment.nickname,
-      communityId: new_comment.communityId,
-    }).then((response) => {
-      dispatch(addComment(response.data));
-    }).catch((err) => {
-      console.error(`부트캠프 커뮤니티 댓글 작성하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .post(`/community/${new_comment.communityId}/communityComments`, {
+        content: new_comment.content,
+        nickname: new_comment.nickname,
+        communityId: new_comment.communityId,
+      })
+      .then((response) => {
+        dispatch(addComment(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티 댓글 작성하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const editCommentDB = (edited_comment) => {
   // 서버의 커뮤니티 댓글 수정하는 함수
   return function (dispatch) {
-    instance.patch(`community/${edited_comment.communityId}/communityComments/${edited_comment.communityCommentId}`, {
-      content: edited_comment.content}).then((response) => {
-      dispatch(editComment(response.data));
-    }).catch((err) => {
-      console.error(`부트캠프 커뮤니티 댓글 수정하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .patch(
+        `community/${edited_comment.communityId}/communityComments/${edited_comment.communityCommentId}`,
+        {
+          content: edited_comment.content,
+        }
+      )
+      .then((response) => {
+        dispatch(editComment(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티 댓글 수정하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
 const deleteCommentDB = (deleted_comment) => {
   // 서버의 커뮤니티 댓글 삭제하는 함수
   return function (dispatch) {
-    instance.delete(`/community/${deleted_comment.communityId}/communityComments/${deleted_comment.communityCommentId}`
-    ).then(
-        dispatch(deleteComment(deleted_comment.communityCommentId))
-    ).catch((err) => {
-      console.error(`부트캠프 커뮤니티 댓글 삭제하기 에러 발생: ${err} ### ${err.response}`);
-    });
+    instance
+      .delete(
+        `/community/${deleted_comment.communityId}/communityComments/${deleted_comment.communityCommentId}`
+      )
+      .then(dispatch(deleteComment(deleted_comment.communityCommentId)))
+      .catch((err) => {
+        console.error(
+          `부트캠프 커뮤니티 댓글 삭제하기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
   };
 };
 
@@ -397,6 +496,9 @@ export default handleActions({
       draft.commu_like_list.splice(like_idx, 1);
     }),
     [SET_COMMENTS]: (state, action) => produce(state, (draft) => {
+      draft.comment_list = [...action.payload.comment_list];
+    }),
+    [SET_NEXT_COMMENTS]: (state, action) => produce(state, (draft) => {
       draft.comment_list = [...draft.comment_list].concat(action.payload.comment_list);
     }),
     [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
@@ -415,31 +517,28 @@ export default handleActions({
     }),
 }, initialState);
 
-
 // 액션 생성자
 const actionCreators = {
-    setCampsDB,
-    addMyCampDB,
-    setMyCampDB,
-    deleteMyCampDB,
-    setReviewsDB,
-    addReviewDB,
-    setCommusDB,
-    setOneCommuDB,
-    addCommuDB,
-    editCommuDB,
-    deleteCommuDB,
-    setMyCommuDB,
-    addMyCommuDB,
-    deleteMyCommuDB,
-    likeCommuDB,
-    unlikeCommuDB,
-    setCommentsDB,
-    addCommentDB,
-    editCommentDB,
-    deleteCommentDB,
-}
-
-export {
-    actionCreators
+  setCampsDB,
+  addMyCampDB,
+  setMyCampDB,
+  deleteMyCampDB,
+  setReviewsDB,
+  addReviewDB,
+  setCommusDB,
+  setOneCommuDB,
+  addCommuDB,
+  editCommuDB,
+  deleteCommuDB,
+  setMyCommuDB,
+  addMyCommuDB,
+  deleteMyCommuDB,
+  likeCommuDB,
+  unlikeCommuDB,
+  setCommentsDB,
+  addCommentDB,
+  editCommentDB,
+  deleteCommentDB,
 };
+
+export { actionCreators };

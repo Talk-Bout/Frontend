@@ -33,10 +33,7 @@ const Sidebar = (props) => {
             src={url === 'boot' ? Boot_white : Boot}
             onClick={() => history.push('/boot')}
           />
-          <Image
-            src={url === 'question' ? Qna_white : Qna}
-            onClick={() => history.push('/question')}
-          />
+
           {/* <Image
             src={url === 'news' ? News_white : News}
             onClick={() => history.push('/news/list')}
@@ -44,6 +41,10 @@ const Sidebar = (props) => {
           <Image
             src={url === 'common' ? Talk_white : Talk}
             onClick={() => history.push('/common/list')}
+          />
+          <Image
+            src={url === 'question' ? Qna_white : Qna}
+            onClick={() => history.push('/question')}
           />
         </Grid>
       </Grid>

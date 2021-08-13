@@ -5,6 +5,7 @@ import instance from '../../shared/Request';
 
 // QUESTION 액션타입
 const SET_QUESTION = 'question/SET_QUESTION';
+const SET_QUESTION_POP = 'question/SET_QUESTION_POP';
 const SET_ONE_QUESTION = 'question/SET_ONE_QUESTION';
 const CREATE_QUESTION = 'question/CREATE_QUESTION';
 const EDIT_QUESTION = 'question/EDIT_QUESTION';
@@ -28,6 +29,7 @@ const UNLIKE_QUESTION = 'question/UNLIKE_QUESTION';
 const setQuestion = createAction(SET_QUESTION, (question_list) => ({
   question_list,
 }));
+const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({question_list}));
 const setOneQuestion = createAction(SET_ONE_QUESTION, (question) => ({
   question,
 }));
@@ -67,6 +69,7 @@ const unlikeQuestion = createAction(UNLIKE_QUESTION, (like) => ({ like }));
 // 기본값 정하기
 const initialState = {
   list: [],
+  popular_list: [],
   answer_list: [],
   bookmark_list: [],
   like_list: [],
@@ -83,6 +86,16 @@ const setQuestionDB = (page) => {
       .catch((err) => {
         console.error(`모든 질문 불러오기 에러 발생: ${err}`);
       });
+  };
+};
+
+const setQuestionPopDB = () => {
+  // 질문글 인기순 정렬
+  return function (dispatch) {
+    instance.get('/popular/questions').then((response) => {
+    }).catch((err) => {
+      console.error(`질문 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
+    });
   };
 };
 
@@ -331,6 +344,9 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.question_list;
       }),
+    [SET_QUESTION_POP]: (state, action) => produce(state, (draft) => {
+      draft.popular_list = action.payload.question_list;
+    }),
     [SET_ONE_QUESTION]: (state, action) =>
       produce(state, (draft) => {
         draft.list = [action.payload.question.questionDetail];
@@ -401,6 +417,7 @@ export default handleActions(
 // 액션 생성자
 const actionCreators = {
   setQuestionDB,
+  setQuestionPopDB,
   setOneQuestionDB,
   createQuestionDB,
   deleteQuestionDB,

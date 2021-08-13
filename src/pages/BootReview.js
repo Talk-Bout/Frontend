@@ -10,35 +10,30 @@ import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import Stars from '../components/Stars';
+import BootOthers from '../components/BootOthers';
 
 const BootReview = (props) => {
   const dispatch = useDispatch();
 
   // 부트캠프 정보를 props로 받는다.
-  const {bootcampName, desc, review, reviewNumber, star, url, camp_page} = props.location.state.camp;
+  const bootcampName = props.location.pathname.split('/')[2];
   const url_word = props.location.pathname.split('/')[3];
-  const camp = {
-    bootcampName: bootcampName,
-    desc: desc,
-    review: review,
-    reviewNumber: reviewNumber,
-    star: star,
-    url: url,
-    url_word: url_word,
-    camp_page: camp_page,
-  };
+
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const this_camp = camp_list.find((camp) => camp.bootcampName === bootcampName);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
   // 페이지 번호가 바뀔 때마다 리뷰 목록 불러오는 함수 호출
   useEffect(() => {
     dispatch(campActions.setReviewsDB(bootcampName, page));
+    dispatch(campActions.setCampsDB(1));
   }, [page]);
   // 불러오는 3페이지짜리 리뷰 목록
   const all_review = useSelector(state => state.bootcamp.review_list);
-  // 앞 페이지로 가는 함수
   // 1페이지에 보여줄 개수로만 자른 목록
   const review_list = all_review.slice(0, 5);
+  // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);
   }
@@ -47,6 +42,8 @@ const BootReview = (props) => {
     setPage(page + 1);
   }
 
+  const is_login = useSelector(state => state.user.is_login);
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -54,7 +51,7 @@ const BootReview = (props) => {
         <Sidebar />
         {/* 헤더 포함한 바디 */}
         <Body header>
-        <BootRoot camp={camp}/>
+        <BootRoot camp={this_camp} url_word={url_word}/>
           {/* 리뷰 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             <Grid className='contents-postlist' backgroundColor='#202124' width='64%' padding='40px 40px 0 40px'>
@@ -62,7 +59,10 @@ const BootReview = (props) => {
                 {/* 리뷰 페이지 타이틀 */}
                 <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{bootcampName} 리뷰</Text>
                 {/* 리뷰 남기기 버튼 */}
+                {/* 로그인 상태에서만 보여주기 */}
+                {is_login &&
                 <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/review/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
+                }
               </Grid>
               {/* 부트캠프 리뷰 목록 */}
               {review_list && review_list.map((review, idx) => {
@@ -133,23 +133,7 @@ const BootReview = (props) => {
               </Grid>
             </Grid>
             {/* 다른 부트캠프 목록 */}
-            <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='491px' padding='24px'>
-              <Text fontSize='18px' fontWeight='700' color='#e8eaed'>다른 부트캠프</Text>
-              {[1, 2, 3, 4].map((c, idx) => {
-                return (
-                  <Camp key={idx} onClick={() => history.push('/boot/info')}>
-                    {/* 다른 부트캠프 로고 */}
-                    <ImageDiv style={{backgroundImage: `url('https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')`}}/>
-                    <div style={{padding: '29px 16px'}}>
-                      {/* 다른 부트캠프 이름 */}
-                      <Text p className='camp-name' fontSize='18px' fontWeight='700' color='#f1f3f4' margin='0 0 4px'>부트캠프명</Text>
-                      {/* 다른 부트캠프 별점 */}
-                      <Stars score='2.2' size='16px' marginRight='4px' withScore/>
-                    </div>
-                  </Camp>
-                )
-              })}
-            </Grid>
+            <BootOthers />
           </Grid>
         </Body>
       </Grid>
@@ -191,23 +175,6 @@ const PostBoxThird = styled.div`
   width: 80%;
   min-width: 300px;
   padding: 0 0 40px 24px;
-`;
-
-const Camp = styled.div`
-  height: 104px;
-  display: flex;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.7;
-  }
-`;
-
-const ImageDiv = styled.div`
-  height: 72px;
-  width: 72px;
-  border-radius: 36px;
-  margin-top: 16px;
-  background-size: cover;
 `;
 
 const PageBox = styled.div`

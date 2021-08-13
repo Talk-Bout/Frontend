@@ -63,7 +63,6 @@ const BootReviewWrite = (props) => {
       stars: stars,
     };
     dispatch(campActions.addReviewDB(new_review));
-    
   };
 
   return (
@@ -91,8 +90,8 @@ const BootReviewWrite = (props) => {
                 </Grid>
               </Grid>
               <BodyBox>
-                {/* 총 평점 */}
-                <div style={{lineHeight: '32px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>총 평점</Text></div>
+                {/* 평점 */}
+                <div style={{lineHeight: '32px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>평점</Text></div>
                 <div style={{lineHeight: '32px'}}><Text fontSize='32px' fontWeight='700'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#dadce0' emptyStarColor='#3c4043'/></Text></div>
                 {/* 수료 여부 */}
                 <div style={{marginTop: '-8px', lineHeight: '52px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>수료 여부</Text></div>
@@ -106,12 +105,12 @@ const BootReviewWrite = (props) => {
                 {/* 리뷰 제목 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed' lineHeight='50px'>제목</Text></div>
                 <div><Input placeholder='제목을 입력해주세요' ref={titleInput}/></div>
-                {/* 부트캠프의 장점 */}
-                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>부트캠프의 장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder='부트캠프의 장점을 입력해주세요.&#13;&#10;리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.' ref={prosInput}/></div>
-                {/* 부트캠프의 단점 */}
-                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>부트캠프의 단점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder='부트캠프의 단점을 입력해주세요.&#13;&#10;리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.' ref={consInput}/></div>
+                {/* 장점 */}
+                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
+                <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput}/></div>
+                {/* 단점 */}
+                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>단점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
+                <div><Textarea rows='5' placeholder={`${camp_name}의 단점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={consInput}/></div>
               </BodyBox>
             </Window>
           </Grid>

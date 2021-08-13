@@ -16,7 +16,7 @@ const MainBoot = (props) => {
             {/* 100% 리얼 실제 리뷰 */}
             <Text fontSize='14px' color='#BDC1C6'>100% 리얼 실제 리뷰</Text>
             {/* 부트캠프 더보기 버튼 */}
-            <Text fontSize='14px' color='#BDC1C6' cursor='pointer'>부트캠프 더보기 &gt;</Text>
+            <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/boot')}>부트캠프 더보기 &gt;</Text>
           </TextBox>
           {/* 부트캠프 목록 */}
           <CardList>

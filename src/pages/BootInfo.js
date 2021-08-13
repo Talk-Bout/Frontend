@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
 import Sidebar from '../components/Sidebar';
@@ -6,22 +6,22 @@ import Body from '../components/Body';
 import BootRoot from '../components/BootRoot';
 import Stars from '../components/Stars';
 import { history } from '../redux/ConfigureStore';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
+import BootOthers from '../components/BootOthers';
 
 const BootInfo = (props) => {
+  const dispatch = useDispatch();
   // 부트캠프 정보를 props로 받는다.
-  const {bootcampName, desc, review, reviewNumber, star, url} = props.location.state.camp;
-  const camp_page = props.location.state.camp_page;
+  const bootcampName = props.location.pathname.split('/')[2];
   const url_word = props.location.pathname.split('/')[3];
-  const camp = {
-    bootcampName: bootcampName,
-    desc: desc,
-    review: review,
-    reviewNumber: reviewNumber,
-    star: star,
-    url: url,
-    url_word: url_word,
-    camp_page: camp_page,
-  };
+
+  useEffect(() => {
+    dispatch(campActions.setCampsDB(1));
+  }, []);
+
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const this_camp = camp_list.find((camp) => camp.bootcampName === bootcampName);
 
   return (
     <React.Fragment>
@@ -30,7 +30,7 @@ const BootInfo = (props) => {
         <Sidebar />
         {/* 헤더 포함한 바디 */}
         <Body header>
-          <BootRoot camp={camp}/>
+          <BootRoot camp={this_camp} url_word={url_word}/>
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             {/* 부트캠프 정보 */}
             <Grid className='contents-info' backgroundColor='#202124' width='64%' padding='40px'>
@@ -63,23 +63,7 @@ const BootInfo = (props) => {
               </InfoList>
             </Grid>
             {/* 다른 부트캠프 목록 */}
-            <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='491px' padding='24px'>
-              <Text fontSize='18px' fontWeight='700' color='#e8eaed'>다른 부트캠프</Text>
-              {[1, 2, 3, 4].map((c, idx) => {
-                return (
-                  <Camp key={idx} onClick={() => history.push(`/boot/${bootcampName}/info`)}>
-                    {/* 다른 부트캠프 로고 */}
-                    <ImageDiv style={{backgroundImage: `url('https://images.unsplash.com/photo-1534950947221-dcaca2836ce8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80')`}}/>
-                    <div style={{padding: '29px 16px'}}>
-                      {/* 다른 부트캠프 이름 */}
-                      <Text p className='camp-name' fontSize='18px' fontWeight='700' color='#f1f3f4' margin='0 0 4px'>부트캠프명</Text>
-                      {/* 다른 부트캠프 별점 */}
-                      <Stars score='2.2' size='16px' marginRight='4px' withScore/>
-                    </div>
-                  </Camp>
-                )
-              })}
-            </Grid>
+            <BootOthers />
           </Grid>
         </Body>
       </Grid>

@@ -20,7 +20,6 @@ import {
 } from 'react-icons/bs';
 import profile_medium from '../image/profile_medium.png';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import { AiOutlineConsoleSql } from 'react-icons/ai';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
@@ -53,18 +52,18 @@ const QuestionDetail = (props) => {
   );
 
   // 질문 좋아요 목록
-  const question_like_list = useSelector((state) => state.question.like_list);
+  const question_like_list = useSelector(
+    (state) => state.question.question_like_list
+  );
   console.log(question_like_list);
   const question_like = question_like_list.find(
     (like) => like.nickname == user_name
   );
   console.log(question_like);
-  //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
+  // 콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
-    if (!question_found) {
-      dispatch(questionActions.setOneQuestionDB(question_id));
-    }
+    dispatch(questionActions.setOneQuestionDB(question_id));
     dispatch(questionActions.setAnswerDB(question_id, 1));
     dispatch(questionActions.setQuestionBookmarkDB());
   }, []);
@@ -138,8 +137,9 @@ const QuestionDetail = (props) => {
     dispatch(questionActions.likeQuestionDB(question_id, user_name));
   };
 
-  const unlikeQuestion = () => {
-    dispatch(questionActions.unlikeQuestionDB());
+  const unlikeQuestion = (questionLikeId) => {
+    console.log(questionLikeId);
+    dispatch(questionActions.unlikeQuestionDB(question_id, questionLikeId));
   };
 
   return (
@@ -302,14 +302,23 @@ const QuestionDetail = (props) => {
 
               {/* 좋아요/ 댓글수/ 조회수 */}
               <Grid display="flex" margin="3% 0%" vertical-align="center">
-                <LikeCommentBtn onClick={() => likeQuestion()}>
-                  <BiLike />
-                  {question_found.questionLike.length}
-                </LikeCommentBtn>
-
-                {/* <LikeCommentBtn onClick={() => likeQuestion()}>
-                    <BiLike />0
-                  </LikeCommentBtn> */}
+                {question_like ? (
+                  <LikeCommentBtn
+                    onClick={() => unlikeQuestion(question_like.questionLikeId)}
+                  >
+                    <BiLike color="#7879f1" />
+                    <Text margin="2px" color="#7879f1">
+                      {question_like_list.length}
+                    </Text>
+                  </LikeCommentBtn>
+                ) : (
+                  <LikeCommentBtn onClick={() => likeQuestion()}>
+                    <BiLike />
+                    <Text margin="2px" color="#C4C4C4">
+                      {question_like_list.length}
+                    </Text>
+                  </LikeCommentBtn>
+                )}
 
                 <Text color="#C4C4C4" margin="auto 1%">
                   <BiComment /> {all_answer.length}

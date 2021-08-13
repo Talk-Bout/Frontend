@@ -26,6 +26,7 @@ const setMyTalkDB = (username) => {
     },{headers: headers})
     .then((response) => {
       dispatch(setMyTalk(response.data));
+      console.log(response.data);
   })
   .catch((err) => {
       console.log(`마이페이지 부트톡톡 북마크 불러오기 에러 발생: ${err}`);
@@ -41,7 +42,6 @@ const setMyBootDB = (nickname) => {
       nickname: nickname,
     },{headers: headers})
     .then((response) => {
-      console.log(response);
       console.log(response.data);
       dispatch(setMYboot(response.data));
   })

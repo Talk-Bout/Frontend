@@ -16,11 +16,16 @@ import {actionCreators as mypageActions} from '../redux/modules/mypage';
 const Mypage = (props) => {
   const dispatch = useDispatch();
   const nickname = useSelector((state) => state.user.user.nickname);
-  const mytalk_list = useSelector((state) => state.mypage.mytalk_list);
+  const all_mytalk = useSelector((state) => state.mypage.mytalk_list);
+  console.log(all_mytalk);
+  const mytalk_list = all_mytalk.filter((talk) => talk.post !== null);
+  console.log(mytalk_list);
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
-
+  
+  
   // mypost 3개 추출
   const mytalk = mytalk_list.slice(0,3);
+  console.log(mytalk);
 
   // 부트캠프, 부트톡톡 북마크
   useEffect(()  => {
@@ -73,7 +78,7 @@ const Mypage = (props) => {
           <Grid height="100%" width="73%" >
             <Grid height="100%" width="100%" >
               <Grid height="172px" width="100%" >
-                <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="100%">
+                <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
                    <Text fontSize="18px" color="#F1F3F4">관심있는 부트캠프</Text>
                     <Count> (5) </Count>
@@ -92,7 +97,7 @@ const Mypage = (props) => {
                 <Grid display="flex" margin="12px 0" justify_content="space-between" height="65%" width="100%">
                 {myboot_list.map((b, idx) => {
               return (
-                  <Grid display="flex" padding="0 1.5%" height="96px" width="32%" backgroundColor="#202124"  borderRadius="5px">
+                  <Grid margin="0 16px 0 0" display="flex" padding="0 1.5%" height="96px" width="32%" backgroundColor="#202124"  borderRadius="5px">
                     <ImageBox>
                      <Image shape="CircleLogo"/>
                     </ImageBox>
@@ -110,49 +115,52 @@ const Mypage = (props) => {
                 </Grid>
               </Grid>
               <Grid height="287px" width="100%" margin="48px 0 0 0" >
-              <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="100%">
+              <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
                    <Text fontSize="18px" color="#F1F3F4">내 북마크</Text>
                     <Count> (5) </Count>
                   </BookMarkBox>
                   <Button color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%">더보기 <AiOutlineRight/></Button>   
                 </Grid>
-                {/* 게시글이 없을 경우
-                <Grid margin="12px 0 0 0" height="211px" width="100%">
-                  <Grid display="flex" align_items="center" text_align="center" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
-                    <Text fontSize="18px" color="#FFFFFF" >북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
-                  </Grid>
-                </Grid> */}
-                {/* 게시글이 있을 경우 */}
-                <Grid display="flex" margin="12px 0" justify_content="space-between" height="211px" width="100%">
+                {/* 부트톡톡 북마크가 있을 경우에만 보여줌 */}
+                {mytalk_list ?
+                <Grid display="flex" margin="12px 0" height="211px" width="100%">
                 {mytalk.map((n, idx) => {
+                  
               return (
-                  <Grid padding="0 1.5%" height="211px" width="32%" backgroundColor="#202124" borderRadius="5px">
+                  <Grid margin="0 16px 0 0" padding="0 1.5%" height="211px" width="32%" backgroundColor="#202124" borderRadius="5px">
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
-                      <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">부트톡톡</Text>
-                      <Text p margin="2% 0 0 0" color="#F1F3F4" fontSize="14px">온라인 부트캠프라서 공간적 제약이 없고 소득공유 결제 모델이 있어서 당장 지금..</Text>
+                      <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">{n.post.title}</Text>
+                      <Text p margin="2% 0 0 0" color="#F1F3F4" fontSize="14px">{n.post.content}</Text>
                     </Grid>
                     <Grid display="flex" height="19%" width="100%" >
                       <ImgBox>
                       <img src={Profile} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
-                        <Text p margin="0 3% 0 0" color="#BDC1C6" fontSize="12px">username</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/> 2021.07.25</Text>
+                        <Text p margin="0 3% 0 0" color="#BDC1C6" fontSize="12px">{n.post.nickname}</Text>
+                        <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{n.post.createdAt}</Text>
                       </InfoBox>
                     </Grid>
                     <hr/>
                     <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
-                      <Text p margin="0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> 정보게시판</Text>
+                      <Text p margin="0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> {n.post.category}</Text>
                       <Text cursor="pointer" color="#7879F1" fontSize="14px"><BsBookmarkFill/></Text>
                     </Grid>
                   </Grid>
                );
               })}
                 </Grid>
+                :
+                <Grid margin="12px 0 0 0" height="211px" width="100%">
+                  <Grid display="flex" align_items="center" text_align="center" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
+                    <Text fontSize="18px" color="#FFFFFF" >북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
+                  </Grid>
+                </Grid>
+                }
               </Grid>
               <Grid height="279px" width="100%" margin="48px 0 0 0">
-              <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="100%">
+              <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
                    <Text fontSize="18px" color="#F1F3F4">내가 쓴 글</Text>
                     <Count> (5) </Count>
@@ -168,10 +176,10 @@ const Mypage = (props) => {
                   </Grid>
                 </Grid> */}
                 {/* 게시글이 있을 경우 */}
-                <Grid display="flex" margin="12px 0" justify_content="space-between" height="211px" width="100%">
+                <Grid display="flex" margin="12px 0" height="211px" width="100%">
                 {[1, 2, 3].map((p, idx) => {
               return (
-                  <Grid padding="0 1.5%" height="203px" width="32%" backgroundColor="#202124" borderRadius="5px">
+                  <Grid margin="0 16px 0 0" padding="0 1.5%" height="203px" width="32%" backgroundColor="#202124" borderRadius="5px">
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
                       <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">부트톡톡</Text>
                       <Text p margin="2% 0 0 0" color="#F1F3F4" fontSize="14px">온라인 부트캠프라서 공간적 제약이 없고 소득공유 결제 모델이 있어서 당장 지금..</Text>

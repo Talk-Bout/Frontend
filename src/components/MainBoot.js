@@ -5,17 +5,17 @@ import Stars from '../components/Stars';
 import {history} from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
+import CampImg from '../image/bootcamp_default.png';
 
 const MainBoot = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(campActions.setCampsDB(1));
+    dispatch(campActions.mainCampsDB());
   }, []);
 
-  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const camp_list = useSelector(state => state.bootcamp.main_camp_list);
   const pop_camps = camp_list.slice(0, 6);
-  console.log(pop_camps);
 
   return (
     <React.Fragment>
@@ -42,48 +42,26 @@ const MainBoot = (props) => {
                   {/* 부트캠프 로고 */}
                   <Grid width="104px" padding="22px 0 0 24px">
                     <ImageDiv>
-                      <Text fontSize="14px" color="#F8F9FA">
-                        LOGO
-                      </Text>
+                      <Logo src={pc.logo ? `http://13.209.12.149${pc.logo}` : CampImg}/>
                     </ImageDiv>
                   </Grid>
                   {/* 부트캠프 정보 */}
-                  <Grid width="304px" padding="22px 24px">
-                    <Grid
-                      cursor="pointer"
-                      _onClick={() => history.push('/boot/info')}
-                    >
+                  <Grid width="304px" padding='22px 24px'>
+                    <Grid cursor='pointer' _onClick={() => history.push(`/boot/${pc.bootcampName}/info`)}>
                       {/* 부트캠프 이름 */}
-                      <Text
-                        p
-                        fontSize="18px"
-                        fontWeight="700"
-                        margin="0"
-                        color="#F8F9FA"
-                      >
-                        부트캠프명
+                      <Text p fontSize="18px" fontWeight="700" margin="0" color='#F8F9FA'>
+                        {pc.bootcampName}
                       </Text>
                       {/* 부트캠프 별점 */}
-                      <Stars size="16px" score="2.2" withScore />
+                      <Stars size='16px' score={pc.star} withScore />
                     </Grid>
                     <Grid display="flex" padding="13px 0 0">
                       {/* 부트캠프 리뷰 메뉴 */}
-                      <Text
-                        fontSize="14px"
-                        color="#E8EAED"
-                        margin="0 16px 0 0"
-                        cursor="pointer"
-                        _onClick={() => history.push('/boot/review')}
-                      >
+                      <Text fontSize="14px" color="#E8EAED" margin='0 16px 0 0' cursor='pointer' _onClick={() => history.push(`/boot/${pc.bootcampName}/review`)}>
                         리뷰
                       </Text>
                       {/* 부트캠프 커뮤니티 메뉴 */}
-                      <Text
-                        fontSize="14px"
-                        color="#E8EAED"
-                        cursor="pointer"
-                        _onClick={() => history.push('/boot/community')}
-                      >
+                      <Text fontSize="14px" color="#E8EAED" cursor='pointer' _onClick={() => history.push(`/boot/${pc.bootcampName}/community`)}>
                         커뮤니티
                       </Text>
                     </Grid>
@@ -134,6 +112,13 @@ const ImageDiv = styled.div`
   border-radius: 50%;
   text-align: center;
   line-height: 80px;
+`;
+
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
+  size: cover;
+  border-radius: 50%;
 `;
 
 export default MainBoot;

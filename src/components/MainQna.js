@@ -12,17 +12,12 @@ const MainQna = (props) => {
     <React.Fragment>
       <Grid className="top-boot" height="fit-content" padding="49px 0 16px">
         {/* 인기 Q&A */}
-        <Text fontSize="24px" fontWeight="700" color="#F8F9FA">
-          {' '}
-          🔥 인기 질문과 답변
-        </Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>🔥질문과 답변</Text>
         <TextBox>
           {/* 부트캠퍼들이 가장 궁금했던 것들 */}
-          <Text fontSize="14px" color="#BDC1C6">
-            부트캠퍼들이 가장 궁금했던 것들
-          </Text>
+          <Text fontSize='14px' color='#BDC1C6'>질문과 답변 = (question) =&gt; &#123; return answer &#125;</Text>
           {/* Q&A 더보기 버튼 */}
-          <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>Q&A 더보기 &gt;</Text>
+          <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>질문과 답변 더보기 &gt;</Text>
         </TextBox>
         {/* Q&A 목록 */}
         <CardList>

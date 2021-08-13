@@ -4,6 +4,7 @@ import instance from '../../shared/Request';
 
 // 액션타입
 const SET_POST = 'post/SET_POST'; // 게시글 전체 불러오기
+const SET_POST_POP = 'post/SET_POST_POP' // 게시글 전체 불러오기(인기순)                 <-- 추가했습니다!!
 const SET_ONE_POST = 'post/SET_ONE_POST'; // 게시글 하나 불러오기
 const ADD_POST = 'post/ADD_POST'; // 게시글 추가하기
 const EDIT_POST = 'post/EDIT_POST'; // 게시글 수정하기
@@ -19,6 +20,7 @@ const UNLIKE_POST = 'post/UNLIKE_POST' // 좋아요 해제하기
 // 액션생성함수
 // 게시물
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
+const setPostPop = createAction(SET_POST_POP, (post_list) => ({post_list}));          // <-- 추가했습니다!!!
 const setOnePost = createAction(SET_ONE_POST, (post) => ({ post }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const editPost = createAction(EDIT_POST, (post) => ({ post }));
@@ -34,10 +36,10 @@ const unlikePost = createAction(UNLIKE_POST, (unlike_post) => ({unlike_post}));
 // 기본값 정하기
 const initialState = {
   list: [],
+  pop_list: [],                                                                       // <-- 추가했습니다!!!
   one_post: [],
   my_bookmark_list: [],
   my_like_list: [],
-  
 };
 
 // 액션함수
@@ -53,6 +55,17 @@ const setPostDB = (page, category) => {
       .catch((err) => {
         console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
       });
+  };
+};
+
+const setPostPopDB = (page) => {                                                      // <-- 추가했습니다!!!
+  // 전체 게시글 인기순 불러오는 함수
+  return function (dispatch) {
+    instance.get(`/popular/posts?page=${page}`).then((response) => {
+      dispatch(setPostPop(response.data));
+    }).catch((err) => {
+      console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
+    });
   };
 };
 
@@ -78,12 +91,14 @@ const addPostDB = (new_post) => {
     const content = new_post.content;
     const nickname = new_post.nickname;
     const category = new_post.category;
+    const image = new_post.image;
     instance
       .post('/posts', {
         title: title,
         content: content,
         nickname: nickname,
         category: category,
+        image: image,
       })
       .then((response) => {
         // console.log(response.data);
@@ -103,6 +118,7 @@ const editPostDB = (edited_post) => {
     const postId = parseInt(edited_post.postId);
     const category = edited_post.category;
     const nickname = edited_post.nickname;
+    const image = edited_post.image;
     // console.log(edited_post);
     instance
       .patch(`/posts/${postId}`, {
@@ -111,6 +127,7 @@ const editPostDB = (edited_post) => {
         postId: postId,
         category: category,
         nickname: nickname,
+        image: image,
       })
       .then((response) => {
         const  data = {
@@ -119,6 +136,7 @@ const editPostDB = (edited_post) => {
           postId: postId,
           category: category,
           nickname: nickname,
+          image: image,
         }
         // console.log(response.data);
         dispatch(editPost(data));
@@ -221,6 +239,9 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.post_list;
       }),
+    [SET_POST_POP]: (state, action) => produce(state, (draft) => {                                        // <-- 추가했습니다!!!!
+      draft.pop_list = action.payload.post_list;
+    }),
     [SET_ONE_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.one_post = action.payload.post;
@@ -246,8 +267,7 @@ export default handleActions(
     }),
     [SET_BOOKMARK]: (state, action) => produce(state, (draft) => {
       draft.my_bookmark_list = action.payload.bookmark_list;
-    }
-    ),
+    }),
     [ADD_BOOKMARK]: (state, action) => produce(state, (draft) => {
       draft.my_bookmark_list.unshift(action.payload.bookmark);
     }),
@@ -273,6 +293,7 @@ export default handleActions(
 // 액션 생성자
 const actionCreators = {
   setPostDB,
+  setPostPopDB,                                                                               // <--- 추가했습니다!!!
   setOnePostDB,
   addPostDB,
   editPostDB,

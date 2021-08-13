@@ -10,6 +10,7 @@ import instance from '../../shared/Request';
 
 // 액션타입
 const SET_COMMENT = 'comment/SET_COMMENT';         // 댓글 불러오기
+const SET_NEXT_COMMENT = 'comment/SET_NEXT_COMMENT';    // 댓글 더보기
 const ADD_COMMENT = 'comment/ADD_COMMENT';         // 댓글 추가하기
 const EDIT_COMMENT = 'comment/EDIT_COMMENT';       // 댓글 수정하기
 const DELETE_COMMENT = 'comment/DELETE_COMMENT';   // 댓글 삭제하기
@@ -17,6 +18,7 @@ const IS_EDIT = 'IS_EDIT';
 
 // 액션생성함수
 const setComment = createAction(SET_COMMENT, (comment_list) => ({comment_list}));
+const setNextComment = createAction(SET_NEXT_COMMENT, (comment_list) => ({comment_list}));
 const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
 const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
@@ -24,7 +26,7 @@ const isEdit = createAction(IS_EDIT, (is_edit) => ({is_edit}));
 
 // 기본값 정하기
 const initialState = {
-  list: [],
+    list: [],
   is_edit: false,
 };
 
@@ -35,11 +37,16 @@ return function (dispatch) {
   instance.get(`/posts/${postId}/postComments?page=${page}`, {
   })
   .then((response) => {
-        dispatch(setComment(response.data));
-        if (page !== 1 && response.data.length === 0) {
-            window.alert('마지막 댓글입니다.');
-            return;
-          }
+        if (page !== 1){
+            if (response.data.length !== 0) {
+                dispatch(setNextComment(response.data));
+              } else {
+                window.alert('마지막 댓글입니다.');
+                return;
+              }
+        } else {
+            dispatch(setComment(response.data));
+        }
         // console.log(setComment(response.data));
     })
     .catch((err) => {
@@ -102,11 +109,15 @@ instance.delete(`/posts/${postId}/postComments/${postCommentId}`
 // 리듀서
 export default handleActions({
 [SET_COMMENT]: (state, action) => produce(state, (draft) => {
+    draft.list = [...action.payload.comment_list];
+}),
+[SET_NEXT_COMMENT] : (state, action) => produce(state, (draft) => {
     draft.list = [...draft.list].concat(action.payload.comment_list);
 }),
 
 [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
     draft.list.unshift(action.payload.comment);
+    console.log(action.payload.comment);
 }),
 
 [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {

@@ -11,9 +11,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 const CommonPostList = (props) => {
 
   const common_list = useSelector(state => state.post.list);
-  const comment_list = useSelector(state => state.comment.comment_list);
-  console.log(comment_list);
-
   return (
     <React.Fragment>
       <Content common_list={common_list} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}

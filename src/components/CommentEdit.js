@@ -12,6 +12,7 @@ const CommentEdit = (props) => {
   const {postCommentId, content, postId} = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
+  console.log(content);
   // 현재 접속 중인 사용자 닉네임
   const username = useSelector(state => state.user.user.nickname);
 
@@ -59,12 +60,11 @@ return (
     <Grid display="flex" width="100%" height="20%">
     <EditInput
     defaultValue={commentValue} onChange={(e) => setCommentValue(e.target.value)} />
-    
     <EditButton onClick={() => (editComment())}>수정완료</EditButton>
     <CancelButton onClick={() => (setIsEditMode(false))}>취소</CancelButton>
     </Grid>
   ):(
-    <Text p margin="0% 1%" fontSize="16px" color="#BDC1C6" fontWeight="bold"> {commentValue}</Text>
+    <Text p margin="0% 1%" fontSize="16px" color="#BDC1C6" fontWeight="bold"> {content}</Text>
     )} 
     </Grid>
     
@@ -79,7 +79,7 @@ return (
 )
 };
 
-const EditInput = styled.textarea`
+const EditInput = styled.input`
 outline: none;
 color: #F1F3F4;
 border: 1px solid #9AA0A6;
@@ -88,7 +88,7 @@ font-size: 1.3vh;
 border-radius: 5px;
 margin-left: 15px;
 overflow: auto;
-height: 54px;
+height: 30px;
 width: 91%;
 
 `;
@@ -110,7 +110,7 @@ height: 16px;
 
 const CancelButton = styled.button`
 width: 38px;
-height: 60px;
+height: 40px;
 background: #2E3134;
 border-radius: 8px;
 font-weight: bold;
@@ -124,7 +124,7 @@ margin: 0 0 0 5px;
 
 const EditButton = styled.button`
 width: 82px;
-height: 60px;
+height: 40px;
 background: #7879F1;
 border-radius: 8px;
 font-weight: bold;
@@ -134,16 +134,5 @@ color: #121212;
 margin: 0 0 0 8px;
 `;
 
-const MoreBtn = styled.button`
-  width: 100%;
-  padding: 23px 0;
-  margin: 0 0 64px;
-  background-color: #282A2D;
-  border: none;
-  cursor: pointer;
-  &:active {
-    opacity: 0.7;
-  }
-`;
 
 export default CommentEdit;

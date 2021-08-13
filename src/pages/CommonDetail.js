@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions} from "../redux/modules/post";
-import { actionCreators as commentActions} from "../redux/modules/comment";
 
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -113,10 +112,9 @@ const CommonDetail = (props) => {
           <Grid display="flex" width="100%">
             <Grid width="70%" height="98vh">
               {/* 게시물 */}
-              <Grid width="100%" height="45vh" >
-                <Grid width="100%" height="45%" >
-                  <Grid width="100%" height="100%" >
-                    <Grid padding="2% 0" width="100%" height="15%">
+              <Grid width="100%" height="50%" >
+                <Grid width="100%" height="27%">
+                    <Grid width="100%" height="15%" >
                       <Text
                         fontSize="14px"
                         lineHeight="18px"
@@ -158,7 +156,7 @@ const CommonDetail = (props) => {
                       {/* 북마크 버튼 */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
                     {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
-                      <Grid display="flex" width="14%" height="100%">
+                      <Grid display="flex" width="14%" height="100%" >
                         
                       {post_bookmark ? (
                         <>
@@ -169,7 +167,7 @@ const CommonDetail = (props) => {
                         >
                             <Text
                               padding="0"
-                              color="#9aa0a6"
+                              color="#7879F1"
                               fontSize="24px"
                               lineHeight="35px"
                               vertical_align="middle"
@@ -266,12 +264,11 @@ const CommonDetail = (props) => {
                         
                       </Grid>
                     </Grid>
-                    <Grid width="100%" height="50%">
-                      <Grid display="flex" width="100%" height="100%">
-                        <Grid width="4.5%" height="80%">
+                    <Grid display="flex" width="100%" height="40px">
+                        <Grid width="4.5%" height="40px">
                           <img src={Profile} alt="프로필" />
                         </Grid>
-                        <Grid width="30%" height="80%">
+                        <Grid width="30%" height="40px" >
                           <Text
                             p
                             margin="0 6px"
@@ -292,25 +289,23 @@ const CommonDetail = (props) => {
                             {one_post.createdAt}
                           </Text>
                         </Grid>
-                        <Grid width="63.5%" height="80%"></Grid>
-                      </Grid>
                     </Grid>
-                  </Grid>
                 </Grid>
                 {/* 게시물 본문 */}
-                <Grid width="70%" height="41%">
+                <Grid width="90%" height="58%" >
                   <Grid padding="0 1% 2% 1%">
-                    <Text
-                      fontSize="16px"
+                    {/* 이미지가 있을 경우 내용 위에 보여주기 */}
+                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image}`}/></ImageBox> : ''}
+                <Text p fontSize="16px"
                       lineHeight="24px"
                       color="#DADCE0"
                       style={{ wordBreak: 'break-all' }}
-                    >
-                      {one_post.content}
-                    </Text>
+                     margin={one_post.image ? '' : '32px 0 0'}>{one_post.content}</Text>
                   </Grid>
                 </Grid>
                 <Grid width="100%" height="100%">
+                  {/* 좋아요 버튼 */}
+                  {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}
                   {like_find ?
                   <span>
                   <UnlikeButton 
@@ -334,7 +329,7 @@ const CommonDetail = (props) => {
                     color="#DADCE0"
                     width="10%"
                     height="100%"
-                    fontSize="14px"
+                    fontSize="16px"
                     lineHeight="18px"
                   >
                     <BiComment /> &nbsp; 15
@@ -344,7 +339,7 @@ const CommonDetail = (props) => {
                     color="#DADCE0"
                     width="10%"
                     height="100%"
-                    fontSize="14px"
+                    fontSize="16px"
                     lineHeight="18px"
                   >
                     <AiOutlineEye /> {one_post.viewCount}
@@ -371,7 +366,7 @@ const CommonDetail = (props) => {
 const LikeButton = styled.button`
   width: 69px;
   height: 40px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 18px;
   background-color: transparent;
   border-radius: 12px;
@@ -387,7 +382,7 @@ const LikeButton = styled.button`
 const UnlikeButton = styled.button`
 width: 69px;
   height: 40px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 18px;
   background-color: #282a2d;
   border-radius: 12px;
@@ -396,5 +391,21 @@ width: 69px;
   color: #7879f1;
 `;
 
+const ImageBox = styled.div`
+  width: 70%;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 32px auto;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  object-fit: contain;
+`;
 
 export default CommonDetail;

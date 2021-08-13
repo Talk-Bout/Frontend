@@ -12,7 +12,7 @@ const MainTalk = (props) => {
     <React.Fragment>
       <Grid className='top-boot' margin='48px 0'>
         {/* 인기 부트톡톡 */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>인기 부트톡톡</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>📣부트톡톡</Text>
         <TextBox>
           {/* 부트캠퍼들이 가장 많이 추천한 게시물 */}
           <Text fontSize='14px' color='#BDC1C6'>부트캠퍼들이 가장 많이 추천한  게시물</Text>

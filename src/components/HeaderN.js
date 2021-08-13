@@ -69,7 +69,7 @@ const HeaderN = (props) => {
               <BsFillBookmarkFill />
             </Text>
             {/* 알림 메뉴 */}
-            <Text
+            {/* <Text
               color="#5F6368"
               fontSize="18px"
               vertical_align="middle"
@@ -77,7 +77,7 @@ const HeaderN = (props) => {
               cursor="pointer"
             >
               <BsFillBellFill />
-            </Text>
+            </Text> */}
             {/* 프로필 이미지 */}
             <ProfileImg src={Profile} alt="프로필"/>
             {/* 드롭다운 메뉴 */}

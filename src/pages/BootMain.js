@@ -121,11 +121,11 @@ const ImageDiv = styled.div`
   height: 86px;
 `;
 
-const Logo = styled.img`
-  width: 100%;
-  height: 100%;
-  size: contain;
-`;
+// const Logo = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   size: contain;
+// `;
 
 const PageBox = styled.div`
   display: inline-block;

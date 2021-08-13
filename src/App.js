@@ -47,6 +47,7 @@ import MypagePost from './pages/MypagePost';
 // import MyPageEdit from './pages/MyPageEdit';
 import DeleteUser from './pages/DeleteUser';
 import PageEdit from './pages/PageEdit';
+import MypageBookmarks from './pages/MypageBookmarks';
 
 function App() {
   const dispatch = useDispatch();
@@ -82,6 +83,7 @@ function App() {
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/mypost" exact component={MypagePost} />
+          <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route path="/mypage/edit" exact component={PageEdit} />
           <Route render={(props) => <NotFound history={props.history} />} />

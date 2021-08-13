@@ -41,10 +41,8 @@ const Comment = (props) => {
   
   // 서버에서 불러온 댓글 목록
   const all_comment = useSelector(state => state.comment.list);
-  console.log(all_comment);
   // 이 커뮤니티글의 댓글이 맞는지 재확인
   const comment_check = all_comment.filter((comment) => comment.postId === postId);
-  console.log(comment_check);
   // 댓글 페이지네이션
   const [next_page, setNextPage] = useState(2);
   

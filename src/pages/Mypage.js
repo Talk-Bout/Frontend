@@ -17,13 +17,6 @@ const Mypage = (props) => {
   const dispatch = useDispatch();
   const nickname = useSelector((state) => state.user.user.nickname);
 
-  // 내 북마크 리스트
-  const all_mytalk = useSelector((state) => state.mypage.mytalk_list);
-  // 삭제된 post의 경우 안띄워줌
-  const mytalk_list = all_mytalk.filter((talk) => talk.post !== null);
-  // 내 북마크 3개 추출
-  const mytalk = mytalk_list.slice(0,3);
-
   // 관심있는 부트캠프
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
   // 관심있는 부트캠프 3개 추출
@@ -35,13 +28,37 @@ const Mypage = (props) => {
   const mypost_list = all_post.filter((posts) => posts.post !== null);
   // 내가쓴글 3개 추출
   const mypost = mypost_list.slice(0,3);
+
+  // 부트톡톡 북마크 리스트
+  const all_mytalk = useSelector((state) => state.mypage.mytalk_list);
+  // 삭제된 post의 경우 안띄워줌
+  const mytalk_list = all_mytalk.filter((talk) => talk.post !== null);
+  // 부트톡톡 북마크 3개 추출
+  const mytalk = mytalk_list.slice(0,3);
+
+  // 질문과 답변 리스트
+  const all_qna = useSelector((state) => state.mypage.myqna_list);
+  // 삭제된 qna의 경우 안띄워줌
+  const myqna_list = all_qna.filter((qnas) => qnas.post !== null);
+  // 질문과답변 3개 추출
+  const myqna = myqna_list.slice(0,3);
+
+  // 커뮤니티 리스트
+  const all_commu = useSelector((state) => state.mypage.mycommu_list);
+  // 삭제된 commu의 경우 안띄워줌
+  const mycommu_list = all_commu.filter((commu) => commu.post !== null);
+  // 커뮤니티 3개 추출
+  const mycommu = mycommu_list.slice(0,3);
   
 
   // 부트캠프, 부트톡톡 북마크
   useEffect(()  => {
-    dispatch(mypageActions.setMyTalkDB(nickname));
     dispatch(mypageActions.setMyBootDB(nickname));
     dispatch(mypageActions.setMypostDB(nickname));
+    dispatch(mypageActions.setMyTalkDB(nickname));
+    dispatch(mypageActions.setMyQnaDB(nickname));
+    dispatch(mypageActions.setMyCommuDB(nickname));
+
   }, []);
   
   return (
@@ -75,20 +92,20 @@ const Mypage = (props) => {
                 <Text p color="#5F6368" text_align="center" margin="0" fontSize="14px">sparta@coding.kr</Text>
               </Grid> */}
               {/* 인증 안됐을 때 */}
-              <Grid height="30%" margin="auto">
+              {/* <Grid height="30%" margin="auto">
                 <TextBox>
                   <Button _onClick={() => history.push('/mypage/edit')}
                   margin="0 7% 0 0" font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">정보 수정</Button>
                   <Button font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">부트캠프 인증하기</Button>
                 </TextBox>
-              </Grid>
+              </Grid> */}
               {/* 인증 됐을 때 */}
-              {/* <Grid height="30%" margin="auto">
+              <Grid height="30%" margin="auto">
                 <TextBox>
                   <Button _onClick={() => history.push('/mypage/edit')}
                    font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">정보 수정</Button>
                 </TextBox>
-              </Grid> */}
+              </Grid>
             </Grid>
           </Grid>
           {/* 북마크된 부트캠프, 글들 */}
@@ -116,7 +133,7 @@ const Mypage = (props) => {
                     <Grid padding="10px 0" width="67%">
                       <Grid display="flex" justify_content="space-between">
                       <Text p margin="0 0 5px 10px" color="#F1F3F4" fontSize="18px">{b.bootcampName}</Text>
-                      <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="18px"><BsHeartFill/></Text>
+                      <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill/></Text>
                       </Grid>
                       
                       <Text p margin="2px 0px 0px 10px" color="#F1F3F4" fontSize="14px">★★☆☆☆ 2.2</Text>
@@ -142,7 +159,9 @@ const Mypage = (props) => {
                    <Text fontSize="18px" color="#F1F3F4">내 북마크</Text>
                     <Count> {'('}{mytalk_list.length} {')'} </Count>
                   </BookMarkBox>
-                  <Button color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%">더보기 <AiOutlineRight/></Button>   
+                  <Button color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%"
+                  _onClick={()=>{history.push('/mypage/mybookmarks')}}
+                  >더보기 <AiOutlineRight/></Button>   
                 </Grid>
                 {/* 북마크가 있을 경우에만 보여줌 */}
                 {mytalk_list.length !== 0 ?
@@ -168,8 +187,8 @@ const Mypage = (props) => {
                     </Grid>
                     <hr/>
                     <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
-                      <Text p margin="0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> {n.post.category}</Text>
-                      <Text cursor="pointer" color="#7879F1" fontSize="14px"><BsBookmarkFill/></Text>
+                      <Text p margin="2px 0 0 0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> {n.post.category}</Text>
+                      <Text cursor="pointer" color="#7879F1" fontSize="24px"><BsBookmarkFill/></Text>
                     </Grid>
                   </Grid>
                );

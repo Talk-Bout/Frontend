@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import profile_small from '../image/profile_small.png';
+import question from '../redux/modules/question';
 
 const QnaCard = (props) => {
   const { _onClick } = props;
@@ -14,6 +15,7 @@ const QnaCard = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == question_id
   );
+  console.log(question_found);
 
   return (
     <React.Fragment>
@@ -83,29 +85,53 @@ const QnaCard = (props) => {
             </Text>
             {/* 댓글 수 */}
             <Text fontSize="12px" color="#bdc1c6" margin="0 8px">
-              <span
-                style={{
-                  fontSize: '16px',
-                  verticalAlign: 'middle',
-                  marginRight: '6px',
-                }}
-              >
-                <BiComment />
-              </span>
-              1
+              {question_found.answer.length > 0 ? (
+                <span
+                  style={{
+                    fontSize: '16px',
+                    verticalAlign: 'middle',
+                    marginRight: '6px',
+                  }}
+                >
+                  <BiComment />
+                  {question_found.answer.length}
+                </span>
+              ) : (
+                <span
+                  style={{
+                    fontSize: '16px',
+                    verticalAlign: 'middle',
+                    marginRight: '6px',
+                  }}
+                >
+                  <BiComment />0
+                </span>
+              )}
             </Text>
             {/* 조회수 */}
             <Text fontSize="12px" color="#bdc1c6" margin="0 0 0 8px">
-              <span
-                style={{
-                  fontSize: '16px',
-                  verticalAlign: 'middle',
-                  marginRight: '6px',
-                }}
-              >
-                <AiOutlineEye />
-              </span>
-              354
+              {question_found.viewCount > 0 ? (
+                <span
+                  style={{
+                    fontSize: '16px',
+                    verticalAlign: 'middle',
+                    marginRight: '6px',
+                  }}
+                >
+                  <AiOutlineEye />
+                  {question_found.viewCount}
+                </span>
+              ) : (
+                <span
+                  style={{
+                    fontSize: '16px',
+                    verticalAlign: 'middle',
+                    marginRight: '6px',
+                  }}
+                >
+                  <AiOutlineEye />0
+                </span>
+              )}
             </Text>
           </div>
         </AnswerSection>

@@ -13,26 +13,52 @@ import AnswerCard from '../components/AnswerCard';
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { BsThreeDotsVertical, BsBookmark } from 'react-icons/bs';
+import {
+  BsThreeDotsVertical,
+  BsBookmark,
+  BsBookmarkFill,
+} from 'react-icons/bs';
 import profile_medium from '../image/profile_medium.png';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { AiOutlineConsoleSql } from 'react-icons/ai';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
-  const question_id = window.location.pathname.split('/question/detail/')[1];
+  const question_id = parseInt(
+    window.location.pathname.split('/question/detail/')[1]
+  );
   const question_list = useSelector((state) => state.question.list);
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
+  console.log(question_found);
   const user_name = useSelector((state) => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
 
   //Answer 작성
   const answerInput = useRef(null);
-  const answer_list = useSelector((state) => state.question.answer_list);
-  const [answer_page, setAnswerPage] = useState(1);
-  console.log(answer_page);
+  const all_answer = useSelector((state) => state.question.answer_list);
+  const answer_list = all_answer.filter(
+    (answer) => answer.questionId === question_id
+  );
+  const [answer_page, setAnswerPage] = useState(2);
+
+  //북마크 목록
+  const question_bookmark_list = useSelector(
+    (state) => state.question.bookmark_list
+  );
+  const question_bookmark = question_bookmark_list.find(
+    (bookmark) => bookmark.questionId == question_id
+  );
+
+  // 질문 좋아요 목록
+  const question_like_list = useSelector((state) => state.question.like_list);
+  console.log(question_like_list);
+  const question_like = question_like_list.find(
+    (like) => like.nickname == user_name
+  );
+  console.log(question_like);
   //콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
@@ -40,6 +66,7 @@ const QuestionDetail = (props) => {
       dispatch(questionActions.setOneQuestionDB(question_id));
     }
     dispatch(questionActions.setAnswerDB(question_id, 1));
+    dispatch(questionActions.setQuestionBookmarkDB());
   }, []);
 
   if (!question_found) {
@@ -87,13 +114,33 @@ const QuestionDetail = (props) => {
   };
 
   //Answer 더보기
-  // const moreAnswer = async () => {
-  //   const result = await setAnswerPage(answer_page + 1);
-  //   console.log(result);
-  //   dispatch(questionActions.setAnswerDB(question_id, answer_page));
-  // };
+  const moreAnswer = () => {
+    dispatch(questionActions.setNextAnswerDB(question_id, answer_page));
+    setAnswerPage(answer_page + 1);
+  };
 
-  async function moreAnswer() {}
+  //북마크
+  const add_bookmark = () => {
+    console.log(question_id, user_name);
+    dispatch(questionActions.addQuestionBookmarkDB(question_id, user_name));
+  };
+
+  const delete_bookmark = (bookmark_id) => {
+    console.log(bookmark_id);
+    dispatch(
+      questionActions.deleteQuestionBookmarkDB(question_id, bookmark_id)
+    );
+  };
+
+  //질문 좋아요
+  const likeQuestion = () => {
+    console.log(question_id, user_name);
+    dispatch(questionActions.likeQuestionDB(question_id, user_name));
+  };
+
+  const unlikeQuestion = () => {
+    dispatch(questionActions.unlikeQuestionDB());
+  };
 
   return (
     <React.Fragment>
@@ -119,19 +166,47 @@ const QuestionDetail = (props) => {
                 </Grid>
                 {/* 북마크와 수정 삭제 */}
                 <Grid display="flex" width="14%" margin="0 0 0 auto">
-                  <Button padding="0" width="16.33px" height="21px">
-                    <Text
+                  {question_bookmark ? (
+                    <Button
                       padding="0"
-                      color="#9aa0a6"
-                      fontSize="24px"
-                      lineHeight="35px"
-                      vertical_align="middle"
-                      cursor="pointer"
-                      hover="opacity: 0.7"
+                      width="16.33px"
+                      height="21px"
+                      onClick={() =>
+                        delete_bookmark(question_bookmark.questionBookmarkId)
+                      }
                     >
-                      <BsBookmark />
-                    </Text>
-                  </Button>
+                      <Text
+                        padding="0"
+                        color="#7879F1"
+                        fontSize="24px"
+                        lineHeight="35px"
+                        vertical_align="middle"
+                        cursor="pointer"
+                        hover="opacity: 0.7"
+                      >
+                        <BsBookmarkFill />
+                      </Text>
+                    </Button>
+                  ) : (
+                    <Button
+                      padding="0"
+                      width="16.33px"
+                      height="21px"
+                      onClick={() => add_bookmark()}
+                    >
+                      <Text
+                        padding="0"
+                        color="#9aa0a6"
+                        fontSize="24px"
+                        lineHeight="35px"
+                        vertical_align="middle"
+                        cursor="pointer"
+                        hover="opacity: 0.7"
+                      >
+                        <BsBookmark />
+                      </Text>
+                    </Button>
+                  )}
 
                   {/* 드롭 다운 버튼 */}
                   {is_login && question_found.nickname === user_name ? (
@@ -189,7 +264,7 @@ const QuestionDetail = (props) => {
                   </Menu>
                 </Grid>
               </Grid>
-
+              {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" margin="3% 0">
                 <Grid width="3vw">
                   <Image src={profile_medium} size="5"></Image>
@@ -211,7 +286,8 @@ const QuestionDetail = (props) => {
                   </Text>
                 </Grid>
               </Grid>
-              {/* 콘텐츠마다 달라지는 위치값 고정하기 */}
+
+              {/* Question 본문 내용 */}
               <Text p margin="5% 0%" color="#C4C4C4">
                 {question_found.content}
               </Text>
@@ -224,14 +300,19 @@ const QuestionDetail = (props) => {
                 ''
               )}
 
+              {/* 좋아요/ 댓글수/ 조회수 */}
               <Grid display="flex" margin="3% 0%" vertical-align="center">
-                <LikeCommentBtn>
+                <LikeCommentBtn onClick={() => likeQuestion()}>
                   <BiLike />
                   {question_found.questionLike.length}
                 </LikeCommentBtn>
 
+                {/* <LikeCommentBtn onClick={() => likeQuestion()}>
+                    <BiLike />0
+                  </LikeCommentBtn> */}
+
                 <Text color="#C4C4C4" margin="auto 1%">
-                  <BiComment /> {answer_list.length}
+                  <BiComment /> {all_answer.length}
                 </Text>
 
                 <Text color="#C4C4C4" margin="auto 1%">
@@ -246,7 +327,7 @@ const QuestionDetail = (props) => {
             {/* 답변 등록 input */}
             <AddAnswerSection>
               <Text p fontWeight="600" color="#E2E2E3">
-                답변 {answer_list.length}
+                답변 {all_answer.length}
               </Text>
               <ACommentBox>
                 <AInput
@@ -261,12 +342,13 @@ const QuestionDetail = (props) => {
               </ACommentBox>
             </AddAnswerSection>
             {/* 새롭게 작성되는 답변 내용  */}
-            {answer_list.map((answer, idx) => {
-              return <AnswerCard key={answer.answerId} {...answer} />;
-            })}
+            {answer_list &&
+              answer_list.map((answer, idx) => {
+                return <AnswerCard key={answer.answerId} {...answer} />;
+              })}
 
             <Grid margin="auto" width="10%">
-              {answer_list.length < 5 ? null : (
+              {all_answer.length < 5 ? null : (
                 <Button onClick={() => moreAnswer()}>
                   <MdKeyboardArrowDown size="40" color="#F2F3F4" />
                 </Button>

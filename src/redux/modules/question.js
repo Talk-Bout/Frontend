@@ -17,9 +17,13 @@ const CREATE_ANSWER = 'question/CREATE_ANSWER';
 const SET_NEXT_ANSWER = 'question/SET_NEXT_ANSWER';
 
 //북마크 액션타입
-const SET_QUESTION_BOOKMARK = 'SET_QUESTION_BOOKMARK';
-const ADD_QUESTION_BOOKMARK = 'ADD_QUESTION_BOOKMARK';
-const DELETE_QUESTION_BOOKMARK = 'DELETE_QUESTION_BOOKMARK';
+const SET_QUESTION_BOOKMARK = 'question/SET_QUESTION_BOOKMARK';
+const ADD_QUESTION_BOOKMARK = 'question/ADD_QUESTION_BOOKMARK';
+const DELETE_QUESTION_BOOKMARK = 'question/DELETE_QUESTION_BOOKMARK';
+
+//좋아요 액션타입
+const LIKE_QUESTION = 'question/LIKE_QUESTION';
+const UNLIKE_QUESTION = 'question/UNLIKE_QUESTION';
 
 // QUESTION 액션생성함수
 const setQuestion = createAction(SET_QUESTION, (question_list) => ({
@@ -39,10 +43,10 @@ const deleteQuestion = createAction(DELETE_QUESTION, (question) => ({
 
 // ANSWER 액션생성함수
 const setAnswer = createAction(SET_ANSWER, (answer_list) => ({ answer_list }));
-const createAnswer = createAction(CREATE_ANSWER, (answer) => ({ answer }));
 const setNextAnswer = createAction(SET_NEXT_ANSWER, (answer_list) => ({
   answer_list,
 }));
+const createAnswer = createAction(CREATE_ANSWER, (answer) => ({ answer }));
 
 // BOOKMARK 액션생성함수
 const setQuestionBookmark = createAction(
@@ -55,8 +59,12 @@ const addQuestionBookmark = createAction(
 );
 const deleteQuestionBookmark = createAction(
   DELETE_QUESTION_BOOKMARK,
-  (question_bookmark) => ({ question_bookmark })
+  (bookmark_id) => ({ bookmark_id })
 );
+
+// 좋아요 액션생성함수
+const likeQuestion = createAction(LIKE_QUESTION, (like) => ({ like }));
+const unlikeQuestion = createAction(UNLIKE_QUESTION, (like) => ({ like }));
 
 // 기본값 정하기
 const initialState = {
@@ -64,6 +72,7 @@ const initialState = {
   popular_list: [],
   answer_list: [],
   bookmark_list: [],
+  like_list: [],
 };
 
 // 액션함수
@@ -138,8 +147,9 @@ const editQuestionDB = (edit_question) => {
   return function (dispatch) {
     const title = edit_question.title;
     const content = edit_question.content;
-    const questionId = edit_question.questionId;
+    const questionId = parseInt(edit_question.questionId);
     const nickname = edit_question.nickname;
+    const image = edit_question.image;
     const headers = {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     };
@@ -150,10 +160,12 @@ const editQuestionDB = (edit_question) => {
           title: title,
           content: content,
           nickname: nickname,
+          image: image,
         },
         { headers: headers }
       )
       .then((response) => {
+        console.log(response);
         dispatch(editQuestion(response.data));
       })
       .catch((err) => {
@@ -186,9 +198,11 @@ const setAnswerDB = (question_id, page) => {
     instance
       .get(`/questions/${questionId}/answers?page=${page}`)
       .then((response) => {
-        page >= 2 && response.data.length > 0
-          ? dispatch(setNextAnswer(response.data))
-          : dispatch(setAnswer(response.data));
+        dispatch(setAnswer(response.data));
+        if (page !== 1 && response.data.length === 0) {
+          window.alert('마지막 댓글입니다.');
+          return;
+        }
       })
       .catch((err) => {
         console.error(`질문 불러오기 에러 발생 : ${err}`);
@@ -196,23 +210,24 @@ const setAnswerDB = (question_id, page) => {
   };
 };
 
-// const setNextAnswerDB = (question_id, page) => {
-//   return function (dispatch) {
-//     const questionId = parseInt(question_id);
-//     console.log(page);
-//     instance
-//       .get(`/questions/${questionId}/answers?page=${page}`)
-//       .then((response) => {
-//         console.log(response.data);
-//         response.data.length > 5
-//           ? dispatch(setNextAnswer(response.data))
-//           : dispatch(setAnswer(response.data));
-//       })
-//       .catch((err) => {
-//         console.error(`질문 불러오기 에러 발생 : ${err}`);
-//       });
-//   };
-// };
+const setNextAnswerDB = (question_id, page) => {
+  return function (dispatch) {
+    const questionId = parseInt(question_id);
+    console.log(page);
+    instance
+      .get(`/questions/${questionId}/answers?page=${page}`)
+      .then((response) => {
+        dispatch(setNextAnswer(response.data));
+        if (page !== 1 && response.data.length === 0) {
+          window.alert('마지막 댓글입니다.');
+          return;
+        }
+      })
+      .catch((err) => {
+        console.error(`질문 불러오기 에러 발생 : ${err}`);
+      });
+  };
+};
 
 const createAnswerDB = (new_answer) => {
   return function (dispatch) {
@@ -241,14 +256,87 @@ const createAnswerDB = (new_answer) => {
   };
 };
 
-// const setQuestionBookmarkDB = (nickname) => {
-//   return function (dispatch){
-//     instance
-//     .get(`/`)
-//   }
-// }
+const setQuestionBookmarkDB = () => {
+  return function (dispatch) {
+    instance.get('/tokenUser').then((response) => {
+      console.log(response.data);
+      const nickname = response.data.nickname;
+      instance
+        .get(`/users/${nickname}/questionBookmarks`)
+        .then((result) => {
+          console.log(result.data);
+          dispatch(setQuestionBookmark(result.data));
+        })
+        .catch((err) => {
+          console.error(`QNA 북마크 목록 불러오기 에러: ${err}`);
+        });
+    });
+  };
+};
 
-// const addQuestionBookmarkDB = ()
+const addQuestionBookmarkDB = (question_id, user_name) => {
+  return function (dispatch) {
+    instance
+      .post(`/questions/${question_id}/questionBookmarks`, {
+        nickname: user_name,
+        questionId: parseInt(question_id),
+      })
+      .then((response) => {
+        dispatch(addQuestionBookmark(response.data));
+      })
+      .catch((err) => {
+        console.error(`질문 북마크 추가 에러: ${err.response}`);
+      });
+  };
+};
+
+const deleteQuestionBookmarkDB = (question_id, questionBookmarkId) => {
+  console.log(question_id, questionBookmarkId);
+  return function (dispatch) {
+    instance
+      .delete(
+        `/questions/${question_id}/questionBookmarks/${questionBookmarkId}`
+      )
+      .then((response) => {
+        console.log(response);
+        dispatch(deleteQuestionBookmark(questionBookmarkId));
+      })
+      .catch((err) => {
+        console.error(`질문 북마크 삭제 에러: ${err}`);
+      });
+  };
+};
+
+const likeQuestionDB = (question_id, user_name) => {
+  console.log(question_id, user_name);
+  return function (dispatch) {
+    instance
+      .post(`/questions/${question_id}/questionLikes`, {
+        nickname: user_name,
+        questionId: question_id,
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch(likeQuestion(response.data));
+      })
+      .catch((err) => {
+        console.error(`질문 좋아요추가 에러 : ${err}`);
+      });
+  };
+};
+
+const unlikeQuestionDB = (question_id, questionLikeId) => {
+  return function (dispatch) {
+    instance
+      .delete(`/questions/${question_id}/questionLikes/${questionLikeId}`)
+      .then((response) => {
+        dispatch(unlikeQuestion(response.data));
+      })
+      .catch((err) => {
+        console.error(`질문 좋아요삭제 에러 : ${err}`);
+      });
+  };
+};
 
 export default handleActions(
   {
@@ -289,11 +377,38 @@ export default handleActions(
         draft.answer_list = draft.answer_list.concat(
           action.payload.answer_list
         );
-        console.log(draft.answer_list);
       }),
+
     [CREATE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
         draft.answer_list.push(action.payload.answer);
+      }),
+    [SET_QUESTION_BOOKMARK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.bookmark_list = action.payload.bookmark_list;
+      }),
+    [ADD_QUESTION_BOOKMARK]: (state, action) =>
+      produce(state, (draft) => {
+        draft.bookmark_list.push(action.payload.question_bookmark);
+      }),
+    [DELETE_QUESTION_BOOKMARK]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.bookmark_id);
+        let bookmark_idx = draft.bookmark_list.findIndex(
+          (info) => info.questionBookmarkId === action.payload.bookmark_id
+        );
+        draft.bookmark_list.splice(bookmark_idx, 1);
+      }),
+    [LIKE_QUESTION]: (state, action) =>
+      produce(state, (draft) => {
+        draft.like_list.push(action.payload.like);
+      }),
+    [UNLIKE_QUESTION]: (state, action) =>
+      produce(state, (draft) => {
+        let like_idx = draft.like_list.findIndex(
+          (like) => like.questionLikeId === action.payload.like.questionLikeId
+        );
+        draft.like_list.splice(like_idx, 1);
       }),
   },
   initialState
@@ -308,8 +423,13 @@ const actionCreators = {
   deleteQuestionDB,
   editQuestionDB,
   setAnswerDB,
-  // setNextAnswerDB,
+  setNextAnswerDB,
   createAnswerDB,
+  setQuestionBookmarkDB,
+  addQuestionBookmarkDB,
+  deleteQuestionBookmarkDB,
+  likeQuestionDB,
+  unlikeQuestionDB,
 };
 
 export { actionCreators };

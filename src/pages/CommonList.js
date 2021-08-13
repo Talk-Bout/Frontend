@@ -48,12 +48,16 @@ const CommonBoardList = (props) => {
   const cc_category = () => {
     dispatch(postActions.setPostDB(page, 'chitchat'));
   }
+  // 카테고리 잡담방 게시물
+  const total_category = () => {
+    dispatch(postActions.setPostDB(page, ' '));
+  }
 
   
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto'>
+      <Grid className='background' display='flex' overflow='auto' >
         <Sidebar />
         <Body header>
         <Grid height="100%" >
@@ -65,6 +69,10 @@ const CommonBoardList = (props) => {
             {/* 게시판 카테고리 */}
                 <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 25px 0">
                   <Categories >
+                  <CategoryButton
+                  onClick={()=>total_category()}>
+                    전체글
+                  </CategoryButton>
                   <CategoryButton
                   onClick={()=>info_category()}>
                     정보방
@@ -112,7 +120,7 @@ const CommonBoardList = (props) => {
               })}
             </Grid>
             {/* import 부트톡톡 게시물  */}
-            <Grid height="85vh">
+            <Grid height="90vh">
               <Grid width="100%" height="100%" margin="2% 0 0 0">
               <Contents>
                 {post_list.map((c, idx) => {
@@ -124,7 +132,7 @@ const CommonBoardList = (props) => {
               </Grid>     
             </Grid>
             
-            <Grid height="3%" is_center>
+            <Grid height="1%" is_center>
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>

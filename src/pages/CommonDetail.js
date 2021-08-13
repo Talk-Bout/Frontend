@@ -133,7 +133,7 @@ const CommonDetail = (props) => {
                         color="#BDC1C6"
                       >
                         {' '}
-                        정보게시판{' '}
+                        {one_post.category}{' '}
                       </Text>
                     </Grid>
                     <Grid
@@ -143,7 +143,7 @@ const CommonDetail = (props) => {
                       width="100%"
                       height="45%"
                     >
-                      <Grid width="20%" height="100%">
+                      <Grid width="40%" height="100%">
                         <Text
                           p
                           margin="0"

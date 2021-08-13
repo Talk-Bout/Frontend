@@ -31,7 +31,6 @@ const initialState = {
 //액션함수
 const setCommentDB = (postId, page) => {
 // 댓글 불러오는 함수
-console.log(postId, page);
 return function (dispatch) {
   instance.get(`/posts/${postId}/postComments?page=${page}`, {
   })
@@ -41,7 +40,7 @@ return function (dispatch) {
             window.alert('마지막 댓글입니다.');
             return;
           }
-        console.log(setComment(response.data));
+        // console.log(setComment(response.data));
     })
     .catch((err) => {
         console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);

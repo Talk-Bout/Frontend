@@ -11,6 +11,8 @@ import { AiOutlineEye } from 'react-icons/ai';
 const CommonPostList = (props) => {
 
   const common_list = useSelector(state => state.post.list);
+  const comment_list = useSelector(state => state.comment.comment_list);
+  console.log(comment_list);
 
   return (
     <React.Fragment>
@@ -36,11 +38,11 @@ const CommonPostList = (props) => {
             <LikeAndCountBox>
               {/* 좋아요 */}
               <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0 8px 0 0">
-                <BiLike/> &nbsp; {props.likes}
+                <BiLike/> &nbsp; {props.postLike ? props.postLike.length : '0'}
                 </Text>
               {/* 댓글 수 */}
               <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">
-                <BiComment/> &nbsp; 2
+                <BiComment/> &nbsp; 3
               </Text>
               {/* 조회수 */}
               <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">

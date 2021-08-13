@@ -21,9 +21,8 @@ const Sidebar = (props) => {
     <React.Fragment>
       <Grid className="sidebar" backgroundColor="#202124" width="100px">
         <Grid className="sidebar-inner" is_center>
-          <Image
-            src={PointImg}
-          ></Image>
+          <img
+            src={PointImg} alt='토크부트 로고'/>
           <Image
             src={url === '' ? Home_white : Home}
             onClick={() => history.push('/')}

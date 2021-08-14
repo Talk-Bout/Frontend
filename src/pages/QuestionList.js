@@ -57,15 +57,13 @@ const QuestionList = (props) => {
             justify_content="space-between"
           >
             {/* Q&A 게시판 타이틀 */}
-            <Text
-              p
-              color="#F8F9FA"
-              fontWeight="700"
-              fontSize="32px"
-              margin="0 0 0 16px"
-            >
-              질문과 답변
+
+            <div>
+              <Text p color="#F8F9FA" fontWeight="700" fontSize="32px" margin="0 0 0 16px">
+            🔥질문과 답변
             </Text>
+              <Text color='#BDC1C6' fontSize='20px'>질문과 답변 = (question) =&gt; &#123; return answer &#125;</Text>
+            </div>
             <div
               style={{
                 width: '200px',

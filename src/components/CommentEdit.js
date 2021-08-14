@@ -12,7 +12,6 @@ const CommentEdit = (props) => {
   const {postCommentId, content, postId} = props;
   const [isEditMode, setIsEditMode] = useState(false);
   const [commentValue, setCommentValue] = useState(content);
-  console.log(content);
   // 현재 접속 중인 사용자 닉네임
   const username = useSelector(state => state.user.user.nickname);
 

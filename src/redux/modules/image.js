@@ -4,12 +4,14 @@ import {history} from '../ConfigureStore';
 import instance from '../../shared/Request';
 
 // 액션타입
-const SET_PREVIEW = 'SET_PREVIEW';  // 선택한 이미지 파일 프리뷰 생성
-const UPLOAD_IMAGE = 'UPLOAD_IMAGE'; // 선택한 이미지 파일 업로드
+const SET_PREVIEW = 'image/SET_PREVIEW';  // 선택한 이미지 파일 프리뷰 생성
+const UPLOAD_IMAGE = 'image/UPLOAD_IMAGE'; // 선택한 이미지 파일 업로드
+const DELETE_IMAGE = 'image/DELETE_IMAGE'; // 이미지 파일 URL 삭제
 
 // 액션생성함수
 const setPreview = createAction(SET_PREVIEW, (preview) => ({preview}));
 const uploadImage = createAction(UPLOAD_IMAGE, (image_url) => ({image_url}));
+const deleteImage = createAction(DELETE_IMAGE, () => ({}));
 
 // 기본값 정하기
 const initialState = {
@@ -38,7 +40,7 @@ const uploadImageDB = (formData) => {
   // 서버에 이미지를 저장하고, url을 반환하는 함수
   return function (dispatch) {
     instance.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
-      console.log(response);
+      // console.log(response);
       dispatch(uploadImage(response.data));
     })
     .catch((err) => {
@@ -50,6 +52,13 @@ const uploadImageDB = (formData) => {
   };
 };
 
+const DeleteImageUrl = () => {
+  // 리덕스에 저장된 이미지 url 삭제하는 함수
+  return function (dispatch) {
+    dispatch(deleteImage());
+  };
+};
+
 export default handleActions({
     [SET_PREVIEW]: (state, action) => produce(state, (draft) => {
       // state의 preview를 선택한 이미지로 설정
@@ -58,6 +67,10 @@ export default handleActions({
     [UPLOAD_IMAGE]: (state, action) => produce(state, (draft) => {
       // state의 image_url을 서버에 저장된 url로 설정
       draft.image_url = action.payload.image_url;
+    }),
+    [DELETE_IMAGE]: (state, action) => produce(state, (draft) => {
+      // state의 image_url을 null로 설정
+      draft.image_url = null;
     })
 }, initialState);
 
@@ -66,6 +79,7 @@ export default handleActions({
 const actionCreators = {
     getPreview,
     uploadImageDB,
+    DeleteImageUrl,
 }
 
 export {

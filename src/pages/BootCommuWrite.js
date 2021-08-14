@@ -61,6 +61,7 @@ const BootCommuWrite = (props) => {
       };
       dispatch(campActions.editCommuDB(edited_commu));
       dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
       titleRef.current.value = '';
       contentRef.current.value = '';
     } else {
@@ -73,6 +74,7 @@ const BootCommuWrite = (props) => {
       };
       dispatch(campActions.addCommuDB(new_commu));
       dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
       titleRef.current.value = '';
       contentRef.current.value = '';
     }
@@ -198,7 +200,7 @@ const BootCommuWrite = (props) => {
                 </form>
                 {/* 해시태그 추가 버튼 */}
                 <Text fontSize="24px" color="#b3b3b3" cursor="pointer">
-                  <FiHash />
+                  {/* <FiHash /> */}
                 </Text>
               </FooterBox>
             </Window>

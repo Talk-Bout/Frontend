@@ -18,6 +18,12 @@ const CommonBoardList = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
+
+  // 게시글 인기순으로 불러오기
+  const pop_postList = () => {
+    dispatch(postActions.setPostPopDB(page));
+  }
+
   // 페이지네이션
   const [page, setPage] = useState(1);
 
@@ -50,7 +56,7 @@ const CommonBoardList = (props) => {
   }
   // 카테고리 전체 게시물
   const total_category = () => {
-    dispatch(postActions.setPostDB(page, 'talktalk'));
+    dispatch(postActions.setPostDB(page, ''));
   }
 
   
@@ -62,9 +68,10 @@ const CommonBoardList = (props) => {
         <Body header>
         <Grid height="100%" >
           <Grid height="3%" margin="0 0 24px 0">
-            <Text fontSize="32px" padding="0 1%" color="#F8F9FA" fontWeight="bold">
-              부트톡톡
+            <Text p fontSize="32px" padding="0 1%" color="#F8F9FA" fontWeight="bold" margin='0 0 8px'>
+            📣부트톡톡
             </Text>
+            <Text color='#BDC1C6' fontSize='20px'>부트캠퍼들의 자유로운 Talk Talk</Text>
           </Grid>
             {/* 게시판 카테고리 */}
                 <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 25px 0">
@@ -75,20 +82,24 @@ const CommonBoardList = (props) => {
                   </CategoryButton>
                   <CategoryButton
                   onClick={()=>info_category()}>
-                    정보방
+                    정보
                   </CategoryButton>
                   <CategoryButton
                   onClick={()=>cc_category()}>
-                    잡담방
+                    잡담
                   </CategoryButton>
                   </Categories>
                  
                   <Grid width="17%" display="flex">
                     {/* 인기순 셀렉트 */}
                    <div style={{color: "#F1F3F4", lineHeight: "48px", marginRight: "10px" }}><RiArrowUpDownFill /></div> 
-                    <SelectButton type="select">
-                        <Options>인기순</Options>
-                        <Options>최신순</Options>
+                    <SelectButton >
+                        <Options id="0"
+                        onClick={()=>pop_postList()}
+                        >인기순</Options>
+                        <Options id="1"
+                        onClick={()=>total_category()}
+                        >최신순</Options>
                       </SelectButton>
                       {/* 글쓰기버튼 (로그인 후 이용가능) */}
                       {is_login ?

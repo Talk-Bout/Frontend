@@ -108,10 +108,10 @@ const HeaderLogo = styled.div`
 const CircleLogo = styled.div`
   /* width: var(--size);
   height: var(--size);
-  cursor: ${(props) => props.cursor};
+  cursor: ${(props) => props.cursor}; */
   background-size: cover;
   background-image: url('${(props) => props.src}');
-  margin: ${(props) => props.margin};
+  /* margin: ${(props) => props.margin};
   padding: ${(props) => props.padding}; */
   background-color: #3c4043;
   width: 80px;

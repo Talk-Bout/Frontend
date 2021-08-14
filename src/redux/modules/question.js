@@ -185,7 +185,6 @@ const editQuestionDB = (edit_question) => {
         { headers: headers }
       )
       .then((response) => {
-        console.log(response);
         dispatch(editQuestion(response.data));
       })
       .catch((err) => {
@@ -206,7 +205,7 @@ const deleteQuestionDB = (question_id) => {
         dispatch(deleteQuestion(response.data));
       })
       .catch((err) => {
-        console.log(`질문 삭제 에러 발생: ${err}`);
+        console.error(`질문 삭제 에러 발생: ${err}`);
       });
   };
 };
@@ -214,13 +213,12 @@ const deleteQuestionDB = (question_id) => {
 const setAnswerDB = (question_id, page) => {
   return function (dispatch) {
     const questionId = parseInt(question_id);
-    console.log(page);
     instance
       .get(`/questions/${questionId}/answers?page=${page}`)
       .then((response) => {
         dispatch(setAnswer(response.data));
         if (page !== 1 && response.data.length === 0) {
-          window.alert('마지막 댓글입니다.');
+          window.alert('마지막 답변입니다.');
           return;
         }
       })
@@ -233,13 +231,12 @@ const setAnswerDB = (question_id, page) => {
 const setNextAnswerDB = (question_id, page) => {
   return function (dispatch) {
     const questionId = parseInt(question_id);
-    console.log(page);
     instance
       .get(`/questions/${questionId}/answers?page=${page}`)
       .then((response) => {
         dispatch(setNextAnswer(response.data));
         if (page !== 1 && response.data.length === 0) {
-          window.alert('마지막 댓글입니다.');
+          window.alert('마지막 답변입니다.');
           return;
         }
       })
@@ -279,7 +276,6 @@ const createAnswerDB = (new_answer) => {
 const setQuestionBookmarkDB = () => {
   return function (dispatch) {
     instance.get('/tokenUser').then((response) => {
-      console.log(response.data);
       const nickname = response.data.nickname;
       instance
         .get(`/users/${nickname}/questionBookmarks`)
@@ -310,7 +306,6 @@ const addQuestionBookmarkDB = (question_id, user_name) => {
 };
 
 const deleteQuestionBookmarkDB = (question_id, questionBookmarkId) => {
-  console.log(question_id, questionBookmarkId);
   return function (dispatch) {
     instance
       .delete(
@@ -362,7 +357,6 @@ const likeAnswerDB = (answer_id, user_name) => {
         answerId: answer_id,
       })
       .then((response) => {
-        console.log(response.data);
         dispatch(likeAnswer(response.data));
       })
       .catch((err) => {
@@ -372,7 +366,6 @@ const likeAnswerDB = (answer_id, user_name) => {
 };
 
 const unlikeAnswerDB = (answer_id, answerLikeId) => {
-  console.log(answer_id, answerLikeId);
   return function (dispatch) {
     instance
       .delete(`/answers/${answer_id}/answerLike/${answerLikeId}`)
@@ -474,7 +467,6 @@ export default handleActions(
       }),
     [UNLIKE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.a_like_id);
         let like_idx = draft.answer_like_list.findIndex(
           (info) => info.answerLikeId === action.payload.a_like_id
         );

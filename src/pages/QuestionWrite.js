@@ -24,7 +24,7 @@ const QuestionWrite = (props) => {
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
-  console.log(image_url);
+  // console.log(image_url);
 
   // 이미지 업로드
   const imageRef = useRef();
@@ -83,6 +83,7 @@ const QuestionWrite = (props) => {
       };
       dispatch(questionActions.editQuestionDB(edit_question));
       dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
     } else {
       const new_question = {
         title: titleInput.current.value,
@@ -92,6 +93,7 @@ const QuestionWrite = (props) => {
       };
       dispatch(questionActions.createQuestionDB(new_question));
       dispatch(imageActions.getPreview(null)); //이미지 미리보기를 없애기
+      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
     }
   };
 

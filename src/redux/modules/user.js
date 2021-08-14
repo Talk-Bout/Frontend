@@ -55,7 +55,7 @@ const logInDB = (email, password) => {
       })
       .catch((err) => {
         console.log(`로그인 에러 발생: ${err}`);
-        console.log(err.response);
+
         dispatch(loginCheck(err.response.status));
       });
   };
@@ -63,7 +63,6 @@ const logInDB = (email, password) => {
 
 const signUpDB = (new_user) => {
   return function (dispatch) {
-    console.log(new_user);
     instance
       .post('/users', {
         email: new_user.user_mail,
@@ -72,7 +71,6 @@ const signUpDB = (new_user) => {
         confirmPassword: new_user.confirm_password,
       })
       .then((response) => {
-        console.log(response.data);
         dispatch(signUp(response.data));
         history.push('/login');
       })
@@ -112,14 +110,12 @@ const stayLogInDB = () => {
 };
 
 const emailCheckDB = (email) => {
-  console.log(email);
   return function (dispatch) {
     instance
       .get(`/users/email/${email}`, {
         email: email,
       })
       .then((response) => {
-        console.log(response);
         dispatch(doubleEmailCheck(response.data));
       })
       .catch((err) => {
@@ -182,18 +178,16 @@ export default handleActions(
     [DOUBLE_EMAIL_CHECK]: (state, action) =>
       produce(state, (draft) => {
         // true로 바꿔주지 말고, 그냥 서버에서 전해주는 값 전달
-        console.log(action.payload.isExist.isExist);
         draft.email_exist = action.payload.isExist.isExist;
       }),
     [DOUBLE_NICKNAME_CHECK]: (state, action) =>
       produce(state, (draft) => {
         // true로 바꿔주지 말고, 그냥 서버에서 전해주는 값 전달
-        console.log(action.payload.isExist.isExist);
         draft.nickname_exist = action.payload.isExist.isExist;
       }),
     [LOGIN_CHECK]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.is_error);
+        // console.log(action.payload.is_error);
         if (action.payload.is_error === 400) {
           draft.is_error = true;
         }

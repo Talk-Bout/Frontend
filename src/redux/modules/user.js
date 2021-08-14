@@ -91,7 +91,7 @@ const stayLogInDB = () => {
     };
 
     const token = localStorage.getItem('token'); // token이라는 이름의 저장된 것을 불러오기
-    console.log(`토큰` === token);
+    // console.log(`토큰` === token);
     if (!token) {
       return;
     }

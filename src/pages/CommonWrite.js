@@ -212,9 +212,9 @@ const BootCommuWrite = (props) => {
                   </label>
                 </form>
                 {/* 해시태그 추가 버튼 */}
-                <Text fontSize="24px" color="#b3b3b3" cursor="pointer">
+                {/* <Text fontSize="24px" color="#b3b3b3" cursor="pointer">
                   <FiHash />
-                </Text>
+                </Text> */}
               </FooterBox>
             </Window>
           </Grid>

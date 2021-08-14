@@ -19,7 +19,7 @@ const Mypage = (props) => {
 
   // 관심있는 부트캠프
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
-  console.log(myboot_list);
+  // console.log(myboot_list);
   // 관심있는 부트캠프 3개 추출
   const myboot = myboot_list.slice(0,3);
 

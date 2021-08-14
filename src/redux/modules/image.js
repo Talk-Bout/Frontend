@@ -38,7 +38,7 @@ const uploadImageDB = (formData) => {
   // 서버에 이미지를 저장하고, url을 반환하는 함수
   return function (dispatch) {
     instance.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
-      console.log(response);
+      // console.log(response);
       dispatch(uploadImage(response.data));
     })
     .catch((err) => {

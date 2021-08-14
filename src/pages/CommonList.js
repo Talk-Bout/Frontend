@@ -18,6 +18,12 @@ const CommonBoardList = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
+
+  // 게시글 인기순으로 불러오기
+  const pop_postList = () => {
+    dispatch(postActions.setPostPopDB(page));
+  }
+
   // 페이지네이션
   const [page, setPage] = useState(1);
 
@@ -86,9 +92,13 @@ const CommonBoardList = (props) => {
                   <Grid width="17%" display="flex">
                     {/* 인기순 셀렉트 */}
                    <div style={{color: "#F1F3F4", lineHeight: "48px", marginRight: "10px" }}><RiArrowUpDownFill /></div> 
-                    <SelectButton type="select">
-                        <Options>인기순</Options>
-                        <Options>최신순</Options>
+                    <SelectButton >
+                        <Options id="0"
+                        onClick={()=>pop_postList()}
+                        >인기순</Options>
+                        <Options id="1"
+                        onClick={()=>total_category()}
+                        >최신순</Options>
                       </SelectButton>
                       {/* 글쓰기버튼 (로그인 후 이용가능) */}
                       {is_login ?

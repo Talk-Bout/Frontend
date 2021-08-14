@@ -24,7 +24,7 @@ const QuestionWrite = (props) => {
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
-  console.log(image_url);
+  // console.log(image_url);
 
   // 이미지 업로드
   const imageRef = useRef();

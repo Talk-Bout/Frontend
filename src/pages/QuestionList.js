@@ -24,7 +24,7 @@ const QuestionList = (props) => {
 
   //인기순정렬
   const popular_arrange = (page) => {
-    console.log(page);
+    // console.log(page);
   };
 
   //페이지네이션

@@ -57,7 +57,13 @@ const QuestionList = (props) => {
             justify_content="space-between"
           >
             {/* Q&A 게시판 타이틀 */}
-            <Text p color="#F8F9FA" fontWeight="700" fontSize="32px" margin="0">
+            <Text
+              p
+              color="#F8F9FA"
+              fontWeight="700"
+              fontSize="32px"
+              margin="0 0 0 16px"
+            >
               질문과 답변
             </Text>
             <div
@@ -65,6 +71,7 @@ const QuestionList = (props) => {
                 width: '200px',
                 padding: '10px 0 0',
                 textAlign: 'right',
+                margin: '0 20px',
               }}
             >
               {/* 인기순 정렬 버튼 */}

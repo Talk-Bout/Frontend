@@ -56,7 +56,7 @@ const CommonBoardList = (props) => {
   }
   // 카테고리 전체 게시물
   const total_category = () => {
-    dispatch(postActions.setPostDB(page, 'talktalk'));
+    dispatch(postActions.setPostDB(page, ''));
   }
 
   
@@ -81,11 +81,11 @@ const CommonBoardList = (props) => {
                   </CategoryButton>
                   <CategoryButton
                   onClick={()=>info_category()}>
-                    정보방
+                    정보
                   </CategoryButton>
                   <CategoryButton
                   onClick={()=>cc_category()}>
-                    잡담방
+                    잡담
                   </CategoryButton>
                   </Categories>
                  

@@ -119,10 +119,10 @@ const Mypage = (props) => {
               </Grid> */}
               {/* 인증 됐을 때 */}
               <Grid height="30%" margin="auto">
-                <TextBox>
+                {/* <TextBox>
                   <Button _onClick={() => history.push('/mypage/edit')}
                    font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">정보 수정</Button>
-                </TextBox>
+                </TextBox> */}
               </Grid>
             </Grid>
           </Grid>

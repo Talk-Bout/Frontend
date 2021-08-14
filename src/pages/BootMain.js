@@ -40,7 +40,8 @@ const BootMain = (props) => {
         {/* 헤더 포함한 바디 */}
         <Body header>
           {/* 부트캠프 */}
-          <Text color='#F8F9FA' fontSize='32px' fontWeight='700'>부트캠프</Text>
+          <Text p color='#F8F9FA' fontSize='32px' fontWeight='700' margin='0 0 8px'>🚀부트캠프</Text>
+          <Text color='#BDC1C6' fontSize='20px'>부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
           {/* 부트캠프 목록 */}
           <CardList>
             {camp_list.map((camp, idx) => {

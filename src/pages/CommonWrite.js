@@ -65,6 +65,7 @@ const BootCommuWrite = (props) => {
       };
       dispatch(postActions.editPostDB(edited_post));
       dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
       history.push(`/common/detail/${postId}`)
       titleRef.current.value = '';
       contentRef.current.value = '';
@@ -79,6 +80,7 @@ const BootCommuWrite = (props) => {
       };
       dispatch(postActions.addPostDB(new_post));
       dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
       history.push(`/common/list`)
       titleRef.current.value = '';
       contentRef.current.value = '';

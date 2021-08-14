@@ -68,9 +68,10 @@ const CommonBoardList = (props) => {
         <Body header>
         <Grid height="100%" >
           <Grid height="3%" margin="0 0 24px 0">
-            <Text fontSize="32px" padding="0 1%" color="#F8F9FA" fontWeight="bold">
-              부트톡톡
+            <Text p fontSize="32px" padding="0 1%" color="#F8F9FA" fontWeight="bold" margin='0 0 8px'>
+            📣부트톡톡
             </Text>
+            <Text color='#BDC1C6' fontSize='20px'>부트캠퍼들의 자유로운 Talk Talk</Text>
           </Grid>
             {/* 게시판 카테고리 */}
                 <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 25px 0">

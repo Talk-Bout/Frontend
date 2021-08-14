@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import Stars from '../components/Stars';
 import Profile from '../image/profile_small.png';
+import CampImg from '../image/bootcamp_default.png';
 import Mid_Profile from '../image/mypage_profile.svg';
 import Badge from '../image/badge 1.png';
 import { Text, Button, Grid, Input, Image } from '../elements/index';
@@ -146,7 +147,7 @@ const Mypage = (props) => {
                   _onClick={()=>{history.push(`/boot/${mb.bootcampName}/info`)}}
                   >
                     <ImageBox>
-                     <Image shape="CircleLogo"/>
+                     <Image shape="CircleLogo" src={mb.logo ? `http://13.209.12.149${mb.logo}` : CampImg}/>
                     </ImageBox>
                     <Grid padding="10px 0" width="67%">
                       <Grid display="flex" justify_content="space-between">

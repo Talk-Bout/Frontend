@@ -68,7 +68,7 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
             postId: postId,
         }, {headers: headers}).then((response) => {
             dispatch(addComment(response.data));
-            console.log(response.data);
+            // console.log(response.data);
             }).catch((err) => {
                 console.error(`부트톡톡 댓글 추가하기 에러 발생: ${err}`);
             });
@@ -117,7 +117,7 @@ export default handleActions({
 
 [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
     draft.list.unshift(action.payload.comment);
-    console.log(action.payload.comment);
+    // console.log(action.payload.comment);
 }),
 
 [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {

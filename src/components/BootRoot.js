@@ -5,6 +5,7 @@ import { history } from '../redux/ConfigureStore';
 import { HiOutlineHeart, HiHeart } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions} from '../redux/modules/bootcamp';
+import Logo from '../image/talkbout_final_logo.png';
 
 const BootRoot = (props) => {
   const dispatch = useDispatch();
@@ -15,15 +16,16 @@ const BootRoot = (props) => {
   // 현재 접속 중인 사용자의 닉네임
   const username = useSelector(state => state.user.user.nickname);
 
-  const key = window.location.pathname.split('/');
-  console.log(key);
-
   // 사용자가 북마크한 부트캠프 목록
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
-  // 사용자가 이 부트캠프를 북마크했다면, this_camp에 넣는다.
-  const this_camp = my_camps.find((camp) => camp.bootcampName === bootcampName);
+  // 사용자가 이 부트캠프를 북마크했다면, my_camp에 넣는다.
+  const my_camp = my_camps.find((camp) => camp.bootcampName === bootcampName);
+
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const this_camp = camp_list.find((camp) => camp.bootcampName === bootcampName);
 
   useEffect(() => {
+    dispatch(campActions.setCampsDB());
     dispatch(campActions.setMyCampDB());
   }, []);
   
@@ -46,14 +48,14 @@ const BootRoot = (props) => {
   return (
     <React.Fragment>
       {/* 부트캠프 로고 */}
-      <LogoBox>로고</LogoBox>
+      <LogoBox><Image src={this_camp.logo !== "" ? `http://13.209.12.149${this_camp.logo}` : Logo}/></LogoBox>
       <Grid className='info-button' padding='24px 0'>
         <InfoBtn>
           <div>
           {/* 부트캠프 이름, 북마크 표시 */}
           <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{bootcampName}
             {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
-            {this_camp ? <Heart check onClick={() => unmarkBoot(this_camp.bootcampBookmarkId)}><HiHeart /></Heart>
+            {my_camp ? <Heart check onClick={() => unmarkBoot(my_camp.bootcampBookmarkId)}><HiHeart /></Heart>
 
             : <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>}
           </Text>
@@ -88,8 +90,14 @@ const BootRoot = (props) => {
 const LogoBox = styled.div`
   height: 112px;
   width: 190px;
-  border: 1px solid whitesmoke; // 로고 있으면 없애기
+  /* border: 1px solid whitesmoke; // 로고 있으면 없애기 */
   align-items: center;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  size: cover;
 `;
 
 const InfoBtn = styled.div`

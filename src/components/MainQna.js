@@ -17,7 +17,8 @@ const MainQna = (props) => {
 
   const qna_list = useSelector(state => state.question.popular_list);
   const pop_qna = qna_list.slice(0, 3);
-  console.log(pop_qna);
+  
+  // console.log(pop_qna);
 
   return (
     <React.Fragment>

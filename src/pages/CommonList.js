@@ -89,7 +89,7 @@ const CommonBoardList = (props) => {
                   </CategoryButton>
                   </Categories>
                  
-                  <Grid width="17%" display="flex">
+                  <Grid width="18%" display="flex">
                     {/* 인기순 셀렉트 */}
                    <div style={{color: "#F1F3F4", lineHeight: "48px", marginRight: "10px" }}><RiArrowUpDownFill /></div> 
                     <SelectButton >
@@ -115,7 +115,7 @@ const CommonBoardList = (props) => {
             </Grid>
             
             {/* 공지 */}
-            <hr/>
+            <hr style={{width:"1233px", margin:"0 5px 0 0"}}/>
             <Grid height="10vh">
               {[1, 2].map((n, idx) => {
                   return (
@@ -123,7 +123,7 @@ const CommonBoardList = (props) => {
                   <Notice>
                     <NoticeHead>공지</NoticeHead>
                     <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                    <Text color="#9AA0A6" fontSize="14px" margin="0.2% 0 0 0" lineHeight="18px">2021.08.03</Text>
+                    <Text color="#9AA0A6" fontSize="14px" margin="1% 0 0 0" lineHeight="18px">2021.08.03</Text>
                   </Notice>
                 </Grid>
                 );
@@ -212,7 +212,7 @@ font-size: 16px;
 border: none;
 color: #7879F1;
 cursor: pointer;
-width: 100%;
+width: 98.5%;
 border-radius: 8px;
 font-weight: bold;
 width: 120px;
@@ -233,7 +233,7 @@ display: flex;
 height: 50%; */
 margin: 5px 0 5px 0;
 border-bottom: 1px solid #9AA0A6;
-width: 100%;
+width: 98.5%;
 height: 55px;
 left: 142px;
 top: 346px;
@@ -254,7 +254,7 @@ border: 1px solid #7879F1;
 box-sizing: border-box;
 border-radius: 8px;
 
-margin: 0px 10px;
+margin: 0.4% 10px;
 font-size: 14px;
 line-height: 18px;
 `;
@@ -263,7 +263,7 @@ const NoticeText = styled.span`
 /* width: 80%; */
 font-weight: bold;
 /* font-size: 1.8vh; */
-margin: 0% 1%;
+margin: 0.7% 1%;
 color: #7879F1;
 width: 82%;
 height: 27px;

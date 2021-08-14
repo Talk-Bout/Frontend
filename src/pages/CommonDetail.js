@@ -109,10 +109,10 @@ const CommonDetail = (props) => {
       >
         <Sidebar />
         <Body header>
-          <Grid display="flex" width="100%">
-            <Grid width="70%" height="98vh">
+          <Grid display="flex" width="100%" >
+            <Grid width="70%" height="98vh" >
               {/* 게시물 */}
-              <Grid width="100%" height="50%" >
+              <Grid width="100%" height="auto" >
                 <Grid width="100%" height="27%">
                     <Grid width="100%" height="15%" >
                       <Text

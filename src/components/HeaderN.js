@@ -47,28 +47,29 @@ const HeaderN = (props) => {
           display="flex"
           justify_content="space-between"
         >
-          <Logo src={LogoImg} alt='토크부트 로고' />
+          <Logo src={LogoImg} alt="토크부트 로고" />
           {/* 검색창 */}
           <Grid
             className="search"
             height="fit-content"
-            width='auto'
+            width="auto"
             margin="26px 0 0 42px"
           >
             {/* <Image src={Search} alt="검색" />
             <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
-          <Grid height='fit-content' width="auto" margin='36px 50px'>
+          <Grid height="fit-content" width="auto" margin="36px 50px">
             {/* 북마크 메뉴 */}
             <Text
               color="#5F6368"
               fontSize="18px"
-              vertical_align="middle"
-              margin="0 8px 0 0"
+              vertical_align="top"
+              margin="5px 8px 0 0"
               cursor="pointer"
+              height="100%"
               _onClick={() => history.push('/mypage/mybookmarks')}
             >
-              <BsFillBookmarkFill />
+              <BsFillBookmarkFill size="26" />
             </Text>
             {/* 알림 메뉴 */}
             {/* <Text
@@ -81,16 +82,16 @@ const HeaderN = (props) => {
               <BsFillBellFill />
             </Text> */}
             {/* 프로필 이미지 */}
-            <ProfileImg src={Profile} alt="프로필"/>
+            <ProfileImg src={Profile} alt="프로필" />
             {/* 드롭다운 메뉴 */}
             <Button
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
-              style={{padding: 0, minWidth: 0, width: '24px'}}
+              style={{ padding: 0, minWidth: 0, width: '24px' }}
             >
-              <Text color="#5F6368" fontSize='4.6px'>
-                <img src={CaretDown} alt='메뉴' />
+              <Text color="#5F6368" fontSize="4.6px">
+                <img src={CaretDown} alt="메뉴" />
               </Text>
             </Button>
             <Menu
@@ -119,7 +120,7 @@ const HeaderN = (props) => {
   }
 
   // 로그인 토큰이 없을 때 보이는 헤더
-  return (      
+  return (
     <React.Fragment>
       <Grid
         className="header"
@@ -129,21 +130,28 @@ const HeaderN = (props) => {
         display="flex"
         justify_content="space-between"
       >
-        <Logo src={LogoImg} alt='토크부트 로고' />
+        <Logo src={LogoImg} alt="토크부트 로고" />
         {/* 검색창 */}
         <Grid
           className="search"
           height="fit-content"
-          width='auto'
-          margin='26px 0 0 42px'
+          width="auto"
+          margin="26px 0 0 42px"
         >
           {/* <Image src={Search} alt="검색" />
           <Input placeholder="검색어를 입력하세요." /> */}
         </Grid>
         {/* 로그인 버튼 */}
-          <LoginBtn type='button' onClick={() => history.push('/login')}><Text fontSize="16px" color="#f8f9fa" cursor='pointer' lineHeight='24px'>
+        <LoginBtn type="button" onClick={() => history.push('/login')}>
+          <Text
+            fontSize="16px"
+            color="#f8f9fa"
+            cursor="pointer"
+            lineHeight="24px"
+          >
             로그인
-          </Text></LoginBtn>
+          </Text>
+        </LoginBtn>
       </Grid>
     </React.Fragment>
   );

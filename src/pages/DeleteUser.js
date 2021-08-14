@@ -19,13 +19,10 @@ import '../App.css';
 const DeleteUser = (props) => {
   const dispatch = useDispatch();
   const user_name = useSelector((state) => state.user.user);
-  console.log(user_name);
 
   const [state, setState] = useState({
     checked: false,
   });
-  console.log(state.checked);
-
   const [charcter, setCharcter] = useState(0);
 
   const handleChange = (event) => {

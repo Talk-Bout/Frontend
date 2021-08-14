@@ -62,22 +62,22 @@ const Signup = (props) => {
         .oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않습니다.'),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       const user_mail = String(values.id + '@' + selectMail.current.value);
       //dictionary 안에 key를 만들고 value를 넣어줌
       //values['key'] = value;
       values['user_mail'] = user_mail;
       values['nickname'] = nickname;
-      console.log(values.nickname);
+      // console.log(values.nickname);
 
       dispatch(userActions.signUpDB(values));
-      notify();
+      // notify();
     },
   });
 
   //로그인 중복 확인
   const emailCheck = (id) => {
-    console.log(id);
+    // console.log(id);
     const email = String(id + '@' + selectMail.current.value);
     dispatch(userActions.emailCheckDB(email));
   };

@@ -52,7 +52,7 @@ const MypagePost = (props) => {
             {mytalk_list.map((p, idx) => {
               return (
             <Grid margin="0 16px 16px 0" padding="0 2.5%" height="235px" width="96%" backgroundColor="#202124" borderRadius="12px"
-                  // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
+            _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
                       <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">{p.post.title}</Text>
@@ -79,7 +79,7 @@ const MypagePost = (props) => {
               {myqna_list.map((q, idx) => {
               return (
             <Grid margin="0 16px 16px 0" padding="0 2.5%" height="235px" width="96%" backgroundColor="#202124" borderRadius="12px"
-                  // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
+            _onClick={()=>{history.push(`/question/detail/${q.questionId}`)}}
                   >
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
                       <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">{q.question.title}</Text>
@@ -106,7 +106,7 @@ const MypagePost = (props) => {
                 {mycommu_list.map((c, idx) => {
               return (
             <Grid margin="0 16px 16px 0" padding="0 2.5%" height="235px" width="96%" backgroundColor="#202124" borderRadius="12px"
-                  // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
+            _onClick={()=>{history.push(`/boot/${c.bootcampName}/post/${c.communityId}`)}}
                   >
                     <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
                       <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">{c.community.title}</Text>

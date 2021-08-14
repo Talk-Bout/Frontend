@@ -63,7 +63,7 @@ const setPostPopDB = (page) => {                                                
   return function (dispatch) {
     instance.get(`/popular/posts?page=${page}`).then((response) => {
       dispatch(setPostPop(response.data));
-      console.log(response.data);
+      // console.log(response.data);
     }).catch((err) => {
       console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
     });

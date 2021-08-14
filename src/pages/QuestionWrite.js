@@ -59,7 +59,7 @@ const QuestionWrite = (props) => {
   const old_question = question_list.find(
     (question) => question.questionId == question_id
   );
-  console.log(old_question);
+  // console.log(old_question);
   //포스트 작성
   const create_question = () => {
     if (titleInput.current.value === '') {
@@ -73,12 +73,13 @@ const QuestionWrite = (props) => {
     }
 
     if (edit_mode) {
+      const edited_image = preview ? image_url : old_question.image;
       const edit_question = {
         questionId: question_id,
         title: titleInput.current.value,
         content: contentInput.current.value,
         nickname: user_name,
-        image: image_url,
+        image: edited_image,
       };
       dispatch(questionActions.editQuestionDB(edit_question));
       dispatch(imageActions.getPreview(null));
@@ -214,14 +215,14 @@ const QuestionWrite = (props) => {
                   </label>
                 </form>
 
-                <Text
+                {/* <Text
                   fontSize="2.5vh"
                   color="#b3b3b3"
                   margin="0 0 0 10px"
                   cursor="pointer"
                 >
                   <FiHash />
-                </Text>
+                </Text> */}
               </FooterBox>
             </Window>
           </Grid>

@@ -3,6 +3,7 @@ import { history } from '../redux/ConfigureStore';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
+import Stars from '../components/Stars';
 import Profile from '../image/profile_small.png';
 import Mid_Profile from '../image/mypage_profile.svg';
 import Badge from '../image/badge 1.png';
@@ -12,6 +13,7 @@ import { AiOutlineRight } from "react-icons/ai";
 import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as mypageActions} from '../redux/modules/mypage';
+import {actionCreators as campActions} from '../redux/modules/bootcamp';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
@@ -19,9 +21,22 @@ const Mypage = (props) => {
 
   // 관심있는 부트캠프
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
-  // console.log(myboot_list);
   // 관심있는 부트캠프 3개 추출
   const myboot = myboot_list.slice(0,3);
+  // 관심있는 부트캠프 3개 이름만 추출
+  let myboot_name = [];
+  myboot.map((boot) => {
+    myboot_name.push(boot.bootcampName);
+  });
+  // 부트캠프 전체 목록
+  const camp_list = useSelector((state) => state.bootcamp.camp_list);
+  // 관심있는 부트캠프 3개 정보까지 추출
+  let myboot_info = [];
+  camp_list.map((camp) => {
+    if (myboot_name.includes(camp.bootcampName)) {
+      myboot_info.push(camp);
+    };
+  });
 
   // 내가 쓴글 리스트
   const all_post = useSelector((state) => state.mypage.mypost_list);
@@ -55,11 +70,11 @@ const Mypage = (props) => {
   // 부트캠프, 부트톡톡 북마크
   useEffect(()  => {
     dispatch(mypageActions.setMyBootDB(nickname));
+    dispatch(campActions.setCampsDB(1));
     dispatch(mypageActions.setMypostDB(nickname));
     dispatch(mypageActions.setMyTalkDB(nickname));
     dispatch(mypageActions.setMyQnaDB(nickname));
     dispatch(mypageActions.setMyCommuDB(nickname));
-
   }, []);
   
   return (
@@ -124,22 +139,22 @@ const Mypage = (props) => {
                 </Grid>
                 {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                 {myboot_list.length !== 0 ?
-                <Grid display="flex" margin="12px 0" height="65%" width="100%">
-                {myboot.map((b, idx) => {
+                <Grid display="flex" margin="12px 0" justify_content="space-between" height="65%" width="100%">
+                {myboot_info.map((mb, idx) => {
               return (
-                  <Grid margin="0 16px 0 0" display="flex" padding="0 1.5%" height="96px" width="31.5%" backgroundColor="#202124"  borderRadius="5px"
-                  _onClick={()=>{history.push(`/boot/${b.bootcampName}/info`)}}
+                  <Grid margin="0 16px 0 0" display="flex" padding="0 1.5%" height="96px" width="32%" backgroundColor="#202124"  borderRadius="5px"
+                  _onClick={()=>{history.push(`/boot/${mb.bootcampName}/info`)}}
                   >
                     <ImageBox>
                      <Image shape="CircleLogo"/>
                     </ImageBox>
                     <Grid padding="10px 0" width="67%">
                       <Grid display="flex" justify_content="space-between">
-                      <Text p margin="0 0 5px 10px" color="#F1F3F4" fontSize="18px">{b.bootcampName}</Text>
+                      <Text p margin="0 0 5px 10px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                       <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill/></Text>
                       </Grid>
                       
-                      <Text p margin="2px 0px 0px 10px" color="#F1F3F4" fontSize="14px">★★☆☆☆ 2.2</Text>
+                      <Text p margin="2px 0px 0px 10px" color="#F1F3F4" fontSize="14px"><Stars score={mb.star} size='14px' withScore /></Text>
                     </Grid>
                   </Grid>
                );

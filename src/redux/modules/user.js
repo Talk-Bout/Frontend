@@ -49,7 +49,7 @@ const logInDB = (email, password) => {
           nickname: response.data.nickname,
         };
         dispatch(logIn(user_info));
-        
+
         localStorage.setItem('token', response.data.token); //token이름으로 response.data.token 저장
         history.push('/');
       })
@@ -73,6 +73,7 @@ const signUpDB = (new_user) => {
       })
       .then((response) => {
         console.log(response.data);
+        dispatch(signUp(response.data));
         history.push('/login');
       })
       .catch((err) => {

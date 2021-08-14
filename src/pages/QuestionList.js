@@ -22,6 +22,11 @@ const QuestionList = (props) => {
   const qna_list = useSelector((state) => state.question.list);
   const [page, setPage] = useState(1);
 
+  //인기순정렬
+  const popular_arrange = (page) => {
+    console.log(page);
+  };
+
   //페이지네이션
   useEffect(() => {
     dispatch(questionActions.setQuestionDB(page));
@@ -69,6 +74,7 @@ const QuestionList = (props) => {
                 lineHeight="32px"
                 margin="0 16px"
                 cursor="pointer"
+                onClick={() => popular_arrange()}
               >
                 <span
                   style={{

@@ -61,6 +61,7 @@ const BootCommuWrite = (props) => {
       };
       dispatch(campActions.editCommuDB(edited_commu));
       dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
       titleRef.current.value = '';
       contentRef.current.value = '';
     } else {
@@ -73,6 +74,7 @@ const BootCommuWrite = (props) => {
       };
       dispatch(campActions.addCommuDB(new_commu));
       dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
       titleRef.current.value = '';
       contentRef.current.value = '';
     }

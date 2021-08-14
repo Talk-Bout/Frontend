@@ -15,6 +15,9 @@ const BootRoot = (props) => {
   // 현재 접속 중인 사용자의 닉네임
   const username = useSelector(state => state.user.user.nickname);
 
+  const key = window.location.pathname.split('/');
+  console.log(key);
+
   // 사용자가 북마크한 부트캠프 목록
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
   // 사용자가 이 부트캠프를 북마크했다면, this_camp에 넣는다.

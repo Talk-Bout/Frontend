@@ -52,7 +52,11 @@ const BootMain = (props) => {
                 })}>
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
-                    {<Logo src={camp.logo ? `http://13.209.12.149${camp.logo}` : CampImg} alt={camp.bootcampName}></Logo>}
+                    {camp.logo ? 
+                    <Logo src={`http://13.209.12.149${camp.logo}`} alt={camp.bootcampName}></Logo>
+                    :
+                    <Logo src={CampImg} alt={camp.bootcampName} style={{width: 'auto', height: 'auto'}}></Logo>
+                    }
                   </ImageDiv>
                   {/* 부트캠프 이름 */}
                   <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" margin="0 0 0 15px" color='#F8F9FA'>

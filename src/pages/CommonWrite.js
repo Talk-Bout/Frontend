@@ -152,8 +152,8 @@ const BootCommuWrite = (props) => {
                  ref={categoryRef}
                 >
                   <Option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
-                  <Option value="info">정보방</Option>
-                  <Option value="chitchat">잡담방</Option>
+                  <Option value="info">정보</Option>
+                  <Option value="chitchat">잡담</Option>
                 </SelectBox>
                 {/* 제목 입력 칸 */}
                 <TitleBox>

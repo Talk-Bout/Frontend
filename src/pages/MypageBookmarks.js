@@ -97,7 +97,7 @@ const MypagePost = (props) => {
                     </Grid>
                     <hr/>
                     <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
-                      <Text p margin="0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> 질문과답변 </Text>
+                      <Text p margin="0" color="#BDC1C6" fontSize="14px"> 질문과답변 </Text>
                     </Grid>
                     
                   </Grid>
@@ -124,7 +124,7 @@ const MypagePost = (props) => {
                     </Grid>
                     <hr/>
                     <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
-                      <Text p margin="0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> 커뮤니티 </Text>
+                      <Text p margin="0" color="#BDC1C6" fontSize="14px"> 커뮤니티 </Text>
                     </Grid>
                     
                   </Grid>

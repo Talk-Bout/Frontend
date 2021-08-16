@@ -179,7 +179,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 326px;
     height: 40px;
     &::placeholder {
@@ -194,7 +194,7 @@ const Logo = styled.img`
   margin: 0 8px;
   cursor: pointer;
   vertical-align: middle;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     height: 56px;
     width: 140px;
 
@@ -218,7 +218,7 @@ const LoginBtn = styled.button`
   padding: 0;
   margin: 38px 42px 0 0;
   height: 24px;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     height: 18px;
     margin: 27px 18px 0 0;
   }

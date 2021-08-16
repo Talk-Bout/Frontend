@@ -78,7 +78,7 @@ const TextBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 4px 0 24px;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     margin: 4px 0 20px;
   } 
 `;
@@ -104,7 +104,7 @@ const QuestionBox = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     border-bottom: 1px solid #3c4043;
     padding: 16px;
   }
@@ -113,7 +113,7 @@ const QuestionBox = styled.div`
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 16px;
   }
 `;

@@ -219,7 +219,7 @@ const GridBox = styled.div`
   cursor: ${(props) => props.cursor};
 
   // 태블릿 사이즈(width: 768px)
-  @media (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     height: ${(props) => props.TABheight};
     width: ${(props) => props.TABwidth};
     margin: ${(props) => props.TABmargin};

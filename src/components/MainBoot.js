@@ -80,7 +80,7 @@ const TextBox = styled.div`
   justify-content: space-between;
   padding-bottom: 25px;
   margin-top: 4px;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     padding-bottom: 20px;
   }
 `;
@@ -91,7 +91,7 @@ const CardList = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     .campcard4, .campcard5 {
     display: none;
     }
@@ -111,7 +111,7 @@ const CampCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 49%;
     height: 96px;
     margin-bottom: 12px;
@@ -125,7 +125,7 @@ const ImageDiv = styled.div`
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 64px;
     height: 64px;
   }

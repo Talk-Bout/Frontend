@@ -125,9 +125,11 @@ Text.defaultProps = {
     -webkit-box-orient: ${(props) => props.wbo};
     overflow: ${(props) => props.overflow};
     // 태블릿 사이즈(width: 768px)
-    font-size: ${(props) => props.TABfontSize};
-    margin: ${(props) => props.TABmargin};
-    line-height: ${(props) => props.TABlineHeight};
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      font-size: ${(props) => props.TABfontSize};
+      margin: ${(props) => props.TABmargin};
+      line-height: ${(props) => props.TABlineHeight};
+    }
   `;
 
   const TextBoxS = styled.span`
@@ -155,9 +157,11 @@ Text.defaultProps = {
     -webkit-box-orient: ${(props) => props.wbo};
     overflow: ${(props) => props.overflow};
     // 태블릿 사이즈(width: 768px)
-    font-size: ${(props) => props.TABfontSize};
-    margin: ${(props) => props.TABmargin};
-    line-height: ${(props) => props.TABlineHeight};
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      font-size: ${(props) => props.TABfontSize};
+      margin: ${(props) => props.TABmargin};
+      line-height: ${(props) => props.TABlineHeight};
+    }
 `;
 
 export default Text;

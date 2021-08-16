@@ -35,6 +35,7 @@ const CommonBoardList = (props) => {
 
   // 불러오는 3페이지짜리 커뮤니티글 목록
   const all_post = useSelector(state => state.post.list);
+  // console.log(all_post);
   // 1페이지에 보여줄 개수로만 자른 목록
   const post_list = all_post.slice(0, 8);
 
@@ -71,7 +72,7 @@ const CommonBoardList = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto' >
         <Sidebar />
-        <Body header>
+        <Body header footer>
         <Grid height="100%" >
           <Grid height="3%" margin="0 0 24px 0">
             <Text p fontSize="32px" padding="0 1%" color="#F8F9FA" fontWeight="bold" margin='0 0 8px'>📣부트톡톡
@@ -142,7 +143,7 @@ const CommonBoardList = (props) => {
               })}
             </Grid>
             {/* import 부트톡톡 게시물  */}
-            <Grid minHeight="90vh">
+            <Grid height="840px">
               <Grid width="100%" height="764px" margin="2% 0 0 0">
               <Contents>
                 {post_list.map((c, idx) => {
@@ -153,7 +154,7 @@ const CommonBoardList = (props) => {
           </Contents>
               </Grid>     
             </Grid>
-            <Grid height="1%" is_center>
+            <Grid height="0px" is_center>
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>

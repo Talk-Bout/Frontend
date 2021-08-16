@@ -45,6 +45,10 @@ const BootCommuWrite = (props) => {
 
   // 게시글 등록(수정)
   const addPost = () => {
+    if (categoryRef.current.value === '') {
+      window.alert('카테고리를 입력해주세요.');
+      return;
+    }
     if (titleRef.current.value === '') {
       window.alert('제목을 입력해주세요.');
       return;
@@ -53,6 +57,7 @@ const BootCommuWrite = (props) => {
       window.alert('내용을 입력해주세요.');
       return;
     }
+    
     if (postId) {
       const edited_image = preview ? image_url : commu_found.image
       const edited_post = {

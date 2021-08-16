@@ -17,6 +17,12 @@ const DELETE_BOOKMARK = 'post/DELETE_BOOKMARK'; // 북마크 삭제하기
 const LIKE_POST = 'post/LIKE_POST' // 좋아요 표시하기
 const UNLIKE_POST = 'post/UNLIKE_POST' // 좋아요 해제하기
 
+const SET_COMMENT = 'post/SET_COMMENT';         // 댓글 불러오기
+const SET_NEXT_COMMENT = 'post/SET_NEXT_COMMENT';    // 댓글 더보기
+const ADD_COMMENT = 'post/ADD_COMMENT';         // 댓글 추가하기
+const EDIT_COMMENT = 'post/EDIT_COMMENT';       // 댓글 수정하기
+const DELETE_COMMENT = 'post/DELETE_COMMENT';   // 댓글 삭제하기
+
 // 액션생성함수
 // 게시물
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
@@ -33,6 +39,13 @@ const deleteBookmark = createAction(DELETE_BOOKMARK, (bookmarkId) => ({bookmarkI
 const likePost = createAction(LIKE_POST, (like_post) => ({like_post}));
 const unlikePost = createAction(UNLIKE_POST, (unlike_post) => ({unlike_post}));
 
+// 액션생성함수
+const setComment = createAction(SET_COMMENT, (postComment_list) => ({postComment_list}));
+const setNextComment = createAction(SET_NEXT_COMMENT, (postComment_list) => ({postComment_list}));
+const addComment = createAction(ADD_COMMENT, (postComment) => ({postComment}));
+const editComment = createAction(EDIT_COMMENT, (postComment) => ({postComment}));
+const deleteComment = createAction(DELETE_COMMENT, (postCommentId) => ({postCommentId}));
+
 // 기본값 정하기
 const initialState = {
   list: [],
@@ -40,6 +53,7 @@ const initialState = {
   one_post: [],
   my_bookmark_list: [],
   my_like_list: [],
+  postComment_list: [],
 };
 
 // 액션함수
@@ -169,6 +183,7 @@ const setBookmarkDB = (nickname) => {
   return function (dispatch) {
     instance.get(`/users/${nickname}/postBookmarks`).then((response) => {
       dispatch(setBookmark(response.data));
+      // console.log(response.data);
     }).catch((err) => {
       console.error(`부트톡톡 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -185,7 +200,7 @@ const addBookmarkDB = (postId, nickname) => {
       .then((response) => {
         // console.log(response.data);
                 dispatch(addBookmark(response.data));
-                
+                console.log(response.data);
             })
             .catch((err) => {
               console.error(`부트톡톡 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
@@ -199,7 +214,7 @@ const deleteBookmarkDB = (postId, postBookmarkId) => {
       instance.delete(`/posts/${postId}/postBookmarks/${postBookmarkId}`)
     .then((response) => {
               dispatch(deleteBookmark(response.data));
-              // console.log(response.data);
+              console.log(response.data);
           })
           .catch((err) => {
             console.error(`부트톡톡 북마크 삭제하기 에러 발생: ${err} ### ${err.response}`);
@@ -233,6 +248,81 @@ const unlikePostDB = (postId, postLikeId) => {
   };
 };
 
+const setCommentDB = (postId, page) => {
+  // 댓글 불러오는 함수
+  return function (dispatch) {
+    instance.get(`/posts/${postId}/postComments?page=${page}`, {
+    })
+    .then((response) => {
+          if (page !== 1){
+              if (response.data.length !== 0) {
+                  dispatch(setNextComment(response.data));
+                } else {
+                  window.alert('마지막 댓글입니다.');
+                  return;
+                }
+          } else {
+              dispatch(setComment(response.data));
+          }
+          // console.log(setComment(response.data));
+      })
+      .catch((err) => {
+          console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);
+      });
+  };
+  };
+  
+  const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
+      return function (dispatch, {history}) {
+          const nickname = new_comment.nickname;
+          const content = new_comment.content;
+          const postId = parseInt(new_comment.postId);
+          const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+          instance.post(`/posts/${postId}/postComments`,
+          {
+              nickname: nickname,
+              content: content,
+              postId: postId,
+          }, {headers: headers}).then((response) => {
+              dispatch(addComment(response.data));
+              // console.log(response.data);
+              }).catch((err) => {
+                  console.error(`부트톡톡 댓글 추가하기 에러 발생: ${err}`);
+              });
+          };
+      };
+  
+  const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하는 함수
+  return function (dispatch, getState, { history }) {
+  const postCommentId = edit_comment.postCommentId;
+  const content = edit_comment.content;
+  instance.patch(`/posts/${postId}/postComments/${postCommentId}`,
+  { 
+      content: content,
+  }).then((response) => {
+          // console.log(response.data);
+          dispatch(editComment(response.data));
+      }).catch((err) => {
+          console.error(`부트톡톡 댓글 수정하기 에러 발생: ${err}`);
+      });
+  };
+  };
+  
+  
+  const deleteCommentDB = (postCommentId, postId) => {   
+    console.log(postCommentId, postId)    // 댓글 삭제하는 함수
+  return function (dispatch) {
+  instance.delete(`/posts/${postId}/postComments/${postCommentId}`
+  )
+  .then((response) => {
+          // console.log(response.data);
+          dispatch(deleteComment(postCommentId));
+      }).catch((err) => {
+          console.error(`부트톡톡 댓글 삭제하기 에러 발생: ${err}`);
+      });
+  }; 
+  };
+  
 // 리듀서
 export default handleActions(
   {
@@ -274,12 +364,8 @@ export default handleActions(
     }),
     [DELETE_BOOKMARK]: (state, action) =>
     produce(state, (draft) => {
-      const new_bookmark = draft.my_bookmark_list.filter((bookmark) => {
-        if(bookmark.postBookmarkId !== action.payload.bookmarkId){
-          return bookmark;
-        }
-      })
-      draft.list = new_bookmark;
+      let idx = draft.my_bookmark_list.findIndex((bookmark) => bookmark.postBookmarkId === action.payload.postBookmarkId);
+    draft.my_bookmark_list.splice(idx, 1);
     }),
     [LIKE_POST] :  (state, action) => produce(state, (draft) => {
       draft.my_like_list.push(action.payload.like_post);
@@ -288,6 +374,27 @@ export default handleActions(
     [UNLIKE_POST] : (state, action) => produce(state, (draft) => {
       let like_idx = draft.my_like_list.findIndex((like) => like.postLikeId === action.payload.unlike_post);
       draft.my_like_list.splice(like_idx, 1);
+    }),
+    [SET_COMMENT]: (state, action) => produce(state, (draft) => {
+      draft.postComment_list = [...action.payload.postComment_list];
+    }),
+    [SET_NEXT_COMMENT] : (state, action) => produce(state, (draft) => {
+        draft.postComment_list = [...draft.postComment_list].concat(action.payload.postComment_list);
+    }),
+    
+    [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
+        draft.postComment_list.unshift(action.payload.postComment);
+    }),
+    
+    [DELETE_COMMENT]: (state, action) => produce(state, (draft) => {
+        let idx = draft.postComment_list.findIndex((ct)=> ct.postCommentId === action.payload.postCommentId);
+        draft.postComment_list.splice(idx, 1);
+    }),
+    
+    [EDIT_COMMENT]: (state, action) =>
+    produce(state, (draft) => {
+        let idx = draft.postComment_list.findIndex((ct) => ct.postCommentId === action.payload.postComment.postCommentId);
+        draft.postComment_list[idx] = action.payload.postComment;   
     }),
 }, initialState);
 
@@ -304,6 +411,10 @@ const actionCreators = {
   setBookmarkDB,
   likePostDB,
   unlikePostDB,
+  setCommentDB,
+  addCommentDB,
+  editCommentDB,
+  deleteCommentDB,
 };
 
 export { actionCreators };

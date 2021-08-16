@@ -41,9 +41,9 @@ const MypagePost = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto' height='100vh'>
+      <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
-        <Body header>
+        <Body header footer>
           <Grid height="85vh">
             <Grid height="9%" width="100%">
               <Text fontSize="32px" lineHeight="46px" color="#F8F9FA">내 북마크</Text>
@@ -131,7 +131,8 @@ const MypagePost = (props) => {
                   );
                 })}
             </Card>
-            <Grid height="10%" width="100%"  is_center>
+            </Grid>
+            <Grid height="24px" width="100%"  is_center>
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기
               <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
@@ -144,7 +145,7 @@ const MypagePost = (props) => {
               다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기
               <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text> */}
             </PageBox>
-             </Grid>
+             
           </Grid>
         </Body>
       </Grid>

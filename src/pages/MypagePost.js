@@ -28,9 +28,9 @@ const MypagePost = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto' height='100vh'>
+      <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
-        <Body header>
+        <Body header footer>
           <Grid height="85vh">
             <Grid height="9%" width="100%">
               <Text fontSize="32px" lineHeight="46px" color="#F8F9FA"> 님의 글</Text>

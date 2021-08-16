@@ -82,8 +82,8 @@ const Mypage = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
-        <Body header>
-        <Grid display="flex" backgroundColor="#17181b" height="93vh">
+        <Body header footer>
+        <Grid display="flex" backgroundColor="#17181b" height="80vh">
           {/* 왼쪽 프로필 */}
           <Grid height="100%" width="25%" margin="0 16px 0 0">
             <Grid backgroundColor="#202124" height="325px" width="302px" margin="auto"

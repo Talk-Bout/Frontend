@@ -44,9 +44,9 @@ const HeaderN = (props) => {
           width="100%"
           height="100px"
           TABheight='72px'
-          borderBottom="1px solid #80868b"
           display="flex"
           justify_content="space-between"
+          backgroundColor='#202124'
         >
           {/* 검색창 */}
           <Grid
@@ -132,9 +132,9 @@ const HeaderN = (props) => {
         width="100%"
         height="100px"
         TABheight='72px'
-        borderBottom="1px solid #5F6368"
         display="flex"
         justify_content="space-between"
+        backgroundColor='#202124'
       >
         {/* 검색창 */}
         <Grid

@@ -137,7 +137,7 @@ const BootPost = (props) => {
       <Grid className='background' display='flex'>
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
+        {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           <BodyInner>
             <div className='post-box' style={{padding: '0 10px 0 0'}}>

@@ -46,17 +46,20 @@ const MainQna = (props) => {
                   Q {pq.title}
                 </Text>
                 {/* 질문 내용 */}
-                <Text
+                <div style={{margin: 0, padding: 0, height: '76px'}}>
+                  <Text
                   p
                   fontSize="14px"
                   letterSpacing="0.2px"
+                  lineHeight='18px'
                   color="#9aa0a6"
                   overflow="hidden"
                   display="-webkit-box"
                   wlc="4"
                   wbo="vertical"
                 >{pq.content}
-                </Text>
+                  </Text>
+                </div>
                 <div style={{ marginTop: '24px', height: '24px' }}>
                   {/* 작성자 프로필 이미지 */}
                   <ProfileImg src={pq.user.profilePic ? pq.user.profilePic : Profile} alt="프로필" />

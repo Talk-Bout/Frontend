@@ -39,8 +39,8 @@ const MainTalk = (props) => {
                 {pp.title}
               </Text>
               {/* 게시글 내용 */}
-              <Grid>
-                <Text p fontSize="14px" margin="16px 0 0" letterSpacing='0.2px' color="#9aa0a6" overflow='hidden' wlc='2' wbo='vertical' display='-webkit-box'>{pp.content}</Text>
+              <Grid height='50px'>
+                <Text p fontSize="14px" margin="16px 0 0" letterSpacing='0.2px' lineHeight='18px' color="#9aa0a6" overflow='hidden' wlc='2' wbo='vertical' display='-webkit-box'>{pp.content}</Text>
               </Grid>
               {/* 작성자 정보 */}
               <Grid padding='16px 0 0'>

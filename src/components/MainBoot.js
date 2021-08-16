@@ -110,15 +110,12 @@ const ImageDiv = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  text-align: center;
   line-height: 80px;
+  overflow: hidden;
 `;
 
 const Logo = styled.img`
-  width: 100%;
-  height: 100%;
-  size: cover;
-  border-radius: 50%;
+  max-height: 100%;
 `;
 
 export default MainBoot;

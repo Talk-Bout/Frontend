@@ -119,7 +119,7 @@ position: relative;
 
 const ImageDiv = styled.div`
   text-align: center;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   opacity: 0.4;
   border-radius: 8px;
@@ -131,7 +131,7 @@ const ImageDiv = styled.div`
 const Logo = styled.img`
   width: 100%;
   height: 100%;
-  size: contain;
+  size: cover;
   border-radius: 8px;
 `;
 

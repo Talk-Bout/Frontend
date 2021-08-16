@@ -124,6 +124,10 @@ const setMyCampDB = () => {
 const addMyCampDB = (nickname, bootcampName) => {
   // 부트캠프 북마크 표시하는 함수
   return function (dispatch) {
+    if (nickname === undefined) {
+      window.alert('로그인 후에 이용 가능합니다.');
+      return;
+    }
     instance
       .post(`/bootcamp/${bootcampName}/bootcampBookmarks`, {
         nickname: nickname,
@@ -316,6 +320,10 @@ const setMyCommuDB = () => {
 const addMyCommuDB = (nickname, communityId) => {
   // 커뮤니티글 북마크 표시하는 함수
   return function (dispatch) {
+    if (nickname === undefined) {
+      window.alert('로그인 후에 이용 가능합니다.');
+      return;
+    }
     instance
       .post(`/community/${communityId}/communityBookmarks`, {
         nickname: nickname,
@@ -353,6 +361,10 @@ const deleteMyCommuDB = (communityId, communityBookmarkId) => {
 const likeCommuDB = (communityId, nickname) => {
   // 커뮤니티글 좋아요 표시하는 함수
   return function (dispatch) {
+    if (nickname === undefined) {
+      window.alert('로그인 후에 이용 가능합니다.');
+      return;
+    }
     instance
       .post(`/community/${communityId}/communityLikes`, {
         communityId: communityId,
@@ -411,6 +423,10 @@ const setCommentsDB = (commu_id, page) => {
 const addCommentDB = (new_comment) => {
   // 서버에 커뮤니티글의 댓글 저장하는 함수
   return function (dispatch) {
+    if (new_comment.nickname === undefined) {
+      window.alert('로그인 후에 이용 가능합니다.');
+      return;
+    }
     instance
       .post(`/community/${new_comment.communityId}/communityComments`, {
         content: new_comment.content,

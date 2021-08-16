@@ -228,7 +228,7 @@ const BootPost = (props) => {
               {/* 댓글 리스트 */}
               {comment_list && comment_list.map((cm, idx) => {
                 return (
-                  <Comment>
+                  <Comment key={idx}>
                     <Grid display='flex' justify_content='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}

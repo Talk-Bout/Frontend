@@ -27,6 +27,7 @@ const Body = (props) => {
 Body.defaultProps = {
   header: false,
   children: null,
+  footer: false,
 };
 
 export default Body;

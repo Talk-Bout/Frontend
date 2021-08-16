@@ -37,7 +37,10 @@ const BootCommuWrite = (props) => {
   };
   // 이미지 미리보기 삭제 함수
   const exitPage = () => {
-    dispatch(imageActions.getPreview(null));
+    if (window.confirm('변경사항이 저장되지 않을 수 있습니다.')) {
+      history.goBack();
+      dispatch(imageActions.getPreview(null));
+    }
   };
 
   // 게시글 등록(수정)
@@ -108,7 +111,6 @@ const BootCommuWrite = (props) => {
                     lineHeight="84px"
                     cursor="pointer"
                     _onClick={() => {
-                      history.goBack();
                       exitPage();
                     }}
                   >

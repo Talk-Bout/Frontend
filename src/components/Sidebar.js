@@ -19,9 +19,9 @@ const Sidebar = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="sidebar" backgroundColor="#202124" width="100px">
+      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px'>
         <Grid className="sidebar-inner" is_center>
-          <img
+          <Point
             src={PointImg} alt='디자인'/>
           <Image
             src={url === '' ? Home_white : Home}
@@ -50,9 +50,18 @@ const Sidebar = (props) => {
   );
 };
 
+const Point = styled.img`
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 72px;
+  }
+`;
+
 const Image = styled.img`
   width: 100px;
   cursor: pointer;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 72px;
+  }
 `;
 
 export default Sidebar;

@@ -22,12 +22,12 @@ const MainQna = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="top-boot" height="fit-content" padding="49px 0 16px">
+      <Grid className="top-boot" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px'>
         {/* 인기 Q&A */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA'>🔥질문과 답변</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px'>🔥질문과 답변</Text>
         <TextBox>
           {/* 질문과 답변 = (question) => { return answer } */}
-          <Text fontSize='14px' color='#BDC1C6'>질문과 답변 = (question) =&gt; &#123; return answer &#125;</Text>
+          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px'>질문과 답변 = (question) =&gt; &#123; return answer &#125;</Text>
           {/* Q&A 더보기 버튼 */}
           <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>질문과 답변 더보기 &gt;</Text>
         </TextBox>
@@ -39,19 +39,27 @@ const MainQna = (props) => {
                 {/* 질문 제목 */}
                 <Text
                   fontSize="18px"
+                  TABfontSize='16px'
                   fontWeight="700"
                   color="#f1f3f4"
                   margin="0 0 16px"
+                  TABmargin='0 0 11px'
+                  overflow='hidden'
+                  display='-webkit-box'
+                  wlc='1'
+                  wbo='vertical'
                 >
                   Q {pq.title}
                 </Text>
                 {/* 질문 내용 */}
-                <div style={{margin: 0, padding: 0, height: '76px'}}>
+                <Content>
                   <Text
                   p
                   fontSize="14px"
+                  TABfontSize='12px'
                   letterSpacing="0.2px"
                   lineHeight='18px'
+                  TABlineHeight='16px'
                   color="#9aa0a6"
                   overflow="hidden"
                   display="-webkit-box"
@@ -59,63 +67,34 @@ const MainQna = (props) => {
                   wbo="vertical"
                 >{pq.content}
                   </Text>
-                </div>
-                <div style={{ marginTop: '24px', height: '24px' }}>
+                </Content>
+                <Info>
                   {/* 작성자 프로필 이미지 */}
                   <ProfileImg src={pq.user.profilePic ? pq.user.profilePic : Profile} alt="프로필" />
                   {/* 작성자 닉네임 */}
-                  <Text fontSize="12px" color="#9aa0a6" margin="0 8px">
+                  <Text fontSize="12px" color="#9aa0a6" margin="0 8px" TABfontSize='10px'>
                     {pq.nickname}
                   </Text>
                   {/* 작성일자 */}
-                  <Text fontSize="12px" color="#80868b" margin="0 4px 0 0">
+                  <Text fontSize="12px" color="#80868b" margin="0 4px 0 0" TABfontSize='14px' vertical_align='middle'>
                     <BiTimeFive />
                   </Text>
-                  <Text fontSize="12px" color="#80868b">
+                  <Text fontSize="12px" color="#80868b" TABfontSize='10px'>
                     {pq.createdAt}
                   </Text>
-                </div>
+                </Info>
                 <Line />
                 <div style={{ height: 'fit-content' }}>
                   {/* 추천 수 */}
-                  <Text fontSize="12px" color="#bdc1c6" margin="0 8px 0 0">
-                    <span
-                      style={{
-                        fontSize: '16px',
-                        verticalAlign: 'middle',
-                        marginRight: '6px',
-                      }}
-                    >
-                      <BiLike />
-                    </span>
-                    {pq.likeNumber}
-                  </Text>
-                  {/* 댓글 수 */}
-                  {/* <Text fontSize="12px" color="#bdc1c6" margin="0 8px">
-                    <span
-                      style={{
-                        fontSize: '16px',
-                        verticalAlign: 'middle',
-                        marginRight: '6px',
-                      }}
-                    >
-                      <BiComment />
-                    </span>
-                    1
-                  </Text> */}
-                  {/* 조회수 */}
-                  <Text fontSize="12px" color="#bdc1c6" margin="0 0 0 8px">
-                    <span
-                      style={{
-                        fontSize: '16px',
-                        verticalAlign: 'middle',
-                        marginRight: '6px',
-                      }}
-                    >
-                      <AiOutlineEye />
-                    </span>
-                    {pq.viewCount}
-                  </Text>
+                  <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px'>
+                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><BiLike /></Text>{pq.likeNumber}
+                </Text>
+                {/* 댓글 수 */}
+                {/* <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
+                  <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>댓글 수</Text> */}
+                {/* 조회수 */}
+                <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
+                <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><AiOutlineEye /></Text>{pq.viewCount}</Text>
                 </div>
               </QuestionCard>
             );
@@ -131,6 +110,10 @@ const TextBox = styled.div`
   justify-content: space-between;
   padding-bottom: 24px;
   margin-top: 3px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin-top: 4px;
+    padding-bottom: 20px;
+  }
 `;
 
 const CardList = styled.div`
@@ -138,6 +121,9 @@ const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    height: 201px;
+  }
 `;
 
 const QuestionCard = styled.div`
@@ -151,15 +137,40 @@ const QuestionCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    padding: 16px 16px 12px;
+  }
+`;
+
+const Content = styled.div`
+  margin: 0;
+  padding: 0;
+  height: 76px;
+`;
+
+const Info = styled.div`
+  margin-top: 24px;
+  height: 24px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin-top: 20px;
+    height: 16px;
+  }
 `;
 
 const ProfileImg = styled.img`
   vertical-align: middle;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 const Line = styled.hr`
   margin: 16px 0 8px;
   border: 1px solid #282a2d;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin: 12px 0;
+  }
 `;
 
 export default MainQna;

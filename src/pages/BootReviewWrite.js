@@ -27,6 +27,13 @@ const BootReviewWrite = (props) => {
   const prosInput = useRef(null);
   const consInput = useRef(null);
 
+  const exitPage = () => {
+    if (window.confirm('변경사항이 저장되지 않을 수 있습니다.')) {
+      history.goBack();
+    }
+  };
+
+
   // 리뷰 [등록] 버튼 누르면 호출되는 함수
   const addReview = () => {
     if (stars === 0) {
@@ -78,7 +85,7 @@ const BootReviewWrite = (props) => {
               <Grid height='84px' display='flex' borderBottom='1px solid #5f6368'>
                 {/* 나가기 버튼 */}
                 <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='35px' color='#e5e5e5' lineHeight='84px' cursor='pointer' _onClick={() => history.goBack()}><BsX /></Text>
+                  <Text fontSize='35px' color='#e5e5e5' lineHeight='84px' cursor='pointer' _onClick={() => exitPage()}><BsX /></Text>
                 </Grid>
                 {/* 타이틀 */}
                 <Grid width='53.33%' is_center>

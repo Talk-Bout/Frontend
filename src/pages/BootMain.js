@@ -37,7 +37,7 @@ const BootMain = (props) => {
       <Grid className='background' display='flex' overflow='auto'>
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
+        {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           {/* 부트캠프 */}
           <Text p color='#F8F9FA' fontSize='32px' fontWeight='700' margin='0 0 8px'>🚀부트캠프</Text>

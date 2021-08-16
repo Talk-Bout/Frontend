@@ -50,7 +50,7 @@ const BootCommu = (props) => {
       <Grid className='background' display='flex' overflow='auto'>
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
+        {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
         <BootRoot camp={this_camp} url_word={url_word}/>
           {/* 커뮤니티 페이지 */}

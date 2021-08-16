@@ -4,10 +4,10 @@ import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-// import Search from '../image/search_black.png';
+import Search from '../image/search_black.png';
 import LogoImg from '../image/Logo.png';
 import { BsFillBookmarkFill } from 'react-icons/bs';
-// import { BsFillBellFill } from 'react-icons/bs';
+import { BsFillBellFill } from 'react-icons/bs';
 import Profile from '../image/profile_small.png';
 import CaretDown from '../image/CaretDown.png';
 import { Button, Menu, MenuItem } from '@material-ui/core';
@@ -47,16 +47,16 @@ const HeaderN = (props) => {
           display="flex"
           justify_content="space-between"
         >
-          <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')}/>
           {/* 검색창 */}
           <Grid
-            className="search"
+            className="logo_search"
             height="fit-content"
             width="auto"
-            margin="26px 0 0 42px"
+            margin='10px 0 0'
           >
-            {/* <Image src={Search} alt="검색" />
-            <Input placeholder="검색어를 입력하세요." /> */}
+            <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')}/>
+            <Image src={Search} alt="검색" />
+            <Input placeholder="검색어를 입력하세요." />
           </Grid>
           <Grid height="fit-content" width="auto" margin="36px 50px">
             {/* 북마크 메뉴 */}
@@ -72,7 +72,7 @@ const HeaderN = (props) => {
               <BsFillBookmarkFill size="26" />
             </Text>
             {/* 알림 메뉴 */}
-            {/* <Text
+            <Text
               color="#5F6368"
               fontSize="18px"
               vertical_align="middle"
@@ -80,7 +80,7 @@ const HeaderN = (props) => {
               cursor="pointer"
             >
               <BsFillBellFill />
-            </Text> */}
+            </Text>
             {/* 프로필 이미지 */}
             <ProfileImg src={Profile} alt="프로필" />
             {/* 드롭다운 메뉴 */}
@@ -130,16 +130,16 @@ const HeaderN = (props) => {
         display="flex"
         justify_content="space-between"
       >
-        <Logo src={LogoImg} alt="토크부트 로고" />
         {/* 검색창 */}
         <Grid
           className="search"
           height="fit-content"
           width="auto"
-          margin="26px 0 0 42px"
+          margin="10px 0 0"
         >
-          {/* <Image src={Search} alt="검색" />
-          <Input placeholder="검색어를 입력하세요." /> */}
+          <Logo src={LogoImg} alt="토크부트 로고" />
+          <Image src={Search} alt="검색" />
+          <Input placeholder="검색어를 입력하세요." />
         </Grid>
         {/* 로그인 버튼 */}
         <LoginBtn type="button" onClick={() => history.push('/login')}>
@@ -157,26 +157,32 @@ const HeaderN = (props) => {
   );
 };
 
-// const Input = styled.input`
-//   border: none;
-//   width: 600px;
-//   height: 48px;
-//   background-color: transparent;
-//   color: #80868b;
-//   &::placeholder {
-//     color: #80868b;
-//     font-size: 16px;
-//   }
-//   &:focus {
-//     outline: none;
-//   }
-// `;
+const Input = styled.input`
+  border: none;
+  width: 600px;
+  height: 48px;
+  background-color: transparent;
+  color: #80868b;
+  &::placeholder {
+    color: #80868b;
+    font-size: 16px;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Logo = styled.img`
   height: 80px;
   width: 210px;
-  margin: 10px 8px;
+  margin: 0 8px;
   cursor: pointer;
+  vertical-align: middle;
+`;
+
+const Image = styled.img`
+  vertical-align: middle;
+  width: 24px;
 `;
 
 const ProfileImg = styled.img`
@@ -184,11 +190,6 @@ const ProfileImg = styled.img`
   margin-left: 8px;
   cursor: pointer;
 `;
-
-// const Image = styled.img`
-//   vertical-align: middle;
-//   width: 24px;
-// `;
 
 const LoginBtn = styled.button`
   background-color: transparent;

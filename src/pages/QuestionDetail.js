@@ -57,16 +57,11 @@ const QuestionDetail = (props) => {
   const question_like_list = useSelector(
     (state) => state.question.question_like_list
   );
-  // console.log(question_like_list);
+
   const question_like = question_like_list.find(
     (like) => like.nickname == user_name
   );
 
-  // const answer_like_list = useSelector(
-  //   (state) => state.question.answer_like_list
-  // );
-  // console.log(answer_like_list);
-  // console.log(question_like);
   // 콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
   // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
@@ -149,10 +144,15 @@ const QuestionDetail = (props) => {
     <React.Fragment>
       <Grid display="flex">
         <Sidebar />
-        <Body header>
-          <Grid>
+        <Body header footer style={{ backgroundColor: 'blue' }}>
+          <Grid backgroundColor="yellow">
             {/* 질문 카드 */}
-            <Grid width="70vw" height="100%" margin="auto">
+            <Grid
+              width="70vw"
+              height="100%"
+              margin="auto"
+              backgroundColor="red"
+            >
               <Grid display="flex">
                 <Grid width="80%">
                   <Text fontSize="3vh" fontWeight="600" color="#ffffff">

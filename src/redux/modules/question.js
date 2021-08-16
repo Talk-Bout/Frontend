@@ -74,8 +74,8 @@ const unlikeQuestion = createAction(UNLIKE_QUESTION, (q_like_id) => ({
   q_like_id,
 }));
 const likeAnswer = createAction(LIKE_ANSWER, (a_like) => ({ a_like }));
-const unlikeAnswer = createAction(UNLIKE_ANSWER, (a_like_id) => ({
-  a_like_id,
+const unlikeAnswer = createAction(UNLIKE_ANSWER, (a_like_info) => ({
+  a_like_info,
 }));
 
 // 기본값 정하기
@@ -357,7 +357,6 @@ const likeAnswerDB = (answer_id, user_name) => {
         answerId: answer_id,
       })
       .then((response) => {
-        console.log(response.data);
         dispatch(likeAnswer(response.data));
       })
       .catch((err) => {
@@ -368,10 +367,14 @@ const likeAnswerDB = (answer_id, user_name) => {
 
 const unlikeAnswerDB = (answer_id, answerLikeId) => {
   return function (dispatch) {
+    const answer_info = {
+      answer_id: answer_id,
+      answerLikeId: answerLikeId,
+    };
     instance
       .delete(`/answers/${answer_id}/answerLike/${answerLikeId}`)
       .then((response) => {
-        dispatch(unlikeAnswer(answerLikeId));
+        dispatch(unlikeAnswer(answer_info));
       })
       .catch((err) => {
         console.error(`답변 좋아요삭제 에러 : ${err}`);
@@ -468,17 +471,21 @@ export default handleActions(
         let like_answer_idx = draft.answer_list.findIndex(
           (answer) => answer.answerId === action.payload.a_like.answerId
         );
-        console.log(like_answer_idx);
         draft.answer_list[like_answer_idx].answerLike.push(
           action.payload.a_like
         );
       }),
     [UNLIKE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
-        let like_idx = draft.answer_like_list.answerLike.findIndex(
-          (info) => info.answerLikeId === action.payload.a_like_id
+        console.log(action.payload.a_like_info);
+        let answer_idx = draft.answer_list.findIndex(
+          (answer) => answer.answerId === action.payload.a_like_info.answer_id
         );
-        draft.answer_like_list.splice(like_idx, 1);
+        let answerLike_idx = draft.answer_list[answer_idx].answerLike.findIndex(
+          (info) =>
+            info.answerLikeId === action.payload.a_like_info.answerLikeId
+        );
+        draft.answer_list[answer_idx].answerLike.splice(answerLike_idx, 1);
       }),
   },
   initialState

@@ -207,6 +207,11 @@ const GridBox = styled.div`
   align-items: ${(props) => props.alignItems};
   align-self: ${(props) => props.alignSelf};
   cursor: ${(props) => props.cursor};
+
+  @media (max-width: 768px) {
+    height: ${(props) => props.TABHeight};
+    width: ${(props) => props.TABwidth};
+  }
 `;
 
 export default Grid;

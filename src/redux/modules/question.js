@@ -103,7 +103,6 @@ const setQuestionDB = (page) => {
 };
 
 const setQuestionPopDB = (page) => {
-  // <-- 추가했습니다!!
   // 질문글 인기순 정렬
   return function (dispatch) {
     instance

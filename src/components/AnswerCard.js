@@ -15,24 +15,29 @@ const AnswerCard = (props) => {
   const answer_id = parseInt(props.answerId);
   const user_name = useSelector((state) => state.user.user.nickname);
 
-  // const answer_like_list = useSelector(
-  //   (state) => state.question.answer_like_list
-  // );
-  // console.log(answer_like_list);
+  // 한 답변에 좋아요 누른 기록? (개인이 좋아요 누른 기록) : 전체 답변 개수
+  const answer_list = useSelector((state) => state.question.answer_list);
+  console.log(answer_list);
 
-  // //모든 답변에 좋아요를 누른 사람들 전체
-  // const this_answer_likes = answer_like_list.find(
+  // 모든 답변에 좋아요를 누른 사람들 전체
+  // const this_answer_likes = answer_list.find(
   //   (list) => list[0].answerId === answer_id
   // );
   // console.log(this_answer_likes);
 
-  // //내가 누른 좋아요
+  const answer = answer_list.find((answer) => answer.answerId == answer_id);
+  console.log(answer);
+
+  const answer_like_list = answer.answerLike;
+  console.log(answer_like_list);
+
+  // 내가 누른 좋아요
   // const my_like = this_answer_likes.find((like) => like.nickname === user_name);
   // console.log(my_like);
 
   //좋아요 버튼
   const likeAnswer = () => {
-    // console.log(answer_id, user_name);
+    console.log(answer_id, user_name);
     dispatch(questionActions.likeAnswerDB(answer_id, user_name));
   };
   const unlikeAnswer = (answerLikeId) => {
@@ -94,6 +99,22 @@ const AnswerCard = (props) => {
               </LikeCommentBtn>
             </Grid>
           )} */}
+
+          <Grid>
+            <LikeCommentBtn onClick={() => likeAnswer()}>
+              <BiLike color="#C4C4C4" />
+              <Text margin="2px" color="#C4C4C4">
+                0
+              </Text>
+            </LikeCommentBtn>
+          </Grid>
+
+          {/* <Grid>
+            <LikeCommentBtn onClick={() => unlikeAnswer()}>
+              <BiLike color="#7879f1" />
+              <Text margin="2px" color="#7879f1"></Text>
+            </LikeCommentBtn>
+          </Grid> */}
         </Grid>
       </AnswerBox>
     </React.Fragment>
@@ -101,7 +122,7 @@ const AnswerCard = (props) => {
 };
 const AnswerBox = styled.div`
   width: 70vw;
-  margin: 3% auto;
+  margin: 30px auto;
   background-color: #202124;
   border-radius: 12px;
 `;

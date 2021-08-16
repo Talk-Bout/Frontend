@@ -357,6 +357,7 @@ const likeAnswerDB = (answer_id, user_name) => {
         answerId: answer_id,
       })
       .then((response) => {
+        console.log(response.data);
         dispatch(likeAnswer(response.data));
       })
       .catch((err) => {
@@ -459,15 +460,22 @@ export default handleActions(
         let like_idx = draft.question_like_list.findIndex(
           (info) => info.questionLikeId === action.payload.q_like_id
         );
+        console.log(like_idx);
         draft.question_like_list.splice(like_idx, 1);
       }),
     [LIKE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
-        draft.answer_like_list.push(action.payload.a_like);
+        let like_answer_idx = draft.answer_list.findIndex(
+          (answer) => answer.answerId === action.payload.a_like.answerId
+        );
+        console.log(like_answer_idx);
+        draft.answer_list[like_answer_idx].answerLike.push(
+          action.payload.a_like
+        );
       }),
     [UNLIKE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
-        let like_idx = draft.answer_like_list.findIndex(
+        let like_idx = draft.answer_like_list.answerLike.findIndex(
           (info) => info.answerLikeId === action.payload.a_like_id
         );
         draft.answer_like_list.splice(like_idx, 1);

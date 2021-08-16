@@ -35,29 +35,32 @@ const MypagePost = (props) => {
             <Grid height="9%" width="100%">
               <Text fontSize="32px" lineHeight="46px" color="#F8F9FA"> 님의 글</Text>
             </Grid>
-            <Card display="flex" height="81%" width="100%" backgroundColor="green">
+            <Card display="flex" height="81%" width="100%">
             {mypost_list.map((p, idx) => {
               return (
-            <Grid margin="0 16px 16px 0" padding="0 1.5%" height="235px" width="96%" backgroundColor="#202124" borderRadius="12px"
-                  // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
+                <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px"
+            // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
-                    <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
-                      <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">{p.title}</Text>
-                      <Text p margin="2% 0 0 0" color="#F1F3F4" fontSize="14px"
+                    <Grid overflow="hidden" height="100px" width="100%" >
+                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
+                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical"
+                      >{p.title}
+                      </Text>
+                      <Text p  color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
+                      margin="0 0 24px 0" height="44px"
                       >{p.content}</Text>
                     </Grid>
-                    <Grid display="flex" height="19%" width="100%" >
+                    <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
                       <img src={Profile} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
-                        <Text p margin="0 3% 0 0" color="#BDC1C6" fontSize="12px">{p.nickname}</Text>
+                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px">{p.nickname}</Text>
                         <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{p.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <hr/>
-                    <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
-                      <Text p margin="0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/>{p.category} </Text>
+                    <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 부트톡톡 <AiOutlineRight/> {p.category} </Text>
                     </Grid>
                     
                   </Grid>

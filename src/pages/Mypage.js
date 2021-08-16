@@ -140,10 +140,10 @@ const Mypage = (props) => {
                 </Grid>
                 {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                 {myboot_list.length !== 0 ?
-                <Grid display="flex" margin="12px 0" justify_content="space-between" height="65%" width="100%">
+                <Grid display="flex" margin="12px 0"  height="65%" width="100%">
                 {myboot_info.map((mb, idx) => {
               return (
-                  <Grid margin="0 16px 0 0" display="flex" padding="0 1.5%" height="96px" width="32%" backgroundColor="#202124"  borderRadius="5px"
+                  <Grid margin="0 16px 0 0" display="flex" padding="0 15px" height="96px" width="32%" backgroundColor="#202124"  borderRadius="5px"
                   _onClick={()=>{history.push(`/boot/${mb.bootcampName}/info`)}}
                   >
                     <ImageBox>
@@ -162,8 +162,8 @@ const Mypage = (props) => {
               })}
                 </Grid>
                 :
-                <Grid display="flex" margin="1% 0" justify_content="space-between" height="65%" width="100%">
-                  <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" padding="2.5% 32%">
+                <Grid display="flex" margin="12px 0 0 0" justify_content="space-between" height="65%" width="100%">
+                  <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" padding="25px 300px">
                     <Grid margin="auto" height="100%" width="98%" >
                     <Text fontSize="16px" color="#FFFFFF">부트캠프를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                     </Grid>
@@ -185,37 +185,40 @@ const Mypage = (props) => {
                 {/* 북마크가 있을 경우에만 보여줌 */}
                 {mytalk_list.length !== 0 ?
                 <Grid display="flex" margin="12px 0" height="211px" width="100%">
-                {mytalk.map((n, idx) => {
-                  
+                {mytalk.map((p, idx) => {
               return (
-                  <Grid margin="0 16px 0 0" padding="0 1.5%" height="211px" width="32%" backgroundColor="#202124" borderRadius="5px"
-                  _onClick={()=>{history.push(`/common/detail/${n.postId}`)}}
+                <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="31.5%" backgroundColor="#202124" borderRadius="12px"
+            _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
-                    <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
-                      <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">{n.post.title}</Text>
-                      <Text p margin="2% 0 0 0" color="#F1F3F4" fontSize="14px">{n.post.content}</Text>
+                    <Grid overflow="hidden" height="100px" width="100%" >
+                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
+                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical"
+                      >{p.post.title}
+                      </Text>
+                      <Text p  color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
+                      margin="0 0 24px 0" height="44px"
+                      >{p.post.content}</Text>
                     </Grid>
-                    <Grid display="flex" height="19%" width="100%" >
+                    <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
                       <img src={Profile} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
-                        <Text p margin="0 3% 0 0" color="#BDC1C6" fontSize="12px">{n.post.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{n.post.createdAt}</Text>
+                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px">{p.post.nickname}</Text>
+                        <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{p.post.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <hr/>
-                    <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
-                      <Text p margin="2px 0 0 0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> {n.post.category}</Text>
-                      <Text cursor="pointer" color="#7879F1" fontSize="24px"><BsBookmarkFill/></Text>
+                    <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 부트톡톡 <AiOutlineRight/> {p.post.category} </Text>
                     </Grid>
+                    
                   </Grid>
-               );
-              })}
+                  );
+                })}
                 </Grid>
                 :
                 <Grid margin="12px 0 0 0" height="211px" width="98%">
-                  <Grid display="flex" align_items="center" text_align="center" height="203px" width="100%" padding="2.5% 32%" border="5px dotted #2E3134" borderRadius="12px">
+                  <Grid display="flex" align_items="center" text_align="center" height="203px" width="100%" padding="20px 300px" border="5px dotted #2E3134" borderRadius="12px">
                     <Text fontSize="16px" color="#FFFFFF" >북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                   </Grid>
                 </Grid>
@@ -236,34 +239,38 @@ const Mypage = (props) => {
                 <Grid display="flex" margin="12px 0" height="211px" width="100%">
                 {mypost.map((p, idx) => {
               return (
-                  <Grid margin="0 16px 0 0" padding="0 1.5%" height="203px" width="32%" backgroundColor="#202124" borderRadius="5px"
-                  _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
+            <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="31.5%" backgroundColor="#202124" borderRadius="12px"
+              _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
-                    <Grid overflow="hidden" padding="2% 7% 0 0" height="55%" width="100%" >
-                      <Text p margin="2% 0" color="#F1F3F4" fontSize="18px">{p.title}</Text>
-                      <Text p margin="2% 0 0 0" color="#F1F3F4" fontSize="14px"
+                    <Grid overflow="hidden" height="100px" width="100%" >
+                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
+                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical"
+                      >{p.title}
+                      </Text>
+                      <Text p  color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
+                      margin="0 0 24px 0" height="44px"
                       >{p.content}</Text>
                     </Grid>
-                    <Grid display="flex" height="19%" width="100%" >
+                    <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
                       <img src={Profile} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
-                        <Text p margin="0 3% 0 0" color="#BDC1C6" fontSize="12px">{p.nickname}</Text>
+                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px">{p.nickname}</Text>
                         <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{p.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <hr/>
-                    <Grid padding="0.5% 5% 0 0" justify_content="space-between" display="flex" height="25%" width="100%">
-                      <Text p margin="0" color="#BDC1C6" fontSize="14px">부트톡톡 <AiOutlineRight/> {p.category}</Text>
+                    <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 부트톡톡 <AiOutlineRight/> {p.category} </Text>
                     </Grid>
+                    
                   </Grid>
-               );
-              })}
+                  );
+                })}
                 </Grid>
                 :
-                <Grid margin="12px 0" height="203px" width="98%">
-                  <Grid display="flex" align_items="center" text_align="center" padding="2.5% 32%" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
+                <Grid margin="12px 0 0 0" height="203px" width="98%">
+                  <Grid display="flex" align_items="center" text_align="center" padding="20px 300px" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
                     <Text fontSize="18px" color="#FFFFFF" >글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                   </Grid>
                 </Grid>
@@ -297,13 +304,13 @@ justify-content: center;
 `;
 
 const ImgBox = styled.div`
-margin: 2% 3% 0 0;
+margin: 0px 15px 0 0;
 `;
 
 const InfoBox = styled.div`
 display: flex;
 width: 100%;
-padding: 2% 0;
+padding: 5px 0;
 `;
 
 const BookMarkBox = styled.div`

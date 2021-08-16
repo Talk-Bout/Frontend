@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/ConfigureStore';
 import { Text, Grid} from '../elements/index';
@@ -19,16 +19,14 @@ const CommonBoardList = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
 
 
-  // 게시글 인기순으로 불러오기
-  const pop_postList = () => {
-    dispatch(postActions.setPostPopDB(page));
-  }
-
   // 페이지네이션
   const [page, setPage] = useState(1);
 
-  // 페이지 번호가 바뀔 때마다 커뮤니티글 목록 불러오는 함수 호출
-  //게시물 리스트 조회 (default : 전체)
+  // 게시글 인기순으로 불러오기
+  const pop = () => {
+    console.log('hehe');
+  }
+    
   useEffect(() => {
     dispatch(postActions.setPostDB(page, ''));
   }, [page]);
@@ -74,13 +72,13 @@ const CommonBoardList = (props) => {
         <Sidebar />
         <Body header footer>
         <Grid height="100%" >
-          <Grid height="3%" margin="0 0 24px 0">
-            <Text p fontSize="32px" padding="0 1%" color="#F8F9FA" fontWeight="bold" margin='0 0 8px'>📣부트톡톡
+          <Grid height="70px" margin="0 0 24px 0">
+            <Text p fontSize="32px"  color="#F8F9FA" fontWeight="bold" margin='0 0 8px'>📣부트톡톡
             </Text>
             <Text color='#BDC1C6' fontSize='20px'>&nbsp;&nbsp;&nbsp;부트캠퍼들의 자유로운 Talk Talk</Text>
           </Grid>
             {/* 게시판 카테고리 */}
-                <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 15px 0">
+                <Grid display="flex" height="44px" justify_content="space-between" margin="0 0 25px 0">
                   <Categories >
                   <CategoryButton
                   onClick={()=>total_category()}>
@@ -99,13 +97,16 @@ const CommonBoardList = (props) => {
                   <Grid width="18%" display="flex">
                     {/* 인기순 셀렉트 */}
                    <div style={{color: "#F1F3F4", lineHeight: "48px", marginRight: "10px" }}><RiArrowUpDownFill /></div> 
-                    <SelectButton >
-                        <Options id="0"
-                        onClick={()=>pop_postList()}
-                        >인기순</Options>
-                        <Options id="1"
-                        onClick={()=>total_category()}
+                    <SelectButton
+                    onChange={(e)=>{pop()}}
+                    // onClick={()=>{pop(pop)}}
+                    >
+                        <Options value="newly"
+                         
                         >최신순</Options>
+                        <Options value="pop"
+                        
+                        >인기순</Options>
                       </SelectButton>
                       {/* 글쓰기버튼 (로그인 후 이용가능) */}
                       {is_login ?
@@ -129,14 +130,14 @@ const CommonBoardList = (props) => {
             </Grid>
             
             {/* 공지 */}
-            <Grid height="10vh">
+            <Grid height="134px">
               {[1, 2].map((n, idx) => {
                   return (
-                <Grid display="flex" width="100%" height="67px">
+                <Grid key={n.postId} display="flex" width="100%">
                   <Notice>
                     <NoticeHead>공지</NoticeHead>
                     <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                    <Text color="#9AA0A6" fontSize="14px" margin="23px 0 0 0" lineHeight="18px">2021.08.03</Text>
+                    <Text color="#9AA0A6" fontSize="14px" margin="23px 0 0 0" lineHeight="22px">2021.08.03</Text>
                   </Notice>
                 </Grid>
                 );
@@ -144,7 +145,7 @@ const CommonBoardList = (props) => {
             </Grid>
             {/* import 부트톡톡 게시물  */}
             <Grid height="840px">
-              <Grid width="100%" height="764px" margin="2% 0 0 0">
+              <Grid width="100%" height="764px" margin="30px 0 0 0">
               <Contents>
                 {post_list.map((c, idx) => {
                 return (
@@ -245,7 +246,7 @@ grid-template-columns: repeat(6, 1fr);
 display: flex;
 margin: 5px 0;
 width: 98.5%;
-height: 55px;
+padding: 5px 0px 0px 0px;
 `;
 
 const NoticeHead = styled.span`

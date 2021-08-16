@@ -262,7 +262,7 @@ const Input = styled.input`
   border: none;
   &::placeholder {
     color: #5f6368;
-    font-size: 1.7vh;
+    font-size: 16px;
   }
   &:focus {
     outline: none;
@@ -279,7 +279,7 @@ const Textarea = styled.textarea`
   color: #dadce0;
   &::placeholder {
     color: #5f6368;
-    font-size: 1.7vh;
+    font-size: 16px;
   }
   &:focus {
     outline: none;
@@ -336,7 +336,7 @@ const ImgInput = styled.input`
 
 const SelectBox = styled.select`
   width: 100%;
-  height: 7.5vh;
+  height: 72px;
   background-color: #282a2d;
   border: none;
   color: #5f6368;

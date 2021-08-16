@@ -11,6 +11,8 @@ import { AiOutlineEye } from 'react-icons/ai';
 const CommonPostList = (props) => {
   const one_post = useSelector(state => state.post.one_post);
   const common_list = useSelector(state => state.post.list);
+  console.log(common_list);
+  console.log(props);
 
   return (
     <React.Fragment>
@@ -36,15 +38,15 @@ const CommonPostList = (props) => {
             <Grid width="100%" float="left">
             <LikeAndCountBox>
               {/* 좋아요 */}
-              <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0 8px 0 0">
+              <Text color="#9AA0A6" fontSize="12px" width="36px" margin= "0 16px 0 0">
                 <BiLike/> &nbsp; {props.postLike ? props.postLike.length : '0'}
                 </Text>
               {/* 댓글 수 */}
-              <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">
-                <BiComment/> &nbsp;
+              <Text color="#9AA0A6" fontSize="12px"  width="33.3%" margin= "0px 16px 0 0">
+                <BiComment/> &nbsp; {props.postComment ? props.postComment.length : '0'}
               </Text>
               {/* 조회수 */}
-              <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">
+              <Text color="#9AA0A6" fontSize="12px" width="43px">
               <AiOutlineEye /> <span>{props.viewCount}</span>
               </Text>
               
@@ -78,16 +80,13 @@ display: flex;
 padding: 3%; */
 width: 400px;
 height: 24px;
-left: 24px;
-top: 111px;
+margin: 16px 0px;
 `;
 
 const LikeAndCountBox = styled.div`
-width: 170px;
+width: 140px;
 height: 16px;
-left: 24px;
-top: 151px;
-margin: 10px 0 0 0;
+margin: 10px 0 24px 0;
 
 `;
 

@@ -154,7 +154,7 @@ const QuestionDetail = (props) => {
             {/* 질문 카드 */}
             <Grid width="70vw" height="100%" margin="auto">
               <Grid display="flex">
-                <Grid width="40%">
+                <Grid width="80%">
                   <Text fontSize="3vh" fontWeight="600" color="#ffffff">
                     Q
                   </Text>
@@ -168,7 +168,7 @@ const QuestionDetail = (props) => {
                   </Text>
                 </Grid>
                 {/* 북마크와 수정 삭제 */}
-                <Grid display="flex" width="14%" margin="0 0 0 auto">
+                <Grid display="flex" width="auto" margin="0 0 0 auto">
                   {question_bookmark ? (
                     <Button
                       padding="0"
@@ -212,59 +212,61 @@ const QuestionDetail = (props) => {
                   )}
 
                   {/* 드롭 다운 버튼 */}
-                  {is_login && question_found.nickname === user_name ? (
-                    <Button
-                      padding="0"
-                      width="16.33px"
-                      height="21px"
-                      bg="transparent"
-                      aria-controls="simple-menu"
-                      aria-haspopup="true"
-                      onClick={handleClick}
-                    >
-                      <Text
+                  {question_found.nickname === user_name ? (
+                    <>
+                      <Button
                         padding="0"
-                        color="#9AA0A6"
-                        fontSize="24px"
-                        lineHeight="35px"
-                        hover="opacity: 0.8"
+                        width="16.33px"
+                        height="21px"
+                        bg="transparent"
+                        aria-controls="simple-menu"
+                        aria-haspopup="true"
+                        onClick={handleClick}
                       >
-                        <BsThreeDotsVertical />
-                      </Text>
-                    </Button>
+                        <Text
+                          padding="0"
+                          color="#9AA0A6"
+                          fontSize="24px"
+                          lineHeight="35px"
+                          hover="opacity: 0.8"
+                        >
+                          <BsThreeDotsVertical />
+                        </Text>
+                      </Button>
+
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={MenuLink}
+                        keepMounted
+                        open={Boolean(MenuLink)}
+                        onClose={handleClose}
+                      >
+                        <MenuItem
+                          onClick={() => {
+                            editBtn();
+                          }}
+                        >
+                          수정하기
+                          <Text margin="0 0 0 10px">
+                            <BiPencil />
+                          </Text>
+                        </MenuItem>
+                        <MenuItem
+                          onClick={() => {
+                            handleClose();
+                            deleteBtn();
+                          }}
+                        >
+                          삭제하기
+                          <Text margin="0 0 0 10px">
+                            <BiTrashAlt />
+                          </Text>
+                        </MenuItem>
+                      </Menu>
+                    </>
                   ) : (
                     ''
                   )}
-
-                  <Menu
-                    id="simple-menu"
-                    anchorEl={MenuLink}
-                    keepMounted
-                    open={Boolean(MenuLink)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem
-                      onClick={() => {
-                        editBtn();
-                      }}
-                    >
-                      수정하기
-                      <Text margin="0 0 0 10px">
-                        <BiPencil />
-                      </Text>
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => {
-                        handleClose();
-                        deleteBtn();
-                      }}
-                    >
-                      삭제하기
-                      <Text margin="0 0 0 10px">
-                        <BiTrashAlt />
-                      </Text>
-                    </MenuItem>
-                  </Menu>
                 </Grid>
               </Grid>
               {/* {Question 글쓴이 프로필 }*/}
@@ -339,7 +341,7 @@ const QuestionDetail = (props) => {
             {/* 답변 등록 input */}
             <AddAnswerSection>
               <Text p fontWeight="600" color="#E2E2E3">
-                답변 {all_answer.length}
+                답변
               </Text>
               <ACommentBox>
                 <AInput
@@ -375,10 +377,10 @@ const QuestionDetail = (props) => {
 
 //Answer Section
 const AnswerBox = styled.div`
-  /* min-height: 100vh; */
-  /* transform: translateX(-40px); */
+  min-height: 100vh;
   margin: 0 -40px 0 -40px;
   background-color: #282a2d;
+  /* background-color: yellow; */
 `;
 
 const AddAnswerSection = styled.div`

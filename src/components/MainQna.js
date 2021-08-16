@@ -143,7 +143,7 @@ const CardList = styled.div`
 const QuestionCard = styled.div`
   background-color: #202124;
   width: 32.5%;
-  height: 250px;
+  height: fit-content;
   padding: 24px 24px 8px;
   box-sizing: border-box;
   border-radius: 12px;

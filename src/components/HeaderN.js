@@ -43,6 +43,7 @@ const HeaderN = (props) => {
           className="header"
           width="100%"
           height="100px"
+          TABheight='72px'
           borderBottom="1px solid #80868b"
           display="flex"
           justify_content="space-between"
@@ -53,30 +54,34 @@ const HeaderN = (props) => {
             height="fit-content"
             width="auto"
             margin='10px 0 0'
+            TABmargin='9px 0 0'
           >
             <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')}/>
             <Image src={Search} alt="검색" />
             <Input placeholder="검색어를 입력하세요." />
           </Grid>
-          <Grid height="fit-content" width="auto" margin="36px 50px">
+          <Grid height="fit-content" width="auto" margin="36px 50px" TABmargin='22px 18px'>
             {/* 북마크 메뉴 */}
             <Text
               color="#5F6368"
-              fontSize="18px"
-              vertical_align="top"
+              fontSize="24px"
+              TABfontSize='18px'
+              vertical_align="middle"
               margin="5px 8px 0 0"
+              TABmargin='4px 6px 0 0'
               cursor="pointer"
-              height="100%"
               _onClick={() => history.push('/mypage/mybookmarks')}
             >
-              <BsFillBookmarkFill size="26" />
+              <BsFillBookmarkFill />
             </Text>
             {/* 알림 메뉴 */}
             <Text
               color="#5F6368"
-              fontSize="18px"
+              fontSize="24px"
+              TABfontSize='18px'
               vertical_align="middle"
               margin="0 8px"
+              TABmargin='4px 8px'
               cursor="pointer"
             >
               <BsFillBellFill />
@@ -126,6 +131,7 @@ const HeaderN = (props) => {
         className="header"
         width="100%"
         height="100px"
+        TABheight='72px'
         borderBottom="1px solid #5F6368"
         display="flex"
         justify_content="space-between"
@@ -136,6 +142,7 @@ const HeaderN = (props) => {
           height="fit-content"
           width="auto"
           margin="10px 0 0"
+          TABmargin='9px 0 0'
         >
           <Logo src={LogoImg} alt="토크부트 로고" />
           <Image src={Search} alt="검색" />
@@ -145,9 +152,11 @@ const HeaderN = (props) => {
         <LoginBtn type="button" onClick={() => history.push('/login')}>
           <Text
             fontSize="16px"
+            TABfontSize='14px'
             color="#f8f9fa"
             cursor="pointer"
             lineHeight="24px"
+            TABlineHeight='18px'
           >
             로그인
           </Text>
@@ -170,6 +179,13 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+  @media screen and (max-width: 768px) {
+    width: 326px;
+    height: 40px;
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
 `;
 
 const Logo = styled.img`
@@ -178,6 +194,11 @@ const Logo = styled.img`
   margin: 0 8px;
   cursor: pointer;
   vertical-align: middle;
+  @media screen and (max-width: 768px) {
+    height: 56px;
+    width: 140px;
+
+  }
 `;
 
 const Image = styled.img`
@@ -197,6 +218,10 @@ const LoginBtn = styled.button`
   padding: 0;
   margin: 38px 42px 0 0;
   height: 24px;
+  @media screen and (max-width: 768px) {
+    height: 18px;
+    margin: 27px 18px 0 0;
+  }
 `;
 
 export default HeaderN;

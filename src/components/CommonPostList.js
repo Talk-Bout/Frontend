@@ -10,7 +10,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 
 const CommonPostList = (props) => {
   const one_post = useSelector(state => state.post.one_post);
-  console.log(props);
   const common_list = useSelector(state => state.post.list);
 
   return (

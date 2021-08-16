@@ -30,8 +30,7 @@ const CommonDetail = (props) => {
   const dispatch = useDispatch();
   // 해당 게시물
   const one_post = useSelector(state => state.post.one_post);
-  console.log(one_post.postComment);
-  console.log(one_post.postComment.length);
+  const comment_list = useSelector(state => state.comment.list);
   const username = useSelector((state) => state.user.user.nickname);
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
@@ -333,7 +332,10 @@ const CommonDetail = (props) => {
                     fontSize="16px"
                     lineHeight="18px"
                   >
-                    <BiComment /> {one_post.postComment.length}
+                    <BiComment /> 
+
+                    {comment_list ? comment_list.length : 0}
+
                   </Text>
                   <Text
                     margin="0 0 0 3%"

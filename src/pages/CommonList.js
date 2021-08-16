@@ -36,7 +36,7 @@ const CommonBoardList = (props) => {
   // 불러오는 3페이지짜리 커뮤니티글 목록
   const all_post = useSelector(state => state.post.list);
   // 1페이지에 보여줄 개수로만 자른 목록
-  const post_list = all_post.slice(0, 12);
+  const post_list = all_post.slice(0, 8);
 
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
@@ -162,9 +162,9 @@ const CommonBoardList = (props) => {
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 12 ?  page + 1 : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 8 ?  page + 1 : ''}</Page></Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 12 ? <BsChevronRight /> : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 8 ? <BsChevronRight /> : ''}</Page></Text>
             </PageBox>
             </Grid> 
         </Body>
@@ -278,7 +278,7 @@ letter-spacing: 0.2px;
 
 const Contents = styled.div`
   border-top: 1px solid #9AA0A6;
-  grid-template-rows: repeat(5, minmax(191px, 191px));
+  grid-template-rows: repeat(4, minmax(191px, 191px));
   grid-template-columns: repeat(2, 1fr);
   display: grid;
   align-items: center;

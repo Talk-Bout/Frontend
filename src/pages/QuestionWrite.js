@@ -106,7 +106,7 @@ const QuestionWrite = (props) => {
         minHeight="100vh"
       >
         <Sidebar />
-        <Body>
+        <Body header footer>
           <Grid className="body-inner" height="100%" padding="5vh 0 0">
             <Window>
               <Grid

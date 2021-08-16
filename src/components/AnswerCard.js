@@ -15,33 +15,33 @@ const AnswerCard = (props) => {
   const answer_id = parseInt(props.answerId);
   const user_name = useSelector((state) => state.user.user.nickname);
 
-  // 한 답변에 좋아요 누른 기록? (개인이 좋아요 누른 기록) : 전체 답변 개수
+  // 전체 답변 리스트
   const answer_list = useSelector((state) => state.question.answer_list);
-  console.log(answer_list);
 
-  // 모든 답변에 좋아요를 누른 사람들 전체
-  // const this_answer_likes = answer_list.find(
-  //   (list) => list[0].answerId === answer_id
-  // );
-  // console.log(this_answer_likes);
+  //답변별 목록
+  const one_answer = answer_list.find((answer) => answer.answerId == answer_id);
 
-  const answer = answer_list.find((answer) => answer.answerId == answer_id);
-  console.log(answer);
+  // 답변의 좋아요
+  const answer_like = one_answer.answerLike;
+  console.log(answer_like);
 
-  const answer_like_list = answer.answerLike;
-  console.log(answer_like_list);
+  // 내가 닉네임이 좋아요 한 답변
+  const my_answer_like = answer_like.find(
+    (answer) => answer.nickname == user_name
+  );
+  // console.log(my_answer_like);
 
-  // 내가 누른 좋아요
-  // const my_like = this_answer_likes.find((like) => like.nickname === user_name);
-  // console.log(my_like);
-
-  //좋아요 버튼
+  // 좋아요 버튼
   const likeAnswer = () => {
-    console.log(answer_id, user_name);
     dispatch(questionActions.likeAnswerDB(answer_id, user_name));
   };
+  // 좋아요 취소 버튼
   const unlikeAnswer = (answerLikeId) => {
-    // console.log(answer_id, answerLikeId);
+    // const my_answer_like = {
+    //   answer_id: answer_id,
+    //   answerLikeId : my_answer_like.answerLikeId,
+
+    // }
     dispatch(questionActions.unlikeAnswerDB(answer_id, answerLikeId));
   };
 
@@ -78,14 +78,14 @@ const AnswerCard = (props) => {
               {props.content}
             </Text>
           </Grid>
-          {/* {my_like ? (
+          {my_answer_like ? (
             <Grid>
               <LikeCommentBtn
-                onClick={() => unlikeAnswer(my_like.answerLikeId)}
+                onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}
               >
                 <BiLike color="#7879f1" />
                 <Text margin="2px" color="#7879f1">
-                  {this_answer_likes.length}
+                  {answer_like.length}
                 </Text>
               </LikeCommentBtn>
             </Grid>
@@ -94,27 +94,11 @@ const AnswerCard = (props) => {
               <LikeCommentBtn onClick={() => likeAnswer()}>
                 <BiLike color="#C4C4C4" />
                 <Text margin="2px" color="#C4C4C4">
-                  {this_answer_likes.length}
+                  {answer_like.length}
                 </Text>
               </LikeCommentBtn>
             </Grid>
-          )} */}
-
-          <Grid>
-            <LikeCommentBtn onClick={() => likeAnswer()}>
-              <BiLike color="#C4C4C4" />
-              <Text margin="2px" color="#C4C4C4">
-                0
-              </Text>
-            </LikeCommentBtn>
-          </Grid>
-
-          {/* <Grid>
-            <LikeCommentBtn onClick={() => unlikeAnswer()}>
-              <BiLike color="#7879f1" />
-              <Text margin="2px" color="#7879f1"></Text>
-            </LikeCommentBtn>
-          </Grid> */}
+          )}
         </Grid>
       </AnswerBox>
     </React.Fragment>

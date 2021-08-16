@@ -18,7 +18,7 @@ const MainN = (props) => {
       <Grid className="background" display='flex'>
         <Sidebar />
         {/* 헤더가 필요하면 바디 안에 header넣기, 아니면 body만 */}
-        <Body header>
+        <Body header footer>
           <Grid className="body-inner" height="100%">
             <BannerN
               title1="수강생들의"

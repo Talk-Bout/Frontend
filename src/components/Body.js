@@ -1,9 +1,10 @@
 import React from 'react';
 import { Grid } from '../elements';
 import HeaderN from '../components/HeaderN';
+import Footer from '../components/Footer';
 
 const Body = (props) => {
-  const { header, children } = props;
+  const { header, children, footer } = props;
 
   return (
     <React.Fragment>
@@ -17,6 +18,7 @@ const Body = (props) => {
         <Grid className="body" width='100%' padding="40px 42px 0">
           {children}
         </Grid>
+        {footer ? <Footer /> : ''}
       </Grid>
     </React.Fragment>
   );

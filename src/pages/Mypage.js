@@ -147,7 +147,7 @@ const Mypage = (props) => {
                   _onClick={()=>{history.push(`/boot/${mb.bootcampName}/info`)}}
                   >
                     <ImageBox>
-                     <Image shape="CircleLogo" src={mb.logo ? `http://13.209.12.149${mb.logo}` : CampImg}/>
+                     <Image shape="CircleLogo" src={mb.logo ? mb.logo : CampImg}/>
                     </ImageBox>
                     <Grid padding="10px 0" width="67%">
                       <Grid display="flex" justify_content="space-between">

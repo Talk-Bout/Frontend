@@ -4,7 +4,7 @@ import { IoStar } from 'react-icons/io5';
 import { Text } from '../elements';
 
 const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴포넌트
-  const {score, size, withScore, cursor, _onClick, marginRight} = props;            // score라는 이름으로 평점 props를 받는다.
+  const {score, size, withScore, cursor, _onClick, marginRight,} = props;            // score라는 이름으로 평점 props를 받는다.
   const styles = {
     size: size,
     cursor: cursor,

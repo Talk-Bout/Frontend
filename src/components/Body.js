@@ -15,7 +15,7 @@ const Body = (props) => {
         width="100vw"
       >
         {header ? <HeaderN /> : ''}
-        <Grid className="body" width="100%" padding="40px 42px 0">
+        <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='32px 18px 0'>
           {children}
         </Grid>
         {footer ? <Footer /> : ''}

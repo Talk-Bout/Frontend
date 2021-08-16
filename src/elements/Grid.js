@@ -54,6 +54,7 @@ const Grid = (props) => {
     TABheight,
     TABwidth,
     TABmargin,
+    TABpadding,
   } = props;
 
   const styles = {
@@ -103,6 +104,7 @@ const Grid = (props) => {
     TABheight: TABheight,
     TABwidth: TABwidth,
     TABmargin: TABmargin,
+    TABpadding: TABpadding,
   };
 
   return (
@@ -221,6 +223,7 @@ const GridBox = styled.div`
     height: ${(props) => props.TABheight};
     width: ${(props) => props.TABwidth};
     margin: ${(props) => props.TABmargin};
+    padding: ${(props) => props.TABpadding};
   }
 `;
 

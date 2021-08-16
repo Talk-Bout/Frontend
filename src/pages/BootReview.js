@@ -50,7 +50,7 @@ const BootReview = (props) => {
         {/* 사이드바 */}
         <Sidebar />
         {/* 헤더 포함한 바디 */}
-        <Body header>
+        <Body header footer>
         <BootRoot camp={this_camp} url_word={url_word}/>
           {/* 리뷰 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
@@ -126,9 +126,9 @@ const BootReview = (props) => {
                   {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
                   <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length ? page + 1 : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? page + 1 : ''}</Page></Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length ? <BsChevronRight /> : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>

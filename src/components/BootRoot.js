@@ -48,7 +48,11 @@ const BootRoot = (props) => {
   return (
     <React.Fragment>
       {/* 부트캠프 로고 */}
-      <LogoBox><Image src={this_camp.logo !== "" ? `http://13.209.12.149${this_camp.logo}` : Logo}/></LogoBox>
+      {this_camp.logo ?
+      <LogoBox><Image src={this_camp.logo}/></LogoBox>
+      :
+      <LogoBox style={{textAlign: 'center'}}><Image src={Logo} style={{width: '150px', height: '150px'}}/></LogoBox>
+      }
       <Grid className='info-button' padding='24px 0'>
         <InfoBtn>
           <div>

@@ -42,7 +42,7 @@ const MainBoot = (props) => {
                   {/* 부트캠프 로고 */}
                   <Grid width="104px" padding="22px 0 0 24px">
                     <ImageDiv>
-                      <Logo src={pc.logo ? `http://13.209.12.149${pc.logo}` : CampImg}/>
+                      <Logo src={pc.logo ? pc.logo : CampImg}/>
                     </ImageDiv>
                   </Grid>
                   {/* 부트캠프 정보 */}

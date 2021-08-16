@@ -526,8 +526,8 @@ export default handleActions({
     draft.comment_list = [...draft.comment_list].concat(action.payload.comment_list);
   }),
   [ADD_COMMENT]: (state, action) => produce(state, (draft) => {
-    if (draft.comment_list.length % 5 !== 0) {
-      draft.comment_list.push(action.payload.comment)
+    if (draft.comment_list.length % 5 !== 0 || draft.comment_list.length === 0) {
+      draft.comment_list.push(action.payload.comment);
     }
     draft.one_commu.communityComment.push(action.payload.comment);
   }),

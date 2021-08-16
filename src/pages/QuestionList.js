@@ -20,11 +20,13 @@ import QnaCard from '../components/QnaCard';
 const QuestionList = (props) => {
   const dispatch = useDispatch();
   const qna_list = useSelector((state) => state.question.list);
+  const pop_qna_list = useSelector((state) => state.question.popular_list);
+  console.log(pop_qna_list);
   const [page, setPage] = useState(1);
 
   //인기순정렬
-  const popular_arrange = (page) => {
-    // console.log(page);
+  const set_popular = (page) => {
+    console.log(page);
   };
 
   //페이지네이션
@@ -88,7 +90,7 @@ const QuestionList = (props) => {
                 lineHeight="32px"
                 margin="0 16px"
                 cursor="pointer"
-                onClick={() => popular_arrange()}
+                onClick={() => set_popular()}
               >
                 <span
                   style={{

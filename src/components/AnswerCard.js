@@ -23,12 +23,11 @@ const AnswerCard = (props) => {
 
   // 답변의 좋아요
   const answer_like = one_answer.answerLike;
-  console.log(answer_like);
 
   // 내가 닉네임이 좋아요 한 답변
-  const my_answer_like = answer_like.find(
-    (answer) => answer.nickname == user_name
-  );
+  const my_answer_like = answer_like
+    ? answer_like.find((answer) => answer.nickname == user_name)
+    : [];
   // console.log(my_answer_like);
 
   // 좋아요 버튼
@@ -37,67 +36,115 @@ const AnswerCard = (props) => {
   };
   // 좋아요 취소 버튼
   const unlikeAnswer = (answerLikeId) => {
-    // const my_answer_like = {
-    //   answer_id: answer_id,
-    //   answerLikeId : my_answer_like.answerLikeId,
-
-    // }
     dispatch(questionActions.unlikeAnswerDB(answer_id, answerLikeId));
   };
 
   return (
     <React.Fragment>
       <AnswerBox>
-        <Grid padding="3%">
+        <Grid padding="40px">
           <Grid display="flex">
-            <Text fontSize="3vh" fontWeight="600" color="#ffffff">
+            <Text fontSize="32px" fontWeight="700" color="#ffffff">
               A
             </Text>
-            <Grid width="4vw" height="4vh" margin="auto 0% auto 2%">
+            <Grid width="40px" height="40px" margin="auto 15px">
               <Image src={profile_medium} size="5"></Image>
             </Grid>
 
-            <Grid width="40%">
+            <Grid width="480px">
               {props.nickname === null ? (
-                <Text p margin="auto" fontWeight="600" color="#C4C4C4">
+                <Text
+                  p
+                  margin="auto"
+                  fontSize="14px"
+                  fontWeight="600"
+                  color="#F1F3F4"
+                >
                   탈퇴한 회원입니다.
                 </Text>
               ) : (
-                <Text p margin="auto" fontWeight="600" color="#C4C4C4">
+                <Text
+                  p
+                  margin="auto"
+                  fontSize="14px"
+                  fontWeight="600"
+                  color="#F1F3F4"
+                >
                   {props.nickname}님의 답변
                 </Text>
               )}
 
-              <Text p margin="auto" color="#C4C4C4">
+              <Text p margin="auto" fontSize="12px" color="#BDC1C6">
                 {props.createdAt}
               </Text>
             </Grid>
           </Grid>
-          <Grid margin="3% 0%">
-            <Text p color="#C4C4C4">
+          <Grid margin="30px 0 50px 0">
+            <Text p fontSize="16px" color="#C4C4C4">
               {props.content}
             </Text>
           </Grid>
+
           {my_answer_like ? (
-            <Grid>
-              <LikeCommentBtn
-                onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}
+            <span
+              style={{
+                backgroundColor: '#282A2D',
+                padding: '8px 16px',
+                borderRadius: '12px',
+              }}
+            >
+              <Text
+                color="#7879F1"
+                fontSize="14px"
+                fontWeight="700"
+                lineHeight="18px"
+                cursor="pointer"
+                _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}
               >
-                <BiLike color="#7879f1" />
-                <Text margin="2px" color="#7879f1">
-                  {answer_like.length}
-                </Text>
-              </LikeCommentBtn>
-            </Grid>
+                <span
+                  style={{
+                    fontSize: '24px',
+                    margin: '0 8px 0 0',
+                    verticalAlign: 'middle',
+                    lineHeight: '30px',
+                  }}
+                >
+                  <BiLike />
+                </span>
+                {/* 좋아요 개수 */}
+                {answer_like ? answer_like.length : 0}
+              </Text>
+            </span>
           ) : (
-            <Grid>
-              <LikeCommentBtn onClick={() => likeAnswer()}>
-                <BiLike color="#C4C4C4" />
-                <Text margin="2px" color="#C4C4C4">
-                  {answer_like.length}
-                </Text>
-              </LikeCommentBtn>
-            </Grid>
+            <span
+              style={{
+                backgroundColor: '#282A2D',
+                padding: '8px 16px',
+                borderRadius: '12px',
+              }}
+            >
+              <Text
+                color="#BDC1C6"
+                fontSize="14px"
+                fontWeight="700"
+                lineHeight="18px"
+                cursor="pointer"
+                _onClick={() => likeAnswer()}
+              >
+                <span
+                  style={{
+                    fontSize: '24px',
+                    margin: '0 8px 0 0',
+                    verticalAlign: 'middle',
+                    lineHeight: '30px',
+                  }}
+                >
+                  <BiLike />
+                </span>
+                {/* 좋아요 개수 */}
+                {answer_like.length}
+              </Text>
+            </span>
           )}
         </Grid>
       </AnswerBox>
@@ -105,22 +152,10 @@ const AnswerCard = (props) => {
   );
 };
 const AnswerBox = styled.div`
-  width: 70vw;
-  margin: 30px auto;
+  width: 1044px;
+  margin: 30px auto 0;
   background-color: #202124;
   border-radius: 12px;
-`;
-
-const LikeCommentBtn = styled.button`
-  background-color: #2e3134;
-  color: #bdc1cb;
-  font-weight: 700;
-  border: 0;
-  outline: 0;
-  border-radius: 7px;
-  width: 7%;
-  padding: 1%;
-  margin-right: 1%;
 `;
 
 export default AnswerCard;

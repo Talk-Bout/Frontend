@@ -142,24 +142,19 @@ const QuestionDetail = (props) => {
 
   return (
     <React.Fragment>
-      <Grid display="flex">
+      <Grid display="flex" backgroundColor="#282a2d">
         <Sidebar />
-        <Body header footer style={{ backgroundColor: 'blue' }}>
-          <Grid backgroundColor="yellow">
+        <Body header footer>
+          <Grid>
             {/* 질문 카드 */}
-            <Grid
-              width="70vw"
-              height="100%"
-              margin="auto"
-              backgroundColor="red"
-            >
+            <Grid margin="0 0 0 111px" width="1041px">
               <Grid display="flex">
                 <Grid width="80%">
-                  <Text fontSize="3vh" fontWeight="600" color="#ffffff">
+                  <Text fontSize="24px" fontWeight="600" color="#ffffff">
                     Q
                   </Text>
                   <Text
-                    fontSize="3vh"
+                    fontSize="24px"
                     fontWeight="600"
                     margin="auto 2%"
                     color="#ffffff"
@@ -270,30 +265,42 @@ const QuestionDetail = (props) => {
                 </Grid>
               </Grid>
               {/* {Question 글쓴이 프로필 }*/}
-              <Grid display="flex" margin="3% 0">
-                <Grid width="3vw">
+              <Grid display="flex" margin="10px 0">
+                <Grid width="40px">
                   <Image src={profile_medium} size="5"></Image>
                 </Grid>
 
                 <Grid width="40%">
                   {question_found.nickname === null ? (
-                    <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
+                    <Text
+                      p
+                      margin="auto 10px"
+                      fontSize="14px"
+                      fontWeight="600"
+                      color="#ffffff"
+                    >
                       탈퇴한 회원입니다.
                     </Text>
                   ) : (
-                    <Text p margin="auto 4%" fontWeight="600" color="#ffffff">
+                    <Text
+                      p
+                      margin="auto 10px"
+                      fontSize="14px"
+                      fontWeight="600"
+                      color="#ffffff"
+                    >
                       {question_found.nickname}
                     </Text>
                   )}
 
-                  <Text p margin="auto 4%" color="#C4C4C4">
+                  <Text p margin="auto 10px" color="#C4C4C4">
                     {question_found.createdAt}
                   </Text>
                 </Grid>
               </Grid>
 
               {/* Question 본문 내용 */}
-              <Text p margin="5% 0%" color="#C4C4C4">
+              <Text p margin="50px 0%" fontSize="16px" color="#C4C4C4">
                 {question_found.content}
               </Text>
 
@@ -308,30 +315,85 @@ const QuestionDetail = (props) => {
               {/* 좋아요/ 댓글수/ 조회수 */}
               <Grid display="flex" margin="3% 0%" vertical-align="center">
                 {question_like ? (
-                  <LikeCommentBtn
-                    onClick={() => unlikeQuestion(question_like.questionLikeId)}
+                  <span
+                    style={{
+                      backgroundColor: '#202124',
+                      padding: '8px 16px',
+                      borderRadius: '10px',
+                    }}
                   >
-                    <BiLike color="#7879f1" />
-                    <Text margin="2px" color="#7879f1">
+                    <Text
+                      color="#7879F1"
+                      fontSize="14px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      cursor="pointer"
+                      _onClick={() =>
+                        unlikeQuestion(question_like.questionLikeId)
+                      }
+                    >
+                      <span
+                        style={{
+                          fontSize: '24px',
+                          margin: '0 8px 0 0',
+                          verticalAlign: 'middle',
+                          lineHeight: '30px',
+                        }}
+                      >
+                        <BiLike />
+                      </span>
+                      {/* 좋아요 개수 */}
                       {question_like_list.length}
                     </Text>
-                  </LikeCommentBtn>
+                  </span>
                 ) : (
-                  <LikeCommentBtn onClick={() => likeQuestion()}>
-                    <BiLike />
-                    <Text margin="2px" color="#C4C4C4">
+                  <span
+                    style={{
+                      backgroundColor: '#202124',
+                      padding: '8px 16px',
+                      borderRadius: '10px',
+                    }}
+                  >
+                    <Text
+                      color="#BDC1C6"
+                      fontSize="14px"
+                      fontWeight="700"
+                      lineHeight="18px"
+                      cursor="pointer"
+                      _onClick={() => likeQuestion()}
+                    >
+                      <span
+                        style={{
+                          fontSize: '24px',
+                          margin: '0 8px 0 0',
+                          verticalAlign: 'middle',
+                          lineHeight: '30px',
+                        }}
+                      >
+                        <BiLike />
+                      </span>
+                      {/* 좋아요 개수 */}
                       {question_like_list.length}
                     </Text>
-                  </LikeCommentBtn>
+                  </span>
                 )}
 
-                <Text color="#C4C4C4" margin="auto 1%">
-                  <BiComment /> {all_answer.length}
+                <Text color="#C4C4C4" margin="auto 6px">
+                  <span style={{ lineHeight: '30px', verticalAlign: 'middle' }}>
+                    <BiComment /> {all_answer.length}
+                  </span>
                 </Text>
 
-                <Text color="#C4C4C4" margin="auto 1%">
-                  <BsEye />
-                  {question_found.viewCount}
+                <Text color="#C4C4C4" margin="auto 6px">
+                  <span
+                    style={{
+                      lineHeight: '30px',
+                      verticalAlign: 'middle',
+                    }}
+                  >
+                    <BsEye />
+                    {question_found.viewCount}
+                  </span>
                 </Text>
               </Grid>
             </Grid>
@@ -340,7 +402,7 @@ const QuestionDetail = (props) => {
           <AnswerBox>
             {/* 답변 등록 input */}
             <AddAnswerSection>
-              <Text p fontWeight="600" color="#E2E2E3">
+              <Text p fontWeight="600" fontSize="14px" color="#E2E2E3">
                 답변
               </Text>
               <ACommentBox>
@@ -361,13 +423,13 @@ const QuestionDetail = (props) => {
                 return <AnswerCard key={answer.answerId} {...answer} />;
               })}
 
-            <Grid margin="auto" width="10%">
-              {all_answer.length < 5 ? null : (
+            {all_answer.length < 5 ? null : (
+              <Grid margin="auto" width="10%">
                 <Button onClick={() => moreAnswer()}>
                   <MdKeyboardArrowDown size="40" color="#F2F3F4" />
                 </Button>
-              )}
-            </Grid>
+              </Grid>
+            )}
           </AnswerBox>
         </Body>
       </Grid>
@@ -378,15 +440,11 @@ const QuestionDetail = (props) => {
 //Answer Section
 const AnswerBox = styled.div`
   min-height: 100vh;
-  margin: 0 -40px 0 -40px;
+  margin: 0 -40px -80px -40px;
+  padding-bottom: 80px;
+  /* width: 1340px; */
   background-color: #282a2d;
   /* background-color: yellow; */
-`;
-
-const AddAnswerSection = styled.div`
-  width: 70vw;
-  margin: 3% auto;
-  padding-top: 1%;
 `;
 
 const ACommentBox = styled.div`
@@ -413,14 +471,23 @@ const Image = styled.img`
   object-fit: contain; //가로세로 비율 콘텐츠 박스 크기에 맞춤
 `;
 
+const AddAnswerSection = styled.div`
+  width: 1044px;
+  margin: 10px auto;
+  padding-top: 30px;
+`;
+
 const AInput = styled.textarea`
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
   border: none;
   border-radius: 12px;
   background-color: #212123;
   color: #dadce0;
   resize: none;
-  padding: 2%;
-  width: 96%;
+  padding: 20px;
+  width: 1000px;
   :focus {
     outline: none;
   }
@@ -430,25 +497,14 @@ const AInput = styled.textarea`
 `;
 
 const AnswerSaveButton = styled.button`
-  border-radius: 5px;
+  border-radius: 8px;
   border: 0;
   outline: 0;
   color: #121212;
   font-weight: 700;
-  padding: 1.2% 5%;
-  margin-left: 80%;
-  margin-bottom: 1%;
+  padding: 15px 40px;
+  margin-left: 866px;
+  margin-bottom: 15px;
 `;
 
-const LikeCommentBtn = styled.button`
-  background-color: #2e3134;
-  color: #bdc1cb;
-  font-weight: 700;
-  border: 0;
-  outline: 0;
-  border-radius: 7px;
-  width: 7%;
-  padding: 1%;
-  margin-right: 1%;
-`;
 export default QuestionDetail;

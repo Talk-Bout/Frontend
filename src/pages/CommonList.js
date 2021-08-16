@@ -59,7 +59,13 @@ const CommonBoardList = (props) => {
     dispatch(postActions.setPostDB(page, ''));
   }
 
-  
+  // 로그인 후 글쓰기 가능
+  const login_check = () => {
+    if (!is_login) {
+      window.alert('로그인 후 이용해주세요!');
+      return;
+    };
+  }
 
   return (
     <React.Fragment>
@@ -73,7 +79,7 @@ const CommonBoardList = (props) => {
             <Text color='#BDC1C6' fontSize='20px'>&nbsp;&nbsp;&nbsp;부트캠퍼들의 자유로운 Talk Talk</Text>
           </Grid>
             {/* 게시판 카테고리 */}
-                <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 25px 0">
+                <Grid display="flex" height="10%" justify_content="space-between" margin="0 0 15px 0">
                   <Categories >
                   <CategoryButton
                   onClick={()=>total_category()}>
@@ -109,29 +115,35 @@ const CommonBoardList = (props) => {
                         <FaPlus/>&nbsp; 글쓰기
                       </WriteButton>
                     </div>
-                      : ""}
+                      :
+                      <div>
+                      <WriteButton
+                        onClick={() => login_check()}
+                      >
+                        <FaPlus/>&nbsp; 글쓰기
+                      </WriteButton>
+                    </div>}
                   </Grid>
                 </Grid>
             </Grid>
             
             {/* 공지 */}
-            <hr style={{width:"1233px", margin:"0 5px 0 0"}}/>
             <Grid height="10vh">
               {[1, 2].map((n, idx) => {
                   return (
-                <Grid display="flex" width="100%">
+                <Grid display="flex" width="100%" height="67px">
                   <Notice>
                     <NoticeHead>공지</NoticeHead>
                     <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                    <Text color="#9AA0A6" fontSize="14px" margin="1% 0 0 0" lineHeight="18px">2021.08.03</Text>
+                    <Text color="#9AA0A6" fontSize="14px" margin="23px 0 0 0" lineHeight="18px">2021.08.03</Text>
                   </Notice>
                 </Grid>
                 );
               })}
             </Grid>
             {/* import 부트톡톡 게시물  */}
-            <Grid height="90vh">
-              <Grid width="100%" height="100%" margin="2% 0 0 0">
+            <Grid minHeight="90vh">
+              <Grid width="100%" height="764px" margin="2% 0 0 0">
               <Contents>
                 {post_list.map((c, idx) => {
                 return (
@@ -141,7 +153,6 @@ const CommonBoardList = (props) => {
           </Contents>
               </Grid>     
             </Grid>
-            
             <Grid height="1%" is_center>
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
@@ -177,7 +188,7 @@ cursor: pointer;
 background-color: #202124;
 border: none;
 border-radius: 100px;
-margin: 0px 10px;
+margin: 7px 10px 0 10px;
 width: 110px;
 height: 44px;
 left: 0px;
@@ -185,7 +196,7 @@ top: 0px;
 color: #80868B;
 text-align: center;
 font-size: 16px;
-line-height: 4vh;
+line-height: 45px;
 &:hover {
   background-color: #BDC1C6;
   color: #0E1013;
@@ -225,24 +236,18 @@ border: 1px solid #4D4E93;
   }
 `;
 
+
 const Notice = styled.div`
+border-top: 1px solid #9AA0A6;
 grid-template-rows: repeat(2, minmax(auto, auto));
 grid-template-columns: repeat(6, 1fr);
 display: flex;
-/* width: 100%;
-height: 50%; */
-margin: 5px 0 5px 0;
-border-bottom: 1px solid #9AA0A6;
+margin: 5px 0;
 width: 98.5%;
 height: 55px;
-left: 142px;
-top: 346px;
-
 `;
 
 const NoticeHead = styled.span`
-/* width: 8%; */
-/* margin: 0.6% 1% 0.6% 0; */
 text-align: center;
 color: #7879F1;
 padding: 8px 32px;
@@ -253,17 +258,14 @@ top: 17px;
 border: 1px solid #7879F1;
 box-sizing: border-box;
 border-radius: 8px;
-
-margin: 0.4% 10px;
+margin: 15px 10px;
 font-size: 14px;
-line-height: 18px;
+line-height: 15px;
 `;
 
 const NoticeText = styled.span`
-/* width: 80%; */
 font-weight: bold;
-/* font-size: 1.8vh; */
-margin: 0.7% 1%;
+margin: 18px 5px;
 color: #7879F1;
 width: 82%;
 height: 27px;
@@ -275,17 +277,17 @@ letter-spacing: 0.2px;
 `;
 
 const Contents = styled.div`
-  grid-template-rows: repeat(5, minmax(auto, auto));
+  border-top: 1px solid #9AA0A6;
+  grid-template-rows: repeat(5, minmax(191px, 191px));
   grid-template-columns: repeat(2, 1fr);
   display: grid;
   align-items: center;
   place-items: center;
   box-sizing: border-box;
   cursor: pointer;
-  width: 100%;
-  height: 900px;
-  left: 284px;
-  top: 826px;
+  width: 98.5%;
+  height: 191px;
+  gap: 16px;
 `;
 
 const PageBox = styled.div`

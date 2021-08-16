@@ -224,7 +224,7 @@ const Mypage = (props) => {
               <Grid height="279px" width="100%" margin="48px 0 0 0">
               <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
-                   <Text fontSize="18px" color="#F1F3F4">내가 쓴 글</Text>
+                   <Text fontSize="18px" color="#F1F3F4">{nickname} 님의 글</Text>
                     <Count> {'('}{mypost_list.length} {')'} </Count>
                   </BookMarkBox>
                   <Button color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%"

@@ -115,6 +115,7 @@ const BootCommuWrite = (props) => {
                     lineHeight="84px"
                     cursor="pointer"
                     _onClick={() => {
+                      window.confirm("변경사항이 저장되지 않을 수 있습니다.")
                       history.goBack();
                       exitPage();
                     }}

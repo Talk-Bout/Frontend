@@ -33,7 +33,7 @@ const MypagePost = (props) => {
         <Body header>
           <Grid height="85vh">
             <Grid height="9%" width="100%">
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA">내가 쓴 글</Text>
+              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA"> 님의 글</Text>
             </Grid>
             <Card display="flex" height="81%" width="100%" backgroundColor="green">
             {mypost_list.map((p, idx) => {

@@ -28,10 +28,10 @@ import Profile from '../image/profile_small.png';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
-  // 부트톡톡 게시물 리스트
-  const common_list = useSelector((state) => state.post.list);
   // 해당 게시물
   const one_post = useSelector(state => state.post.one_post);
+  console.log(one_post.postComment);
+  console.log(one_post.postComment.length);
   const username = useSelector((state) => state.user.user.nickname);
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
@@ -275,6 +275,7 @@ const CommonDetail = (props) => {
                             fontSize="12px"
                             lineHeight="16px"
                             color="#BDC1C6"
+                            _onClick={()=>{history.push('/mypage/mypost')}}
                           >
                             {one_post.nickname}
                           </Text>
@@ -332,7 +333,7 @@ const CommonDetail = (props) => {
                     fontSize="16px"
                     lineHeight="18px"
                   >
-                    <BiComment /> &nbsp; 15
+                    <BiComment /> {one_post.postComment.length}
                   </Text>
                   <Text
                     margin="0 0 0 3%"
@@ -347,7 +348,7 @@ const CommonDetail = (props) => {
                 </Grid>
               </Grid>
               {/* import 댓글 작성과 리스트 */}
-              <Grid width="97%" height="15vh" borderTop="1.5px solid #DADCE0" >
+              <Grid width="97%" height="15vh" borderTop="1px solid #DADCE0" >
                 <Comment postId={postId} />
               </Grid>
               {/* <Grid width="100%" height="40vh" backgroundColor="tomato"></Grid> */}

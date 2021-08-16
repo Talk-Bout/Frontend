@@ -9,8 +9,10 @@ import { BiTimeFive, BiLike, BiComment} from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 
 const CommonPostList = (props) => {
-
+  const one_post = useSelector(state => state.post.one_post);
+  console.log(props);
   const common_list = useSelector(state => state.post.list);
+
   return (
     <React.Fragment>
       <Content common_list={common_list} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}
@@ -18,7 +20,8 @@ const CommonPostList = (props) => {
                 <Text p color="#F1F3F4" lineHeight="27px" fontSize="18px" fontWeight="bold">
                  {props.title}
                 </Text>
-                <Text p color="#9AA0A6" lineHeight="18px" fontSize="14px" >
+                <Text p color="#9AA0A6" lineHeight="18px" fontSize="14px"
+                overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" >
                  {props.content}
                </Text>
               <ProfileImage>
@@ -39,7 +42,7 @@ const CommonPostList = (props) => {
                 </Text>
               {/* 댓글 수 */}
               <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">
-                <BiComment/> &nbsp; 3
+                <BiComment/> &nbsp;
               </Text>
               {/* 조회수 */}
               <Text color="#9AA0A6" fontSize="12px" padding="2%" width="33.3%" margin= "0px 8px">
@@ -48,7 +51,6 @@ const CommonPostList = (props) => {
               
             </LikeAndCountBox>
             
-            <hr/>
             </Grid>
             </Content>
     </React.Fragment>
@@ -56,17 +58,19 @@ const CommonPostList = (props) => {
 };
 
 const Content = styled.div`
+border-bottom: 1px solid #9AA0A6;
   z-index: 1;
   align-content: center;
   justify-content: center;
   width: 100%;
-  height: auto;
+  height: 191px;
   background-size: cover;
   box-sizing: border-box;
-  padding: 0% 3%;
+  flex-wrap: wrap;
   &:hover {
     opacity: 0.7;
   }
+
 `;
 
 const ProfileImage = styled.div`
@@ -85,6 +89,7 @@ height: 16px;
 left: 24px;
 top: 151px;
 margin: 10px 0 0 0;
+
 `;
 
 export default CommonPostList;

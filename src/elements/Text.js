@@ -84,7 +84,6 @@ const Text = (props) => {
 Text.defaultProps = {
     p: false,
     children: null,
-    color: 'black',
     fontSize: '1rem',
     fontWeight: '400',
     margin: null,

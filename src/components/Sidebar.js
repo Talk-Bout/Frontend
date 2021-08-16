@@ -22,7 +22,7 @@ const Sidebar = (props) => {
       <Grid className="sidebar" backgroundColor="#202124" width="100px">
         <Grid className="sidebar-inner" is_center>
           <img
-            src={PointImg} alt='토크부트 로고'/>
+            src={PointImg} alt='디자인'/>
           <Image
             src={url === '' ? Home_white : Home}
             onClick={() => history.push('/')}

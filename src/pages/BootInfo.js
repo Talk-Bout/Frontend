@@ -28,8 +28,8 @@ const BootInfo = (props) => {
       <Grid className='background' display='flex' overflow='auto'>
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
-        <Body header>
+        {/* 헤더, 푸터 포함한 바디 */}
+        <Body header footer>
           <BootRoot camp={this_camp} url_word={url_word}/>
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
             {/* 부트캠프 정보 */}

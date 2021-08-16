@@ -28,7 +28,7 @@ const BootOthers = (props) => {
           <Camp key={idx} onClick={() => history.push({pathname: `/boot/${other.bootcampName}/info`, state: {camp: {bootcampName: other.bootcampName}}})}>
             {/* 다른 부트캠프 로고 */}
             <ImageDiv>
-              <Image src={other.logo ? `http://13.209.12.149${other.logo}` : CampImg}/>
+              <Image src={other.logo ? other.logo : CampImg}/>
             </ImageDiv>
             <div style={{padding: '29px 16px'}}>
               {/* 다른 부트캠프 이름 */}

@@ -49,8 +49,8 @@ const BootReview = (props) => {
       <Grid className='background' display='flex' overflow='auto'>
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
-        <Body header>
+        {/* 헤더, 푸터 포함한 바디 */}
+        <Body header footer>
         <BootRoot camp={this_camp} url_word={url_word}/>
           {/* 리뷰 페이지 */}
           <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
@@ -59,9 +59,11 @@ const BootReview = (props) => {
                 {/* 리뷰 페이지 타이틀 */}
                 <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{bootcampName} 리뷰</Text>
                 {/* 리뷰 남기기 버튼 */}
-                {/* 로그인 상태에서만 보여주기 */}
-                {is_login &&
+                {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
+                {is_login ?
                 <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/review/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
+                :
+                <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
                 }
               </Grid>
               {/* 부트캠프 리뷰 목록 */}
@@ -126,9 +128,9 @@ const BootReview = (props) => {
                   {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
                   <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length ? page + 1 : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? page + 1 : ''}</Page></Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length ? <BsChevronRight /> : ''}</Page></Text>
+                  <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? <BsChevronRight /> : ''}</Page></Text>
                 </PageBox>
               </Grid>
             </Grid>

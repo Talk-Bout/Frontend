@@ -37,8 +37,8 @@ const BootMain = (props) => {
       <Grid className='background' display='flex' overflow='auto'>
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
-        <Body header>
+        {/* 헤더, 푸터 포함한 바디 */}
+        <Body header footer>
           {/* 부트캠프 */}
           <Text p color='#F8F9FA' fontSize='32px' fontWeight='700' margin='0 0 8px'>🚀부트캠프</Text>
           <Text color='#BDC1C6' fontSize='20px'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
@@ -53,7 +53,7 @@ const BootMain = (props) => {
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
                     {camp.logo ? 
-                    <Logo src={`http://13.209.12.149${camp.logo}`} alt={camp.bootcampName}></Logo>
+                    <Logo src={camp.logo} alt={camp.bootcampName}></Logo>
                     :
                     <Logo src={CampImg} alt={camp.bootcampName} style={{width: 'auto', height: 'auto'}}></Logo>
                     }
@@ -63,7 +63,7 @@ const BootMain = (props) => {
                     {camp.bootcampName}
                   </Text>
                   {/* 부트캠프 설명 */}
-                  <Text p fontSize="14px" fontWeight="500" position="absolute" top="172px" margin="0 0 0 15px" color='#F8F9FA'>
+                  <Text p fontSize="14px" fontWeight="500" position="absolute" top="172px" margin="0 0 0 15px" color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
                     {camp.desc}
                   </Text>
                   {/* 부트캠프 별점 */}
@@ -119,7 +119,7 @@ position: relative;
 
 const ImageDiv = styled.div`
   text-align: center;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   opacity: 0.4;
   border-radius: 8px;
@@ -131,7 +131,7 @@ const ImageDiv = styled.div`
 const Logo = styled.img`
   width: 100%;
   height: 100%;
-  size: contain;
+  size: cover;
   border-radius: 8px;
 `;
 

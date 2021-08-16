@@ -47,7 +47,7 @@ const HeaderN = (props) => {
           display="flex"
           justify_content="space-between"
         >
-          <Logo src={LogoImg} alt="토크부트 로고" />
+          <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')}/>
           {/* 검색창 */}
           <Grid
             className="search"
@@ -176,6 +176,7 @@ const Logo = styled.img`
   height: 80px;
   width: 210px;
   margin: 10px 8px;
+  cursor: pointer;
 `;
 
 const ProfileImg = styled.img`

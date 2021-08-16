@@ -42,7 +42,7 @@ const MainBoot = (props) => {
                   {/* 부트캠프 로고 */}
                   <Grid width="104px" padding="22px 0 0 24px">
                     <ImageDiv>
-                      <Logo src={pc.logo ? `http://13.209.12.149${pc.logo}` : CampImg}/>
+                      <Logo src={pc.logo ? pc.logo : CampImg}/>
                     </ImageDiv>
                   </Grid>
                   {/* 부트캠프 정보 */}
@@ -110,15 +110,12 @@ const ImageDiv = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  text-align: center;
   line-height: 80px;
+  overflow: hidden;
 `;
 
 const Logo = styled.img`
-  width: 100%;
-  height: 100%;
-  size: cover;
-  border-radius: 50%;
+  max-height: 100%;
 `;
 
 export default MainBoot;

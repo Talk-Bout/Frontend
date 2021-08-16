@@ -137,8 +137,8 @@ const BootPost = (props) => {
       <Grid className='background' display='flex'>
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
-        <Body header>
+        {/* 헤더, 푸터 포함한 바디 */}
+        <Body header footer>
           <BodyInner>
             <div className='post-box' style={{padding: '0 10px 0 0'}}>
               {/* 게시글 */}
@@ -228,7 +228,7 @@ const BootPost = (props) => {
               {/* 댓글 리스트 */}
               {comment_list && comment_list.map((cm, idx) => {
                 return (
-                  <Comment>
+                  <Comment key={idx}>
                     <Grid display='flex' justify_content='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}

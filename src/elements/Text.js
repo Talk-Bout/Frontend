@@ -28,6 +28,10 @@ const Text = (props) => {
     wlc,                  // -webkit-line-clamp: 콘텐츠 줄 수 제한
     wbo,                  // -webkit-box-orient: 콘텐츠 정렬 방향
     overflow,
+    // 태블릿 사이즈(width: 768px)
+    TABfontSize,
+    TABmargin,
+    TABlineHeight,
     } = props;
 
 
@@ -53,6 +57,9 @@ const Text = (props) => {
     wlc: wlc,
     wbo: wbo,
     overflow: overflow,
+    TABfontSize: TABfontSize,
+    TABmargin: TABmargin,
+    TABlineHeight: TABlineHeight,
   };
 
   if (p) {
@@ -77,7 +84,6 @@ const Text = (props) => {
 Text.defaultProps = {
     p: false,
     children: null,
-    color: 'black',
     fontSize: '1rem',
     fontWeight: '400',
     margin: null,
@@ -118,6 +124,12 @@ Text.defaultProps = {
     -webkit-line-clamp: ${(props) => props.wlc};
     -webkit-box-orient: ${(props) => props.wbo};
     overflow: ${(props) => props.overflow};
+    // 태블릿 사이즈(width: 768px)
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      font-size: ${(props) => props.TABfontSize};
+      margin: ${(props) => props.TABmargin};
+      line-height: ${(props) => props.TABlineHeight};
+    }
   `;
 
   const TextBoxS = styled.span`
@@ -144,6 +156,12 @@ Text.defaultProps = {
     -webkit-line-clamp: ${(props) => props.wlc};
     -webkit-box-orient: ${(props) => props.wbo};
     overflow: ${(props) => props.overflow};
+    // 태블릿 사이즈(width: 768px)
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      font-size: ${(props) => props.TABfontSize};
+      margin: ${(props) => props.TABmargin};
+      line-height: ${(props) => props.TABlineHeight};
+    }
 `;
 
 export default Text;

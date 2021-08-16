@@ -50,6 +50,11 @@ const Grid = (props) => {
     alignItems,
     alignSelf,
     cursor,
+    // 태블릿 사이즈(width: 768px)
+    TABheight,
+    TABwidth,
+    TABmargin,
+    TABpadding,
   } = props;
 
   const styles = {
@@ -95,6 +100,11 @@ const Grid = (props) => {
     alignItems: alignItems,
     alignSelf: alignSelf,
     cursor: cursor,
+    // 태블릿 사이즈(width: 768px)
+    TABheight: TABheight,
+    TABwidth: TABwidth,
+    TABmargin: TABmargin,
+    TABpadding: TABpadding,
   };
 
   return (
@@ -207,6 +217,14 @@ const GridBox = styled.div`
   align-items: ${(props) => props.alignItems};
   align-self: ${(props) => props.alignSelf};
   cursor: ${(props) => props.cursor};
+
+  // 태블릿 사이즈(width: 768px)
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    height: ${(props) => props.TABheight};
+    width: ${(props) => props.TABwidth};
+    margin: ${(props) => props.TABmargin};
+    padding: ${(props) => props.TABpadding};
+  }
 `;
 
 export default Grid;

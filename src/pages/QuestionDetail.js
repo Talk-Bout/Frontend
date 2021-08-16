@@ -375,7 +375,7 @@ const QuestionDetail = (props) => {
 
 //Answer Section
 const AnswerBox = styled.div`
-  min-height: 100vh;
+  /* min-height: 100vh; */
   /* transform: translateX(-40px); */
   margin: 0 -40px 0 -40px;
   background-color: #282a2d;

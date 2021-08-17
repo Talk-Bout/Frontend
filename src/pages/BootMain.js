@@ -78,17 +78,15 @@ const BootMain = (props) => {
             {/* 페이지네이션 */}
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
-              {/* <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text> */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
               {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-              {/* <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text> */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-              {/* <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text> */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              {/* <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? page + 1 : ''}</Page></Text> */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? page + 1 : ''}</Page></Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              {/* <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? <BsChevronRight /> : ''}</Page></Text> */}
-              <Text lineHeight='14px' margin='0 40px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
-              <Text lineHeight='14px' margin='0 40px 0'><Page style={{opacity: 1}} onClick={() => toNextPage()}>{all_camp.length > 12 ? <BsChevronRight /> : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? <BsChevronRight /> : ''}</Page></Text>
             </PageBox>
           </Grid>
         </Body>

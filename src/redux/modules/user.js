@@ -13,6 +13,8 @@ const DOUBLE_NICKNAME_CHECK = 'USER/DOUBLE_NICKNAME_CHECK'; //닉네임 중복 �
 const LOGIN_CHECK = 'user/LOGIN_CHECK'; //로그인 페이지 id, pwd 체크
 const DELETE_USER = 'user/DELETE_USER'; //회원 탈퇴
 
+const AUTH_KAKAO = 'user/AUTH_KAKAO'; // 카카오 소셜로그인
+
 //액션 생성함수
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
@@ -26,6 +28,7 @@ const doubleNicknameCheck = createAction(DOUBLE_NICKNAME_CHECK, (isExist) => ({
 }));
 const loginCheck = createAction(LOGIN_CHECK, (is_error) => ({ is_error }));
 const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
+const authKakao = createAction(AUTH_KAKAO, (data) => ({data})); // 아직 어떤 형태의 데이터를 받을 수 있는지 모름
 
 //기본값 정하기
 const initialState = {
@@ -156,6 +159,17 @@ const userDeleteDB = (nickname) => {
   };
 };
 
+const authKakaoDB = () => {
+  // 카카오 소셜로그인
+  return function (dispatch) {
+    instance.get('/oauth/kakao').then((response) => {
+      console.log(response.data); //아직 어떤 형태의 데이터를 받을 수 있는지 모름
+    }).catch((err) => {
+      console.error(`카카오 소셜로그인 에러: ${err} ### ${err.response}`);
+    });
+  };
+};
+
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
@@ -210,6 +224,7 @@ const actionCreators = {
   emailCheckDB,
   nicknameCheckDB,
   userDeleteDB,
+  authKakaoDB,
 };
 
 export { actionCreators };

@@ -14,7 +14,7 @@ const MainBoot = () => {
     dispatch(campActions.mainCampsDB());
   }, []);
 
-  const camp_list = useSelector((state) => state.bootcamp.main_camp_list);
+  const camp_list = useSelector((state) => state.bootcamp.camp_list);
   const pop_camps = camp_list.slice(0, 6);
 
   return (
@@ -71,7 +71,7 @@ const MainBoot = () => {
                     <Grid
                       cursor="pointer"
                       _onClick={() =>
-                        history.push(`/boot/${pc.bootcampName}/info`)
+                        history.push(`/boot/${pc.bootcampName}`)
                       }
                     >
                       {/* 부트캠프 이름 */}
@@ -102,7 +102,7 @@ const MainBoot = () => {
                         TABmargin="0 8px 0 0"
                         cursor="pointer"
                         _onClick={() =>
-                          history.push(`/boot/${pc.bootcampName}/review`)
+                          history.push({pathname: `/boot/${pc.bootcampName}`, state: {tab_click: 'review'}})
                         }
                       >
                         리뷰
@@ -114,7 +114,7 @@ const MainBoot = () => {
                         TABfontSize="12px"
                         cursor="pointer"
                         _onClick={() =>
-                          history.push(`/boot/${pc.bootcampName}/community`)
+                          history.push({pathname: `/boot/${pc.bootcampName}`, state: {tab_click: 'community'}})
                         }
                       >
                         커뮤니티

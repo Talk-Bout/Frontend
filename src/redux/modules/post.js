@@ -78,10 +78,8 @@ const setPostDB = (page, category) => {
 const setPostPopDB = (page) => {                                                      // <-- 추가했습니다!!!
   // 전체 게시글 인기순 불러오는 함수
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     instance.get(`/popular/posts?page=${page}`).then((response) => {
       dispatch(setPostPop(response.data));
-      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
     });

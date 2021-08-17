@@ -89,6 +89,7 @@ const setCampsDB = (page) => {
     instance
       .get(`/bootcamp?page=${page}`)
       .then((response) => {
+        console.log(response.data);
         dispatch(setCamps(response.data));
         dispatch(statusActions.endLoading());
       })

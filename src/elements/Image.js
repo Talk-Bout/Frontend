@@ -15,6 +15,9 @@ const Image = (props) => {
     _onClick,
     borderRadius,
     display,
+    TABwidth,
+    TABheight,
+    TABmargin,
   } = props;
 
   const styles = {
@@ -28,6 +31,9 @@ const Image = (props) => {
     align_items: align_items,
     borderRadius: borderRadius,
     display: display,
+    TABwidth: TABwidth,
+    TABheight: TABheight,
+    TABmargin: TABmargin,
   };
 
   if (shape === 'BigProfileImage') {
@@ -77,6 +83,12 @@ const ImageDefault = styled.div`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius};
   display: ${(props) => props.display};
+  // 태블릿 사이즈(768~992px)
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: ${(props) => props.TABwidth};
+    height: ${(props) => props.TABheight};
+    margin: ${(props) => props.TABmargin};
+  }
 `;
 
 // 마이페이지(정보수정) 프로필 이미지
@@ -91,6 +103,12 @@ const BigProfileImage = styled.div`
   background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
+  // 태블릿 사이즈(768~992px)
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: ${(props) => props.TABwidth};
+    height: ${(props) => props.TABheight};
+    margin: ${(props) => props.TABmargin};
+  }
 `;
 
 // bootReview(MainBoot) 캠프 로고 이미지
@@ -102,6 +120,12 @@ const HeaderLogo = styled.div`
   border: 1px solid #5f6368;
   align-items: center;
   text-align: center;
+  // 태블릿 사이즈(768~992px)
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: ${(props) => props.TABwidth};
+    height: ${(props) => props.TABheight};
+    margin: ${(props) => props.TABmargin};
+  }
 `;
 
 // 메인페이지 circle 캠프 로고 이미지
@@ -119,6 +143,12 @@ const CircleLogo = styled.div`
   border-radius: 50%;
   text-align: center;
   line-height: 80px;
+  // 태블릿 사이즈(768~992px)
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: ${(props) => props.TABwidth};
+    height: ${(props) => props.TABheight};
+    margin: ${(props) => props.TABmargin};
+  }
 `;
 
 export default Image;

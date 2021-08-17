@@ -108,12 +108,10 @@ const setQuestionDB = (page) => {
 const setQuestionPopDB = (page) => {
   // 질문글 인기순 정렬
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     instance
       .get(`/popular/questions?page=${page}`)
       .then((response) => {
         dispatch(setQuestionPop(response.data));
-        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(

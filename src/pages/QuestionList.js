@@ -95,7 +95,7 @@ const QuestionList = (props) => {
                 width: '200px',
                 padding: '10px 0 0',
                 textAlign: 'right',
-                // margin: '0 20px',
+                margin: '0 20px',
               }}
             >
               {/* 인기순 정렬 버튼 */}
@@ -250,7 +250,6 @@ const CardList = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
 `;
 
 const PageBox = styled.div`

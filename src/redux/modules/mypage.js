@@ -1,6 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from 'immer';
 import instance from '../../shared/Request';
+import { actionCreators as statusActions } from './status';
 
 // 액션타입
 const SET_BOOTTALK = 'mypage/SET_BOOTTALK'; //부트톡톡 북마크 불러오기
@@ -30,12 +31,13 @@ const initialState = {
 // 부트캠프 북마크 불러오기
 const setMyBootDB = (nickname) => {
   return function (dispatch) {
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+    dispatch(statusActions.setLoading());
     instance.get(`/users/${nickname}/bootcampBookmarks`,{
-    },{headers: headers})
+    })
     .then((response) => {
       // console.log(response.data);
       dispatch(setMyboot(response.data));
+      dispatch(statusActions.endLoading());
   })
   .catch((err) => {
       console.log(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
@@ -46,11 +48,12 @@ const setMyBootDB = (nickname) => {
 // 부트톡톡 북마크 불러오기
 const setMyTalkDB = (nickname) => {
   return function (dispatch) {
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+    dispatch(statusActions.setLoading());
     instance.get(`/users/${nickname}/postBookmarks`,{
-    },{headers: headers})
+    })
     .then((response) => {
       dispatch(setMytalk(response.data));
+      dispatch(statusActions.endLoading());
       // console.log(response.data);
   })
   .catch((err) => {
@@ -62,11 +65,12 @@ const setMyTalkDB = (nickname) => {
 // 질문과답변 북마크 불러오기
 const setMyQnaDB = (nickname) => {
   return function (dispatch) {
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+    dispatch(statusActions.setLoading());
     instance.get(`/users/${nickname}/questionBookmarks`,{
-    },{headers: headers})
+    })
     .then((response) => {
       dispatch(setMyqna(response.data));
+      dispatch(statusActions.endLoading());
       // console.log(response.data);
   })
   .catch((err) => {
@@ -78,11 +82,12 @@ const setMyQnaDB = (nickname) => {
 // 커뮤니티 북마크 불러오기
 const setMyCommuDB = (nickname) => {
   return function (dispatch) {
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+    dispatch(statusActions.setLoading());
     instance.get(`/users/${nickname}/communityBookmarks`,{
-    },{headers: headers})
+    })
     .then((response) => {
       dispatch(setMycommu(response.data));
+      dispatch(statusActions.endLoading());
       // console.log(response.data);
   })
   .catch((err) => {
@@ -96,12 +101,13 @@ const setMyCommuDB = (nickname) => {
 // 내가 쓴글 불러오기
 const setMypostDB = (nickname) => {
   return function (dispatch) {
-    const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
+    dispatch(statusActions.setLoading());
     instance.get(`/users/${nickname}/posts`,{
-    },{headers: headers})
+    })
     .then((response) => {
       // console.log(response.data);
       dispatch(setMypost(response.data));
+      dispatch(statusActions.endLoading());
   })
   .catch((err) => {
       console.log(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);

@@ -18,24 +18,29 @@ const CommonBoardList = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
-
+  // 인기순, 최신순 정렬
+  const [PopArray, setPopArray] = useState(false);
+  
   // 페이지네이션
   const [page, setPage] = useState(1);
-
-  // 게시글 인기순으로 불러오기
-  const pop = () => {
-    console.log('hehe');
-  }
-    
+  
   useEffect(() => {
-    dispatch(postActions.setPostDB(page, ''));
+    if(PopArray){
+      dispatch(postActions.setPostPopDB(page));
+    } else {
+      dispatch(postActions.setPostDB(page, ''));
+    }
   }, [page]);
 
-  // 불러오는 3페이지짜리 커뮤니티글 목록
-  const all_post = useSelector(state => state.post.list);
-  // console.log(all_post);
-  // 1페이지에 보여줄 개수로만 자른 목록
-  const post_list = all_post.slice(0, 8);
+  // 불러오는 3페이지짜리 최신순 커뮤니티글 목록
+  const new_post = useSelector(state => state.post.list);
+  // 1페이지에 보여줄 개수로만 자른 최신순 목록
+  const newPost_list = new_post.slice(0, 8);
+
+  // 불러오는 3페이지짜리 인기순 커뮤니티글 목록
+  const pop_post = useSelector(state => state.post.pop_list);
+  // 1페이지에 보여줄 개수로만 자른 인기순 목록
+  const popPost_list = pop_post.slice(0, 8);
 
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
@@ -56,7 +61,15 @@ const CommonBoardList = (props) => {
   // 카테고리 전체 게시물
   const total_category = () => {
     dispatch(postActions.setPostDB(page, ''));
+    setPopArray(false);
   }
+
+   // 인기순 조회
+   const setPop = () => {
+    dispatch(postActions.setPostPopDB(page));
+    setPopArray(true);
+   }
+
 
   // 로그인 후 글쓰기 가능
   const login_check = () => {
@@ -95,18 +108,18 @@ const CommonBoardList = (props) => {
                   </Categories>
                  
                   <Grid width="18%" display="flex">
-                    {/* 인기순 셀렉트 */}
+                    {/* 인기순, 최신순 */}
                    <div style={{color: "#F1F3F4", lineHeight: "48px", marginRight: "10px" }}><RiArrowUpDownFill /></div> 
                     <SelectButton
-                    onChange={(e)=>{pop()}}
-                    // onClick={()=>{pop(pop)}}
                     >
-                        <Options value="newly"
-                         
-                        >최신순</Options>
-                        <Options value="pop"
-                        
-                        >인기순</Options>
+                      {PopArray?
+                      <Options onClick={()=>total_category()}
+                      >최신순</Options>
+                      :
+                      <Options onClick={()=>setPop()}
+                      >인기순</Options>
+                      }
+                    
                       </SelectButton>
                       {/* 글쓰기버튼 (로그인 후 이용가능) */}
                       {is_login ?
@@ -146,13 +159,28 @@ const CommonBoardList = (props) => {
             {/* import 부트톡톡 게시물  */}
             <Grid height="840px">
               <Grid width="100%" height="764px" margin="30px 0 0 0">
-              <Contents>
-                {post_list.map((c, idx) => {
+                {PopArray?
+                <>
+                <Contents>
+                {popPost_list.map((c, idx) => {
                 return (
                 <CommonPostList key={c.postId} {...c}/>
-            );
-              })}
-          </Contents>
+                  );
+                    })}
+                </Contents>
+                </>
+                :
+                <>
+                <Contents>
+                {newPost_list.map((c, idx) => {
+                return (
+                <CommonPostList key={c.postId} {...c}/>
+                  );
+                    })}
+                </Contents>
+                </>
+                }
+              
               </Grid>     
             </Grid>
             <Grid height="0px" is_center>
@@ -163,10 +191,21 @@ const CommonBoardList = (props) => {
               <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
+              {!PopArray?
+              <>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 8 ?  page + 1 : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{new_post.length > 8 ?  page + 1 : ''}</Page></Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_post.length > 8 ? <BsChevronRight /> : ''}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{new_post.length > 8 ? <BsChevronRight /> : ''}</Page></Text>
+              </>
+              :
+              <>
+              {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{pop_post.length > 8 ?  page + 1 : ''}</Page></Text>
+              {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
+              <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{pop_post.length > 8 ? <BsChevronRight /> : ''}</Page></Text>
+              </>}
+              
             </PageBox>
             </Grid> 
         </Body>
@@ -205,7 +244,7 @@ line-height: 45px;
   }
 `;
 
-const SelectButton = styled.select`
+const SelectButton = styled.div`
 border: none;
 background-color: #17181B;
 color: #F1F3F4;
@@ -216,7 +255,8 @@ margin-right: 16px;
 appearance: none;
 `;
 
-const Options = styled.option`
+const Options = styled.div`
+margin: 10px 0 0 0;
 `;
 
 const WriteButton = styled.button`

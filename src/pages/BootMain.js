@@ -99,27 +99,28 @@ const CardList = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 30px 15px;
+  /* justify-content: space-between; */
   margin-top: 24px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     margin-top: 16px;
+    gap: 12px;
   }
 `;
 
 const Card = styled.div`
 background-color: #202124;
 background-size: cover;
-width: 32.5%;
+width: 32%;
 height: 240px;
 border-radius: 8px;
-margin-bottom: 30px;
+/* margin-bottom: 30px; */
 box-sizing: border-box;
 cursor: pointer;
 position: relative;
 @media screen and (min-width: 768px) and (max-width: 992px) {
   width: 49%;
   height: 208px;
-  margin-bottom: 12px;
 }
 `;
 

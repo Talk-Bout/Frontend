@@ -66,6 +66,9 @@ const Mypage = (props) => {
   const mycommu_list = all_commu.filter((commu) => commu.post !== null);
   // 커뮤니티 3개 추출
   const mycommu = mycommu_list.slice(0,3);
+
+  // 구글 폼 링크
+  const url = 'https://forms.gle/bFX46XToYSFVGFoW6';
   
 
   // 부트캠프, 부트톡톡 북마크
@@ -111,13 +114,13 @@ const Mypage = (props) => {
                 <Text p color="#5F6368" text_align="center" margin="0" fontSize="14px">sparta@coding.kr</Text>
               </Grid> */}
               {/* 인증 안됐을 때 */}
-              {/* <Grid height="30%" margin="auto">
+              <Grid height="30%" margin="auto">
                 <TextBox>
                   <Button _onClick={() => history.push('/mypage/edit')}
                   margin="0 7% 0 0" font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">정보 수정</Button>
-                  <Button font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">부트캠프 인증하기</Button>
+                  <Button _onClick={() => window.open(`${url}`, '_blank')} font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">부트캠프 인증하기</Button>
                 </TextBox>
-              </Grid> */}
+              </Grid>
               {/* 인증 됐을 때 */}
               <Grid height="30%" margin="auto">
                 {/* <TextBox>

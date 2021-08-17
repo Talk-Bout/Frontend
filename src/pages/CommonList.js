@@ -107,9 +107,9 @@ const CommonBoardList = (props) => {
                   </CategoryButton>
                   </Categories>
                  
-                  <Grid width="17.5%" display="flex">
+                  <Grid width="18%" display="flex">
                     {/* 인기순, 최신순 */}
-                   <div style={{color: "#F1F3F4", lineHeight: "48px", margin: "3px 0 0 8px" }}><RiArrowUpDownFill /></div> 
+                   <div style={{color: "#F1F3F4", lineHeight: "48px", margin: "3px 0 0 0px" }}><RiArrowUpDownFill /></div> 
                     <SelectButton
                     >
                       {PopArray?
@@ -135,7 +135,7 @@ const CommonBoardList = (props) => {
                       <WriteButton
                         onClick={() => login_check()}
                       >
-                        <FaPlus/>&nbsp; 글쓰기
+                        <BiPencil/>&nbsp; 글쓰기
                       </WriteButton>
                     </div>}
                   </Grid>
@@ -150,7 +150,7 @@ const CommonBoardList = (props) => {
                   <Notice>
                     <NoticeHead>공지</NoticeHead>
                     <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                    <Text color="#9AA0A6" fontSize="14px" margin="23px 0 0 0" lineHeight="22px">2021.08.03</Text>
+                    <Text color="#9AA0A6" fontSize="14px" margin="23px 30px 0 0" lineHeight="18px">2021.08.03</Text>
                   </Notice>
                 </Grid>
                 );
@@ -254,7 +254,6 @@ color: #F1F3F4;
 width: fit-content;
 height: 48px;
 font-size: 16px;
-margin-right: 16px;
 appearance: none;
 line-height: 24px;
 margin: 3px 16px 0 8px;

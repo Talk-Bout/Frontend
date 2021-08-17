@@ -40,8 +40,8 @@ const BootMain = (props) => {
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           {/* 부트캠프 */}
-          <Text p color='#F8F9FA' fontSize='32px' fontWeight='700' margin='0 0 8px'>🚀부트캠프</Text>
-          <Text color='#BDC1C6' fontSize='20px'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
+          <Text p color='#F8F9FA' fontSize='32px' TABfontSize='20px' fontWeight='700' margin='0 0 8px' TABmargin='14px 0 0'>🚀부트캠프</Text>
+          <Text color='#BDC1C6' fontSize='20px' TABfontSize='12px'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
           {/* 부트캠프 목록 */}
           <CardList>
             {camp_list.map((camp, idx) => {
@@ -59,16 +59,16 @@ const BootMain = (props) => {
                     }
                   </ImageDiv>
                   {/* 부트캠프 이름 */}
-                  <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" margin="0 0 0 15px" color='#F8F9FA'>
+                  <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" TABtop='114px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA'>
                     {camp.bootcampName}
                   </Text>
                   {/* 부트캠프 설명 */}
-                  <Text p fontSize="14px" fontWeight="500" position="absolute" top="172px" margin="0 0 0 15px" color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
+                  <Text p fontSize="14px" position="absolute" top="172px" TABtop='144px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
                     {camp.desc}
                   </Text>
                   {/* 부트캠프 별점 */}
-                  <Text fontSize="14px" color='#E8EAED' position="absolute" top="200px" margin="0 0 0 15px">
-                    {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' marginRight='4px' withScore/> : '별점/리뷰 없음'}
+                  <Text fontSize="14px" color='#E8EAED' position="absolute" top="200px" TABtop='158px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
+                    {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' marginRight='4px' withScore/> : '별점/리뷰 없음'}
                   </Text>
                 </Card>
               );
@@ -101,6 +101,9 @@ const CardList = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 24px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin-top: 16px;
+  }
 `;
 
 const Card = styled.div`
@@ -113,6 +116,11 @@ margin-bottom: 30px;
 box-sizing: border-box;
 cursor: pointer;
 position: relative;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  width: 49%;
+  height: 208px;
+  margin-bottom: 12px;
+}
 `;
 
 const ImageDiv = styled.div`
@@ -123,6 +131,9 @@ const ImageDiv = styled.div`
   border-radius: 8px;
   &:hover {
     opacity: 0.9;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    opacity: 0.6;
   }
 `;
 

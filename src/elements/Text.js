@@ -32,6 +32,7 @@ const Text = (props) => {
     TABfontSize,
     TABmargin,
     TABlineHeight,
+    TABtop,
     } = props;
 
 
@@ -60,6 +61,7 @@ const Text = (props) => {
     TABfontSize: TABfontSize,
     TABmargin: TABmargin,
     TABlineHeight: TABlineHeight,
+    TABtop: TABtop,
   };
 
   if (p) {
@@ -129,6 +131,7 @@ Text.defaultProps = {
       font-size: ${(props) => props.TABfontSize};
       margin: ${(props) => props.TABmargin};
       line-height: ${(props) => props.TABlineHeight};
+      top: ${(props) => props.TABtop};
     }
   `;
 
@@ -161,6 +164,7 @@ Text.defaultProps = {
       font-size: ${(props) => props.TABfontSize};
       margin: ${(props) => props.TABmargin};
       line-height: ${(props) => props.TABlineHeight};
+      top: ${(props) => props.TABtop};
     }
 `;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -7,9 +7,16 @@ import MainBoot from '../components/MainBoot';
 import MainQna from '../components/MainQna';
 // import MainNews from '../components/MainNews';
 import MainTalk from '../components/MainTalk';
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
 
 const MainN = (props) => {
+  // const dispatch = useDispatch();                 // 카카오 소셜로그인 시험 중
 
+  // useEffect(() => {
+  //   dispatch(userActions.authKakaoDB());
+  // }, []);
+  
 
   return (
     <React.Fragment>

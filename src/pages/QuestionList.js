@@ -20,9 +20,8 @@ import QnaCard from '../components/QnaCard';
 const QuestionList = (props) => {
   const dispatch = useDispatch();
   const qna_list = useSelector((state) => state.question.list);
-  console.log(qna_list);
   const pop_qna_list = useSelector((state) => state.question.popular_list);
-  console.log(pop_qna_list);
+
   const [popPage, setPopPage] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -36,8 +35,6 @@ const QuestionList = (props) => {
     dispatch(questionActions.setQuestionDB(page));
     setPopPage(false);
   };
-
-  console.log(popPage);
 
   //페이지네이션
   useEffect(() => {

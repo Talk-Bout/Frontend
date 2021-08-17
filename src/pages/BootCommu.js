@@ -9,7 +9,7 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import { AiOutlineEye } from 'react-icons/ai';
-import { BiLike, BiComment } from "react-icons/bi";
+import { BiLike, BiComment, BiPencil } from "react-icons/bi";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import BootOthers from '../components/BootOthers';
 
@@ -65,9 +65,9 @@ const BootCommu = (props) => {
                   {/* 글쓰기 버튼 */}
                   {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
                   {is_login ?
-                  <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/community/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
+                  <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/community/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '18px', marginRight: '4px', verticalAlign: 'middle'}}><BiPencil /></span>글쓰기</Text></WriteBtn>
                   :
-                  <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'>글쓰기</Text></WriteBtn>
+                  <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '18px', marginRight: '4px', verticalAlign: 'middle'}}><BiPencil /></span>글쓰기</Text></WriteBtn>
                   }
                 </Grid>
               </Grid>
@@ -120,11 +120,12 @@ const BootCommu = (props) => {
 };
 
 const WriteBtn = styled.button`
-  height: 40px;
-  width: 80px;
+  height: 44px;
+  width: 121px;
   background-color: transparent;
   border: 1px solid #7879F1;
   border-radius: 7px;
+  padding: 10px 24px;
   cursor: pointer;
   vertical-align: middle;
   &:active {

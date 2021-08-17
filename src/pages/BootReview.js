@@ -6,7 +6,8 @@ import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import BootRoot from '../components/BootRoot';
 import { history } from '../redux/ConfigureStore';
-import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { BiPencil } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import Stars from '../components/Stars';
@@ -61,9 +62,9 @@ const BootReview = (props) => {
                 {/* 리뷰 남기기 버튼 */}
                 {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
                 {is_login ?
-                <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/review/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
+                <WriteBtn onClick={() => history.push({pathname: `/boot/${bootcampName}/review/write`, state: {camp_name: bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
                 :
-                <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BsPlus /></span>리뷰 남기기</Text></WriteBtn>
+                <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
                 }
               </Grid>
               {/* 부트캠프 리뷰 목록 */}
@@ -144,8 +145,8 @@ const BootReview = (props) => {
 };
 
 const WriteBtn = styled.button`
-  height: 40px;
-  width: 120px;
+  height: 48px;
+  width: 152px;
   background-color: transparent;
   border: 1px solid #7879F1;
   border-radius: 7px;

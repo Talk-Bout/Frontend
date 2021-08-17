@@ -29,7 +29,7 @@ const CommonDetail = (props) => {
   // 해당 게시물
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
-  console.log(comment_list);
+  // console.log(comment_list);
   const username = useSelector((state) => state.user.user.nickname);
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
@@ -166,7 +166,7 @@ const CommonDetail = (props) => {
                 <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; {one_post.category}</Text>
                 <Grid display='flex' justify_content='space-between' padding='12px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' vertical_align='middle'>{one_post.title}</Text>
+                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' vertical_align='middle'>{one_post.title}</Text>
                   <div style={{height: 'fit-content'}}>
                     {/* 북마크 버튼 */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
@@ -207,10 +207,10 @@ const CommonDetail = (props) => {
                 <InfoBox>
                 <img src={Profile} alt='프로필' style={{width: '40px', height: '40px'}}/>
                   <InfoBoxInner>
-                    <div style={{height: '18px'}}>
-                    <Text fontSize='12px' color='#BDC1C6' margin='0'>{one_post.nickname}</Text>
+                    <div style={{height: '18px', lineHeight: '18px'}}>
+                    <Text fontSize='14px' color='#BDC1C6' margin='0'>{one_post.nickname}</Text>
                     </div>
-                    <div style={{height: '16px'}}>
+                    <div style={{height: '16px', lineHeight: '16px'}}>
                     <Text fontSize='12px' color='#BDC1C6' margin='0'>{one_post.createdAt}</Text>
                     </div>
                   </InfoBoxInner>
@@ -218,7 +218,7 @@ const CommonDetail = (props) => {
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
                 {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image}`}/></ImageBox> : ''}
-                <Text p fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'}>{one_post.content}</Text>
+                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'}>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}
                   {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}
@@ -251,7 +251,7 @@ const CommonDetail = (props) => {
               </Post>
               {/* 댓글 입력란 */}
               <CommentInput>
-                <Text p fontSize='14px' color='#E8eaed' margin='16px 0'>댓글</Text>
+                <Text p fontSize='14px' lineHeight='18px' color='#E8eaed' margin='16px 0'>댓글</Text>
                 <InputWrap>
                   <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
                   <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
@@ -264,9 +264,9 @@ const CommonDetail = (props) => {
                     <Grid display='flex' justify_content='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}
-                        <Text fontSize='14px' fontWeight='700' color='#F1F3F4' margin='0 16px 0 0'>{ct.nickname}</Text>
+                        <Text fontSize='14px' lineHeight='18px' fontWeight='700' color='#F1F3F4' margin='0 16px 0 0'>{ct.nickname}</Text>
                         {/* 작성일자 */}
-                        <Text fontSize='12px' color='#BDC1C6'>{ct.createdAt}</Text>
+                        <Text fontSize='12px' lineHeight='16px' color='#BDC1C6'>{ct.createdAt}</Text>
                       </NameTime>
                       {/* 댓글 수정, 삭제 버튼 */}
                       {/* 댓글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
@@ -290,7 +290,7 @@ const CommonDetail = (props) => {
                     {ct.postCommentId === edit_comment ?
                     <Input edit_mode ref={commentEdit} defaultValue={ct.content}/>
                     :
-                    <Text p fontSize='16px' color='#F1F3F4' margin='0 0 16px'>{ct.content}</Text>
+                    <Text p lineHeight='24px' fontSize='16px' color='#F1F3F4' margin='0 0 16px'>{ct.content}</Text>
                     }
                     {/* <Like> */}
                       {/* 추천 수 */}
@@ -336,6 +336,7 @@ const InfoBox = styled.div`
 display: flex;
 width: auto;
 height: 40px;
+margin: 24px 0 0 0;
 `;
 
 const InfoBoxInner = styled.div`
@@ -373,7 +374,7 @@ const Image = styled.img`
 `;
 
 const IconBox = styled.div`
-  margin: 56px 0 0;
+  margin: 50px 0 0;
 `;
 
 const CommentInput = styled.div`
@@ -395,7 +396,8 @@ const Input = styled.input`
   border-radius: 8px;
   padding: ${(props) => props.edit_mode ? '15px 10px' : '15px 20px'};
   margin: ${(props) => props.edit_mode ? '0 0 10px' : '0 8px 0 0'};
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 18px;
   caret-color: #5F6368;
   color: #e1e1e1;
   &::placeholder {
@@ -407,6 +409,7 @@ const Input = styled.input`
 `;
 
 const CommentBtn = styled.button`
+  line-height: '18px';
   width: 17%;
   background-color: #7879F1;
   border-radius: 8px;
@@ -448,9 +451,10 @@ const MoreBtn = styled.button`
 `;
 
 const OthersBox = styled.div`
-  height: fit-content;
+  /* height: fit-content; */
   background-color: #202124;
   padding: 24px;
+  height: 403px;
 `;
 
 export default CommonDetail;

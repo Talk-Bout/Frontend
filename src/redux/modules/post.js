@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import instance from '../../shared/Request';
+import { actionCreators as statusActions } from './status';
 
 // 액션타입
 const SET_POST = 'post/SET_POST'; // 게시글 전체 불러오기
@@ -60,9 +61,11 @@ const initialState = {
 const setPostDB = (page, category) => {
   // 전체 게시글 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.get(`/posts?page=${page}&category=${category}`)
       .then((response) => {
         dispatch(setPost(response.data));
+        dispatch(statusActions.endLoading());
         // console.log(response);
         // console.log(response.data);
       })
@@ -75,9 +78,10 @@ const setPostDB = (page, category) => {
 const setPostPopDB = (page) => {                                                      // <-- 추가했습니다!!!
   // 전체 게시글 인기순 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.get(`/popular/posts?page=${page}`).then((response) => {
       dispatch(setPostPop(response.data));
-      console.log(response.data);
+      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -87,11 +91,12 @@ const setPostPopDB = (page) => {                                                
 const setOnePostDB = (postId) => {
   // 개별 게시글 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.get(`/posts/${postId}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(setOnePost(response.data));
-
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(`부트톡톡 개별 게시글 불러오기 에러 발생: ${err}`);
@@ -102,6 +107,7 @@ const setOnePostDB = (postId) => {
 const addPostDB = (new_post) => {
   // 게시글 추가하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const title = new_post.title;
     const content = new_post.content;
     const nickname = new_post.nickname;
@@ -118,6 +124,7 @@ const addPostDB = (new_post) => {
       .then((response) => {
         // console.log(response.data);
         dispatch(addPost(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(`부트톡톡 게시글 추가하기 에러 발생: ${err}`);
@@ -128,6 +135,7 @@ const addPostDB = (new_post) => {
 const editPostDB = (edited_post) => {
   // 게시글 수정하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const title = edited_post.title;
     const content = edited_post.content;
     const postId = parseInt(edited_post.postId);
@@ -155,6 +163,7 @@ const editPostDB = (edited_post) => {
         }
         // console.log(response.data);
         dispatch(editPost(data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(`부트톡톡 게시글 수정하기 에러 발생: ${err}`);
@@ -165,12 +174,14 @@ const editPostDB = (edited_post) => {
 const deletePostDB = (deleted_post) => {
   // 게시글 삭제하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const postId = parseInt(deleted_post.postId);
     instance
       .delete(`/posts/${postId}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(deletePost(postId));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(`부트톡톡 게시글 삭제하기 에러 발생: ${err}`);
@@ -181,8 +192,10 @@ const deletePostDB = (deleted_post) => {
 const setBookmarkDB = (nickname) => {
   // 부트톡톡 북마크 불러오기
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.get(`/users/${nickname}/postBookmarks`).then((response) => {
       dispatch(setBookmark(response.data));
+      dispatch(statusActions.endLoading());
       // console.log(response.data);
     }).catch((err) => {
       console.error(`부트톡톡 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
@@ -193,6 +206,7 @@ const setBookmarkDB = (nickname) => {
 const addBookmarkDB = (postId, nickname) => {
   // 부트톡톡 북마크 추가하기
     return function (dispatch) {
+      dispatch(statusActions.setLoading());
         instance.post(`/posts/${postId}/postBookmarks`,{
           postId: parseInt(postId),
           nickname: nickname,
@@ -200,7 +214,7 @@ const addBookmarkDB = (postId, nickname) => {
       .then((response) => {
         // console.log(response.data);
                 dispatch(addBookmark(response.data));
-                console.log(response.data);
+                dispatch(statusActions.endLoading());
             })
             .catch((err) => {
               console.error(`부트톡톡 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
@@ -211,10 +225,11 @@ const addBookmarkDB = (postId, nickname) => {
 const deleteBookmarkDB = (postId, postBookmarkId) => {
   // 부트톡톡 북마크 삭제하기
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
       instance.delete(`/posts/${postId}/postBookmarks/${postBookmarkId}`)
     .then((response) => {
               dispatch(deleteBookmark(response.data));
-              console.log(response.data);
+              dispatch(statusActions.endLoading());
           })
           .catch((err) => {
             console.error(`부트톡톡 북마크 삭제하기 에러 발생: ${err} ### ${err.response}`);
@@ -225,11 +240,13 @@ const deleteBookmarkDB = (postId, postBookmarkId) => {
 const likePostDB = (nickname, postId) => {
   // 부트톡톡 좋아요 표시하기
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.post(`/posts/${postId}/postLikes`, {
       nickname: nickname,
       postId: postId,
     }).then((response) => {
       dispatch(likePost(response.data));
+      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`부트톡톡 좋아요 표시하기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -239,9 +256,11 @@ const likePostDB = (nickname, postId) => {
 const unlikePostDB = (postId, postLikeId) => {
   // 부트톡톡 좋아요 해제하기
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.delete(`/posts/${postId}/postLikes/${postLikeId}`)
     .then((response) => {
       dispatch(unlikePost(postId, postLikeId));
+      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`부트톡톡 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -251,6 +270,7 @@ const unlikePostDB = (postId, postLikeId) => {
 const setCommentDB = (postId, page) => {
   // 댓글 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.get(`/posts/${postId}/postComments?page=${page}`, {
     })
     .then((response) => {
@@ -265,6 +285,7 @@ const setCommentDB = (postId, page) => {
               dispatch(setComment(response.data));
           }
           // console.log(setComment(response.data));
+          dispatch(statusActions.endLoading());
       })
       .catch((err) => {
           console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);
@@ -274,17 +295,18 @@ const setCommentDB = (postId, page) => {
   
   const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
       return function (dispatch, {history}) {
+        dispatch(statusActions.setLoading());
           const nickname = new_comment.nickname;
           const content = new_comment.content;
           const postId = parseInt(new_comment.postId);
-          const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}`}
           instance.post(`/posts/${postId}/postComments`,
           {
               nickname: nickname,
               content: content,
               postId: postId,
-          }, {headers: headers}).then((response) => {
+          }).then((response) => {
               dispatch(addComment(response.data));
+              dispatch(statusActions.endLoading());
               // console.log(response.data);
               }).catch((err) => {
                   console.error(`부트톡톡 댓글 추가하기 에러 발생: ${err}`);
@@ -294,6 +316,7 @@ const setCommentDB = (postId, page) => {
   
   const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하는 함수
   return function (dispatch, getState, { history }) {
+    dispatch(statusActions.setLoading());
   const postCommentId = edit_comment.postCommentId;
   const content = edit_comment.content;
   instance.patch(`/posts/${postId}/postComments/${postCommentId}`,
@@ -302,6 +325,7 @@ const setCommentDB = (postId, page) => {
   }).then((response) => {
           // console.log(response.data);
           dispatch(editComment(response.data));
+          dispatch(statusActions.endLoading());
       }).catch((err) => {
           console.error(`부트톡톡 댓글 수정하기 에러 발생: ${err}`);
       });
@@ -309,14 +333,15 @@ const setCommentDB = (postId, page) => {
   };
   
   
-  const deleteCommentDB = (postCommentId, postId) => {   
-    console.log(postCommentId, postId)    // 댓글 삭제하는 함수
+  const deleteCommentDB = (postCommentId, postId) => {       // 댓글 삭제하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
   instance.delete(`/posts/${postId}/postComments/${postCommentId}`
   )
   .then((response) => {
           // console.log(response.data);
           dispatch(deleteComment(postCommentId));
+          dispatch(statusActions.endLoading());
       }).catch((err) => {
           console.error(`부트톡톡 댓글 삭제하기 에러 발생: ${err}`);
       });

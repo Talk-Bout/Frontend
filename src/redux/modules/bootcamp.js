@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/Request';
+import { actionCreators as statusActions } from './status';
 
 // 액션타입
 const MAIN_CAMPS = 'bootcamp/MAIN_CAMPS' // 메인페이지 부트캠프 목록 불러오기(인기순)
@@ -71,8 +72,10 @@ const initialState = {
 const mainCampsDB = () => {
   // 메인페이지 부트캠프 목록 불러오는 함수(인기순)
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.get(`/popular/bootcamps`).then((response) => {
       dispatch(mainCamps(response.data));
+      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`메인페이지 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
     });
@@ -82,10 +85,12 @@ const mainCampsDB = () => {
 const setCampsDB = (page) => {
   // 서버로부터 부트캠프 전체 목록 불러오는 함수(페이징)
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .get(`/bootcamp?page=${page}`)
       .then((response) => {
         dispatch(setCamps(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -98,6 +103,7 @@ const setCampsDB = (page) => {
 const setMyCampDB = () => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .get('/tokenUser')
       .then((response) => {
@@ -106,6 +112,7 @@ const setMyCampDB = () => {
           .get(`/users/${nickname}/bootcampBookmarks`)
           .then((response) => {
             dispatch(setMyCamp(response.data));
+            dispatch(statusActions.endLoading());
           })
           .catch((err) => {
             console.error(
@@ -128,6 +135,7 @@ const addMyCampDB = (nickname, bootcampName) => {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
+    dispatch(statusActions.setLoading());
     instance
       .post(`/bootcamp/${bootcampName}/bootcampBookmarks`, {
         nickname: nickname,
@@ -135,6 +143,7 @@ const addMyCampDB = (nickname, bootcampName) => {
       })
       .then((response) => {
         dispatch(addMyCamp(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -147,11 +156,15 @@ const addMyCampDB = (nickname, bootcampName) => {
 const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
   // 부트캠프 북마크 해제하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .delete(
         `/bootcamp/${bootcampName}/bootcampBookmarks/${bootcampBookmarkId}`
       )
-      .then(dispatch(deleteMyCamp(bootcampBookmarkId)))
+      .then((response) => {
+        dispatch(deleteMyCamp(bootcampBookmarkId));
+        dispatch(statusActions.endLoading());
+      })
       .catch((err) => {
         console.error(
           `부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response}`
@@ -163,10 +176,12 @@ const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
 const setReviewsDB = (camp_name, page) => {
   // 서버로부터 리뷰 불러오는 함수(페이징)
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .get(`/bootcamp/${camp_name}/review?page=${page}`)
       .then((response) => {
         dispatch(setReviews(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -179,6 +194,7 @@ const setReviewsDB = (camp_name, page) => {
 const addReviewDB = (new_review) => {
   // 서버에 리뷰 저장하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .post(`/bootcamp/${new_review.bootcampName}/review`, {
         nickname: new_review.nickname,
@@ -191,6 +207,7 @@ const addReviewDB = (new_review) => {
       })
       .then((response) => {
         dispatch(addReview(response.data));
+        dispatch(statusActions.endLoading());
         history.goBack();
       })
       .catch((err) => {
@@ -209,10 +226,12 @@ const addReviewDB = (new_review) => {
 const setCommusDB = (camp_name, page) => {
   // 서버로부터 커뮤니티글 목록 불러오는 함수(페이징)
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .get(`/bootcamp/${camp_name}/community?page=${page}`)
       .then((response) => {
         dispatch(setCommus(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -225,10 +244,12 @@ const setCommusDB = (camp_name, page) => {
 const setOneCommuDB = (camp_name, commu_id) => {
   // 서버로부터 커뮤니티글 하나를 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());dispatch(statusActions.setLoading(true));
     instance
       .get(`/bootcamp/${camp_name}/community/${commu_id}`)
       .then((response) => {
         dispatch(setOneCommu(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -241,6 +262,7 @@ const setOneCommuDB = (camp_name, commu_id) => {
 const addCommuDB = (new_commu) => {
   // 서버에 커뮤니티글 저장하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .post(`/bootcamp/${new_commu.bootcampName}/community`, {
         nickname: new_commu.nickname,
@@ -251,6 +273,7 @@ const addCommuDB = (new_commu) => {
       })
       .then((response) => {
         dispatch(addCommu(response.data));
+        dispatch(statusActions.endLoading());
         history.push(
           `/boot/${response.data.bootcampName}/post/${response.data.communityId}`
         );
@@ -266,6 +289,7 @@ const addCommuDB = (new_commu) => {
 const editCommuDB = (edited_commu) => {
   // 서버의 커뮤니티글을 수정하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .patch(
         `/bootcamp/${edited_commu.bootcampName}/community/${edited_commu.communityId}`,
@@ -277,6 +301,7 @@ const editCommuDB = (edited_commu) => {
       )
       .then((response) => {
         dispatch(editCommu(response.data));
+        dispatch(statusActions.endLoading());
         history.push(
           `/boot/${edited_commu.bootcampName}/post/${edited_commu.communityId}`
         );
@@ -292,11 +317,15 @@ const editCommuDB = (edited_commu) => {
 const deleteCommuDB = (deleted_commu) => {
   // 서버의 커뮤니티글을 삭제하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .delete(
         `/bootcamp/${deleted_commu.bootcampName}/community/${deleted_commu.communityId}`
       )
-      .then(history.goBack())
+      .then((response) => {
+        history.goBack();
+        dispatch(statusActions.endLoading());
+      })
       .catch((err) => {
         console.error(`부트캠프 커뮤니티글 삭제하기 에러 발생: ${err} ### ${err.response}`);
       });
@@ -306,11 +335,13 @@ const deleteCommuDB = (deleted_commu) => {
 const setMyCommuDB = () => {
   // 서버로부터 북마크한 커뮤니티글 목록 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance.get('/tokenUser').then((response) => {
       const nickname = response.data.nickname;
       instance.get(`/users/${nickname}/communityBookmarks`)
     }).then((result) => {
         dispatch(setMyCommu(result.data));
+        dispatch(statusActions.endLoading());
       }).catch((err) => {
         console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
       });
@@ -324,6 +355,7 @@ const addMyCommuDB = (nickname, communityId) => {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
+    dispatch(statusActions.setLoading());
     instance
       .post(`/community/${communityId}/communityBookmarks`, {
         nickname: nickname,
@@ -331,6 +363,7 @@ const addMyCommuDB = (nickname, communityId) => {
       })
       .then((response) => {
         dispatch(addMyCommu(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -343,12 +376,14 @@ const addMyCommuDB = (nickname, communityId) => {
 const deleteMyCommuDB = (communityId, communityBookmarkId) => {
   // 커뮤니티글 북마크 해제하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .delete(
         `/community/${communityId}/communityBookmarks/${communityBookmarkId}`
       )
       .then((response) => {
         dispatch(deleteMyCommu(communityBookmarkId));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -365,6 +400,7 @@ const likeCommuDB = (communityId, nickname) => {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
+    dispatch(statusActions.setLoading());
     instance
       .post(`/community/${communityId}/communityLikes`, {
         communityId: communityId,
@@ -372,6 +408,7 @@ const likeCommuDB = (communityId, nickname) => {
       })
       .then((response) => {
         dispatch(likeCommu(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -384,9 +421,13 @@ const likeCommuDB = (communityId, nickname) => {
 const unlikeCommuDB = (communityId, communityLikeId) => {
   // 커뮤니티글 좋아요 해제하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .delete(`/community/${communityId}/communityLikes/${communityLikeId}`)
-      .then(dispatch(unlikeCommu(communityId, communityLikeId)))
+      .then((response) => {
+        dispatch(unlikeCommu(communityId, communityLikeId));
+        dispatch(statusActions.endLoading());
+      })
       .catch((err) => {
         console.error(
           `부트캠프 커뮤니티글 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`
@@ -398,18 +439,22 @@ const unlikeCommuDB = (communityId, communityLikeId) => {
 const setCommentsDB = (commu_id, page) => {
   // 서버로부터 커뮤니티글의 댓글 목록 불러오는 함수(페이징)
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .get(`/community/${commu_id}/communityComments?page=${page}`)
       .then((response) => {
         if (page !== 1) {
           if (response.data.length !== 0) {
             dispatch(setNextComments(response.data));
+            dispatch(statusActions.endLoading());
           } else {
             window.alert('마지막 댓글입니다.');
+            dispatch(statusActions.endLoading());
             return;
           }
         } else {
           dispatch(setComments(response.data));
+          dispatch(statusActions.endLoading());
         }
       })
       .catch((err) => {
@@ -427,6 +472,7 @@ const addCommentDB = (new_comment) => {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
+    dispatch(statusActions.setLoading());
     instance
       .post(`/community/${new_comment.communityId}/communityComments`, {
         content: new_comment.content,
@@ -435,6 +481,7 @@ const addCommentDB = (new_comment) => {
       })
       .then((response) => {
         dispatch(addComment(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -447,6 +494,7 @@ const addCommentDB = (new_comment) => {
 const editCommentDB = (edited_comment) => {
   // 서버의 커뮤니티 댓글 수정하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .patch(
         `community/${edited_comment.communityId}/communityComments/${edited_comment.communityCommentId}`,
@@ -456,6 +504,7 @@ const editCommentDB = (edited_comment) => {
       )
       .then((response) => {
         dispatch(editComment(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(
@@ -468,11 +517,15 @@ const editCommentDB = (edited_comment) => {
 const deleteCommentDB = (deleted_comment) => {
   // 서버의 커뮤니티 댓글 삭제하는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     instance
       .delete(
         `/community/${deleted_comment.communityId}/communityComments/${deleted_comment.communityCommentId}`
       )
-      .then(dispatch(deleteComment(deleted_comment.communityCommentId)))
+      .then((response) => {
+        dispatch(deleteComment(deleted_comment.communityCommentId));
+        dispatch(statusActions.endLoading());
+      })
       .catch((err) => {
         console.error(
           `부트캠프 커뮤니티 댓글 삭제하기 에러 발생: ${err} ### ${err.response}`

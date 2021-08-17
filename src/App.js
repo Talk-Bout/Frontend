@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from './redux/modules/user';
 
 // NotFound 페이지
@@ -49,8 +49,12 @@ import DeleteUser from './pages/DeleteUser';
 import PageEdit from './pages/PageEdit';
 import MypageBookmarks from './pages/MypageBookmarks';
 
+//로딩 스피너
+import Spinner from './components/Spinner';
+
 function App() {
   const dispatch = useDispatch();
+  const is_loading = useSelector(state => state.status.is_loading);
 
   useEffect(() => {
     dispatch(userActions.stayLogInDB());
@@ -86,9 +90,11 @@ function App() {
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route path="/mypage/edit" exact component={PageEdit} />
+          {/* <Route path='/spinner' exact component={Spinner} /> */}
           <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>
+      <Spinner visible={is_loading} />
     </React.Fragment>
   );
 }

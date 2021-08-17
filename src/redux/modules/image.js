@@ -24,10 +24,8 @@ const initialState = {
 const getPreview = (e) => {
   // 게시글 작성 페이지로부터 받은 이미지의 preview를 만드는 함수
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     if (e === null) {
       dispatch(setPreview(null));
-      dispatch(statusActions.endLoading());
       return;
     }
     const reader = new FileReader();
@@ -43,11 +41,9 @@ const getPreview = (e) => {
 const uploadImageDB = (formData) => {
   // 서버에 이미지를 저장하고, url을 반환하는 함수
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     instance.post('/images', formData, {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
       // console.log(response);
       dispatch(uploadImage(response.data));
-      dispatch(statusActions.endLoading());
     })
     .catch((err) => {
       console.error(`이미지 업로드 에러 발생: ${err}`);

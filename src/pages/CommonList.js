@@ -107,9 +107,9 @@ const CommonBoardList = (props) => {
                   </CategoryButton>
                   </Categories>
                  
-                  <Grid width="18%" display="flex">
+                  <Grid width="fit-content" display="flex">
                     {/* 인기순, 최신순 */}
-                   <div style={{color: "#F1F3F4", lineHeight: "48px", margin: "3px 0 0 0px" }}><RiArrowUpDownFill /></div> 
+                   <div style={{ color: "#F1F3F4", lineHeight: "48px", margin: "3px 0 0 0px" }}><RiArrowUpDownFill /></div> 
                     <SelectButton
                     >
                       {PopArray?
@@ -141,16 +141,18 @@ const CommonBoardList = (props) => {
                   </Grid>
                 </Grid>
             </Grid>
-            
+            <hr/>
             {/* 공지 */}
             <Grid height="134px">
               {[1, 2].map((n, idx) => {
                   return (
-                <Grid key={n.postId} display="flex" width="100%">
+                <Grid key={n.postId} display="flex" width="100%" >
                   <Notice>
+                    <div style={{ margin: "17.5px 0 0 0"}}>
                     <NoticeHead>공지</NoticeHead>
                     <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                    <Text color="#9AA0A6" fontSize="14px" margin="23px 30px 0 0" lineHeight="18px">2021.08.03</Text>
+                    </div>
+                    <Text color="#9AA0A6" fontSize="14px" margin="23px 23px 0 0" lineHeight="18px">2021.08.03</Text>
                   </Notice>
                 </Grid>
                 );
@@ -222,7 +224,6 @@ const Categories = styled.div`
   height: 44px;
   left: 142px;
   top: 210px;
-  margin: 5px 0 0 0;
 `;
 
 const CategoryButton = styled.div`
@@ -257,6 +258,7 @@ font-size: 16px;
 appearance: none;
 line-height: 24px;
 margin: 3px 16px 0 8px;
+
 `;
 
 const Options = styled.div`
@@ -284,13 +286,14 @@ border: 1px solid #4D4E93;
 
 
 const Notice = styled.div`
-border-top: 1px solid #9AA0A6;
+border-bottom: 1px solid #9AA0A6;
 grid-template-rows: repeat(2, minmax(auto, auto));
 grid-template-columns: repeat(6, 1fr);
 display: flex;
-margin: 5px 0;
-width: 98.5%;
-padding: 5px 0px 0px 0px;
+width: 100%;
+height:67px;
+display:flex;
+justify-content: space-between;
 `;
 
 const NoticeHead = styled.span`
@@ -299,31 +302,26 @@ color: #7879F1;
 padding: 8px 32px;
 width: 95px;
 height: 34px;
-left: 24px;
-top: 17px;
 border: 1px solid #7879F1;
 box-sizing: border-box;
 border-radius: 8px;
-margin: 15px 15px 15px 25px;
+margin: 0px 15px 0px 25px;
 font-size: 14px;
-line-height: 15px;
+line-height: 27px;
 `;
 
 const NoticeText = styled.span`
 font-weight: bold;
-margin: 18px 5px;
+margin: 0px 5px;
 color: #7879F1;
 width: 82%;
 height: 27px;
-left: 138px;
-top: 20px;
 font-size: 18px;
 line-height: 27px;
 letter-spacing: 0.2px;
 `;
 
 const Contents = styled.div`
-  border-top: 1px solid #9AA0A6;
   grid-template-rows: repeat(4, minmax(191px, 191px));
   grid-template-columns: repeat(2, 1fr);
   display: grid;

@@ -30,7 +30,7 @@ const QuestionDetail = (props) => {
   const question_found = question_list.find(
     (question) => question.questionId == parseInt(question_id)
   );
-  //  console.log(question_found);
+
   const user_name = useSelector((state) => state.user.user.nickname);
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
@@ -41,8 +41,7 @@ const QuestionDetail = (props) => {
   const answer_list = all_answer.filter(
     (answer) => answer.questionId === question_id
   );
-  // console.log(all_answer);
-  // console.log(answer_list);
+
   const [answer_page, setAnswerPage] = useState(2);
 
   //북마크 목록
@@ -142,12 +141,12 @@ const QuestionDetail = (props) => {
 
   return (
     <React.Fragment>
-      <Grid display="flex" backgroundColor="#282a2d">
+      <Grid display="flex">
         <Sidebar />
         <Body header footer>
           <Grid>
             {/* 질문 카드 */}
-            <Grid margin="0 0 0 111px" width="1041px">
+            <Grid width="1041px" margin="10px auto">
               <Grid display="flex">
                 <Grid width="80%">
                   <Text fontSize="24px" fontWeight="600" color="#ffffff">

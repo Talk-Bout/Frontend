@@ -147,14 +147,12 @@ const createQuestionDB = (new_question) => {
     const nickname = new_question.nickname;
     const image = new_question.image;
     instance
-      .post(
-        `/questions`,
-        {
-          title: title,
-          content: content,
-          nickname: nickname,
-          image: image,
-        })
+      .post(`/questions`, {
+        title: title,
+        content: content,
+        nickname: nickname,
+        image: image,
+      })
       .then((response) => {
         // console.log(response.data);
         dispatch(createQuestion(response.data));
@@ -175,14 +173,12 @@ const editQuestionDB = (edit_question) => {
     const nickname = edit_question.nickname;
     const image = edit_question.image;
     instance
-      .patch(
-        `/questions/${questionId}`,
-        {
-          title: title,
-          content: content,
-          nickname: nickname,
-          image: image,
-        })
+      .patch(`/questions/${questionId}`, {
+        title: title,
+        content: content,
+        nickname: nickname,
+        image: image,
+      })
       .then((response) => {
         dispatch(editQuestion(response.data));
         dispatch(statusActions.endLoading());
@@ -256,13 +252,11 @@ const createAnswerDB = (new_answer) => {
     const content = new_answer.content;
     const nickname = new_answer.nickname;
     instance
-      .post(
-        `/questions/${questionId}/answers`,
-        {
-          content: content,
-          nickname: nickname,
-          questionId: questionId,
-        })
+      .post(`/questions/${questionId}/answers`, {
+        content: content,
+        nickname: nickname,
+        questionId: questionId,
+      })
       .then((response) => {
         dispatch(createAnswer(response.data));
         dispatch(statusActions.endLoading());
@@ -404,7 +398,6 @@ export default handleActions(
       }),
     [SET_QUESTION_POP]: (state, action) =>
       produce(state, (draft) => {
-        // <-- 추가했습니다!!
         draft.popular_list = action.payload.question_list;
       }),
     [SET_ONE_QUESTION]: (state, action) =>
@@ -473,11 +466,9 @@ export default handleActions(
       }),
     [UNLIKE_QUESTION]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload.q_like_id);
         let like_idx = draft.question_like_list.findIndex(
           (info) => info.questionLikeId === action.payload.q_like_id
         );
-        console.log(like_idx);
         draft.question_like_list.splice(like_idx, 1);
       }),
     [LIKE_ANSWER]: (state, action) =>

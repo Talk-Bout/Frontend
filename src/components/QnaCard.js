@@ -160,7 +160,7 @@ const QnaListCard = styled.div`
   border-radius: 12px;
   box-sizing: border-box;
   padding: 24px 24px 0;
-  margin: 0 5px 24px;
+  margin: 0 11px 24px;
   cursor: pointer;
   &:hover {
     opacity: 0.7;

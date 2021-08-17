@@ -508,7 +508,7 @@ export default handleActions(
 // 액션 생성자
 const actionCreators = {
   setQuestionDB,
-  setQuestionPopDB, // <-- 추가했습니다!!
+  setQuestionPopDB,
   setOneQuestionDB,
   createQuestionDB,
   deleteQuestionDB,

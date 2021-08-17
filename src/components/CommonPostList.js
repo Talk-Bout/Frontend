@@ -11,8 +11,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 const CommonPostList = (props) => {
   const one_post = useSelector(state => state.post.one_post);
   const common_list = useSelector(state => state.post.list);
-  console.log(common_list);
-  console.log(props);
 
   return (
     <React.Fragment>

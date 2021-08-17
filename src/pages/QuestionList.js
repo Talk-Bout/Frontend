@@ -12,7 +12,7 @@ import Body from '../components/Body';
 //icons
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { Group } from '../image/Group.png';
+import { BiPencil } from 'react-icons/bi';
 
 //게시물 하나 카드
 import QnaCard from '../components/QnaCard';
@@ -68,6 +68,7 @@ const QuestionList = (props) => {
           <Grid
             className="Title-btn"
             display="flex"
+            width="100%"
             justify_content="space-between"
           >
             {/* Q&A 게시판 타이틀 */}
@@ -89,10 +90,11 @@ const QuestionList = (props) => {
             </div>
             <div
               style={{
-                width: '200px',
-                padding: '10px 0 0',
+                padding: '10px 0px',
                 textAlign: 'right',
-                margin: '0 20px',
+                // margin: '0 10px',
+                alignItems: 'center',
+                // backgroundColor: 'yellow',
               }}
             >
               {/* 인기순 정렬 버튼 */}
@@ -107,7 +109,7 @@ const QuestionList = (props) => {
                 >
                   <span
                     style={{
-                      fontSize: '20px',
+                      fontSize: '24px',
                       marginRight: '8px',
                       verticalAlign: 'middle',
                     }}
@@ -127,7 +129,7 @@ const QuestionList = (props) => {
                 >
                   <span
                     style={{
-                      fontSize: '20px',
+                      fontSize: '24px',
                       marginRight: '8px',
                       verticalAlign: 'middle',
                     }}
@@ -140,8 +142,8 @@ const QuestionList = (props) => {
 
               {/* 글쓰기 버튼 */}
               <WriteBtn onClick={() => history.push('/question/write')}>
-                <Text fontSize="14px" color="#7879F1">
-                  글쓰기
+                <Text fontSize="16px" color="#7879F1">
+                  <BiPencil /> 글쓰기
                 </Text>
               </WriteBtn>
             </div>
@@ -230,11 +232,11 @@ const QuestionList = (props) => {
 };
 
 const WriteBtn = styled.button`
-  height: 40px;
-  width: 80px;
+  width: 120px;
+  height: 48px;
   background-color: transparent;
   border: 1px solid #7879f1;
-  border-radius: 7px;
+  border-radius: 8px;
   cursor: pointer;
   vertical-align: middle;
   &:active {
@@ -243,9 +245,10 @@ const WriteBtn = styled.button`
 `;
 
 const CardList = styled.div`
-  margin: 24px 0 0;
+  margin-top: 24px;
   width: 100%;
   display: flex;
+  gap: 24px 16px;
   flex-wrap: wrap;
 `;
 

@@ -9,7 +9,7 @@ import { actionCreators as postActions} from "../redux/modules/post";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { FaPlus } from "react-icons/fa";
 import { RiArrowUpDownFill} from 'react-icons/ri';
-
+import { BiPencil } from 'react-icons/bi';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import CommonPostList from '../components/CommonPostList';
@@ -107,9 +107,9 @@ const CommonBoardList = (props) => {
                   </CategoryButton>
                   </Categories>
                  
-                  <Grid width="18%" display="flex">
+                  <Grid width="17.5%" display="flex">
                     {/* 인기순, 최신순 */}
-                   <div style={{color: "#F1F3F4", lineHeight: "48px", marginRight: "10px" }}><RiArrowUpDownFill /></div> 
+                   <div style={{color: "#F1F3F4", lineHeight: "48px", margin: "3px 0 0 8px" }}><RiArrowUpDownFill /></div> 
                     <SelectButton
                     >
                       {PopArray?
@@ -127,7 +127,7 @@ const CommonBoardList = (props) => {
                       <WriteButton
                         onClick={() => history.push('/common/write')}
                       >
-                        <FaPlus/>&nbsp; 글쓰기
+                        <BiPencil />&nbsp; 글쓰기
                       </WriteButton>
                     </div>
                       :
@@ -222,6 +222,7 @@ const Categories = styled.div`
   height: 44px;
   left: 142px;
   top: 210px;
+  margin: 5px 0 0 0;
 `;
 
 const CategoryButton = styled.div`
@@ -229,15 +230,17 @@ cursor: pointer;
 background-color: #202124;
 border: none;
 border-radius: 100px;
-margin: 7px 10px 0 10px;
+margin: 0 8px;
 width: 110px;
 height: 44px;
-left: 0px;
-top: 0px;
 color: #80868B;
 text-align: center;
 font-size: 16px;
-line-height: 45px;
+line-height: 24px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
 &:hover {
   background-color: #BDC1C6;
   color: #0E1013;
@@ -253,6 +256,8 @@ height: 48px;
 font-size: 16px;
 margin-right: 16px;
 appearance: none;
+line-height: 24px;
+margin: 3px 16px 0 8px;
 `;
 
 const Options = styled.div`
@@ -300,7 +305,7 @@ top: 17px;
 border: 1px solid #7879F1;
 box-sizing: border-box;
 border-radius: 8px;
-margin: 15px 10px;
+margin: 15px 15px 15px 25px;
 font-size: 14px;
 line-height: 15px;
 `;

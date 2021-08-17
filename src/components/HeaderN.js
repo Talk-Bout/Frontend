@@ -168,7 +168,7 @@ const HeaderN = (props) => {
 
 const Input = styled.input`
   border: none;
-  width: 600px;
+  width: 400px;
   height: 48px;
   background-color: transparent;
   color: #80868b;

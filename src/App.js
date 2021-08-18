@@ -19,6 +19,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ChangeInfo from './pages/ChangeInfo';
 
+//소셜 로그인
+import KakaoLogin from './pages/KakaoLogin';
+
 //자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
 import CommonList from './pages/CommonList';
@@ -86,6 +89,7 @@ function App() {
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route path="/mypage/edit" exact component={PageEdit} />
+          <Route path="/oauth/kakao/callback" exact component={KakaoLogin} />
           <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>

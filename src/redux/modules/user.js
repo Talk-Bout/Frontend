@@ -161,35 +161,49 @@ const userDeleteDB = (nickname) => {
 const authKakaoDB = () => {
   // 카카오 소셜로그인
   return function (dispatch) {
-    // window.open('http://13.209.12.149/oauth/kakao', '_blank')
 
-    // const axios = require('axios');
-    // const headers = {'Authorization': 'Bearer d1FcrVA8H0067Q_zEXwq0E5SHEjylw5HROk6_go9cxgAAAF7Vuz5UQ'}
-    // axios.post('http://13.209.12.149/oauth/logout', {headers: headers}).then((response) => {
-    //   console.log(response);
-    // }).catch((err) => {
-    //   console.error(`로그아웃 에러: ${err}`);
-    // })
+      // 리프레시 토큰 발급
+  //   const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
+  //   const axios = require('axios');
+  //   axios.post('https://kauth.kakao.com/oauth/token', formUrlEncoded({
+  //     "grant_type": "refresh_token",
+  //     "client_id": "544c4bf1696e4295986a43b5cd9f7f80", // rest api 키
+  //     // client_id: '0af532c12971e247c7d66ed819d41c6c', // 자바스크립트 키
+  //     // redirect_uri: 'http://localhost:3000/oauth/kakao/callback',
+  // "refresh_token": "473nuOOErq_H-7TDMr_G_xhJYCycE4VFllnpwworDNMAAAF7WBujVw",
+  //     // client_secret: 'Xa2qaAZATfPnMdY792FGAC2EcZSOVjVf',
+  //   }), {headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': '544c4bf1696e4295986a43b5cd9f7f80'}}).then((response) => {
+  //     console.log(response);
+  //   }).catch((err) => {
+  //     console.error(`${err}`);
+  //   })
+  // };
 
-
-    // const axios = require('axios');
-    // axios.post('https://kauth.kakao.com/oauth/token', {
-    //   grant_type: "refresh_token",
-    //   client_id: "a1e045a6bd23510144e987da133f3eff", // rest api 키
-    //   // client_id: '0af532c12971e247c7d66ed819d41c6c', // 자바스크립트 키
-    //   refresh_token: 'Cvmr3R9Esupkxm7kAX5m9Tdkq0SVrEva4dTeHAorDKcAAAF7VtU-dA',
-    // }, {headers: {'Content-type': 'application/x-www-form-urlencoded'}}).then((response) => {
-    //   console.log(response);
-    // }).catch((err) => {
-    //   console.error(`${err}`);
-    // })
-
-    // instance.get('/oauth/kakao').then((response) => {
-    //   console.log(response.data); //아직 어떤 형태의 데이터를 받을 수 있는지 모름
-    // }).catch((err) => {
-    //   console.error(`카카오 소셜로그인 에러: ${err} ### ${err.response}`);
-    // });
+    // 로그아웃
+  const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
+    const axios = require('axios');
+    axios.post('https://kapi.kakao.com/v1/user/logout', 
+    // formUrlEncoded({
+      // "grant_type": "refresh_token",
+      // "client_id": "544c4bf1696e4295986a43b5cd9f7f80", // rest api 키
+      // client_id: '0af532c12971e247c7d66ed819d41c6c', // 자바스크립트 키
+      // redirect_uri: 'http://localhost:3000/oauth/kakao/callback',
+      // "refresh_token": "473nuOOErq_H-7TDMr_G_xhJYCycE4VFllnpwworDNMAAAF7WBujVw",
+      // client_secret: 'Xa2qaAZATfPnMdY792FGAC2EcZSOVjVf',
+    // }), 
+    {headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': "Bearer pccRReL3tetIxaVo80STmT8Epb5e0O0-gWOTeQorDNMAAAF7WBujWQ"}}).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.error(`${err}`);
+    })
   };
+
+  //   instance.get('/oauth/kakao').then((response) => {
+  //     console.log(response.data); //아직 어떤 형태의 데이터를 받을 수 있는지 모름
+  //   }).catch((err) => {
+  //     console.error(`카카오 소셜로그인 에러: ${err} ### ${err.response}`);
+  //   });
+  // };
 };
 
 export default handleActions(

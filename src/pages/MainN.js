@@ -9,13 +9,22 @@ import MainQna from '../components/MainQna';
 import MainTalk from '../components/MainTalk';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as postActions } from '../redux/modules/post';
 
 const MainN = (props) => {
-  // const dispatch = useDispatch();                 // 카카오 소셜로그인 시험 중
+  const dispatch = useDispatch();                 // 카카오 소셜로그인 시험 중
+  // const new_post = {
+  //   title: '제목',
+  //   content: '내용',
+  //   nickname: 'realmot',
+  //   category: '정보',
+  //   image: '',
+  // };
 
-  // useEffect(() => {
-  //   dispatch(userActions.authKakaoDB());
-  // }, []);
+  useEffect(() => {
+    // dispatch(userActions.authKakaoDB());
+    // dispatch(postActions.addPostDB(new_post));
+  }, []);
   
 
   return (

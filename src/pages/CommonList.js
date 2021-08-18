@@ -315,6 +315,9 @@ const WriteButton = styled.button`
     background-color: #282a2d;
     color: #f1f3f4;
   }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    display:none;
+  }
 `;
 
 const Notice = styled.div`
@@ -364,6 +367,11 @@ const Contents = styled.div`
   width: 98.5%;
   height: 191px;
   gap: 16px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 324px;
+    height: 164px;
+    position: static;
+  }
 `;
 
 const PageBox = styled.div`
@@ -379,6 +387,11 @@ const Page = styled.span`
   color: #f8f9fa;
   &:hover {
     opacity: 1;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

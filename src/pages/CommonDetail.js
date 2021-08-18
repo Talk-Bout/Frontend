@@ -325,11 +325,17 @@ const BodyInner = styled.div`
   height: auto;
   display: grid;
   grid-template-columns: 65% 34%;
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    grid-template-columns: 100%;
+  }
 `;
 
 const Post = styled.div`
   border-bottom: 1px solid #5F6368;
   padding: 0 0 20px;
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    width: 100%;
+  }
 `;
 
 const InfoBox = styled.div`
@@ -455,6 +461,9 @@ const OthersBox = styled.div`
   background-color: #202124;
   padding: 24px;
   height: 403px;
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    display: none;
+  }
 `;
 
 export default CommonDetail;

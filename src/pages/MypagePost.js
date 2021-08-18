@@ -32,7 +32,7 @@ const MypagePost = (props) => {
       <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
         <Body header footer>
-          <Grid height="85vh">
+          <Grid height="fit-content">
             <Grid height="9%" width="100%">
               
               <Text fontSize="32px" lineHeight="46px" color="#F8F9FA">님의 글</Text>
@@ -69,20 +69,20 @@ const MypagePost = (props) => {
                   );
                 })}
             </Card>
-            {/* <Grid height="10%" width="100%"  is_center>
+            <Grid height="10%" width="100%"  is_center>
             <PageBox>
-              앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기
+              {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기
               <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
-              앞 페이지 번호는 0일 때는 안 보이게 하기
+              앞 페이지 번호는 0일 때는 안 보이게 하기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page>1</Page></Text>
-              가운데 페이지 번호는 현재 페이지 번호로 띄우기
+              {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기
               <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
               마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기
               <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
               다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기
-              <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text> */}
             </PageBox>
-             </Grid> */}
+             </Grid>
           </Grid>
         </Body>
       </Grid>
@@ -95,6 +95,11 @@ grid-template-rows: repeat(3, minmax(auto, auto));
 grid-template-columns: repeat(4, 1fr);
 display: grid;
 width: 100%;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  width: 100%;
+  grid-template-rows: repeat(1, minmax(auto, auto));
+  grid-template-columns: repeat(3, 1fr);
+  }
 
 `;
 

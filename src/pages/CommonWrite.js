@@ -237,6 +237,10 @@ const Window = styled.div`
   width: 1044px;
   height: fit-content;
   margin: auto;
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    width: 688px;
+    height: fit-content;
+  }
 `;
 
 const BodyBox = styled.div`
@@ -309,6 +313,10 @@ const Preview = styled.div`
   object-fit: cover;
   overflow: hidden;
   margin: 0 auto 16px;
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    width: 608px;
+    height: fit-content;
+  }
 `;
 
 const Img = styled.img`
@@ -323,6 +331,7 @@ const FooterBox = styled.div`
   height: 24px;
   padding: 28px 40px;
   display: flex;
+  
 `;
 
 // 이미지 파일 선택하는 기본 버튼 숨기기

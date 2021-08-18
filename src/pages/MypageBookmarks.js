@@ -44,15 +44,14 @@ const MypagePost = (props) => {
       <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
         <Body header footer>
-          <Grid height="85vh">
+          <Grid height="fit-content">
             <Grid height="9%" width="100%">
               <Text fontSize="32px" lineHeight="46px" color="#F8F9FA">내 북마크</Text>
             </Grid>
-            <Card display="flex" height="81%" width="100%" backgroundColor="green">
+            <Card display="flex" height="81%" width="100%">
             {mytalk_list.map((p, idx) => {
               return (
-            <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px"
-            _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
+            <Post onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >
                       <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
@@ -75,14 +74,12 @@ const MypagePost = (props) => {
                     <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 부트톡톡 <AiOutlineRight/> {p.post.category} </Text>
                     </Grid>
-                    
-                  </Grid>
+                  </Post>
                   );
                 })}
               {myqna_list.map((q, idx) => {
               return (
-            <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px"
-            _onClick={()=>{history.push(`/question/detail/${q.questionId}`)}}
+            <Post onClick={()=>{history.push(`/question/detail/${q.questionId}`)}}
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >
                       <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
@@ -106,13 +103,13 @@ const MypagePost = (props) => {
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 질문과답변 </Text>
                     </Grid>
                     
-                  </Grid>
+                  </Post>
                   );
                 })}
                 {mycommu_list.map((c, idx) => {
               return (
-            <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px"
-            _onClick={()=>{history.push(`/boot/${c.bootcampName}/post/${c.communityId}`)}}
+            <Post
+            onClick={()=>{history.push(`/boot/${c.bootcampName}/post/${c.communityId}`)}}
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >
                       <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
@@ -136,7 +133,7 @@ const MypagePost = (props) => {
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 커뮤니티 </Text>
                     </Grid>
                     
-                  </Grid>
+                  </Post>
                   );
                 })}
             </Card>
@@ -167,6 +164,21 @@ grid-template-rows: repeat(1, minmax(auto, auto));
 grid-template-columns: repeat(4, 1fr);
 display: grid;
 width: 100%;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  width: 100%;
+  grid-template-rows: repeat(1, minmax(auto, auto));
+  grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const Post = styled.div`
+margin: 0 16px 16px 0;
+padding: 15px 20px;
+height: 211px;
+width: 95%;
+background-color: #202124;
+border-radius: 12px;
+box-sizing: border-box;
 
 `;
 

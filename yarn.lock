@@ -9513,6 +9513,11 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
+react-floating-button-menu@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-floating-button-menu/-/react-floating-button-menu-2.1.1.tgz#603221fd8d1b5968c53de34228e529cb03dbd88a"
+  integrity sha512-ycjs3BOudDXdOL14fkXCxm/N9OzR1hGYYax18aP8iOVDDFAy1MDzg0L/6PYXnLoUD56BDItIgAYRLEgBujeK+g==
+
 react-hot-toast@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.1.0.tgz#f4fe3107a3ccd1d7e76ad3d3282967fbf2fccf2c"

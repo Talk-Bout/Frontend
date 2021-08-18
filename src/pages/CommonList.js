@@ -7,10 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 //icons
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FaPlus } from "react-icons/fa";
-import { RiArrowUpDownFill} from 'react-icons/ri';
+import { FaPlus } from 'react-icons/fa';
+import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
 
+import FloatingBtn from '../elements/FloatingBtn';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import CommonPostList from '../components/CommonPostList';
@@ -150,6 +151,7 @@ const CommonBoardList = (props) => {
                     </div>}
                   </Grid>
                 </Grid>
+
             </Grid>
             <hr/>
             {/* 공지 */}
@@ -168,6 +170,19 @@ const CommonBoardList = (props) => {
                 </Grid>
               );
             })}
+            {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
+            {is_login ?
+            <>
+            <FloatingBtn _onClick={() => history.push('/common/write')}>
+              <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+            </>
+            :
+            <>
+            <FloatingBtn _onClick={() => login_check()}>
+              <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+            </>
+            }
+            
           </Grid>
           {/* import 부트톡톡 게시물  */}
           <Grid height="840px">
@@ -259,25 +274,24 @@ const Categories = styled.div`
 `;
 
 const CategoryButton = styled.div`
-
-cursor: pointer;
-background-color: #202124;
-border: none;
-border-radius: 100px;
-margin: 0 8px;
-width: 110px;
-height: 44px;
-color: #80868B;
-text-align: center;
-font-size: 16px;
-line-height: 24px;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-&:hover {
-  background-color: #BDC1C6;
-  color: #0E1013;
+  cursor: pointer;
+  background-color: #202124;
+  border: none;
+  border-radius: 100px;
+  margin: 0 8px;
+  width: 110px;
+  height: 44px;
+  color: #80868b;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: #bdc1c6;
+    color: #0e1013;
   }
 `;
 
@@ -291,7 +305,6 @@ font-size: 16px;
 appearance: none;
 line-height: 24px;
 margin: 3px 16px 0 8px;
-
 `;
 
 const Options = styled.div`
@@ -314,6 +327,9 @@ const WriteButton = styled.button`
   &:hover {
     background-color: #282a2d;
     color: #f1f3f4;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    display:none;
   }
 `;
 
@@ -354,16 +370,13 @@ letter-spacing: 0.2px;
 `;
 
 const Contents = styled.div`
-  grid-template-rows: repeat(4, minmax(191px, 191px));
+  grid-template-rows: repeat(4, minmax(auto, auto));
   grid-template-columns: repeat(2, 1fr);
   display: grid;
-  align-items: center;
-  place-items: center;
-  box-sizing: border-box;
   cursor: pointer;
   width: 98.5%;
   height: 191px;
-  gap: 16px;
+  
 `;
 
 const PageBox = styled.div`
@@ -379,6 +392,11 @@ const Page = styled.span`
   color: #f8f9fa;
   &:hover {
     opacity: 1;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

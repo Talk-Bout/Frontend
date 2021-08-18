@@ -57,7 +57,7 @@ const CommonPostList = (props) => {
 };
 
 const Content = styled.div`
-border-bottom: 1px solid #9AA0A6;
+  border-bottom: 1px solid #9AA0A6;
   padding: 0 20px;
   z-index: 1;
   align-content: center;
@@ -75,8 +75,6 @@ border-bottom: 1px solid #9AA0A6;
 
 const ProfileImage = styled.div`
 display: flex;
-/* height: 10%;
-padding: 3%; */
 width: 400px;
 height: 24px;
 margin: 16px 0px;

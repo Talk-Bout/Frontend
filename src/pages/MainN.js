@@ -5,10 +5,9 @@ import Body from '../components/Body';
 import BannerN from '../components/BannerN';
 import MainBoot from '../components/MainBoot';
 import MainQna from '../components/MainQna';
-// import MainNews from '../components/MainNews';
 import MainTalk from '../components/MainTalk';
 
-const MainN = (props) => {  
+const MainN = (props) => {
 
   return (
     <React.Fragment>
@@ -20,7 +19,6 @@ const MainN = (props) => {
             <BannerN />
             <MainBoot />
             <MainTalk />
-            {/* <MainNews /> */}
             <MainQna />
           </Grid>
         </Body>

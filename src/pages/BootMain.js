@@ -135,7 +135,7 @@ const ImageDiv = styled.div`
 `;
 
 const Logo = styled.img`
-  min-width: 100%;
+  max-width: 100%;
   border-radius: 8px;
 `;
 

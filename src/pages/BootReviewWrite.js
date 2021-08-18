@@ -76,9 +76,9 @@ const BootReviewWrite = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' backgroundColor='#17181b'>
         {/* 사이드바 */}
-        <Sidebar TABopacity='0.2'/>
+        <Sidebar opacity='0.2' TABopacity='0.2'/>
         {/* 헤더 포함한 바디 */}
-        <Body header TABopacity='0.2'>
+        <Body header opacity='0.2' TABopacity='0.2'>
           <Grid className='body-inner' padding='24px 0 0'>
             <Window>
               {/* 작성 페이지 헤더 */}
@@ -129,7 +129,9 @@ const BootReviewWrite = (props) => {
 
 const Window = styled.div`
   background-color: #282a2d;
-  width: 1044px;
+  width: 80%;
+  max-width: 1044px;
+  width: 80%;
   height: fit-content;
   margin: auto;
   @media screen and (min-width: 768px) and (max-width: 992px) {

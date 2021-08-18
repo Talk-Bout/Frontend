@@ -40,7 +40,7 @@ const MypagePost = (props) => {
             <Card display="flex" height="81%" width="100%">
             {mypost_list.map((p, idx) => {
               return (
-                <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px"
+                <Grid key={idx} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px"
             // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >

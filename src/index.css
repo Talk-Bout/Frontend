@@ -7,7 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  background-attachment: fixed;
 }
 
 body::-webkit-scrollbar {

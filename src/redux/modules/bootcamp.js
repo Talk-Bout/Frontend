@@ -321,12 +321,14 @@ const setMyCommuDB = () => {
     instance.get('/tokenUser').then((response) => {
       const nickname = response.data.nickname;
       instance.get(`/users/${nickname}/communityBookmarks`)
-    }).then((result) => {
+      .then((result) => {
         dispatch(setMyCommu(result.data));
       }).catch((err) => {
         console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
-      });
-  };
+    }).catch((err) => {
+        console.error(`북마크 목록 불러오기 위한 사용자 조회 에러 발생: ${err} ### ${err.response}`);
+    });
+  })};
 };
 
 const addMyCommuDB = (nickname, communityId) => {

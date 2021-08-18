@@ -8,19 +8,17 @@ import Boot from '../image/Bootcamp.png';
 import Boot_white from '../image/Bootcamp_white.png';
 import Qna from '../image/Qna.png';
 import Qna_white from '../image/qna_white.png';
-// import News from '../image/News.png';
-// import News_white from '../image/News_white.png';
 import Talk from '../image/Board.png';
 import Talk_white from '../image/Board_white.png';
 import { history } from '../redux/ConfigureStore';
 
 const Sidebar = (props) => {
-  const {TABopacity} = props;
+  const {opacity, TABopacity} = props;
   const url = window.location.pathname.split('/')[1];
 
   return (
     <React.Fragment>
-      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px' TABopacity={TABopacity} position='relative'>
+      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px' opacity={opacity} TABopacity={TABopacity}>
         <Grid className="sidebar-inner">
           <Point
               src={PointImg} alt='디자인'/>
@@ -33,11 +31,6 @@ const Sidebar = (props) => {
               src={url === 'boot' ? Boot_white : Boot}
               onClick={() => history.push('/boot')}
             />
-
-            {/* <Image
-              src={url === 'news' ? News_white : News}
-              onClick={() => history.push('/news/list')}
-            /> */}
             <Image
               src={url === 'common' ? Talk_white : Talk}
               onClick={() => history.push('/common/list')}

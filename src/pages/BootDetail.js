@@ -5,14 +5,13 @@ import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import BootRoot from '../components/BootRoot';
 import { history } from '../redux/ConfigureStore';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import BootOthers from '../components/BootOthers';
 import BootInfo from '../components/BootInfo';
 import BootReview from '../components/BootReview';
 import BootCommu from '../components/BootCommu';
 
 const BootDetail = (props) => {
-  const dispatch = useDispatch();
   // 메인에서 리뷰나 커뮤니티 버튼을 클릭해 들어오면 tab_click으로 받는다.
   const {tab_click} = history.location.state ? history.location.state : 'info';
   // 현재 탭을 useState로 관리한다. 초깃값은 정보 탭.

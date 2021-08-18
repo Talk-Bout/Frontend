@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import { Grid } from '../elements';
 import BannerImg from '../image/banner.png';
 
 const BannerN = (props) => {

@@ -21,7 +21,7 @@ const BootOthers = (props) => {
   const others_list = all_camps.slice(random_start, random_start + 4);
 
   return (
-    <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='491px' padding='24px'>
+    <Grid className='contents-bootcamp' backgroundColor='#202124' width='34%' height='491px' padding='24px' TABdisplay='none'>
       <Text fontSize='18px' fontWeight='700' color='#e8eaed'>다른 부트캠프</Text>
       {others_list.map((other, idx) => {
         return (

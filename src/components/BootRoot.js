@@ -11,32 +11,27 @@ const BootRoot = (props) => {
   const dispatch = useDispatch();
 
   // 부트캠프 이름, 설명, 리뷰(별점), 현재 탭 url 주소를 props로 받는다.
-  const {bootcampName, desc, review, url, reviewNumber, star} = props.camp;
-  const {url_word} = props;
+  const {camp} = props;
   // 현재 접속 중인 사용자의 닉네임
   const username = useSelector(state => state.user.user.nickname);
 
   // 사용자가 북마크한 부트캠프 목록
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
   // 사용자가 이 부트캠프를 북마크했다면, my_camp에 넣는다.
-  const my_camp = my_camps.find((camp) => camp.bootcampName === bootcampName);
-
-  const camp_list = useSelector(state => state.bootcamp.camp_list);
-  const this_camp = camp_list.find((camp) => camp.bootcampName === bootcampName);
+  const my_camp = my_camps.find((c) => c.bootcampName === camp.bootcampName);
 
   useEffect(() => {
-    dispatch(campActions.setCampsDB());
     dispatch(campActions.setMyCampDB());
   }, []);
   
   // 부트캠프 북마크 표시
   const markBoot = () => {
-    dispatch(campActions.addMyCampDB(username, bootcampName));
+    dispatch(campActions.addMyCampDB(username, camp.bootcampName));
   }
 
   // 부트캠프 북마크 해제
   const unmarkBoot = (bookmark_id) => {
-    dispatch(campActions.deleteMyCampDB(bootcampName, bookmark_id));
+    dispatch(campActions.deleteMyCampDB(camp.bootcampName, bookmark_id));
   }
 
   if (!props.camp) {
@@ -48,8 +43,8 @@ const BootRoot = (props) => {
   return (
     <React.Fragment>
       {/* 부트캠프 로고 */}
-      {this_camp.logo ?
-      <LogoBox><Image src={this_camp.logo}/></LogoBox>
+      {camp.logo ?
+      <LogoBox><Image src={camp.logo}/></LogoBox>
       :
       <LogoBox style={{textAlign: 'center'}}><Image src={Logo} style={{width: '150px', height: '150px'}}/></LogoBox>
       }
@@ -57,34 +52,18 @@ const BootRoot = (props) => {
         <InfoBtn>
           <div>
           {/* 부트캠프 이름, 북마크 표시 */}
-          <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{bootcampName}
+          <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{camp.bootcampName}
             {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
             {my_camp ? <Heart check onClick={() => unmarkBoot(my_camp.bootcampBookmarkId)}><HiHeart /></Heart>
             : <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>}
           </Text>
-          <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{desc}</Text>
+          <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{camp.desc}</Text>
           </div>
           {/* 홈페이지 바로가기 버튼 */}
-          <Button onClick={() => window.open(`${url}`, '_blank')}><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
+          <Button onClick={() => window.open(`${camp.url}`, '_blank')}><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
         </InfoBtn>
         {/* 부트캠프 평점, 리뷰 개수 */}
-        <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{Number(star).toFixed(1)}</span>({reviewNumber}개 리뷰)</Text>
-      </Grid>
-      {/* 정보, 리뷰, 커뮤니티 탭 */}
-      {/* url에 따라 메뉴 CSS 달라지게 함 */}
-      <Grid className='nav-box' height='54px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
-        <Menu url={url_word === 'info' && 'white'}>
-          <Text fontSize='24px' color={url_word === 'info' ? '#e8eaed' : '#5f6368'} _onClick={() => history.push({pathname: `/boot/${bootcampName}/info`, state: {camp: props.camp}})}>
-            정보</Text>
-        </Menu>
-        <Menu url={url_word === 'review' && 'white'}>
-          <Text fontSize='24px' color={url_word === 'review' ? '#e8eaed' : '#5f6368'} _onClick={() => history.push({pathname: `/boot/${bootcampName}/review`, state: {camp: props.camp}})}>
-            리뷰</Text>
-        </Menu>
-        <Menu url={url_word === 'community' && 'white'}>
-          <Text fontSize='24px' color={url_word === 'community' ? '#e8eaed' : '#5f6368'} _onClick={() => history.push({pathname: `/boot/${bootcampName}/community`, state: {camp: props.camp}})}>
-            커뮤니티</Text>
-        </Menu>
+        <Text fontSize='14px' color='#dadce0'>★<span style={{margin: '0 8px'}}>{Number(camp.star).toFixed(1)}</span>({camp.reviewNumber}개 리뷰)</Text>
       </Grid>
     </React.Fragment>
   )
@@ -93,8 +72,10 @@ const BootRoot = (props) => {
 const LogoBox = styled.div`
   height: 112px;
   width: 190px;
-  /* border: 1px solid whitesmoke; // 로고 있으면 없애기 */
   align-items: center;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin-top: 22px;
+  }
 `;
 
 const Image = styled.img`
@@ -127,14 +108,6 @@ const Button = styled.button`
   &:active {
     opacity: 0.7;
   }
-`;
-
-const Menu = styled.div`
-  display: inline-block;
-  margin-right: 48px;
-  cursor: pointer;
-  padding-bottom: 16px;
-  ${(props) => props.url === 'white' && 'border-bottom: 4px solid #e8eaed'};
 `;
 
 export default BootRoot;

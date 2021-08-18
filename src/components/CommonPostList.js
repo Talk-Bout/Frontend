@@ -37,11 +37,11 @@ const CommonPostList = (props) => {
             <LikeAndCountBox>
               {/* 좋아요 */}
               <Text color="#9AA0A6" fontSize="12px" width="36px" margin= "0 16px 0 0">
-                <BiLike/> &nbsp; {props.postLike ? props.postLike.length : '0'}
+                <BiLike/> {props.postLike ? props.postLike.length : '0'}
                 </Text>
               {/* 댓글 수 */}
               <Text color="#9AA0A6" fontSize="12px"  width="33.3%" margin= "0px 16px 0 0">
-                <BiComment/> &nbsp; {props.postComment ? props.postComment.length : '0'}
+                <BiComment/> {props.postComment ? props.postComment.length : '0'}
               </Text>
               {/* 조회수 */}
               <Text color="#9AA0A6" fontSize="12px" width="43px">

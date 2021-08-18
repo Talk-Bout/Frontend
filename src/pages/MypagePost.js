@@ -18,6 +18,7 @@ const MypagePost = (props) => {
 
   // 내가 쓴글 리스트
   const all_post = useSelector((state) => state.mypage.mypost_list);
+  // console.log(all_post);
   // 삭제된 post의 경우 안띄워줌
   const mypost_list = all_post.filter((posts) => posts.post !== null);
 
@@ -33,7 +34,8 @@ const MypagePost = (props) => {
         <Body header footer>
           <Grid height="85vh">
             <Grid height="9%" width="100%">
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA"> 님의 글</Text>
+              
+              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA">님의 글</Text>
             </Grid>
             <Card display="flex" height="81%" width="100%">
             {mypost_list.map((p, idx) => {

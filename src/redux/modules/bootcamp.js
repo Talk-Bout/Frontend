@@ -57,7 +57,6 @@ const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}))
 
 // 기본값 정하기
 const initialState = {
-  main_camp_list: [], // 메인페이지 부트캠프 인기순 정렬
   camp_list: [], // 부트캠프 전체 목록
   my_camp_list: [], // 북마크한 부트캠프 목록
   review_list: [], // 리뷰 목록
@@ -72,7 +71,7 @@ const initialState = {
 const mainCampsDB = () => {
   // 메인페이지 부트캠프 목록 불러오는 함수(인기순)
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    // dispatch(statusActions.setLoading());
     instance.get(`/popular/bootcamps`).then((response) => {
       dispatch(mainCamps(response.data));
       dispatch(statusActions.endLoading());
@@ -89,7 +88,6 @@ const setCampsDB = (page) => {
     instance
       .get(`/bootcamp?page=${page}`)
       .then((response) => {
-        console.log(response.data);
         dispatch(setCamps(response.data));
         dispatch(statusActions.endLoading());
       })
@@ -502,7 +500,7 @@ const deleteCommentDB = (deleted_comment) => {
 
 export default handleActions({
   [MAIN_CAMPS]: (state, action) => produce(state, (draft) => {
-    draft.main_camp_list = [...action.payload.camp_list];
+    draft.camp_list = [...action.payload.camp_list];
   }),
   [SET_CAMPS]: (state, action) => produce(state, (draft) => {
     draft.camp_list = [...action.payload.camp_list];

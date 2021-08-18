@@ -46,10 +46,7 @@ const BootMain = (props) => {
           <CardList>
             {camp_list.map((camp, idx) => {
               return (
-                <Card key={idx} onClick={() => history.push({
-                  pathname: `/boot/${camp.bootcampName}/info`,
-                  state: {camp: camp, camp_page: page}
-                })}>
+                <Card key={idx} onClick={() => history.push(`/boot/${camp.bootcampName}`)}>
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
                     {camp.logo ? 
@@ -100,7 +97,6 @@ const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 30px 15px;
-  /* justify-content: space-between; */
   margin-top: 24px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     margin-top: 16px;
@@ -114,7 +110,6 @@ background-size: cover;
 width: 32%;
 height: 240px;
 border-radius: 8px;
-/* margin-bottom: 30px; */
 box-sizing: border-box;
 cursor: pointer;
 position: relative;

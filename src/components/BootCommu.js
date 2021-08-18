@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
+import FloatingBtn from '../elements/FloatingBtn';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
@@ -36,7 +37,7 @@ const BootCommu = (props) => {
   const is_login = useSelector(state => state.user.is_login);
 
   return (
-    <Grid className='contents-postlist' backgroundColor='#202124' width='64%' padding='40px 40px 0 40px'>
+    <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px'>
       <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091' padding='0 0 40px'>
         {/* 커뮤니티 페이지 타이틀 */}
         <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{camp.bootcampName} 커뮤니티</Text>
@@ -46,10 +47,12 @@ const BootCommu = (props) => {
           {/* 글쓰기 버튼 */}
           {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
           {is_login ?
-          <WriteBtn onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/community/write`})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '18px', marginRight: '4px', verticalAlign: 'middle'}}><BiPencil /></span>글쓰기</Text></WriteBtn>
+          <WriteBtn onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/community`, state: {camp_name: camp.bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '18px', marginRight: '4px', verticalAlign: 'middle'}}><BiPencil /></span>글쓰기</Text></WriteBtn>
           :
           <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '18px', marginRight: '4px', verticalAlign: 'middle'}}><BiPencil /></span>글쓰기</Text></WriteBtn>
           }
+          {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
+          <FloatingBtn><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
         </Grid>
       </Grid>
       {/* 커뮤니티 게시글 목록 */}
@@ -105,6 +108,9 @@ const WriteBtn = styled.button`
   vertical-align: middle;
   &:active {
     opacity: 0.7;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    display: none;
   }
 `;
 

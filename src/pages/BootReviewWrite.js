@@ -82,21 +82,24 @@ const BootReviewWrite = (props) => {
           <Grid className='body-inner' padding='24px 0 0'>
             <Window>
               {/* 작성 페이지 헤더 */}
-              <Grid height='84px' display='flex' borderBottom='1px solid #5f6368'>
+              <Grid height='84px' display='flex' borderBottom='1px solid #5f6368' backgroundColor='#202124'>
                 {/* 나가기 버튼 */}
                 <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='35px' color='#e5e5e5' lineHeight='84px' cursor='pointer' _onClick={() => exitPage()}><BsX /></Text>
+                  <Text fontSize='35px' TABfontSize='28px' color='#e5e5e5' lineHeight='84px' cursor='pointer' _onClick={() => exitPage()}><BsX /></Text>
                 </Grid>
                 {/* 타이틀 */}
                 <Grid width='53.33%' is_center>
-                  <Text fontSize='24px' fontWeight='700' color='#e5e5e5' lineHeight='84px'>{camp_name} 리뷰 작성</Text>
+                  <Text fontSize='24px' TABfontSize='20px' fontWeight='700' color='#e5e5e5' lineHeight='84px'>{camp_name} 리뷰 작성</Text>
                 </Grid>
                 {/* 등록 버튼 */}
                 <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='24px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => addReview()}>등록</Text>
+                  <Text fontSize='24px' TABfontSize='20px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => addReview()}>등록</Text>
                 </Grid>
               </Grid>
               <BodyBox>
+                {/* 리뷰 제목 */}
+                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed' lineHeight='50px'>제목</Text></div>
+                <div><Input placeholder='제목을 입력해주세요' ref={titleInput}/></div>
                 {/* 평점 */}
                 <div style={{lineHeight: '32px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>평점</Text></div>
                 <div style={{lineHeight: '32px'}}><Text fontSize='32px' fontWeight='700'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#dadce0' emptyStarColor='#3c4043'/></Text></div>
@@ -109,9 +112,6 @@ const BootReviewWrite = (props) => {
                     <option value='수료'>수료</option>
                   </Select>
                 </div>
-                {/* 리뷰 제목 */}
-                <div><Text fontSize='18px' fontWeight='700' color='#e8eaed' lineHeight='50px'>제목</Text></div>
-                <div><Input placeholder='제목을 입력해주세요' ref={titleInput}/></div>
                 {/* 장점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
                 <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput}/></div>
@@ -132,6 +132,12 @@ const Window = styled.div`
   width: 1044px;
   height: fit-content;
   margin: auto;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    position: absolute;
+    left: 0;
+    margin-left: 40px;
+    width: 688px;
+  }
 `;
 
 const BodyBox = styled.div`
@@ -140,6 +146,12 @@ const BodyBox = styled.div`
   grid-template-columns: 160px 804px;
   & > div {
     margin-bottom: 40px;
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      margin-bottom: 32px;
+    }
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    grid-template-columns: 160px 448px;
   }
 `;
 
@@ -187,6 +199,10 @@ const Textarea = styled.textarea`
   }
   &:focus {
     outline: none;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 400px;
+    height: 120px;
   }
 `;
 

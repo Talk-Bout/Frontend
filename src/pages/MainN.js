@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Grid } from '../elements';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
@@ -7,25 +7,8 @@ import MainBoot from '../components/MainBoot';
 import MainQna from '../components/MainQna';
 // import MainNews from '../components/MainNews';
 import MainTalk from '../components/MainTalk';
-import { useDispatch } from 'react-redux';
-import { actionCreators as userActions } from '../redux/modules/user';
-import { actionCreators as postActions } from '../redux/modules/post';
 
-const MainN = (props) => {
-  const dispatch = useDispatch();                 // 카카오 소셜로그인 시험 중
-  // const new_post = {
-  //   title: '제목',
-  //   content: '내용',
-  //   nickname: 'realmot',
-  //   category: '정보',
-  //   image: '',
-  // };
-
-  useEffect(() => {
-    // dispatch(userActions.authKakaoDB());
-    // dispatch(postActions.addPostDB(new_post));
-  }, []);
-  
+const MainN = (props) => {  
 
   return (
     <React.Fragment>

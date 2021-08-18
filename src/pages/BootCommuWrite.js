@@ -92,9 +92,9 @@ const BootCommuWrite = (props) => {
         padding="0 0 42px"
       >
         {/* 사이드바 */}
-        <Sidebar />
+        <Sidebar TABopacity='0.2' />
         {/* 헤더 포함한 바디 */}
-        <Body header>
+        <Body header TABopacity='0.2'>
           <Grid className="body-inner" padding="24px 0 0">
             <Window>
               {/* 작성 페이지 헤더 */}
@@ -102,11 +102,13 @@ const BootCommuWrite = (props) => {
                 height="84px"
                 display="flex"
                 borderBottom="1px solid #5f6368"
+                backgroundColor='#202124'
               >
                 {/* 나가기 버튼 */}
                 <Grid width="23.33%" padding="0 40px">
                   <Text
                     fontSize="35px"
+                    TABfontSize='28px' 
                     color="#e5e5e5"
                     lineHeight="84px"
                     cursor="pointer"
@@ -121,6 +123,7 @@ const BootCommuWrite = (props) => {
                 <Grid width="53.33%" is_center>
                   <Text
                     fontSize="24px"
+                    TABfontSize='20px' 
                     fontWeight="700"
                     color="#e5e5e5"
                     lineHeight="84px"
@@ -132,6 +135,7 @@ const BootCommuWrite = (props) => {
                 <Grid width="23.33%" padding="0 40px">
                   <Text
                     fontSize="24px"
+                    TABfontSize='20px' 
                     fontWeight="700"
                     color="#848484"
                     lineHeight="84px"
@@ -218,6 +222,10 @@ const Window = styled.div`
   width: 1044px;
   height: fit-content;
   margin: auto;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    position: absolute;
+    width: 80%;
+  }
 `;
 
 const BodyBox = styled.div`
@@ -290,6 +298,10 @@ const Preview = styled.div`
   object-fit: cover;
   overflow: hidden;
   margin: 0 auto 16px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 100%;
+    height: 540px;
+  }
 `;
 
 const Img = styled.img`

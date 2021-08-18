@@ -18,6 +18,8 @@ const HeaderN = (props) => {
 
   // 로컬 스토리지에 저장된 로그인 토큰을 찾는다.
   const token = localStorage.getItem('token');
+  // const token = localStorage.getItem('Atoken');
+  // const login_path = localStorage.getItem('LoginPath');
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -32,6 +34,10 @@ const HeaderN = (props) => {
 
   // 로그아웃
   const logOutBtn = () => {
+    // if (login_path === 'kakao') {
+    //   dispatch(userActions.kakaoLogout());
+    //   return;
+    // }
     dispatch(userActions.logOut());
     history.push('/');
   };

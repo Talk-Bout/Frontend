@@ -44,13 +44,13 @@ const SmallWindow = (props) => {
 
   return (
     <React.Fragment>
-      <Grid backgroundColor="#18181A" height="100vh" padding="10vh 15vh">
+      <Grid backgroundColor="#18181A" height="100vh" padding="194px 0 0" TABpadding='160px 0 0'>
         <Grid
           backgroundColor="#212123"
-          width="25vw"
-          height="70vh"
+          width="408px"
+          height="638px"
           margin="auto"
-          padding="3vh 2.5vw"
+          padding="72px 48px"
         >
           {children}
         </Grid>

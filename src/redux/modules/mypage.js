@@ -88,7 +88,7 @@ const setMyCommuDB = (nickname) => {
     .then((response) => {
       dispatch(setMycommu(response.data));
       dispatch(statusActions.endLoading());
-      // console.log(response.data);
+      console.log(response.data);
   })
   .catch((err) => {
       console.log(`마이페이지 커뮤니티 북마크 불러오기 에러 발생: ${err}`);

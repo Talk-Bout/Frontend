@@ -43,11 +43,18 @@ const BootReview = (props) => {
         {/* 리뷰 남기기 버튼 */}
         {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
         {is_login ?
+        <>
         <WriteBtn onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/review`, state: {camp_name: camp.bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
+        {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
+        <FloatingBtn _onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/review`, state: {camp_name: camp.bootcampName}})} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+        </>
         :
+        <>
         <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
+        {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
+        <FloatingBtn _onClick={() => window.alert('로그인 후에 이용 가능합니다.')} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+        </>
         }
-        <FloatingBtn />
       </Grid>
       {/* 부트캠프 리뷰 목록 */}
       {review_list && review_list.map((review, idx) => {

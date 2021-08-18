@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 //icons
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FaPlus } from "react-icons/fa";
-import { RiArrowUpDownFill} from 'react-icons/ri';
+import { FaPlus } from 'react-icons/fa';
+import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
 
 import Sidebar from '../components/Sidebar';
@@ -101,55 +101,59 @@ const CommonBoardList = (props) => {
             </Grid>
             {/* 게시판 카테고리 */}
 
-                <Grid display="flex" height="44px" justify_content="space-between" margin="0 0 25px 0">
-                  <Categories >
-                  <CategoryButton
-                  onClick={()=>total_category()}>
-                    전체글
-                  </CategoryButton>
-                  <CategoryButton
-                  onClick={()=>info_category()}>
-                    정보
-                  </CategoryButton>
-                  <CategoryButton
-                  onClick={()=>cc_category()}>
-                    잡담
-                  </CategoryButton>
-                  </Categories>
-                 
-                  <Grid width="17.5%" display="flex">
-                    {/* 인기순, 최신순 */}
-                   <div style={{color: "#F1F3F4", lineHeight: "48px", margin: "3px 0 0 8px" }}><RiArrowUpDownFill /></div> 
-                    <SelectButton
-                    >
-                      {PopArray?
-                      <Options onClick={()=>total_category()}
-                      >최신순</Options>
-                      :
-                      <Options onClick={()=>setPop()}
-                      >인기순</Options>
-                      }
-                    
-                      </SelectButton>
-                      {/* 글쓰기버튼 (로그인 후 이용가능) */}
-                      {is_login ?
-                      <div>
-                      <WriteButton
-                        onClick={() => history.push('/common/write')}
-                      >
-                        <BiPencil />&nbsp; 글쓰기
-                      </WriteButton>
-                    </div>
-                      :
-                      <div>
-                      <WriteButton
-                        onClick={() => login_check()}
-                      >
-                        <FaPlus/>&nbsp; 글쓰기
-                      </WriteButton>
-                    </div>}
-                  </Grid>
-                </Grid>
+            <Grid
+              display="flex"
+              height="44px"
+              justify_content="space-between"
+              margin="0 0 25px 0"
+            >
+              <Categories>
+                <CategoryButton onClick={() => total_category()}>
+                  전체글
+                </CategoryButton>
+                <CategoryButton onClick={() => info_category()}>
+                  정보
+                </CategoryButton>
+                <CategoryButton onClick={() => cc_category()}>
+                  잡담
+                </CategoryButton>
+              </Categories>
+
+              <Grid width="17.5%" display="flex">
+                {/* 인기순, 최신순 */}
+                <div
+                  style={{
+                    color: '#F1F3F4',
+                    lineHeight: '48px',
+                    margin: '3px 0 0 8px',
+                  }}
+                >
+                  <RiArrowUpDownFill />
+                </div>
+                <SelectButton>
+                  {PopArray ? (
+                    <Options onClick={() => total_category()}>최신순</Options>
+                  ) : (
+                    <Options onClick={() => setPop()}>인기순</Options>
+                  )}
+                </SelectButton>
+                {/* 글쓰기버튼 (로그인 후 이용가능) */}
+                {is_login ? (
+                  <div>
+                    <WriteButton onClick={() => history.push('/common/write')}>
+                      <BiPencil />
+                      &nbsp; 글쓰기
+                    </WriteButton>
+                  </div>
+                ) : (
+                  <div>
+                    <WriteButton onClick={() => login_check()}>
+                      <FaPlus />
+                      &nbsp; 글쓰기
+                    </WriteButton>
+                  </div>
+                )}
+              </Grid>
             </Grid>
           </Grid>
 
@@ -267,39 +271,38 @@ const Categories = styled.div`
 `;
 
 const CategoryButton = styled.div`
-
-cursor: pointer;
-background-color: #202124;
-border: none;
-border-radius: 100px;
-margin: 0 8px;
-width: 110px;
-height: 44px;
-color: #80868B;
-text-align: center;
-font-size: 16px;
-line-height: 24px;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-&:hover {
-  background-color: #BDC1C6;
-  color: #0E1013;
+  cursor: pointer;
+  background-color: #202124;
+  border: none;
+  border-radius: 100px;
+  margin: 0 8px;
+  width: 110px;
+  height: 44px;
+  color: #80868b;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: #bdc1c6;
+    color: #0e1013;
   }
 `;
 
 const SelectButton = styled.div`
-border: none;
-background-color: #17181B;
-color: #F1F3F4;
-width: fit-content;
-height: 48px;
-font-size: 16px;
-margin-right: 16px;
-appearance: none;
-line-height: 24px;
-margin: 3px 16px 0 8px;
+  border: none;
+  background-color: #17181b;
+  color: #f1f3f4;
+  width: fit-content;
+  height: 48px;
+  font-size: 16px;
+  margin-right: 16px;
+  appearance: none;
+  line-height: 24px;
+  margin: 3px 16px 0 8px;
 `;
 
 const Options = styled.div`
@@ -336,19 +339,19 @@ const Notice = styled.div`
 `;
 
 const NoticeHead = styled.span`
-text-align: center;
-color: #7879F1;
-padding: 8px 32px;
-width: 95px;
-height: 34px;
-left: 24px;
-top: 17px;
-border: 1px solid #7879F1;
-box-sizing: border-box;
-border-radius: 8px;
-margin: 15px 15px 15px 25px;
-font-size: 14px;
-line-height: 15px;
+  text-align: center;
+  color: #7879f1;
+  padding: 8px 32px;
+  width: 95px;
+  height: 34px;
+  left: 24px;
+  top: 17px;
+  border: 1px solid #7879f1;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin: 15px 15px 15px 25px;
+  font-size: 14px;
+  line-height: 15px;
 `;
 
 const NoticeText = styled.span`

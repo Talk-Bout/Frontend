@@ -24,6 +24,8 @@ const Mypage = (props) => {
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
   // 관심있는 부트캠프 3개 추출
   const myboot = myboot_list.slice(0,3);
+  // 반응형 테블릿일 때 부트캠프 2개 추출
+  const mybootTAB = myboot_list.slice(0,2);
   // 관심있는 부트캠프 3개 이름만 추출
   let myboot_name = [];
   myboot.map((boot) => {
@@ -116,8 +118,8 @@ const Mypage = (props) => {
               <AuthBox>
                 <TextBox>
                   <InfoButton onClick={() => history.push('/mypage/edit')}
-                  >정보 수정</InfoButton>
-                  <InfoButton onClick={() => window.open(`${url}`, '_blank')}>부트캠프 인증</InfoButton>
+                  >내 정보 수정</InfoButton>
+                  <InfoButton onClick={() => window.open(`${url}`, '_blank')}>부트캠프 인증 </InfoButton>
                 </TextBox>
               </AuthBox>
               {/* 인증 됐을 때 */}
@@ -142,27 +144,26 @@ const Mypage = (props) => {
                 </Grid>
                 {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                 {myboot_list.length !== 0 ?
-                <Grid display="flex" margin="12px 0"  height="65%" width="100%">
+                <BootBox>
                 {myboot_info.map((mb, idx) => {
               return (
-                  <Grid margin="0 16px 0 0" display="flex" padding="0 15px" height="96px" width="32.3%" backgroundColor="#202124"  borderRadius="5px"
-                  _onClick={()=>{history.push(`/boot/${mb.bootcampName}/info`)}}
+                  <BootCard  key={idx} className={`bootcard${idx}`} onClick={()=>{history.push(`/boot/${mb.bootcampName}/info`)}}
                   >
                     <ImageBox>
                      <Image shape="CircleLogo" src={mb.logo ? mb.logo : CampImg}/>
                     </ImageBox>
                     <Grid padding="10px 0" width="67%">
                       <Grid display="flex" justify_content="space-between">
-                      <Text p margin="0 0 5px 10px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
+                      <Text p margin="0 0 5px 15px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                       <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill/></Text>
                       </Grid>
                       
-                      <Text p margin="2px 0px 0px 10px" color="#F1F3F4" fontSize="14px"><Stars score={mb.star} size='14px' withScore /></Text>
+                      <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.star} size='14px' withScore /></Text>
                     </Grid>
-                  </Grid>
+                  </BootCard>
                );
               })}
-                </Grid>
+                </BootBox>
                 :
                 <Grid display="flex" margin="12px 0 0 0" justify_content="space-between" height="65%" width="98.5%">
                   <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" padding="25px 330px">
@@ -174,6 +175,7 @@ const Mypage = (props) => {
                 }
                 
               </Grid>
+              
               <Grid height="287px" width="100%" margin="48px 0 0 0" >
               <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
@@ -295,27 +297,19 @@ const Outter = styled.div`
   height: auto;
   display: flex;
   grid-template-columns: 30% 68%;
-  @media screen and (min-width: 768px) and (max-width: 992px) { 
+
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
     grid-template-columns: 100%;
     display: grid;
   }
 `;
 
-// const Outter = styled.div`
-// display: flex;
-// background-color: #17181b;
-// height: fit-content;
-// @media screen and (min-width: 768px) and (max-width: 992px) { 
-//     flex-direction: column;
-//     height: fit-content;
-//   }
-// `;
 
 const ProfileOutter = styled.div`
 height: auto;
-width: 20%;
+width: 24%;
 margin: 0 16px 0 0;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
     width: 98.5%;
     height: auto;
     margin: 0 0 32px 0;
@@ -324,28 +318,36 @@ margin: 0 16px 0 0;
 
 const ProfileInner = styled.div`
 background-color: #202124;
-width: 100%;
+/* min-width: 175px; */
+width: 302px;
 height: 325px;
 margin: auto;
 border: 1px solid #202124;
 border-radius: 12px;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
-    width: 100%;
-    height: 136px;
-    display: flex;
-    
-  }
+
+@media screen and (min-width: 992px) and (max-width: 1460px) { 
+  width: 100%;
+  height: 325px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
+  width: 99.5%;
+  height: 136px;
+  display: flex;
+}
 `;
 
 const ProfileBox = styled.div`
 width: 72px;
 height: 72px;
 margin: 12% auto;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
   width: 72px;
   height: 72px;
   margin: 32px 0 32px 32px;
   }
+
 `;
 
 const NicknameBox = styled.p`
@@ -354,7 +356,8 @@ text-align: center;
 margin: 5px 0 5px 0;
 font-size: 24px;
 font-weight: bold;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
   width: 89px;
   height: 36px;
   margin: 32px 0 0 24px;
@@ -367,7 +370,15 @@ display: flex;
 padding: 6% 0;
 margin: auto;
 justify-content: center;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+
+@media screen and (min-width: 992px) and (max-width: 1460px) { 
+  width: 250px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
   width: 200px;
   height: 18px;
   margin: 0;
@@ -378,14 +389,15 @@ justify-content: center;
 const AuthBox = styled.div`
 height: 30%;
 margin: auto;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
   height: 0;
   margin: 32px 32px 0 0;
 }
 `;
 
 const InfoButton = styled.button`
-margin: 0 16px 0 0;
+margin: 0 2%;
 line-height: 18px;
 font-size: 14px;
 font-weight: bold;
@@ -394,7 +406,7 @@ border: none;
 background-color: transparent;
 color: #7879F1;
 text-align: center;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
   height: 0;
   margin: 0;
   width: 100px;
@@ -403,7 +415,7 @@ text-align: center;
 
 const ImgBox = styled.div`
 margin: 0px 15px 0 0;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1100px) {
   margin: 0px 8px 0 0;
   }
 `;
@@ -411,7 +423,7 @@ margin: 0px 15px 0 0;
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1100px) {
     width: 16px;
   }
 `;
@@ -428,17 +440,46 @@ background-color: transparent;
 border: none;
 font-size: 18px;
 font-weight: bold;
-width: 10%;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
-  width: 10%;
+width: 13%;
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
+  width: 12%;
   font-size: 14px;
 }
+`;
+
+const BootBox  = styled.div`
+display: flex;
+margin: 12px 0;
+height: 65%;
+width: 100%;
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
+  height: 100%;
+  .bootcard2 {
+    display: none;
+  }
+}
+`;
+
+const BootCard = styled.div`
+margin: 0 16px 0 0;
+display: flex;
+padding: 0 15px;
+height: 96px;
+width: 32.3%;
+background-color:#202124;
+border-radius: 5px;
+@media screen and (min-width: 768px) and (max-width: 1100px) {
+    width: 49.25%;
+    height: 96px;
+    margin-bottom: 12px;
+    box-shadow: none;
+  }
 `;
 
 const ResponSiveOutter = styled.div`
 height: auto;
 width: 100%;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
   height: 100%;
   width: 100%;
 }
@@ -456,7 +497,7 @@ const ImageBox = styled.div`
 width: 35%;
 justify-content: middle;
 margin: auto;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
+@media screen and (min-width: 768px) and (max-width: 1100px) { 
   width: 40%;
 }
 `;

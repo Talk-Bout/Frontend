@@ -72,8 +72,10 @@ const BootRoot = (props) => {
 const LogoBox = styled.div`
   height: 112px;
   width: 190px;
-  /* border: 1px solid whitesmoke; // 로고 있으면 없애기 */
   align-items: center;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin-top: 22px;
+  }
 `;
 
 const Image = styled.img`

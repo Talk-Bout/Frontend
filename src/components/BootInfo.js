@@ -6,7 +6,7 @@ const BootInfo = (props) => {
   const {camp} = props;
   
   return (
-    <Grid className='contents-info' backgroundColor='#202124' width='64%' padding='40px'>
+    <Grid className='contents-info' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px'>
       <InfoList>
         <div><Text fontSize='16px' color='#9AA0A6'>코스</Text></div>
         <div><Text fontSize='16px' color='#DADCE0'>14주</Text></div>
@@ -44,6 +44,9 @@ const InfoList = styled.div`
   & > div {
     margin-bottom: 16px;
     line-height: 30px;
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      line-height: 24px;
+    }
   }
 `;
 

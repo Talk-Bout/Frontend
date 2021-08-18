@@ -71,7 +71,7 @@ const initialState = {
 const mainCampsDB = () => {
   // 메인페이지 부트캠프 목록 불러오는 함수(인기순)
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    // dispatch(statusActions.setLoading());
     instance.get(`/popular/bootcamps`).then((response) => {
       dispatch(mainCamps(response.data));
       dispatch(statusActions.endLoading());

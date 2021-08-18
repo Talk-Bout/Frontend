@@ -8,6 +8,7 @@ import { BiPencil } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
 import Stars from './Stars';
+import FloatingBtn from '../elements/FloatingBtn';
 
 const BootReview = (props) => {
   const dispatch = useDispatch();
@@ -35,17 +36,18 @@ const BootReview = (props) => {
   const is_login = useSelector(state => state.user.is_login);
 
   return (
-    <Grid className='contents-postlist' backgroundColor='#202124' width='64%' padding='40px 40px 0 40px'>
+    <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px'>
       <Grid className='review-title' display='flex' justify_content='space-between' padding='0 0 40px' borderBottom='1px solid #8f9091'>
         {/* 리뷰 페이지 타이틀 */}
         <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{camp.bootcampName} 리뷰</Text>
         {/* 리뷰 남기기 버튼 */}
         {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
         {is_login ?
-        <WriteBtn onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/review/write`})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
+        <WriteBtn onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/review`, state: {camp_name: camp.bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
         :
         <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
         }
+        <FloatingBtn />
       </Grid>
       {/* 부트캠프 리뷰 목록 */}
       {review_list && review_list.map((review, idx) => {
@@ -127,6 +129,9 @@ const WriteBtn = styled.button`
   cursor: pointer;
   &:active {
     opacity: 0.7;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    display: none;
   }
 `;
 

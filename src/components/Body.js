@@ -4,7 +4,7 @@ import HeaderN from '../components/HeaderN';
 import Footer from '../components/Footer';
 
 const Body = (props) => {
-  const { header, children, footer } = props;
+  const { header, children, footer, TABopacity } = props;
 
   return (
     <React.Fragment>
@@ -14,7 +14,7 @@ const Body = (props) => {
         minHeight="100vh"
         width="100vw"
       >
-        {header ? <HeaderN /> : ''}
+        {header ? <HeaderN TABopacity={TABopacity}/> : ''}
         <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='32px 18px 0'>
           {children}
         </Grid>

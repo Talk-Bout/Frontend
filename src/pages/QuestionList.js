@@ -14,6 +14,8 @@ import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { BiPencil } from 'react-icons/bi';
 
+import FloatingBtn from '../elements/FloatingBtn';
+
 //게시물 하나 카드
 import QnaCard from '../components/QnaCard';
 
@@ -242,6 +244,9 @@ const WriteBtn = styled.button`
   &:active {
     opacity: 0.7;
   }
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
 `;
 
 const CardList = styled.div`
@@ -250,6 +255,10 @@ const CardList = styled.div`
   display: flex;
   gap: 24px 16px;
   flex-wrap: wrap;
+  background-color: rosybrown;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    gap: 24px 12px;
+  }
 `;
 
 const PageBox = styled.div`

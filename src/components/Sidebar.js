@@ -20,38 +20,51 @@ const Sidebar = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px' TABopacity={TABopacity}>
-        <Grid className="sidebar-inner" is_center>
+      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px' TABopacity={TABopacity} position='relative'>
+        <Grid className="sidebar-inner">
           <Point
-            src={PointImg} alt='디자인'/>
-          <Image
-            src={url === '' ? Home_white : Home}
-            onClick={() => history.push('/')}
-          />
-          <Image
-            src={url === 'boot' ? Boot_white : Boot}
-            onClick={() => history.push('/boot')}
-          />
+              src={PointImg} alt='디자인'/>
+          <FixNav>
+            <Image
+              src={url === '' ? Home_white : Home}
+              onClick={() => history.push('/')}
+            />
+            <Image
+              src={url === 'boot' ? Boot_white : Boot}
+              onClick={() => history.push('/boot')}
+            />
 
-          {/* <Image
-            src={url === 'news' ? News_white : News}
-            onClick={() => history.push('/news/list')}
-          /> */}
-          <Image
-            src={url === 'common' ? Talk_white : Talk}
-            onClick={() => history.push('/common/list')}
-          />
-          <Image
-            src={url === 'question' ? Qna_white : Qna}
-            onClick={() => history.push('/question')}
-          />
+            {/* <Image
+              src={url === 'news' ? News_white : News}
+              onClick={() => history.push('/news/list')}
+            /> */}
+            <Image
+              src={url === 'common' ? Talk_white : Talk}
+              onClick={() => history.push('/common/list')}
+            />
+            <Image
+              src={url === 'question' ? Qna_white : Qna}
+              onClick={() => history.push('/question')}
+            />
+          </FixNav>
         </Grid>
       </Grid>
     </React.Fragment>
   );
 };
 
+const FixNav = styled.div`
+  position: fixed;
+  width: 100px;
+  top: 100px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 72px;
+    top: 72px;
+  }
+`;
+
 const Point = styled.img`
+  width: 100px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 72px;
   }

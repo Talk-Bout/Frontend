@@ -181,6 +181,9 @@ const ImageDiv = styled.div`
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 64px;
     height: 64px;
@@ -188,7 +191,7 @@ const ImageDiv = styled.div`
 `;
 
 const Logo = styled.img`
-  max-height: 100%;
+  max-width: 100%;
 `;
 
 export default MainBoot;

@@ -13,6 +13,7 @@ import CaretDown from '../image/CaretDown.png';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const HeaderN = (props) => {
+  const {TABopacity} = props;
   const dispatch = useDispatch();
 
   // 로컬 스토리지에 저장된 로그인 토큰을 찾는다.
@@ -47,6 +48,7 @@ const HeaderN = (props) => {
           display="flex"
           justify_content="space-between"
           backgroundColor='#202124'
+          TABopacity={TABopacity}
         >
           {/* 검색창 */}
           <Grid
@@ -135,6 +137,7 @@ const HeaderN = (props) => {
         display="flex"
         justify_content="space-between"
         backgroundColor='#202124'
+        TABopacity={TABopacity}
       >
         {/* 검색창 */}
         <Grid

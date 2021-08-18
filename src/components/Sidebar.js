@@ -15,11 +15,12 @@ import Talk_white from '../image/Board_white.png';
 import { history } from '../redux/ConfigureStore';
 
 const Sidebar = (props) => {
+  const {TABopacity} = props;
   const url = window.location.pathname.split('/')[1];
 
   return (
     <React.Fragment>
-      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px'>
+      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px' TABopacity={TABopacity}>
         <Grid className="sidebar-inner" is_center>
           <Point
             src={PointImg} alt='디자인'/>

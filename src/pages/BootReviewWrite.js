@@ -76,9 +76,9 @@ const BootReviewWrite = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' backgroundColor='#17181b'>
         {/* 사이드바 */}
-        <Sidebar />
+        <Sidebar TABopacity='0.2'/>
         {/* 헤더 포함한 바디 */}
-        <Body header>
+        <Body header TABopacity='0.2'>
           <Grid className='body-inner' padding='24px 0 0'>
             <Window>
               {/* 작성 페이지 헤더 */}

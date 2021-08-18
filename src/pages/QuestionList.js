@@ -62,6 +62,7 @@ const QuestionList = (props) => {
 
   return (
     <React.Fragment>
+      <FloatingBtn />
       <Grid display="flex">
         {/* 사이드바 */}
         <Sidebar />
@@ -255,7 +256,6 @@ const CardList = styled.div`
   display: flex;
   gap: 24px 16px;
   flex-wrap: wrap;
-  background-color: rosybrown;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     gap: 24px 12px;
   }
@@ -264,6 +264,9 @@ const CardList = styled.div`
 const PageBox = styled.div`
   display: inline-block;
   height: 100%;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin-top: 24px;
+  }
 `;
 
 const Page = styled.span`

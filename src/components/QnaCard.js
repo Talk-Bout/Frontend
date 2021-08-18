@@ -28,8 +28,11 @@ const QnaCard = (props) => {
             color="#F8F9FA"
             overflow="hidden"
             display="-webkit-box"
-            wlc="1"
+            wlc="2"
             wbo="vertical"
+            TABfontSize="16px"
+            TABwlc="1"
+            TABwbo="vertical"
           >
             <span style={{ marginRight: '8px' }}>Q</span>
             {question_found.title}
@@ -43,116 +46,174 @@ const QnaCard = (props) => {
             display="-webkit-box"
             wlc="4"
             wbo="vertical"
-            TABwlc="2"
+            TABwlc="3"
             TABoverflow="hidden"
+            TABfontSize="12px"
           >
             {question_found.content}
           </Text>
           <QeustionInfo>
             {/* 작성자 프로필 이미지 */}
-            <Image src={profile_small} width="24px" height="24px" />
+            <ProfileImg src={profile_small} width="24px" height="24px" />
             {/* 작성자 닉네임 */}
             <Text
               fontSize="12px"
               color="#80868b"
               lineHeight="24px"
               margin="0 8px"
+              TABfontSize="10px"
             >
               {question_found.nickname}
             </Text>
             {/* 작성일자 */}
-            <Text fontSize="12px" color="#80868b" lineHeight="24px">
-              <span
-                style={{
-                  fontSize: '16px',
-                  verticalAlign: 'middle',
-                  marginRight: '4px',
-                }}
+            <Text
+              fontSize="12px"
+              color="#80868b"
+              lineHeight="24px"
+              TABfontSize="10px"
+            >
+              <Text
+                fontSize="16px"
+                verticalAlign="middle"
+                margin="0 4px 0 0"
+                TABfontSize="10px"
               >
                 <BiTimeFive />
-              </span>
+              </Text>
               {question_found.createdAt}
             </Text>
           </QeustionInfo>
         </QuestionSection>
+
         <AnswerSection>
-          <div style={{ paddingTop: '16px' }}>
+          <span style={{ height: 'fit-content' }}>
             {/* 추천 수 */}
-            <Text fontSize="12px" color="#bdc1c6" margin="0 8px 0 0">
-              {question_found.questionLike ? (
-                <span
-                  style={{
-                    fontSize: '16px',
-                    verticalAlign: 'middle',
-                    marginRight: '6px',
-                  }}
+
+            {question_found.questionLike ? (
+              <Text
+                fontSize="12px"
+                color="#bdc1c6"
+                vertical_align="middle"
+                margin="0 8px 0 0"
+                TABfontSize="10px"
+              >
+                <Text
+                  fontSize="10px"
+                  color="#bdc1c6"
+                  margin="0 6px 0 0"
+                  vertical_align="middle"
+                  TABfontSize="14px"
                 >
                   <BiLike />
-                  {question_found.questionLike.length}
-                </span>
-              ) : (
-                <span
-                  style={{
-                    fontSize: '16px',
-                    verticalAlign: 'middle',
-                    marginRight: '6px',
-                  }}
+                </Text>
+                {question_found.questionLike.length}
+              </Text>
+            ) : (
+              <Text
+                fontSize="12px"
+                color="#bdc1c6"
+                vertical_align="middle"
+                margin="0 8px 0 0"
+                TABfontSize="10px"
+              >
+                <Text
+                  fontSize="10px"
+                  color="#bdc1c6"
+                  margin="0 6px 0 0"
+                  vertical_align="middle"
+                  TABfontSize="14px"
                 >
-                  <BiLike />0
-                </span>
-              )}
-            </Text>
+                  <BiLike />
+                </Text>
+                0
+              </Text>
+            )}
+
             {/* 댓글 수 */}
-            <Text fontSize="12px" color="#bdc1c6" margin="0 8px">
-              {question_found.answer ? (
-                <span
-                  style={{
-                    fontSize: '16px',
-                    verticalAlign: 'middle',
-                    marginRight: '6px',
-                  }}
+
+            {question_found.answer ? (
+              <Text
+                fontSize="12px"
+                color="#bdc1c6"
+                vertical_align="middle"
+                margin="0 8px 0 0"
+                TABfontSize="10px"
+              >
+                <Text
+                  fontSize="10px"
+                  color="#bdc1c6"
+                  margin="0 6px 0 0"
+                  vertical_align="middle"
+                  TABfontSize="14px"
                 >
                   <BiComment />
-                  {question_found.answer.length}
-                </span>
-              ) : (
-                <span
-                  style={{
-                    fontSize: '16px',
-                    verticalAlign: 'middle',
-                    marginRight: '6px',
-                  }}
+                </Text>
+
+                {question_found.answer.length}
+              </Text>
+            ) : (
+              <Text
+                fontSize="12px"
+                color="#bdc1c6"
+                vertical_align="middle"
+                margin="0 8px 0 0"
+                TABfontSize="10px"
+              >
+                <Text
+                  fontSize="10px"
+                  color="#bdc1c6"
+                  margin="0 6px 0 0"
+                  vertical_align="middle"
+                  TABfontSize="14px"
                 >
-                  <BiComment />0
-                </span>
-              )}
-            </Text>
+                  <BiComment />
+                </Text>
+                0
+              </Text>
+            )}
+
             {/* 조회수 */}
-            <Text fontSize="12px" color="#bdc1c6" margin="0 0 0 8px">
-              {question_found.viewCount > 0 ? (
-                <span
-                  style={{
-                    fontSize: '16px',
-                    verticalAlign: 'middle',
-                    marginRight: '6px',
-                  }}
+
+            {question_found.viewCount > 0 ? (
+              <Text
+                fontSize="12px"
+                color="#bdc1c6"
+                vertical_align="middle"
+                margin="0 8px 0 0"
+                TABfontSize="10px"
+              >
+                <Text
+                  fontSize="10px"
+                  color="#bdc1c6"
+                  margin="0 6px 0 0"
+                  vertical_align="middle"
+                  TABfontSize="14px"
                 >
                   <AiOutlineEye />
-                  {question_found.viewCount}
-                </span>
-              ) : (
-                <span
-                  style={{
-                    fontSize: '16px',
-                    verticalAlign: 'middle',
-                    marginRight: '6px',
-                  }}
+                </Text>
+                {question_found.viewCount}
+              </Text>
+            ) : (
+              <Text
+                fontSize="12px"
+                color="#bdc1c6"
+                vertical_align="middle"
+                margin="0 8px 0 0"
+                TABfontSize="10px"
+              >
+                <Text
+                  fontSize="10px"
+                  color="#bdc1c6"
+                  margin="0 6px 0 0"
+                  vertical_align="middle"
+                  TABfontSize="14px"
                 >
-                  <AiOutlineEye />0
-                </span>
-              )}
-            </Text>
-          </div>
+                  <AiOutlineEye />
+                </Text>
+                0
+              </Text>
+            )}
+          </span>
         </AnswerSection>
       </QnaListCard>
     </React.Fragment>
@@ -165,17 +226,17 @@ const QnaListCard = styled.div`
   height: 250px;
   float: left;
   background-color: #202124;
-  /* background-color: yellowgreen; */
   border-radius: 12px;
   box-sizing: border-box;
   padding: 24px 24px 0;
-  /* margin: 0 11px 24px; */
   cursor: pointer;
   &:hover {
     opacity: 0.7;
   }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 32%;
+    height: 200px;
+    padding: 16px 16px 0;
   }
 `;
 
@@ -184,24 +245,41 @@ const QuestionSection = styled.div`
   position: relative;
   border-bottom: 1px solid #282a2d;
   box-sizing: border-box;
-  background-color: skyblue;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    height: 140px;
+  }
 `;
 
 const QeustionInfo = styled.div`
   position: absolute;
-  /* background-color: yellowgreen; */
   bottom: 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: tomato;
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    height: 50px;
-    vertical-align: top;
+    height: 16px;
+    bottom: 12px;
+    margin-top: 20px;
   }
 `;
 
 const AnswerSection = styled.div`
   height: 16px;
+  padding-top: 16px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    height: 30px;
+    padding-top: 12px;
+  }
+`;
+
+const ProfileImg = styled.img`
+  width: 24px;
+  vertical-align: middle;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 QnaCard.defaultProps = {

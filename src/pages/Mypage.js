@@ -300,7 +300,6 @@ height: fit-content;
   }
 `;
 
-
 const ProfileOutter = styled.div`
 height: auto;
 width: 25%;
@@ -314,8 +313,8 @@ margin: 0 16px 0 0;
 
 const ProfileInner = styled.div`
 background-color: #202124;
-height: auto;
-width: 95%;
+width: 302px;
+height: 325px;
 margin: auto;
 border: 1px solid #202124;
 border-radius: 12px;

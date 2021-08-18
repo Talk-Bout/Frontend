@@ -105,8 +105,6 @@ const CardList = styled.div`
 `;
 
 const Card = styled.div`
-background-color: #202124;
-background-size: cover;
 width: 32%;
 height: 240px;
 border-radius: 8px;
@@ -120,11 +118,14 @@ position: relative;
 `;
 
 const ImageDiv = styled.div`
-  text-align: center;
-  min-width: 100%;
+  width: 100%;
   height: 100%;
   opacity: 0.4;
   border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     opacity: 0.9;
   }
@@ -134,9 +135,7 @@ const ImageDiv = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 100%;
-  height: 100%;
-  size: cover;
+  min-width: 100%;
   border-radius: 8px;
 `;
 

@@ -57,14 +57,14 @@ const ImageDiv = styled.div`
   width: 72px;
   border-radius: 36px;
   margin-top: 16px;
-  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 `;
 
 const Image = styled.img`
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  background-size: cover;
+  max-width: 72px;
 `;
 
 export default BootOthers;

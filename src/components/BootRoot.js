@@ -72,16 +72,17 @@ const BootRoot = (props) => {
 const LogoBox = styled.div`
   height: 112px;
   width: 190px;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  overflow: hidden;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     margin-top: 22px;
   }
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  size: cover;
+  max-width: 100%;
 `;
 
 const InfoBtn = styled.div`

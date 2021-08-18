@@ -11,6 +11,7 @@ import { FaPlus } from 'react-icons/fa';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
 
+import FloatingBtn from '../elements/FloatingBtn';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import CommonPostList from '../components/CommonPostList';
@@ -169,6 +170,19 @@ const CommonBoardList = (props) => {
                 </Grid>
               );
             })}
+            {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
+            {is_login ?
+            <>
+            <FloatingBtn _onClick={() => history.push('/common/write')}>
+              <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+            </>
+            :
+            <>
+            <FloatingBtn _onClick={() => login_check()}>
+              <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+            </>
+            }
+            
           </Grid>
           {/* import 부트톡톡 게시물  */}
           <Grid height="840px">
@@ -356,21 +370,13 @@ letter-spacing: 0.2px;
 `;
 
 const Contents = styled.div`
-  grid-template-rows: repeat(4, minmax(191px, 191px));
+  grid-template-rows: repeat(4, minmax(auto, auto));
   grid-template-columns: repeat(2, 1fr);
   display: grid;
-  align-items: center;
-  place-items: center;
-  box-sizing: border-box;
   cursor: pointer;
   width: 98.5%;
   height: 191px;
-  gap: 16px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    width: 324px;
-    height: 164px;
-    position: static;
-  }
+  
 `;
 
 const PageBox = styled.div`

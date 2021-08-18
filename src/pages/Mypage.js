@@ -130,7 +130,7 @@ const Mypage = (props) => {
             </ProfileInner>
           </ProfileOutter>
           {/* 북마크된 부트캠프, 글들 */}
-          <ResponSiveOutter height="100%" width="73%" >
+          <ResponSiveOutter height="100%" width="100%" >
             <Grid height="100%" width="100%" >
               <Grid height="172px" width="100%" >
                 <Grid padding="18px 20px" justify_content="space-between" flexDirection="row" align_items="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
@@ -167,7 +167,7 @@ const Mypage = (props) => {
                 <Grid display="flex" margin="12px 0 0 0" justify_content="space-between" height="65%" width="98.5%">
                   <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" padding="25px 330px">
                     <Grid margin="auto" height="100%" width="100%" >
-                    <Text fontSize="16px" color="#FFFFFF">부트캠프를 추가해주세요 :)</Text>
+                    <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px">부트캠프를 추가해주세요 :)</Text>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -194,24 +194,24 @@ const Mypage = (props) => {
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >
                       <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
-                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical"
+                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
                       >{p.post.title}
                       </Text>
                       <Text p  color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                      margin="0 0 24px 0" height="44px"
+                      margin="0 0 24px 0" height="44px" TABfontSize="12px"
                       >{p.post.content}</Text>
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <img src={Profile} alt='프로필'/>
+                      <ProfileImg src={Profile} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
-                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px">{p.post.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{p.post.createdAt}</Text>
+                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.post.nickname}</Text>
+                        <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive/>{p.post.createdAt}</Text>
                       </InfoBox>
                     </Grid>
                     <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
-                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 부트톡톡 <AiOutlineRight/> {p.post.category} </Text>
+                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight/> {p.post.category} </Text>
                     </Grid>
                     
                   </Grid>
@@ -221,7 +221,7 @@ const Mypage = (props) => {
                 :
                 <Grid margin="12px 0 0 0" height="211px" width="98.5%">
                   <Grid display="flex" align_items="center" text_align="center" height="203px" width="100%" padding="20px 300px" border="5px dotted #2E3134" borderRadius="12px">
-                    <Text fontSize="16px" color="#FFFFFF" >북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
+                    <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px">북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                   </Grid>
                 </Grid>
                 }
@@ -246,24 +246,24 @@ const Mypage = (props) => {
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >
                       <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
-                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical"
+                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
                       >{p.title}
                       </Text>
                       <Text p  color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                      margin="0 0 24px 0" height="44px"
+                      margin="0 0 24px 0" height="44px" TABfontSize="12px"
                       >{p.content}</Text>
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <img src={Profile} alt='프로필'/>
+                      <ProfileImg src={Profile} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
-                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px">{p.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{p.createdAt}</Text>
+                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.nickname}</Text>
+                        <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive/>{p.createdAt}</Text>
                       </InfoBox>
                     </Grid>
                     <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
-                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 부트톡톡 <AiOutlineRight/> {p.category} </Text>
+                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight/> {p.category} </Text>
                     </Grid>
                     
                   </Grid>
@@ -273,7 +273,7 @@ const Mypage = (props) => {
                 :
                 <Grid margin="12px 0 0 0" height="203px" width="98%">
                   <Grid display="flex" align_items="center" text_align="center" padding="20px 300px" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
-                    <Text fontSize="18px" color="#FFFFFF" >글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
+                    <Text fontSize="18px" color="#FFFFFF" TABfontSize="16px">글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                   </Grid>
                 </Grid>
                 }
@@ -291,18 +291,29 @@ const Mypage = (props) => {
 };
 
 const Outter = styled.div`
-display: flex;
-background-color: #17181b;
-height: fit-content;
-@media screen and (min-width: 768px) and (max-width: 992px) { 
-    flex-direction: column;
-    height: fit-content;
+  width: 100%;
+  height: auto;
+  display: flex;
+  grid-template-columns: 30% 68%;
+  @media screen and (min-width: 768px) and (max-width: 992px) { 
+    grid-template-columns: 100%;
+    display: grid;
   }
 `;
 
+// const Outter = styled.div`
+// display: flex;
+// background-color: #17181b;
+// height: fit-content;
+// @media screen and (min-width: 768px) and (max-width: 992px) { 
+//     flex-direction: column;
+//     height: fit-content;
+//   }
+// `;
+
 const ProfileOutter = styled.div`
 height: auto;
-width: 25%;
+width: 20%;
 margin: 0 16px 0 0;
 @media screen and (min-width: 768px) and (max-width: 992px) { 
     width: 98.5%;
@@ -313,7 +324,7 @@ margin: 0 16px 0 0;
 
 const ProfileInner = styled.div`
 background-color: #202124;
-width: 302px;
+width: 100%;
 height: 325px;
 margin: auto;
 border: 1px solid #202124;
@@ -392,6 +403,17 @@ text-align: center;
 
 const ImgBox = styled.div`
 margin: 0px 15px 0 0;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  margin: 0px 8px 0 0;
+  }
+`;
+
+const ProfileImg = styled.img`
+  width: 24px;
+  vertical-align: middle;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 16px;
+  }
 `;
 
 const InfoBox = styled.div`
@@ -408,11 +430,14 @@ font-size: 18px;
 font-weight: bold;
 width: 10%;
 @media screen and (min-width: 768px) and (max-width: 992px) { 
-  width: 13%;
+  width: 10%;
+  font-size: 14px;
 }
 `;
 
 const ResponSiveOutter = styled.div`
+height: auto;
+width: 100%;
 @media screen and (min-width: 768px) and (max-width: 992px) { 
   height: 100%;
   width: 100%;

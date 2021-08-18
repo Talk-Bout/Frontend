@@ -75,8 +75,6 @@ const Content = styled.div`
 
 const ProfileImage = styled.div`
 display: flex;
-/* height: 10%;
-padding: 3%; */
 width: 400px;
 height: 24px;
 margin: 16px 0px;

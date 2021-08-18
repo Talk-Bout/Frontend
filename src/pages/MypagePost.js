@@ -35,7 +35,7 @@ const MypagePost = (props) => {
           <Grid height="fit-content">
             <Grid height="9%" width="100%">
               
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA">님의 글</Text>
+              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px">님의 글</Text>
             </Grid>
             <Card display="flex" height="81%" width="100%">
             {mypost_list.map((p, idx) => {
@@ -45,24 +45,24 @@ const MypagePost = (props) => {
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >
                       <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
-                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical"
+                      overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
                       >{p.title}
                       </Text>
                       <Text p  color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                      margin="0 0 24px 0" height="44px"
+                      margin="0 0 24px 0" height="44px" TABfontSize="12px"
                       >{p.content}</Text>
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <img src={Profile} alt='프로필'/>
+                      <ProfileImg src={Profile} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
-                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px">{p.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px"><BiTimeFive/>{p.createdAt}</Text>
+                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.nickname}</Text>
+                        <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive/>{p.createdAt}</Text>
                       </InfoBox>
                     </Grid>
                     <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
-                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px"> 부트톡톡 <AiOutlineRight/> {p.category} </Text>
+                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight/> {p.category} </Text>
                     </Grid>
                     
                   </Grid>
@@ -104,7 +104,18 @@ width: 100%;
 `;
 
 const ImgBox = styled.div`
-margin: 2% 3% 0 0;
+margin: 0px 15px 0 0;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  margin: 0px 8px 0 0;
+  }
+`;
+
+const ProfileImg = styled.img`
+  width: 24px;
+  vertical-align: middle;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 16px;
+  }
 `;
 
 const InfoBox = styled.div`

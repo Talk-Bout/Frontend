@@ -4,16 +4,25 @@ import { Text } from '.';
 import { BiPencil } from 'react-icons/bi';
 
 const FloatingBtn = (props) => {
+  const {
+    _onClick,
+
+  } = props;
 
   return (
     <React.Fragment>
-      <FloatBtn>
+      <FloatBtn onClick={_onClick}>
         <Text fontSize='32px' color='#dadce0'>
           <BiPencil />
         </Text>
       </FloatBtn>
     </React.Fragment>
   )
+};
+
+FloatingBtn.defaultProps = {
+  _onClick: () => {},
+
 };
 
 const FloatBtn = styled.button`

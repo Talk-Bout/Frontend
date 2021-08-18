@@ -66,7 +66,7 @@ const BootCommu = (props) => {
         return (
           <Post key={idx} onClick={() => history.push(`/boot/${camp.bootcampName}/post/${c.communityId}`)}>
             {/* 제목 */}
-            <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0'>{c.title}</Text>
+            <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{c.title}</Text>
             {/* 내용 */}
             <Text p fontSize='14px' color='#80868b' margin='16px 0 0' overflow='hidden' display='-webkit-box' wlc='2' wbo='vertical'>{c.content}</Text>
             <div style={{height: 'fit-content', marginTop: '16px'}}>

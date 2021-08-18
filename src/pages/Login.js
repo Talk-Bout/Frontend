@@ -146,11 +146,6 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  /* :active {
-    box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
-    position: relative;
-    top: 2px;
-  } */
   :hover {
     background-color: #7879f1;
   }

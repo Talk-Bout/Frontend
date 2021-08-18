@@ -13,6 +13,8 @@ const DOUBLE_NICKNAME_CHECK = 'USER/DOUBLE_NICKNAME_CHECK'; //닉네임 중복 �
 const LOGIN_CHECK = 'user/LOGIN_CHECK'; //로그인 페이지 id, pwd 체크
 const DELETE_USER = 'user/DELETE_USER'; //회원 탈퇴
 
+// const AUTH_KAKAO = 'user/AUTH_KAKAO'; // 카카오 소셜로그인
+
 //액션 생성함수
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, () => ({}));
@@ -26,6 +28,7 @@ const doubleNicknameCheck = createAction(DOUBLE_NICKNAME_CHECK, (isExist) => ({
 }));
 const loginCheck = createAction(LOGIN_CHECK, (is_error) => ({ is_error }));
 const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
+// const authKakao = createAction(AUTH_KAKAO, (data) => ({data})); // 아직 어떤 형태의 데이터를 받을 수 있는지 모름
 
 //기본값 정하기
 const initialState = {
@@ -55,7 +58,6 @@ const logInDB = (email, password) => {
       })
       .catch((err) => {
         console.log(`로그인 에러 발생: ${err}`);
-
         dispatch(loginCheck(err.response.status));
       });
   };
@@ -156,6 +158,40 @@ const userDeleteDB = (nickname) => {
   };
 };
 
+const authKakaoDB = () => {
+  // 카카오 소셜로그인
+  return function (dispatch) {
+    // window.open('http://13.209.12.149/oauth/kakao', '_blank')
+
+    // const axios = require('axios');
+    // const headers = {'Authorization': 'Bearer d1FcrVA8H0067Q_zEXwq0E5SHEjylw5HROk6_go9cxgAAAF7Vuz5UQ'}
+    // axios.post('http://13.209.12.149/oauth/logout', {headers: headers}).then((response) => {
+    //   console.log(response);
+    // }).catch((err) => {
+    //   console.error(`로그아웃 에러: ${err}`);
+    // })
+
+
+    // const axios = require('axios');
+    // axios.post('https://kauth.kakao.com/oauth/token', {
+    //   grant_type: "refresh_token",
+    //   client_id: "a1e045a6bd23510144e987da133f3eff", // rest api 키
+    //   // client_id: '0af532c12971e247c7d66ed819d41c6c', // 자바스크립트 키
+    //   refresh_token: 'Cvmr3R9Esupkxm7kAX5m9Tdkq0SVrEva4dTeHAorDKcAAAF7VtU-dA',
+    // }, {headers: {'Content-type': 'application/x-www-form-urlencoded'}}).then((response) => {
+    //   console.log(response);
+    // }).catch((err) => {
+    //   console.error(`${err}`);
+    // })
+
+    // instance.get('/oauth/kakao').then((response) => {
+    //   console.log(response.data); //아직 어떤 형태의 데이터를 받을 수 있는지 모름
+    // }).catch((err) => {
+    //   console.error(`카카오 소셜로그인 에러: ${err} ### ${err.response}`);
+    // });
+  };
+};
+
 export default handleActions(
   {
     [LOG_IN]: (state, action) =>
@@ -210,6 +246,7 @@ const actionCreators = {
   emailCheckDB,
   nicknameCheckDB,
   userDeleteDB,
+  authKakaoDB,
 };
 
 export { actionCreators };

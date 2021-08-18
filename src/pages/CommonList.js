@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 //icons
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FaPlus } from "react-icons/fa";
-import { RiArrowUpDownFill} from 'react-icons/ri';
+import { FaPlus } from 'react-icons/fa';
+import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
 
 import Sidebar from '../components/Sidebar';
@@ -150,6 +150,7 @@ const CommonBoardList = (props) => {
                     </div>}
                   </Grid>
                 </Grid>
+
             </Grid>
             <hr/>
             {/* 공지 */}
@@ -259,25 +260,24 @@ const Categories = styled.div`
 `;
 
 const CategoryButton = styled.div`
-
-cursor: pointer;
-background-color: #202124;
-border: none;
-border-radius: 100px;
-margin: 0 8px;
-width: 110px;
-height: 44px;
-color: #80868B;
-text-align: center;
-font-size: 16px;
-line-height: 24px;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-&:hover {
-  background-color: #BDC1C6;
-  color: #0E1013;
+  cursor: pointer;
+  background-color: #202124;
+  border: none;
+  border-radius: 100px;
+  margin: 0 8px;
+  width: 110px;
+  height: 44px;
+  color: #80868b;
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: #bdc1c6;
+    color: #0e1013;
   }
 `;
 
@@ -291,7 +291,6 @@ font-size: 16px;
 appearance: none;
 line-height: 24px;
 margin: 3px 16px 0 8px;
-
 `;
 
 const Options = styled.div`

@@ -26,12 +26,10 @@ import CommonWrite from './pages/CommonWrite';
 
 //부트캠프별 페이지
 import BootMain from './pages/BootMain';
-import BootInfo from './pages/BootInfo';
-import BootReview from './pages/BootReview';
-import BootCommu from './pages/BootCommu';
-import BootPost from './pages/BootPost';
+import BootDetail from './pages/BootDetail';
 import BootReviewWrite from './pages/BootReviewWrite';
 import BootCommuWrite from './pages/BootCommuWrite';
+import BootPost from './pages/BootPost';
 
 //질문 게시판 페이지
 import QuestionList from './pages/QuestionList';
@@ -77,12 +75,10 @@ function App() {
           <Route path="/question/write/:id" exact component={QuestionWrite} />
           <Route path="/question/detail/:id" exact component={QuestionDetail} />
           <Route path="/boot" exact component={BootMain} />
-          <Route path="/boot/:name/info" exact component={BootInfo} />
-          <Route path="/boot/:name/review" exact component={BootReview} />
-          <Route path="/boot/:name/community" exact component={BootCommu} />
-          <Route path="/boot/:name/review/write" exact component={BootReviewWrite} />
-          <Route path="/boot/:name/community/write" exact component={BootCommuWrite}/>
-          <Route path="/boot/:name/community/write/:id" exact component={BootCommuWrite}/>
+          <Route path="/boot/:name" exact component={BootDetail} />
+          <Route path="/boot/:name/review" exact component={BootReviewWrite} />
+          <Route path="/boot/:name/community" exact component={BootCommuWrite} />
+          <Route path="/boot/:name/community/:id" exact component={BootCommuWrite} />
           <Route path="/boot/:name/post/:id" exact component={BootPost} />
           <Route path="/news/list" exact component={NewsList} />
           <Route path="/mypage" exact component={Mypage} />
@@ -90,7 +86,6 @@ function App() {
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route path="/mypage/edit" exact component={PageEdit} />
-          {/* <Route path='/spinner' exact component={Spinner} /> */}
           <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>

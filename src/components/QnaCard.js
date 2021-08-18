@@ -22,7 +22,15 @@ const QnaCard = (props) => {
         {/* 질문 글 */}
         <QuestionSection>
           {/* 질문 제목 */}
-          <Text fontSize="18px" fontWeight="700" color="#F8F9FA">
+          <Text
+            fontSize="18px"
+            fontWeight="700"
+            color="#F8F9FA"
+            overflow="hidden"
+            display="-webkit-box"
+            wlc="1"
+            wbo="vertical"
+          >
             <span style={{ marginRight: '8px' }}>Q</span>
             {question_found.title}
           </Text>
@@ -35,12 +43,12 @@ const QnaCard = (props) => {
             display="-webkit-box"
             wlc="4"
             wbo="vertical"
+            TABwlc="2"
+            TABoverflow="hidden"
           >
             {question_found.content}
           </Text>
-          <div
-            style={{ position: 'absolute', bottom: '16px', display: 'flex' }}
-          >
+          <QeustionInfo>
             {/* 작성자 프로필 이미지 */}
             <Image src={profile_small} width="24px" height="24px" />
             {/* 작성자 닉네임 */}
@@ -65,7 +73,7 @@ const QnaCard = (props) => {
               </span>
               {question_found.createdAt}
             </Text>
-          </div>
+          </QeustionInfo>
         </QuestionSection>
         <AnswerSection>
           <div style={{ paddingTop: '16px' }}>
@@ -157,6 +165,7 @@ const QnaListCard = styled.div`
   height: 250px;
   float: left;
   background-color: #202124;
+  /* background-color: yellowgreen; */
   border-radius: 12px;
   box-sizing: border-box;
   padding: 24px 24px 0;
@@ -165,6 +174,9 @@ const QnaListCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 32%;
+  }
 `;
 
 const QuestionSection = styled.div`
@@ -172,10 +184,24 @@ const QuestionSection = styled.div`
   position: relative;
   border-bottom: 1px solid #282a2d;
   box-sizing: border-box;
+  background-color: skyblue;
+`;
+
+const QeustionInfo = styled.div`
+  position: absolute;
+  /* background-color: yellowgreen; */
+  bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    height: 50px;
+    vertical-align: top;
+  }
 `;
 
 const AnswerSection = styled.div`
-  height: 50px;
+  height: 16px;
 `;
 
 QnaCard.defaultProps = {

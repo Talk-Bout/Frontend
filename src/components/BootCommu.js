@@ -47,12 +47,18 @@ const BootCommu = (props) => {
           {/* 글쓰기 버튼 */}
           {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
           {is_login ?
+          <>
           <WriteBtn onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/community`, state: {camp_name: camp.bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '18px', marginRight: '4px', verticalAlign: 'middle'}}><BiPencil /></span>글쓰기</Text></WriteBtn>
+          {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
+          <FloatingBtn _onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/community`, state: {camp_name: camp.bootcampName}})}><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+          </>
           :
+          <>
           <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '18px', marginRight: '4px', verticalAlign: 'middle'}}><BiPencil /></span>글쓰기</Text></WriteBtn>
+          {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
+          <FloatingBtn _onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+          </>
           }
-          {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
-          <FloatingBtn><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
         </Grid>
       </Grid>
       {/* 커뮤니티 게시글 목록 */}
@@ -60,7 +66,7 @@ const BootCommu = (props) => {
         return (
           <Post key={idx} onClick={() => history.push(`/boot/${camp.bootcampName}/post/${c.communityId}`)}>
             {/* 제목 */}
-            <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0'>{c.title}</Text>
+            <Text p fontSize='18px' fontWeight='700' color='#dadce0' margin='0' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{c.title}</Text>
             {/* 내용 */}
             <Text p fontSize='14px' color='#80868b' margin='16px 0 0' overflow='hidden' display='-webkit-box' wlc='2' wbo='vertical'>{c.content}</Text>
             <div style={{height: 'fit-content', marginTop: '16px'}}>

@@ -145,9 +145,9 @@ const BootPost = (props) => {
               <Post>
                 {/* 게시글 카테고리 */}
                 <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; 커뮤니티</Text>
-                <Grid display='flex' justify_content='space-between' padding='12px 0 0'>
+                <Grid display='flex' justify_content='space-between' padding='12px 0 0' TABpadding='11px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' vertical_align='middle'>{commu_found.title}</Text>
+                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' TABlineHeight='36px' vertical_align='middle'>{commu_found.title}</Text>
                   <div style={{height: 'fit-content'}}>
                     {/* 북마크 버튼 */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
@@ -273,6 +273,7 @@ const BootPost = (props) => {
               <MoreBtn onClick={() => moreComment()}><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기</Text></MoreBtn>
             </div>
             {/* 다른 게시글 목록 */}
+            {/* 태블릿 사이즈 이하에서는 보이지 않기 */}
             <OthersBox>
               <Text fontSize='18px' fontWeight='700' color='#E8EAED'>커뮤니티 내 다른 게시글</Text>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n, idx) => {
@@ -293,6 +294,9 @@ const BodyInner = styled.div`
   height: auto;
   display: grid;
   grid-template-columns: 65% 34%;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const Post = styled.div`
@@ -407,6 +411,9 @@ const OthersBox = styled.div`
   height: fit-content;
   background-color: #202124;
   padding: 24px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    display: none;
+  }
 `;
 
 export default BootPost;

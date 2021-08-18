@@ -6,12 +6,16 @@ import { BiPencil } from 'react-icons/bi';
 const FloatingBtn = (props) => {
   const {
     _onClick,
-
+    active,
   } = props;
+
+  const styles = {
+    active: active,
+  }
 
   return (
     <React.Fragment>
-      <FloatBtn onClick={_onClick}>
+      <FloatBtn onClick={_onClick} {...styles}>
         <Text fontSize='32px' color='#dadce0'>
           <BiPencil />
         </Text>
@@ -35,6 +39,9 @@ const FloatBtn = styled.button`
   z-index: 10;
   bottom: 110px;
   right: 12px;
+  &:active {
+    ${(props) => props.active};
+  }
   @media screen and (min-width: 993px) {
     display: none;
   }

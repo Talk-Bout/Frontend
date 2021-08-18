@@ -42,7 +42,7 @@ const AnswerCard = (props) => {
   return (
     <React.Fragment>
       <AnswerBox>
-        <Grid padding="40px">
+        <AnswerContent>
           <Grid display="flex">
             <Text fontSize="32px" fontWeight="700" color="#ffffff">
               A
@@ -79,6 +79,7 @@ const AnswerCard = (props) => {
               </Text>
             </Grid>
           </Grid>
+
           <Grid margin="30px 0 50px 0">
             <Text p fontSize="16px" color="#C4C4C4">
               {props.content}
@@ -118,7 +119,7 @@ const AnswerCard = (props) => {
           ) : (
             <span
               style={{
-                backgroundColor: '#282A2D',
+                backgroundColor: '#2E3134',
                 padding: '8px 16px',
                 borderRadius: '12px',
               }}
@@ -146,7 +147,7 @@ const AnswerCard = (props) => {
               </Text>
             </span>
           )}
-        </Grid>
+        </AnswerContent>
       </AnswerBox>
     </React.Fragment>
   );
@@ -156,6 +157,14 @@ const AnswerBox = styled.div`
   margin: 30px auto 0;
   background-color: #202124;
   border-radius: 12px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 660px;
+    /* margin: 30px; */
+  }
+`;
+
+const AnswerContent = styled.div`
+  padding: 40px;
 `;
 
 export default AnswerCard;

@@ -146,7 +146,7 @@ const QuestionDetail = (props) => {
         <Body header footer>
           <Grid>
             {/* 질문 카드 */}
-            <Grid width="1041px" margin="10px auto">
+            <QuestionBox>
               <Grid display="flex">
                 <Grid width="80%">
                   <Text fontSize="24px" fontWeight="600" color="#ffffff">
@@ -378,24 +378,32 @@ const QuestionDetail = (props) => {
                 )}
 
                 <Text color="#C4C4C4" margin="auto 6px">
-                  <span style={{ lineHeight: '30px', verticalAlign: 'middle' }}>
-                    <BiComment /> {all_answer.length}
+                  <span
+                    style={{
+                      lineHeight: '30px',
+                      margin: '0 4px',
+                      verticalAlign: 'middle',
+                    }}
+                  >
+                    <BiComment />
                   </span>
+                  {all_answer.length}
                 </Text>
 
                 <Text color="#C4C4C4" margin="auto 6px">
                   <span
                     style={{
                       lineHeight: '30px',
+                      margin: '0 4px',
                       verticalAlign: 'middle',
                     }}
                   >
                     <BsEye />
-                    {question_found.viewCount}
                   </span>
+                  {question_found.viewCount}
                 </Text>
               </Grid>
-            </Grid>
+            </QuestionBox>
           </Grid>
 
           <AnswerBox>
@@ -436,18 +444,27 @@ const QuestionDetail = (props) => {
   );
 };
 
+const QuestionBox = styled.div`
+  width: 1041px;
+  margin: 10px auto;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 660px;
+  }
+`;
+
 //Answer Section
 const AnswerBox = styled.div`
   min-height: 100vh;
   margin: 0 -40px -80px -40px;
   padding-bottom: 80px;
-  /* width: 1340px; */
   background-color: #282a2d;
-  /* background-color: yellow; */
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin: 0 -18px -65px -18px;
+    padding-bottom: 65px;
+  }
 `;
 
 const ACommentBox = styled.div`
-  /* color: #5d6065; */
   background-color: #212123;
   border-radius: 12px;
   border: 1px solid #9aa0a6;
@@ -474,6 +491,9 @@ const AddAnswerSection = styled.div`
   width: 1044px;
   margin: 10px auto;
   padding-top: 30px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 660px;
+  }
 `;
 
 const AInput = styled.textarea`
@@ -493,6 +513,9 @@ const AInput = styled.textarea`
   ::placeholder {
     color: #4e5357;
   }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 620px;
+  }
 `;
 
 const AnswerSaveButton = styled.button`
@@ -504,6 +527,9 @@ const AnswerSaveButton = styled.button`
   padding: 15px 40px;
   margin-left: 866px;
   margin-bottom: 15px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    margin-left: 490px;
+  }
 `;
 
 export default QuestionDetail;

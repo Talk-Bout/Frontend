@@ -105,8 +105,8 @@ const QuestionWrite = (props) => {
         backgroundColor="#17181b"
         minHeight="100vh"
       >
-        <Sidebar />
-        <Body header footer>
+        <Sidebar TABopacity="0.2" />
+        <Body header footer TABopacity="0.2">
           <Grid className="body-inner" height="100%" padding="5vh 0 0">
             <Window>
               <Grid

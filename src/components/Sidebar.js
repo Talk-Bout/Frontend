@@ -1,15 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
-import PointImg from '../image/point.png';
-import Home from '../image/Home.png';
-import Home_white from '../image/Home_white.png';
-import Boot from '../image/Bootcamp.png';
-import Boot_white from '../image/Bootcamp_white.png';
-import Qna from '../image/Qna.png';
-import Qna_white from '../image/qna_white.png';
-import Talk from '../image/Board.png';
-import Talk_white from '../image/Board_white.png';
+import { PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white } from '../image';
 import { history } from '../redux/ConfigureStore';
 
 const Sidebar = (props) => {

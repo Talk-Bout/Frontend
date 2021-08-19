@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {Grid, Text} from '../elements';
+import { Grid, Text, FloatingBtn } from '../elements';
+import { Stars } from '.';
 import { history } from '../redux/ConfigureStore';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { BiPencil } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
-import Stars from './Stars';
-import FloatingBtn from '../elements/FloatingBtn';
 
 const BootReview = (props) => {
   const dispatch = useDispatch();
@@ -16,19 +15,14 @@ const BootReview = (props) => {
 
   // 페이지네이션
   const [page, setPage] = useState(1);
-  // 페이지 번호가 바뀔 때마다 리뷰 목록 불러오는 함수 호출
   useEffect(() => {
     dispatch(campActions.setReviewsDB(camp.bootcampName, page));
   }, [page]);
-  // 불러오는 3페이지짜리 리뷰 목록
   const all_review = useSelector(state => state.bootcamp.review_list);
-  // 1페이지에 보여줄 개수로만 자른 목록
   const review_list = all_review.slice(0, 5);
-  // 앞 페이지로 가는 함수
   const toPrePage = () => {
     setPage(page - 1);
   }
-  // 다음 페이지로 가는 함수
   const toNextPage = () => {
     setPage(page + 1);
   }
@@ -37,7 +31,7 @@ const BootReview = (props) => {
 
   return (
     <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px'>
-      <Grid className='review-title' display='flex' justify_content='space-between' padding='0 0 40px' borderBottom='1px solid #8f9091'>
+      <Grid className='review-title' display='flex' justifyContent='space-between' padding='0 0 40px' borderBottom='1px solid #8f9091'>
         {/* 리뷰 페이지 타이틀 */}
         <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{camp.bootcampName} 리뷰</Text>
         {/* 리뷰 남기기 버튼 */}

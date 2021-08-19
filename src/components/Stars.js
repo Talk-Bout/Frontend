@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IoStar } from 'react-icons/io5';
 import { Text } from '../elements';
+import { IoStar } from 'react-icons/io5';
 
 const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴포넌트
   const {score, size, withScore, cursor, _onClick, marginRight, TABsize} = props;            // score라는 이름으로 평점 props를 받는다.

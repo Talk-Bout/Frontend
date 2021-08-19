@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
-const KakaoLogin = (props) => {
+const SocialLogin = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,10 +13,10 @@ const KakaoLogin = (props) => {
   return (
     <React.Fragment>
       <div>
-        <h1>구글 로그인이 잘 되고 있습니다</h1>
+        <h1>소셜 로그인이 잘 되고 있습니다</h1>
       </div>
     </React.Fragment>
   )
 };
 
-export default KakaoLogin;
+export default SocialLogin;

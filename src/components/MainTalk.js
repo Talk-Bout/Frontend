@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Grid, Text } from '../elements';
-import Profile from '../image/profile_small.png';
+import { Grid, Text, Emoji } from '../elements';
+import { Profile_small, Megaphone_emoji } from '../image';
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { history } from '../redux/ConfigureStore';
@@ -22,7 +22,7 @@ const MainTalk = (props) => {
     <React.Fragment>
       <Grid className="top-boot" margin="48px 0" TABpadding='32px 0 0'>
         {/* 인기 부트톡톡 */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px'>📣부트톡톡</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px'><Emoji src={Megaphone_emoji} alt='확성기' height='24px' TABheight='20px' margin='0 8px 0 0' />부트톡톡</Text>
         <TextBox>
           {/* 부트캠퍼들이 가장 많이 추천한 게시물 */}
           <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px'>부트캠퍼들의 자유로운 Talk Talk</Text>
@@ -44,7 +44,7 @@ const MainTalk = (props) => {
               </Grid>
               {/* 작성자 정보 */}
               <Grid padding='16px 0 0' TABpadding='24px 0 0'>
-                <ProfileImg src={pp.user.profilePic ? pp.user.profilePic : Profile} alt='프로필' />
+                <ProfileImg src={pp.user.profilePic ? pp.user.profilePic : Profile_small} alt='프로필' />
                 <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px'>
                   {pp.user.nickname}
                 </Text>
@@ -56,14 +56,14 @@ const MainTalk = (props) => {
               <Grid padding='16px 0 0' TABpadding='12px 0 0'>
                 {/* 추천 수 */}
                 <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px'>
-                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><BiLike /></Text>{pp.likeNumber}
+                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign= 'middle' TABfontSize='14px'><BiLike /></Text>{pp.likeNumber}
                 </Text>
                 {/* 댓글 수 */}
                 {/* <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
                   <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>댓글 수</Text> */}
                 {/* 조회수 */}
                 <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
-                <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><AiOutlineEye /></Text>{pp.viewCount}</Text>
+                <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign= 'middle' TABfontSize='14px'><AiOutlineEye /></Text>{pp.viewCount}</Text>
               </Grid>
             </QuestionBox>
           );

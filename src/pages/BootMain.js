@@ -8,8 +8,6 @@ import CampImg from '../image/talkbout_final_logo.png';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
-import { actionCreators as postActions } from '../redux/modules/post';
-import { actionCreators as userActions } from '../redux/modules/user';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 const BootMain = (props) => {
@@ -19,18 +17,7 @@ const BootMain = (props) => {
   const [page, setPage] = useState(1);
   // 페이지 번호가 바뀔 때마다 부트캠프 목록 불러오는 함수 호출
   useEffect(() => {
-    // dispatch(campActions.setCampsDB(page));
-    // const new_post = {
-        
-    //   title: '제목',
-    //   content: '내용',
-    //   nickname: localStorage.getItem('nickname') ? localStorage.getItem('nickname') : 'tester',
-    //   category: 'test',
-    //   image: '',
-    // };
-    // console.log(new_post);
-    // dispatch(postActions.addPostDB(new_post));
-    dispatch(userActions.googleRefresh());
+    dispatch(campActions.setCampsDB(page));
   }, [page]);
   // 불러오는 3페이지짜리 부트캠프 목록
   const all_camp = useSelector(state => state.bootcamp.camp_list);

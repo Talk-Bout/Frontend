@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text, Image } from '../elements';
-import { useDispatch, useSelector } from 'react-redux';
+import { Text } from '../elements';
+import { Profile_small } from '../image';
+import { useSelector } from 'react-redux';
 //icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
-import profile_small from '../image/profile_small.png';
-import question from '../redux/modules/question';
 
 const QnaCard = (props) => {
   const { _onClick } = props;
@@ -32,7 +31,6 @@ const QnaCard = (props) => {
             wbo="vertical"
             TABfontSize="16px"
             TABwlc="1"
-            TABwbo="vertical"
           >
             <span style={{ marginRight: '8px' }}>Q</span>
             {question_found.title}
@@ -54,7 +52,7 @@ const QnaCard = (props) => {
           </Text>
           <QuestionInfo>
             {/* 작성자 프로필 이미지 */}
-            <ProfileImg src={profile_small} width="24px" height="24px" />
+            <ProfileImg src={Profile_small} width="24px" height="24px" />
             {/* 작성자 닉네임 */}
             <Text
               fontSize="12px"
@@ -75,7 +73,7 @@ const QnaCard = (props) => {
             >
               <Text
                 fontSize="16px"
-                vertical_align="middle"
+                verticalAlign="middle"
                 margin="0 4px 0 0"
                 TABfontSize="10px"
                 TABmargin="0 2px 0 0"
@@ -95,7 +93,7 @@ const QnaCard = (props) => {
               <Text
                 fontSize="12px"
                 color="#bdc1c6"
-                vertical_align="middle"
+                verticalAlign="middle"
                 margin="0 8px 0 0"
                 TABfontSize="10px"
               >
@@ -103,7 +101,7 @@ const QnaCard = (props) => {
                   fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
-                  vertical_align="middle"
+                  verticalAlign="middle"
                   TABfontSize="14px"
                 >
                   <BiLike />
@@ -114,7 +112,7 @@ const QnaCard = (props) => {
               <Text
                 fontSize="12px"
                 color="#bdc1c6"
-                vertical_align="middle"
+                verticalAlign="middle"
                 margin="0 8px 0 0"
                 TABfontSize="10px"
               >
@@ -122,7 +120,7 @@ const QnaCard = (props) => {
                   fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
-                  vertical_align="middle"
+                  verticalAlign="middle"
                   TABfontSize="14px"
                 >
                   <BiLike />
@@ -137,7 +135,7 @@ const QnaCard = (props) => {
               <Text
                 fontSize="12px"
                 color="#bdc1c6"
-                vertical_align="middle"
+                verticalAlign="middle"
                 margin="0 8px 0 0"
                 TABfontSize="10px"
               >
@@ -145,7 +143,7 @@ const QnaCard = (props) => {
                   fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
-                  vertical_align="middle"
+                  verticalAlign="middle"
                   TABfontSize="14px"
                 >
                   <BiComment />
@@ -157,7 +155,7 @@ const QnaCard = (props) => {
               <Text
                 fontSize="12px"
                 color="#bdc1c6"
-                vertical_align="middle"
+                verticalAlign="middle"
                 margin="0 8px 0 0"
                 TABfontSize="10px"
               >
@@ -165,7 +163,7 @@ const QnaCard = (props) => {
                   fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
-                  vertical_align="middle"
+                  verticalAlign="middle"
                   TABfontSize="14px"
                 >
                   <BiComment />
@@ -180,7 +178,7 @@ const QnaCard = (props) => {
               <Text
                 fontSize="12px"
                 color="#bdc1c6"
-                vertical_align="middle"
+                verticalAlign="middle"
                 margin="0 8px 0 0"
                 TABfontSize="10px"
               >
@@ -188,7 +186,7 @@ const QnaCard = (props) => {
                   fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
-                  vertical_align="middle"
+                  verticalAlign="middle"
                   TABfontSize="14px"
                 >
                   <AiOutlineEye />
@@ -199,7 +197,7 @@ const QnaCard = (props) => {
               <Text
                 fontSize="12px"
                 color="#bdc1c6"
-                vertical_align="middle"
+                verticalAlign="middle"
                 margin="0 8px 0 0"
                 TABfontSize="10px"
               >
@@ -207,7 +205,7 @@ const QnaCard = (props) => {
                   fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
-                  vertical_align="middle"
+                  verticalAlign="middle"
                   TABfontSize="14px"
                 >
                   <AiOutlineEye />

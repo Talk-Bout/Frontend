@@ -12,10 +12,7 @@ const HeaderN = (props) => {
   const {opacity, TABopacity} = props;
   const dispatch = useDispatch();
 
-  // 로컬 스토리지에 저장된 로그인 토큰을 찾는다.
   const token = localStorage.getItem('accessToken');
-  // const token = localStorage.getItem('Atoken');
-  // const login_path = localStorage.getItem('LoginPath');
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -28,14 +25,8 @@ const HeaderN = (props) => {
     setMenuLink(null);
   };
 
-  // 로그아웃
-  const logOutBtn = () => {
-    // if (login_path === 'kakao') {
-      dispatch(userActions.kakaoLogout());
-    //   return;
-    // }
-    // dispatch(userActions.logOut());
-    // history.push('/');
+  const logOut = () => {
+    dispatch(userActions.logOut());
   };
 
   // 로그인 토큰이 있을 때 보이는 헤더
@@ -117,7 +108,7 @@ const HeaderN = (props) => {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  logOutBtn();
+                  logOut();
                 }}
               >
                 로그아웃

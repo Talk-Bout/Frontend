@@ -20,7 +20,7 @@ import Signup from './pages/Signup';
 import ChangeInfo from './pages/ChangeInfo';
 
 //소셜 로그인
-import KakaoLogin from './pages/KakaoLogin';
+import SocialLogin from './pages/SocialLogin';
 
 //자유 게시판 페이지
 import CommonDetail from './pages/CommonDetail';
@@ -89,7 +89,7 @@ function App() {
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route path="/mypage/edit" exact component={PageEdit} />
-          <Route path="/profile" exact component={KakaoLogin} />
+          <Route path="/profile" exact component={SocialLogin} />
           <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>

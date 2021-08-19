@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Grid, Text } from '../elements';
-import Profile from '../image/profile_small.png';
+import { Grid, Text, Emoji } from '../elements';
+import { Profile_small, Fire_emoji } from '../image';
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { history } from '../redux/ConfigureStore';
@@ -17,18 +17,16 @@ const MainQna = (props) => {
 
   const qna_list = useSelector(state => state.question.popular_list);
   const pop_qna = qna_list.slice(0, 3);
-  
-  // console.log(pop_qna);
 
   return (
     <React.Fragment>
       <Grid className="top-boot" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px'>
-        {/* 인기 Q&A */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px'>🔥질문과 답변</Text>
+        {/* 질문과 답변 */}
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px'><Emoji src={Fire_emoji} alt='불' height='24px' TABheight='20px' margin='0 8px 0 0' />질문과 답변</Text>
         <TextBox>
-          {/* 질문과 답변 = (question) => { return answer } */}
+          {/* const 질문과 답변 = (Question) => { return Answer } */}
           <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px'>const 질문과_답변 = ( Question) =&gt; &#123; return Answer &#125;</Text>
-          {/* Q&A 더보기 버튼 */}
+          {/* 질문과 답변 더보기 버튼 */}
           <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>질문과 답변 더보기 &gt;</Text>
         </TextBox>
         {/* Q&A 목록 */}
@@ -70,7 +68,7 @@ const MainQna = (props) => {
                 </Content>
                 <Info>
                   {/* 작성자 프로필 이미지 */}
-                  <ProfileImg src={pq.user.profilePic ? pq.user.profilePic : Profile} alt="프로필" />
+                  <ProfileImg src={pq.user.profilePic ? pq.user.profilePic : Profile_small} alt="프로필" />
                   {/* 작성자 닉네임 */}
                   <Text fontSize="12px" color="#9aa0a6" margin="0 8px" TABfontSize='10px'>
                     {pq.nickname}
@@ -87,14 +85,14 @@ const MainQna = (props) => {
                 <div style={{ height: 'fit-content' }}>
                   {/* 추천 수 */}
                   <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px'>
-                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><BiLike /></Text>{pq.likeNumber}
+                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign= 'middle' TABfontSize='14px'><BiLike /></Text>{pq.likeNumber}
                 </Text>
                 {/* 댓글 수 */}
                 {/* <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
                   <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>댓글 수</Text> */}
                 {/* 조회수 */}
                 <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
-                <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><AiOutlineEye /></Text>{pq.viewCount}</Text>
+                <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign= 'middle' TABfontSize='14px'><AiOutlineEye /></Text>{pq.viewCount}</Text>
                 </div>
               </QuestionCard>
             );

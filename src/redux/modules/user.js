@@ -174,28 +174,6 @@ const kakaoLogin = () => {
   };
 };
 
-    // const REST_API_KEY = 'a1e045a6bd23510144e987da133f3eff';
-    // const REDIRECT_URI = 'http://localhost:3000/oauth/kakao/callback'
-    // const requestURL = new URL(window.location.href).searchParams.get('code');
-    // const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
-    // const axios = require('axios');
-    // axios.post('https://kauth.kakao.com/oauth/token', formUrlEncoded({
-    //   grant_type: 'authorization_code',
-    //   client_id: REST_API_KEY,
-    //   redirect_uri: REDIRECT_URI,
-    //   code: requestURL,
-    // }), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((response) => {
-    //   console.log(response.data);
-    //   const access_token = response.data.access_token;
-    //   const refresh_token = response.data.refresh_token;
-    //   localStorage.setItem('Atoken', access_token);
-    //   localStorage.setItem('Rtoken', refresh_token);
-    //   localStorage.setItem('LoginPath', 'kakao');
-    //   history.push('/');
-    // }).catch((err) => {
-    //   console.error(`카카오 로그인 토큰 발급 에러: ${err}`);
-    // });
-
 const kakaoRefresh = () => {
   // 카카오 액세스 토큰 갱신
   return function (dispatch) {
@@ -215,28 +193,22 @@ const kakaoRefresh = () => {
   };
 };
 
-const kakaoLogout = () => {
+const LogOut = () => {
   // 로그아웃
-  return function (dispatch) {
-    // const ACCESS_TOKEN = localStorage.getItem('accessToken');
-    // const headers = {'Content-Type': 'application/x-www-form-urlencoded', 'authorization': `Bearer ${ACCESS_TOKEN}`};
-    
-    // const axios = require('axios');
-    instance.post('/oauth/logout', {
-      provider: localStorage.getItem('provider')
-    }).then((response) => {
-      console.log(response);
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('idToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('provider');
-      localStorage.removeItem('nickname');
-      localStorage.removeItem('profilePic');
-      history.push('/');
-    }).catch((err) => {
-      console.log(`로그아웃 에러: ${err}`);
-    });
-  };
+  instance.post('/oauth/logout', {
+    provider: localStorage.getItem('provider')
+  }).then((response) => {
+    // console.log(response);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('idToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('provider');
+    localStorage.removeItem('nickname');
+    localStorage.removeItem('profilePic');
+    history.push('/');
+  }).catch((err) => {
+    console.log(`로그아웃 에러: ${err}`);
+  });
 };
 
 const googleLogin = () => {
@@ -328,7 +300,6 @@ export default handleActions(
 
 //액션 생성자
 const actionCreators = {
-  logOut,
   logInDB,
   signUpDB,
   stayLogInDB,
@@ -337,7 +308,7 @@ const actionCreators = {
   userDeleteDB,
   kakaoLogin,
   kakaoRefresh,
-  kakaoLogout,
+  LogOut,
   googleLogin,
   googleRefresh,
 };

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {Grid, Text} from '../elements';
-import { history } from '../redux/ConfigureStore';
+import { Grid, Text } from '../elements';
+import { LogoIcon } from '../image';
 import { HiOutlineHeart, HiHeart } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions} from '../redux/modules/bootcamp';
-import Logo from '../image/talkbout_final_logo.png';
 
 const BootRoot = (props) => {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ const BootRoot = (props) => {
       {camp.logo ?
       <LogoBox><Image src={camp.logo}/></LogoBox>
       :
-      <LogoBox style={{textAlign: 'center'}}><Image src={Logo} style={{width: '150px', height: '150px'}}/></LogoBox>
+      <LogoBox style={{textAlign: 'center'}}><Image src={LogoIcon} style={{width: '150px', height: '150px'}}/></LogoBox>
       }
       <Grid className='info-button' padding='24px 0'>
         <InfoBtn>

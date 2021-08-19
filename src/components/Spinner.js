@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import spinner from '../image/loadingspinner_256.gif';
-import spinner_white from '../image/loadingspinner_white_256.gif'
+import { Spinner_iris } from '../image';
 import PropTypes from 'prop-types';
 
 const Spinner = (props) => {
@@ -14,7 +13,7 @@ const Spinner = (props) => {
   return (
     <React.Fragment>
       <Div>
-        <SpinnerImg src={spinner_white} />
+        <SpinnerImg src={Spinner_iris} />
       </Div>
     </React.Fragment>
   )
@@ -32,7 +31,7 @@ const Div = styled.div`
   line-height: 85vh;
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 999;
+  z-index: 100;
 `;
 
 const SpinnerImg = styled.img`

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import { Grid, Text, Emoji } from '../elements';
 import { Stars } from '../components';
-import { CampLogo_default } from '../image';
+import { CampLogo_default, Rocket_emoji, } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
@@ -28,7 +28,7 @@ const MainBoot = () => {
             color="#F8F9FA"
             TABfontSize="20px"
           >
-            🚀부트캠프
+            <Emoji src={Rocket_emoji} alt='로켓' height='24px' TABheight='20px' margin='0 8px 0 0'/>부트캠프
           </Text>
           <TextBox>
             {/* 부트캠프 페이지 소개 */}
@@ -58,7 +58,7 @@ const MainBoot = () => {
                     TABpadding="16px 0 0 20px"
                   >
                     <ImageDiv>
-                      <Logo src={pc.logo ? pc.logo : CampLogo_default} />
+                      <Logo src={pc.logo ? pc.logo : CampLogo_default} onClick={() => history.push(`/boot/${pc.bootcampName}`)}/>
                     </ImageDiv>
                   </Grid>
                   {/* 부트캠프 정보 */}
@@ -68,12 +68,7 @@ const MainBoot = () => {
                     TABwidth="240px"
                     TABpadding="16px 10px"
                   >
-                    <Grid
-                      cursor="pointer"
-                      _onClick={() =>
-                        history.push(`/boot/${pc.bootcampName}`)
-                      }
-                    >
+                    <Grid>
                       {/* 부트캠프 이름 */}
                       <Text
                         p
@@ -82,6 +77,10 @@ const MainBoot = () => {
                         margin="0"
                         color="#F8F9FA"
                         TABfontSize="16px"
+                        cursor='pointer'
+                        _onClick={() =>
+                          history.push(`/boot/${pc.bootcampName}`)
+                        }
                       >
                         {pc.bootcampName}
                       </Text>
@@ -184,6 +183,7 @@ const ImageDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 64px;
     height: 64px;

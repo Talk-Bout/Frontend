@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Stars } from '../components';
+import { LogoIcon}  from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
-import CampImg from '../image/talkbout_final_logo.png';
 
 // 다른 부트캠프 목록
 const BootOthers = (props) => {
@@ -28,13 +28,13 @@ const BootOthers = (props) => {
           <Camp key={idx} onClick={() => history.push({pathname: `/boot/${other.bootcampName}/info`, state: {camp: {bootcampName: other.bootcampName}}})}>
             {/* 다른 부트캠프 로고 */}
             <ImageDiv>
-              <Image src={other.logo ? other.logo : CampImg}/>
+              <Image src={other.logo ? other.logo : LogoIcon}/>
             </ImageDiv>
             <div style={{padding: '29px 16px'}}>
               {/* 다른 부트캠프 이름 */}
               <Text p className='camp-name' fontSize='18px' fontWeight='700' color='#f1f3f4' margin='0 0 4px'>{other.bootcampName}</Text>
               {/* 다른 부트캠프 별점 */}
-              <Stars score={other.star} size='16px' marginRight='4px' withScore/>
+              <Stars score={other.star} size='16px' marginRight='4px' withScore />
             </div>
           </Camp>
         )

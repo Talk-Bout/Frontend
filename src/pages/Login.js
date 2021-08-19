@@ -9,8 +9,7 @@ import KakaoLogin_btn from '../image/kakao_login_medium_narrow.png';
 import GoogleLogin_btn from '../image/google_login_light_pressed.png';
 
 //로고
-import talkbout_logo_title from '../image/talkbout_logo_title.png';
-import { FcGoogle } from 'react-icons/fc';
+import talkbout_logo_title from '../image/talkbout_logo_title.png';;
 
 const Login = (props) => {
   const dispatch = useDispatch();

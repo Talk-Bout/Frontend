@@ -135,7 +135,9 @@ const ImageDiv = styled.div`
 `;
 
 const Logo = styled.img`
-  max-width: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: scale-down;
   border-radius: 8px;
 `;
 

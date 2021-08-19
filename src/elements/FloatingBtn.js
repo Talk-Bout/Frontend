@@ -4,10 +4,7 @@ import { Text } from '.';
 import { BiPencil } from 'react-icons/bi';
 
 const FloatingBtn = (props) => {
-  const {
-    _onClick,
-    active,
-  } = props;
+  const {_onClick, active,} = props;
 
   const styles = {
     active: active,

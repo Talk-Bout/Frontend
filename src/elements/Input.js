@@ -2,17 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = (props) => {
-
   const {
     multiLine,
     placeholder,
     type,
     width,
-    border_radius,
+    borderRadius,
     border,
     _onChange,
-    bg,
-    font_size,
+    backgroundColor,
+    fontSize,
     outline,
     margin,
     _ref,
@@ -21,15 +20,16 @@ const Input = (props) => {
     height,
     color,
     _defaultValue,
+    rows,
   } = props;
 
 
     const styles = {
         width: width,
-        border_radius: border_radius,
+        borderRadius: borderRadius,
         border: border,
-        bg: bg,
-        font_size: font_size,
+        backgroundColor: backgroundColor,
+        fontSize: fontSize,
         outline: outline,
         margin: margin,
         _ref: _ref,
@@ -37,30 +37,30 @@ const Input = (props) => {
         color: color,
       padding: padding,
       _defaultValue: _defaultValue,
-        
+      rows: rows,
     }
 
   if (multiLine) {
     return (
-      <ElTextarea
+      <Txtarea 
         {...styles}
         type={type}
-        rows={5}
+        rows={rows}
         placeholder={placeholder}
         onChange={_onChange}
         ref={_ref}
         defaultValue={_defaultValue}
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
-            onsubmit(e);
+            onSubmit(e);
           }
         }}
-      ></ElTextarea>
+      ></Txtarea>
     );
   }
   return (
     <React.Fragment>
-      <ElInput
+      <Inputarea
         {...styles}
         type={type}
         placeholder={placeholder}
@@ -81,30 +81,23 @@ Input.defaultProps = {
   multiLine: false,
   placeholder: '텍스트를 입력해주세요',
   type: 'text',
-  width: '90%',
-  border_radius: '',
   border: '1px solid black',
   _onChange: () => {},
   onSubmit: () => {},
-  bg: null,
-  font_size: null,
+  fontSize: null,
   outline: null,
   margin: null,
   padding: null,
   height: null,
   color: null,
-  _defaultValue: () => {},
- 
-  // is_submit: false,
-  // onSubmit: () => {} // form 태그 안에서 전송전 입력된 데이터의 유효성 체크
 };
 
-const ElTextarea = styled.textarea`
-  font-size: ${(props) => props.font_size};
+const Txtarea = styled.textarea`
+  font-size: ${(props) => props.fontSize};
   border: ${(props) => props.border};
   width: ${(props) => props.width};
-  border-radius: ${(props) => props.border_radius};
-  background-color: ${(props) => props.bg};
+  border-radius: ${(props) => props.borderRadius};
+  background-color: ${(props) => props.backgroundColor};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   outline:${(props) => props.outline};
@@ -112,12 +105,12 @@ const ElTextarea = styled.textarea`
   resize: none;
 `;
 
-const ElInput = styled.input`
-  font-size: ${(props) => props.font_size};
+const Inputarea = styled.input`
+  font-size: ${(props) => props.fontSize};
   border: ${(props) => props.border};
   width: ${(props) => props.width};
-  border-radius: ${(props) => props.border_radius};
-  background-color: ${(props) => props.bg};
+  border-radius: ${(props) => props.borderRadius};
+  background-color: ${(props) => props.backgroundColor};
   padding: ${(props) => props.padding};
   height: ${(props) => props.height};
   outline: ${(props) => props.outline};

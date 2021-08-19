@@ -112,6 +112,7 @@ const Login = (props) => {
           </Button>
         </Grid>
       </Grid>
+      <Grid></Grid>
     </SmallWindow>
   );
 };

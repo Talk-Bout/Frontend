@@ -62,7 +62,7 @@ const QuestionList = (props) => {
 
   return (
     <React.Fragment>
-      <FloatingBtn />
+      <FloatingBtn _onClick={() => history.push(`/question/write`)} />
       <Grid display="flex">
         {/* 사이드바 */}
         <Sidebar />

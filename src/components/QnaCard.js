@@ -52,7 +52,7 @@ const QnaCard = (props) => {
           >
             {question_found.content}
           </Text>
-          <QeustionInfo>
+          <QuestionInfo>
             {/* 작성자 프로필 이미지 */}
             <ProfileImg src={profile_small} width="24px" height="24px" />
             {/* 작성자 닉네임 */}
@@ -62,6 +62,7 @@ const QnaCard = (props) => {
               lineHeight="24px"
               margin="0 8px"
               TABfontSize="10px"
+              TABmargin="0 4px 0"
             >
               {question_found.nickname}
             </Text>
@@ -74,15 +75,16 @@ const QnaCard = (props) => {
             >
               <Text
                 fontSize="16px"
-                verticalAlign="middle"
+                vertical_align="middle"
                 margin="0 4px 0 0"
                 TABfontSize="10px"
+                TABmargin="0 2px 0 0"
               >
                 <BiTimeFive />
               </Text>
               {question_found.createdAt}
             </Text>
-          </QeustionInfo>
+          </QuestionInfo>
         </QuestionSection>
 
         <AnswerSection>
@@ -98,7 +100,7 @@ const QnaCard = (props) => {
                 TABfontSize="10px"
               >
                 <Text
-                  fontSize="10px"
+                  fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
                   vertical_align="middle"
@@ -117,7 +119,7 @@ const QnaCard = (props) => {
                 TABfontSize="10px"
               >
                 <Text
-                  fontSize="10px"
+                  fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
                   vertical_align="middle"
@@ -140,7 +142,7 @@ const QnaCard = (props) => {
                 TABfontSize="10px"
               >
                 <Text
-                  fontSize="10px"
+                  fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
                   vertical_align="middle"
@@ -160,7 +162,7 @@ const QnaCard = (props) => {
                 TABfontSize="10px"
               >
                 <Text
-                  fontSize="10px"
+                  fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
                   vertical_align="middle"
@@ -183,7 +185,7 @@ const QnaCard = (props) => {
                 TABfontSize="10px"
               >
                 <Text
-                  fontSize="10px"
+                  fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
                   vertical_align="middle"
@@ -202,7 +204,7 @@ const QnaCard = (props) => {
                 TABfontSize="10px"
               >
                 <Text
-                  fontSize="10px"
+                  fontSize="16px"
                   color="#bdc1c6"
                   margin="0 6px 0 0"
                   vertical_align="middle"
@@ -250,17 +252,11 @@ const QuestionSection = styled.div`
   }
 `;
 
-const QeustionInfo = styled.div`
+const QuestionInfo = styled.div`
   position: absolute;
   bottom: 16px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: tomato;
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    height: 16px;
-    bottom: 12px;
-    margin-top: 20px;
+    bottom: 4px;
   }
 `;
 

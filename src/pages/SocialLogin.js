@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { Grid } from '../elements';
+import { Spinner_iris } from '../image';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
@@ -12,11 +15,16 @@ const SocialLogin = (props) => {
 
   return (
     <React.Fragment>
-      <div>
-        <h1>소셜 로그인이 잘 되고 있습니다</h1>
-      </div>
+      <Grid is_center height='100vh' lineHeight='85vh'>
+        <SpinnerImg src={Spinner_iris} />
+      </Grid>
     </React.Fragment>
   )
 };
+
+const SpinnerImg = styled.img`
+  margin-top: 25vh;
+  vertical-align: middle;
+`;
 
 export default SocialLogin;

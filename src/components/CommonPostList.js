@@ -14,77 +14,68 @@ const CommonPostList = (props) => {
 
   return (
     <React.Fragment>
-      <Content common_list={common_list} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}
-                >
-                <Text p color="#F1F3F4" lineHeight="27px" fontSize="18px" fontWeight="bold">
-                 {props.title}
-                </Text>
-                <Text p color="#9AA0A6" lineHeight="18px" fontSize="14px"
-                overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" >
-                 {props.content}
-               </Text>
-              <ProfileImage>
-                <img src={Profile} alt='프로필' style={{margin: "0 8px 0 0"}}/>
-                <Text lineHeight="16px" fontSize="12px" color="#9AA0A6" margin= "0px 8px">
-                {props.nickname}
-                </Text>
-                <Text color="#9AA0A6" fontSize="12px" margin= "0px 8px"  >
-                  <BiTimeFive/> &nbsp; {props.createdAt}
-                </Text>
-              </ProfileImage>
-            
-            <Grid width="100%" float="left">
-            <LikeAndCountBox>
-              {/* 좋아요 */}
-              <Text color="#9AA0A6" fontSize="12px" width="36px" margin= "0 16px 0 0">
-                <BiLike/> {props.postLike ? props.postLike.length : '0'}
-                </Text>
-              {/* 댓글 수 */}
-              <Text color="#9AA0A6" fontSize="12px"  width="33.3%" margin= "0px 16px 0 0">
-                <BiComment/> {props.postComment ? props.postComment.length : '0'}
+      <Content common_list={common_list} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}>
+              {/* 부트톡톡 게시글 제목 */}
+              <Text fontSize="18px" fontWeight='700' TABfontSize='16px' color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
+                {props.title}
               </Text>
-              {/* 조회수 */}
-              <Text color="#9AA0A6" fontSize="12px" width="43px">
-              <AiOutlineEye /> <span>{props.viewCount}</span>
-              </Text>
-              
-            </LikeAndCountBox>
-            
-            </Grid>
+              {/* 부트톡톡 게시글 내용 */}
+              <Grid height='50px' TABheight='32px'>
+                <Text p fontSize="14px" margin="16px 0 0" letterSpacing='0.2px' lineHeight='18px' color="#9aa0a6" overflow='hidden' wlc='2' wbo='vertical' display='-webkit-box' TABfontSize='12px' TABlineHeight='16px'>{props.content}</Text>
+              </Grid>
+              {/* 작성자 정보 */}
+              <Grid padding='16px 0 0' TABpadding='24px 0 0'>
+                <ProfileImage src={props.profilePic ? props.profilePic : Profile}
+                alt='프로필' />
+                <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px'>
+                  {props.nickname}
+                </Text>
+                {/* 작성일자 */}
+                <Text fontSize='12px' color='#bdc1c6' margin='0 12px 0 0' TABfontSize='10px'>
+                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' TABmargin='0 4px 0 0' vertical_align= 'middle'><BiTimeFive /></Text>{props.createdAt}
+                </Text>
+              </Grid>
+              <Grid padding='16px 0 0' TABpadding='12px 0 0'>
+                {/* 추천 수 */}
+                <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px'>
+                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><BiLike /></Text>{props.postLike ? props.postLike.length : '0'}
+                </Text>
+                {/* 댓글 수 */}
+                <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
+                  <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>{props.postComment ? props.postComment.length : '0'}</Text>
+                {/* 조회수 */}
+                <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
+                <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' vertical_align= 'middle' TABfontSize='14px'><AiOutlineEye /></Text>{props.viewCount}</Text>
+              </Grid>
             </Content>
     </React.Fragment>
   )
 };
 
 const Content = styled.div`
-  border-bottom: 1px solid #9AA0A6;
-  padding: 0 20px;
-  z-index: 1;
-  align-content: center;
-  justify-content: center;
-  width: 100%;
-  height: 191px;
-  background-size: cover;
+  height: fit-content;
+  width: 49%;
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid #b5b5b5;
   box-sizing: border-box;
+  display: flex;
   flex-wrap: wrap;
+  cursor: pointer;
   &:hover {
     opacity: 0.7;
   }
-
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    border-bottom: 1px solid #3c4043;
+    padding: 16px;
+  }
 `;
 
-const ProfileImage = styled.div`
-display: flex;
-width: 400px;
-height: 24px;
-margin: 16px 0px;
-`;
-
-const LikeAndCountBox = styled.div`
-width: 140px;
-height: 16px;
-margin: 10px 0 24px 0;
-
+const ProfileImage = styled.img`
+  width: 24px;
+  vertical-align: middle;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 16px;
+  }
 `;
 
 export default CommonPostList;

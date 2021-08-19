@@ -85,7 +85,7 @@ const CommonBoardList = (props) => {
       <Grid className="background" display="flex" overflow="auto">
         <Sidebar />
         <Body header footer>
-          <Grid height="100%">
+          <Grid width="100%">
             <Grid height="70px" margin="0 0 24px 0">
               <Text
                 p
@@ -335,8 +335,6 @@ const WriteButton = styled.button`
 
 const Notice = styled.div`
 border-bottom: 1px solid #9AA0A6;
-grid-template-rows: repeat(2, minmax(auto, auto));
-grid-template-columns: repeat(6, 1fr);
 display: flex;
 width: 100%;
 height:67px;
@@ -370,13 +368,11 @@ letter-spacing: 0.2px;
 `;
 
 const Contents = styled.div`
-  grid-template-rows: repeat(4, minmax(auto, auto));
-  grid-template-columns: repeat(2, 1fr);
-  display: grid;
-  cursor: pointer;
-  width: 98.5%;
-  height: 191px;
-  
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 const PageBox = styled.div`
@@ -393,7 +389,7 @@ const Page = styled.span`
   &:hover {
     opacity: 1;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) { 
+  @media screen and (min-width: 768px) and (max-width: 1080px) { 
     flex-direction: row;
     justify-content: center;
     align-items: center;

@@ -1,25 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
+import { Sidebar, Body, AnswerCard } from '../components';
+import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { history } from '../redux/ConfigureStore';
-
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-import AnswerCard from '../components/AnswerCard';
-
-//icons
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
-import { BsEye } from 'react-icons/bs';
-import { Button, Menu, MenuItem } from '@material-ui/core';
-import {
-  BsThreeDotsVertical,
-  BsBookmark,
-  BsBookmarkFill,
-} from 'react-icons/bs';
-import profile_medium from '../image/profile_medium.png';
+import { BsEye, BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
@@ -28,7 +18,7 @@ const QuestionDetail = (props) => {
   );
   const question_list = useSelector((state) => state.question.list);
   const question_found = question_list.find(
-    (question) => question.questionId == parseInt(question_id)
+    (question) => question.questionId === parseInt(question_id)
   );
 
   const user_name = useSelector((state) => state.user.user.nickname);
@@ -49,7 +39,7 @@ const QuestionDetail = (props) => {
     (state) => state.question.bookmark_list
   );
   const question_bookmark = question_bookmark_list.find(
-    (bookmark) => bookmark.questionId == question_id
+    (bookmark) => bookmark.questionId === question_id
   );
 
   // 질문 좋아요 목록
@@ -61,8 +51,6 @@ const QuestionDetail = (props) => {
     (like) => like.nickname == user_name
   );
 
-  // 콘솔이 두 번씩 찍힘 : 들어왔을때 콘솔 +1(렌더링), 셋원포스트 +1(useEffect)
-  // 한 번 더 렌더링이 되면서 날아감
   useEffect(() => {
     dispatch(questionActions.setOneQuestionDB(question_id));
     dispatch(questionActions.setAnswerDB(question_id, 1));
@@ -177,7 +165,7 @@ const QuestionDetail = (props) => {
                         color="#7879F1"
                         fontSize="24px"
                         lineHeight="35px"
-                        vertical_align="middle"
+                        verticalAlign="middle"
                         cursor="pointer"
                         hover="opacity: 0.7"
                       >
@@ -196,7 +184,7 @@ const QuestionDetail = (props) => {
                         color="#9aa0a6"
                         fontSize="24px"
                         lineHeight="35px"
-                        vertical_align="middle"
+                        verticalAlign="middle"
                         cursor="pointer"
                         hover="opacity: 0.7"
                       >
@@ -266,7 +254,7 @@ const QuestionDetail = (props) => {
               {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" margin="10px 0">
                 <Grid width="40px">
-                  <Image src={profile_medium} size="5"></Image>
+                  <Image src={Profile_medium} size="5"></Image>
                 </Grid>
 
                 <Grid width="40%">
@@ -299,7 +287,7 @@ const QuestionDetail = (props) => {
               </Grid>
 
               {/* Question 본문 내용 */}
-              <Text p margin="50px 0%" fontSize="16px" color="#C4C4C4">
+              <Text p margin="50px 0" fontSize="16px" color="#C4C4C4">
                 {question_found.content}
               </Text>
 
@@ -312,7 +300,7 @@ const QuestionDetail = (props) => {
               )}
 
               {/* 좋아요/ 댓글수/ 조회수 */}
-              <Grid display="flex" margin="3% 0%" vertical-align="center">
+              <Grid display="flex" margin="3% 0%" verticalAlign="center">
                 {question_like ? (
                   <span
                     style={{

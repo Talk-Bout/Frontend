@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
 import {Grid, Text} from '../elements';
+import { Sidebar, Body } from '../components';
 import { GoPrimitiveDot } from 'react-icons/go';
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from "react-icons/bi";
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
-import {history} from '../redux/ConfigureStore';
+import { history } from '../redux/ConfigureStore';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const BootPost = (props) => {
@@ -148,15 +147,15 @@ const BootPost = (props) => {
               <Post>
                 {/* 게시글 카테고리 */}
                 <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; 커뮤니티</Text>
-                <Grid display='flex' justify_content='space-between' padding='12px 0 0' TABpadding='11px 0 0'>
+                <Grid display='flex' justifyContent='space-between' padding='12px 0 0' TABpadding='11px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' TABlineHeight='36px' vertical_align='middle'>{commu_found.title}</Text>
+                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='28px' TABlineHeight='36px' verticalAlign='middle'>{commu_found.title}</Text>
                   <div style={{height: 'fit-content'}}>
                     {/* 북마크 버튼 */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
                     {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
-                    {this_commu ? <Text color='#7879F1' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkCommu(this_commu.communityBookmarkId)}><BsBookmarkFill /></Text>
-                    : <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markCommu()}><BsBookmark /></Text> }
+                    {this_commu ? <Text color='#7879F1' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkCommu(this_commu.communityBookmarkId)}><BsBookmarkFill /></Text>
+                    : <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markCommu()}><BsBookmark /></Text> }
                     {/* 드롭다운 메뉴 버튼 */}
                     {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
                     {commu_found.nickname === username ?
@@ -232,7 +231,7 @@ const BootPost = (props) => {
               {comment_list && comment_list.map((cm, idx) => {
                 return (
                   <Comment key={idx}>
-                    <Grid display='flex' justify_content='space-between'>
+                    <Grid display='flex' justifyContent='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}
                         <Text fontSize='14px' fontWeight='700' color='#F1F3F4' margin='0 10px 0 0'>익명의 부트캠퍼{idx+1}</Text>

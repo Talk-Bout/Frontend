@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button, Image } from '../elements';
-
-import { history } from '../redux/ConfigureStore';
+import { Grid, Text, FloatingBtn, Emoji } from '../elements';
+import { Sidebar, Body, QnaCard } from '../components';
+import { Fire_emoji } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
-
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-
-//icons
+import { history } from '../redux/ConfigureStore';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { BiPencil } from 'react-icons/bi';
-
-import FloatingBtn from '../elements/FloatingBtn';
-
-//게시물 하나 카드
-import QnaCard from '../components/QnaCard';
 
 const QuestionList = (props) => {
   const dispatch = useDispatch();
@@ -72,10 +63,9 @@ const QuestionList = (props) => {
             className="Title-btn"
             display="flex"
             width="100%"
-            justify_content="space-between"
+            justifyContent="space-between"
           >
             {/* Q&A 게시판 타이틀 */}
-
             <div>
               <Text
                 p
@@ -84,10 +74,10 @@ const QuestionList = (props) => {
                 fontSize="32px"
                 margin="0 0 8px"
               >
-                🔥질문과 답변
+                <Emoji src={Fire_emoji} alt='불' height='32px'/>질문과 답변
               </Text>
               <Text color="#BDC1C6" fontSize="20px">
-                &nbsp;&nbsp;질문과 답변 = (question) =&gt; &#123; return answer
+                &nbsp;&nbsp;const 질문과_답변 = ( Question) =&gt; &#123; return Answer
                 &#125;
               </Text>
             </div>

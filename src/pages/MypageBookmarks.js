@@ -1,16 +1,13 @@
 import React from 'react';
-import { history } from '../redux/ConfigureStore';
-
 import styled from 'styled-components';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
 import {Grid, Text} from '../elements';
-import Profile from '../image/profile_small.png';
+import { Sidebar, Body } from '../components';
+import { Profile_small } from '../image';
+import { useDispatch, useSelector } from 'react-redux';
+import {actionCreators as mypageActions} from '../redux/modules/mypage';
+import { history } from '../redux/ConfigureStore';
 import { BiTimeFive, BiBadgeCheck} from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
-
-import {actionCreators as mypageActions} from '../redux/modules/mypage';
-import { useDispatch, useSelector } from 'react-redux';
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();
@@ -18,16 +15,16 @@ const MypagePost = (props) => {
 
 
    // 부트캠프, 부트톡톡 북마크
-   React.useEffect(()  => {
+  React.useEffect(()  => {
     dispatch(mypageActions.setMyTalkDB(nickname));
     dispatch(mypageActions.setMyQnaDB(nickname));
     dispatch(mypageActions.setMyCommuDB(nickname));
   }, []);
 
    // 부트톡톡 북마크 리스트
-   const all_mytalk = useSelector((state) => state.mypage.mytalk_list);
+  const all_mytalk = useSelector((state) => state.mypage.mytalk_list);
    // 삭제된 post의 경우 안띄워줌
-   const mytalk_list = all_mytalk.filter((talk) => talk.post !== null);
+  const mytalk_list = all_mytalk.filter((talk) => talk.post !== null);
 
   // 질문과 답변 리스트
   const all_qna = useSelector((state) => state.mypage.myqna_list);
@@ -64,14 +61,14 @@ const MypagePost = (props) => {
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <ProfileImg src={Profile} alt='프로필'/>
+                      <ProfileImg src={Profile_small} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
                         <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.post.nickname}</Text>
                         <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive/>{p.post.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight/> {p.post.category} </Text>
                     </Grid>
                   </Post>
@@ -92,14 +89,14 @@ const MypagePost = (props) => {
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <ProfileImg src={Profile} alt='프로필'/>
+                      <ProfileImg src={Profile_small} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
                         <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{q.question.nickname}</Text>
                         <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive/>{q.question.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 질문과답변 </Text>
                     </Grid>
                     
@@ -122,14 +119,14 @@ const MypagePost = (props) => {
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <ProfileImg src={Profile} alt='프로필'/>
+                      <ProfileImg src={Profile_small} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
                         <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{c.community.nickname}</Text>
                         <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive/>{c.community.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 커뮤니티 </Text>
                     </Grid>
                     
@@ -151,7 +148,6 @@ const MypagePost = (props) => {
               다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기
               <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text> */}
             </PageBox>
-             
           </Grid>
         </Body>
       </Grid>

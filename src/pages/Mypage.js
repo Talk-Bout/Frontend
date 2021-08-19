@@ -1,20 +1,16 @@
 import React, { useEffect } from 'react';
-import { history } from '../redux/ConfigureStore';
 import styled from 'styled-components';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-import Stars from '../components/Stars';
-import Profile from '../image/profile_small.png';
-import CampImg from '../image/bootcamp_default.png';
+import { Text, Button, Grid, Input, Image } from '../elements';
+import { Sidebar, Body, Stars } from '../components';
+import { Profile_small, CampLogo_default, Badge } from '../image';
 import Mid_Profile from '../image/mypage_profile.svg';
-import Badge from '../image/badge 1.png';
-import { Text, Button, Grid, Input, Image } from '../elements/index';
 import { BiTimeFive, BiBadgeCheck} from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
 import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import {actionCreators as mypageActions} from '../redux/modules/mypage';
 import {actionCreators as campActions} from '../redux/modules/bootcamp';
+import { history } from '../redux/ConfigureStore';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
@@ -150,7 +146,7 @@ const Mypage = (props) => {
                   <BootCard  key={idx} className={`bootcard${idx}`} onClick={()=>{history.push(`/boot/${mb.bootcampName}/info`)}}
                   >
                     <ImageBox>
-                     <Image shape="CircleLogo" src={mb.logo ? mb.logo : CampImg}/>
+                     <Image shape="CircleLogo" src={mb.logo ? mb.logo : CampLogo_default}/>
                     </ImageBox>
                     <Grid padding="10px 0" width="67%">
                       <Grid display="flex" justify_content="space-between">
@@ -205,7 +201,7 @@ const Mypage = (props) => {
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <ProfileImg src={Profile} alt='프로필'/>
+                      <ProfileImg src={Profile_small} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
                         <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.post.nickname}</Text>
@@ -257,7 +253,7 @@ const Mypage = (props) => {
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <ProfileImg src={Profile} alt='프로필'/>
+                      <ProfileImg src={Badge} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
                         <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.nickname}</Text>

@@ -1,15 +1,12 @@
 //질문 업로드 임의 게시판
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Button, Grid, Input, Text } from '../elements';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-import { history } from '../redux/ConfigureStore';
-
+import { Grid, Text } from '../elements';
+import { Sidebar, Body } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { actionCreators as imageActions } from '../redux/modules/image';
-//icons
+import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
 import { FiHash } from 'react-icons/fi';

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-import Stars from '../components/Stars';
-import CampImg from '../image/talkbout_final_logo.png';
+import { Sidebar, Body, Stars } from '../components';
+import { LogoIcon } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
@@ -52,7 +50,7 @@ const BootMain = (props) => {
                     {camp.logo ? 
                     <Logo src={camp.logo} alt={camp.bootcampName}></Logo>
                     :
-                    <Logo src={CampImg} alt={camp.bootcampName} style={{width: 'auto', height: 'auto'}}></Logo>
+                    <Logo src={LogoIcon} alt={camp.bootcampName} style={{width: 'auto', height: 'auto'}}></Logo>
                     }
                   </ImageDiv>
                   {/* 부트캠프 이름 */}
@@ -65,7 +63,7 @@ const BootMain = (props) => {
                   </Text>
                   {/* 부트캠프 별점 */}
                   <Text fontSize="14px" color='#E8EAED' position="absolute" top="200px" TABtop='158px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
-                    {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' marginRight='4px' withScore/> : '별점/리뷰 없음'}
+                    {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' marginRight='4px' withScore /> : '별점/리뷰 없음'}
                   </Text>
                 </Card>
               );

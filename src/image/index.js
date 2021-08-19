@@ -20,6 +20,9 @@ import Qna_white from './qna_white.png';
 import Talk from './Board.png';
 import Talk_white from './Board_white.png';
 import Spinner_iris from './loadingspinner_256.gif';
-import Spinner_white from './loadingspinner_white_256.gif'
+import Spinner_white from './loadingspinner_white_256.gif';
+import KakaoLogin_btn from './kakao_login_medium_narrow.png';
+import GoogleLogin_btn from './google_login_light_pressed.png';
+import Badge from '../image/badge 1.png';
 
-export {Profile_medium, Search, LogoImg, Profile_small, CaretDown, Banner_desktop, Banner_desktop_short, CampLogo_default, LogoIcon, Rocket_emoji, Megaphone_emoji, Fire_emoji, PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white, Spinner_iris, Spinner_white,  };
+export {Profile_medium, Search, LogoImg, Profile_small, CaretDown, Banner_desktop, Banner_desktop_short, CampLogo_default, LogoIcon, Rocket_emoji, Megaphone_emoji, Fire_emoji, PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white, Spinner_iris, Spinner_white, KakaoLogin_btn, GoogleLogin_btn, Badge, };

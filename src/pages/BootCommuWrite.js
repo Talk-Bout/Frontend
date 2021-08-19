@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { Sidebar, Body } from '../components';
 import { Grid, Text } from '../elements';
-import { BsX } from 'react-icons/bs';
-import { BiImageAdd } from 'react-icons/bi';
-import { FiHash } from 'react-icons/fi';
+import { Sidebar, Body } from '../components';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { actionCreators as imageActions } from '../redux/modules/image';
+import { BsX } from 'react-icons/bs';
+import { BiImageAdd } from 'react-icons/bi';
+import { FiHash } from 'react-icons/fi';
 
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();

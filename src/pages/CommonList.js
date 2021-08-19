@@ -1,20 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/ConfigureStore';
-import { Text, Grid } from '../elements/index';
+import { Text, Grid, FloatingBtn } from '../elements';
+import { Sidebar, Body, CommonPostList } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { actionCreators as postActions } from '../redux/modules/post';
-//icons
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { FaPlus } from 'react-icons/fa';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
-
-import FloatingBtn from '../elements/FloatingBtn';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-import CommonPostList from '../components/CommonPostList';
 
 const CommonBoardList = (props) => {
   const dispatch = useDispatch();
@@ -102,7 +95,7 @@ const CommonBoardList = (props) => {
             </Grid>
             {/* 게시판 카테고리 */}
 
-                <Grid display="flex" height="44px" justify_content="space-between" margin="0 0 25px 0">
+                <Grid display="flex" height="44px" justifyContent="space-between" margin="0 0 25px 0">
                   <Categories >
                   <CategoryButton
                   onClick={()=>total_category()}>
@@ -165,7 +158,6 @@ const CommonBoardList = (props) => {
                     <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
                     </div>
                     <Text color="#9AA0A6" fontSize="14px" margin="23px 23px 0 0" lineHeight="18px">2021.08.03</Text>
-
                   </Notice>
                 </Grid>
               );

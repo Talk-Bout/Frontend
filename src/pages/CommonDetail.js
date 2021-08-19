@@ -1,28 +1,16 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import { Text, Grid } from '../elements';
+import { Sidebar, Body } from '../components';
+import { Profile_small } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions} from "../redux/modules/post";
-
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-
-import Profile from '../image/profile_small.png';
-import styled from 'styled-components';
-import { Text, Grid } from '../elements/index';
 import { GoPrimitiveDot } from 'react-icons/go';
-import {
-  BiLike,
-  BiComment,
-  BiPencil,
-  BiTrashAlt,
-} from 'react-icons/bi';
+import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
+import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import {
-  BsThreeDotsVertical,
-  BsBookmark,
-  BsBookmarkFill,
-} from 'react-icons/bs';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -164,15 +152,15 @@ const CommonDetail = (props) => {
               <Post>
                 {/* 게시글 카테고리 */}
                 <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; {one_post.category}</Text>
-                <Grid display='flex' justify_content='space-between' padding='12px 0 0'>
+                <Grid display='flex' justifyContent='space-between' padding='12px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' vertical_align='middle'>{one_post.title}</Text>
+                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' verticalAlign='middle'>{one_post.title}</Text>
                   <div style={{height: 'fit-content'}}>
                     {/* 북마크 버튼 */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
                     {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
-                    {post_bookmark ? <Text color='#7879F1' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7' _onClick={()=> unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
-                    : <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' vertical_align='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text> }
+                    {post_bookmark ? <Text color='#7879F1' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={()=> unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
+                    : <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text> }
                     {/* 드롭다운 메뉴 버튼 */}
                     {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
                     {one_post.nickname === username ?
@@ -205,7 +193,7 @@ const CommonDetail = (props) => {
                 </Grid>
                 {/* 작성일자 */}
                 <InfoBox>
-                <img src={Profile} alt='프로필' style={{width: '40px', height: '40px'}}/>
+                <img src={Profile_small} alt='프로필' style={{width: '40px', height: '40px'}}/>
                   <InfoBoxInner>
                     <div style={{height: '18px', lineHeight: '18px'}}>
                     <Text fontSize='14px' color='#BDC1C6' margin='0'>{one_post.nickname}</Text>
@@ -261,7 +249,7 @@ const CommonDetail = (props) => {
               {comment_list && comment_list.map((ct, idx) => {
                 return (
                   <CommentBox key={idx}>
-                    <Grid display='flex' justify_content='space-between'>
+                    <Grid display='flex' justifyContent='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}
                         <Text fontSize='14px' lineHeight='18px' fontWeight='700' color='#F1F3F4' margin='0 16px 0 0'>{ct.nickname}</Text>

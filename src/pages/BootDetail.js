@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {Grid, Text} from '../elements';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-import BootRoot from '../components/BootRoot';
+import { Sidebar, Body, BootRoot, BootOthers, BootInfo, BootReview, BootCommu } from '../components';
 import { history } from '../redux/ConfigureStore';
 import { useSelector } from 'react-redux';
-import BootOthers from '../components/BootOthers';
-import BootInfo from '../components/BootInfo';
-import BootReview from '../components/BootReview';
-import BootCommu from '../components/BootCommu';
 
 const BootDetail = (props) => {
   // 메인에서 리뷰나 커뮤니티 버튼을 클릭해 들어오면 tab_click으로 받는다.
@@ -52,7 +46,7 @@ const BootDetail = (props) => {
                 커뮤니티</Text>
             </Menu>
           </Grid>
-          <Grid className='contents-box' padding='24px 0' display='flex' justify_content='space-between'>
+          <Grid className='contents-box' padding='24px 0' display='flex' justifyContent='space-between'>
             {tab === 'info' ?
             <BootInfo camp={camp}/>
             :

@@ -33,7 +33,6 @@ const BootReviewWrite = (props) => {
     }
   };
 
-
   // 리뷰 [등록] 버튼 누르면 호출되는 함수
   const addReview = () => {
     if (stars === 0) {

@@ -1,11 +1,9 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
 import { Grid, Text } from '../elements';
+import { Sidebar, Body } from '../components';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
-import { FiHash } from 'react-icons/fi';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';

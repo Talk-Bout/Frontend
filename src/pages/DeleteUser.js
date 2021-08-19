@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Button, Image } from '../elements';
+import { Grid, Text } from '../elements';
+import { Sidebar, Body, SmallWindow } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { history } from '../redux/ConfigureStore';
-
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
-import SmallWindow from '../components/SmallWindow';
 
 //체크박스
 import FormControlLabel from '@material-ui/core/FormControlLabel';

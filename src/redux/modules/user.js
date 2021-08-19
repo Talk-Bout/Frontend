@@ -48,6 +48,7 @@ const logInDB = (email, password) => {
           email: response.data.email,
           nickname: response.data.nickname,
         };
+        console.log(response.data);
         dispatch(logIn(user_info));
 
         localStorage.setItem('token', response.data.token); //token이름으로 response.data.token 저장
@@ -158,28 +159,42 @@ const userDeleteDB = (nickname) => {
 const kakaoLogin = () => {
   // 카카오 액세스 토큰, 리프레시 토큰 발급
   return function (dispatch) {
-    const REST_API_KEY = 'a1e045a6bd23510144e987da133f3eff';
-    const REDIRECT_URI = 'http://localhost:3000/oauth/kakao/callback'
-    const requestURL = new URL(window.location.href).searchParams.get('code');
-    const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
-    const axios = require('axios');
-    axios.post('https://kauth.kakao.com/oauth/token', formUrlEncoded({
-      grant_type: 'authorization_code',
-      client_id: REST_API_KEY,
-      redirect_uri: REDIRECT_URI,
-      code: requestURL,
-    }), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((response) => {
-      const access_token = response.data.access_token;
-      const refresh_token = response.data.refresh_token;
-      localStorage.setItem('Atoken', access_token);
-      localStorage.setItem('Rtoken', refresh_token);
-      localStorage.setItem('LoginPath', 'kakao');
-      history.push('/');
-    }).catch((err) => {
-      console.error(`카카오 로그인 토큰 발급 에러: ${err}`);
-    });
+    const accessToken_URL = new URL(window.location.href).searchParams.get('accessToken');
+    const refreshToken_URL = new URL(window.location.href).searchParams.get('refreshToken');
+    const provider_URL = new URL(window.location.href).searchParams.get('provider');
+    const nickname_URL = new URL(window.location.href).searchParams.get('nickname');
+    const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
+    console.log(accessToken_URL, refreshToken_URL, provider_URL, nickname_URL, profilePic_URL);
+    localStorage.setItem('accessToken', accessToken_URL);
+    localStorage.setItem('refreshToken', refreshToken_URL);
+    localStorage.setItem('provider', provider_URL);
+    localStorage.setItem('nickname', nickname_URL);
+    localStorage.setItem('profilePic', profilePic_URL);
+    history.push('/');
   };
 };
+
+    // const REST_API_KEY = 'a1e045a6bd23510144e987da133f3eff';
+    // const REDIRECT_URI = 'http://localhost:3000/oauth/kakao/callback'
+    // const requestURL = new URL(window.location.href).searchParams.get('code');
+    // const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
+    // const axios = require('axios');
+    // axios.post('https://kauth.kakao.com/oauth/token', formUrlEncoded({
+    //   grant_type: 'authorization_code',
+    //   client_id: REST_API_KEY,
+    //   redirect_uri: REDIRECT_URI,
+    //   code: requestURL,
+    // }), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then((response) => {
+    //   console.log(response.data);
+    //   const access_token = response.data.access_token;
+    //   const refresh_token = response.data.refresh_token;
+    //   localStorage.setItem('Atoken', access_token);
+    //   localStorage.setItem('Rtoken', refresh_token);
+    //   localStorage.setItem('LoginPath', 'kakao');
+    //   history.push('/');
+    // }).catch((err) => {
+    //   console.error(`카카오 로그인 토큰 발급 에러: ${err}`);
+    // });
 
 const kakaoRefresh = () => {
   // 카카오 액세스 토큰 갱신
@@ -191,7 +206,7 @@ const kakaoRefresh = () => {
     axios.post('https://kauth.kakao.com/oauth/token', formUrlEncoded({
       grant_type: 'refresh_token',
       client_id: REST_API_KEY,
-      refresh_token: localStorage.getItem('Rtoken'),
+      refresh_token: localStorage.getItem('refreshToken'),
     }), {headers: headers}).then((response) => {
       localStorage.setItem('Atoken', response.data.access_token);
     }).catch((err) => {
@@ -201,25 +216,70 @@ const kakaoRefresh = () => {
 };
 
 const kakaoLogout = () => {
-  // 카카오 로그아웃
+  // 로그아웃
   return function (dispatch) {
-    const ACCESS_TOKEN = localStorage.getItem('Atoken');
-    const headers = {'Content-Type': 'application/x-www-form-urlencoded', 'authorization': `Bearer ${ACCESS_TOKEN}`};
-    const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
-    const axios = require('axios');
-    axios.post('https://kapi.kakao.com/v1/user/logout',
-    formUrlEncoded({headers: headers})).then((response) => {
+    // const ACCESS_TOKEN = localStorage.getItem('accessToken');
+    // const headers = {'Content-Type': 'application/x-www-form-urlencoded', 'authorization': `Bearer ${ACCESS_TOKEN}`};
+    
+    // const axios = require('axios');
+    instance.post('/oauth/logout', {
+      provider: localStorage.getItem('provider')
+    }).then((response) => {
       console.log(response);
-      // localStorage.removeItem('Atoken');
-      // localStorage.removeItem('Rtoken');
-      // localStorage.removeItem('LoginPath');
-      // history.push('/');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('idToken');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('provider');
+      localStorage.removeItem('nickname');
+      localStorage.removeItem('profilePic');
+      history.push('/');
     }).catch((err) => {
-      console.log(`카카오 로그아웃 에러: ${err}`);
+      console.log(`로그아웃 에러: ${err}`);
     });
   };
 };
-  
+
+const googleLogin = () => {
+  // 구글 소셜로그인 테스트용
+  return function (dispatch) {
+    const accessToken_URL = new URL(window.location.href).searchParams.get('accessToken');
+    const refreshToken_URL = new URL(window.location.href).searchParams.get('refreshToken');
+    const provider_URL = new URL(window.location.href).searchParams.get('provider');
+    const nickname_URL = new URL(window.location.href).searchParams.get('nickname');
+    const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
+    console.log(accessToken_URL, refreshToken_URL, provider_URL, nickname_URL, profilePic_URL);
+    localStorage.setItem('accessToken', accessToken_URL);
+    localStorage.setItem('refreshToken', refreshToken_URL);
+    localStorage.setItem('provider', provider_URL);
+    localStorage.setItem('nickname', nickname_URL);
+    localStorage.setItem('profilePic', profilePic_URL);
+    history.push('/');
+  };
+};
+
+const googleRefresh = () => {
+  // 구글 액세스 토큰 갱신
+  return function (dispatch) {
+    const refreshToken = localStorage.getItem('refreshToken');
+    const headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
+    const axios = require('axios');
+    axios.post('https://oauth2.googleapis.com/token', formUrlEncoded({
+      grant_type: 'refresh_token',
+      client_secret: 'NEk_9kMajTMRCvE0b24vQWCh',
+      client_id: '1024289816833-ekko4or0shvl9vusetgga5rmbs5u8gla.apps.googleusercontent.com',
+      refresh_token: refreshToken,
+    }), {headers: headers}).then((response) => {
+      console.log(response.data);
+      localStorage.removeItem('accessToken');
+      localStorage.setItem('accessToken', response.data.access_token);
+      localStorage.removeItem('idToken');
+      localStorage.setItem('idToken', response.data.id_token);
+    }).catch((err) => {
+      console.error(`구글 로그인 토큰 갱신 에러: ${err}`);
+    });
+  };
+};
 
 
 export default handleActions(
@@ -253,7 +313,6 @@ export default handleActions(
       }),
     [LOGIN_CHECK]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload.is_error);
         if (action.payload.is_error === 400) {
           draft.is_error = true;
         }
@@ -279,6 +338,8 @@ const actionCreators = {
   kakaoLogin,
   kakaoRefresh,
   kakaoLogout,
+  googleLogin,
+  googleRefresh,
 };
 
 export { actionCreators };

@@ -6,6 +6,7 @@ import { Grid, Input, Text, Image } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { actionCreators as userActions } from '../redux/modules/user';
 import KakaoLogin_btn from '../image/kakao_login_medium_narrow.png';
+import GoogleLogin_btn from '../image/google_login_light_pressed.png';
 
 //로고
 import talkbout_logo_title from '../image/talkbout_logo_title.png';
@@ -23,8 +24,14 @@ const Login = (props) => {
   };
 
   const kakaoLogin = () => {
-    const kakaoApi = 'https://kauth.kakao.com/oauth/authorize?client_id=a1e045a6bd23510144e987da133f3eff&redirect_uri=http://localhost:3000/oauth/kakao/callback&response_type=code';
+    // const kakaoApi = 'https://kauth.kakao.com/oauth/authorize?client_id=a1e045a6bd23510144e987da133f3eff&redirect_uri=http://localhost:3000/oauth/kakao/callback&response_type=code';
+    const kakaoApi = 'http://13.209.12.149/oauth/kakao';
     window.location.assign(kakaoApi);
+  }
+
+  const googleLogin = () => {
+    const googleApi = 'http://fw3efsadfcv.shop/oauth/google';
+    window.location.assign(googleApi);
   }
 
   //onChange의 e.target.value안찍힐때 버튼에 콘솔로그 해보기!
@@ -85,7 +92,7 @@ const Login = (props) => {
             </Text>
           </Grid>
           {/* 구글 로그인 버튼 */}
-          <Button style={{ backgroundColor: '#2e3134', width: '200px', display: 'block', margin: 'auto' }}>
+          {/* <Button style={{ backgroundColor: '#2e3134', width: '200px', display: 'block', margin: 'auto' }}>
             <FcGoogle
               size="24px"
               style={{ marginRight: '25px', verticalAlign: 'middle' }}
@@ -93,7 +100,8 @@ const Login = (props) => {
             <Text fontSize="14px" color="#f8f9fa" margin='0 30px 0 0'>
               Google 로그인
             </Text>
-          </Button>
+          </Button> */}
+          <GoogleBtn src={GoogleLogin_btn} alt='구글 로그인' onClick={() => googleLogin()}/>
           <KakaoBtn src={KakaoLogin_btn} alt='카카오 로그인' onClick={() => kakaoLogin()}/>
       </Grid>
       <Grid is_flex margin='136px 0 0' TABmargin='162px 0 0'>
@@ -138,6 +146,10 @@ const KakaoBtn = styled.img`
   margin: 6px auto 0;
   height: 48px;
   display: block;
+`;
+
+const GoogleBtn = styled.img`
+
 `;
 
 export default Login;

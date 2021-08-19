@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Image } from '../elements';
+import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { BiLike } from 'react-icons/bi';
-import { profile_medium } from '../image';
 
 const AnswerCard = (props) => {
   const dispatch = useDispatch();
@@ -16,14 +16,14 @@ const AnswerCard = (props) => {
   const answer_list = useSelector((state) => state.question.answer_list);
 
   //답변별 목록
-  const one_answer = answer_list.find((answer) => answer.answerId == answer_id);
+  const one_answer = answer_list.find((answer) => answer.answerId === answer_id);
 
   // 답변의 좋아요
   const answer_like = one_answer.answerLike;
 
   // 내가 닉네임이 좋아요 한 답변
   const my_answer_like = answer_like
-    ? answer_like.find((answer) => answer.nickname == user_name)
+    ? answer_like.find((answer) => answer.nickname === user_name)
     : [];
   // console.log(my_answer_like);
 
@@ -45,7 +45,7 @@ const AnswerCard = (props) => {
               A
             </Text>
             <Grid width="40px" height="40px" margin="auto 15px">
-              <Image src={profile_medium} size="5"></Image>
+              <Image src={Profile_medium} size="5"></Image>
             </Grid>
 
             <Grid width="480px">
@@ -149,6 +149,7 @@ const AnswerCard = (props) => {
     </React.Fragment>
   );
 };
+
 const AnswerBox = styled.div`
   width: 1044px;
   margin: 30px auto 0;

@@ -6,13 +6,14 @@ const KakaoLogin = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userActions.kakaoLogin());
+    // dispatch(userActions.kakaoLogin());
+    dispatch(userActions.googleLogin());
   }, []);
 
   return (
     <React.Fragment>
       <div>
-        <h1>카카오 로그인</h1>
+        <h1>구글 로그인이 잘 되고 있습니다</h1>
       </div>
     </React.Fragment>
   )

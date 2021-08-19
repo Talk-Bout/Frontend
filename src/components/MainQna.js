@@ -27,7 +27,7 @@ const MainQna = (props) => {
         <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px'>🔥질문과 답변</Text>
         <TextBox>
           {/* 질문과 답변 = (question) => { return answer } */}
-          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px'>질문과 답변 = (question) =&gt; &#123; return answer &#125;</Text>
+          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px'>const 질문과_답변 = ( Question) =&gt; &#123; return Answer &#125;</Text>
           {/* Q&A 더보기 버튼 */}
           <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>질문과 답변 더보기 &gt;</Text>
         </TextBox>

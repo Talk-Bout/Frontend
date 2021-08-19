@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {Grid, Text} from '../elements';
-import FloatingBtn from '../elements/FloatingBtn';
+import { Grid, Text, FloatingBtn } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
-import {actionCreators as campActions} from '../redux/modules/bootcamp';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BiLike, BiComment, BiPencil } from "react-icons/bi";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
@@ -38,12 +37,12 @@ const BootCommu = (props) => {
 
   return (
     <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px'>
-      <Grid className='community-title' display='flex' justify_content='space-between' borderBottom='1px solid #8f9091' padding='0 0 40px'>
+      <Grid className='community-title' display='flex' justifyContent='space-between' borderBottom='1px solid #8f9091' padding='0 0 40px'>
         {/* 커뮤니티 페이지 타이틀 */}
         <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{camp.bootcampName} 커뮤니티</Text>
         <Grid width='auto' height='fit-content'>
           {/* 인기순, 최신순 정렬 */}
-          <Text fontSize='14px' color='#757577' margin='0 20px' vertical_align='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text>
+          <Text fontSize='14px' color='#757577' margin='0 20px' verticalAlign='middle'>인기순<span style={{color: '#E8EAED', margin: '0 5px'}}>|</span>최신순</Text>
           {/* 글쓰기 버튼 */}
           {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
           {is_login ?

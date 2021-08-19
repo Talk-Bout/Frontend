@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
+import { Sidebar, Body } from '../components';
 import { Grid, Text } from '../elements';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';

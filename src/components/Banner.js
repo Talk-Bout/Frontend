@@ -1,16 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
-import BannerImg from '../image/banner.png';
-import BannerImg_short from '../image/banner_shorter.png';
+import { Banner_desktop, Banner_desktop_short } from '../image';
 
 const BannerN = (props) => {
 
   return (
     <React.Fragment>
       <Grid className='banner' backgroundColor='#7176E5' height='300px' TABheight='168px'>
-        <ImageL src={BannerImg} alt='토크부트 배너'/>
-        <ImageM src={BannerImg_short} alt='토크부트 배너'/>
+        <ImageL src={Banner_desktop} alt='토크부트 배너'/>
+        <ImageM src={Banner_desktop_short} alt='토크부트 배너'/>
       </Grid>
     </React.Fragment>
   )

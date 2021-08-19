@@ -4,12 +4,8 @@ import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import Search from '../image/search_black.png';
-import LogoImg from '../image/Logo.png';
-import { BsFillBookmarkFill } from 'react-icons/bs';
-import { BsFillBellFill } from 'react-icons/bs';
-import Profile from '../image/profile_small.png';
-import CaretDown from '../image/CaretDown.png';
+import { Search, LogoImg, Profile_small, CaretDown } from '../image';
+import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const HeaderN = (props) => {
@@ -17,7 +13,7 @@ const HeaderN = (props) => {
   const dispatch = useDispatch();
 
   // 로컬 스토리지에 저장된 로그인 토큰을 찾는다.
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('accessToken');
   // const token = localStorage.getItem('Atoken');
   // const login_path = localStorage.getItem('LoginPath');
 
@@ -35,11 +31,11 @@ const HeaderN = (props) => {
   // 로그아웃
   const logOutBtn = () => {
     // if (login_path === 'kakao') {
-    //   dispatch(userActions.kakaoLogout());
+      dispatch(userActions.kakaoLogout());
     //   return;
     // }
-    dispatch(userActions.logOut());
-    history.push('/');
+    // dispatch(userActions.logOut());
+    // history.push('/');
   };
 
   // 로그인 토큰이 있을 때 보이는 헤더
@@ -96,7 +92,7 @@ const HeaderN = (props) => {
               <BsFillBellFill />
             </Text>
             {/* 프로필 이미지 */}
-            <ProfileImg src={Profile} alt="프로필" />
+            <ProfileImg src={Profile_small} alt="프로필" />
             {/* 드롭다운 메뉴 */}
             <Button
               aria-controls="simple-menu"
@@ -155,7 +151,7 @@ const HeaderN = (props) => {
           margin="10px 0 0"
           TABmargin='9px 0 0'
         >
-          <Logo src={LogoImg} alt="토크부트 로고" />
+          <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')}/>
           <Image src={Search} alt="검색" />
           <Input placeholder="검색어를 입력하세요." />
         </Grid>

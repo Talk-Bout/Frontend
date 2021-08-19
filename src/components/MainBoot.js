@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import Stars from '../components/Stars';
+import { Stars } from '../components';
+import { CampLogo_default } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
-import CampImg from '../image/bootcamp_default.png';
 
 const MainBoot = () => {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const MainBoot = () => {
                     TABpadding="16px 0 0 20px"
                   >
                     <ImageDiv>
-                      <Logo src={pc.logo ? pc.logo : CampImg} />
+                      <Logo src={pc.logo ? pc.logo : CampLogo_default} />
                     </ImageDiv>
                   </Grid>
                   {/* 부트캠프 정보 */}

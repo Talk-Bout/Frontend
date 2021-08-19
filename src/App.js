@@ -89,7 +89,7 @@ function App() {
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />
           <Route path="/mypage/edit" exact component={PageEdit} />
-          <Route path="/oauth/kakao/callback" exact component={KakaoLogin} />
+          <Route path="/profile" exact component={KakaoLogin} />
           <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>

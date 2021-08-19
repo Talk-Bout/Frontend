@@ -16,10 +16,9 @@ const Text = (props) => {
     float,
     position,
     _onClick,
-    bg,
     height,
-    text_align,
-    vertical_align,
+    textAlign,
+    verticalAlign,
     top,
     cursor,
     hover,
@@ -28,7 +27,7 @@ const Text = (props) => {
     wlc, // -webkit-line-clamp: 콘텐츠 줄 수 제한
     wbo, // -webkit-box-orient: 콘텐츠 정렬 방향
     overflow,
-    // 태블릿 사이즈(width: 768px)
+    // 태블릿 사이즈(width: 768px~992px)
     TABfontSize,
     TABmargin,
     TABlineHeight,
@@ -49,10 +48,9 @@ const Text = (props) => {
     position: position,
     lineHeight: lineHeight,
     float: float,
-    bg: bg,
     height: height,
-    text_align: text_align,
-    vertical_align: vertical_align,
+    textAlign: textAlign,
+    verticalAlign: verticalAlign,
     top: top,
     cursor: cursor,
     hover: hover,
@@ -93,19 +91,6 @@ const Text = (props) => {
 Text.defaultProps = {
   p: false,
   children: null,
-  fontSize: '1rem',
-  fontWeight: '400',
-  margin: null,
-  padding: null,
-  display: null,
-  position: null,
-  lineHeight: null,
-  float: null,
-  bg: null,
-  height: null,
-  text_align: null,
-  vertical_align: null,
-  top: null,
   _onClick: () => {},
 };
 
@@ -119,10 +104,9 @@ const TextBoxP = styled.p`
   position: ${(props) => props.position};
   line-height: ${(props) => props.lineHeight};
   float: ${(props) => props.float};
-  background-color: ${(props) => props.bg};
   height: ${(props) => props.height};
-  text-align: ${(props) => props.text_align};
-  vertical-align: ${(props) => props.vertical_align};
+  text-align: ${(props) => props.textAlign};
+  vertical-align: ${(props) => props.verticalAlign};
   top: ${(props) => props.top};
   cursor: ${(props) => props.cursor};
   &:hover {
@@ -156,10 +140,9 @@ const TextBoxS = styled.span`
   position: ${(props) => props.position};
   line-height: ${(props) => props.lineHeight};
   float: ${(props) => props.float};
-  background-color: ${(props) => props.bg};
   height: ${(props) => props.height};
-  text-align: ${(props) => props.text_align};
-  vertical-align: ${(props) => props.vertical_align};
+  text-align: ${(props) => props.textAlign};
+  vertical-align: ${(props) => props.verticalAlign};
   top: ${(props) => props.top};
   cursor: ${(props) => props.cursor};
   &:hover {

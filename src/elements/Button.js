@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const {children, backgroundColor, width, height, margin, _onClick, borderRadius, cursor, border, display, padding, float,} = props;
+  const {children, backgroundColor, width, height, margin, _onClick, borderRadius, cursor, border, display, padding, float, TABheight, TABwidth, TABmargin, } = props;
 
   const styles = {
     backgroundColor: backgroundColor,
@@ -15,6 +15,10 @@ const Button = (props) => {
     display: display,
     padding: padding,
     float: float,
+    // 태블릿 사이즈(768px~992px)
+    TABheight: TABheight,
+    TABwidth: TABwidth,
+    TABmargin: TABmargin,
   };
 
   return (
@@ -34,15 +38,21 @@ Button.defaultProps = {
 
 const Btn = styled.button`
   width: ${(props) => props.width};
-  margin: ${(props) => props.margin};
   height: ${(props) => props.height};
+  margin: ${(props) => props.margin};
+  padding: ${(props) => props.padding};
   background-color: ${(props) => props.backgroundColor};
   border-radius: ${(props) => props.borderRadius};
   cursor: ${(props) => props.cursor};
   border: ${(props) => props.border};
   display: ${(props) => props.display};
-  padding: ${(props) => props.padding};
   float: ${(props) => props.float};
+  // 태블릿 사이즈(768px~992px)
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: ${(props) => props.TABwidth};
+    height: ${(props) => props.TABheight};
+    margin: ${(props) => props.TABmargin};
+  }
 `;
 
 export default Button;

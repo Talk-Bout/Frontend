@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+import { Grid, Text, Image } from '../elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
-
-import styled from 'styled-components';
-import { Grid, Text, Button, Input, Image } from '../elements';
-//icons
 import { BiLike } from 'react-icons/bi';
-import profile_medium from '../image/profile_medium.png';
+import { profile_medium } from '../image';
 
 const AnswerCard = (props) => {
   const dispatch = useDispatch();
-  // console.log(props);
 
   const answer_id = parseInt(props.answerId);
   const user_name = useSelector((state) => state.user.user.nickname);

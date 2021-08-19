@@ -52,7 +52,7 @@ const HeaderN = (props) => {
           height="100px"
           TABheight='72px'
           display="flex"
-          justify_content="space-between"
+          justifyContent="space-between"
           backgroundColor='#202124'
           opacity={opacity}
           TABopacity={TABopacity}
@@ -75,7 +75,7 @@ const HeaderN = (props) => {
               color="#5F6368"
               fontSize="24px"
               TABfontSize='18px'
-              vertical_align="middle"
+              verticalAlign="middle"
               margin="5px 8px 0 0"
               TABmargin='4px 6px 0 0'
               cursor="pointer"
@@ -88,7 +88,7 @@ const HeaderN = (props) => {
               color="#5F6368"
               fontSize="24px"
               TABfontSize='18px'
-              vertical_align="middle"
+              verticalAlign="middle"
               margin="0 8px"
               TABmargin='4px 8px'
               cursor="pointer"
@@ -142,7 +142,7 @@ const HeaderN = (props) => {
         height="100px"
         TABheight='72px'
         display="flex"
-        justify_content="space-between"
+        justifyContent="space-between"
         backgroundColor='#202124'
         opacity={opacity}
         TABopacity={TABopacity}
@@ -228,6 +228,7 @@ const LoginBtn = styled.button`
   padding: 0;
   margin: 38px 42px 0 0;
   height: 24px;
+  float: right;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     height: 18px;
     margin: 27px 18px 0 0;

@@ -328,7 +328,7 @@ const WriteButton = styled.button`
     background-color: #282a2d;
     color: #f1f3f4;
   }
-  @media screen and (min-width: 768px) and (max-width: 1080px) {
+  @media screen and (min-width: 768px) and (max-width: 992px) {
     display:none;
   }
 `;

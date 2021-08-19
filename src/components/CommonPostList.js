@@ -25,9 +25,10 @@ const CommonPostList = (props) => {
               </Grid>
               {/* 작성자 정보 */}
               <Grid padding='16px 0 0' TABpadding='24px 0 0'>
-                <ProfileImage src={props.user.profilePic ? props.user.profilePic : Profile} alt='프로필' />
+                <ProfileImage src={props.profilePic ? props.profilePic : Profile}
+                alt='프로필' />
                 <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px'>
-                  {props.user.nickname}
+                  {props.nickname}
                 </Text>
                 {/* 작성일자 */}
                 <Text fontSize='12px' color='#bdc1c6' margin='0 12px 0 0' TABfontSize='10px'>

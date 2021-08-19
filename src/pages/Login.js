@@ -100,6 +100,7 @@ const Login = (props) => {
         <Text fontSize='12px' color='#bdc1c6'>© 2021 Project Talk'bout</Text>
         <Text fontSize='12px' color='#bdc1c6' margin='0 24px'>All rights reserved.</Text>
       </Grid>
+      <Grid></Grid>
     </SmallWindow>
   );
 };

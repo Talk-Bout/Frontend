@@ -106,7 +106,7 @@ const QuestionWrite = (props) => {
         minHeight="100vh"
       >
         <Sidebar TABopacity="0.2" />
-        <Body header footer TABopacity="0.2">
+        <Body header TABopacity="0.2">
           <Grid className="body-inner" height="100%" padding="5vh 0 0">
             <Window>
               <Grid
@@ -118,9 +118,9 @@ const QuestionWrite = (props) => {
               >
                 <Grid className="exit-button" width="23.33%" padding="0 25px">
                   <Text
-                    fontSize="4vh"
+                    fontSize="24px"
                     color="#e5e5e5"
-                    lineHeight="7.5vh"
+                    lineHeight="84px"
                     cursor="pointer"
                     _onClick={() => {
                       history.goBack();
@@ -132,34 +132,35 @@ const QuestionWrite = (props) => {
                 </Grid>
                 <Grid className="title" width="53.33%" is_center>
                   <Text
-                    fontSize="2.5vh"
+                    fontSize="24px"
                     fontWeight="700"
                     color="#e5e5e5"
-                    lineHeight="7vh"
+                    lineHeight="84px"
                   >
                     질문하기
                   </Text>
                 </Grid>
                 <Grid className="submit-button" width="23.33%" padding="0 25px">
                   <Text
-                    fontSize="24px"
-                    fontWeight="700"
-                    color="#848484"
-                    lineHeight="84px"
-                    float="right"
-                    hover="color= '#7879F1'" // 호버 확인!!!!!!!!
                     _onClick={() => {
                       create_question();
-                      history.goBack();
                     }}
                   >
-                    {edit_mode ? '수정' : '등록'}
+                    <HoverActionBtn>
+                      {' '}
+                      {edit_mode ? '수정' : '등록'}
+                    </HoverActionBtn>
                   </Text>
                 </Grid>
               </Grid>
               <BodyBox>
                 <TitleBox>
-                  <Text margin="auto 0%" color="#e5e5e5">
+                  <Text
+                    margin="auto 0"
+                    color="#e5e5e5"
+                    fontSize="18px"
+                    fontWeight="700"
+                  >
                     Q
                   </Text>
                   <TitleInput
@@ -239,15 +240,10 @@ const Window = styled.div`
   width: 80%;
   height: 90%;
   margin: auto;
-`;
-
-const saveBtn = styled.text`
-  font-size: 2.5vh;
-  font-weight: 700;
-  color: #848484;
-  line-height: 7vh;
-  float: right;
-  cursor: pointer;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 688px;
+    margin: 0 30px 0 -40px;
+  }
 `;
 
 const BodyBox = styled.div`
@@ -265,6 +261,18 @@ const TitleBox = styled.div`
   background-color: #282a2d;
 `;
 
+const HoverActionBtn = styled.text`
+  color: #5f6368;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 84px;
+  float: right;
+  :hover {
+    color: #7879f1;
+  }
+`;
+
 const ContentBox = styled.div`
   height: 40vh;
   padding-top: 20px;
@@ -274,14 +282,14 @@ const ContentBox = styled.div`
 const TitleInput = styled.input`
   background-color: #383838;
   padding: 10px;
-  font-size: 1.7vh;
+  font-size: 16px;
   color: #e5e5e5;
   background-color: #282a2d;
   width: 80%;
   border: none;
   &::placeholder {
     color: #8f9091;
-    font-size: 1.7vh;
+    font-size: 16px;
   }
   &:focus {
     outline: none;
@@ -293,16 +301,19 @@ const Textarea = styled.textarea`
   resize: none;
   padding: 10px;
   margin-left: 10px;
-  font-size: 1.7vh;
+  font-size: 16px;
   background-color: #282a2d;
   border: none;
   color: #e5e5e5;
   &::placeholder {
     color: #8f9091;
-    font-size: 1.7vh;
+    font-size: 16px;
   }
   &:focus {
     outline: none;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 568px;
   }
 `;
 const Preview = styled.div`

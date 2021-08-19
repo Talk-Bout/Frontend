@@ -7,14 +7,14 @@ const Image = (props) => {
     height,
     shape,
     src,
-    size,
     cursor,
     margin,
     padding,
-    align_items,
+    alignItems,
     _onClick,
     borderRadius,
     display,
+    //태블릿 사이즈(768px~992px)
     TABwidth,
     TABheight,
     TABmargin,
@@ -24,13 +24,13 @@ const Image = (props) => {
     width: width,
     height: height,
     src: src,
-    size: size,
     cursor: cursor,
     margin: margin,
     padding: padding,
-    align_items: align_items,
+    alignItems: alignItems,
     borderRadius: borderRadius,
     display: display,
+    //태블릿 사이즈(768px~992px)
     TABwidth: TABwidth,
     TABheight: TABheight,
     TABmargin: TABmargin,
@@ -61,25 +61,17 @@ Image.defaultProps = {
   shape: 'circle',
   src: '',
   _onClick: () => {},
-  cursor: '',
-  size: null,
-  margin: null,
-  padding: null,
-  align_items: null,
 };
 
 // default로 프로필 이미지 입니다
 const ImageDefault = styled.div`
-  --size: ${(props) => props.size}vw;
-  /* width: var(--size);
-  height: var(--size); */
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   cursor: ${(props) => props.cursor};
   background-image: url('${(props) => props.src}');
   background-size: contain;
   background-repeat: no-repeat;
-  align-items: ${(props) => props.align_items};
+  align-items: ${(props) => props.alignItems};
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius};
   display: ${(props) => props.display};
@@ -93,9 +85,8 @@ const ImageDefault = styled.div`
 
 // 마이페이지(정보수정) 프로필 이미지
 const BigProfileImage = styled.div`
-  --size: ${(props) => props.size}vw;
-  width: var(--size);
-  height: var(--size);
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background-size: cover;
   background-position: 50% 50%; // 이미지의 중간 부분이 보이게
   background-color: #eee; // 이미지 안 뜨는 경우 배경색
@@ -113,9 +104,8 @@ const BigProfileImage = styled.div`
 
 // bootReview(MainBoot) 캠프 로고 이미지
 const HeaderLogo = styled.div`
-  --size: ${(props) => props.size}vw;
-  height: var(--size);
-  width: var(--size);
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   min-width: 150px;
   border: 1px solid #5f6368;
   align-items: center;
@@ -130,13 +120,8 @@ const HeaderLogo = styled.div`
 
 // 메인페이지 circle 캠프 로고 이미지
 const CircleLogo = styled.div`
-  /* width: var(--size);
-  height: var(--size);
-  cursor: ${(props) => props.cursor}; */
   background-size: cover;
   background-image: url('${(props) => props.src}');
-  /* margin: ${(props) => props.margin};
-  padding: ${(props) => props.padding}; */
   background-color: #3c4043;
   width: 80px;
   height: 80px;

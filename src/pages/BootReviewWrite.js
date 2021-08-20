@@ -13,7 +13,8 @@ import StarRatingComponent from 'react-star-rating-component';
 const BootReviewWrite = (props) => {
   const dispatch = useDispatch();
   const camp_name = props.location.state.camp_name;
-  const user_name = useSelector(state => state.user.user.nickname);
+  // const user_name = useSelector(state => state.user.user.nickname);
+  const user_name = sessionStorage.getItem('nickname');
 
   // 별점을 state에 저장하기
   const [stars, setStars] = useState(0);

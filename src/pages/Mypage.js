@@ -14,7 +14,8 @@ import { history } from '../redux/ConfigureStore';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.user.nickname);
+  // const nickname = useSelector((state) => state.user.user.nickname);
+  const nickname = sessionStorage.getItem('nickname');
 
   // 관심있는 부트캠프
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
@@ -115,7 +116,7 @@ const Mypage = (props) => {
                 <TextBox>
                   <InfoButton onClick={() => history.push('/mypage/edit')}
                   >내 정보 수정</InfoButton>
-                  <InfoButton onClick={() => window.open(`${url}`, '_blank')}>부트캠프 인증 </InfoButton>
+                  <InfoButton onClick={() => window.open(`${url}`, '_blank')}>부트캠프 인증</InfoButton>
                 </TextBox>
               </AuthBox>
               {/* 인증 됐을 때 */}
@@ -131,7 +132,7 @@ const Mypage = (props) => {
           <ResponSiveOutter height="100%" width="100%" >
             <Grid height="100%" width="100%" >
               <Grid height="172px" width="100%" >
-                <Grid padding="18px 20px" justify_content="space-between" flexDirection="row" align_items="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
+                <Grid padding="18px 20px" justifyContent="space-between" flexDirection="row" alignItems="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
                    <Text fontSize="18px" color="#F1F3F4">관심있는 부트캠프</Text>
                     <Count> {'('}{myboot_list.length}{')'} </Count>
@@ -149,7 +150,7 @@ const Mypage = (props) => {
                      <Image shape="CircleLogo" src={mb.logo ? mb.logo : CampLogo_default}/>
                     </ImageBox>
                     <Grid padding="10px 0" width="67%">
-                      <Grid display="flex" justify_content="space-between">
+                      <Grid display="flex" justifyContent="space-between">
                       <Text p margin="0 0 5px 15px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                       <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill/></Text>
                       </Grid>
@@ -161,9 +162,9 @@ const Mypage = (props) => {
               })}
                 </BootBox>
                 :
-                <Grid display="flex" margin="12px 0 0 0" justify_content="space-between" height="65%" width="98.5%">
+                <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="65%" width="98.5%">
                   <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" padding="25px 330px">
-                    <Grid margin="auto" height="100%" width="100%" >
+                    <Grid margin="auto" height="100%" width="100%">
                     <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px">부트캠프를 추가해주세요 :)</Text>
                     </Grid>
                   </Grid>
@@ -173,13 +174,12 @@ const Mypage = (props) => {
               </Grid>
               
               <Grid height="287px" width="100%" margin="48px 0 0 0" >
-              <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
+              <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
                    <Text fontSize="18px" color="#F1F3F4">내 북마크</Text>
                     <Count> {'('}{mytalk_list.length} {')'} </Count>
                   </BookMarkBox>
-                  <MoreButton color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%"
-                  onClick={()=>{history.push('/mypage/mybookmarks')}}
+                  <MoreButton onClick={()=>{history.push('/mypage/mybookmarks')}}
                   >더보기 <AiOutlineRight/></MoreButton>   
                 </Grid>
                 {/* 북마크가 있을 경우에만 보여줌 */}
@@ -218,14 +218,14 @@ const Mypage = (props) => {
                 </Grid>
                 :
                 <Grid margin="12px 0 0 0" height="211px" width="98.5%">
-                  <Grid display="flex" align_items="center" text_align="center" height="203px" width="100%" padding="20px 300px" border="5px dotted #2E3134" borderRadius="12px">
+                  <Grid display="flex" alignItems="center" textAlign="center" height="203px" width="100%" padding="20px 300px" border="5px dotted #2E3134" borderRadius="12px">
                     <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px">북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                   </Grid>
                 </Grid>
                 }
               </Grid>
               <Grid height="279px" width="100%" margin="48px 0 0 0">
-              <Grid padding="18px 20px" flexDirection="row" align_items="flex-start" justify_content="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
+              <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                   <BookMarkBox>
                    <Text fontSize="18px" color="#F1F3F4">{nickname} 님의 글</Text>
                     <Count> {'('}{mypost_list.length} {')'} </Count>
@@ -253,14 +253,14 @@ const Mypage = (props) => {
                     </Grid>
                     <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                       <ImgBox>
-                      <ProfileImg src={Badge} alt='프로필'/>
+                      <ProfileImg src={Profile_small} alt='프로필'/>
                       </ImgBox>
                       <InfoBox>
                         <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.nickname}</Text>
                         <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive/>{p.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight/> {p.category} </Text>
                     </Grid>
                     
@@ -270,14 +270,11 @@ const Mypage = (props) => {
                 </Grid>
                 :
                 <Grid margin="12px 0 0 0" height="203px" width="98%">
-                  <Grid display="flex" align_items="center" text_align="center" padding="20px 300px" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
+                  <Grid display="flex" alignItems="center" textAlign="center" padding="20px 300px" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
                     <Text fontSize="18px" color="#FFFFFF" TABfontSize="16px">글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                   </Grid>
                 </Grid>
                 }
-                
-                
-                
               </Grid>
             </Grid>
           </ResponSiveOutter>
@@ -285,7 +282,7 @@ const Mypage = (props) => {
         </Body>
       </Grid>
     </React.Fragment>
-  )
+  )  
 };
 
 const Outter = styled.div`
@@ -350,7 +347,7 @@ const NicknameBox = styled.p`
 color: #F8F9FA;
 text-align: center;
 margin: 5px 0 5px 0;
-font-size: 24px;
+font-size: 20px;
 font-weight: bold;
 
 @media screen and (min-width: 768px) and (max-width: 1100px) { 

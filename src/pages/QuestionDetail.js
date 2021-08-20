@@ -21,7 +21,8 @@ const QuestionDetail = (props) => {
     (question) => question.questionId === parseInt(question_id)
   );
 
-  const user_name = useSelector((state) => state.user.user.nickname);
+  // const user_name = useSelector((state) => state.user.user.nickname);
+  const user_name = sessionStorage.getItem('nickname');
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
 
@@ -48,7 +49,7 @@ const QuestionDetail = (props) => {
   );
 
   const question_like = question_like_list.find(
-    (like) => like.nickname == user_name
+    (like) => like.nickname === user_name
   );
 
   useEffect(() => {

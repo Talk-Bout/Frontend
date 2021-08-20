@@ -17,8 +17,8 @@ const CommonDetail = (props) => {
   // 해당 게시물
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
-  // console.log(comment_list);
-  const username = useSelector((state) => state.user.user.nickname);
+  // const username = useSelector((state) => state.user.user.nickname);
+  const username = sessionStorage.getItem('nickname');
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
   const [MenuLink, setMenuLink] = useState(null);

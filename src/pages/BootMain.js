@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import { Grid, Text, Emoji } from '../elements';
 import { Sidebar, Body, Stars } from '../components';
-import { LogoIcon } from '../image';
+import { LogoIcon, Rocket_emoji } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
@@ -38,7 +38,7 @@ const BootMain = (props) => {
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           {/* 부트캠프 */}
-          <Text p color='#F8F9FA' fontSize='32px' TABfontSize='20px' fontWeight='700' margin='0 0 8px' TABmargin='14px 0 0'>🚀부트캠프</Text>
+          <Text p color='#F8F9FA' fontSize='32px' TABfontSize='20px' fontWeight='700' margin='0 0 8px' TABmargin='14px 0 0'><Emoji src={Rocket_emoji} alt='로켓' height='32px' TABheight='20px' margin='0 8px 0 0' />부트캠프</Text>
           <Text color='#BDC1C6' fontSize='20px' TABfontSize='12px'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
           {/* 부트캠프 목록 */}
           <CardList>

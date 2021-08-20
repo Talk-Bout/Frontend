@@ -72,11 +72,12 @@ const QuestionList = (props) => {
                 color="#F8F9FA"
                 fontWeight="700"
                 fontSize="32px"
+                TABfontSize='20px'
                 margin="0 0 8px"
               >
-                <Emoji src={Fire_emoji} alt='불' height='32px'/>질문과 답변
+                <Emoji src={Fire_emoji} alt='불' height='32px' TABheight='20px' margin='0 8px 0 0'/>질문과 답변
               </Text>
-              <Text color="#BDC1C6" fontSize="20px">
+              <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px'>
                 &nbsp;&nbsp;const 질문과_답변 = ( Question) =&gt; &#123; return Answer
                 &#125;
               </Text>

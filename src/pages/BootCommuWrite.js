@@ -14,7 +14,8 @@ const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
-  const username = useSelector(state => state.user.user.nickname);
+  // const username = useSelector(state => state.user.user.nickname);
+  const username = sessionStorage.getItem('nickname');
 
   const edited_id = parseInt(props.match.params.id);
   const commu_found = useSelector((state) => state.bootcamp.one_commu);

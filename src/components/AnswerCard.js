@@ -10,7 +10,8 @@ const AnswerCard = (props) => {
   const dispatch = useDispatch();
 
   const answer_id = parseInt(props.answerId);
-  const user_name = useSelector((state) => state.user.user.nickname);
+  // const user_name = useSelector((state) => state.user.user.nickname);
+  const user_name = sessionStorage.getItem('nickname');
 
   // 전체 답변 리스트
   const answer_list = useSelector((state) => state.question.answer_list);

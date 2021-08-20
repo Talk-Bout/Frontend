@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
@@ -12,7 +12,7 @@ const HeaderN = (props) => {
   const {opacity, TABopacity} = props;
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem('accessToken');
+  const token = sessionStorage.getItem('refreshToken');
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -25,7 +25,7 @@ const HeaderN = (props) => {
     setMenuLink(null);
   };
 
-  const logOut = () => {
+  const logout = () => {
     dispatch(userActions.logOut());
   };
 
@@ -106,10 +106,7 @@ const HeaderN = (props) => {
                 마이페이지
               </MenuItem>
               <MenuItem
-                onClick={() => {
-                  handleClose();
-                  logOut();
-                }}
+                onClick={() => {handleClose(); logout()}}
               >
                 로그아웃
               </MenuItem>

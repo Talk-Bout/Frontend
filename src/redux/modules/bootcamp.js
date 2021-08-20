@@ -102,10 +102,10 @@ const setCampsDB = (page) => {
 const setMyCampDB = () => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
-    instance
-      .get('/tokenUser')
-      .then((response) => {
-        const nickname = response.data.nickname;
+    // instance
+    //   .get('/tokenUser')
+    //   .then((response) => {
+        const nickname = sessionStorage.getItem('nickname');
         instance
           .get(`/users/${nickname}/bootcampBookmarks`)
           .then((response) => {
@@ -116,12 +116,12 @@ const setMyCampDB = () => {
               `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`
             );
           });
-      })
-      .catch((err) => {
-        console.error(
-          `사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`
-        );
-      });
+      // })
+      // .catch((err) => {
+      //   console.error(
+      //     `사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`
+      //   );
+      // });
   };
 };
 
@@ -318,16 +318,17 @@ const deleteCommuDB = (deleted_commu) => {
 const setMyCommuDB = () => {
   // 서버로부터 북마크한 커뮤니티글 목록 불러오는 함수
   return function (dispatch) {
-    instance.get('/tokenUser').then((response) => {
-      const nickname = response.data.nickname;
+    // instance.get('/tokenUser').then((response) => {
+    //   const nickname = response.data.nickname;
+      const nickname = sessionStorage.getItem('nickname');
       instance.get(`/users/${nickname}/communityBookmarks`)
       .then((result) => {
         dispatch(setMyCommu(result.data));
       }).catch((err) => {
         console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
-    }).catch((err) => {
-        console.error(`북마크 목록 불러오기 위한 사용자 조회 에러 발생: ${err} ### ${err.response}`);
-    });
+    // }).catch((err) => {
+    //     console.error(`북마크 목록 불러오기 위한 사용자 조회 에러 발생: ${err} ### ${err.response}`);
+    // });
   })};
 };
 

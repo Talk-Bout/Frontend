@@ -46,9 +46,13 @@ import NotFound from './shared/NotFound';
 function App() {
   const dispatch = useDispatch();
   const is_loading = useSelector(state => state.status.is_loading);
+  const token = sessionStorage.getItem('refreshToken');
 
   useEffect(() => {
-    dispatch(userActions.stayLogInDB());
+    // dispatch(userActions.stayLogInDB());
+    if (token) {
+      dispatch(userActions.loginCheck());
+    }
   }, []);
 
   return (

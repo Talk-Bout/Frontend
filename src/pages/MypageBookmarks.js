@@ -11,7 +11,8 @@ import { AiOutlineRight } from "react-icons/ai";
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.user.nickname);
+  // const nickname = useSelector((state) => state.user.user.nickname);
+  const nickname = sessionStorage.getItem('nickname');
 
 
    // 부트캠프, 부트톡톡 북마크
@@ -40,7 +41,7 @@ const MypagePost = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
-        <Body header footer>
+        <Body header>
           <Grid height="fit-content">
             <Grid height="9%" width="100%">
               <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px">내 북마크</Text>

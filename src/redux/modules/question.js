@@ -149,8 +149,8 @@ const createQuestionDB = (new_question) => {
         image: image,
       })
       .then((response) => {
-        // console.log(response.data);
         dispatch(createQuestion(response.data));
+        history.push('/question');
       })
       .catch((err) => {
         console.error(`질문 작성하기 에러: ${err}`);
@@ -174,6 +174,7 @@ const editQuestionDB = (edit_question) => {
       })
       .then((response) => {
         dispatch(editQuestion(response.data));
+        history.push('/question');
       })
       .catch((err) => {
         console.error(`질문 작성하기 에러: ${err}`);

@@ -10,7 +10,8 @@ import { AiOutlineRight } from "react-icons/ai";
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();
-  const nickname = useSelector((state) => state.user.user.nickname);
+  // const nickname = useSelector((state) => state.user.user.nickname);
+  const nickname = sessionStorage.getItem('nickname');
 
   // 내가 쓴글 리스트
   const all_post = useSelector((state) => state.mypage.mypost_list);
@@ -27,11 +28,11 @@ const MypagePost = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
-        <Body header footer>
+        <Body header>
           <Grid height="fit-content">
             <Grid height="9%" width="100%">
               
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px">님의 글</Text>
+              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px">{nickname}님의 글</Text>
             </Grid>
             <Card display="flex" height="81%" width="100%">
             {mypost_list.map((p, idx) => {

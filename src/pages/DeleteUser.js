@@ -15,7 +15,8 @@ import '../App.css';
 
 const DeleteUser = (props) => {
   const dispatch = useDispatch();
-  const user_name = useSelector((state) => state.user.user);
+  // const user_name = useSelector((state) => state.user.user);
+  const user_name = sessionStorage.getItem('nickname');
 
   const [state, setState] = useState({
     checked: false,

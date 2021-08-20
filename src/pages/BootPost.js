@@ -17,7 +17,8 @@ const BootPost = (props) => {
   const commu_id = parseInt(props.match.params.id);
 
   // 현재 접속 중인 사용자 닉네임
-  const username = useSelector(state => state.user.user.nickname);
+  // const username = useSelector(state => state.user.user.nickname);
+  const username = sessionStorage.getItem('nickname');
   // 사용자가 북마크한 커뮤니티글 목록
   const my_commu_list = useSelector(state => state.bootcamp.my_commu_list);
   // 북마크한 커뮤니티글 목록에 이 글이 있으면, this_commu에 넣는다.
@@ -29,8 +30,6 @@ const BootPost = (props) => {
   const commu_likes = useSelector(state => state.bootcamp.commu_like_list);
   // 이 커뮤니티글 좋아요 한 사람들 목록에 사용자 닉네임이 있으면, like_found에 넣는다.
   const like_found = commu_likes.find((like) => like.nickname === username);
-
-  console.log(camp_name, commu_id, username, my_commu_list, this_commu);
 
   // 서버에서 불러온 댓글 목록
   const all_comment = useSelector(state => state.bootcamp.comment_list);

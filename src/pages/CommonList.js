@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { history } from '../redux/ConfigureStore';
-import { Text, Grid, FloatingBtn } from '../elements';
+import { Text, Grid, FloatingBtn, Emoji } from '../elements';
 import { Sidebar, Body, CommonPostList } from '../components';
+import { Megaphone_emoji } from '../image';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
@@ -83,14 +84,15 @@ const CommonBoardList = (props) => {
               <Text
                 p
                 fontSize="32px"
+                TABfontSize='20px'
                 color="#F8F9FA"
                 fontWeight="bold"
                 margin="0 0 8px"
               >
-                📣부트톡톡
+                <Emoji src={Megaphone_emoji} height='32px' TABheight='20px' margin='0 8px 0 0'/>부트톡톡
               </Text>
-              <Text color="#BDC1C6" fontSize="20px">
-                &nbsp;&nbsp;&nbsp;부트캠퍼들의 자유로운 Talk Talk
+              <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px'>
+                부트캠퍼들의 자유로운 Talk Talk
               </Text>
             </Grid>
             {/* 게시판 카테고리 */}
@@ -178,7 +180,7 @@ const CommonBoardList = (props) => {
           </Grid>
           {/* import 부트톡톡 게시물  */}
           <Grid height="840px">
-            <Grid width="100%" height="764px" margin="30px 0 0 0">
+            <Grid width="100%" height="764px">
               {PopArray ? (
                 <>
                   <Contents>
@@ -261,8 +263,6 @@ const Categories = styled.div`
   align-items: flex-start;
   width: 450px;
   height: 44px;
-  left: 142px;
-  top: 210px;
 `;
 
 const CategoryButton = styled.div`
@@ -270,7 +270,7 @@ const CategoryButton = styled.div`
   background-color: #202124;
   border: none;
   border-radius: 100px;
-  margin: 0 8px;
+  margin: 0 8px 0 0;
   width: 110px;
   height: 44px;
   color: #80868b;

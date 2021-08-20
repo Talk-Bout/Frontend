@@ -10,12 +10,11 @@ const Body = (props) => {
       <Grid
         className="whole-body"
         backgroundColor="#17181b"
-        height='auto'
         minHeight="100vh"
         width="100vw"
       >
-        {header ? <Header opacity={opacity} TABopacity={TABopacity}/> : ''}
-        <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='32px 18px 0'>
+        {header ? <Header opacity={opacity} TABopacity={TABopacity} /> : ''}
+        <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='32px 18px 0' minHeight='100vh'>
           {children}
         </Grid>
         {footer ? <Footer /> : ''}

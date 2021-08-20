@@ -156,9 +156,11 @@ const AnswerBox = styled.div`
   margin: 30px auto 0;
   background-color: #202124;
   border-radius: 12px;
+  @media screen and (max-width: 1200px) {
+    width: 800px;
+  }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 660px;
-    /* margin: 30px; */
   }
 `;
 

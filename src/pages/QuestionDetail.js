@@ -265,7 +265,7 @@ const QuestionDetail = (props) => {
                       margin="auto 10px"
                       fontSize="14px"
                       fontWeight="600"
-                      color="#ffffff"
+                      color="#9aa0a6"
                     >
                       탈퇴한 회원입니다.
                     </Text>
@@ -275,20 +275,20 @@ const QuestionDetail = (props) => {
                       margin="auto 10px"
                       fontSize="14px"
                       fontWeight="600"
-                      color="#ffffff"
+                      color="#9aa0a6"
                     >
                       {question_found.nickname}
                     </Text>
                   )}
 
-                  <Text p margin="auto 10px" color="#C4C4C4">
+                  <Text p margin="auto 10px" color="#bdc1c6">
                     {question_found.createdAt}
                   </Text>
                 </Grid>
               </Grid>
 
               {/* Question 본문 내용 */}
-              <Text p margin="50px 0" fontSize="16px" color="#C4C4C4">
+              <Text p margin="50px 0" fontSize="16px" color="#bdc1c6">
                 {question_found.content}
               </Text>
 
@@ -435,7 +435,10 @@ const QuestionDetail = (props) => {
 
 const QuestionBox = styled.div`
   width: 1041px;
-  margin: 10px auto;
+  margin: 0 auto;
+  @media screen and (max-width: 1200px) {
+    width: 800px;
+  }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 660px;
   }
@@ -480,6 +483,9 @@ const AddAnswerSection = styled.div`
   width: 1044px;
   margin: 10px auto;
   padding-top: 30px;
+  @media screen and (max-width: 1200px) {
+    width: 800px;
+  }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 660px;
   }
@@ -502,6 +508,9 @@ const AInput = styled.textarea`
   ::placeholder {
     color: #4e5357;
   }
+  @media screen and (max-width: 1200px) {
+    width: 760px;
+  }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 620px;
   }
@@ -516,6 +525,9 @@ const AnswerSaveButton = styled.button`
   padding: 15px 40px;
   margin-left: 866px;
   margin-bottom: 15px;
+  @media screen and (max-width: 1200px) {
+    margin-left: 630px;
+  }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     margin-left: 490px;
   }

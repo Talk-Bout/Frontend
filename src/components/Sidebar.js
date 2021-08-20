@@ -5,7 +5,7 @@ import { PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Tal
 import { history } from '../redux/ConfigureStore';
 
 const Sidebar = (props) => {
-  const {opacity, TABopacity} = props;
+  const { opacity, TABopacity } = props;
   const url = window.location.pathname.split('/')[1];
 
   return (
@@ -13,7 +13,7 @@ const Sidebar = (props) => {
       <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px' opacity={opacity} TABopacity={TABopacity}>
         <Grid className="sidebar-inner">
           <Point
-              src={PointImg} alt='디자인'/>
+            src={PointImg} alt='디자인' />
           <FixNav>
             <Image
               src={url === '' ? Home_white : Home}

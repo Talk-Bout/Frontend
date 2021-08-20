@@ -88,144 +88,144 @@ const CommonList = (props) => {
             {/* 부트톡톡 타이틀 */}
             <Grid height="fit-content" margin="0 0 24px 0" TABmargin='14px 0 8px'>
               <Text p fontSize="32px" TABfontSize='20px' color="#F8F9FA" fontWeight="700" margin='0 0 8px' TABmargin='0'>
-                <Emoji src={Megaphone_emoji} height='32px' TABheight='20px' margin='0 8px 0 0'/>부트톡톡</Text>
+                <Emoji src={Megaphone_emoji} height='32px' TABheight='20px' margin='0 8px 0 0' />부트톡톡</Text>
               <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px'>부트캠퍼들의 자유로운 Talk Talk</Text>
             </Grid>
             {/* 게시판 카테고리 */}
             <Grid display="flex" justifyContent="space-between" margin="0 0 24px 0" TABmargin='0 0 16px 0'>
               <Categories>
                 <CategoryButton url={category === 'all' && 'white'}
-                onClick={() => {setCategory('all'); total_category()}}>
+                  onClick={() => { setCategory('all'); total_category() }}>
                   전체
                 </CategoryButton>
                 <CategoryButton url={category === 'info' && 'white'}
-                onClick={() => {setCategory('info'); info_category()}}>
+                  onClick={() => { setCategory('info'); info_category() }}>
                   정보
                 </CategoryButton>
                 <CategoryButton url={category === 'chat' && 'white'}
-                onClick={() => {setCategory('all'); cc_category()}}>
+                  onClick={() => { setCategory('all'); cc_category() }}>
                   잡담
                 </CategoryButton>
               </Categories>
               <Grid width="fit-content" display="flex">
                 {/* 인기순, 최신순 정렬 버튼 */}
-                <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" verticalAlign='middle'><RiArrowUpDownFill /></Text> 
+                <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" verticalAlign='middle'><RiArrowUpDownFill /></Text>
                 <SelectButton>
-                  {PopArray?
-                  <Options onClick={() => total_category()}><Text fontSize='16px' TABfontSize='14px'>인기순</Text></Options>
-                  :
-                  <Options onClick={() => setNew()}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
+                  {PopArray ?
+                    <Options onClick={() => total_category()}><Text fontSize='16px' TABfontSize='14px'>인기순</Text></Options>
+                    :
+                    <Options onClick={() => setNew()}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
                   }
                 </SelectButton>
                 {/* 글쓰기버튼 (로그인 후 이용가능) */}
                 {is_login ?
-                <div>
-                  <WriteButton onClick={() => history.push('/common/write')}><BiPencil />&nbsp; 글쓰기</WriteButton>
-                </div>
-                :
-                <div>
-                  <WriteButton onClick={() => login_check()}><BiPencil/>&nbsp; 글쓰기</WriteButton>
-                </div>}
+                  <div>
+                    <WriteButton onClick={() => history.push('/common/write')}><BiPencil />&nbsp; 글쓰기</WriteButton>
+                  </div>
+                  :
+                  <div>
+                    <WriteButton onClick={() => login_check()}><BiPencil />&nbsp; 글쓰기</WriteButton>
+                  </div>}
               </Grid>
             </Grid>
           </Grid>
-          <Line style={{border: '1px solid #80868B'}}/>
+          <Line style={{ border: '1px solid #80868B' }} />
           {/* 공지 */}
           <Grid>
             {[1, 2].map((n, idx) => {
               return (
-              <Grid key={idx} display="flex" width="100%" >
-                <Notice>
-                  <div>
-                    <NoticeHead>공지</NoticeHead>
-                    <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                  </div>
-                  <Text color="#9AA0A6" fontSize="14px" margin="24px" TABmargin='5px 16px' lineHeight="18px" TABlineHeight='14px'>2021.08.03</Text>
-                </Notice>
-              </Grid>
-            );
-          })}
-          {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
-          {is_login ?
-          <>
-          <FloatingBtn _onClick={() => history.push('/common/write')}>
-            <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
-          </>
-          :
-          <>
-          <FloatingBtn _onClick={() => login_check()}>
-            <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
-          </>
-          }
-        </Grid>
-        {/* import 부트톡톡 게시물  */}
-        <Grid width="100%" height='730px'>
-          {PopArray ? (
-          <Contents>
-            {popPost_list.map((c, idx) => {
-              return <CommonPostList key={c.postId} {...c} />;
+                <Grid key={idx} display="flex" width="100%" >
+                  <Notice>
+                    <div>
+                      <NoticeHead>공지</NoticeHead>
+                      <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
+                    </div>
+                    <Text color="#9AA0A6" fontSize="14px" margin="10px 24px" TABmargin='5px 16px' lineHeight="18px" TABlineHeight='14px' verticalAlign='middle'>2021.08.03</Text>
+                  </Notice>
+                </Grid>
+              );
             })}
-          </Contents>)
-          : (
-          <Contents>
-            {newPost_list.map((c, idx) => {
-              return <CommonPostList key={c.postId} {...c} />;
-            })}
-          </Contents>
-          )}
-        </Grid>
-        {/* 페이지네이션 */}
-        <Grid is_center>
-          <PageBox>
-            {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
-            <Text lineHeight="14px" margin="0 20px 0">
-              <Page onClick={() => toPrePage()}>
-                {page === 1 ? '' : <BsChevronLeft />}
-              </Page>
-            </Text>
-            {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-            <Text lineHeight="14px" margin="0 20px 0">
-              <Page onClick={() => toPrePage()}>
-                {page === 1 ? '' : page - 1}
-              </Page>
-            </Text>
-            {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-            <Text lineHeight="14px" margin="0 20px 0">
-              <Page style={{ opacity: 1 }}>{page}</Page>
-            </Text>
-            {!PopArray ? (
+            {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
+            {is_login ?
               <>
-                {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                <Text lineHeight="14px" margin="0 20px 0">
-                  <Page onClick={() => toNextPage()}>
-                    {new_post.length > 8 ? page + 1 : ''}
-                  </Page>
-                </Text>
-                {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                <Text lineHeight="14px" margin="0 20px 0">
-                  <Page onClick={() => toNextPage()}>
-                    {new_post.length > 8 ? <BsChevronRight /> : ''}
-                  </Page>
-                </Text>
+                <FloatingBtn _onClick={() => history.push('/common/write')}>
+                  <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
               </>
-            ) : (
+              :
               <>
-                {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                <Text lineHeight="14px" margin="0 20px 0">
-                  <Page onClick={() => toNextPage()}>
-                    {pop_post.length > 8 ? page + 1 : ''}
-                  </Page>
-                </Text>
-                {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                <Text lineHeight="14px" margin="0 20px 0">
-                  <Page onClick={() => toNextPage()}>
-                    {pop_post.length > 8 ? <BsChevronRight /> : ''}
-                  </Page>
-                </Text>
+                <FloatingBtn _onClick={() => login_check()}>
+                  <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
               </>
-            )}
-          </PageBox>
-        </Grid>
+            }
+          </Grid>
+          {/* import 부트톡톡 게시물  */}
+          <Grid width="100%" height='850px' TABheight='730px'>
+            {PopArray ? (
+              <Contents>
+                {popPost_list.map((c, idx) => {
+                  return <CommonPostList key={c.postId} {...c} />;
+                })}
+              </Contents>)
+              : (
+                <Contents>
+                  {newPost_list.map((c, idx) => {
+                    return <CommonPostList key={c.postId} {...c} />;
+                  })}
+                </Contents>
+              )}
+          </Grid>
+          {/* 페이지네이션 */}
+          <Grid is_center>
+            <PageBox>
+              {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
+              <Text lineHeight="14px" margin="0 20px 0">
+                <Page onClick={() => toPrePage()}>
+                  {page === 1 ? '' : <BsChevronLeft />}
+                </Page>
+              </Text>
+              {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
+              <Text lineHeight="14px" margin="0 20px 0">
+                <Page onClick={() => toPrePage()}>
+                  {page === 1 ? '' : page - 1}
+                </Page>
+              </Text>
+              {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
+              <Text lineHeight="14px" margin="0 20px 0">
+                <Page style={{ opacity: 1 }}>{page}</Page>
+              </Text>
+              {!PopArray ? (
+                <>
+                  {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
+                  <Text lineHeight="14px" margin="0 20px 0">
+                    <Page onClick={() => toNextPage()}>
+                      {new_post.length > 8 ? page + 1 : ''}
+                    </Page>
+                  </Text>
+                  {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
+                  <Text lineHeight="14px" margin="0 20px 0">
+                    <Page onClick={() => toNextPage()}>
+                      {new_post.length > 8 ? <BsChevronRight /> : ''}
+                    </Page>
+                  </Text>
+                </>
+              ) : (
+                <>
+                  {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
+                  <Text lineHeight="14px" margin="0 20px 0">
+                    <Page onClick={() => toNextPage()}>
+                      {pop_post.length > 8 ? page + 1 : ''}
+                    </Page>
+                  </Text>
+                  {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
+                  <Text lineHeight="14px" margin="0 20px 0">
+                    <Page onClick={() => toNextPage()}>
+                      {pop_post.length > 8 ? <BsChevronRight /> : ''}
+                    </Page>
+                  </Text>
+                </>
+              )}
+            </PageBox>
+          </Grid>
         </Body>
       </Grid>
     </React.Fragment>
@@ -309,7 +309,7 @@ border-bottom: 1px solid #3C4043;
 display: flex;
 justify-content: space-between;
 width: 100%;
-height: 67px;
+height: 60px;
 margin-top: 16px;
 @media screen and (min-width: 768px) and (max-width: 992px) {
   height: 48px;
@@ -328,6 +328,7 @@ border-radius: 8px;
 margin: 17px 24px;
 font-size: 14px;
 line-height: 18px;
+vertical-align: middle;
 @media screen and (min-width: 768px) and (max-width: 992px) {
   margin: 0 16px;
   padding: 6px 20px;
@@ -339,9 +340,9 @@ const NoticeText = styled.span`
 font-weight: bold;
 color: #7879F1;
 font-size: 18px;
-line-height: 27px;
+line-height: 18px;
 letter-spacing: 0.2px;
-margin-top: 3px;
+vertical-align: middle;
 @media screen and (min-width: 768px) and (max-width: 992px) {
   font-size: 14px;
 }

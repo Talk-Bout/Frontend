@@ -218,16 +218,20 @@ export default handleActions(
       }),
     [GOOGLE_LOG_IN]: (state, action) => produce(state, (draft) => {
       draft.user_info = action.payload.google_info;
+      draft.is_login = true;
     }),
     [GOOGLE_RE_FRESH]: (state, action) => produce(state, (draft) => {
       draft.user_info['accessToken'] = action.payload.google_tokens.accessToken;
       draft.user_info['idToken'] = action.payload.google_tokens.idToken;
+      draft.is_login = true;
     }),
     [KAKAO_LOG_IN]: (state, action) => produce(state, (draft) => {
       draft.user_info = action.payload.kakao_info;
+      draft.is_login = true;
     }),
     [KAKAO_RE_FRESH]: (state, action) => produce(state, (draft) => {
       draft.user_info['accessToken'] = action.payload.kakao_token.accessToken;
+      draft.is_login = true;
     }),
     [REMOVE_TOKENS]: (state, action) => produce(state, (draft) => {
       draft.user_info = null;

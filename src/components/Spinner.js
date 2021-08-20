@@ -30,7 +30,7 @@ const Div = styled.div`
   min-height: 100vh;
   line-height: 85vh;
   text-align: center;
-  background: rgba(0, 0, 0, 0.6);
+  background: #17181B;
   z-index: 100;
 `;
 

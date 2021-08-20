@@ -17,214 +17,95 @@ const QnaCard = (props) => {
 
   return (
     <React.Fragment>
+      {/* 질문 글 */}
       <QnaListCard onClick={_onClick}>
-        {/* 질문 글 */}
-        <QuestionSection>
-          {/* 질문 제목 */}
-          <Text
-            fontSize="18px"
-            fontWeight="700"
-            color="#F8F9FA"
-            overflow="hidden"
-            display="-webkit-box"
-            wlc="2"
-            wbo="vertical"
-            TABfontSize="16px"
-            TABwlc="1"
-          >
-            <span style={{ marginRight: '8px' }}>Q</span>
-            {question_found.title}
-          </Text>
-          {/* 질문 내용 */}
-          <Text
-            p
-            fontSize="14px"
-            color="#9AA0A6"
-            overflow="hidden"
-            display="-webkit-box"
-            wlc="4"
-            wbo="vertical"
-            TABwlc="3"
-            TABoverflow="hidden"
-            TABfontSize="12px"
-          >
+        {/* 질문 제목 */}
+        <Text fontSize="18px" fontWeight="700" color="#F8F9FA" overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px">
+          <span style={{ marginRight: '8px' }}>Q</span>
+          {question_found.title}
+        </Text>
+        {/* 질문 내용 */}
+        <Content>
+          <Text p fontSize="14px" color="#9AA0A6" lineHeight='18px' letterSpacing='0.2px' overflow="hidden" display="-webkit-box" wlc="4" wbo="vertical" TABoverflow="hidden" TABfontSize="12px">
             {question_found.content}
           </Text>
-          <QuestionInfo>
-            {/* 작성자 프로필 이미지 */}
-            <ProfileImg src={Profile_small} width="24px" height="24px" />
-            {/* 작성자 닉네임 */}
-            <Text
-              fontSize="12px"
-              color="#80868b"
-              lineHeight="24px"
-              margin="0 8px"
-              TABfontSize="10px"
-              TABmargin="0 4px 0"
-            >
-              {question_found.nickname}
-            </Text>
+        </Content>
+        {/* 화면 너비 width > 1200px 일 때 보이기 */}
+        <QInfoDesktop>
+          {/* 작성자 프로필 이미지 */}
+          <ProfileImg src={Profile_small} width='16px' />
+          {/* 작성자 닉네임 */}
+          <Text fontSize="12px" TABfontSize='10px' color="#80868b" lineHeight="24px" margin="0 16px 0 8px" TABmargin='0 4px 0'>
+            {question_found.nickname}
+          </Text>
+          {/* 작성일자 */}
+          <Text fontSize="12px" color="#80868b" lineHeight="24px" TABfontSize="8px">
+            <Text fontSize="16px" TABfontSize="10px" verticalAlign="middle" margin="0 4px 0 0" TABmargin="0 2px 0 0"><BiTimeFive /></Text>
+            {question_found.createdAt}
+          </Text>
+        </QInfoDesktop>
+        {/* 화면 너비 < 1200px 일 때 보이기 */}
+        <QInfoTablet>
+          {/* 작성자 프로필 이미지 */}
+          <ProfileImg src={Profile_small} width='16px' />
+          {/* 작성자 닉네임 */}
+          <Text color="#80868b" fontSize='12px' lineHeight='24px' TABfontSize="10px" margin='0 16px 0 8px' TABmargin="0 4px 0">
+            {question_found.nickname}
+          </Text>
+          <Date>
             {/* 작성일자 */}
-            <Text
-              fontSize="12px"
-              color="#80868b"
-              lineHeight="24px"
-              TABfontSize="10px"
-            >
-              <Text
-                fontSize="16px"
-                verticalAlign="middle"
-                margin="0 4px 0 0"
-                TABfontSize="10px"
-                TABmargin="0 2px 0 0"
-              >
-                <BiTimeFive />
-              </Text>
+            <Text fontSize='12px' color="#80868b" lineHeight='24px' TABfontSize="8px">
+              <Text fontSize='16px' verticalAlign="middle" TABfontSize="10px" margin='0 4px 0 0' TABmargin="0 2px 0 0"><BiTimeFive /></Text>
               {question_found.createdAt}
             </Text>
-          </QuestionInfo>
-        </QuestionSection>
-
-        <AnswerSection>
-          <span style={{ height: 'fit-content' }}>
-            {/* 추천 수 */}
-
-            {question_found.questionLike ? (
-              <Text
-                fontSize="12px"
-                color="#bdc1c6"
-                verticalAlign="middle"
-                margin="0 8px 0 0"
-                TABfontSize="10px"
-              >
-                <Text
-                  fontSize="16px"
-                  color="#bdc1c6"
-                  margin="0 6px 0 0"
-                  verticalAlign="middle"
-                  TABfontSize="14px"
-                >
-                  <BiLike />
-                </Text>
-                {question_found.questionLike.length}
-              </Text>
-            ) : (
-              <Text
-                fontSize="12px"
-                color="#bdc1c6"
-                verticalAlign="middle"
-                margin="0 8px 0 0"
-                TABfontSize="10px"
-              >
-                <Text
-                  fontSize="16px"
-                  color="#bdc1c6"
-                  margin="0 6px 0 0"
-                  verticalAlign="middle"
-                  TABfontSize="14px"
-                >
-                  <BiLike />
-                </Text>
-                0
-              </Text>
-            )}
-
-            {/* 댓글 수 */}
-
-            {question_found.answer ? (
-              <Text
-                fontSize="12px"
-                color="#bdc1c6"
-                verticalAlign="middle"
-                margin="0 8px 0 0"
-                TABfontSize="10px"
-              >
-                <Text
-                  fontSize="16px"
-                  color="#bdc1c6"
-                  margin="0 6px 0 0"
-                  verticalAlign="middle"
-                  TABfontSize="14px"
-                >
-                  <BiComment />
-                </Text>
-
-                {question_found.answer.length}
-              </Text>
-            ) : (
-              <Text
-                fontSize="12px"
-                color="#bdc1c6"
-                verticalAlign="middle"
-                margin="0 8px 0 0"
-                TABfontSize="10px"
-              >
-                <Text
-                  fontSize="16px"
-                  color="#bdc1c6"
-                  margin="0 6px 0 0"
-                  verticalAlign="middle"
-                  TABfontSize="14px"
-                >
-                  <BiComment />
-                </Text>
-                0
-              </Text>
-            )}
-
-            {/* 조회수 */}
-
-            {question_found.viewCount > 0 ? (
-              <Text
-                fontSize="12px"
-                color="#bdc1c6"
-                verticalAlign="middle"
-                margin="0 8px 0 0"
-                TABfontSize="10px"
-              >
-                <Text
-                  fontSize="16px"
-                  color="#bdc1c6"
-                  margin="0 6px 0 0"
-                  verticalAlign="middle"
-                  TABfontSize="14px"
-                >
-                  <AiOutlineEye />
-                </Text>
-                {question_found.viewCount}
-              </Text>
-            ) : (
-              <Text
-                fontSize="12px"
-                color="#bdc1c6"
-                verticalAlign="middle"
-                margin="0 8px 0 0"
-                TABfontSize="10px"
-              >
-                <Text
-                  fontSize="16px"
-                  color="#bdc1c6"
-                  margin="0 6px 0 0"
-                  verticalAlign="middle"
-                  TABfontSize="14px"
-                >
-                  <AiOutlineEye />
-                </Text>
-                0
-              </Text>
-            )}
-          </span>
-        </AnswerSection>
+          </Date>
+        </QInfoTablet>
+        <Line />
+        <span style={{ height: 'fit-content' }}>
+          {/* 추천 수 */}
+          {question_found.questionLike ?
+            <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
+              <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><BiLike /></Text>
+              {question_found.questionLike.length}
+            </Text>
+            :
+            <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
+              <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><BiLike /></Text>
+              0
+            </Text>
+          }
+          {/* 댓글 수 */}
+          {question_found.answer ?
+            <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
+              <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><BiComment /></Text>
+              {question_found.answer.length}
+            </Text>
+            :
+            <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
+              <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><BiComment /></Text>
+              0
+            </Text>
+          }
+          {/* 조회수 */}
+          {question_found.viewCount > 0 ?
+            <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" TABfontSize="10px">
+              <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><AiOutlineEye /></Text>
+              {question_found.viewCount}
+            </Text>
+            :
+            <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" TABfontSize="10px">
+              <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><AiOutlineEye /></Text>
+              0
+            </Text>
+          }
+        </span>
       </QnaListCard>
     </React.Fragment>
   );
 };
 
 const QnaListCard = styled.div`
-  width: 32.48%;
-  max-width: 800px;
   height: 250px;
-  float: left;
   background-color: #202124;
   border-radius: 12px;
   box-sizing: border-box;
@@ -233,37 +114,32 @@ const QnaListCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
+  @media screen and (max-width: 1200px) {
+    height: 270px;
+  }
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    width: 32%;
-    height: 200px;
+    height: 230px;
     padding: 16px 16px 0;
   }
 `;
 
-const QuestionSection = styled.div`
-  height: 170px;
-  position: relative;
-  border-bottom: 1px solid #282a2d;
-  box-sizing: border-box;
+const Content = styled.div`
+  height: 72px;
+  margin: 16px 0 32px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    height: 140px;
+    margin: 10px 0 10px;
   }
 `;
 
-const QuestionInfo = styled.div`
-  position: absolute;
-  bottom: 16px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    bottom: 4px;
+const QInfoDesktop = styled.div`
+  @media screen and (max-width: 1200px) {
+    display: none;
   }
 `;
 
-const AnswerSection = styled.div`
-  height: 16px;
-  padding-top: 16px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    height: 30px;
-    padding-top: 12px;
+const QInfoTablet = styled.div`
+  @media screen and (min-width: 1200px) {
+    display: none;
   }
 `;
 
@@ -276,8 +152,22 @@ const ProfileImg = styled.img`
   }
 `;
 
+const Date = styled.div`
+  @media screen and (max-width: 1200px) {
+    margin-top: -8px;
+    margin-left: 30px;
+  }
+  @media screen and (max-width: 992px) {
+    margin-left: 20px;
+  }
+`;
+
+const Line = styled.hr`
+  border: 1px solid #282a2d;
+`;
+
 QnaCard.defaultProps = {
-  _onClick: () => {},
+  _onClick: () => { },
 };
 
 export default QnaCard;

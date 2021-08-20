@@ -20,7 +20,7 @@ const CommonPostList = (props) => {
         </Text>
         {/* 부트톡톡 게시글 내용 */}
         <Grid height='50px' TABheight='32px'>
-          <Text p fontSize="14px" margin="16px 0 0" letterSpacing='0.2px' lineHeight='18px' color="#9aa0a6" overflow='hidden' wlc='2' wbo='vertical' display='-webkit-box' TABfontSize='12px' TABlineHeight='16px'>{props.content}</Text>
+          <Text p fontSize="14px" margin="16px 0 0" TABmargin='10px 0 0' letterSpacing='0.2px' lineHeight='18px' color="#9aa0a6" overflow='hidden' wlc='2' wbo='vertical' display='-webkit-box' TABfontSize='12px' TABlineHeight='16px'>{props.content}</Text>
         </Grid>
         {/* 작성자 정보 */}
         <Grid margin='16px 0 0' TABmargin='24px 0 0'>
@@ -30,7 +30,7 @@ const CommonPostList = (props) => {
             {props.nickname}
           </Text>
           {/* 작성일자 */}
-          <Text fontSize='12px' color='#bdc1c6' margin='0 12px 0 0' TABfontSize='10px'>
+          <Text fontSize='12px' color='#bdc1c6' margin='0 12px 0 0' TABmargin='12px 0 0' TABfontSize='10px'>
             <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' TABmargin='0 4px 0 0' verticalAlign= 'middle'><BiTimeFive /></Text>{props.createdAt}
           </Text>
         </Grid>

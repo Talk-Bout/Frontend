@@ -10,7 +10,7 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
 
-const CommonBoardList = (props) => {
+const CommonList = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
@@ -85,9 +85,10 @@ const CommonBoardList = (props) => {
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           <Grid>
-            {/* 부트톡톡 */}
+            {/* 부트톡톡 타이틀 */}
             <Grid height="fit-content" margin="0 0 24px 0" TABmargin='14px 0 8px'>
-              <Text p fontSize="32px" TABfontSize='20px' color="#F8F9FA" fontWeight="700" margin='0 0 8px' TABmargin='0'><Emoji src={Megaphone_emoji} height='32px' TABheight='20px' margin='0 8px 0 0'/>부트톡톡</Text>
+              <Text p fontSize="32px" TABfontSize='20px' color="#F8F9FA" fontWeight="700" margin='0 0 8px' TABmargin='0'>
+                <Emoji src={Megaphone_emoji} height='32px' TABheight='20px' margin='0 8px 0 0'/>부트톡톡</Text>
               <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px'>부트캠퍼들의 자유로운 Talk Talk</Text>
             </Grid>
             {/* 게시판 카테고리 */}
@@ -95,7 +96,7 @@ const CommonBoardList = (props) => {
               <Categories>
                 <CategoryButton url={category === 'all' && 'white'}
                 onClick={() => {setCategory('all'); total_category()}}>
-                  전체글
+                  전체
                 </CategoryButton>
                 <CategoryButton url={category === 'info' && 'white'}
                 onClick={() => {setCategory('info'); info_category()}}>
@@ -107,13 +108,13 @@ const CommonBoardList = (props) => {
                 </CategoryButton>
               </Categories>
               <Grid width="fit-content" display="flex">
-                {/* 인기순, 최신순 */}
-                <Text color="#F1F3F4" fontSize='16px' lineHeight="48px"><span style={{verticalAlign: 'middle', fontSize: '24px'}}><RiArrowUpDownFill /></span></Text> 
+                {/* 인기순, 최신순 정렬 버튼 */}
+                <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" verticalAlign='middle'><RiArrowUpDownFill /></Text> 
                 <SelectButton>
                   {PopArray?
-                  <Options onClick={() => total_category()}><Text fontSize='16px'>인기순</Text></Options>
+                  <Options onClick={() => total_category()}><Text fontSize='16px' TABfontSize='14px'>인기순</Text></Options>
                   :
-                  <Options onClick={() => setNew()}><Text fontSize='16px'>최신순</Text></Options>
+                  <Options onClick={() => setNew()}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
                   }
                 </SelectButton>
                 {/* 글쓰기버튼 (로그인 후 이용가능) */}
@@ -128,18 +129,18 @@ const CommonBoardList = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <hr style={{border: '1px solid #80868B'}}/>
+          <Line style={{border: '1px solid #80868B'}}/>
           {/* 공지 */}
           <Grid>
             {[1, 2].map((n, idx) => {
               return (
-              <Grid key={n.postId} display="flex" width="100%" >
+              <Grid key={idx} display="flex" width="100%" >
                 <Notice>
-                  <div style={{ marginTop: "16px"}}>
-                  <NoticeHead>공지</NoticeHead>
-                  <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
+                  <div>
+                    <NoticeHead>공지</NoticeHead>
+                    <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
                   </div>
-                  <Text color="#9AA0A6" fontSize="14px" margin="24px" lineHeight="18px">2021.08.03</Text>
+                  <Text color="#9AA0A6" fontSize="14px" margin="24px" TABmargin='5px 16px' lineHeight="18px" TABlineHeight='14px'>2021.08.03</Text>
                 </Notice>
               </Grid>
             );
@@ -158,7 +159,7 @@ const CommonBoardList = (props) => {
           }
         </Grid>
         {/* import 부트톡톡 게시물  */}
-        <Grid width="100%" height='850px'>
+        <Grid width="100%" height='730px'>
           {PopArray ? (
           <Contents>
             {popPost_list.map((c, idx) => {
@@ -257,6 +258,10 @@ const CategoryButton = styled.div`
     background-color: #bdc1c6;
     color: #0e1013;
   }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    padding: 3px 20px;
+    font-size: 14px;
+  }
 `;
 
 const SelectButton = styled.div`
@@ -265,7 +270,6 @@ background-color: transparent;
 color: #F1F3F4;
 width: fit-content;
 height: 48px;
-font-size: 16px;
 appearance: none;
 line-height: 24px;
 margin: 3px 16px 0 8px;
@@ -293,12 +297,23 @@ const WriteButton = styled.button`
   }
 `;
 
+const Line = styled.hr`
+  border: 1px solid #80868B;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    display: none;
+  }
+`;
+
 const Notice = styled.div`
 border-bottom: 1px solid #3C4043;
 display: flex;
 justify-content: space-between;
 width: 100%;
 height: 67px;
+margin-top: 16px;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  height: 48px;
+}
 `;
 
 const NoticeHead = styled.span`
@@ -313,6 +328,11 @@ border-radius: 8px;
 margin: 17px 24px;
 font-size: 14px;
 line-height: 18px;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  margin: 0 16px;
+  padding: 6px 20px;
+  line-height: 16px;
+}
 `;
 
 const NoticeText = styled.span`
@@ -322,6 +342,9 @@ font-size: 18px;
 line-height: 27px;
 letter-spacing: 0.2px;
 margin-top: 3px;
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  font-size: 14px;
+}
 `;
 
 const Contents = styled.div`
@@ -347,4 +370,4 @@ const Page = styled.span`
   }
 `;
 
-export default CommonBoardList;
+export default CommonList;

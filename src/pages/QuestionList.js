@@ -53,97 +53,37 @@ const QuestionList = (props) => {
 
   return (
     <React.Fragment>
-      <FloatingBtn _onClick={() => history.push(`/question/write`)} />
       <Grid display="flex">
         {/* 사이드바 */}
         <Sidebar />
-        {/* 헤더 포함한 바디 */}
+        {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
-          <Grid
-            className="Title-btn"
-            display="flex"
-            width="100%"
-            justifyContent="space-between"
-          >
-            {/* Q&A 게시판 타이틀 */}
+          {/* 질문과 답변 타이틀 */}
+          <Grid className='Title' height='fit-content' TABmargin='15px 0 0'>
+            <Text color="#F8F9FA" fontWeight="700" fontSize="32px" TABfontSize='20px' TABmargin='15px 0 0'>
+              <Emoji src={Fire_emoji} alt='불' height='32px' TABheight='20px' margin='0 8px 0 0' />질문과 답변
+            </Text>
+          </Grid>
+          <Grid className='Descr-btn' display='flex' justifyContent='space-between' height='fit-content'>
+            <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' lineHeight='52px' TABlineHeight='32px'>&nbsp;&nbsp;const 질문과_답변 = ( Question ) =&gt; &#123; return Answer &#125;</Text>
             <div>
-              <Text
-                p
-                color="#F8F9FA"
-                fontWeight="700"
-                fontSize="32px"
-                TABfontSize='20px'
-                margin="0 0 8px"
-              >
-                <Emoji src={Fire_emoji} alt='불' height='32px' TABheight='20px' margin='0 8px 0 0'/>질문과 답변
-              </Text>
-              <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px'>
-                &nbsp;&nbsp;const 질문과_답변 = ( Question) =&gt; &#123; return Answer
-                &#125;
-              </Text>
-            </div>
-            <div
-              style={{
-                padding: '10px 0px',
-                textAlign: 'right',
-                // margin: '0 10px',
-                alignItems: 'center',
-                // backgroundColor: 'yellow',
-              }}
-            >
-              {/* 인기순 정렬 버튼 */}
-              {popPage ? (
-                <Text
-                  fontSize="16px"
-                  color="#F8F9fA"
-                  lineHeight="32px"
-                  margin="0 16px"
-                  cursor="pointer"
-                  _onClick={() => set_latest()}
-                >
-                  <span
-                    style={{
-                      fontSize: '24px',
-                      marginRight: '8px',
-                      verticalAlign: 'middle',
-                    }}
-                  >
-                    <RiArrowUpDownFill />
-                  </span>
-                  인기순
-                </Text>
-              ) : (
-                <Text
-                  fontSize="16px"
-                  color="#F8F9fA"
-                  lineHeight="32px"
-                  margin="0 16px"
-                  cursor="pointer"
-                  _onClick={() => set_popular()}
-                >
-                  <span
-                    style={{
-                      fontSize: '24px',
-                      marginRight: '8px',
-                      verticalAlign: 'middle',
-                    }}
-                  >
-                    <RiArrowUpDownFill />
-                  </span>
-                  최신순
-                </Text>
-              )}
-
+              {/* 인기순, 최신순 정렬 버튼 */}
+              <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" TABlineHeight='24px' verticalAlign='middle' margin='8px'><RiArrowUpDownFill /></Text>
+              {popPage ?
+                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_latest()}>최신순</Text>
+                :
+                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_popular()}>인기순</Text>
+              }
               {/* 글쓰기 버튼 */}
               <WriteBtn onClick={() => history.push('/question/write')}>
                 <Text fontSize="16px" color="#7879F1">
                   <BiPencil /> 글쓰기
                 </Text>
               </WriteBtn>
+              <FloatingBtn _onClick={() => history.push(`/question/write`)} />
             </div>
           </Grid>
           {/* Q&A 게시글 목록 */}
-
           {popPage ? (
             <CardList>
               {pop_question_page.map((q, idx) => {
@@ -175,7 +115,7 @@ const QuestionList = (props) => {
           )}
 
           {/* 페이지네이션 */}
-          <Grid height="7vh" is_center margin="8px 0 0">
+          <Grid is_center>
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
               <Text fontSize="14px" margin="0 20px 0 0">
@@ -244,17 +184,20 @@ const WriteBtn = styled.button`
 const CardList = styled.div`
   margin-top: 24px;
   width: 100%;
-  display: flex;
-  gap: 24px 16px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 24px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    gap: 24px 12px;
+    row-gap: 16px;
+    margin-top: 15px;
   }
 `;
 
 const PageBox = styled.div`
   display: inline-block;
   height: 100%;
+  margin-top: 40px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     margin-top: 24px;
   }

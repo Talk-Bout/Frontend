@@ -11,15 +11,15 @@ const GOOGLE_RE_FRESH = 'user/GOOGLE_RE_FRESH'; // 구글 accessToken 갱신 및
 const KAKAO_LOG_IN = 'user/KAKAO_LOG_IN'; // 카카오 accessToken, provider, nickname, profilePic 저장
 const KAKAO_RE_FRESH = 'user/KAKAO_RE_FRESH'; // 카카오 accessToken 갱신
 const REMOVE_TOKENS = 'user/REMOVE_TOKENS'; // 구글&카카오 로그아웃 및 토큰 삭제
-const LOGIN_CHECK = 'user/LOGIN_CHECK'; 
+const LOGIN_CHECK = 'user/LOGIN_CHECK';
 
 //액션 생성함수
 const stayLogIn = createAction(STAY_LOGIN, (user) => ({ user }));
 const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
-const googleLogIn = createAction(GOOGLE_LOG_IN, (google_info) => ({google_info}));
-const googleReFresh = createAction(GOOGLE_RE_FRESH, (google_tokens) => ({google_tokens}));
-const kakaoLogIn = createAction(KAKAO_LOG_IN, (kakao_info) => ({kakao_info}));
-const kakaoReFresh = createAction(KAKAO_RE_FRESH, (kakao_token) => ({kakao_token}));
+const googleLogIn = createAction(GOOGLE_LOG_IN, (google_info) => ({ google_info }));
+const googleReFresh = createAction(GOOGLE_RE_FRESH, (google_tokens) => ({ google_tokens }));
+const kakaoLogIn = createAction(KAKAO_LOG_IN, (kakao_info) => ({ kakao_info }));
+const kakaoReFresh = createAction(KAKAO_RE_FRESH, (kakao_token) => ({ kakao_token }));
 const removeTokens = createAction(REMOVE_TOKENS, () => ({}));
 const loginCheck = createAction(LOGIN_CHECK, () => ({}));
 
@@ -63,7 +63,7 @@ const googleRefresh = () => {
     const clientSecret = 'NEk_9kMajTMRCvE0b24vQWCh';
     const clientId = '1024289816833-ekko4or0shvl9vusetgga5rmbs5u8gla.apps.googleusercontent.com';
     const refreshToken = sessionStorage.getItem('refreshToken');
-    const headers = {'Content-Type': 'application/x-www-form-urlencoded'};
+    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
     const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
     const axios = require('axios');
     axios.post('https://oauth2.googleapis.com/token', formUrlEncoded({
@@ -71,7 +71,7 @@ const googleRefresh = () => {
       client_secret: clientSecret,
       client_id: clientId,
       refresh_token: refreshToken,
-    }), {headers: headers}).then((response) => {
+    }), { headers: headers }).then((response) => {
       sessionStorage.removeItem('accessToken');
       sessionStorage.setItem('accessToken', response.data.access_token);
       sessionStorage.removeItem('idToken');
@@ -115,14 +115,14 @@ const kakaoRefresh = () => {
   // 카카오 액세스 토큰 갱신
   return function (dispatch) {
     const REST_API_KEY = 'a1e045a6bd23510144e987da133f3eff';
-    const headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
     const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
     const axios = require('axios');
     axios.post('https://kauth.kakao.com/oauth/token', formUrlEncoded({
       grant_type: 'refresh_token',
       client_id: REST_API_KEY,
       refresh_token: sessionStorage.getItem('refreshToken'),
-    }), {headers: headers}).then((response) => {
+    }), { headers: headers }).then((response) => {
       sessionStorage.removeItem('accessToken');
       sessionStorage.setItem('accessToken', response.data.access_token);
       const kakao_token = {
@@ -140,12 +140,14 @@ const logOut = () => {
   return function (dispatch) {
     const accessToken = sessionStorage.getItem('accessToken');
     const provider = sessionStorage.getItem('provider');
-    const headers = {'authorization': `Bearer ${accessToken}`};
+    const headers = { 'authorization': `Bearer ${accessToken}` };
     const axios = require('axios');
-    axios.post('http://13.209.12.249/oauth/logout', {
+    axios.post('http://13.209.12.149/oauth/logout', {
       provider: provider,
-    }, {headers: headers}).then((response) => {
-      console.log(response);
+    }, { headers: headers }).then((response) => {
+      if (response.status === 200) {
+        window.alert('성공적으로 로그아웃 되었습니다.');
+      }
       sessionStorage.removeItem('accessToken');
       sessionStorage.removeItem('refreshToken');
       sessionStorage.removeItem('idToken');
@@ -203,7 +205,7 @@ const userDeleteDB = (nickname) => {
 };
 
 export default handleActions(
-  { 
+  {
     // [LOGIN_CHECK]: (state, action) =>
     //   produce(state, (draft) => {
     //     if (action.payload.is_error === 400) {

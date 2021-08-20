@@ -53,7 +53,6 @@ const googleLogin = () => {
       profilePic: profilePic_URL,
     };
     dispatch(googleLogIn(google_info));
-    googleRefresh();
     history.push('/');
   };
 };

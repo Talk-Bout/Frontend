@@ -146,7 +146,7 @@ const logOut = () => {
     axios.post('http://13.209.12.249/oauth/logout', {
       provider: provider,
     }, {headers: headers}).then((response) => {
-      console.log(response.status);
+      console.log(response);
       sessionStorage.removeItem('accessToken');
       sessionStorage.removeItem('refreshToken');
       sessionStorage.removeItem('idToken');

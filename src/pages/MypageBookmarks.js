@@ -20,7 +20,6 @@ const MypagePost = (props) => {
   React.useEffect(() => {
     dispatch(mypageActions.setMyTalkDB(nickname));
     dispatch(mypageActions.setMyQnaDB(nickname));
-    dispatch(mypageActions.setMyCommuDB(nickname));
   }, []);
 
   // 부트톡톡 북마크 리스트
@@ -32,11 +31,6 @@ const MypagePost = (props) => {
   const all_qna = useSelector((state) => state.mypage.myqna_list);
   // 삭제된 post의 경우 안띄워줌
   const myqna_list = all_qna.filter((qnas) => qnas.question !== null);
-
-  // 커뮤니티 리스트
-  const all_commu = useSelector((state) => state.mypage.mycommu_list);
-  // 삭제된 post의 경우 안띄워줌
-  const mycommu_list = all_commu.filter((commu) => commu.community !== null);
 
   return (
     <React.Fragment>
@@ -100,36 +94,6 @@ const MypagePost = (props) => {
                     </Grid>
                     <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
                       <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 질문과답변 </Text>
-                    </Grid>
-
-                  </Post>
-                );
-              })}
-              {mycommu_list.map((c, idx) => {
-                return (
-                  <Post
-                    onClick={() => { history.push(`/boot/${c.bootcampName}/post/${c.communityId}`) }}
-                  >
-                    <Grid overflow="hidden" height="100px" width="100%" >
-                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
-                        overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
-                      >{c.community.title}
-                      </Text>
-                      <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                        margin="0 0 24px 0" height="44px" TABfontSize="12px"
-                      >{c.community.content}</Text>
-                    </Grid>
-                    <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
-                      <ImgBox>
-                        <ProfileImg src={Profile_small} alt='프로필' />
-                      </ImgBox>
-                      <InfoBox>
-                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{c.community.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive />{c.community.createdAt}</Text>
-                      </InfoBox>
-                    </Grid>
-                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
-                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 커뮤니티 </Text>
                     </Grid>
 
                   </Post>

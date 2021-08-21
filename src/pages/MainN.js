@@ -7,13 +7,6 @@ import { getCookie } from '../shared/cookie';
 
 const MainN = (props) => {
   const dispatch = useDispatch();
-  const provider = getCookie('provider');
-
-  useEffect(() => {
-    if (provider === 'google') {
-      dispatch(userActions.googleRefresh());
-    }
-  }, []);
 
   return (
     <React.Fragment>

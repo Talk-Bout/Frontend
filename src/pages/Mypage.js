@@ -60,13 +60,6 @@ const Mypage = (props) => {
   // 질문과답변 3개 추출
   const myqna = myqna_list.slice(0, 3);
 
-  // 커뮤니티 리스트
-  const all_commu = useSelector((state) => state.mypage.mycommu_list);
-  // 삭제된 commu의 경우 안띄워줌
-  const mycommu_list = all_commu.filter((commu) => commu.post !== null);
-  // 커뮤니티 3개 추출
-  const mycommu = mycommu_list.slice(0, 3);
-
   // 구글 폼 링크
   const url = 'https://forms.gle/bFX46XToYSFVGFoW6';
 
@@ -78,7 +71,6 @@ const Mypage = (props) => {
     dispatch(mypageActions.setMypostDB(nickname));
     dispatch(mypageActions.setMyTalkDB(nickname));
     dispatch(mypageActions.setMyQnaDB(nickname));
-    dispatch(mypageActions.setMyCommuDB(nickname));
   }, []);
 
   return (

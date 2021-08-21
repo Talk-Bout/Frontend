@@ -3,7 +3,6 @@ import Footer from './Footer';
 import AnswerCard from './AnswerCard';
 import Banner from './Banner';
 import Body from './Body';
-import BootCommu from './BootCommu';
 import BootInfo from './BootInfo';
 import BootOthers from './BootOthers';
 import BootReview from './BootReview';
@@ -20,4 +19,4 @@ import Stars from './Stars';
 import ToastMessage from './ToastMessage';
 
 
-export {Header, Footer, AnswerCard, Banner, Body, BootCommu, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, QnaCard, Sidebar, SmallWindow, Spinner, Stars, ToastMessage, };
+export { Header, Footer, AnswerCard, Banner, Body, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, QnaCard, Sidebar, SmallWindow, Spinner, Stars, ToastMessage, };

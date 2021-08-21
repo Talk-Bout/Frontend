@@ -24,7 +24,6 @@ import CommonWrite from './pages/CommonWrite';
 import BootMain from './pages/BootMain';
 import BootDetail from './pages/BootDetail';
 import BootReviewWrite from './pages/BootReviewWrite';
-import BootCommuWrite from './pages/BootCommuWrite';
 import BootPost from './pages/BootPost';
 
 //질문 게시판
@@ -53,6 +52,11 @@ function App() {
   useEffect(() => {
     if (token && provider) {
       dispatch(userActions.logInCheck());
+      if (provider === 'google') {
+        dispatch(userActions.googleRefresh());
+      } else if (provider === 'kakao') {
+        dispatch(userActions.kakaoRefresh());
+      }
     }
   }, []);
 
@@ -74,8 +78,6 @@ function App() {
           <Route path="/boot" exact component={BootMain} />
           <Route path="/boot/:name" exact component={BootDetail} />
           <Route path="/boot/:name/review" exact component={BootReviewWrite} />
-          <Route path="/boot/:name/community" exact component={BootCommuWrite} />
-          <Route path="/boot/:name/community/:id" exact component={BootCommuWrite} />
           <Route path="/boot/:name/post/:id" exact component={BootPost} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/mypost" exact component={MypagePost} />

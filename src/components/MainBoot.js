@@ -22,13 +22,8 @@ const MainBoot = () => {
       <Grid className="top-boot" height="421px" TABheight="330px">
         <Grid padding="57px 0 0" TABpadding="40px 0 0">
           {/* 인기 부트캠프 */}
-          <Text
-            fontSize="24px"
-            fontWeight="700"
-            color="#F8F9FA"
-            TABfontSize="20px"
-          >
-            <Emoji src={Rocket_emoji} alt='로켓' height='24px' TABheight='20px' margin='0 8px 0 0'/>부트캠프
+          <Text fontSize="24px" fontWeight="700" color="#F8F9FA" TABfontSize="20px">
+            <Emoji src={Rocket_emoji} alt='로켓' height='24px' TABheight='20px' margin='0 8px 0 0' />부트캠프
           </Text>
           <TextBox>
             {/* 부트캠프 페이지 소개 */}
@@ -49,7 +44,7 @@ const MainBoot = () => {
           <CardList>
             {pop_camps.map((pc, idx) => {
               return (
-                <CampCard className={`campcard${idx}`} key={idx}>
+                <CampCard className={`campcard${idx}`} key={idx} onClick={() => history.push(`/boot/${pc.bootcampName}`)}>
                   {/* 부트캠프 로고 */}
                   <Grid
                     width="104px"
@@ -58,13 +53,13 @@ const MainBoot = () => {
                     TABpadding="16px 0 0 20px"
                   >
                     <ImageDiv>
-                      <Logo src={pc.logo ? pc.logo : CampLogo_default} onClick={() => history.push(`/boot/${pc.bootcampName}`)}/>
+                      <Logo src={pc.logo ? pc.logo : CampLogo_default} />
                     </ImageDiv>
                   </Grid>
                   {/* 부트캠프 정보 */}
                   <Grid
                     width="304px"
-                    padding="22px 24px"
+                    padding="36px 24px"
                     TABwidth="240px"
                     TABpadding="16px 10px"
                   >
@@ -74,7 +69,7 @@ const MainBoot = () => {
                         p
                         fontSize="18px"
                         fontWeight="700"
-                        margin="0"
+                        margin="0 0 5px"
                         color="#F8F9FA"
                         TABfontSize="16px"
                         cursor='pointer'
@@ -86,38 +81,6 @@ const MainBoot = () => {
                       </Text>
                       {/* 부트캠프 별점 */}
                       <Stars size="16px" score={pc.star} withScore />
-                    </Grid>
-                    <Grid
-                      display="flex"
-                      padding="13px 0 0"
-                      TABpadding="6px 0 0"
-                    >
-                      {/* 부트캠프 리뷰 메뉴 */}
-                      <Text
-                        fontSize="14px"
-                        color="#E8EAED"
-                        margin="0 16px 0 0"
-                        TABfontSize="12px"
-                        TABmargin="0 8px 0 0"
-                        cursor="pointer"
-                        _onClick={() =>
-                          history.push({pathname: `/boot/${pc.bootcampName}`, state: {tab_click: 'review'}})
-                        }
-                      >
-                        리뷰
-                      </Text>
-                      {/* 부트캠프 커뮤니티 메뉴 */}
-                      <Text
-                        fontSize="14px"
-                        color="#E8EAED"
-                        TABfontSize="12px"
-                        cursor="pointer"
-                        _onClick={() =>
-                          history.push({pathname: `/boot/${pc.bootcampName}`, state: {tab_click: 'community'}})
-                        }
-                      >
-                        커뮤니티
-                      </Text>
                     </Grid>
                   </Grid>
                 </CampCard>
@@ -163,6 +126,7 @@ const CampCard = styled.div`
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   border-radius: 8px;
+  cursor: pointer;
   &:hover {
     opacity: 0.7;
   }
@@ -183,7 +147,6 @@ const ImageDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: 64px;
     height: 64px;

@@ -9,12 +9,13 @@ import { IoStar } from 'react-icons/io5';
 import { history } from '../redux/ConfigureStore';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import StarRatingComponent from 'react-star-rating-component';
+import { getCookie } from '../shared/cookie';
 
 const BootReviewWrite = (props) => {
   const dispatch = useDispatch();
   const camp_name = props.location.state.camp_name;
   // const user_name = useSelector(state => state.user.user.nickname);
-  const user_name = sessionStorage.getItem('nickname');
+  const user_name = getCookie('nickname');
 
   // 별점을 state에 저장하기
   const [stars, setStars] = useState(0);
@@ -24,7 +25,7 @@ const BootReviewWrite = (props) => {
 
   // 리뷰 제목, 수료 여부, 장점, 단점에 useRef 설정
   const titleInput = useRef(null);
-  const courseInput = useRef(null); 
+  const courseInput = useRef(null);
   const prosInput = useRef(null);
   const consInput = useRef(null);
 
@@ -76,7 +77,7 @@ const BootReviewWrite = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' backgroundColor='#17181b'>
         {/* 사이드바 */}
-        <Sidebar opacity='0.2' TABopacity='0.2'/>
+        <Sidebar opacity='0.2' TABopacity='0.2' />
         {/* 헤더 포함한 바디 */}
         <Body header opacity='0.2' TABopacity='0.2'>
           <Grid className='body-inner' padding='24px 0 0'>
@@ -99,13 +100,13 @@ const BootReviewWrite = (props) => {
               <BodyBox>
                 {/* 리뷰 제목 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed' lineHeight='50px'>제목</Text></div>
-                <div><Input placeholder='제목을 입력해주세요' ref={titleInput}/></div>
+                <div><Input placeholder='제목을 입력해주세요' ref={titleInput} /></div>
                 {/* 평점 */}
-                <div style={{lineHeight: '32px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>평점</Text></div>
-                <div style={{lineHeight: '32px'}}><Text fontSize='32px' fontWeight='700'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#dadce0' emptyStarColor='#3c4043'/></Text></div>
+                <div style={{ lineHeight: '32px' }}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>평점</Text></div>
+                <div style={{ lineHeight: '32px' }}><Text fontSize='32px' fontWeight='700'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#dadce0' emptyStarColor='#3c4043' /></Text></div>
                 {/* 수료 여부 */}
-                <div style={{marginTop: '-8px', lineHeight: '52px'}}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>수료 여부</Text></div>
-                <div style={{marginTop: '-8px'}}>
+                <div style={{ marginTop: '-8px', lineHeight: '52px' }}><Text fontSize='18px' fontWeight='700' color='#e8eaed'>수료 여부</Text></div>
+                <div style={{ marginTop: '-8px' }}>
                   <Select ref={courseInput}>
                     <option value=''>선택해주세요</option>
                     <option value='수강중'>수강중</option>
@@ -114,10 +115,10 @@ const BootReviewWrite = (props) => {
                 </div>
                 {/* 장점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput}/></div>
+                <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput} /></div>
                 {/* 단점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>단점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder={`${camp_name}의 단점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={consInput}/></div>
+                <div><Textarea rows='5' placeholder={`${camp_name}의 단점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={consInput} /></div>
               </BodyBox>
             </Window>
           </Grid>

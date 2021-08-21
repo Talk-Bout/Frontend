@@ -1,12 +1,12 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
-import instance from '../../shared/Request';
+import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
 
 // QUESTION 액션타입
 const SET_QUESTION = 'question/SET_QUESTION';
-const SET_QUESTION_POP = 'question/SET_QUESTION_POP'; // <-- 추가했습니다!!
+const SET_QUESTION_POP = 'question/SET_QUESTION_POP';
 const SET_ONE_QUESTION = 'question/SET_ONE_QUESTION';
 const CREATE_QUESTION = 'question/CREATE_QUESTION';
 const EDIT_QUESTION = 'question/EDIT_QUESTION';
@@ -29,60 +29,33 @@ const LIKE_ANSWER = 'question/LIKE_ANSWER';
 const UNLIKE_ANSWER = 'question/UNLIKE_ANSWER';
 
 // QUESTION 액션생성함수
-const setQuestion = createAction(SET_QUESTION, (question_list) => ({
-  question_list,
-}));
-
-const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({
-  question_list,
-})); // <-- 추가했습니다!!
-
-const setOneQuestion = createAction(SET_ONE_QUESTION, (question) => ({
-  question,
-}));
-const createQuestion = createAction(CREATE_QUESTION, (question) => ({
-  question,
-}));
+const setQuestion = createAction(SET_QUESTION, (question_list) => ({ question_list }));
+const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({ question_list }));
+const setOneQuestion = createAction(SET_ONE_QUESTION, (question) => ({ question }));
+const createQuestion = createAction(CREATE_QUESTION, (question) => ({ question }));
 const editQuestion = createAction(EDIT_QUESTION, (question) => ({ question }));
-const deleteQuestion = createAction(DELETE_QUESTION, (question) => ({
-  question,
-}));
+const deleteQuestion = createAction(DELETE_QUESTION, (question) => ({ question }));
 
 // ANSWER 액션생성함수
 const setAnswer = createAction(SET_ANSWER, (answer_list) => ({ answer_list }));
-const setNextAnswer = createAction(SET_NEXT_ANSWER, (answer_list) => ({
-  answer_list,
-}));
+const setNextAnswer = createAction(SET_NEXT_ANSWER, (answer_list) => ({ answer_list }));
 const createAnswer = createAction(CREATE_ANSWER, (answer) => ({ answer }));
 
 // BOOKMARK 액션생성함수
-const setQuestionBookmark = createAction(
-  SET_QUESTION_BOOKMARK,
-  (bookmark_list) => ({ bookmark_list })
-);
-const addQuestionBookmark = createAction(
-  ADD_QUESTION_BOOKMARK,
-  (question_bookmark) => ({ question_bookmark })
-);
-const deleteQuestionBookmark = createAction(
-  DELETE_QUESTION_BOOKMARK,
-  (bookmark_id) => ({ bookmark_id })
-);
+const setQuestionBookmark = createAction(SET_QUESTION_BOOKMARK, (bookmark_list) => ({ bookmark_list }));
+const addQuestionBookmark = createAction(ADD_QUESTION_BOOKMARK, (question_bookmark) => ({ question_bookmark }));
+const deleteQuestionBookmark = createAction(DELETE_QUESTION_BOOKMARK, (bookmark_id) => ({ bookmark_id }));
 
 // 좋아요 액션생성함수
 const likeQuestion = createAction(LIKE_QUESTION, (q_like) => ({ q_like }));
-const unlikeQuestion = createAction(UNLIKE_QUESTION, (q_like_id) => ({
-  q_like_id,
-}));
+const unlikeQuestion = createAction(UNLIKE_QUESTION, (q_like_id) => ({ q_like_id }));
 const likeAnswer = createAction(LIKE_ANSWER, (a_like) => ({ a_like }));
-const unlikeAnswer = createAction(UNLIKE_ANSWER, (a_like_info) => ({
-  a_like_info,
-}));
+const unlikeAnswer = createAction(UNLIKE_ANSWER, (a_like_info) => ({ a_like_info }));
 
 // 기본값 정하기
 const initialState = {
   list: [],
-  popular_list: [], // 인기순 정렬                                                    <-- 추가했습니다!!
+  popular_list: [], // 인기순 정렬
   answer_list: [],
   bookmark_list: [],
   question_like_list: [], //질문 좋아요 리스트

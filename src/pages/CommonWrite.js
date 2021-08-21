@@ -8,13 +8,14 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import { actionCreators as imageActions } from '../redux/modules/image';
+import { getCookie } from '../shared/cookie';
 
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
   // const username = useSelector(state => state.user.user.nickname);
-  const username = sessionStorage.getItem('nickname');
+  const username = getCookie('nickname');
 
   const postId = parseInt(window.location.pathname.split('/common/write/')[1]);
   const commu_found = useSelector((state) => state.post.one_post);
@@ -22,7 +23,7 @@ const BootCommuWrite = (props) => {
 
   const titleRef = useRef('');
   const contentRef = useRef('');
-  
+
   // 카테고리 설정
   const categoryRef = useRef('');
 
@@ -56,7 +57,7 @@ const BootCommuWrite = (props) => {
       window.alert('내용을 입력해주세요.');
       return;
     }
-    
+
     if (postId) {
       const edited_image = preview ? image_url : commu_found.image
       const edited_post = {
@@ -75,7 +76,7 @@ const BootCommuWrite = (props) => {
       contentRef.current.value = '';
     } else {
       const new_post = {
-        
+
         title: titleRef.current.value,
         content: contentRef.current.value,
         nickname: username,
@@ -155,8 +156,8 @@ const BootCommuWrite = (props) => {
               </Grid>
               <BodyBox>
                 {/* 카테고리 선택 */}
-                <SelectBox 
-                 ref={categoryRef}
+                <SelectBox
+                  ref={categoryRef}
                 >
                   <Option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
                   <Option value="info">정보</Option>
@@ -194,7 +195,7 @@ const BootCommuWrite = (props) => {
                       {preview ? imageRef.current.files[0].name : ''}
                     </Text>
                   </div>
-                    : '' }
+                  : ''}
               </BodyBox>
               {/* 작성 페이지 푸터 */}
               <FooterBox>

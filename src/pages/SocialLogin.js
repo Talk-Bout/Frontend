@@ -23,7 +23,7 @@ const SocialLogin = (props) => {
 
   return (
     <React.Fragment>
-      <Grid is_center height='100vh' lineHeight='85vh'>
+      <Grid is_center height='100vh' lineHeight='85vh' backgroundColor='#17181B'>
         <SpinnerImg src={Spinner_iris} />
       </Grid>
     </React.Fragment>

@@ -1,7 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
-import instance from '../../shared/Request';
+import instance from '../../shared/request';
+import { getCookie, setCookie, deleteCookie } from "../../shared/cookie";
 
 //액션 타입
 const STAY_LOGIN = 'user/STAY_LOGIN'; //로그인 상태 유지
@@ -27,7 +28,6 @@ const loginCheck = createAction(LOGIN_CHECK, () => ({}));
 const initialState = {
   user: [],
   is_deleted: false,
-  // one_question: null, // 왜 여기 있는지 모르겠음..
   user_info: null,
   is_login: false,
 };
@@ -41,11 +41,11 @@ const googleLogin = () => {
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
     const nickname_URL = new URL(window.location.href).searchParams.get('nickname');
     const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
-    sessionStorage.setItem('accessToken', accessToken_URL);
-    sessionStorage.setItem('refreshToken', refreshToken_URL);
-    sessionStorage.setItem('provider', provider_URL);
-    sessionStorage.setItem('nickname', nickname_URL);
-    sessionStorage.setItem('profilePic', profilePic_URL);
+    setCookie('refreshToken', refreshToken_URL);
+    setCookie('accessToken', accessToken_URL);
+    setCookie('provider', provider_URL);
+    setCookie('nickname', nickname_URL);
+    setCookie('profilePic', profilePic_URL);
     const google_info = {
       accessToken: accessToken_URL,
       provider: provider_URL,
@@ -62,7 +62,7 @@ const googleRefresh = () => {
   return function (dispatch) {
     const clientSecret = 'NEk_9kMajTMRCvE0b24vQWCh';
     const clientId = '1024289816833-ekko4or0shvl9vusetgga5rmbs5u8gla.apps.googleusercontent.com';
-    const refreshToken = sessionStorage.getItem('refreshToken');
+    const refreshToken = getCookie('refreshToken');
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
     const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
     const axios = require('axios');
@@ -72,10 +72,10 @@ const googleRefresh = () => {
       client_id: clientId,
       refresh_token: refreshToken,
     }), { headers: headers }).then((response) => {
-      sessionStorage.removeItem('accessToken');
-      sessionStorage.setItem('accessToken', response.data.access_token);
-      sessionStorage.removeItem('idToken');
-      sessionStorage.setItem('idToken', response.data.access_token);
+      deleteCookie('accessToken');
+      setCookie('accessToken', response.data.access_token);
+      deleteCookie('idToken');
+      setCookie('idToken', response.data.access_token);
       const tokens = {
         accessToken: response.data.access_token,
         idToken: response.data.id_token,
@@ -95,11 +95,11 @@ const kakaoLogin = () => {
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
     const nickname_URL = new URL(window.location.href).searchParams.get('nickname');
     const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
-    sessionStorage.setItem('accessToken', accessToken_URL);
-    sessionStorage.setItem('refreshToken', refreshToken_URL);
-    sessionStorage.setItem('provider', provider_URL);
-    sessionStorage.setItem('nickname', nickname_URL);
-    sessionStorage.setItem('profilePic', profilePic_URL);
+    setCookie('accessToken', accessToken_URL);
+    setCookie('refreshToken', refreshToken_URL);
+    setCookie('provider', provider_URL);
+    setCookie('nickname', nickname_URL);
+    setCookie('profilePic', profilePic_URL);
     const kakao_info = {
       accessToken: accessToken_URL,
       provider: provider_URL,
@@ -121,10 +121,10 @@ const kakaoRefresh = () => {
     axios.post('https://kauth.kakao.com/oauth/token', formUrlEncoded({
       grant_type: 'refresh_token',
       client_id: REST_API_KEY,
-      refresh_token: sessionStorage.getItem('refreshToken'),
+      refresh_token: getCookie('refreshToken'),
     }), { headers: headers }).then((response) => {
-      sessionStorage.removeItem('accessToken');
-      sessionStorage.setItem('accessToken', response.data.access_token);
+      deleteCookie('accessToken');
+      setCookie('accessToken', response.data.access_token);
       const kakao_token = {
         accessToken: response.data.access_token
       }
@@ -138,8 +138,8 @@ const kakaoRefresh = () => {
 const logOut = () => {
   // 로그아웃
   return function (dispatch) {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const provider = sessionStorage.getItem('provider');
+    const accessToken = getCookie('accessToken');
+    const provider = getCookie('provider');
     const headers = { 'authorization': `Bearer ${accessToken}` };
     const axios = require('axios');
     axios.post('http://13.209.12.149/oauth/logout', {
@@ -148,12 +148,12 @@ const logOut = () => {
       if (response.status === 200) {
         window.alert('성공적으로 로그아웃 되었습니다.');
       }
-      sessionStorage.removeItem('accessToken');
-      sessionStorage.removeItem('refreshToken');
-      sessionStorage.removeItem('idToken');
-      sessionStorage.removeItem('provider');
-      sessionStorage.removeItem('nickname');
-      sessionStorage.removeItem('profilePic');
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('idToken');
+      deleteCookie('provider');
+      deleteCookie('nickname');
+      deleteCookie('profilePic');
       dispatch(removeTokens());
       history.push('/');
     }).catch((err) => {
@@ -161,6 +161,33 @@ const logOut = () => {
     });
   };
 };
+
+const logOutAuto = () => {
+  // 쿠키 만료된 후 자동 로그아웃
+  return function (dispatch) {
+    deleteCookie('accessToken');
+    deleteCookie('refreshToken');
+    deleteCookie('idToken');
+    deleteCookie('provider');
+    deleteCookie('nickname');
+    deleteCookie('profilePic');
+    window.alert('로그인 정보가 만료되어 자동 로그아웃 되었습니다. 로그인 화면으로 이동합니다.');
+    dispatch(removeTokens());
+    history.push('/login');
+  };
+};
+
+const logInCheck = () => {
+  return function (dispatch) {
+    const provider = getCookie('provider');
+    if (provider === 'google') {
+      googleRefresh();
+    } else if (provider === 'kakao') {
+      kakaoRefresh();
+    }
+    dispatch(loginCheck());
+  }
+}
 
 const stayLogInDB = () => {
   return function (dispatch) {
@@ -252,9 +279,10 @@ const actionCreators = {
   kakaoLogin,
   kakaoRefresh,
   logOut,
+  logOutAuto,
+  logInCheck,
   stayLogInDB,
   userDeleteDB,
-  loginCheck,
 };
 
 export { actionCreators };

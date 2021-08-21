@@ -10,6 +10,7 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { BsEye, BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Button, Menu, MenuItem } from '@material-ui/core';
+import { getCookie } from '../shared/cookie';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const QuestionDetail = (props) => {
   );
 
   // const user_name = useSelector((state) => state.user.user.nickname);
-  const user_name = sessionStorage.getItem('nickname');
+  const user_name = getCookie('nickname');
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
 

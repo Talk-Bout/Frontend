@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from './redux/modules/user';
+import { getCookie } from './shared/cookie';
 
 //메인 페이지
 import MainN from './pages/MainN';
@@ -46,12 +47,12 @@ import NotFound from './shared/NotFound';
 function App() {
   const dispatch = useDispatch();
   const is_loading = useSelector(state => state.status.is_loading);
-  const token = sessionStorage.getItem('refreshToken');
+  const token = getCookie('refreshToken');
+  const provider = getCookie('provider');
 
   useEffect(() => {
-    // dispatch(userActions.stayLogInDB());
-    if (token) {
-      dispatch(userActions.loginCheck());
+    if (token && provider) {
+      dispatch(userActions.logInCheck());
     }
   }, []);
 

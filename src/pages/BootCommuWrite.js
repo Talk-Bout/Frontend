@@ -9,13 +9,14 @@ import { actionCreators as imageActions } from '../redux/modules/image';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
 import { FiHash } from 'react-icons/fi';
+import { getCookie } from '../shared/cookie';
 
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
   // const username = useSelector(state => state.user.user.nickname);
-  const username = sessionStorage.getItem('nickname');
+  const username = getCookie('nickname');
 
   const edited_id = parseInt(props.match.params.id);
   const commu_found = useSelector((state) => state.bootcamp.one_commu);
@@ -108,7 +109,7 @@ const BootCommuWrite = (props) => {
                 <Grid width="23.33%" padding="0 40px">
                   <Text
                     fontSize="35px"
-                    TABfontSize='28px' 
+                    TABfontSize='28px'
                     color="#e5e5e5"
                     lineHeight="84px"
                     cursor="pointer"
@@ -123,7 +124,7 @@ const BootCommuWrite = (props) => {
                 <Grid width="53.33%" is_center>
                   <Text
                     fontSize="24px"
-                    TABfontSize='20px' 
+                    TABfontSize='20px'
                     fontWeight="700"
                     color="#e5e5e5"
                     lineHeight="84px"
@@ -135,7 +136,7 @@ const BootCommuWrite = (props) => {
                 <Grid width="23.33%" padding="0 40px">
                   <Text
                     fontSize="24px"
-                    TABfontSize='20px' 
+                    TABfontSize='20px'
                     fontWeight="700"
                     color="#848484"
                     lineHeight="84px"
@@ -180,7 +181,7 @@ const BootCommuWrite = (props) => {
                       {preview ? imageRef.current.files[0].name : ''}
                     </Text>
                   </div>
-                    : '' }
+                  : ''}
               </BodyBox>
               {/* 작성 페이지 푸터 */}
               <FooterBox>

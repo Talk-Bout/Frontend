@@ -7,12 +7,13 @@ import { actionCreators as userActions } from '../redux/modules/user';
 import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
+import { getCookie } from '../shared/cookie';
 
-const HeaderN = (props) => {
-  const {opacity, TABopacity} = props;
+const Header = (props) => {
+  const { opacity, TABopacity } = props;
   const dispatch = useDispatch();
 
-  const token = sessionStorage.getItem('refreshToken');
+  const token = getCookie('refreshToken');
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -52,7 +53,7 @@ const HeaderN = (props) => {
             margin='10px 0 0'
             TABmargin='9px 0 0'
           >
-            <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')}/>
+            <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
             <Image src={Search} alt="검색" />
             <Input placeholder="검색어를 입력하세요." />
           </Grid>
@@ -106,7 +107,7 @@ const HeaderN = (props) => {
                 마이페이지
               </MenuItem>
               <MenuItem
-                onClick={() => {handleClose(); logout()}}
+                onClick={() => { handleClose(); logout() }}
               >
                 로그아웃
               </MenuItem>
@@ -139,7 +140,7 @@ const HeaderN = (props) => {
           margin="10px 0 0"
           TABmargin='9px 0 0'
         >
-          <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')}/>
+          <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
           <Image src={Search} alt="검색" />
           <Input placeholder="검색어를 입력하세요." />
         </Grid>
@@ -219,4 +220,4 @@ const LoginBtn = styled.button`
   }
 `;
 
-export default HeaderN;
+export default Header;

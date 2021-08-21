@@ -5,13 +5,14 @@ import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { BiLike } from 'react-icons/bi';
+import { getCookie } from '../shared/cookie';
 
 const AnswerCard = (props) => {
   const dispatch = useDispatch();
 
   const answer_id = parseInt(props.answerId);
   // const user_name = useSelector((state) => state.user.user.nickname);
-  const user_name = sessionStorage.getItem('nickname');
+  const user_name = getCookie('nickname');
 
   // 전체 답변 리스트
   const answer_list = useSelector((state) => state.question.answer_list);

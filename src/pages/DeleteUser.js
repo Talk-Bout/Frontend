@@ -5,6 +5,7 @@ import { Sidebar, Body, SmallWindow } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { history } from '../redux/ConfigureStore';
+import { getCookie } from '../shared/cookie';
 
 //체크박스
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -16,7 +17,7 @@ import '../App.css';
 const DeleteUser = (props) => {
   const dispatch = useDispatch();
   // const user_name = useSelector((state) => state.user.user);
-  const user_name = sessionStorage.getItem('nickname');
+  const user_name = getCookie('nickname');
 
   const [state, setState] = useState({
     checked: false,

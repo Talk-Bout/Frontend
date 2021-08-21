@@ -1,13 +1,13 @@
-import {createAction, handleActions} from "redux-actions";
-import {produce} from 'immer';
-import {history} from '../ConfigureStore';
-import instance from '../../shared/Request';
+import { createAction, handleActions } from "redux-actions";
+import { produce } from 'immer';
+import { history } from '../ConfigureStore';
+import instance from '../../shared/request';
 
 // 액션타입
 const SET_NEWS = 'SET_NEWS';
 
 // 액션생성함수
-const setNews = createAction(SET_NEWS, (news_list) => ({news_list}));
+const setNews = createAction(SET_NEWS, (news_list) => ({ news_list }));
 
 // 기본값 정하기
 const initialState = {
@@ -18,7 +18,7 @@ const initialState = {
 const setNewsDB = () => {
     return function (dispatch) {
         instance.get('/')
-      .then((response) => {
+            .then((response) => {
                 dispatch(setNews(response.data));
             })
             .catch((err) => {

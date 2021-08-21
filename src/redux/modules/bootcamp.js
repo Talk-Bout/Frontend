@@ -1,8 +1,9 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
-import instance from '../../shared/Request';
+import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
+import { getCookie } from '../../shared/cookie';
 
 // 액션타입
 const MAIN_CAMPS = 'bootcamp/MAIN_CAMPS' // 메인페이지 부트캠프 목록 불러오기(인기순)
@@ -33,27 +34,27 @@ const EDIT_COMMENT = 'bootcamp/EDIT_COMMENT'; // 커뮤니티 댓글 수정하�
 const DELETE_COMMENT = 'bootcamp/DELETE_COMMENT'; // 커뮤니티 댓글 삭제하기
 
 // 액션생성함수
-const mainCamps = createAction(MAIN_CAMPS, (camp_list) => ({camp_list}));
-const setCamps = createAction(SET_CAMPS, (camp_list) => ({camp_list}));
-const setMyCamp = createAction(SET_MY_CAMP, (camp_list) => ({camp_list}));
-const addMyCamp = createAction(ADD_MY_CAMP, (camp) => ({camp}));
-const deleteMyCamp = createAction(DELETE_MY_CAMP, (bookmark_id) => ({bookmark_id}));
-const setReviews = createAction(SET_REVIEWS, (review_list) => ({review_list}));
-const addReview = createAction(ADD_REVIEW, (review) => ({review}));
-const setCommus = createAction(SET_COMMUS, (commu_list) => ({commu_list}));
-const setOneCommu = createAction(SET_ONE_COMMU, (commu) => ({commu}));
-const addCommu = createAction(ADD_COMMU, (commu) => ({commu}));
-const editCommu = createAction(EDIT_COMMU, (commu) => ({commu}));
-const setMyCommu = createAction(SET_MY_COMMU, (commu_list) => ({commu_list}));
-const addMyCommu = createAction(ADD_MY_COMMU, (commu) => ({commu}));
-const deleteMyCommu = createAction(DELETE_MY_COMMU, (bookmark_id) => ({bookmark_id}));
-const likeCommu = createAction(LIKE_COMMU, (like) => ({like}));
-const unlikeCommu = createAction(UNLIKE_COMMU, (like) => ({like}));
-const setComments = createAction(SET_COMMENTS, (comment_list) => ({comment_list}));
-const setNextComments = createAction(SET_NEXT_COMMENTS, (comment_list) => ({comment_list}));
-const addComment = createAction(ADD_COMMENT, (comment) => ({comment}));
-const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
-const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
+const mainCamps = createAction(MAIN_CAMPS, (camp_list) => ({ camp_list }));
+const setCamps = createAction(SET_CAMPS, (camp_list) => ({ camp_list }));
+const setMyCamp = createAction(SET_MY_CAMP, (camp_list) => ({ camp_list }));
+const addMyCamp = createAction(ADD_MY_CAMP, (camp) => ({ camp }));
+const deleteMyCamp = createAction(DELETE_MY_CAMP, (bookmark_id) => ({ bookmark_id }));
+const setReviews = createAction(SET_REVIEWS, (review_list) => ({ review_list }));
+const addReview = createAction(ADD_REVIEW, (review) => ({ review }));
+const setCommus = createAction(SET_COMMUS, (commu_list) => ({ commu_list }));
+const setOneCommu = createAction(SET_ONE_COMMU, (commu) => ({ commu }));
+const addCommu = createAction(ADD_COMMU, (commu) => ({ commu }));
+const editCommu = createAction(EDIT_COMMU, (commu) => ({ commu }));
+const setMyCommu = createAction(SET_MY_COMMU, (commu_list) => ({ commu_list }));
+const addMyCommu = createAction(ADD_MY_COMMU, (commu) => ({ commu }));
+const deleteMyCommu = createAction(DELETE_MY_COMMU, (bookmark_id) => ({ bookmark_id }));
+const likeCommu = createAction(LIKE_COMMU, (like) => ({ like }));
+const unlikeCommu = createAction(UNLIKE_COMMU, (like) => ({ like }));
+const setComments = createAction(SET_COMMENTS, (comment_list) => ({ comment_list }));
+const setNextComments = createAction(SET_NEXT_COMMENTS, (comment_list) => ({ comment_list }));
+const addComment = createAction(ADD_COMMENT, (comment) => ({ comment }));
+const editComment = createAction(EDIT_COMMENT, (comment) => ({ comment }));
+const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({ commentId }));
 
 // 기본값 정하기
 const initialState = {
@@ -105,23 +106,23 @@ const setMyCampDB = () => {
     // instance
     //   .get('/tokenUser')
     //   .then((response) => {
-        const nickname = sessionStorage.getItem('nickname');
-        instance
-          .get(`/users/${nickname}/bootcampBookmarks`)
-          .then((response) => {
-            dispatch(setMyCamp(response.data));
-          })
-          .catch((err) => {
-            console.error(
-              `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`
-            );
-          });
-      // })
-      // .catch((err) => {
-      //   console.error(
-      //     `사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`
-      //   );
-      // });
+    const nickname = getCookie('nickname');
+    instance
+      .get(`/users/${nickname}/bootcampBookmarks`)
+      .then((response) => {
+        dispatch(setMyCamp(response.data));
+      })
+      .catch((err) => {
+        console.error(
+          `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`
+        );
+      });
+    // })
+    // .catch((err) => {
+    //   console.error(
+    //     `사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`
+    //   );
+    // });
   };
 };
 
@@ -320,22 +321,23 @@ const setMyCommuDB = () => {
   return function (dispatch) {
     // instance.get('/tokenUser').then((response) => {
     //   const nickname = response.data.nickname;
-      const nickname = sessionStorage.getItem('nickname');
-      instance.get(`/users/${nickname}/communityBookmarks`)
+    const nickname = getCookie('nickname');
+    instance.get(`/users/${nickname}/communityBookmarks`)
       .then((result) => {
         dispatch(setMyCommu(result.data));
       }).catch((err) => {
         console.error(`부트캠프 커뮤니티글 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
-    // }).catch((err) => {
-    //     console.error(`북마크 목록 불러오기 위한 사용자 조회 에러 발생: ${err} ### ${err.response}`);
-    // });
-  })};
+        // }).catch((err) => {
+        //     console.error(`북마크 목록 불러오기 위한 사용자 조회 에러 발생: ${err} ### ${err.response}`);
+        // });
+      })
+  };
 };
 
 const addMyCommuDB = (nickname, communityId) => {
   // 커뮤니티글 북마크 표시하는 함수
   return function (dispatch) {
-    if (nickname === undefined) {
+    if (!nickname) {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
@@ -376,7 +378,7 @@ const deleteMyCommuDB = (communityId, communityBookmarkId) => {
 const likeCommuDB = (communityId, nickname) => {
   // 커뮤니티글 좋아요 표시하는 함수
   return function (dispatch) {
-    if (nickname === undefined) {
+    if (!nickname) {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
@@ -441,7 +443,7 @@ const setCommentsDB = (commu_id, page) => {
 const addCommentDB = (new_comment) => {
   // 서버에 커뮤니티글의 댓글 저장하는 함수
   return function (dispatch) {
-    if (new_comment.nickname === undefined) {
+    if (!new_comment.nickname) {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
@@ -511,7 +513,7 @@ export default handleActions({
   [SET_MY_CAMP]: (state, action) => produce(state, (draft) => {
     draft.my_camp_list = [...action.payload.camp_list];
   }),
-  [ADD_MY_CAMP]: (state,action) => produce(state, (draft) => {
+  [ADD_MY_CAMP]: (state, action) => produce(state, (draft) => {
     draft.my_camp_list.push(action.payload.camp);
   }),
   [DELETE_MY_CAMP]: (state, action) => produce(state, (draft) => {

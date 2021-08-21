@@ -10,6 +10,7 @@ import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
 import { FiHash } from 'react-icons/fi';
+import { getCookie } from '../shared/cookie';
 
 const QuestionWrite = (props) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const QuestionWrite = (props) => {
   const titleInput = useRef(null);
   const contentInput = useRef(null);
   // const user_name = useSelector((state) => state.user.user.nickname);
-  const user_name = sessionStorage.getItem('nickname');
+  const user_name = getCookie('nickname');
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);

@@ -158,6 +158,7 @@ const CommonDetail = (props) => {
                   <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' verticalAlign='middle'>{one_post.title}</Text>
                   <div style={{ height: 'fit-content' }}>
                     {/* 북마크 버튼 */}
+                    {/*  */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
                     {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
                     {post_bookmark ? <Text color='#7879F1' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>

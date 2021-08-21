@@ -5,7 +5,7 @@ import { actionCreators as statusActions } from './status';
 
 // 액션타입
 const SET_POST = 'post/SET_POST'; // 게시글 전체 불러오기
-const SET_POST_POP = 'post/SET_POST_POP' // 게시글 전체 불러오기(인기순)                 <-- 추가했습니다!!
+const SET_POST_POP = 'post/SET_POST_POP' // 게시글 전체 불러오기(인기순)
 const SET_ONE_POST = 'post/SET_ONE_POST'; // 게시글 하나 불러오기
 const ADD_POST = 'post/ADD_POST'; // 게시글 추가하기
 const EDIT_POST = 'post/EDIT_POST'; // 게시글 수정하기
@@ -27,7 +27,7 @@ const DELETE_COMMENT = 'post/DELETE_COMMENT';   // 댓글 삭제하기
 // 액션생성함수
 // 게시물
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
-const setPostPop = createAction(SET_POST_POP, (post_list) => ({ post_list }));          // <-- 추가했습니다!!!
+const setPostPop = createAction(SET_POST_POP, (post_list) => ({ post_list }));
 const setOnePost = createAction(SET_ONE_POST, (post) => ({ post }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const editPost = createAction(EDIT_POST, (post) => ({ post }));
@@ -50,7 +50,7 @@ const deleteComment = createAction(DELETE_COMMENT, (postCommentId) => ({ postCom
 // 기본값 정하기
 const initialState = {
   list: [],
-  pop_list: [],                                                                       // <-- 추가했습니다!!!
+  pop_list: [],
   one_post: [],
   my_bookmark_list: [],
   my_like_list: [],
@@ -75,7 +75,7 @@ const setPostDB = (page, category) => {
   };
 };
 
-const setPostPopDB = (page) => {                                                      // <-- 추가했습니다!!!
+const setPostPopDB = (page) => {
   // 전체 게시글 인기순 불러오는 함수
   return function (dispatch) {
     instance.get(`/popular/posts?page=${page}`).then((response) => {
@@ -327,7 +327,7 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.post_list;
       }),
-    [SET_POST_POP]: (state, action) => produce(state, (draft) => {                                        // <-- 추가했습니다!!!!
+    [SET_POST_POP]: (state, action) => produce(state, (draft) => {
       draft.pop_list = action.payload.post_list;
     }),
     [SET_ONE_POST]: (state, action) =>
@@ -398,7 +398,7 @@ export default handleActions(
 // 액션 생성자
 const actionCreators = {
   setPostDB,
-  setPostPopDB,                                                                               // <--- 추가했습니다!!!
+  setPostPopDB,
   setOnePostDB,
   addPostDB,
   editPostDB,

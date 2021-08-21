@@ -83,22 +83,21 @@ const QuestionDetail = (props) => {
 
   // 답변 작성
   const createAnswerBtn = () => {
+    const contents = document.getElementById('txtArea').value.replace('\r\n', '<br>');
     const new_answer = {
-      content: answerInput.current.value,
+      // content: answerInput.current.value,
+      content: contents,
       nickname: user_name,
       questionId: question_id,
     };
-
     if (!is_login) {
       window.alert('로그인 후에 이용 가능합니다.');
       return;
     }
-
     if (answerInput.current.value === '') {
       window.alert('내용을 입력해주세요.');
       return;
     }
-
     dispatch(questionActions.createAnswerDB(new_answer));
     answerInput.current.value = '';
   };
@@ -138,119 +137,57 @@ const QuestionDetail = (props) => {
             {/* 질문 카드 */}
             <QuestionBox>
               <Grid display="flex">
-                <Grid width="80%">
+                <Grid width="100%">
+                  {/* 제목 */}
                   <Text fontSize="24px" fontWeight="600" color="#ffffff">
                     Q
                   </Text>
-                  <Text
-                    fontSize="24px"
-                    fontWeight="600"
-                    margin="auto 2%"
-                    color="#ffffff"
-                  >
+                  <Text fontSize="24px" fontWeight="600" margin="0 8px" color="#ffffff">
                     {question_found.title}
                   </Text>
                 </Grid>
                 {/* 북마크와 수정 삭제 */}
-                <Grid display="flex" width="auto" margin="0 0 0 auto">
-                  {question_bookmark ? (
-                    <Button
-                      padding="0"
-                      width="16.33px"
-                      height="21px"
-                      onClick={() =>
-                        delete_bookmark(question_bookmark.questionBookmarkId)
-                      }
-                    >
-                      <Text
-                        padding="0"
-                        color="#7879F1"
-                        fontSize="24px"
-                        lineHeight="35px"
-                        verticalAlign="middle"
-                        cursor="pointer"
-                        hover="opacity: 0.7"
-                      >
-                        <BsBookmarkFill />
-                      </Text>
-                    </Button>
-                  ) : (
-                    <Button
-                      padding="0"
-                      width="16.33px"
-                      height="21px"
-                      onClick={() => add_bookmark()}
-                    >
-                      <Text
-                        padding="0"
-                        color="#9aa0a6"
-                        fontSize="24px"
-                        lineHeight="35px"
-                        verticalAlign="middle"
-                        cursor="pointer"
-                        hover="opacity: 0.7"
-                      >
-                        <BsBookmark />
-                      </Text>
-                    </Button>
-                  )}
-
-                  {/* 드롭 다운 버튼 */}
-                  {question_found.nickname === user_name ? (
+                {/* 북마크 버튼은 로그인한 사용자만 보여주기 */}
+                <Grid display="flex" width='auto' float='right'>
+                  {is_login &&
                     <>
-                      <Button
-                        padding="0"
-                        width="16.33px"
-                        height="21px"
-                        bg="transparent"
-                        aria-controls="simple-menu"
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                      >
-                        <Text
-                          padding="0"
-                          color="#9AA0A6"
-                          fontSize="24px"
-                          lineHeight="35px"
-                          hover="opacity: 0.8"
-                        >
+                      {question_bookmark ?
+                        <Button padding="0" width="16.33px" height="21px" onClick={() => delete_bookmark(question_bookmark.questionBookmarkId)}>
+                          <Text padding="0" color="#7879F1" fontSize="24px" lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
+                            <BsBookmarkFill />
+                          </Text>
+                        </Button>
+                        :
+                        <Button padding="0" width="16.33px" height="21px" onClick={() => add_bookmark()}>
+                          <Text padding="0" color="#9aa0a6" fontSize="24px" lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
+                            <BsBookmark />
+                          </Text>
+                        </Button>
+                      }
+                    </>
+                  }
+                  {/* 드롭 다운 버튼 */}
+                  {question_found.nickname === user_name ?
+                    <>
+                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        <Text padding="0" color="#9AA0A6" fontSize="24px" lineHeight="35px" hover="opacity: 0.8">
                           <BsThreeDotsVertical />
                         </Text>
                       </Button>
-
-                      <Menu
-                        id="simple-menu"
-                        anchorEl={MenuLink}
-                        keepMounted
-                        open={Boolean(MenuLink)}
-                        onClose={handleClose}
-                      >
-                        <MenuItem
-                          onClick={() => {
-                            editBtn();
-                          }}
-                        >
+                      <Menu id="simple-menu" anchorEl={MenuLink} keepMounted open={Boolean(MenuLink)} onClose={handleClose}>
+                        <MenuItem onClick={() => { handleClose(); editBtn() }}>
                           수정하기
-                          <Text margin="0 0 0 10px">
-                            <BiPencil />
-                          </Text>
+                          <Text margin="0 0 0 10px"><BiPencil /></Text>
                         </MenuItem>
-                        <MenuItem
-                          onClick={() => {
-                            handleClose();
-                            deleteBtn();
-                          }}
-                        >
+                        <MenuItem onClick={() => { handleClose(); deleteBtn(); }}>
                           삭제하기
-                          <Text margin="0 0 0 10px">
-                            <BiTrashAlt />
-                          </Text>
+                          <Text margin="0 0 0 10px"><BiTrashAlt /></Text>
                         </MenuItem>
                       </Menu>
                     </>
-                  ) : (
+                    :
                     ''
-                  )}
+                  }
                 </Grid>
               </Grid>
               {/* {Question 글쓴이 프로필 }*/}
@@ -258,77 +195,32 @@ const QuestionDetail = (props) => {
                 <Grid width="40px">
                   <Image src={Profile_medium} size="5"></Image>
                 </Grid>
-
                 <Grid width="40%">
-                  {question_found.nickname === null ? (
-                    <Text
-                      p
-                      margin="auto 10px"
-                      fontSize="14px"
-                      fontWeight="600"
-                      color="#9aa0a6"
-                    >
-                      탈퇴한 회원입니다.
-                    </Text>
-                  ) : (
-                    <Text
-                      p
-                      margin="auto 10px"
-                      fontSize="14px"
-                      fontWeight="600"
-                      color="#9aa0a6"
-                    >
-                      {question_found.nickname}
-                    </Text>
-                  )}
-
+                  <Text p margin="auto 10px" fontSize="14px" fontWeight="600" color="#9aa0a6">
+                    {question_found.nickname}
+                  </Text>
                   <Text p margin="auto 10px" color="#bdc1c6">
                     {question_found.createdAt}
                   </Text>
                 </Grid>
               </Grid>
-
               {/* Question 본문 내용 */}
               <Text p margin="50px 0" fontSize="16px" color="#bdc1c6">
                 {question_found.content}
               </Text>
-
-              {question_found.image ? (
+              {question_found.image ?
                 <ImageBox>
                   <Image src={`http://13.209.12.149${question_found.image}`} />
                 </ImageBox>
-              ) : (
+                :
                 ''
-              )}
-
+              }
               {/* 좋아요/ 댓글수/ 조회수 */}
-              <Grid display="flex" margin="3% 0%" verticalAlign="center">
+              <Grid display="flex" margin="56px 0 47px" verticalAlign="center">
                 {question_like ? (
-                  <span
-                    style={{
-                      backgroundColor: '#202124',
-                      padding: '8px 16px',
-                      borderRadius: '10px',
-                    }}
-                  >
-                    <Text
-                      color="#7879F1"
-                      fontSize="14px"
-                      fontWeight="700"
-                      lineHeight="18px"
-                      cursor="pointer"
-                      _onClick={() =>
-                        unlikeQuestion(question_like.questionLikeId)
-                      }
-                    >
-                      <span
-                        style={{
-                          fontSize: '24px',
-                          margin: '0 8px 0 0',
-                          verticalAlign: 'middle',
-                          lineHeight: '30px',
-                        }}
-                      >
+                  <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
+                    <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeQuestion(question_like.questionLikeId)}>
+                      <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}>
                         <BiLike />
                       </span>
                       {/* 좋아요 개수 */}
@@ -367,11 +259,12 @@ const QuestionDetail = (props) => {
                   </span>
                 )}
 
-                <Text color="#C4C4C4" margin="auto 6px">
+                <Text color="#C4C4C4" margin="auto 16px">
                   <span
                     style={{
+                      fontSize: '20px',
                       lineHeight: '30px',
-                      margin: '0 4px',
+                      margin: '0 6px 0 0',
                       verticalAlign: 'middle',
                     }}
                   >
@@ -379,12 +272,13 @@ const QuestionDetail = (props) => {
                   </span>
                   {all_answer.length}
                 </Text>
-
-                <Text color="#C4C4C4" margin="auto 6px">
+                {/* 조회수 */}
+                <Text color="#C4C4C4" margin="auto 16px auto 0">
                   <span
                     style={{
+                      fontSize: '20px',
                       lineHeight: '30px',
-                      margin: '0 4px',
+                      margin: '0 6px',
                       verticalAlign: 'middle',
                     }}
                   >
@@ -395,31 +289,37 @@ const QuestionDetail = (props) => {
               </Grid>
             </QuestionBox>
           </Grid>
-
           <AnswerBox>
             {/* 답변 등록 input */}
-            <AddAnswerSection>
-              <Text p fontWeight="600" fontSize="14px" color="#E2E2E3">
-                답변
-              </Text>
-              <ACommentBox>
-                <AInput
-                  rows="5"
-                  placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
+            {/* 로그인 상태에서만 보여주기 */}
+            {is_login &&
+              <AddAnswerSection>
+                <Text p fontWeight="600" fontSize="14px" color="#E2E2E3">
+                  답변
+                </Text>
+                <ACommentBox>
+                  <AInput id='txtArea' onKeyPress={(e) => { if (e.key === 'Enter') { document.getElementById('txtArea').value = document.getElementById('txtArea').value + '\r\n' } }}
+                    rows="5"
+                    placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
 답변을 남긴 이후에는 수정 및 삭제가 불가하오니 신중하게 써주시길 부탁드립니다."
-                  ref={answerInput}
-                />
-                <AnswerSaveButton onClick={() => createAnswerBtn()}>
-                  답변 추가하기
-                </AnswerSaveButton>
-              </ACommentBox>
-            </AddAnswerSection>
+                    ref={answerInput}
+                  />
+                  <AnswerSaveButton onClick={() => createAnswerBtn()}>
+                    답변 추가하기
+                  </AnswerSaveButton>
+                </ACommentBox>
+              </AddAnswerSection>
+            }
             {/* 새롭게 작성되는 답변 내용  */}
             {answer_list &&
               answer_list.map((answer, idx) => {
                 return <AnswerCard key={answer.answerId} {...answer} />;
               })}
-
+            {answer_list.length === 0 &&
+              <Grid is_center margin='50px 0 0'>
+                <Text p color='#9aa0a6' fontSize='14px'>답변이 아직 달리지 않은 글입니다.</Text>
+              </Grid>
+            }
             {all_answer.length < 5 ? null : (
               <Grid margin="auto" width="10%">
                 <Button onClick={() => moreAnswer()}>
@@ -429,8 +329,8 @@ const QuestionDetail = (props) => {
             )}
           </AnswerBox>
         </Body>
-      </Grid>
-    </React.Fragment>
+      </Grid >
+    </React.Fragment >
   );
 };
 
@@ -449,7 +349,7 @@ const QuestionBox = styled.div`
 const AnswerBox = styled.div`
   min-height: 100vh;
   margin: 0 -40px -80px -40px;
-  padding-bottom: 80px;
+  padding: 10px 0 80px;
   background-color: #282a2d;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     margin: 0 -18px -65px -18px;
@@ -483,7 +383,6 @@ const Image = styled.img`
 const AddAnswerSection = styled.div`
   width: 1044px;
   margin: 10px auto;
-  padding-top: 30px;
   @media screen and (max-width: 1200px) {
     width: 800px;
   }
@@ -508,6 +407,7 @@ const AInput = styled.textarea`
   }
   ::placeholder {
     color: #4e5357;
+    font-size: 14px;
   }
   @media screen and (max-width: 1200px) {
     width: 760px;

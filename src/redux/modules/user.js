@@ -76,11 +76,11 @@ const googleRefresh = () => {
       setCookie('accessToken', response.data.access_token);
       deleteCookie('idToken');
       setCookie('idToken', response.data.access_token);
-      const tokens = {
-        accessToken: response.data.access_token,
-        idToken: response.data.id_token,
-      };
-      dispatch(googleReFresh(tokens));
+      // const tokens = {
+      //   accessToken: response.data.access_token,
+      //   idToken: response.data.id_token,
+      // };
+      // dispatch(googleReFresh(tokens));
     }).catch((err) => {
       console.error(`구글 로그인 토큰 갱신 에러: ${err}`);
     });

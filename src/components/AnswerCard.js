@@ -17,16 +17,14 @@ const AnswerCard = (props) => {
   // 전체 답변 리스트
   const answer_list = useSelector((state) => state.question.answer_list);
 
-  //답변별 목록
+  // 이 답변에 대한 데이터
   const one_answer = answer_list.find((answer) => answer.answerId === answer_id);
 
-  // 답변의 좋아요
+  // 답변의 좋아요 목록
   const answer_like = one_answer.answerLike;
 
   // 내가 닉네임이 좋아요 한 답변
-  const my_answer_like = answer_like
-    ? answer_like.find((answer) => answer.nickname === user_name)
-    : [];
+  const my_answer_like = answer_like && answer_like.findIndex((like) => like.nickname === user_name) !== -1 ? answer_like.find((like) => like.nickname === user_name) : '';
   // console.log(my_answer_like);
 
   // 좋아요 버튼
@@ -43,76 +41,38 @@ const AnswerCard = (props) => {
       <AnswerBox>
         <AnswerContent>
           <Grid display="flex">
+            {/* 답변 작성자 정보 */}
             <Text fontSize="32px" fontWeight="700" color="#ffffff">
               A
             </Text>
             <Grid width="40px" height="40px" margin="auto 15px">
               <Image src={Profile_medium} size="5"></Image>
             </Grid>
-
             <Grid width="480px">
-              {props.nickname === null ? (
-                <Text
-                  p
-                  margin="auto"
-                  fontSize="14px"
-                  fontWeight="600"
-                  color="#F1F3F4"
-                >
-                  탈퇴한 회원입니다.
-                </Text>
-              ) : (
-                <Text
-                  p
-                  margin="auto"
-                  fontSize="14px"
-                  fontWeight="600"
-                  color="#F1F3F4"
-                >
-                  {props.nickname}님의 답변
-                </Text>
-              )}
-
+              {/* 작성자 닉네임 */}
+              <Text p margin="auto" fontSize="14px" fontWeight="600" color="#F1F3F4">
+                {props.nickname} 님의 답변
+              </Text>
+              {/* 작성 시간 */}
               <Text p margin="auto" fontSize="12px" color="#BDC1C6">
                 {props.createdAt}
               </Text>
             </Grid>
           </Grid>
-
+          {/* 답변 내용 */}
           <Grid margin="30px 0 50px 0">
             <Text p fontSize="16px" color="#C4C4C4">
               {props.content}
             </Text>
           </Grid>
-
           {my_answer_like ? (
-            <span
-              style={{
-                backgroundColor: '#282A2D',
-                padding: '8px 16px',
-                borderRadius: '12px',
-              }}
-            >
-              <Text
-                color="#7879F1"
-                fontSize="14px"
-                fontWeight="700"
-                lineHeight="18px"
-                cursor="pointer"
-                _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}
-              >
-                <span
-                  style={{
-                    fontSize: '24px',
-                    margin: '0 8px 0 0',
-                    verticalAlign: 'middle',
-                    lineHeight: '30px',
-                  }}
-                >
+            <span style={{ backgroundColor: '#282A2D', padding: '8px 16px', borderRadius: '12px', }}>
+              <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}>
+                <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}>
                   <BiLike />
                 </span>
                 {/* 좋아요 개수 */}
-                {answer_like ? answer_like.length : 0}
+                {one_answer.likeNumber}
               </Text>
             </span>
           ) : (
@@ -142,7 +102,7 @@ const AnswerCard = (props) => {
                   <BiLike />
                 </span>
                 {/* 좋아요 개수 */}
-                {answer_like.length}
+                {one_answer.likeNumber}
               </Text>
             </span>
           )}

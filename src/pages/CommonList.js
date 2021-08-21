@@ -130,34 +130,18 @@ const CommonList = (props) => {
             </Grid>
           </Grid>
           <Line style={{ border: '1px solid #80868B' }} />
-          {/* 공지 */}
-          <Grid>
-            {[1, 2].map((n, idx) => {
-              return (
-                <Grid key={idx} display="flex" width="100%" >
-                  <Notice>
-                    <div>
-                      <NoticeHead>공지</NoticeHead>
-                      <NoticeText>스파르타코딩클럽 항해99 얼리버드 모집 안내</NoticeText>
-                    </div>
-                    <Text color="#9AA0A6" fontSize="14px" margin="10px 24px" TABmargin='5px 16px' lineHeight="18px" TABlineHeight='14px' verticalAlign='middle'>2021.08.03</Text>
-                  </Notice>
-                </Grid>
-              );
-            })}
-            {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
-            {is_login ?
-              <>
-                <FloatingBtn _onClick={() => history.push('/common/write')}>
-                  <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
-              </>
-              :
-              <>
-                <FloatingBtn _onClick={() => login_check()}>
-                  <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
-              </>
-            }
-          </Grid>
+          {/* 태블릿 사이즈 이하에서만 나오는 플로팅 버튼 */}
+          {is_login ?
+            <>
+              <FloatingBtn _onClick={() => history.push('/common/write')}>
+                <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+            </>
+            :
+            <>
+              <FloatingBtn _onClick={() => login_check()}>
+                <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+            </>
+          }
           {/* import 부트톡톡 게시물  */}
           <Grid width="100%" height='850px' TABheight='730px'>
             {PopArray ? (

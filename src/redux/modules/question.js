@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
+import { getCookie } from '../../shared/cookie';
 
 // QUESTION 액션타입
 const SET_QUESTION = 'question/SET_QUESTION';
@@ -50,7 +51,7 @@ const deleteQuestionBookmark = createAction(DELETE_QUESTION_BOOKMARK, (bookmark_
 const likeQuestion = createAction(LIKE_QUESTION, (q_like) => ({ q_like }));
 const unlikeQuestion = createAction(UNLIKE_QUESTION, (q_like_id) => ({ q_like_id }));
 const likeAnswer = createAction(LIKE_ANSWER, (a_like) => ({ a_like }));
-const unlikeAnswer = createAction(UNLIKE_ANSWER, (a_like_info) => ({ a_like_info }));
+const unlikeAnswer = createAction(UNLIKE_ANSWER, (a_like) => ({ a_like }));
 
 // 기본값 정하기
 const initialState = {
@@ -182,7 +183,7 @@ const setAnswerDB = (question_id, page) => {
         }
       })
       .catch((err) => {
-        console.error(`질문 불러오기 에러 발생 : ${err}`);
+        console.error(`답변 불러오기 에러 발생 : ${err}`);
       });
   };
 };
@@ -227,17 +228,18 @@ const createAnswerDB = (new_answer) => {
 
 const setQuestionBookmarkDB = () => {
   return function (dispatch) {
-    instance.get('/tokenUser').then((response) => {
-      const nickname = response.data.nickname;
-      instance
-        .get(`/users/${nickname}/questionBookmarks`)
-        .then((result) => {
-          dispatch(setQuestionBookmark(result.data));
-        })
-        .catch((err) => {
-          console.error(`QNA 북마크 목록 불러오기 에러: ${err}`);
-        });
-    });
+    const nickname = getCookie('nickname');
+    if (!nickname) {
+      return;
+    }
+    instance
+      .get(`/users/${nickname}/questionBookmarks`)
+      .then((result) => {
+        dispatch(setQuestionBookmark(result.data));
+      })
+      .catch((err) => {
+        console.error(`QNA 북마크 목록 불러오기 에러: ${err}`);
+      });
   };
 };
 
@@ -310,6 +312,7 @@ const likeAnswerDB = (answer_id, user_name) => {
       })
       .then((response) => {
         dispatch(likeAnswer(response.data));
+        console.log(response.data);
       })
       .catch((err) => {
         console.error(`답변 좋아요추가 에러 : ${err}`);
@@ -317,15 +320,16 @@ const likeAnswerDB = (answer_id, user_name) => {
   };
 };
 
-const unlikeAnswerDB = (answer_id, answerLikeId) => {
+const unlikeAnswerDB = (answer_id, answerLikeId, nickname) => {
   return function (dispatch) {
-    const answer_info = {
-      answer_id: answer_id,
-      answerLikeId: answerLikeId,
-    };
     instance
       .delete(`/answers/${answer_id}/answerLike/${answerLikeId}`)
       .then((response) => {
+        const answer_info = {
+          answer_id: answer_id,
+          answerLikeId: answerLikeId,
+          nickname: nickname,
+        };
         dispatch(unlikeAnswer(answer_info));
       })
       .catch((err) => {
@@ -346,9 +350,9 @@ export default handleActions(
       }),
     [SET_ONE_QUESTION]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = [action.payload.question.questionDetail];
+        draft.list = [action.payload.question];
         draft.question_like_list =
-          action.payload.question.questionDetail.questionLike;
+          action.payload.question.questionLike;
       }),
     [CREATE_QUESTION]: (state, action) =>
       produce(state, (draft) => {
@@ -370,13 +374,6 @@ export default handleActions(
     [SET_ANSWER]: (state, action) =>
       produce(state, (draft) => {
         draft.answer_list = action.payload.answer_list;
-
-        let answers_like_list = [];
-        action.payload.answer_list.map((answer, idx) => {
-          answers_like_list.push(answer.answerLike);
-        });
-
-        draft.answer_like_list = answers_like_list; //아니면 Push에러 뜬다
       }),
     [SET_NEXT_ANSWER]: (state, action) =>
       produce(state, (draft) => {
@@ -420,21 +417,20 @@ export default handleActions(
         let like_answer_idx = draft.answer_list.findIndex(
           (answer) => answer.answerId === action.payload.a_like.answerId
         );
-        draft.answer_list[like_answer_idx].answerLike.push(
-          action.payload.a_like
-        );
+        draft.answer_list[like_answer_idx].likeNumber += 1;
+        draft.answer_list[like_answer_idx].answerLike.push(action.payload.a_like);
       }),
     [UNLIKE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.a_like_info);
         let answer_idx = draft.answer_list.findIndex(
-          (answer) => answer.answerId === action.payload.a_like_info.answer_id
+          (answer) => answer.answerId === action.payload.a_like.answer_id
         );
         let answerLike_idx = draft.answer_list[answer_idx].answerLike.findIndex(
           (info) =>
-            info.answerLikeId === action.payload.a_like_info.answerLikeId
+            info.answerLikeId === action.payload.a_like.answerLikeId
         );
         draft.answer_list[answer_idx].answerLike.splice(answerLike_idx, 1);
+        draft.answer_list[answer_idx].likeNumber -= 1;
       }),
   },
   initialState

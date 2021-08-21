@@ -312,7 +312,6 @@ const likeAnswerDB = (answer_id, user_name) => {
       })
       .then((response) => {
         dispatch(likeAnswer(response.data));
-        console.log(response.data);
       })
       .catch((err) => {
         console.error(`답변 좋아요추가 에러 : ${err}`);
@@ -395,7 +394,6 @@ export default handleActions(
       }),
     [DELETE_QUESTION_BOOKMARK]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload.bookmark_id);
         let bookmark_idx = draft.bookmark_list.findIndex(
           (info) => info.questionBookmarkId === action.payload.bookmark_id
         );

@@ -83,10 +83,8 @@ const QuestionDetail = (props) => {
 
   // 답변 작성
   const createAnswerBtn = () => {
-    const contents = document.getElementById('txtArea').value.replace('\r\n', '<br>');
     const new_answer = {
-      // content: answerInput.current.value,
-      content: contents,
+      content: answerInput.current.value,
       nickname: user_name,
       questionId: question_id,
     };
@@ -215,73 +213,33 @@ const QuestionDetail = (props) => {
                 :
                 ''
               }
-              {/* 좋아요/ 댓글수/ 조회수 */}
+              {/* 좋아요 수 */}
+              {/* 내가 좋아요를 눌렀다면, 보라색 */}
+              {/* 누르지 않았다면, 하얀색으로 보여주기 */}
               <Grid display="flex" margin="56px 0 47px" verticalAlign="center">
-                {question_like ? (
-                  <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
+                <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
+                  {question_like ?
                     <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeQuestion(question_like.questionLikeId)}>
-                      <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}>
-                        <BiLike />
-                      </span>
-                      {/* 좋아요 개수 */}
+                      <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
                       {question_like_list.length}
                     </Text>
-                  </span>
-                ) : (
-                  <span
-                    style={{
-                      backgroundColor: '#202124',
-                      padding: '8px 16px',
-                      borderRadius: '10px',
-                    }}
-                  >
-                    <Text
-                      color="#BDC1C6"
-                      fontSize="14px"
-                      fontWeight="700"
-                      lineHeight="18px"
-                      cursor="pointer"
-                      _onClick={() => likeQuestion()}
-                    >
-                      <span
-                        style={{
-                          fontSize: '24px',
-                          margin: '0 8px 0 0',
-                          verticalAlign: 'middle',
-                          lineHeight: '30px',
-                        }}
-                      >
-                        <BiLike />
-                      </span>
-                      {/* 좋아요 개수 */}
+                    :
+                    <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeQuestion()}>
+                      <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
                       {question_like_list.length}
                     </Text>
-                  </span>
-                )}
-
+                  }
+                </span>
+                {/* 답변 수 */}
                 <Text color="#C4C4C4" margin="auto 16px">
-                  <span
-                    style={{
-                      fontSize: '20px',
-                      lineHeight: '30px',
-                      margin: '0 6px 0 0',
-                      verticalAlign: 'middle',
-                    }}
-                  >
+                  <span style={{ fontSize: '20px', lineHeight: '30px', margin: '0 6px 0 0', verticalAlign: 'middle', }}>
                     <BiComment />
                   </span>
                   {all_answer.length}
                 </Text>
                 {/* 조회수 */}
                 <Text color="#C4C4C4" margin="auto 16px auto 0">
-                  <span
-                    style={{
-                      fontSize: '20px',
-                      lineHeight: '30px',
-                      margin: '0 6px',
-                      verticalAlign: 'middle',
-                    }}
-                  >
+                  <span style={{ fontSize: '20px', lineHeight: '30px', margin: '0 6px', verticalAlign: 'middle', }}>
                     <BsEye />
                   </span>
                   {question_found.viewCount}
@@ -298,35 +256,33 @@ const QuestionDetail = (props) => {
                   답변
                 </Text>
                 <ACommentBox>
-                  <AInput id='txtArea' onKeyPress={(e) => { if (e.key === 'Enter') { document.getElementById('txtArea').value = document.getElementById('txtArea').value + '\r\n' } }}
-                    rows="5"
-                    placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
-답변을 남긴 이후에는 수정 및 삭제가 불가하오니 신중하게 써주시길 부탁드립니다."
-                    ref={answerInput}
-                  />
+                  <AInput rows="5" placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
+답변을 남긴 이후에는 수정 및 삭제가 불가하오니 신중하게 써주시길 부탁드립니다." ref={answerInput} />
                   <AnswerSaveButton onClick={() => createAnswerBtn()}>
                     답변 추가하기
                   </AnswerSaveButton>
                 </ACommentBox>
               </AddAnswerSection>
             }
-            {/* 새롭게 작성되는 답변 내용  */}
-            {answer_list &&
-              answer_list.map((answer, idx) => {
-                return <AnswerCard key={answer.answerId} {...answer} />;
-              })}
+            {/* 답변 목록  */}
+            {answer_list && answer_list.map((answer, idx) => {
+              return <AnswerCard key={answer.answerId} {...answer} />;
+            })}
+            {/* 답변이 하나도 없는 경우 보여주는 문구 */}
             {answer_list.length === 0 &&
               <Grid is_center margin='50px 0 0'>
-                <Text p color='#9aa0a6' fontSize='14px'>답변이 아직 달리지 않은 글입니다.</Text>
+                <Text p color='#9aa0a6' fontSize='14px' margin='0'>아직 답변을 기다리고 있는 질문입니다.</Text>
+                <Text color='#9aa0a6' fontSize='14px'>첫 번째 답변의 주인공이 되어주세요!</Text>
               </Grid>
             }
-            {all_answer.length < 5 ? null : (
+            {/* 총 답변 개수가 5개 이상인 경우 화살표(더보기) 버튼 보여주기  */}
+            {all_answer.length < 5 &&
               <Grid margin="auto" width="10%">
                 <Button onClick={() => moreAnswer()}>
                   <MdKeyboardArrowDown size="40" color="#F2F3F4" />
                 </Button>
               </Grid>
-            )}
+            }
           </AnswerBox>
         </Body>
       </Grid >

@@ -22,6 +22,7 @@ const Text = (props) => {
     top,
     cursor,
     hover,
+    active,
     letterSpacing,
     wordWrap,
     wlc, // -webkit-line-clamp: 콘텐츠 줄 수 제한
@@ -54,6 +55,7 @@ const Text = (props) => {
     top: top,
     cursor: cursor,
     hover: hover,
+    active: active,
     letterSpacing: letterSpacing,
     wordWrap: wordWrap,
     wlc: wlc,
@@ -91,7 +93,7 @@ const Text = (props) => {
 Text.defaultProps = {
   p: false,
   children: null,
-  _onClick: () => {},
+  _onClick: () => { },
 };
 
 const TextBoxP = styled.p`
@@ -111,6 +113,9 @@ const TextBoxP = styled.p`
   cursor: ${(props) => props.cursor};
   &:hover {
     ${(props) => props.hover};
+  }
+  &:active {
+    ${(props) => props.active};
   }
   letter-spacing: ${(props) => props.letterSpacing};
   word-wrap: ${(props) => props.wordWrap};
@@ -147,6 +152,9 @@ const TextBoxS = styled.span`
   cursor: ${(props) => props.cursor};
   &:hover {
     ${(props) => props.hover};
+  }
+  &:active {
+    ${(props) => props.active};
   }
   letter-spacing: ${(props) => props.letterSpacing};
   word-wrap: ${(props) => props.wordWrap};

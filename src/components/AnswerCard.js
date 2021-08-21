@@ -33,7 +33,7 @@ const AnswerCard = (props) => {
   };
   // 좋아요 취소 버튼
   const unlikeAnswer = (answerLikeId) => {
-    dispatch(questionActions.unlikeAnswerDB(answer_id, answerLikeId));
+    dispatch(questionActions.unlikeAnswerDB(answer_id, answerLikeId, user_name));
   };
 
   return (

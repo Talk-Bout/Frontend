@@ -12,17 +12,19 @@ const GOOGLE_RE_FRESH = 'user/GOOGLE_RE_FRESH'; // 구글 accessToken 갱신 및
 const KAKAO_LOG_IN = 'user/KAKAO_LOG_IN'; // 카카오 accessToken, provider, nickname, profilePic 저장
 const KAKAO_RE_FRESH = 'user/KAKAO_RE_FRESH'; // 카카오 accessToken 갱신
 const REMOVE_TOKENS = 'user/REMOVE_TOKENS'; // 구글&카카오 로그아웃 및 토큰 삭제
-const LOGIN_CHECK = 'user/LOGIN_CHECK';
+const LOGIN_CHECK = 'user/LOGIN_CHECK'; // 로그인 상태 설정
+const LOGOUT_CHECK = 'user/LOGOUT_CHECK'; // 로그아웃 상태 설정
 
 //액션 생성함수
 const stayLogIn = createAction(STAY_LOGIN, (user) => ({ user }));
 const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
-const googleLogIn = createAction(GOOGLE_LOG_IN, (google_info) => ({ google_info }));
-const googleReFresh = createAction(GOOGLE_RE_FRESH, (google_tokens) => ({ google_tokens }));
-const kakaoLogIn = createAction(KAKAO_LOG_IN, (kakao_info) => ({ kakao_info }));
-const kakaoReFresh = createAction(KAKAO_RE_FRESH, (kakao_token) => ({ kakao_token }));
-const removeTokens = createAction(REMOVE_TOKENS, () => ({}));
+// const googleLogIn = createAction(GOOGLE_LOG_IN, (google_info) => ({ google_info }));
+// const googleReFresh = createAction(GOOGLE_RE_FRESH, (google_tokens) => ({ google_tokens }));
+// const kakaoLogIn = createAction(KAKAO_LOG_IN, (kakao_info) => ({ kakao_info }));
+// const kakaoReFresh = createAction(KAKAO_RE_FRESH, (kakao_token) => ({ kakao_token }));
+// const removeTokens = createAction(REMOVE_TOKENS, () => ({}));
 const loginCheck = createAction(LOGIN_CHECK, () => ({}));
+const logoutCheck = createAction(LOGOUT_CHECK, () => ({}));
 
 //기본값 정하기
 const initialState = {
@@ -43,16 +45,18 @@ const googleLogin = () => {
     const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
     setCookie('refreshToken', refreshToken_URL);
     setCookie('accessToken', accessToken_URL);
+    setCookie('idToken', accessToken_URL);
     setCookie('provider', provider_URL);
     setCookie('nickname', nickname_URL);
     setCookie('profilePic', profilePic_URL);
-    const google_info = {
-      accessToken: accessToken_URL,
-      provider: provider_URL,
-      nickname: nickname_URL,
-      profilePic: profilePic_URL,
-    };
-    dispatch(googleLogIn(google_info));
+    dispatch(loginCheck);
+    // const google_info = {
+    //   accessToken: accessToken_URL,
+    //   provider: provider_URL,
+    //   nickname: nickname_URL,
+    //   profilePic: profilePic_URL,
+    // };
+    // dispatch(googleLogIn(google_info));
     history.push('/');
   };
 };
@@ -76,6 +80,7 @@ const googleRefresh = () => {
       setCookie('accessToken', response.data.access_token);
       deleteCookie('idToken');
       setCookie('idToken', response.data.access_token);
+      dispatch(loginCheck);
       // const tokens = {
       //   accessToken: response.data.access_token,
       //   idToken: response.data.id_token,
@@ -100,13 +105,14 @@ const kakaoLogin = () => {
     setCookie('provider', provider_URL);
     setCookie('nickname', nickname_URL);
     setCookie('profilePic', profilePic_URL);
-    const kakao_info = {
-      accessToken: accessToken_URL,
-      provider: provider_URL,
-      nickname: nickname_URL,
-      profilePic: profilePic_URL,
-    };
-    dispatch(kakaoLogIn(kakao_info));
+    dispatch(loginCheck);
+    // const kakao_info = {
+    //   accessToken: accessToken_URL,
+    //   provider: provider_URL,
+    //   nickname: nickname_URL,
+    //   profilePic: profilePic_URL,
+    // };
+    // dispatch(kakaoLogIn(kakao_info));
     history.push('/');
   };
 };
@@ -125,10 +131,11 @@ const kakaoRefresh = () => {
     }), { headers: headers }).then((response) => {
       deleteCookie('accessToken');
       setCookie('accessToken', response.data.access_token);
-      const kakao_token = {
-        accessToken: response.data.access_token
-      }
-      dispatch(kakaoReFresh(kakao_token));
+      dispatch(loginCheck);
+      // const kakao_token = {
+      //   accessToken: response.data.access_token
+      // }
+      // dispatch(kakaoReFresh(kakao_token));
     }).catch((err) => {
       console.error(`카카오 로그인 토큰 갱신 에러: ${err}`);
     });
@@ -147,6 +154,8 @@ const logOut = () => {
     }, { headers: headers }).then((response) => {
       if (response.status === 200) {
         window.alert('성공적으로 로그아웃 되었습니다.');
+      } else {
+        console.log(response);
       }
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
@@ -154,10 +163,11 @@ const logOut = () => {
       deleteCookie('provider');
       deleteCookie('nickname');
       deleteCookie('profilePic');
-      dispatch(removeTokens());
+      dispatch(logoutCheck);
       history.push('/');
+      // dispatch(removeTokens());
     }).catch((err) => {
-      console.log(`로그아웃 에러: ${err}`);
+      console.error(`로그아웃 에러: ${err}`);
     });
   };
 };
@@ -172,22 +182,11 @@ const logOutAuto = () => {
     deleteCookie('nickname');
     deleteCookie('profilePic');
     window.alert('로그인 정보가 만료되어 자동 로그아웃 되었습니다. 로그인 화면으로 이동합니다.');
-    dispatch(removeTokens());
+    dispatch(logoutCheck);
+    // dispatch(removeTokens());
     history.push('/login');
   };
 };
-
-const logInCheck = () => {
-  return function (dispatch) {
-    const provider = getCookie('provider');
-    if (provider === 'google') {
-      googleRefresh();
-    } else if (provider === 'kakao') {
-      kakaoRefresh();
-    }
-    dispatch(loginCheck());
-  }
-}
 
 const stayLogInDB = () => {
   return function (dispatch) {
@@ -264,9 +263,13 @@ export default handleActions(
     [REMOVE_TOKENS]: (state, action) => produce(state, (draft) => {
       draft.user_info = null;
       draft.is_login = false;
+      history.push('/');
     }),
     [LOGIN_CHECK]: (state, action) => produce(state, (draft) => {
       draft.is_login = true;
+    }),
+    [LOGOUT_CHECK]: (state, action) => produce(state, (draft) => {
+      draft.is_login = false;
     }),
   },
   initialState
@@ -280,7 +283,7 @@ const actionCreators = {
   kakaoRefresh,
   logOut,
   logOutAuto,
-  logInCheck,
+  loginCheck,
   stayLogInDB,
   userDeleteDB,
 };

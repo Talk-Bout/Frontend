@@ -51,7 +51,7 @@ function App() {
 
   useEffect(() => {
     if (token && provider) {
-      dispatch(userActions.logInCheck());
+      dispatch(userActions.loginCheck());
       if (provider === 'google') {
         dispatch(userActions.googleRefresh());
       } else if (provider === 'kakao') {

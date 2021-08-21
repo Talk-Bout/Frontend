@@ -37,16 +37,16 @@ const BootReviewWrite = (props) => {
 
   // 리뷰 [등록] 버튼 누르면 호출되는 함수
   const addReview = () => {
+    if (titleInput.current.value === '') {
+      window.alert('제목을 입력해주세요.')
+      return;
+    }
     if (stars === 0) {
       window.alert('평점을 매겨주세요.')
       return;
     }
     if (courseInput.current.value === '') {
       window.alert('수료 여부를 선택해주세요.')
-      return;
-    }
-    if (titleInput.current.value === '') {
-      window.alert('제목을 입력해주세요.')
       return;
     }
     if (prosInput.current.value === '') {
@@ -94,7 +94,7 @@ const BootReviewWrite = (props) => {
                 </Grid>
                 {/* 등록 버튼 */}
                 <Grid width='23.33%' padding='0 40px'>
-                  <Text fontSize='24px' TABfontSize='20px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' _onClick={() => addReview()}>등록</Text>
+                  <Text fontSize='24px' TABfontSize='20px' fontWeight='700' color='#848484' lineHeight='84px' float='right' cursor='pointer' active='color: #7879F1' _onClick={() => addReview()}>등록</Text>
                 </Grid>
               </Grid>
               <BodyBox>
@@ -115,10 +115,12 @@ const BootReviewWrite = (props) => {
                 </div>
                 {/* 장점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>장점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput} /></div>
+                <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요.
+리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput} /></div>
                 {/* 단점 */}
                 <div><Text fontSize='18px' fontWeight='700' color='#e8eaed'>단점<br /></Text><Text fontSize='14px' color='#9AA0A6'>최소 20자</Text></div>
-                <div><Textarea rows='5' placeholder={`${camp_name}의 단점을 입력해주세요. 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={consInput} /></div>
+                <div><Textarea rows='5' placeholder={`${camp_name}의 단점을 입력해주세요.
+리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={consInput} /></div>
               </BodyBox>
             </Window>
           </Grid>

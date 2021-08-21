@@ -42,7 +42,7 @@ const AnswerCard = (props) => {
         <AnswerContent>
           <Grid display="flex">
             {/* 답변 작성자 정보 */}
-            <Text fontSize="32px" fontWeight="700" color="#ffffff">
+            <Text fontSize="32px" fontWeight="700" color="#ffffff" cursor='default'>
               A
             </Text>
             <Grid width="40px" height="40px" margin="auto 15px">
@@ -50,18 +50,18 @@ const AnswerCard = (props) => {
             </Grid>
             <Grid width="480px">
               {/* 작성자 닉네임 */}
-              <Text p margin="auto" fontSize="14px" fontWeight="600" color="#F1F3F4">
+              <Text p margin="auto" fontSize="14px" fontWeight="600" color="#F1F3F4" cursor='default'>
                 {props.nickname} 님의 답변
               </Text>
               {/* 작성 시간 */}
-              <Text p margin="auto" fontSize="12px" color="#BDC1C6">
+              <Text p margin="auto" fontSize="12px" color="#BDC1C6" cursor='default'>
                 {props.createdAt}
               </Text>
             </Grid>
           </Grid>
           {/* 답변 내용 */}
           <Grid margin="30px 0 50px 0">
-            <Text p fontSize="16px" color="#C4C4C4">
+            <Text p fontSize="16px" color="#C4C4C4" cursor='default'>
               {props.content}
             </Text>
           </Grid>

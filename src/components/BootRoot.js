@@ -53,18 +53,18 @@ const BootRoot = (props) => {
         <InfoBtn>
           <div>
             {/* 부트캠프 이름, 북마크 표시 */}
-            <Text fontSize='32px' color='#F8F9FA' fontWeight='700'>{camp.bootcampName}
+            <Text fontSize='32px' color='#F8F9FA' fontWeight='700' cursor='default'>{camp.bootcampName}
               {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
               {my_camp ? <Heart check onClick={() => unmarkBoot(my_camp.bootcampBookmarkId)}><HiHeart /></Heart>
                 : <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>}
             </Text>
-            <Text p fontSize='14px' color='#dadce0' margin='0 0 17px'>{camp.desc}</Text>
+            <Text p fontSize='14px' color='#dadce0' margin='0 0 17px' cursor='default'>{camp.desc}</Text>
           </div>
           {/* 홈페이지 바로가기 버튼 */}
           <Button onClick={() => window.open(`${camp.url}`, '_blank')}><Text fontSize='14px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
         </InfoBtn>
         {/* 부트캠프 평점, 리뷰 개수 */}
-        <Text fontSize='14px' color='#dadce0'>★<span style={{ margin: '0 8px' }}>{Number(camp.star).toFixed(1)}</span>({camp.reviewNumber}개 리뷰)</Text>
+        <Text fontSize='14px' color='#dadce0' cursor='default'>★<span style={{ margin: '0 8px' }}>{Number(camp.star).toFixed(1)}</span>({camp.reviewNumber}개 리뷰)</Text>
       </Grid>
     </React.Fragment>
   )

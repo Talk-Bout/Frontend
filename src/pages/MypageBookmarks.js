@@ -39,7 +39,7 @@ const MypagePost = (props) => {
         <Body header>
           <Grid height="fit-content">
             <Grid height="9%" width="100%">
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px">내 북마크</Text>
+              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px" cursor='default'>내 북마크</Text>
             </Grid>
             <Card display="flex" height="81%" width="100%">
               {mytalk_list.map((p, idx) => {

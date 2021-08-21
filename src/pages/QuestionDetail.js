@@ -137,10 +137,10 @@ const QuestionDetail = (props) => {
               <Grid display="flex">
                 <Grid width="100%">
                   {/* 제목 */}
-                  <Text fontSize="24px" fontWeight="600" color="#ffffff">
+                  <Text fontSize="24px" fontWeight="600" color="#ffffff" cursor='default'>
                     Q
                   </Text>
-                  <Text fontSize="24px" fontWeight="600" margin="0 8px" color="#ffffff">
+                  <Text fontSize="24px" fontWeight="600" margin="0 8px" color="#ffffff" cursor='default'>
                     {question_found.title}
                   </Text>
                 </Grid>
@@ -194,16 +194,16 @@ const QuestionDetail = (props) => {
                   <Image src={Profile_medium} size="5"></Image>
                 </Grid>
                 <Grid width="40%">
-                  <Text p margin="auto 10px" fontSize="14px" fontWeight="600" color="#9aa0a6">
+                  <Text p margin="auto 10px" fontSize="14px" fontWeight="600" color="#9aa0a6" cursor='default'>
                     {question_found.nickname}
                   </Text>
-                  <Text p margin="auto 10px" color="#bdc1c6">
+                  <Text p margin="auto 10px" color="#bdc1c6" cursor='default'>
                     {question_found.createdAt}
                   </Text>
                 </Grid>
               </Grid>
               {/* Question 본문 내용 */}
-              <Text p margin="50px 0" fontSize="16px" color="#bdc1c6">
+              <Text p margin="50px 0" fontSize="16px" color="#bdc1c6" cursor='default'>
                 {question_found.content}
               </Text>
               {question_found.image ?
@@ -231,14 +231,14 @@ const QuestionDetail = (props) => {
                   }
                 </span>
                 {/* 답변 수 */}
-                <Text color="#C4C4C4" margin="auto 16px">
+                <Text color="#C4C4C4" margin="auto 16px" cursor='default'>
                   <span style={{ fontSize: '20px', lineHeight: '30px', margin: '0 6px 0 0', verticalAlign: 'middle', }}>
                     <BiComment />
                   </span>
                   {all_answer.length}
                 </Text>
                 {/* 조회수 */}
-                <Text color="#C4C4C4" margin="auto 16px auto 0">
+                <Text color="#C4C4C4" margin="auto 16px auto 0" cursor='default'>
                   <span style={{ fontSize: '20px', lineHeight: '30px', margin: '0 6px', verticalAlign: 'middle', }}>
                     <BsEye />
                   </span>
@@ -252,7 +252,7 @@ const QuestionDetail = (props) => {
             {/* 로그인 상태에서만 보여주기 */}
             {is_login &&
               <AddAnswerSection>
-                <Text p fontWeight="600" fontSize="14px" color="#E2E2E3">
+                <Text p fontWeight="600" fontSize="14px" color="#E2E2E3" cursor='default'>
                   답변
                 </Text>
                 <ACommentBox>
@@ -271,8 +271,8 @@ const QuestionDetail = (props) => {
             {/* 답변이 하나도 없는 경우 보여주는 문구 */}
             {answer_list.length === 0 &&
               <Grid is_center margin='50px 0 0'>
-                <Text p color='#9aa0a6' fontSize='14px' margin='0'>아직 답변을 기다리고 있는 질문입니다.</Text>
-                <Text color='#9aa0a6' fontSize='14px'>첫 번째 답변의 주인공이 되어주세요!</Text>
+                <Text p color='#9aa0a6' fontSize='14px' margin='0' cursor='default'>아직 답변을 기다리고 있는 질문입니다.</Text>
+                <Text color='#9aa0a6' fontSize='14px' cursor='default'>첫 번째 답변의 주인공이 되어주세요!</Text>
               </Grid>
             }
             {/* 총 답변 개수가 5개 이상인 경우 화살표(더보기) 버튼 보여주기  */}

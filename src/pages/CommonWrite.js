@@ -130,12 +130,7 @@ const BootCommuWrite = (props) => {
                 </Grid>
                 {/* 타이틀 */}
                 <Grid width="53.33%" is_center>
-                  <Text
-                    fontSize="24px"
-                    fontWeight="700"
-                    color="#e5e5e5"
-                    lineHeight="84px"
-                  >
+                  <Text fontSize="24px" fontWeight="700" color="#e5e5e5" lineHeight="84px" cursor='default'>
                     글쓰기
                   </Text>
                 </Grid>

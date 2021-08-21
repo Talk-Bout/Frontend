@@ -29,15 +29,14 @@ const initialState = {
 const setMyBootDB = (nickname) => {
   return function (dispatch) {
     dispatch(statusActions.setLoading());
-    instance.get(`/users/${nickname}/bootcampBookmarks`, {
-    })
+    instance.get(`/users/${nickname}/bootcampBookmarks`)
       .then((response) => {
         // console.log(response.data);
         dispatch(setMyboot(response.data));
         dispatch(statusActions.endLoading());
       })
       .catch((err) => {
-        console.log(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
+        console.error(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
       });
   };
 };
@@ -54,7 +53,7 @@ const setMyTalkDB = (nickname) => {
         // console.log(response.data);
       })
       .catch((err) => {
-        console.log(`마이페이지 부트톡톡 북마크 불러오기 에러 발생: ${err}`);
+        console.error(`마이페이지 부트톡톡 북마크 불러오기 에러 발생: ${err}`);
       });
   };
 };
@@ -71,7 +70,7 @@ const setMyQnaDB = (nickname) => {
         // console.log(response.data);
       })
       .catch((err) => {
-        console.log(`마이페이지 질문과답변 북마크 불러오기 에러 발생: ${err}`);
+        console.error(`마이페이지 질문과답변 북마크 불러오기 에러 발생: ${err}`);
       });
   };
 };
@@ -88,7 +87,7 @@ const setMypostDB = (nickname) => {
         dispatch(statusActions.endLoading());
       })
       .catch((err) => {
-        console.log(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);
+        console.error(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);
       });
   };
 };

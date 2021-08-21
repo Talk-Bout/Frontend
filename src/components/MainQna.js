@@ -22,10 +22,10 @@ const MainQna = (props) => {
     <React.Fragment>
       <Grid className="top-boot" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px'>
         {/* 질문과 답변 */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px'><Emoji src={Fire_emoji} alt='불' height='24px' TABheight='20px' margin='0 8px 0 0' />질문과 답변</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' cursor='default'><Emoji src={Fire_emoji} alt='불' height='24px' TABheight='20px' margin='0 8px 0 0' />질문과 답변</Text>
         <TextBox>
           {/* const 질문과 답변 = (Question) => { return Answer } */}
-          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px'>const 질문과_답변 = ( Question) =&gt; &#123; return Answer &#125;</Text>
+          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' cursor='default'>const 질문과_답변 = ( Question ) =&gt; &#123; return Answer &#125;</Text>
           {/* 질문과 답변 더보기 버튼 */}
           <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}>질문과 답변 더보기 &gt;</Text>
         </TextBox>
@@ -52,18 +52,18 @@ const MainQna = (props) => {
                 {/* 질문 내용 */}
                 <Content>
                   <Text
-                  p
-                  fontSize="14px"
-                  TABfontSize='12px'
-                  letterSpacing="0.2px"
-                  lineHeight='18px'
-                  TABlineHeight='16px'
-                  color="#9aa0a6"
-                  overflow="hidden"
-                  display="-webkit-box"
-                  wlc="4"
-                  wbo="vertical"
-                >{pq.content}
+                    p
+                    fontSize="14px"
+                    TABfontSize='12px'
+                    letterSpacing="0.2px"
+                    lineHeight='18px'
+                    TABlineHeight='16px'
+                    color="#9aa0a6"
+                    overflow="hidden"
+                    display="-webkit-box"
+                    wlc="4"
+                    wbo="vertical"
+                  >{pq.content}
                   </Text>
                 </Content>
                 <Info>
@@ -85,14 +85,14 @@ const MainQna = (props) => {
                 <div style={{ height: 'fit-content' }}>
                   {/* 추천 수 */}
                   <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px'>
-                  <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign= 'middle' TABfontSize='14px'><BiLike /></Text>{pq.likeNumber}
-                </Text>
-                {/* 댓글 수 */}
-                {/* <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
+                    <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><BiLike /></Text>{pq.likeNumber}
+                  </Text>
+                  {/* 댓글 수 */}
+                  {/* <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
                   <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>댓글 수</Text> */}
-                {/* 조회수 */}
-                <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
-                <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign= 'middle' TABfontSize='14px'><AiOutlineEye /></Text>{pq.viewCount}</Text>
+                  {/* 조회수 */}
+                  <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
+                    <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><AiOutlineEye /></Text>{pq.viewCount}</Text>
                 </div>
               </QuestionCard>
             );

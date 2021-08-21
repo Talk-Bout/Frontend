@@ -130,12 +130,7 @@ const QuestionWrite = (props) => {
                   </Text>
                 </Grid>
                 <Grid className="title" width="53.33%" is_center>
-                  <Text
-                    fontSize="24px"
-                    fontWeight="700"
-                    color="#e5e5e5"
-                    lineHeight="84px"
-                  >
+                  <Text fontSize="24px" fontWeight="700" color="#e5e5e5" lineHeight="84px" cursor='default'>
                     질문하기
                   </Text>
                 </Grid>

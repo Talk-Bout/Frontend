@@ -38,8 +38,8 @@ const BootMain = (props) => {
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           {/* 부트캠프 */}
-          <Text p color='#F8F9FA' fontSize='32px' TABfontSize='20px' fontWeight='700' margin='0 0 8px' TABmargin='14px 0 0'><Emoji src={Rocket_emoji} alt='로켓' height='32px' TABheight='20px' margin='0 8px 0 0' />부트캠프</Text>
-          <Text color='#BDC1C6' fontSize='20px' TABfontSize='12px'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
+          <Text p color='#F8F9FA' fontSize='32px' TABfontSize='20px' fontWeight='700' margin='0 0 8px' TABmargin='14px 0 0' cursor='default'><Emoji src={Rocket_emoji} alt='로켓' height='32px' TABheight='20px' margin='0 8px 0 0' />부트캠프</Text>
+          <Text color='#BDC1C6' fontSize='20px' TABfontSize='12px' cursor='default'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
           {/* 부트캠프 목록 */}
           <CardList>
             {camp_list.map((camp, idx) => {
@@ -47,10 +47,10 @@ const BootMain = (props) => {
                 <Card key={idx} onClick={() => history.push(`/boot/${camp.bootcampName}`)}>
                   {/* 부트캠프 로고 */}
                   <ImageDiv>
-                    {camp.logo ? 
-                    <Logo src={camp.logo} alt={camp.bootcampName}></Logo>
-                    :
-                    <Logo src={LogoIcon} alt={camp.bootcampName} style={{width: 'auto', height: 'auto'}}></Logo>
+                    {camp.logo ?
+                      <Logo src={camp.logo} alt={camp.bootcampName}></Logo>
+                      :
+                      <Logo src={LogoIcon} alt={camp.bootcampName} style={{ width: 'auto', height: 'auto' }}></Logo>
                     }
                   </ImageDiv>
                   {/* 부트캠프 이름 */}
@@ -77,7 +77,7 @@ const BootMain = (props) => {
               {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
+              <Text lineHeight='14px' margin='0 20px 0'><Page style={{ opacity: 1 }}>{page}</Page></Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
               <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? page + 1 : ''}</Page></Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}

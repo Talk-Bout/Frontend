@@ -87,9 +87,9 @@ const CommonList = (props) => {
           <Grid>
             {/* 부트톡톡 타이틀 */}
             <Grid height="fit-content" margin="0 0 24px 0" TABmargin='14px 0 8px'>
-              <Text p fontSize="32px" TABfontSize='20px' color="#F8F9FA" fontWeight="700" margin='0 0 8px' TABmargin='0'>
+              <Text p fontSize="32px" TABfontSize='20px' color="#F8F9FA" fontWeight="700" margin='0 0 8px' TABmargin='0' cursor='default'>
                 <Emoji src={Megaphone_emoji} height='32px' TABheight='20px' margin='0 8px 0 0' />부트톡톡</Text>
-              <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px'>부트캠퍼들의 자유로운 Talk Talk</Text>
+              <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' cursor='default'>부트캠퍼들의 자유로운 Talk Talk</Text>
             </Grid>
             {/* 게시판 카테고리 */}
             <Grid display="flex" justifyContent="space-between" margin="0 0 24px 0" TABmargin='0 0 16px 0'>

@@ -32,13 +32,12 @@ const MypagePost = (props) => {
         <Body header>
           <Grid height="fit-content">
             <Grid height="9%" width="100%">
-
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px">{nickname}님의 글</Text>
+              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px" cursor='default'>{nickname} 님의 글</Text>
             </Grid>
             <Card display="flex" height="81%" width="100%">
               {mypost_list.map((p, idx) => {
                 return (
-                  <Grid key={idx} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px"
+                  <Grid key={idx} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px" cursor='pointer' hover='opacity: 0.7'
                   // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
                     <Grid overflow="hidden" height="100px" width="100%" >

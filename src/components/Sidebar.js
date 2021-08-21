@@ -10,7 +10,7 @@ const Sidebar = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="sidebar" backgroundColor="#202124" width="100px" TABwidth='72px' opacity={opacity} TABopacity={TABopacity}>
+      <Grid className="sidebar" backgroundColor="#202124" width="100px" minHeight='100vh' TABwidth='72px' opacity={opacity} TABopacity={TABopacity}>
         <Grid className="sidebar-inner">
           <Point
             src={PointImg} alt='디자인' />

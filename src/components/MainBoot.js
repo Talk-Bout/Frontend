@@ -22,12 +22,12 @@ const MainBoot = () => {
       <Grid className="top-boot" height="421px" TABheight="330px">
         <Grid padding="57px 0 0" TABpadding="40px 0 0">
           {/* 인기 부트캠프 */}
-          <Text fontSize="24px" fontWeight="700" color="#F8F9FA" TABfontSize="20px">
+          <Text fontSize="24px" fontWeight="700" color="#F8F9FA" TABfontSize="20px" cursor='default'>
             <Emoji src={Rocket_emoji} alt='로켓' height='24px' TABheight='20px' margin='0 8px 0 0' />부트캠프
           </Text>
           <TextBox>
             {/* 부트캠프 페이지 소개 */}
-            <Text fontSize="14px" color="#BDC1C6" TABfontSize="12px">
+            <Text fontSize="14px" color="#BDC1C6" TABfontSize="12px" cursor='default'>
               부트캠프별 정보를 공유하고 별점도 매겨보세요!
             </Text>
             {/* 부트캠프 더보기 버튼 */}

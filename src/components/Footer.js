@@ -8,11 +8,11 @@ const Footer = (props) => {
   return (
     <React.Fragment>
       <Grid height='250px' TABheight='182px' margin='80px 0 0' TABmargin='64px 0 0' backgroundColor='#0E1013' padding='24px 20px' TABpadding='24px 20px 36px'>
-        <Image src={LogoImg} alt='로고'/>
-        <Text p fontSize='14px' fontWeight='700' color='#bdc1c6' margin='0 8px 0' TABmargin='0 4px 0'>토크부트를 만든 사람들 소개</Text>
+        <Image src={LogoImg} alt='로고' />
+        <Text p fontSize='14px' fontWeight='700' color='#bdc1c6' margin='0 8px 0' TABmargin='0 4px 0' cursor='default'>토크부트를 만든 사람들 소개</Text>
         <Grid display='flex' justifyContent='space-between' width='fit-content' margin='16px 8px 0' TABmargin='12px 4px'>
-          <Text fontSize='12px' color='#bdc1c6'>© 2021 Project Talk'bout</Text>
-          <Text fontSize='12px' color='#bdc1c6' margin='0 24px'>All rights reserved.</Text>
+          <Text fontSize='12px' color='#bdc1c6' cursor='default'>© 2021 Project Talk'bout</Text>
+          <Text fontSize='12px' color='#bdc1c6' margin='0 24px' cursor='default'>All rights reserved.</Text>
         </Grid>
       </Grid>
     </React.Fragment>

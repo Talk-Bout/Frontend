@@ -152,10 +152,10 @@ const CommonDetail = (props) => {
               {/* 게시글 */}
               <Post>
                 {/* 게시글 카테고리 */}
-                <Text fontSize='14px' color='#dadce0'>부트캠프 &gt; {one_post.category}</Text>
+                <Text fontSize='14px' color='#dadce0' cursor='default'>부트캠프 &gt; {one_post.category === 'chitchat' ? '잡담' : '정보'}</Text>
                 <Grid display='flex' justifyContent='space-between' padding='12px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' verticalAlign='middle'>{one_post.title}</Text>
+                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' verticalAlign='middle' cursor='default'>{one_post.title}</Text>
                   <div style={{ height: 'fit-content' }}>
                     {/* 북마크 버튼 */}
                     {/*  */}
@@ -198,50 +198,42 @@ const CommonDetail = (props) => {
                   <img src={Profile_small} alt='프로필' style={{ width: '40px', height: '40px' }} />
                   <InfoBoxInner>
                     <div style={{ height: '18px', lineHeight: '18px' }}>
-                      <Text fontSize='14px' color='#BDC1C6' margin='0'>{one_post.nickname}</Text>
+                      <Text fontSize='14px' color='#BDC1C6' margin='0' cursor='default'>{one_post.nickname}</Text>
                     </div>
                     <div style={{ height: '16px', lineHeight: '16px' }}>
-                      <Text fontSize='12px' color='#BDC1C6' margin='0'>{one_post.createdAt}</Text>
+                      <Text fontSize='12px' color='#BDC1C6' margin='0' cursor='default'>{one_post.createdAt}</Text>
                     </div>
                   </InfoBoxInner>
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
                 {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image}`} /></ImageBox> : ''}
-                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'}>{one_post.content}</Text>
+                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='default'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}
                   {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}
-                  {like_find ?
-                    <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
+                  <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
+                    {like_find ?
                       <Text color='#7879F1' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => unlikePost(like_find.postLikeId)}>
-                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}>
-                          <BiLike />
-                        </span>
-                        {/* 좋아요 개수 */}
+                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
                         {my_like.length}
                       </Text>
-                    </span>
-                    :
-                    <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
+                      :
                       <Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => likePost()}>
-                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}>
-                          <BiLike />
-                        </span>
-                        {/* 좋아요 개수 */}
+                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
                         {my_like.length}
                       </Text>
-                    </span>
-                  }
+                    }
+                  </span>
                   {/* 댓글 수 */}
-                  <Text color='#BDC1C6' fontSize='12px' margin='0 16px 0'><span style={{ fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle' }}><BiComment /></span>{comment_list ? comment_list.length : 0}</Text>
+                  <Text color='#BDC1C6' fontSize='12px' margin='0 16px 0' cursor='default'><span style={{ fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle' }}><BiComment /></span>{comment_list ? comment_list.length : 0}</Text>
                   {/* 조회수 */}
-                  <Text color='#BDC1C6' fontSize='12px'><span style={{ fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle' }}><AiOutlineEye /></span>{one_post.viewCount}</Text>
+                  <Text color='#BDC1C6' fontSize='12px' cursor='default'><span style={{ fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle' }}><AiOutlineEye /></span>{one_post.viewCount}</Text>
                 </IconBox>
               </Post>
               {/* 댓글 입력란 */}
               <CommentInput>
-                <Text p fontSize='14px' lineHeight='18px' color='#E8eaed' margin='16px 0'>댓글</Text>
+                <Text p fontSize='14px' lineHeight='18px' color='#E8eaed' margin='16px 0' cursor='default'>댓글</Text>
                 <InputWrap>
                   <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
                   <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
@@ -254,9 +246,9 @@ const CommonDetail = (props) => {
                     <Grid display='flex' justifyContent='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}
-                        <Text fontSize='14px' lineHeight='18px' fontWeight='700' color='#F1F3F4' margin='0 16px 0 0'>{ct.nickname}</Text>
+                        <Text fontSize='14px' lineHeight='18px' fontWeight='700' color='#F1F3F4' margin='0 16px 0 0' cursor='default'>{ct.nickname}</Text>
                         {/* 작성일자 */}
-                        <Text fontSize='12px' lineHeight='16px' color='#BDC1C6'>{ct.createdAt}</Text>
+                        <Text fontSize='12px' lineHeight='16px' color='#BDC1C6' cursor='default'>{ct.createdAt}</Text>
                       </NameTime>
                       {/* 댓글 수정, 삭제 버튼 */}
                       {/* 댓글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
@@ -280,14 +272,8 @@ const CommonDetail = (props) => {
                     {ct.postCommentId === edit_comment ?
                       <Input edit_mode ref={commentEdit} defaultValue={ct.content} />
                       :
-                      <Text p lineHeight='24px' fontSize='16px' color='#F1F3F4' margin='0 0 16px'>{ct.content}</Text>
+                      <Text p lineHeight='24px' fontSize='16px' color='#F1F3F4' margin='0 0 16px' cursor='default'>{ct.content}</Text>
                     }
-                    {/* <Like> */}
-                    {/* 추천 수 */}
-                    {/* <Text fontSize='16px' color='#BDC1C6' margin='0 16px 0 0'><BiLike /><span style={{fontSize: '12px', marginLeft: '6px'}}>17</span></Text> */}
-                    {/* 대댓글 수 */}
-                    {/* <Text fontSize='16px' color='#BDC1C6'><BiComment /><span style={{fontSize: '12px', marginLeft: '6px'}}>0</span></Text> */}
-                    {/* </Like> */}
                   </CommentBox>
                 )
               })}
@@ -296,7 +282,7 @@ const CommonDetail = (props) => {
             </div>
             {/* 다른 게시글 목록 */}
             <OthersBox>
-              <Text fontSize='18px' fontWeight='700' color='#E8EAED'>커뮤니티 내 다른 게시글</Text>
+              <Text fontSize='18px' fontWeight='700' color='#E8EAED' cursor='default'>커뮤니티 내 다른 게시글</Text>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n, idx) => {
                 return (
                   <Text key={idx} p fontSize='16px' margin='8px 0 0' color='#DADCE0' _onClick={() => history.push('/boot/community/post')} cursor='pointer' hover='opacity: 0.7' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'><GoPrimitiveDot style={{ height: '10px' }} />부트캠프 질문 드립니다!</Text>

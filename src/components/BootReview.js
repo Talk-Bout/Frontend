@@ -7,11 +7,11 @@ import { history } from '../redux/ConfigureStore';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { BiPencil } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import {actionCreators as campActions} from '../redux/modules/bootcamp';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
 
 const BootReview = (props) => {
   const dispatch = useDispatch();
-  const {camp} = props;
+  const { camp } = props;
 
   // 페이지네이션
   const [page, setPage] = useState(1);
@@ -33,21 +33,21 @@ const BootReview = (props) => {
     <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px'>
       <Grid className='review-title' display='flex' justifyContent='space-between' padding='0 0 40px' borderBottom='1px solid #8f9091'>
         {/* 리뷰 페이지 타이틀 */}
-        <Text fontSize='24px' fontWeight='700' color='#e8eaed'>{camp.bootcampName} 리뷰</Text>
+        <Text fontSize='24px' fontWeight='700' color='#e8eaed' cursor='default'>{camp.bootcampName} 리뷰</Text>
         {/* 리뷰 남기기 버튼 */}
         {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
         {is_login ?
-        <>
-        <WriteBtn onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/review`, state: {camp_name: camp.bootcampName}})}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
-        {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
-        <FloatingBtn _onClick={() => history.push({pathname: `/boot/${camp.bootcampName}/review`, state: {camp_name: camp.bootcampName}})} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
-        </>
-        :
-        <>
-        <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{fontSize: '20px', verticalAlign: 'middle', marginRight: '10px'}}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
-        {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
-        <FloatingBtn _onClick={() => window.alert('로그인 후에 이용 가능합니다.')} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
-        </>
+          <>
+            <WriteBtn onClick={() => history.push({ pathname: `/boot/${camp.bootcampName}/review`, state: { camp_name: camp.bootcampName } })}><Text fontSize='14px' color='#7879F1'><span style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '10px' }}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
+            {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
+            <FloatingBtn _onClick={() => history.push({ pathname: `/boot/${camp.bootcampName}/review`, state: { camp_name: camp.bootcampName } })} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+          </>
+          :
+          <>
+            <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '10px' }}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
+            {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
+            <FloatingBtn _onClick={() => window.alert('로그인 후에 이용 가능합니다.')} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+          </>
         }
       </Grid>
       {/* 부트캠프 리뷰 목록 */}
@@ -58,22 +58,22 @@ const BootReview = (props) => {
             <Post key={review.reviewId}>
               {/* 별점 */}
               <StarBox>
-                <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>{review.stars}</Text>
-                <Stars score={review.stars} size='16px' marginRight='4px'/>
+                <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
+                <Stars score={review.stars} size='16px' marginRight='4px' />
               </StarBox>
               {/* 리뷰 */}
               <PostBoxThird>
                 {/* 리뷰 제목 */}
-                <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>{review.title}</Text>
+                <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.title}</Text>
                 {/* 작성자 닉네임, 작성일자 */}
-                <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>
-                  {review.status === '수료' ? '수료자: ' : '작성자: ' }{review.nickname} - {review.createdAt}
+                <Text p fontSize='14px' color='#80868b' margin='4px 0 0' cursor='default'>
+                  {review.status === '수료' ? '수료자: ' : '작성자: '}{review.nickname} - {review.createdAt}
                 </Text>
                 {/* 장점 */}
-                <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0'>장점</Text>
-                <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0'>{review.pros}</Text>
-                <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='16px 0 0'>단점</Text>
-                <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0'>{review.cons}</Text>
+                <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
+                <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.pros}</Text>
+                <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
+                <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.cons}</Text>
               </PostBoxThird>
             </Post>
           )
@@ -82,22 +82,22 @@ const BootReview = (props) => {
           <Post key={review.reviewId}>
             {/* 별점 */}
             <StarBox>
-              <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>{review.stars}</Text>
-              <Stars score={review.stars} size='16px' marginRight='4px'/>
+              <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
+              <Stars score={review.stars} size='16px' marginRight='4px' />
             </StarBox>
             {/* 리뷰 */}
             <PostBox>
               {/* 리뷰 제목 */}
-              <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0'>리뷰 제목</Text>
+              <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>리뷰 제목</Text>
               {/* 작성자 닉네임, 작성일자 */}
-              <Text p fontSize='14px' color='#80868b' margin='4px 0 0'>
-                {review.status === '수료' ? '수료자: ' : '작성자: ' }{review.nickname} - {review.createdAt}
+              <Text p fontSize='14px' color='#80868b' margin='4px 0 0' cursor='default'>
+                {review.status === '수료' ? '수료자: ' : '작성자: '}{review.nickname} - {review.createdAt}
               </Text>
               {/* 장점 */}
-              <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0'>장점</Text>
-              <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0'>{review.pros}</Text>
-              <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='16px 0 0'>단점</Text>
-              <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0'>{review.cons}</Text>
+              <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
+              <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.pros}</Text>
+              <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
+              <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.cons}</Text>
             </PostBox>
           </Post>
         )
@@ -110,7 +110,7 @@ const BootReview = (props) => {
           {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
           <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
           {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-          <Text lineHeight='14px' margin='0 20px 0'><Page style={{opacity: 1}}>{page}</Page></Text>
+          <Text lineHeight='14px' margin='0 20px 0'><Page style={{ opacity: 1 }}>{page}</Page></Text>
           {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
           <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? page + 1 : ''}</Page></Text>
           {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}

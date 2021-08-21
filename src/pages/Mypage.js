@@ -17,6 +17,15 @@ const Mypage = (props) => {
   const dispatch = useDispatch();
   // const nickname = useSelector((state) => state.user.user.nickname);
   const nickname = getCookie('nickname');
+  const provider = getCookie('provider');
+
+  useEffect(() => {
+    dispatch(mypageActions.setMyBootDB(nickname));
+    dispatch(campActions.setCampsDB(1));
+    dispatch(mypageActions.setMypostDB(nickname));
+    dispatch(mypageActions.setMyTalkDB(nickname));
+    dispatch(mypageActions.setMyQnaDB(nickname));
+  }, []);
 
   // 관심있는 부트캠프
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
@@ -60,19 +69,6 @@ const Mypage = (props) => {
   // 질문과답변 3개 추출
   const myqna = myqna_list.slice(0, 3);
 
-  // 구글 폼 링크
-  const url = 'https://forms.gle/bFX46XToYSFVGFoW6';
-
-
-  // 부트캠프, 부트톡톡 북마크
-  useEffect(() => {
-    dispatch(mypageActions.setMyBootDB(nickname));
-    dispatch(campActions.setCampsDB(1));
-    dispatch(mypageActions.setMypostDB(nickname));
-    dispatch(mypageActions.setMyTalkDB(nickname));
-    dispatch(mypageActions.setMyQnaDB(nickname));
-  }, []);
-
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -84,41 +80,16 @@ const Mypage = (props) => {
               <ProfileInner>
                 {/* 인증 안됐을 때 */}
                 <ProfileBox>
-                  <img src={Mid_Profile} alt='프로필' />
+                  <Profile src={Mid_Profile} alt='프로필' />
                 </ProfileBox>
-                <Grid height="30%">
+                <Grid>
                   {/* 닉네임 표시 */}
-                  <NicknameBox>
-                    {nickname} <Text fontSize="24px" color="#7879F1"></Text>
-                  </NicknameBox>
-                  {/* 이메일 표시 */}
-                  {/* <Text p color="#5F6368" text_align="center" margin="0" fontSize="14px">sparta@coding.kr</Text> */}
+                  <Nickname>
+                    {nickname}
+                  </Nickname>
+                  {/* 소셜 로그인 표시 */}
+                  <Status>{provider} 로그인 이용 중</Status>
                 </Grid>
-                {/* 인증 됐을 때 */}
-                {/* <ProfileBox>
-              <img src={Mid_Profile} alt='프로필'/>
-              </ProfileBox>
-              <Grid height="30%">
-                <Text p color="#F8F9FA" text_align="center" margin="5px 0 5px 0" fontSize="24px" fontWeight="bold">
-                  스파르타 <Text fontSize="24px" color="#7879F1"><img src={Badge} alt='배지'/></Text>
-                </Text>
-                <Text p color="#5F6368" text_align="center" margin="0" fontSize="14px">sparta@coding.kr</Text>
-              </Grid> */}
-                {/* 인증 안됐을 때 */}
-                <AuthBox>
-                  <TextBox>
-                    <InfoButton onClick={() => history.push('/mypage/edit')}
-                    >내 정보 수정</InfoButton>
-                    <InfoButton onClick={() => window.open(`${url}`, '_blank')}>부트캠프 인증</InfoButton>
-                  </TextBox>
-                </AuthBox>
-                {/* 인증 됐을 때 */}
-                {/* <Grid height="30%" margin="auto"> */}
-                {/* <TextBox>
-                  <Button _onClick={() => history.push('/mypage/edit')}
-                   font_size="14px" fontWeight="bold" width="40%" border="none" bg="transparent" color="#7879F1" text_align="center">정보 수정</Button>
-                </TextBox> */}
-                {/* </Grid> */}
               </ProfileInner>
             </ProfileOutter>
             {/* 북마크된 부트캠프, 글들 */}
@@ -127,10 +98,10 @@ const Mypage = (props) => {
                 <Grid height="172px" width="100%" >
                   <Grid padding="18px 20px" justifyContent="space-between" flexDirection="row" alignItems="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                     <BookMarkBox>
-                      <Text fontSize="18px" color="#F1F3F4">관심있는 부트캠프</Text>
+                      <Text fontSize="18px" color="#F1F3F4" cursor='default'>관심있는 부트캠프</Text>
                       <Count> {'('}{myboot_list.length}{')'} </Count>
                     </BookMarkBox>
-                    <MoreButton>더보기 <AiOutlineRight /></MoreButton>
+                    <MoreButton>더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
                   </Grid>
                   {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                   {myboot_list.length !== 0 ?
@@ -155,25 +126,21 @@ const Mypage = (props) => {
                       })}
                     </BootBox>
                     :
-                    <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="65%" width="98.5%">
+                    <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="96%" width="98.5%">
                       <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" padding="25px 330px">
-                        <Grid margin="auto" height="100%" width="100%">
-                          <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px">부트캠프를 추가해주세요 :)</Text>
-                        </Grid>
+                        <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default'>부트캠프를 추가해주세요 :)</Text>
                       </Grid>
                     </Grid>
                   }
-
                 </Grid>
-
                 <Grid height="287px" width="100%" margin="48px 0 0 0" >
                   <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                     <BookMarkBox>
-                      <Text fontSize="18px" color="#F1F3F4">내 북마크</Text>
+                      <Text fontSize="18px" color="#F1F3F4" cursor='default'>내 북마크</Text>
                       <Count> {'('}{mytalk_list.length} {')'} </Count>
                     </BookMarkBox>
                     <MoreButton onClick={() => { history.push('/mypage/mybookmarks') }}
-                    >더보기 <AiOutlineRight /></MoreButton>
+                    >더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
                   </Grid>
                   {/* 북마크가 있을 경우에만 보여줌 */}
                   {mytalk_list.length !== 0 ?
@@ -181,14 +148,13 @@ const Mypage = (props) => {
                       {mytalk.map((p, idx) => {
                         return (
                           <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
-                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }}
-                          >
+                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer'>
                             <Grid overflow="hidden" height="100px" width="100%" >
                               <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
                                 overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
                               >{p.post.title}
                               </Text>
-                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
+                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="2" wbo="vertical"
                                 margin="0 0 24px 0" height="44px" TABfontSize="12px"
                               >{p.post.content}</Text>
                             </Grid>
@@ -212,7 +178,7 @@ const Mypage = (props) => {
                     :
                     <Grid margin="12px 0 0 0" height="211px" width="98.5%">
                       <Grid display="flex" alignItems="center" textAlign="center" height="203px" width="100%" padding="20px 300px" border="5px dotted #2E3134" borderRadius="12px">
-                        <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px">북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
+                        <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default'>북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }
@@ -220,12 +186,12 @@ const Mypage = (props) => {
                 <Grid height="279px" width="100%" margin="48px 0 0 0">
                   <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                     <BookMarkBox>
-                      <Text fontSize="18px" color="#F1F3F4">{nickname} 님의 글</Text>
+                      <Text fontSize="18px" color="#F1F3F4" cursor='default'>{nickname} 님의 글</Text>
                       <Count> {'('}{mypost_list.length} {')'} </Count>
                     </BookMarkBox>
                     <MoreButton color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%"
                       onClick={() => { history.push('/mypage/mypost') }}
-                    >더보기 <AiOutlineRight /></MoreButton>
+                    >더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
                   </Grid>
                   {/* 내가 쓴글이 있을 경우에만 보여줌 */}
                   {mypost_list.length !== 0 ?
@@ -233,8 +199,7 @@ const Mypage = (props) => {
                       {mypost.map((p, idx) => {
                         return (
                           <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
-                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }}
-                          >
+                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer' hover='opacity: 0.7'>
                             <Grid overflow="hidden" height="100px" width="100%" >
                               <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
                                 overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
@@ -264,7 +229,7 @@ const Mypage = (props) => {
                     :
                     <Grid margin="12px 0 0 0" height="203px" width="98%">
                       <Grid display="flex" alignItems="center" textAlign="center" padding="20px 300px" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
-                        <Text fontSize="18px" color="#FFFFFF" TABfontSize="16px">글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
+                        <Text fontSize="18px" color="#FFFFFF" TABfontSize="16px" cursor='default'>글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }
@@ -292,10 +257,10 @@ const Outter = styled.div`
 
 
 const ProfileOutter = styled.div`
-height: auto;
-width: 24%;
-margin: 0 16px 0 0;
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
+  height: auto;
+  width: 24%;
+  margin: 0 16px 0 0;
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
     width: 98.5%;
     height: auto;
     margin: 0 0 32px 0;
@@ -303,107 +268,68 @@ margin: 0 16px 0 0;
 `;
 
 const ProfileInner = styled.div`
-background-color: #202124;
-/* min-width: 175px; */
-width: 302px;
-height: 325px;
-margin: auto;
-border: 1px solid #202124;
-border-radius: 12px;
-
-@media screen and (min-width: 992px) and (max-width: 1460px) { 
-  width: 100%;
+  background-color: #202124;
+  width: 302px;
   height: 325px;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  width: 99.5%;
-  height: 136px;
-  display: flex;
-}
+  margin: auto;
+  border: 1px solid #202124;
+  border-radius: 12px;
+  @media screen and (min-width: 992px) and (max-width: 1460px) { 
+    width: 100%;
+    height: 325px;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+    width: 99.5%;
+    height: 136px;
+    display: flex;
+  }
 `;
 
 const ProfileBox = styled.div`
-width: 72px;
-height: 72px;
-margin: 12% auto;
-
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  width: 72px;
-  height: 72px;
-  margin: 32px 0 32px 32px;
-  }
-
-`;
-
-const NicknameBox = styled.p`
-color: #F8F9FA;
-text-align: center;
-margin: 5px 0 5px 0;
-font-size: 20px;
-font-weight: bold;
-
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  width: 89px;
-  height: 36px;
-  margin: 32px 0 0 24px;
-  }
-`;
-
-const TextBox = styled.div`
-text-align: center;
-display: flex;
-padding: 6% 0;
-margin: auto;
-justify-content: center;
-
-@media screen and (min-width: 992px) and (max-width: 1460px) { 
-  width: 250px;
-  height: 18px;
-  margin: 0;
-  padding: 0;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  width: 200px;
-  height: 18px;
-  margin: 0;
-  padding: 0;
-  }
-`;
-
-const AuthBox = styled.div`
-height: 30%;
-margin: auto;
-
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  height: 0;
-  margin: 32px 32px 0 0;
-}
-`;
-
-const InfoButton = styled.button`
-margin: 0 2%;
-line-height: 18px;
-font-size: 14px;
-font-weight: bold;
-width: 40%;
-border: none;
-background-color: transparent;
-color: #7879F1;
-text-align: center;
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  height: 0;
-  margin: 0;
   width: 100px;
-}
+  height: 100px;
+  margin: 70px auto 0;
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+    width: 100px;
+    height: 100px;
+    margin: 24px 64px;
+    }
+`;
+
+const Profile = styled.img`
+  width: 100%;
+`;
+
+const Nickname = styled.p`
+  color: #F8F9FA;
+  text-align: center;
+  margin: 50px 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: default;
+  @media screen and (min-width: 768px) and (max-width: 1100px) {
+    text-align: start;
+    margin: 32px 0 0 24px;
+    }
+`;
+
+const Status = styled.p`
+  color: #5f6368;
+  text-align: center;
+  margin: 0;
+  font-size: 14px;
+  cursor: default;
+  @media screen and (min-width: 768px) and (max-width: 1100px) {
+    text-align: start;
+    margin: 10px 24px;
+  }
 `;
 
 const ImgBox = styled.div`
-margin: 0px 15px 0 0;
-@media screen and (min-width: 768px) and (max-width: 1100px) {
-  margin: 0px 8px 0 0;
-  }
+  margin: 0px 15px 0 0;
+  @media screen and (min-width: 768px) and (max-width: 1100px) {
+    margin: 0px 8px 0 0;
+    }
 `;
 
 const ProfileImg = styled.img`
@@ -415,77 +341,78 @@ const ProfileImg = styled.img`
 `;
 
 const InfoBox = styled.div`
-display: flex;
-width: 100%;
-padding: 5px 0;
+  display: flex;
+  width: 100%;
+  padding: 5px 0;
 `;
 
 const MoreButton = styled.button`
-color: #5F6368;
-background-color: transparent;
-border: none;
-font-size: 18px;
-font-weight: bold;
-width: 13%;
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  width: 12%;
-  font-size: 14px;
-}
+  color: #bdc1c6;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  width: 13%;
+  cursor: pointer;
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+    width: 12%;
+    font-size: 14px;
+  }
 `;
 
 const BootBox = styled.div`
-display: flex;
-margin: 12px 0;
-height: 65%;
-width: 100%;
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  height: 100%;
-  .bootcard2 {
-    display: none;
-  }
+  display: flex;
+  margin: 12px 0;
+  height: 96px;
+  width: 100%;
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+    height: 100%;
+    .bootcard2 {
+      display: none;
+    }
 }
 `;
 
 const BootCard = styled.div`
-margin: 0 16px 0 0;
-display: flex;
-padding: 0 15px;
-height: 96px;
-width: 32.3%;
-background-color:#202124;
-border-radius: 5px;
-@media screen and (min-width: 768px) and (max-width: 1100px) {
-    width: 49.25%;
-    height: 96px;
-    margin-bottom: 12px;
-    box-shadow: none;
-  }
+  margin: 0 16px 0 0;
+  display: flex;
+  padding: 0 15px;
+  height: 96px;
+  width: 32.3%;
+  background-color:#202124;
+  border-radius: 5px;
+  @media screen and (min-width: 768px) and (max-width: 1100px) {
+      width: 49.25%;
+      height: 96px;
+      margin-bottom: 12px;
+      box-shadow: none;
+    }
 `;
 
 const ResponSiveOutter = styled.div`
-height: auto;
-width: 100%;
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  height: 100%;
+  height: auto;
   width: 100%;
-}
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 const BookMarkBox = styled.div`
 `;
 
 const Count = styled.span`
-color: #5F6368;
-font-size: 18px;
+  color: #5F6368;
+  font-size: 18px;
 `;
 
 const ImageBox = styled.div`
-width: 35%;
-justify-content: middle;
-margin: auto;
-@media screen and (min-width: 768px) and (max-width: 1100px) { 
-  width: 40%;
-}
+  width: 35%;
+  justify-content: middle;
+  margin: auto;
+  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+    width: 40%;
+  }
 `;
 
 export default Mypage;

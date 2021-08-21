@@ -29,7 +29,8 @@ const CommonList = (props) => {
     } else {
       dispatch(postActions.setPostDB(page, ''));
     }
-  }, [page]);
+    window.scrollTo(0, 0);
+  }, [page, category]);
 
   // 불러오는 3페이지짜리 최신순 커뮤니티글 목록
   const new_post = useSelector((state) => state.post.list);
@@ -67,14 +68,6 @@ const CommonList = (props) => {
   const setNew = () => {
     dispatch(postActions.setPostPopDB(page));
     setPopArray(true);
-  };
-
-  // 로그인 후 글쓰기 가능
-  const login_check = () => {
-    if (!is_login) {
-      window.alert('로그인 후 이용해주세요!');
-      return;
-    }
   };
 
   return (
@@ -124,7 +117,7 @@ const CommonList = (props) => {
                   </div>
                   :
                   <div>
-                    <WriteButton onClick={() => login_check()}><BiPencil />&nbsp; 글쓰기</WriteButton>
+                    <WriteButton onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><BiPencil />&nbsp; 글쓰기</WriteButton>
                   </div>}
               </Grid>
             </Grid>
@@ -137,10 +130,7 @@ const CommonList = (props) => {
                 <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
             </>
             :
-            <>
-              <FloatingBtn _onClick={() => login_check()}>
-                <Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
-            </>
+            ''
           }
           {/* import 부트톡톡 게시물  */}
           <Grid width="100%" height='850px' TABheight='730px'>

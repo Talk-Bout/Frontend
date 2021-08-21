@@ -91,10 +91,6 @@ const setMyCampDB = () => {
 const addMyCampDB = (nickname, bootcampName) => {
   // 부트캠프 북마크 표시하는 함수
   return function (dispatch) {
-    if (nickname === undefined) {
-      window.alert('로그인 후에 이용 가능합니다.');
-      return;
-    }
     instance
       .post(`/bootcamp/${bootcampName}/bootcampBookmarks`, {
         nickname: nickname,

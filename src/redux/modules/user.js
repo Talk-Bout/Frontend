@@ -49,7 +49,7 @@ const googleLogin = () => {
     setCookie('provider', provider_URL);
     setCookie('nickname', nickname_URL);
     setCookie('profilePic', profilePic_URL);
-    dispatch(loginCheck);
+    dispatch(loginCheck());
     // const google_info = {
     //   accessToken: accessToken_URL,
     //   provider: provider_URL,
@@ -80,7 +80,7 @@ const googleRefresh = () => {
       setCookie('accessToken', response.data.access_token);
       deleteCookie('idToken');
       setCookie('idToken', response.data.access_token);
-      dispatch(loginCheck);
+      dispatch(loginCheck());
       // const tokens = {
       //   accessToken: response.data.access_token,
       //   idToken: response.data.id_token,
@@ -105,7 +105,7 @@ const kakaoLogin = () => {
     setCookie('provider', provider_URL);
     setCookie('nickname', nickname_URL);
     setCookie('profilePic', profilePic_URL);
-    dispatch(loginCheck);
+    dispatch(loginCheck());
     // const kakao_info = {
     //   accessToken: accessToken_URL,
     //   provider: provider_URL,
@@ -131,7 +131,7 @@ const kakaoRefresh = () => {
     }), { headers: headers }).then((response) => {
       deleteCookie('accessToken');
       setCookie('accessToken', response.data.access_token);
-      dispatch(loginCheck);
+      dispatch(loginCheck());
       // const kakao_token = {
       //   accessToken: response.data.access_token
       // }
@@ -154,8 +154,6 @@ const logOut = () => {
     }, { headers: headers }).then((response) => {
       if (response.status === 200) {
         window.alert('성공적으로 로그아웃 되었습니다.');
-      } else {
-        console.log(response);
       }
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
@@ -163,7 +161,7 @@ const logOut = () => {
       deleteCookie('provider');
       deleteCookie('nickname');
       deleteCookie('profilePic');
-      dispatch(logoutCheck);
+      dispatch(logoutCheck());
       history.push('/');
       // dispatch(removeTokens());
     }).catch((err) => {
@@ -182,7 +180,7 @@ const logOutAuto = () => {
     deleteCookie('nickname');
     deleteCookie('profilePic');
     window.alert('로그인 정보가 만료되어 자동 로그아웃 되었습니다. 로그인 화면으로 이동합니다.');
-    dispatch(logoutCheck);
+    dispatch(logoutCheck());
     // dispatch(removeTokens());
     history.push('/login');
   };

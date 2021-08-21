@@ -158,11 +158,16 @@ const CommonDetail = (props) => {
                   <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' verticalAlign='middle' cursor='default'>{one_post.title}</Text>
                   <div style={{ height: 'fit-content' }}>
                     {/* 북마크 버튼 */}
-                    {/*  */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
                     {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
-                    {post_bookmark ? <Text color='#7879F1' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
-                      : <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text>}
+                    {is_login ?
+                      post_bookmark ?
+                        <Text color='#7879F1' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
+                        :
+                        <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text>
+                      :
+                      ''
+                    }
                     {/* 드롭다운 메뉴 버튼 */}
                     {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
                     {one_post.nickname === username ?
@@ -213,13 +218,19 @@ const CommonDetail = (props) => {
                   {/* 좋아요 버튼 */}
                   {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}
                   <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
-                    {like_find ?
-                      <Text color='#7879F1' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => unlikePost(like_find.postLikeId)}>
-                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
-                        {my_like.length}
-                      </Text>
+                    {is_login ?
+                      like_find ?
+                        <Text color='#7879F1' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => unlikePost(like_find.postLikeId)}>
+                          <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
+                          {my_like.length}
+                        </Text>
+                        :
+                        <Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => likePost()}>
+                          <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
+                          {my_like.length}
+                        </Text>
                       :
-                      <Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='pointer' _onClick={() => likePost()}>
+                      <Text color='#BDC1C6' fontSize='14px' fontWeight='700' lineHeight='18px' cursor='default'>
                         <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
                         {my_like.length}
                       </Text>
@@ -232,13 +243,15 @@ const CommonDetail = (props) => {
                 </IconBox>
               </Post>
               {/* 댓글 입력란 */}
-              <CommentInput>
-                <Text p fontSize='14px' lineHeight='18px' color='#E8eaed' margin='16px 0' cursor='default'>댓글</Text>
-                <InputWrap>
-                  <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
-                  <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
-                </InputWrap>
-              </CommentInput>
+              {is_login &&
+                <CommentInput>
+                  <Text p fontSize='14px' lineHeight='18px' color='#E8eaed' margin='16px 0' cursor='default'>댓글</Text>
+                  <InputWrap>
+                    <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
+                    <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
+                  </InputWrap>
+                </CommentInput>
+              }
               {/* 댓글 리스트 */}
               {comment_list && comment_list.map((ct, idx) => {
                 return (

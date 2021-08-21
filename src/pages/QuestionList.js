@@ -15,6 +15,8 @@ const QuestionList = (props) => {
   const qna_list = useSelector((state) => state.question.list);
   const pop_qna_list = useSelector((state) => state.question.popular_list);
 
+  const is_login = useSelector(state => state.user.is_login);
+
   const [popPage, setPopPage] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -75,12 +77,24 @@ const QuestionList = (props) => {
                 <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_popular()}>인기순</Text>
               }
               {/* 글쓰기 버튼 */}
-              <WriteBtn onClick={() => history.push('/question/write')}>
-                <Text fontSize="16px" color="#7879F1">
-                  <BiPencil /> 글쓰기
-                </Text>
-              </WriteBtn>
-              <FloatingBtn _onClick={() => history.push(`/question/write`)} />
+              {is_login ?
+                <>
+                  <WriteBtn onClick={() => history.push('/question/write')}>
+                    <Text fontSize="16px" color="#7879F1">
+                      <BiPencil /> 글쓰기
+                    </Text>
+                  </WriteBtn>
+                  <FloatingBtn _onClick={() => history.push(`/question/write`)} />
+                </>
+                :
+                <>
+                  <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}>
+                    <Text fontSize="16px" color="#7879F1">
+                      <BiPencil /> 글쓰기
+                    </Text>
+                  </WriteBtn>
+                </>
+              }
             </div>
           </Grid>
           {/* Q&A 게시글 목록 */}

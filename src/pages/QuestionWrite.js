@@ -48,29 +48,26 @@ const QuestionWrite = (props) => {
       setEditMode(true);
     }
   }, []);
-  //title, title을 변경할 수 있는 setTitle
-  // 수정하고 목록으로 돌아가면 ,setPost 됨. 서버의 내용을 도로 가져오는 함수가 있기 때문에
+
   // 콘텐츠 수정
   const [edit_mode, setEditMode] = React.useState(false);
-  const question_id = props.match.params.id; //작성페이지, 수정페이지인지 구분할 수 있는 부분
+  const question_id = parseInt(props.match.params.id);
   const question_list = useSelector((state) => state.question.list);
   //수정 전 게시물
   const old_question = question_list.find(
-    (question) => question.questionId == question_id
+    (question) => question.questionId === question_id
   );
-  // console.log(old_question);
+
   //포스트 작성
   const create_question = () => {
     if (titleInput.current.value === '') {
       window.alert('제목을 입력해주세요');
       return;
     }
-
     if (contentInput.current.value === '') {
       window.alert('내용을 입력해주세요');
       return;
     }
-
     if (edit_mode) {
       const edited_image = preview ? image_url : old_question.image;
       const edit_question = {
@@ -183,7 +180,6 @@ const QuestionWrite = (props) => {
                       margin="0 auto 80px"
                     >
                       {preview ? imageRef.current.files[0].name : ''}
-                      {/* {imageRef.current.files[0].name} */}
                     </Text>
                   </div>
                 ) : (

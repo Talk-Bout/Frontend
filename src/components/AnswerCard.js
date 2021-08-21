@@ -13,6 +13,7 @@ const AnswerCard = (props) => {
   const answer_id = parseInt(props.answerId);
   // const user_name = useSelector((state) => state.user.user.nickname);
   const user_name = getCookie('nickname');
+  const is_login = useSelector(state => state.user.is_login);
 
   // 전체 답변 리스트
   const answer_list = useSelector((state) => state.question.answer_list);
@@ -65,47 +66,31 @@ const AnswerCard = (props) => {
               {props.content}
             </Text>
           </Grid>
-          {my_answer_like ? (
-            <span style={{ backgroundColor: '#282A2D', padding: '8px 16px', borderRadius: '12px', }}>
-              <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}>
-                <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}>
-                  <BiLike />
-                </span>
-                {/* 좋아요 개수 */}
+          {/* 좋아요 버튼 */}
+          {/* 이미 눌려 있는 경우 보라색, 그렇지 않은 경우 하얀색으로 보여주기 */}
+          {is_login ?
+            my_answer_like ?
+              <span style={{ backgroundColor: '#282A2D', padding: '8px 16px', borderRadius: '12px', }}>
+                <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}>
+                  <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+                  {one_answer.likeNumber}
+                </Text>
+              </span>
+              :
+              <span style={{ backgroundColor: '#2E3134', padding: '8px 16px', borderRadius: '12px', }}>
+                <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeAnswer()}>
+                  <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+                  {one_answer.likeNumber}
+                </Text>
+              </span>
+            :
+            <span style={{ backgroundColor: '#2E3134', padding: '8px 16px', borderRadius: '12px', }}>
+              <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="default">
+                <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
                 {one_answer.likeNumber}
               </Text>
             </span>
-          ) : (
-            <span
-              style={{
-                backgroundColor: '#2E3134',
-                padding: '8px 16px',
-                borderRadius: '12px',
-              }}
-            >
-              <Text
-                color="#BDC1C6"
-                fontSize="14px"
-                fontWeight="700"
-                lineHeight="18px"
-                cursor="pointer"
-                _onClick={() => likeAnswer()}
-              >
-                <span
-                  style={{
-                    fontSize: '24px',
-                    margin: '0 8px 0 0',
-                    verticalAlign: 'middle',
-                    lineHeight: '30px',
-                  }}
-                >
-                  <BiLike />
-                </span>
-                {/* 좋아요 개수 */}
-                {one_answer.likeNumber}
-              </Text>
-            </span>
-          )}
+          }
         </AnswerContent>
       </AnswerBox>
     </React.Fragment>

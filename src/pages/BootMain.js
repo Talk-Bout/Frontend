@@ -16,6 +16,7 @@ const BootMain = (props) => {
   // 페이지 번호가 바뀔 때마다 부트캠프 목록 불러오는 함수 호출
   useEffect(() => {
     dispatch(campActions.setCampsDB(page));
+    window.scrollTo(0, 0);
   }, [page]);
   // 불러오는 3페이지짜리 부트캠프 목록
   const all_camp = useSelector(state => state.bootcamp.camp_list);
@@ -53,18 +54,20 @@ const BootMain = (props) => {
                       <Logo src={LogoIcon} alt={camp.bootcampName} style={{ width: 'auto', height: 'auto' }}></Logo>
                     }
                   </ImageDiv>
-                  {/* 부트캠프 이름 */}
-                  <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" TABtop='114px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA'>
-                    {camp.bootcampName}
-                  </Text>
-                  {/* 부트캠프 설명 */}
-                  <Text p fontSize="14px" position="absolute" top="172px" TABtop='144px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
-                    {camp.desc}
-                  </Text>
-                  {/* 부트캠프 별점 */}
-                  <Text fontSize="14px" color='#E8EAED' position="absolute" top="200px" TABtop='158px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
-                    {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' marginRight='4px' withScore /> : '별점/리뷰 없음'}
-                  </Text>
+                  <div id='txt'>
+                    {/* 부트캠프 이름 */}
+                    <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" TABtop='114px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA'>
+                      {camp.bootcampName}
+                    </Text>
+                    {/* 부트캠프 설명 */}
+                    <Text p fontSize="14px" position="absolute" top="172px" TABtop='144px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
+                      {camp.desc}
+                    </Text>
+                    {/* 부트캠프 별점 */}
+                    <Text fontSize="14px" color='#E8EAED' position="absolute" top="200px" TABtop='158px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
+                      {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' marginRight='4px' withScore /> : '별점/리뷰 없음'}
+                    </Text>
+                  </div>
                 </Card>
               );
             })}
@@ -126,6 +129,14 @@ const ImageDiv = styled.div`
   align-items: center;
   &:hover {
     opacity: 0.9;
+    ::before {
+      position: absolute;
+      bottom: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,.6) 100%);
+    }
   }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     opacity: 0.6;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Sidebar, Body, BootRoot, BootOthers, BootInfo, BootReview } from '../components';
@@ -12,6 +12,10 @@ const BootDetail = (props) => {
   // 리덕스에 저장된 camp_list에서 bootcampName과 같은 이름을 가진 캠프 정보를 가져온다.
   const camp_list = useSelector(state => state.bootcamp.camp_list);
   const camp = camp_list.find((c) => c.bootcampName === bootcampName);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [tab, bootcampName]);
 
   return (
     <React.Fragment>

@@ -6,7 +6,6 @@ import { actionCreators as userActions } from '../redux/modules/user';
 import { getCookie } from '../shared/cookie';
 
 const MainN = (props) => {
-  const dispatch = useDispatch();
 
   return (
     <React.Fragment>

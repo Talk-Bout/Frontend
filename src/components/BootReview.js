@@ -45,8 +45,6 @@ const BootReview = (props) => {
           :
           <>
             <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '10px' }}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
-            {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
-            <FloatingBtn _onClick={() => window.alert('로그인 후에 이용 가능합니다.')} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
           </>
         }
       </Grid>

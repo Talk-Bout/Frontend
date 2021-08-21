@@ -218,13 +218,19 @@ const QuestionDetail = (props) => {
               {/* 누르지 않았다면, 하얀색으로 보여주기 */}
               <Grid display="flex" margin="56px 0 47px" verticalAlign="center">
                 <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
-                  {question_like ?
-                    <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeQuestion(question_like.questionLikeId)}>
-                      <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
-                      {question_like_list.length}
-                    </Text>
+                  {is_login ?
+                    question_like ?
+                      <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeQuestion(question_like.questionLikeId)}>
+                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
+                        {question_like_list.length}
+                      </Text>
+                      :
+                      <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeQuestion()}>
+                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+                        {question_like_list.length}
+                      </Text>
                     :
-                    <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeQuestion()}>
+                    <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="default">
                       <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
                       {question_like_list.length}
                     </Text>
@@ -270,14 +276,14 @@ const QuestionDetail = (props) => {
             })}
             {/* 답변이 하나도 없는 경우 보여주는 문구 */}
             {answer_list.length === 0 &&
-              <Grid is_center margin='50px 0 0'>
+              <Grid margin='50px auto 0' width='fit-content' is_center>
                 <Text p color='#9aa0a6' fontSize='14px' margin='0' cursor='default'>아직 답변을 기다리고 있는 질문입니다.</Text>
-                <Text color='#9aa0a6' fontSize='14px' cursor='default'>첫 번째 답변의 주인공이 되어주세요!</Text>
+                <Text color='#9aa0a6' fontSize='14px' cursor='default'>{is_login ? '' : '로그인 하신 후, '}첫 번째 답변의 주인공이 되어주세요!</Text>
               </Grid>
             }
             {/* 총 답변 개수가 5개 이상인 경우 화살표(더보기) 버튼 보여주기  */}
-            {all_answer.length < 5 &&
-              <Grid margin="auto" width="10%">
+            {all_answer.length > 5 &&
+              <Grid margin="auto" width="fit-content">
                 <Button onClick={() => moreAnswer()}>
                   <MdKeyboardArrowDown size="40" color="#F2F3F4" />
                 </Button>

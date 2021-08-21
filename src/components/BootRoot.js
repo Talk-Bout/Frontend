@@ -15,6 +15,7 @@ const BootRoot = (props) => {
   // 현재 접속 중인 사용자의 닉네임
   // const username = useSelector(state => state.user.user.nickname);
   const username = getCookie('nickname');
+  const is_login = useSelector(state => state.user.is_login);
 
   // 사용자가 북마크한 부트캠프 목록
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
@@ -55,8 +56,14 @@ const BootRoot = (props) => {
             {/* 부트캠프 이름, 북마크 표시 */}
             <Text fontSize='32px' color='#F8F9FA' fontWeight='700' cursor='default'>{camp.bootcampName}
               {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
-              {my_camp ? <Heart check onClick={() => unmarkBoot(my_camp.bootcampBookmarkId)}><HiHeart /></Heart>
-                : <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>}
+              {is_login ?
+                my_camp ?
+                  <Heart check onClick={() => unmarkBoot(my_camp.bootcampBookmarkId)}><HiHeart /></Heart>
+                  :
+                  <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>
+                :
+                ''
+              }
             </Text>
             <Text p fontSize='14px' color='#dadce0' margin='0 0 17px' cursor='default'>{camp.desc}</Text>
           </div>

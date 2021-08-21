@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '../elements';
 import { Header, Footer } from '../components';
 
 const Body = (props) => {
   const { header, children, footer, opacity, TABopacity } = props;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <React.Fragment>

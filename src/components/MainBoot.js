@@ -6,6 +6,7 @@ import { CampLogo_default, Rocket_emoji, } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
+import { FaPlus } from 'react-icons/fa';
 
 const MainBoot = () => {
   const dispatch = useDispatch();
@@ -23,21 +24,21 @@ const MainBoot = () => {
         <Grid padding="57px 0 0" TABpadding="40px 0 0">
           {/* 인기 부트캠프 */}
           <Text fontSize="24px" fontWeight="700" color="#F8F9FA" TABfontSize="20px" cursor='default'>
-            <Emoji src={Rocket_emoji} alt='로켓' height='24px' TABheight='20px' margin='0 8px 0 0' />부트캠프
+            <Emoji src={Rocket_emoji} alt='로켓' height='24px' TABheight='20px' margin='0 8px 0 0' />이 부트캠프는 어떠세요?
           </Text>
           <TextBox>
             {/* 부트캠프 페이지 소개 */}
             <Text fontSize="14px" color="#BDC1C6" TABfontSize="12px" cursor='default'>
-              부트캠프별 정보를 공유하고 별점도 매겨보세요!
+              매력있는 부트캠프들을 만나보세요!
             </Text>
             {/* 부트캠프 더보기 버튼 */}
             <Text
-              fontSize="14px"
+              fontSize="20px"
               color="#BDC1C6"
               cursor="pointer"
               _onClick={() => history.push('/boot')}
             >
-              부트캠프 더보기 &gt;
+              <FaPlus />
             </Text>
           </TextBox>
           {/* 부트캠프 목록 */}

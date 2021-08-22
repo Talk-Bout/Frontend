@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import { Grid } from '../elements';
 import { Sidebar, Body, Banner, MainBoot, MainQna, MainTalk } from '../components';
-import { useDispatch } from 'react-redux';
-import { actionCreators as userActions } from '../redux/modules/user';
-import { getCookie } from '../shared/cookie';
 
 const MainN = (props) => {
 
@@ -12,7 +9,7 @@ const MainN = (props) => {
       <Grid className="background" display='flex'>
         <Sidebar />
         <Body header footer>
-          <Grid className="body-inner" height="100%">
+          <Grid className="body-inner" height="100%" overflow='hidden'>
             <Banner />
             <MainBoot />
             <MainTalk />

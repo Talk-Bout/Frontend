@@ -5,6 +5,7 @@ import { Megaphone_emoji, LogoIcon } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
+import { FaPlus } from 'react-icons/fa';
 
 const MainTalk = (props) => {
   const dispatch = useDispatch();
@@ -13,8 +14,7 @@ const MainTalk = (props) => {
     dispatch(postActions.setPostPopDB(1));
   }, []);
 
-  const post_list = useSelector(state => state.post.pop_list);
-  const pop_posts = post_list.slice(0, 3);
+  const pop_posts = useSelector(state => state.post.pop_list);
 
   return (
     <React.Fragment>
@@ -24,30 +24,34 @@ const MainTalk = (props) => {
         <TextBox>
           {/* 부트캠퍼들이 가장 많이 추천한 게시물 */}
           <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' cursor='default'>지금 우리에게 가장 관심받는 주제는?!</Text>
-          {/* 부트톡톡 더보기 버튼 */}
-          <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/common/list')}>부트톡톡 더보기 &gt;</Text>
+          {/* 더보기 버튼 */}
+          <Text fontSize='20px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/common/list')}><FaPlus /></Text>
         </TextBox>
         {/* 부트톡톡 게시물 목록 */}
-        <CardList>
-          {pop_posts.map((pp, idx) => {
-            return (
-              <PostCard key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
-                <ImgBox>
-                  <Img src={pp.image ? `http://13.209.12.149${pp.image}` : LogoIcon} />
-                </ImgBox>
-                {/* 질문 제목 */}
-                <Text
-                  fontSize="18px" TABfontSize='16px' fontWeight="700" color="#f1f3f4" margin="0 0 16px" TABmargin='0 0 11px' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>{pp.title}
-                </Text>
-                {/* 질문 내용 */}
-                <Content>
-                  <Text p fontSize="14px" TABfontSize='12px' letterSpacing="0.2px" lineHeight='18px' TABlineHeight='16px' color="#9aa0a6" overflow="hidden" display="-webkit-box" wlc="4" wbo="vertical">{pp.content}
-                  </Text>
-                </Content>
-              </PostCard>
-            );
-          })}
-        </CardList>
+        <Scroll>
+          <CardList>
+            {pop_posts.map((pp, idx) => {
+              return (
+                <PostCard key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
+                  <ImgBox>
+                    <Img src={pp.image ? `http://13.209.12.149${pp.image}` : LogoIcon} />
+                  </ImgBox>
+                  {/* 질문 제목 */}
+                  <TxtBox>
+                    <Text
+                      fontSize="18px" TABfontSize='16px' fontWeight="700" color="#f1f3f4" margin="0 0 16px" TABmargin='0 0 11px' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>{pp.title}
+                    </Text>
+                    {/* 질문 내용 */}
+                    <Content>
+                      <Text p fontSize="14px" TABfontSize='12px' letterSpacing="0.2px" lineHeight='18px' TABlineHeight='16px' color="#9aa0a6" overflow="hidden" display="-webkit-box" wlc="4" TABwlc='2' wbo="vertical">{pp.content}
+                      </Text>
+                    </Content>
+                  </TxtBox>
+                </PostCard>
+              );
+            })}
+          </CardList>
+        </Scroll>
       </Grid>
     </React.Fragment>
   );
@@ -64,11 +68,33 @@ const TextBox = styled.div`
   }
 `;
 
+const Scroll = styled.div`
+  width: calc(100vw - 185px);
+  overflow-x: scroll;
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4e4e4e;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: calc(100vw - 108px);
+  }
+`;
+
 const CardList = styled.div`
   height: 100%;
+  width: max-content;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  overflow-x: hidden;
+  padding-bottom: 16px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     height: 201px;
   }
@@ -76,17 +102,20 @@ const CardList = styled.div`
 
 const PostCard = styled.div`
   background-color: #202124;
-  width: 32.5%;
+  width: 350px;
   height: 350px;
   padding: 24px;
   box-sizing: border-box;
   border-radius: 12px;
   cursor: pointer;
+  margin-right: 16px;
   &:hover {
     opacity: 0.7;
   }
   @media screen and (min-width: 768px) and (max-width: 992px) {
     padding: 16px 16px 12px;
+    width: 250px;
+    height: 201px;
   }
 `;
 
@@ -96,13 +125,21 @@ const ImgBox = styled.div`
   height: 150px;
   margin: 0 auto 20px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    width: 100%;
+    height: 50%;
+    margin: 0 0 8px;
+  }
 `;
 
 const Img = styled.img`
   max-width: 100%;
   max-height: 100%;
+`;
+
+const TxtBox = styled.div`
+  width: 100%;
 `;
 
 const Content = styled.div`

@@ -36,7 +36,7 @@ const MypagePost = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
-        <Body header>
+        <Body header footer>
           <Grid height="fit-content">
             <Grid height="9%" width="100%">
               <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px" cursor='default'>내 북마크</Text>

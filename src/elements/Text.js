@@ -38,6 +38,7 @@ const Text = (props) => {
     TABwordWrap,
     TABoverflow,
     TABtextAlign,
+    TABheight,
   } = props;
 
   const styles = {
@@ -71,6 +72,7 @@ const Text = (props) => {
     TABwordWrap: TABwordWrap,
     TABoverflow: TABoverflow,
     TABtextAlign: TABtextAlign,
+    TABheight: TABheight,
   };
 
   if (p) {
@@ -135,6 +137,7 @@ const TextBoxP = styled.p`
     -webkit-box-orient: ${(props) => props.TABwbo};
     overflow: ${(props) => props.TABoverflow};
     text-align: ${(props) => props.TABtextAlign};
+    height: ${(props) => props.TABheight};
   }
 `;
 
@@ -175,6 +178,7 @@ const TextBoxS = styled.span`
     -webkit-box-orient: ${(props) => props.TABwbo};
     overflow: ${(props) => props.TABoverflow};
     text-align: ${(props) => props.TABtextAlign};
+    height: ${(props) => props.TABheight};
   }
 `;
 

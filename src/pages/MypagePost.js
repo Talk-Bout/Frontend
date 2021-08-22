@@ -29,43 +29,34 @@ const MypagePost = (props) => {
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
         <Sidebar />
-        <Body header>
+        <Body header footer>
           <Grid height="fit-content">
-            <Grid height="9%" width="100%">
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px" cursor='default'>{nickname} 님의 글</Text>
+            <Grid>
+              <Text fontSize="32px" lineHeight="46px" fontWeight='700' color="#F8F9FA" TABfontSize="20px" cursor='default'>{nickname} 님의 글</Text>
+              <Text fontSize="32px" lineHeight="46px" fontWeight='700' color="#5F6368" TABfontSize="20px" cursor='default' margin='0 8px 0'> ({mypost_list ? mypost_list.length : 0})</Text>
             </Grid>
-            <Card display="flex" height="81%" width="100%">
+            <Cards>
               {mypost_list.map((p, idx) => {
                 return (
-                  <Grid key={idx} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="95%" backgroundColor="#202124" borderRadius="12px" cursor='pointer' hover='opacity: 0.7'
+                  <Grid key={idx} TABheight='201px' width="95%" backgroundColor="#202124" borderRadius="12px" cursor='pointer' hover='opacity: 0.7'
                   // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
-                    <Grid overflow="hidden" height="100px" width="100%" >
-                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
-                        overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
+                    <Grid padding='24px 24px 16px' TABpadding='16px 16px 13px' borderBottom='1px solid #5F6368'>
+                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
                       >{p.title}
                       </Text>
-                      <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                        margin="0 0 24px 0" height="44px" TABfontSize="12px"
+                      <Text p color="#F1F3F4" fontSize="14px" letterSpacing='0.2px' lineHeight='22px' overflow="hidden" display="-webkit-box" wlc="2" TABwlc='4' wbo="vertical"
+                        margin="13px 0 16px" TABmargin='11px 0 21px' height='44px' TABheight='64px' TABfontSize="12px"
                       >{p.content}</Text>
+                      <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px" padding='0 0 3px'><span style={{ marginRight: '4px' }}><BiTimeFive /></span>{p.createdAt}</Text>
                     </Grid>
-                    <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
-                      <ImgBox>
-                        <ProfileImg src={Profile_small} alt='프로필' />
-                      </ImgBox>
-                      <InfoBox>
-                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive />{p.createdAt}</Text>
-                      </InfoBox>
+                    <Grid padding='12px 24px' TABpadding='11px 16px'>
+                      <Text p margin='0' color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.category} </Text>
                     </Grid>
-                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
-                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.category} </Text>
-                    </Grid>
-
                   </Grid>
                 );
               })}
-            </Card>
+            </Cards>
             <Grid height="10%" width="100%" is_center>
               <PageBox>
                 {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기
@@ -87,38 +78,23 @@ const MypagePost = (props) => {
   )
 };
 
-const Card = styled.div`
-grid-template-rows: repeat(3, minmax(auto, auto));
-grid-template-columns: repeat(4, 1fr);
-display: grid;
-width: 100%;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+const Cards = styled.div`
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  gap: 16px;
   width: 100%;
-  grid-template-rows: repeat(1, minmax(auto, auto));
-  grid-template-columns: repeat(3, 1fr);
-  }
-
-`;
-
-const ImgBox = styled.div`
-margin: 0px 15px 0 0;
-@media screen and (min-width: 768px) and (max-width: 992px) {
-  margin: 0px 8px 0 0;
-  }
-`;
-
-const ProfileImg = styled.img`
-  width: 24px;
-  vertical-align: middle;
+  margin-top: 24px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    width: 16px;
-  }
+    width: 100%;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    }
 `;
 
-const InfoBox = styled.div`
-display: flex;
-width: 100%;
-padding: 2% 0;
+const Line = styled.hr`
+  border: 1px solid #282A2D;;
 `;
 
 const PageBox = styled.div`

@@ -141,7 +141,7 @@ const CardList = styled.div`
   height: 100%;
   width: max-content;
   display: flex;
-  overflow-x: hidden;
+  overflow: hidden;
   padding-bottom: 16px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
     height: 225px;

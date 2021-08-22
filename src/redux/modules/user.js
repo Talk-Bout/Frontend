@@ -154,16 +154,16 @@ const logOut = () => {
     }, { headers: headers }).then((response) => {
       if (response.status === 200) {
         window.alert('성공적으로 로그아웃 되었습니다.');
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
+        deleteCookie('idToken');
+        deleteCookie('provider');
+        deleteCookie('nickname');
+        deleteCookie('profilePic');
+        dispatch(logoutCheck());
+        history.push('/');
+        // dispatch(removeTokens());
       }
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
-      deleteCookie('idToken');
-      deleteCookie('provider');
-      deleteCookie('nickname');
-      deleteCookie('profilePic');
-      dispatch(logoutCheck());
-      history.push('/');
-      // dispatch(removeTokens());
     }).catch((err) => {
       console.error(`로그아웃 에러: ${err}`);
     });

@@ -127,8 +127,8 @@ const Mypage = (props) => {
                     </BootBox>
                     :
                     <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="96%" width="98.5%">
-                      <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" padding="25px 330px">
-                        <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default'>부트캠프를 추가해주세요 :)</Text>
+                      <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" display='flex' alignItems='center'>
+                        <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default' margin='auto'>부트캠프를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }
@@ -177,8 +177,8 @@ const Mypage = (props) => {
                     </Grid>
                     :
                     <Grid margin="12px 0 0 0" height="211px" width="98.5%">
-                      <Grid display="flex" alignItems="center" textAlign="center" height="203px" width="100%" padding="20px 300px" border="5px dotted #2E3134" borderRadius="12px">
-                        <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default'>북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
+                      <Grid display="flex" alignItems="center" height="203px" width="100%" border="4px dotted #2E3134" borderRadius="12px">
+                        <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default' margin='auto'>북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }
@@ -228,8 +228,8 @@ const Mypage = (props) => {
                     </Grid>
                     :
                     <Grid margin="12px 0 0 0" height="203px" width="98%">
-                      <Grid display="flex" alignItems="center" textAlign="center" padding="20px 300px" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
-                        <Text fontSize="18px" color="#FFFFFF" TABfontSize="16px" cursor='default'>글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
+                      <Grid display="flex" alignItems="center" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
+                        <Text fontSize="18px" color="#FFFFFF" TABfontSize="16px" cursor='default' margin='auto'>글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }

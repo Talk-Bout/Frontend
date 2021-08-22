@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Emoji } from '../elements';
-import { Profile_small, Megaphone_emoji } from '../image';
-import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
-import { AiOutlineEye } from 'react-icons/ai';
+import { Megaphone_emoji, LogoIcon } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
@@ -16,59 +14,40 @@ const MainTalk = (props) => {
   }, []);
 
   const post_list = useSelector(state => state.post.pop_list);
-  const pop_posts = post_list.slice(0, 4);
+  const pop_posts = post_list.slice(0, 3);
 
   return (
     <React.Fragment>
-      <Grid className="top-boot" margin="48px 0" TABpadding='32px 0 0'>
+      <Grid className="top-talk" height='fit-content' padding='49px 0 16px' TABmpadding='32px 0 16px'>
         {/* 인기 부트톡톡 */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' cursor='default'><Emoji src={Megaphone_emoji} alt='확성기' height='24px' TABheight='20px' margin='0 8px 0 0' />부트톡톡</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' cursor='default'><Emoji src={Megaphone_emoji} alt='확성기' height='24px' TABheight='20px' margin='0 8px 0 0' />지금 이 순간, Hot! 부트톡톡</Text>
         <TextBox>
           {/* 부트캠퍼들이 가장 많이 추천한 게시물 */}
-          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' cursor='default'>부트캠퍼들의 자유로운 Talk Talk</Text>
+          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' cursor='default'>지금 우리에게 가장 관심받는 주제는?!</Text>
           {/* 부트톡톡 더보기 버튼 */}
           <Text fontSize='14px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/common/list')}>부트톡톡 더보기 &gt;</Text>
         </TextBox>
         {/* 부트톡톡 게시물 목록 */}
-        <Questions>
+        <CardList>
           {pop_posts.map((pp, idx) => {
             return (
-              <QuestionBox key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
-                {/* 게시글 제목 */}
-                <Text fontSize="18px" fontWeight='700' TABfontSize='16px' color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
-                  {pp.title}
+              <PostCard key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
+                <ImgBox>
+                  <Img src={pp.image ? `http://13.209.12.149${pp.image}` : LogoIcon} />
+                </ImgBox>
+                {/* 질문 제목 */}
+                <Text
+                  fontSize="18px" TABfontSize='16px' fontWeight="700" color="#f1f3f4" margin="0 0 16px" TABmargin='0 0 11px' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>{pp.title}
                 </Text>
-                {/* 게시글 내용 */}
-                <Grid height='50px' TABheight='32px'>
-                  <Text p fontSize="14px" margin="16px 0 0" letterSpacing='0.2px' lineHeight='18px' color="#9aa0a6" overflow='hidden' wlc='2' wbo='vertical' display='-webkit-box' TABfontSize='12px' TABlineHeight='16px'>{pp.content}</Text>
-                </Grid>
-                {/* 작성자 정보 */}
-                <Grid padding='16px 0 0' TABpadding='24px 0 0'>
-                  <ProfileImg src={pp.user.profilePic ? pp.user.profilePic : Profile_small} alt='프로필' />
-                  <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px'>
-                    {pp.user.nickname}
+                {/* 질문 내용 */}
+                <Content>
+                  <Text p fontSize="14px" TABfontSize='12px' letterSpacing="0.2px" lineHeight='18px' TABlineHeight='16px' color="#9aa0a6" overflow="hidden" display="-webkit-box" wlc="4" wbo="vertical">{pp.content}
                   </Text>
-                  {/* 작성일자 */}
-                  <Text fontSize='12px' color='#bdc1c6' margin='0 12px 0 0' TABfontSize='10px'>
-                    <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' TABmargin='0 4px 0 0' vertical_align='middle'><BiTimeFive /></Text>{pp.createdAt}
-                  </Text>
-                </Grid>
-                <Grid padding='16px 0 0' TABpadding='12px 0 0'>
-                  {/* 추천 수 */}
-                  <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px'>
-                    <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><BiLike /></Text>{pp.likeNumber}
-                  </Text>
-                  {/* 댓글 수 */}
-                  {/* <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
-                  <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>댓글 수</Text> */}
-                  {/* 조회수 */}
-                  <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
-                    <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><AiOutlineEye /></Text>{pp.viewCount}</Text>
-                </Grid>
-              </QuestionBox>
+                </Content>
+              </PostCard>
             );
           })}
-        </Questions>
+        </CardList>
       </Grid>
     </React.Fragment>
   );
@@ -77,45 +56,59 @@ const MainTalk = (props) => {
 const TextBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 4px 0 24px;
+  padding-bottom: 24px;
+  margin-top: 3px;
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    margin: 4px 0 20px;
-  } 
+    margin-top: 4px;
+    padding-bottom: 20px;
+  }
 `;
 
-const Questions = styled.div`
-  width: 100%;
-  height: fit-content;
+const CardList = styled.div`
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 16px;
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    height: 201px;
+  }
 `;
 
-const QuestionBox = styled.div`
-  height: fit-content;
-  width: 49%;
-  padding: 24px 24px 16px;
-  border-bottom: 1px solid #b5b5b5;
+const PostCard = styled.div`
+  background-color: #202124;
+  width: 32.5%;
+  height: 350px;
+  padding: 24px;
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
+  border-radius: 12px;
   cursor: pointer;
   &:hover {
     opacity: 0.7;
   }
   @media screen and (min-width: 768px) and (max-width: 992px) {
-    border-bottom: 1px solid #3c4043;
-    padding: 16px;
+    padding: 16px 16px 12px;
   }
 `;
 
-const ProfileImg = styled.img`
-  width: 24px;
-  vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    width: 16px;
-  }
+const ImgBox = styled.div`
+  border: 1px solid #333;
+  width: 90%;
+  height: 150px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+`;
+
+const Img = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+`;
+
+const Content = styled.div`
+  margin: 0;
+  padding: 0;
+  height: 76px;
 `;
 
 export default MainTalk;

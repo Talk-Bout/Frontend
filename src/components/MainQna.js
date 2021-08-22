@@ -20,7 +20,7 @@ const MainQna = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="top-boot" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px'>
+      <Grid className="top-qna" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px'>
         {/* 질문과 답변 */}
         <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' cursor='default'><Emoji src={Fire_emoji} alt='불' height='24px' TABheight='20px' margin='0 8px 0 0' />질문과 답변</Text>
         <TextBox>
@@ -127,7 +127,7 @@ const CardList = styled.div`
 const QuestionCard = styled.div`
   background-color: #202124;
   width: 32.5%;
-  height: fit-content;
+  height: 260px;
   padding: 24px 24px 8px;
   box-sizing: border-box;
   border-radius: 12px;

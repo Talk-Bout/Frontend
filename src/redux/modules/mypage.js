@@ -4,23 +4,21 @@ import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
 
 // 액션타입
-const SET_BOOTTALK = 'mypage/SET_BOOTTALK'; //부트톡톡 북마크 불러오기
 const SET_MYBOOT = 'mypage/SET_BOOTCAMP'; // 부트캠프 북마크 불러오기
-const SET_MYPOST = 'mypage/SET_MYPOST'  // 내가 쓴 글 불러오기
-const SET_MYQNA = 'mypage/SET_MYQNA' // 질문과 답변 북마크 불러오기
+const SET_MYPOST = 'mypage/SET_MYPOST';  // 내가 쓴 글 불러오기
+const SET_MYBOOKMARK = 'mypage/SET_MYBOOKMARK'; // 내가 북마크한 글들 불러오기
 
 // 액션생성함수
-const setMytalk = createAction(SET_BOOTTALK, (mytalk_list) => ({ mytalk_list }));
 const setMyboot = createAction(SET_MYBOOT, (myboot_list) => ({ myboot_list }));
 const setMypost = createAction(SET_MYPOST, (mypost_list) => ({ mypost_list }));
-const setMyqna = createAction(SET_MYQNA, (myqna_list) => ({ myqna_list }));
+const setMyBookmark = createAction(SET_MYBOOKMARK, (mybookmark_list) => ({ mybookmark_list }));
 
 // 기본값 정하기
 const initialState = {
-  mytalk_list: [],
   myboot_list: [],
   mypost_list: [],
   myqna_list: [],
+  mytalk_list: [],
 };
 
 // 액션함수
@@ -41,39 +39,6 @@ const setMyBootDB = (nickname) => {
   };
 };
 
-// 부트톡톡 북마크 불러오기
-const setMyTalkDB = (nickname) => {
-  return function (dispatch) {
-    dispatch(statusActions.setLoading());
-    instance.get(`/users/${nickname}/postBookmarks`, {
-    })
-      .then((response) => {
-        dispatch(setMytalk(response.data));
-        dispatch(statusActions.endLoading());
-        // console.log(response.data);
-      })
-      .catch((err) => {
-        console.error(`마이페이지 부트톡톡 북마크 불러오기 에러 발생: ${err}`);
-      });
-  };
-};
-
-// 질문과답변 북마크 불러오기
-const setMyQnaDB = (nickname) => {
-  return function (dispatch) {
-    dispatch(statusActions.setLoading());
-    instance.get(`/users/${nickname}/questionBookmarks`, {
-    })
-      .then((response) => {
-        dispatch(setMyqna(response.data));
-        dispatch(statusActions.endLoading());
-        // console.log(response.data);
-      })
-      .catch((err) => {
-        console.error(`마이페이지 질문과답변 북마크 불러오기 에러 발생: ${err}`);
-      });
-  };
-};
 
 // 내가 쓴글 불러오기
 const setMypostDB = (nickname) => {
@@ -92,29 +57,40 @@ const setMypostDB = (nickname) => {
   };
 };
 
+const setMyBookmarkDB = (nickname) => {
+  // 내가 북마크한 글들 불러오기
+  return function (dispatch) {
+    dispatch(statusActions.setLoading());
+    instance.get(`/users/${nickname}/allBookmarks`)
+      .then((response) => {
+        dispatch(setMyBookmark(response.data));
+        dispatch(statusActions.endLoading());
+      }).catch((err) => {
+        console.error(`마이페이지 내 북마크 글 불러오기 에러 발생: ${err} ### ${err.response}`);
+      });
+  };
+};
+
 
 export default handleActions({
-  [SET_BOOTTALK]: (state, action) => produce(state, (draft) => {
-    draft.mytalk_list = [...action.payload.mytalk_list];
-  }),
   [SET_MYBOOT]: (state, action) => produce(state, (draft) => {
     draft.myboot_list = [...action.payload.myboot_list];
   }),
   [SET_MYPOST]: (state, action) => produce(state, (draft) => {
     draft.mypost_list = [...action.payload.mypost_list];
   }),
-  [SET_MYQNA]: (state, action) => produce(state, (draft) => {
-    draft.myqna_list = [...action.payload.myqna_list];
+  [SET_MYBOOKMARK]: (state, action) => produce(state, (draft) => {
+    draft.myqna_list = [...action.payload.mybookmark_list.questionBookmarks];
+    draft.mytalk_list = [...action.payload.mybookmark_list.postBookmarks];
   }),
 }, initialState);
 
 
 // 액션 생성자
 const actionCreators = {
-  setMyTalkDB,
   setMyBootDB,
   setMypostDB,
-  setMyQnaDB,
+  setMyBookmarkDB,
 }
 
 export {

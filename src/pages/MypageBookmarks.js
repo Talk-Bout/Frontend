@@ -18,8 +18,7 @@ const MypagePost = (props) => {
 
   // 부트캠프, 부트톡톡 북마크
   React.useEffect(() => {
-    dispatch(mypageActions.setMyTalkDB(nickname));
-    dispatch(mypageActions.setMyQnaDB(nickname));
+    dispatch(mypageActions.setMyBookmarkDB(nickname));
   }, []);
 
   // 부트톡톡 북마크 리스트
@@ -141,7 +140,10 @@ width: 95%;
 background-color: #202124;
 border-radius: 12px;
 box-sizing: border-box;
-
+cursor: pointer;
+&:hover {
+  opacity: 0.7;
+}
 `;
 
 const ImgBox = styled.div`

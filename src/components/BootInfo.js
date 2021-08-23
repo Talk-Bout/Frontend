@@ -20,6 +20,8 @@ const BootInfo = (props) => {
     return <></>
   }
 
+  console.log(one_camp)
+
   // 가격 정보가 객체일 경우와 문자열일 경우를 나누어 처리한다.
   let camp_cost;
   if (one_camp.bootcampInfo && typeof (one_camp.bootcampInfo.가격) === 'object') {
@@ -47,7 +49,7 @@ const BootInfo = (props) => {
           {course.map((c_list, idx) => {
             return (
               <>
-                <div key={idx}><TextValue>{c_list[0]}</TextValue></div>
+                <div key={idx}><TextValue>{c_list[0].includes('99') ? `${c_list[0].split('99')[0]}주 ~ ${c_list[0].split('99')[1]}주` : `${c_list[0]}주`}</TextValue></div>
                 <div><TextValue>{c_list[1]}</TextValue></div>
               </>
             )
@@ -74,7 +76,7 @@ const Schedule = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 20% 80%;
   @media screen and (max-width: 767px) {
     grid-template-columns: 20% 80%;
   }

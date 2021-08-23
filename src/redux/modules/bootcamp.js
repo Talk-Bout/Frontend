@@ -84,11 +84,13 @@ const setOneCampDB = (bootcampName) => {
 const setMyCampDB = () => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const nickname = getCookie('nickname');
     instance
       .get(`/users/${nickname}/bootcampBookmarks`)
       .then((response) => {
         dispatch(setMyCamp(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         console.error(

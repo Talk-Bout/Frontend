@@ -22,10 +22,8 @@ const Mypage = (props) => {
 
   useEffect(() => {
     dispatch(mypageActions.setMyBootDB(nickname));
-    dispatch(campActions.setCampsDB(1));
     dispatch(mypageActions.setMypostDB(nickname));
-    dispatch(mypageActions.setMyTalkDB(nickname));
-    dispatch(mypageActions.setMyQnaDB(nickname));
+    dispatch(mypageActions.setMyBookmarkDB(nickname))
   }, []);
 
   // 관심있는 부트캠프
@@ -105,7 +103,7 @@ const Mypage = (props) => {
                                 <Text p margin="0 0 5px 15px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                                 <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill /></Text>
                               </Grid>
-                              <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.stars} size='14px' withScore /></Text>
+                              <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.stars == null ? 0 : mb.stars} size='14px' withScore /></Text>
                             </Grid>
                           </BootCard>
                         );

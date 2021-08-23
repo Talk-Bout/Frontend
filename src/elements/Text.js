@@ -43,12 +43,14 @@ const Text = (props) => {
     MOBfontSize,
     MOBmargin,
     MOBlineHeight,
+    MOBtop,
     MOBwlc,
     MOBwbo,
     MOBoverflow,
     MOBtextAlign,
     MOBheight,
     MOBdisplay,
+    MOBcolor,
   } = props;
 
   const styles = {
@@ -86,12 +88,14 @@ const Text = (props) => {
     MOBfontSize: MOBfontSize,
     MOBmargin: MOBmargin,
     MOBlineHeight: MOBlineHeight,
+    MOBtop: MOBtop,
     MOBwlc: MOBwlc,
     MOBwbo: MOBwbo,
     MOBoverflow: MOBoverflow,
     MOBtextAlign: MOBtextAlign,
     MOBheight: MOBheight,
     MOBdisplay: MOBdisplay,
+    MOBcolor: MOBcolor,
   };
 
   if (p) {
@@ -163,12 +167,14 @@ const TextBoxP = styled.p`
     font-size: ${(props) => props.MOBfontSize};
     margin: ${(props) => props.MOBmargin};
     line-height: ${(props) => props.MOBlineHeight};
+    top: ${(props) => props.MOBtop};
     -webkit-line-clamp: ${(props) => props.MOBwlc};
     -webkit-box-orient: ${(props) => props.MOBwbo};
     overflow: ${(props) => props.MOBoverflow};
     text-align: ${(props) => props.MOBtextAlign};
     height: ${(props) => props.MOBheight};
     display: ${(props) => props.MOBdisplay};
+    color: ${(props) => props.MOBcolor};
   }
 `;
 
@@ -216,12 +222,14 @@ const TextBoxS = styled.span`
     font-size: ${(props) => props.MOBfontSize};
     margin: ${(props) => props.MOBmargin};
     line-height: ${(props) => props.MOBlineHeight};
+    top: ${(props) => props.MOBtop};
     -webkit-line-clamp: ${(props) => props.MOBwlc};
     -webkit-box-orient: ${(props) => props.MOBwbo};
     overflow: ${(props) => props.MOBoverflow};
     text-align: ${(props) => props.MOBtextAlign};
     height: ${(props) => props.MOBheight};
     display: ${(props) => props.MOBdisplay};
+    color: ${(props) => props.MOBcolor};
   }
 `;
 

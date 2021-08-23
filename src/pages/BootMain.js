@@ -39,8 +39,8 @@ const BootMain = (props) => {
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           {/* 부트캠프 */}
-          <Text p color='#F8F9FA' fontSize='32px' TABfontSize='20px' fontWeight='700' margin='0 0 8px' TABmargin='14px 0 0' cursor='default'><Emoji src={Rocket_emoji} alt='로켓' height='32px' TABheight='20px' margin='0 8px 0 0' />부트캠프</Text>
-          <Text color='#BDC1C6' fontSize='20px' TABfontSize='12px' cursor='default'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
+          <Text p color='#F8F9FA' fontSize='32px' TABfontSize='20px' MOBfontSize='16px' fontWeight='700' margin='0 0 8px' TABmargin='14px 0 0' cursor='default'><Emoji src={Rocket_emoji} alt='로켓' height='32px' TABheight='20px' MOBfontSize='16px' margin='0 8px 0 0' />부트캠프</Text>
+          <Text color='#BDC1C6' fontSize='20px' TABfontSize='12px' MOBfontSize='10px' cursor='default'> 부트캠프별 정보를 공유하고 별점도 매겨보세요!</Text>
           {/* 부트캠프 목록 */}
           <CardList>
             {camp_list.map((camp, idx) => {
@@ -56,16 +56,16 @@ const BootMain = (props) => {
                   </ImageDiv>
                   <div id='txt'>
                     {/* 부트캠프 이름 */}
-                    <Text p fontSize="18px" fontWeight="700" position="absolute" top="140px" TABtop='114px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA'>
+                    <Text p fontSize="18px" MOBfontSize='14px' fontWeight="700" position="absolute" top="140px" TABtop='114px' MOBtop='10px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA'>
                       {camp.bootcampName}
                     </Text>
                     {/* 부트캠프 설명 */}
-                    <Text p fontSize="14px" position="absolute" top="172px" TABtop='144px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
+                    <Text p fontSize="14px" MOBfontSize='10px' position="absolute" top="172px" TABtop='144px' MOBtop='35px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA' MOBcolor='#BDC1C6' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
                       {camp.desc}
                     </Text>
                     {/* 부트캠프 별점 */}
-                    <Text fontSize="14px" color='#E8EAED' position="absolute" top="200px" TABtop='158px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
-                      {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' marginRight='4px' withScore /> : '별점/리뷰 없음'}
+                    <Text fontSize="14px" MOBfontSize='12px' color='#E8EAED' MOBcolor='#BDC1C6' position="absolute" top="200px" TABtop='158px' MOBtop='50px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
+                      {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' MOBsize='10px' marginRight='4px' withScore /> : '별점/리뷰 없음'}
                     </Text>
                   </div>
                 </Card>
@@ -99,7 +99,7 @@ const CardList = styled.div`
   flex-wrap: wrap;
   gap: 30px 15px;
   margin-top: 24px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     margin-top: 16px;
     gap: 12px;
   }
@@ -112,9 +112,14 @@ border-radius: 8px;
 box-sizing: border-box;
 cursor: pointer;
 position: relative;
-@media screen and (min-width: 768px) and (max-width: 1090px) {
+@media screen and (max-width: 1090px) {
   width: 49%;
   height: 208px;
+}
+@media screen and (max-width: 768px) {
+  width: 100%;
+  height: 96px;
+  display: flex;
 }
 `;
 
@@ -138,8 +143,11 @@ const ImageDiv = styled.div`
       background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,.6) 100%);
     }
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     opacity: 0.6;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%;
   }
 `;
 

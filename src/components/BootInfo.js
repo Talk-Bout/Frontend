@@ -6,7 +6,7 @@ const BootInfo = (props) => {
   const { camp } = props;
 
   return (
-    <Grid className='contents-info' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px'>
+    <Grid className='contents-info' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px' MOBpadding='18px'>
       <InfoList>
         <div><TextKey>코스</TextKey></div>
         <div><TextValue>14주</TextValue></div>
@@ -44,7 +44,7 @@ const InfoList = styled.div`
   & > div {
     margin-bottom: 16px;
     line-height: 30px;
-    @media screen and (min-width: 768px) and (max-width: 1090px) {
+    @media screen and (max-width: 1090px) {
       line-height: 24px;
     }
   }
@@ -55,18 +55,27 @@ const Schedule = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 15% 85%;
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 20% 80%;
+  }
 `;
 
 const TextKey = styled.span`
   font-size: 16px;
   color: #9aa0a6;
   cursor: default;
+  @media screen and (max-width: 767px) {
+    font-size: 12px;
+  }
 `;
 
 const TextValue = styled.span`
   font-size: 16px;
   color: #DADCE0;
   cursor: default;
+  @media screen and (max-width: 767px) {
+    font-size: 12px;
+  }
 `;
 
 export default BootInfo;

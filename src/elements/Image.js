@@ -18,7 +18,7 @@ const Image = (props) => {
     TABwidth,
     TABheight,
     TABmargin,
-    //모바일 사이즈(~768px)
+    //모바일 사이즈(~767px)
     MOBwidth,
     MOBheight,
     MOBmargin,
@@ -38,7 +38,7 @@ const Image = (props) => {
     TABwidth: TABwidth,
     TABheight: TABheight,
     TABmargin: TABmargin,
-    //모바일 사이즈(~768px)
+    //모바일 사이즈(~767px)
     MOBwidth: MOBwidth,
     MOBheight: MOBheight,
     MOBmargin: MOBmargin,
@@ -90,7 +90,7 @@ const ImageDefault = styled.div`
     margin: ${(props) => props.TABmargin};
   }
   // 모바일 사이즈(~768px)
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     width: ${(props) => props.MOBwidth};
     height: ${(props) => props.MOBheight};
     margin: ${(props) => props.MOBmargin};
@@ -115,7 +115,7 @@ const BigProfileImage = styled.div`
     margin: ${(props) => props.TABmargin};
   }
   // 모바일 사이즈(~768px)
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     width: ${(props) => props.MOBwidth};
     height: ${(props) => props.MOBheight};
     margin: ${(props) => props.MOBmargin};
@@ -137,7 +137,7 @@ const HeaderLogo = styled.div`
     margin: ${(props) => props.TABmargin};
   }
   // 모바일 사이즈(~768px)
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     width: ${(props) => props.MOBwidth};
     height: ${(props) => props.MOBheight};
     margin: ${(props) => props.MOBmargin};
@@ -161,7 +161,7 @@ const CircleLogo = styled.div`
     margin: ${(props) => props.TABmargin};
   }
   // 모바일 사이즈(~768px)
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     width: ${(props) => props.MOBwidth};
     height: ${(props) => props.MOBheight};
     margin: ${(props) => props.MOBmargin};

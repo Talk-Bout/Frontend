@@ -10,7 +10,7 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
 
 const Header = (props) => {
-  const { opacity, TABopacity } = props;
+  const { opacity, TABopacity, MOBopacity } = props;
   const dispatch = useDispatch();
 
   const token = getCookie('refreshToken');
@@ -47,6 +47,7 @@ const Header = (props) => {
           MOBborderBottom='1px solid #282A2D'
           opacity={opacity}
           TABopacity={TABopacity}
+          MOBopacity={MOBopacity}
         >
           {/* 검색창 */}
           <Grid

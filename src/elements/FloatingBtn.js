@@ -13,7 +13,7 @@ const FloatingBtn = (props) => {
   return (
     <React.Fragment>
       <FloatBtn onClick={_onClick} {...styles}>
-        <Text fontSize='32px' color='#dadce0'>
+        <Text fontSize='32px' MOBfontSize='24px' color='#dadce0'>
           <BiPencil />
         </Text>
       </FloatBtn>
@@ -41,6 +41,10 @@ const FloatBtn = styled.button`
   }
   @media screen and (min-width: 1091px) {
     display: none;
+  }
+  @media screen and (max-width: 767px) {
+    height: 48px;
+    width: 48px;
   }
 `;
 

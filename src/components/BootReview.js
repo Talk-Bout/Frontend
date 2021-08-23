@@ -30,10 +30,10 @@ const BootReview = (props) => {
   const is_login = useSelector(state => state.user.is_login);
 
   return (
-    <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px'>
+    <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px' MOBpadding='18px 18px 0 18px'>
       <Grid className='review-title' display='flex' justifyContent='space-between' padding='0 0 40px' borderBottom='1px solid #8f9091'>
         {/* 리뷰 페이지 타이틀 */}
-        <Text fontSize='24px' fontWeight='700' color='#e8eaed' cursor='default'>{camp.bootcampName} 리뷰</Text>
+        <Text fontSize='24px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' cursor='default'>{camp.bootcampName} 리뷰</Text>
         {/* 리뷰 남기기 버튼 */}
         {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
         {is_login ?
@@ -56,22 +56,22 @@ const BootReview = (props) => {
             <Post key={review.reviewId}>
               {/* 별점 */}
               <StarBox>
-                <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
-                <Stars score={review.stars} size='16px' marginRight='4px' />
+                <Text p fontSize='18px' MOBfontSize='12px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
+                <Stars score={review.stars} size='16px' MOBsize='10px' marginRight='4px' />
               </StarBox>
               {/* 리뷰 */}
               <PostBoxThird>
                 {/* 리뷰 제목 */}
-                <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.title}</Text>
+                <Text p fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.title}</Text>
                 {/* 작성자 닉네임, 작성일자 */}
-                <Text p fontSize='14px' color='#80868b' margin='4px 0 0' cursor='default'>
+                <Text p fontSize='14px' MOBfontSize='10px' color='#80868b' margin='4px 0 0' cursor='default'>
                   {review.status === '수료' ? '수료자: ' : '작성자: '}{review.nickname} - {review.createdAt}
                 </Text>
                 {/* 장점 */}
-                <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
-                <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.pros}</Text>
-                <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
-                <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.cons}</Text>
+                <Text p fontSize='14px' fontWeight='700' MOBfontSize='10px' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
+                <Text p fontSize='14px' color='#e8eaed' MOBfontSize='10px' margin='4px 0 0' cursor='default'>{review.pros}</Text>
+                <Text p fontSize='14px' fontWeight='700' MOBfontSize='10px' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
+                <Text p fontSize='14px' color='#e8eaed' MOBfontSize='10px' margin='4px 0 0' cursor='default'>{review.cons}</Text>
               </PostBoxThird>
             </Post>
           )
@@ -80,22 +80,22 @@ const BootReview = (props) => {
           <Post key={review.reviewId}>
             {/* 별점 */}
             <StarBox>
-              <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
-              <Stars score={review.stars} size='16px' marginRight='4px' />
+              <Text p fontSize='18px' MOBfontSize='12px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
+              <Stars score={review.stars} size='16px' MOBsize='10px' marginRight='4px' />
             </StarBox>
             {/* 리뷰 */}
             <PostBox>
               {/* 리뷰 제목 */}
-              <Text p fontSize='18px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>리뷰 제목</Text>
+              <Text p fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>리뷰 제목</Text>
               {/* 작성자 닉네임, 작성일자 */}
-              <Text p fontSize='14px' color='#80868b' margin='4px 0 0' cursor='default'>
+              <Text p fontSize='14px' MOBfontSize='10px' color='#80868b' margin='4px 0 0' cursor='default'>
                 {review.status === '수료' ? '수료자: ' : '작성자: '}{review.nickname} - {review.createdAt}
               </Text>
               {/* 장점 */}
-              <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
-              <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.pros}</Text>
-              <Text p fontSize='14px' fontWeight='700' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
-              <Text p fontSize='14px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.cons}</Text>
+              <Text p fontSize='14px' MOBfontSize='10px' fontWeight='700' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
+              <Text p fontSize='14px' MOBfontSize='10px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.pros}</Text>
+              <Text p fontSize='14px' MOBfontSize='10px' fontWeight='700' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
+              <Text p fontSize='14px' MOBfontSize='10px' color='#e8eaed' margin='4px 0 0' cursor='default'>{review.cons}</Text>
             </PostBox>
           </Post>
         )
@@ -104,15 +104,15 @@ const BootReview = (props) => {
         {/* 페이지네이션 */}
         <PageBox>
           {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
-          <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
+          <Text lineHeight='14px' MOBfontSize='10px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : <BsChevronLeft />}</Page></Text>
           {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-          <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
+          <Text lineHeight='14px' MOBfontSize='10px' margin='0 20px 0'><Page onClick={() => toPrePage()}>{page === 1 ? '' : page - 1}</Page></Text>
           {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-          <Text lineHeight='14px' margin='0 20px 0'><Page style={{ opacity: 1 }}>{page}</Page></Text>
+          <Text lineHeight='14px' MOBfontSize='10px' margin='0 20px 0'><Page style={{ opacity: 1 }}>{page}</Page></Text>
           {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-          <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? page + 1 : ''}</Page></Text>
+          <Text lineHeight='14px' MOBfontSize='10px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? page + 1 : ''}</Page></Text>
           {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-          <Text lineHeight='14px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? <BsChevronRight /> : ''}</Page></Text>
+          <Text lineHeight='14px' MOBfontSize='10px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_review.length > 3 ? <BsChevronRight /> : ''}</Page></Text>
         </PageBox>
       </Grid>
     </Grid>
@@ -129,7 +129,7 @@ const WriteBtn = styled.button`
   &:active {
     opacity: 0.7;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     display: none;
   }
 `;
@@ -137,12 +137,18 @@ const WriteBtn = styled.button`
 const Post = styled.div`
   display: flex;
   padding: 40px 0 0;
+  @media screen and (max-width: 767px) {
+    padding: 18px 0 0;
+  }
 `;
 
 const StarBox = styled.div`
   height: 100%;
   width: fit-content;
   min-width: 100px;
+  @media screen and (max-width: 767px) {
+    min-width: 75px;
+  }
 `;
 
 const PostBox = styled.div`
@@ -150,12 +156,20 @@ const PostBox = styled.div`
   min-width: 300px;
   border-bottom: 1px solid #8f9091;
   padding: 0 0 40px 24px;
+  @media screen and (max-width: 767px) {
+    min-width: 100px;
+    padding: 0 0 18px 10px;
+  }
 `;
 
 const PostBoxThird = styled.div`
   width: 80%;
   min-width: 300px;
   padding: 0 0 40px 24px;
+  @media screen and (max-width: 767px) {
+    min-width: 100px;
+    padding: 0 0 18px 10px;
+  }
 `;
 
 const PageBox = styled.div`

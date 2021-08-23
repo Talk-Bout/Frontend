@@ -7,13 +7,14 @@ import { actionCreators as userActions } from '../redux/modules/user';
 import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { getCookie } from '../shared/cookie';
+import { getCookie, profilePic_c } from '../shared/cookie';
 
 const Header = (props) => {
   const { opacity, TABopacity, MOBopacity } = props;
   const dispatch = useDispatch();
-
   const token = getCookie('refreshToken');
+  const profilePic = getCookie('profilePic');
+  const user_profile_url = `http://13.209.12.149${profilePic}`
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -81,7 +82,7 @@ const Header = (props) => {
               <BsFillBookmarkFill />
             </Text>
             {/* 프로필 이미지 */}
-            <ProfileImg src={Profile_small} alt="프로필" />
+            <ProfileImg src={profilePic === 'null' ? Profile_small : user_profile_url} alt='프로필' />
             {/* 드롭다운 메뉴 */}
             <Button
               aria-controls="simple-menu"
@@ -131,6 +132,7 @@ const Header = (props) => {
         MOBborderBottom='1px solid #282A2D'
         opacity={opacity}
         TABopacity={TABopacity}
+        MOBopacity={MOBopacity}
       >
         {/* 검색창 */}
         <Grid
@@ -146,10 +148,8 @@ const Header = (props) => {
           MOBjustifyContent='space-between'
         >
           <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
-          <Hidden>
-            <Image src={Search} alt="검색" />
-            <Input placeholder="검색어를 입력하세요." />
-          </Hidden>
+          <Image MOBdisplayNone src={Search} alt="검색" />
+          <Input placeholder="검색어를 입력하세요." />
         </Grid>
         {/* 로그인 버튼 */}
         <LoginBtn type="button" onClick={() => history.push('/login')}>
@@ -219,6 +219,7 @@ const Image = styled.img`
   @media screen and (max-width: 767px) {
     height: 24px;
     margin: 12px 0;
+    ${(props) => props.MOBdisplayNone ? 'display: none' : ''};
   }
 `;
 
@@ -228,11 +229,6 @@ const ProfileImg = styled.img`
   cursor: pointer;
 `;
 
-const Hidden = styled.div`
-  @media screen and (max-width: 767px) {
-  display: none;
-}
-`;
 
 const LoginBtn = styled.button`
   background-color: transparent;

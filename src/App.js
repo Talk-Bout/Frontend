@@ -34,8 +34,9 @@ import QuestionWrite from './pages/QuestionWrite';
 //마이 페이지
 import Mypage from './pages/Mypage';
 import MypagePic from './pages/MypagePic';
+import MypageBootcamps from './pages/MypageBootcamps';
 import MypagePost from './pages/MypagePost';
-import DeleteUser from './pages/DeleteUser';
+// import DeleteUser from './pages/DeleteUser';
 import MypageBookmarks from './pages/MypageBookmarks';
 
 //로딩 스피너
@@ -43,6 +44,7 @@ import Spinner from './components/Spinner';
 
 // NotFound 페이지
 import NotFound from './shared/NotFound';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -83,9 +85,10 @@ function App() {
           <Route path="/boot/:name/post/:id" exact component={BootPost} />
           <Route path="/mypage" exact component={Mypage} />
           <Route path="/mypage/pic" exact component={MypagePic} />
+          <Route path="/mypage/mycamp" exact component={MypageBootcamps} />
           <Route path="/mypage/mypost" exact component={MypagePost} />
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
-          <Route path="/mypage/deleteuser" exact component={DeleteUser} />
+          {/* <Route path="/mypage/deleteuser" exact component={DeleteUser} /> */}
           <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>

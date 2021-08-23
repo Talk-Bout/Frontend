@@ -17,6 +17,8 @@ const Text = (props) => {
     position,
     _onClick,
     height,
+    backgroundColor,
+    borderRadius,
     textAlign,
     verticalAlign,
     top,
@@ -64,6 +66,8 @@ const Text = (props) => {
     lineHeight: lineHeight,
     float: float,
     height: height,
+    backgroundColor: backgroundColor,
+    borderRadius: borderRadius,
     textAlign: textAlign,
     verticalAlign: verticalAlign,
     top: top,
@@ -134,6 +138,8 @@ const TextBoxP = styled.p`
   line-height: ${(props) => props.lineHeight};
   float: ${(props) => props.float};
   height: ${(props) => props.height};
+  background-color: ${(props) => props.backgroundColor};
+  border-radius: ${(props) => props.borderRadius};
   text-align: ${(props) => props.textAlign};
   vertical-align: ${(props) => props.verticalAlign};
   top: ${(props) => props.top};
@@ -189,6 +195,8 @@ const TextBoxS = styled.span`
   line-height: ${(props) => props.lineHeight};
   float: ${(props) => props.float};
   height: ${(props) => props.height};
+  background-color: ${(props) => props.backgroundColor};
+  border-radius: ${(props) => props.borderRadius};
   text-align: ${(props) => props.textAlign};
   vertical-align: ${(props) => props.verticalAlign};
   top: ${(props) => props.top};

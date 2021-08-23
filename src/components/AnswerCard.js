@@ -5,14 +5,14 @@ import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { BiLike } from 'react-icons/bi';
-import { getCookie } from '../shared/cookie';
+import { nickname_c } from '../shared/cookie';
 
 const AnswerCard = (props) => {
   const dispatch = useDispatch();
 
   const answer_id = parseInt(props.answerId);
   // const user_name = useSelector((state) => state.user.user.nickname);
-  const user_name = getCookie('nickname');
+  const user_name = nickname_c;
   const is_login = useSelector(state => state.user.is_login);
 
   // 전체 답변 리스트
@@ -26,7 +26,6 @@ const AnswerCard = (props) => {
 
   // 내가 닉네임이 좋아요 한 답변
   const my_answer_like = answer_like && answer_like.findIndex((like) => like.nickname === user_name) !== -1 ? answer_like.find((like) => like.nickname === user_name) : '';
-  // console.log(my_answer_like);
 
   // 좋아요 버튼
   const likeAnswer = () => {
@@ -36,6 +35,10 @@ const AnswerCard = (props) => {
   const unlikeAnswer = (answerLikeId) => {
     dispatch(questionActions.unlikeAnswerDB(answer_id, answerLikeId, user_name));
   };
+
+  // 답변 작성자 프로필 사진
+  const user_profile = one_answer.profilePic;
+  const user_profile_url = `http://13.209.12.149${one_answer.profilePic}`
 
   return (
     <React.Fragment>
@@ -47,7 +50,7 @@ const AnswerCard = (props) => {
               A
             </Text>
             <Grid width="40px" height="40px" margin="auto 15px">
-              <Image src={Profile_medium} size="5"></Image>
+              <Image src={user_profile === null ? Profile_medium : user_profile_url}></Image>
             </Grid>
             <Grid width="480px">
               {/* 작성자 닉네임 */}

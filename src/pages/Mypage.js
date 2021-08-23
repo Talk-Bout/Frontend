@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Text, Button, Grid, Input, Image } from '../elements';
+import { Text, Grid, Image } from '../elements';
 import { Sidebar, Body, Stars } from '../components';
-import { Profile_small, Profile_medium, CampLogo_default, Badge } from '../image';
-import { BiTimeFive, BiBadgeCheck } from 'react-icons/bi';
+import { Profile_small, Profile_medium, CampLogo_default } from '../image';
+import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
 import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
-import { getCookie } from '../shared/cookie';
+import { nickname_c, provider_c, profilePic_c } from '../shared/cookie';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
-  // const nickname = useSelector((state) => state.user.user.nickname);
-  const nickname = getCookie('nickname');
-  const provider = getCookie('provider');
+
+  const nickname = nickname_c;
+  const provider = provider_c;
+  const profilePic = profilePic_c;
+  const user_profile_url = `http://13.209.12.149${profilePic}`;
 
   useEffect(() => {
     dispatch(mypageActions.setMyBootDB(nickname));
@@ -30,8 +32,6 @@ const Mypage = (props) => {
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
   // 관심있는 부트캠프 3개 추출
   const myboot = myboot_list.slice(0, 3);
-  // 반응형 테블릿일 때 부트캠프 2개 추출
-  const mybootTAB = myboot_list.slice(0, 2);
   // 관심있는 부트캠프 3개 이름만 추출
   let myboot_name = [];
   myboot.map((boot) => {
@@ -79,7 +79,7 @@ const Mypage = (props) => {
               <ProfileInner>
                 {/* 인증 안됐을 때 */}
                 <ProfileBox>
-                  <Profile src={Profile_medium} alt='프로필' onClick={() => history.push('/mypage/pic')} />
+                  <Profile src={profilePic === 'null' ? Profile_medium : user_profile_url} alt='프로필' onClick={() => history.push('/mypage/pic')} />
                 </ProfileBox>
                 <Grid>
                   {/* 닉네임 표시 */}
@@ -93,14 +93,14 @@ const Mypage = (props) => {
             </ProfileOutter>
             {/* 북마크된 부트캠프, 글들 */}
             <ResponSiveOutter height="100%" width="100%" >
-              <Grid height="100%" width="100%" >
+              <Grid height="100%" width="100%">
                 <Grid height="172px" width="100%" >
                   <Grid padding="18px 20px" justifyContent="space-between" flexDirection="row" alignItems="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                     <BookMarkBox>
                       <Text fontSize="18px" color="#F1F3F4" cursor='default'>관심있는 부트캠프</Text>
                       <Count> {'('}{myboot_list.length}{')'} </Count>
                     </BookMarkBox>
-                    <MoreButton>더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
+                    <MoreButton onClick={() => history.push('/mypage/mycamp')}>더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
                   </Grid>
                   {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                   {myboot_list.length !== 0 ?
@@ -125,14 +125,14 @@ const Mypage = (props) => {
                       })}
                     </BootBox>
                     :
-                    <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="96%" width="98.5%">
-                      <Grid height="80%" width="100%" border="4px dotted #2E3134" borderRadius="5px" display='flex' alignItems='center'>
+                    <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="96px" width="98.5%">
+                      <Grid height="100%" width="100%" border="4px dotted #2E3134" borderRadius="5px" display='flex' alignItems='center'>
                         <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default' margin='auto'>부트캠프를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }
                 </Grid>
-                <Grid height="287px" width="100%" margin="48px 0 0 0" >
+                <Grid width="100%" margin="48px 0 0 0" >
                   <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                     <BookMarkBox>
                       <Text fontSize="18px" color="#F1F3F4" cursor='default'>내 북마크</Text>
@@ -186,7 +186,7 @@ const Mypage = (props) => {
                   <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                     <BookMarkBox>
                       <Text fontSize="18px" color="#F1F3F4" cursor='default'>{nickname} 님의 글</Text>
-                      <Count> {'('}{mypost_list.length} {')'} </Count>
+                      <Count> {'('}{mypost_list.length}{')'} </Count>
                     </BookMarkBox>
                     <MoreButton color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%"
                       onClick={() => { history.push('/mypage/mypost') }}
@@ -210,11 +210,10 @@ const Mypage = (props) => {
                             </Grid>
                             <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
                               <ImgBox>
-                                <ProfileImg src={Profile_small} alt='프로필' />
+                                <ProfileImg src={profilePic === 'null' ? Profile_small : profilePic} alt='프로필' />
                               </ImgBox>
                               <InfoBox>
-                                <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.nickname}</Text>
-                                <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive />{p.createdAt}</Text>
+                                <Text margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><span style={{ marginRight: '4px' }}><BiTimeFive /></span>{p.createdAt}</Text>
                               </InfoBox>
                             </Grid>
                             <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
@@ -344,9 +343,9 @@ const ProfileImg = styled.img`
 `;
 
 const InfoBox = styled.div`
-  display: flex;
   width: 100%;
   padding: 5px 0;
+  vertical-align: middle;
 `;
 
 const MoreButton = styled.button`

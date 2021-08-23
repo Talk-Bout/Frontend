@@ -19,7 +19,7 @@ const QuestionDetail = (props) => {
   );
   const question_list = useSelector((state) => state.question.list);
   const question_found = question_list.find(
-    (question) => question.questionId === parseInt(question_id)
+    (question) => question.questionId === question_id
   );
 
   const user_name = getCookie('nickname');
@@ -61,6 +61,10 @@ const QuestionDetail = (props) => {
   if (!question_found) {
     return <></>;
   }
+
+  // 질문 작성자 프로필 사진
+  const user_profile = question_found.user.profilePic;
+  const user_profile_url = `http://13.209.12.149${question_found.user.profilePic}`
 
   // 수정 삭제 버튼
   const handleClick = (e) => {
@@ -190,13 +194,13 @@ const QuestionDetail = (props) => {
               {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" margin="10px 0">
                 <Grid width="40px">
-                  <Image src={Profile_medium} size="5"></Image>
+                  <Image src={user_profile === null ? Profile_medium : user_profile_url}></Image>
                 </Grid>
                 <Grid width="40%">
                   <Text p margin="auto 10px" fontSize="14px" fontWeight="600" color="#9aa0a6" cursor='default'>
                     {question_found.nickname}
                   </Text>
-                  <Text p margin="auto 10px" color="#bdc1c6" cursor='default'>
+                  <Text p margin="auto 10px" fontSize='14px' color="#bdc1c6" cursor='default'>
                     {question_found.createdAt}
                   </Text>
                 </Grid>

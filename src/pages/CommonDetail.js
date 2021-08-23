@@ -11,15 +11,15 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { getCookie } from '../shared/cookie';
+import { nickname_c } from '../shared/cookie';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
   // 해당 게시물
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
-  // const username = useSelector((state) => state.user.user.nickname);
-  const username = getCookie('nickname');
+
+  const username = nickname_c;
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
   const [MenuLink, setMenuLink] = useState(null);
@@ -84,12 +84,9 @@ const CommonDetail = (props) => {
     dispatch(postActions.unlikePostDB(postId, postLikeId));
   };
 
-
-
   //댓글 추가하기
   const addComment = () => {
     const content_comment = commentInput.current.value;
-    console.log(content_comment);
     const new_comment = {
       content: content_comment,
       nickname: username,
@@ -103,7 +100,6 @@ const CommonDetail = (props) => {
       window.alert('댓글을 입력해주세요!');
       return;
     };
-
     dispatch(postActions.addCommentDB(new_comment));
     commentInput.current.value = '';
   };
@@ -111,7 +107,6 @@ const CommonDetail = (props) => {
   // 댓글 수정하기
   const editComment = (postCommentId) => {
     const content_comment = commentEdit.current.value;
-    console.log(content_comment);
     const edit_comment = {
       postCommentId: postCommentId,
       content: content_comment,
@@ -139,6 +134,12 @@ const CommonDetail = (props) => {
       <></>
     );
   };
+
+  console.log(one_post);
+
+  // // 게시글 작성자 프로필 사진
+  // const user_profile = question_found.user.profilePic;
+  // const user_profile_url = `http://13.209.12.149${question_found.user.profilePic}`
 
   return (
     <React.Fragment>

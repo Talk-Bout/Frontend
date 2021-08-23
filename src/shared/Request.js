@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { getCookie } from '../shared/cookie';
 
-const provider = sessionStorage.getItem('provider');
-const accessToken = sessionStorage.getItem('accessToken');
-const idToken = sessionStorage.getItem('idToken');
+const provider = getCookie('provider');
+const accessToken = getCookie('accessToken');
+const idToken = getCookie('idToken');
 
 const instance = axios.create({
   baseURL: 'http://13.209.12.149',

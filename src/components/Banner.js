@@ -1,40 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
-import { Banner_desktop, Banner_desktop_short } from '../image';
+import { Banner_desktop, Banner_desktop_short, Banner_tablet, Banner_mobile } from '../image';
 import { history } from '../redux/ConfigureStore';
 
 const BannerN = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='banner' backgroundColor='#7176E5' height='300px' TABheight='168px'>
-        <ImageL src={Banner_desktop} alt='토크부트 배너' onClick={() => history.push('/boot')} />
-        <ImageM src={Banner_desktop_short} alt='토크부트 배너' onClick={() => history.push('/boot')} />
+      <Grid className='banner' backgroundColor='#7176E5' height='300px' TABheight='168px' MOBheight='96px'>
+        <ImageDT src={Banner_desktop} alt='토크부트 배너' onClick={() => history.push('/boot')} />
+        <ImageDTS src={Banner_desktop_short} alt='토크부트 배너' onClick={() => history.push('/boot')} />
+        <ImageTAB src={Banner_tablet} alt='토크부트 배너' onClick={() => history.push('/boot')} />
+        <ImageMOB src={Banner_mobile} alt='토크부트 배너' onClick={() => history.push('/boot')} />
       </Grid>
     </React.Fragment>
   )
 };
 
-const ImageL = styled.img`
+const ImageDT = styled.img`
   cursor: pointer;
-  @media screen and (min-width: 993px) and (max-width: 1400px) {
+  @media screen and (max-width: 1400px) {
     display: none;
-  }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
-    width: 660px;
   }
 `;
 
-const ImageM = styled.img`
+const ImageDTS = styled.img`
   cursor: pointer;
   @media screen and (min-width: 1401px) {
     display: none;
   }
-  @media screen and (min-width: 993px) and (max-width: 1400px) {
-    width: 951px;
+  @media screen and (max-width: 1090px) {
+    display: none;
   }
-  @media screen and (max-width: 992px) {
+`;
+
+const ImageTAB = styled.img`
+  cursor: pointer;
+  @media screen and (min-width: 1090px) {
+    display: none;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const ImageMOB = styled.img`
+  cursor: pointer;
+  @media screen and (min-width: 768px) {
     display: none;
   }
 `;

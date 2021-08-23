@@ -23,7 +23,6 @@ const QuestionWrite = (props) => {
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
-  // console.log(image_url);
 
   // 이미지 업로드
   const imageRef = useRef();
@@ -189,7 +188,7 @@ const QuestionWrite = (props) => {
               <FooterBox>
                 {/* 이미지 추가 버튼 */}
                 <form>
-                  <label for="file">
+                  <label htmlFor="file">
                     <Text
                       fontSize="24px"
                       color="#b3b3b3"
@@ -230,7 +229,7 @@ const Window = styled.div`
   width: 80%;
   height: 90%;
   margin: auto;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 688px;
     margin: 0 30px 0 -40px;
   }
@@ -302,7 +301,7 @@ const Textarea = styled.textarea`
   &:focus {
     outline: none;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 568px;
   }
 `;

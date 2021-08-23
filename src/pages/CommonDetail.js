@@ -314,7 +314,7 @@ const BodyInner = styled.div`
   height: auto;
   display: grid;
   grid-template-columns: 65% 34%;
-  @media screen and (min-width: 768px) and (max-width: 992px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     grid-template-columns: 100%;
   }
 `;
@@ -322,7 +322,7 @@ const BodyInner = styled.div`
 const Post = styled.div`
   border-bottom: 1px solid #5F6368;
   padding: 0 0 20px;
-  @media screen and (min-width: 768px) and (max-width: 992px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 100%;
   }
 `;
@@ -450,7 +450,7 @@ const OthersBox = styled.div`
   background-color: #202124;
   padding: 24px;
   height: 403px;
-  @media screen and (min-width: 768px) and (max-width: 992px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     display: none;
   }
 `;

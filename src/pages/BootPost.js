@@ -296,7 +296,7 @@ const BodyInner = styled.div`
   height: auto;
   display: grid;
   grid-template-columns: 65% 34%;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     grid-template-columns: 100%;
   }
 `;
@@ -413,7 +413,7 @@ const OthersBox = styled.div`
   height: fit-content;
   background-color: #202124;
   padding: 24px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     display: none;
   }
 `;

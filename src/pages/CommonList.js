@@ -30,7 +30,7 @@ const CommonList = (props) => {
       dispatch(postActions.setPostDB(page, ''));
     }
     window.scrollTo(0, 0);
-  }, [page, category]);
+  }, [page]);
 
   // 불러오는 3페이지짜리 최신순 커뮤니티글 목록
   const new_post = useSelector((state) => state.post.list);
@@ -50,7 +50,7 @@ const CommonList = (props) => {
   const toNextPage = () => {
     setPage(page + 1);
   };
-  // 카테고리 정보방 게시물 (default)
+  // 카테고리 정보방 게시물 
   const info_category = () => {
     dispatch(postActions.setPostDB(page, 'info'));
   };
@@ -65,7 +65,7 @@ const CommonList = (props) => {
   };
 
   // 인기순 조회
-  const setNew = () => {
+  const setPop = () => {
     dispatch(postActions.setPostPopDB(page));
     setPopArray(true);
   };
@@ -95,8 +95,8 @@ const CommonList = (props) => {
                   onClick={() => { setCategory('info'); info_category() }}>
                   정보
                 </CategoryButton>
-                <CategoryButton url={category === 'chat' && 'white'}
-                  onClick={() => { setCategory('all'); cc_category() }}>
+                <CategoryButton url={category === 'chitchat' && 'white'}
+                  onClick={() => { setCategory('chitchat'); cc_category() }}>
                   잡담
                 </CategoryButton>
               </Categories>
@@ -107,7 +107,7 @@ const CommonList = (props) => {
                   {PopArray ?
                     <Options onClick={() => total_category()}><Text fontSize='16px' TABfontSize='14px'>인기순</Text></Options>
                     :
-                    <Options onClick={() => setNew()}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
+                    <Options onClick={() => setPop()}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
                   }
                 </SelectButton>
                 {/* 글쓰기버튼 (로그인 후 이용가능) */}
@@ -210,7 +210,7 @@ const Categories = styled.div`
   display: flex;
   align-items: flex-start;
   height: 44px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     height: 34px;
   }
 `;
@@ -232,7 +232,7 @@ const CategoryButton = styled.div`
     background-color: #bdc1c6;
     color: #0e1013;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     padding: 3px 20px;
     font-size: 14px;
   }
@@ -266,14 +266,14 @@ const WriteButton = styled.button`
   height: 48px;
   padding: 10px 0px;
   border: 1px solid #7879F1;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     display: none;
   }
 `;
 
 const Line = styled.hr`
   border: 1px solid #80868B;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     display: none;
   }
 `;
@@ -285,7 +285,7 @@ justify-content: space-between;
 width: 100%;
 height: 60px;
 margin-top: 16px;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1090px) {
   height: 48px;
 }
 `;
@@ -303,7 +303,7 @@ margin: 17px 24px;
 font-size: 14px;
 line-height: 18px;
 vertical-align: middle;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1090px) {
   margin: 0 16px;
   padding: 6px 20px;
   line-height: 16px;
@@ -317,7 +317,7 @@ font-size: 18px;
 line-height: 18px;
 letter-spacing: 0.2px;
 vertical-align: middle;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1090px) {
   font-size: 14px;
 }
 `;

@@ -20,14 +20,14 @@ const MainQna = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="top-qna" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px'>
+      <Grid className="top-qna" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px' MOBpadding='20px 0 0'>
         {/* 질문과 답변 */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' cursor='default'><Emoji src={Fire_emoji} alt='불' height='24px' TABheight='20px' margin='0 8px 0 0' />부트캠퍼들의 질문과 답변</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' MOBfontSize='16px' cursor='default'><Emoji src={Fire_emoji} alt='불' height='24px' TABheight='20px' margin='0 8px 0 0' />부트캠퍼들의 질문과 답변</Text>
         <TextBox>
           {/* const 질문과 답변 = (Question) => { return Answer } */}
-          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' cursor='default'>모두가 궁금해하는 바로 그 질문, 시원한 답변</Text>
+          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' MOBfontSize='10px' cursor='default'>모두가 궁금해하는 바로 그 질문, 시원한 답변</Text>
           {/* 질문과 답변 더보기 버튼 */}
-          <Text fontSize='20px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}><FaPlus /></Text>
+          <Text fontSize='20px' MOBfontSize='12px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/question')}><FaPlus /></Text>
         </TextBox>
         {/* Q&A 목록 */}
         <Scroll>
@@ -39,6 +39,7 @@ const MainQna = (props) => {
                   <Text
                     fontSize="18px"
                     TABfontSize='16px'
+                    MOBfontSize='14px'
                     fontWeight="700"
                     color="#f1f3f4"
                     margin="0 0 16px"
@@ -56,13 +57,14 @@ const MainQna = (props) => {
                       p
                       fontSize="14px"
                       TABfontSize='12px'
+                      MOBfontSize='10px'
                       letterSpacing="0.2px"
                       lineHeight='18px'
                       TABlineHeight='16px'
                       color="#9aa0a6"
                       overflow="hidden"
                       display="-webkit-box"
-                      wlc="4"
+                      wlc="3"
                       wbo="vertical"
                     >{pq.content}
                     </Text>
@@ -71,16 +73,18 @@ const MainQna = (props) => {
                     {/* 작성자 프로필 이미지 */}
                     <ProfileImg src={pq.user.profilePic ? pq.user.profilePic : Profile_small} alt="프로필" />
                     {/* 작성자 닉네임 */}
-                    <Text fontSize="12px" color="#9aa0a6" margin="0 8px" TABfontSize='10px'>
+                    <Text fontSize="12px" MOBfontSize='8px' color="#9aa0a6" margin="0 8px" TABfontSize='10px'>
                       {pq.nickname}
                     </Text>
                     {/* 작성일자 */}
-                    <Text fontSize="12px" color="#80868b" margin="0 4px 0 0" TABfontSize='14px' vertical_align='middle'>
-                      <BiTimeFive />
-                    </Text>
-                    <Text fontSize="12px" color="#80868b" TABfontSize='10px'>
-                      {pq.createdAt}
-                    </Text>
+                    <Date>
+                      <Text fontSize="12px" color="#80868b" margin="0 4px 0 0" TABfontSize='14px' verticalAlign='middle'>
+                        <BiTimeFive />
+                      </Text>
+                      <Text fontSize="12px" MOBfontSize='8px' color="#80868b" TABfontSize='10px'>
+                        {pq.createdAt}
+                      </Text>
+                    </Date>
                   </Info>
                   <Line />
                   <div style={{ height: 'fit-content' }}>
@@ -101,7 +105,7 @@ const MainQna = (props) => {
           </CardList>
         </Scroll>
       </Grid>
-    </React.Fragment>
+    </React.Fragment >
   );
 };
 
@@ -110,7 +114,7 @@ const TextBox = styled.div`
   justify-content: space-between;
   padding-bottom: 24px;
   margin-top: 3px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     margin-top: 4px;
     padding-bottom: 20px;
   }
@@ -132,8 +136,11 @@ const Scroll = styled.div`
   ::-webkit-scrollbar-button {
     display: none;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: calc(100vw - 108px);
+  }
+  @media screen and (max-width: 767px) {
+    width: calc(100vw - 35px);
   }
 `;
 
@@ -143,8 +150,11 @@ const CardList = styled.div`
   display: flex;
   overflow: hidden;
   padding-bottom: 16px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     height: 225px;
+  }
+  @media screen and (max-width: 767px) {
+    height: 200px;
   }
 `;
 
@@ -161,10 +171,15 @@ const QuestionCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     padding: 16px 16px 12px;
     width: 250px;
     height: 225px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 14px 14px 8px;
+    width: 200px;
+    height: 200px;
   }
 `;
 
@@ -172,30 +187,52 @@ const Content = styled.div`
   margin: 0;
   padding: 0;
   height: 76px;
+  @media screen and (max-width: 767px) {
+    height: 40px;
+  }
 `;
 
 const Info = styled.div`
   margin-top: 24px;
   height: 24px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     margin-top: 20px;
     height: 16px;
+  }
+  @media screen and (max-width: 1090px) {
+    margin-top: 16px;
+    height: fit-content;
   }
 `;
 
 const ProfileImg = styled.img`
   vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: 16px;
     height: 16px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 14px;
+    height: 14px;
+  }
+`;
+
+const Date = styled.div`
+  display: inline;
+  @media screen and (max-width: 767px) {
+    display: block;
+    margin: 0 0 0 15px;
   }
 `;
 
 const Line = styled.hr`
   margin: 16px 0 8px;
   border: 1px solid #282a2d;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     margin: 12px 0;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 8px 0;
   }
 `;
 

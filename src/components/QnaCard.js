@@ -117,7 +117,7 @@ const QnaListCard = styled.div`
   @media screen and (max-width: 1200px) {
     height: 270px;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     height: 230px;
     padding: 16px 16px 0;
   }
@@ -126,7 +126,7 @@ const QnaListCard = styled.div`
 const Content = styled.div`
   height: 72px;
   margin: 16px 0 32px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     margin: 10px 0 10px;
   }
 `;
@@ -146,7 +146,7 @@ const QInfoTablet = styled.div`
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 16px;
     height: 16px;
   }
@@ -157,7 +157,7 @@ const Date = styled.div`
     margin-top: -8px;
     margin-left: 30px;
   }
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     margin-left: 20px;
   }
 `;

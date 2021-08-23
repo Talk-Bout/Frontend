@@ -126,7 +126,7 @@ grid-template-rows: repeat(1, minmax(auto, auto));
 grid-template-columns: repeat(4, 1fr);
 display: grid;
 width: 100%;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1090px) {
   width: 100%;
   grid-template-rows: repeat(1, minmax(auto, auto));
   grid-template-columns: repeat(3, 1fr);
@@ -146,7 +146,7 @@ box-sizing: border-box;
 
 const ImgBox = styled.div`
 margin: 0px 15px 0 0;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1090px) {
   margin: 0px 8px 0 0;
   }
 `;
@@ -154,7 +154,7 @@ margin: 0px 15px 0 0;
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 16px;
   }
 `;

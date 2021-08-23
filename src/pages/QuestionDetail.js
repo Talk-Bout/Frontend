@@ -302,7 +302,7 @@ const QuestionBox = styled.div`
   @media screen and (max-width: 1200px) {
     width: 800px;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 660px;
   }
 `;
@@ -313,7 +313,7 @@ const AnswerBox = styled.div`
   margin: 0 -40px -80px -40px;
   padding: 10px 0 80px;
   background-color: #282a2d;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     margin: 0 -18px -65px -18px;
     padding-bottom: 65px;
   }
@@ -348,7 +348,7 @@ const AddAnswerSection = styled.div`
   @media screen and (max-width: 1200px) {
     width: 800px;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 660px;
   }
 `;
@@ -374,7 +374,7 @@ const AInput = styled.textarea`
   @media screen and (max-width: 1200px) {
     width: 760px;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 620px;
   }
 `;
@@ -391,7 +391,7 @@ const AnswerSaveButton = styled.button`
   @media screen and (max-width: 1200px) {
     margin-left: 630px;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     margin-left: 490px;
   }
 `;

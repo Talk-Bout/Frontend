@@ -99,7 +99,7 @@ const CardList = styled.div`
   flex-wrap: wrap;
   gap: 30px 15px;
   margin-top: 24px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     margin-top: 16px;
     gap: 12px;
   }
@@ -112,7 +112,7 @@ border-radius: 8px;
 box-sizing: border-box;
 cursor: pointer;
 position: relative;
-@media screen and (min-width: 768px) and (max-width: 992px) {
+@media screen and (min-width: 768px) and (max-width: 1090px) {
   width: 49%;
   height: 208px;
 }
@@ -138,7 +138,7 @@ const ImageDiv = styled.div`
       background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,.6) 100%);
     }
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     opacity: 0.6;
   }
 `;

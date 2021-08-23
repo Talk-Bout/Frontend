@@ -249,7 +249,7 @@ const Outter = styled.div`
   display: flex;
   grid-template-columns: 30% 68%;
 
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     grid-template-columns: 100%;
     display: grid;
   }
@@ -260,7 +260,7 @@ const ProfileOutter = styled.div`
   height: auto;
   width: 24%;
   margin: 0 16px 0 0;
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 98.5%;
     height: auto;
     margin: 0 0 32px 0;
@@ -278,7 +278,7 @@ const ProfileInner = styled.div`
     width: 100%;
     height: 325px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 99.5%;
     height: 136px;
     display: flex;
@@ -289,7 +289,7 @@ const ProfileBox = styled.div`
   width: 100px;
   height: 100px;
   margin: 70px auto 0;
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 100px;
     height: 100px;
     margin: 24px 64px;
@@ -307,7 +307,7 @@ const Nickname = styled.p`
   font-size: 20px;
   font-weight: bold;
   cursor: default;
-  @media screen and (min-width: 768px) and (max-width: 1100px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     text-align: start;
     margin: 32px 0 0 24px;
     }
@@ -319,7 +319,7 @@ const Status = styled.p`
   margin: 0;
   font-size: 14px;
   cursor: default;
-  @media screen and (min-width: 768px) and (max-width: 1100px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     text-align: start;
     margin: 10px 24px;
   }
@@ -327,7 +327,7 @@ const Status = styled.p`
 
 const ImgBox = styled.div`
   margin: 0px 15px 0 0;
-  @media screen and (min-width: 768px) and (max-width: 1100px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     margin: 0px 8px 0 0;
     }
 `;
@@ -335,7 +335,7 @@ const ImgBox = styled.div`
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 1100px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 16px;
   }
 `;
@@ -354,7 +354,7 @@ const MoreButton = styled.button`
   font-weight: bold;
   width: 13%;
   cursor: pointer;
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 12%;
     font-size: 14px;
   }
@@ -365,7 +365,7 @@ const BootBox = styled.div`
   margin: 12px 0;
   height: 96px;
   width: 100%;
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     height: 100%;
     .bootcard2 {
       display: none;
@@ -381,7 +381,7 @@ const BootCard = styled.div`
   width: 32.3%;
   background-color:#202124;
   border-radius: 5px;
-  @media screen and (min-width: 768px) and (max-width: 1100px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
       width: 49.25%;
       height: 96px;
       margin-bottom: 12px;
@@ -392,7 +392,7 @@ const BootCard = styled.div`
 const ResponSiveOutter = styled.div`
   height: auto;
   width: 100%;
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     height: 100%;
     width: 100%;
   }
@@ -410,7 +410,7 @@ const ImageBox = styled.div`
   width: 35%;
   justify-content: middle;
   margin: auto;
-  @media screen and (min-width: 768px) and (max-width: 1100px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 40%;
   }
 `;

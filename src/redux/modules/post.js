@@ -66,8 +66,6 @@ const setPostDB = (page, category) => {
       .then((response) => {
         dispatch(setPost(response.data));
         dispatch(statusActions.endLoading());
-        // console.log(response);
-        // console.log(response.data);
       })
       .catch((err) => {
         console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);

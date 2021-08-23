@@ -85,7 +85,7 @@ const Cards = styled.div`
   gap: 16px;
   width: 100%;
   margin-top: 24px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 100%;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);

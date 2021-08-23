@@ -137,7 +137,7 @@ const Window = styled.div`
   width: 80%;
   height: fit-content;
   margin: auto;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     position: absolute;
     left: 0;
     margin-left: 40px;
@@ -151,11 +151,11 @@ const BodyBox = styled.div`
   grid-template-columns: 160px 804px;
   & > div {
     margin-bottom: 40px;
-    @media screen and (min-width: 768px) and (max-width: 992px) {
+    @media screen and (min-width: 768px) and (max-width: 1090px) {
       margin-bottom: 32px;
     }
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     grid-template-columns: 160px 448px;
   }
 `;
@@ -205,7 +205,7 @@ const Textarea = styled.textarea`
   &:focus {
     outline: none;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 400px;
     height: 120px;
   }

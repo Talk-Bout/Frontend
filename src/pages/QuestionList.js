@@ -67,7 +67,7 @@ const QuestionList = (props) => {
             </Text>
           </Grid>
           <Grid className='Descr-btn' display='flex' justifyContent='space-between' height='fit-content'>
-            <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' lineHeight='52px' TABlineHeight='32px' cursor='default'>&nbsp;&nbsp;const 질문과_답변 = ( Question ) =&gt; &#123; return Answer &#125;</Text>
+            <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' lineHeight='52px' TABlineHeight='32px' cursor='default'>궁금한 점을 자유롭게 묻고 답하는 공간이에요!</Text>
             <div>
               {/* 인기순, 최신순 정렬 버튼 */}
               <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" TABlineHeight='24px' verticalAlign='middle' margin='8px'><RiArrowUpDownFill /></Text>
@@ -190,7 +190,7 @@ const WriteBtn = styled.button`
   &:active {
     opacity: 0.7;
   }
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     display: none;
   }
 `;
@@ -202,7 +202,7 @@ const CardList = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 16px;
   row-gap: 24px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     row-gap: 16px;
     margin-top: 15px;
   }
@@ -212,7 +212,7 @@ const PageBox = styled.div`
   display: inline-block;
   height: 100%;
   margin-top: 40px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     margin-top: 24px;
   }
 `;

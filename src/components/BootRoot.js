@@ -84,7 +84,7 @@ const LogoBox = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     margin-top: 22px;
   }
 `;

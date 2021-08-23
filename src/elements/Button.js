@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = (props) => {
-  const {children, backgroundColor, width, height, margin, _onClick, borderRadius, cursor, border, display, padding, float, TABheight, TABwidth, TABmargin, } = props;
+  const { children, backgroundColor, width, height, margin, _onClick, borderRadius, cursor, border, display, padding, float, TABheight, TABwidth, TABmargin, } = props;
 
   const styles = {
     backgroundColor: backgroundColor,
@@ -15,7 +15,7 @@ const Button = (props) => {
     display: display,
     padding: padding,
     float: float,
-    // 태블릿 사이즈(768px~992px)
+    // 태블릿 사이즈(768px~1090px)
     TABheight: TABheight,
     TABwidth: TABwidth,
     TABmargin: TABmargin,
@@ -33,7 +33,7 @@ const Button = (props) => {
 Button.defaultProps = {
   children: null,
   margin: 0,
-  _onClick: () => {},
+  _onClick: () => { },
 };
 
 const Btn = styled.button`
@@ -47,7 +47,7 @@ const Btn = styled.button`
   border: ${(props) => props.border};
   display: ${(props) => props.display};
   float: ${(props) => props.float};
-  // 태블릿 사이즈(768px~992px)
+  // 태블릿 사이즈(768px~1090px)
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};

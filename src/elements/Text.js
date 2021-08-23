@@ -28,7 +28,7 @@ const Text = (props) => {
     wlc, // -webkit-line-clamp: 콘텐츠 줄 수 제한
     wbo, // -webkit-box-orient: 콘텐츠 정렬 방향
     overflow,
-    // 태블릿 사이즈(width: 768px~992px)
+    // 태블릿 사이즈(width: ~1090px)
     TABfontSize,
     TABmargin,
     TABlineHeight,
@@ -39,6 +39,16 @@ const Text = (props) => {
     TABoverflow,
     TABtextAlign,
     TABheight,
+    // 모바일 사이즈(width: ~767px)
+    MOBfontSize,
+    MOBmargin,
+    MOBlineHeight,
+    MOBwlc,
+    MOBwbo,
+    MOBoverflow,
+    MOBtextAlign,
+    MOBheight,
+    MOBdisplay,
   } = props;
 
   const styles = {
@@ -73,6 +83,15 @@ const Text = (props) => {
     TABoverflow: TABoverflow,
     TABtextAlign: TABtextAlign,
     TABheight: TABheight,
+    MOBfontSize: MOBfontSize,
+    MOBmargin: MOBmargin,
+    MOBlineHeight: MOBlineHeight,
+    MOBwlc: MOBwlc,
+    MOBwbo: MOBwbo,
+    MOBoverflow: MOBoverflow,
+    MOBtextAlign: MOBtextAlign,
+    MOBheight: MOBheight,
+    MOBdisplay: MOBdisplay,
   };
 
   if (p) {
@@ -126,8 +145,8 @@ const TextBoxP = styled.p`
   -webkit-line-clamp: ${(props) => props.wlc};
   -webkit-box-orient: ${(props) => props.wbo};
   overflow: ${(props) => props.overflow};
-  // 태블릿 사이즈(width: 768px)
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  // 태블릿 사이즈(width: 768px~1090px)
+  @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};
     margin: ${(props) => props.TABmargin};
     line-height: ${(props) => props.TABlineHeight};
@@ -138,6 +157,18 @@ const TextBoxP = styled.p`
     overflow: ${(props) => props.TABoverflow};
     text-align: ${(props) => props.TABtextAlign};
     height: ${(props) => props.TABheight};
+  }
+    // 모바일 사이즈(width: ~767px)
+    @media screen and (max-width: 767px) {
+    font-size: ${(props) => props.MOBfontSize};
+    margin: ${(props) => props.MOBmargin};
+    line-height: ${(props) => props.MOBlineHeight};
+    -webkit-line-clamp: ${(props) => props.MOBwlc};
+    -webkit-box-orient: ${(props) => props.MOBwbo};
+    overflow: ${(props) => props.MOBoverflow};
+    text-align: ${(props) => props.MOBtextAlign};
+    height: ${(props) => props.MOBheight};
+    display: ${(props) => props.MOBdisplay};
   }
 `;
 
@@ -167,8 +198,8 @@ const TextBoxS = styled.span`
   -webkit-line-clamp: ${(props) => props.wlc};
   -webkit-box-orient: ${(props) => props.wbo};
   overflow: ${(props) => props.overflow};
-  // 태블릿 사이즈(width: 768px)
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  // 태블릿 사이즈(width: 768px~1090px)
+  @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};
     margin: ${(props) => props.TABmargin};
     line-height: ${(props) => props.TABlineHeight};
@@ -179,6 +210,18 @@ const TextBoxS = styled.span`
     overflow: ${(props) => props.TABoverflow};
     text-align: ${(props) => props.TABtextAlign};
     height: ${(props) => props.TABheight};
+  }
+  // 모바일 사이즈(width: ~767px)
+  @media screen and (max-width: 767px) {
+    font-size: ${(props) => props.MOBfontSize};
+    margin: ${(props) => props.MOBmargin};
+    line-height: ${(props) => props.MOBlineHeight};
+    -webkit-line-clamp: ${(props) => props.MOBwlc};
+    -webkit-box-orient: ${(props) => props.MOBwbo};
+    overflow: ${(props) => props.MOBoverflow};
+    text-align: ${(props) => props.MOBtextAlign};
+    height: ${(props) => props.MOBheight};
+    display: ${(props) => props.MOBdisplay};
   }
 `;
 

@@ -18,14 +18,14 @@ const MainTalk = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="top-talk" height='fit-content' padding='49px 0 16px' TABmpadding='32px 0 16px'>
+      <Grid className="top-talk" height='fit-content' padding='49px 0 16px' TABpadding='32px 0 16px' MOBpadding='20px 0 0'>
         {/* 인기 부트톡톡 */}
-        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' cursor='default'><Emoji src={Megaphone_emoji} alt='확성기' height='24px' TABheight='20px' margin='0 8px 0 0' />지금 이 순간, Hot! 부트톡톡</Text>
+        <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' MOBfontSize='16px' cursor='default'><Emoji src={Megaphone_emoji} alt='확성기' height='24px' TABheight='20px' margin='0 8px 0 0' />지금 이 순간, Hot! 부트톡톡</Text>
         <TextBox>
           {/* 부트캠퍼들이 가장 많이 추천한 게시물 */}
-          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' cursor='default'>지금 우리에게 가장 관심받는 주제는?!</Text>
+          <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' MOBfontSize='10px' cursor='default'>지금 우리에게 가장 관심받는 주제는?!</Text>
           {/* 더보기 버튼 */}
-          <Text fontSize='20px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/common/list')}><FaPlus /></Text>
+          <Text fontSize='20px' MOBfontSize='12px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/common/list')}><FaPlus /></Text>
         </TextBox>
         {/* 부트톡톡 게시물 목록 */}
         <Scroll>
@@ -39,11 +39,11 @@ const MainTalk = (props) => {
                   {/* 질문 제목 */}
                   <TxtBox>
                     <Text
-                      fontSize="18px" TABfontSize='16px' fontWeight="700" color="#f1f3f4" margin="0 0 16px" TABmargin='0 0 11px' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>{pp.title}
+                      fontSize="18px" TABfontSize='16px' MOBfontSize='14px' fontWeight="700" color="#f1f3f4" margin="0 0 16px" TABmargin='0 0 11px' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>{pp.title}
                     </Text>
                     {/* 질문 내용 */}
                     <Content>
-                      <Text p fontSize="14px" TABfontSize='12px' letterSpacing="0.2px" lineHeight='18px' TABlineHeight='16px' color="#9aa0a6" overflow="hidden" display="-webkit-box" wlc="4" TABwlc='2' wbo="vertical">{pp.content}
+                      <Text p fontSize="14px" TABfontSize='12px' MOBfontSize='10px' letterSpacing="0.2px" lineHeight='18px' TABlineHeight='16px' color="#9aa0a6" overflow="hidden" display="-webkit-box" wlc="4" TABwlc='2' MOBwlc='1' wbo="vertical">{pp.content}
                       </Text>
                     </Content>
                   </TxtBox>
@@ -62,7 +62,7 @@ const TextBox = styled.div`
   justify-content: space-between;
   padding-bottom: 24px;
   margin-top: 3px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     margin-top: 4px;
     padding-bottom: 20px;
   }
@@ -84,8 +84,11 @@ const Scroll = styled.div`
   ::-webkit-scrollbar-button {
     display: none;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: calc(100vw - 108px);
+  }
+  @media screen and (max-width: 767px) {
+    width: calc(100vw - 35px);
   }
 `;
 
@@ -95,8 +98,11 @@ const CardList = styled.div`
   display: flex;
   overflow: hidden;
   padding-bottom: 16px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     height: 201px;
+  }
+  @media screen and (max-width: 767px) {
+    height: 154px;
   }
 `;
 
@@ -112,10 +118,15 @@ const PostCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     padding: 16px 16px 12px;
     width: 250px;
     height: 201px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 14px 14px 8px;
+    width: 200px;
+    height: 154px;
   }
 `;
 
@@ -126,7 +137,7 @@ const ImgBox = styled.div`
   margin: 0 auto 20px;
   overflow: hidden;
   text-align: center;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: 100%;
     height: 50%;
     margin: 0 0 8px;
@@ -146,6 +157,9 @@ const Content = styled.div`
   margin: 0;
   padding: 0;
   height: 76px;
+  @media screen and (max-width: 1090px) {
+    height: fit-content;
+  }
 `;
 
 export default MainTalk;

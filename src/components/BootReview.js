@@ -129,7 +129,7 @@ const WriteBtn = styled.button`
   &:active {
     opacity: 0.7;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     display: none;
   }
 `;

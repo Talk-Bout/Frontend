@@ -4,7 +4,7 @@ import { Text } from '.';
 import { BiPencil } from 'react-icons/bi';
 
 const FloatingBtn = (props) => {
-  const {_onClick, active,} = props;
+  const { _onClick, active, } = props;
 
   const styles = {
     active: active,
@@ -22,7 +22,7 @@ const FloatingBtn = (props) => {
 };
 
 FloatingBtn.defaultProps = {
-  _onClick: () => {},
+  _onClick: () => { },
 
 };
 
@@ -39,7 +39,7 @@ const FloatBtn = styled.button`
   &:active {
     ${(props) => props.active};
   }
-  @media screen and (min-width: 993px) {
+  @media screen and (min-width: 1091px) {
     display: none;
   }
 `;

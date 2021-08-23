@@ -14,7 +14,7 @@ const Image = (props) => {
     _onClick,
     borderRadius,
     display,
-    //태블릿 사이즈(768px~992px)
+    //태블릿 사이즈(768px~1090px)
     TABwidth,
     TABheight,
     TABmargin,
@@ -30,7 +30,7 @@ const Image = (props) => {
     alignItems: alignItems,
     borderRadius: borderRadius,
     display: display,
-    //태블릿 사이즈(768px~992px)
+    //태블릿 사이즈(768px~1090px)
     TABwidth: TABwidth,
     TABheight: TABheight,
     TABmargin: TABmargin,
@@ -60,7 +60,7 @@ Image.defaultProps = {
   height: '100%',
   shape: 'circle',
   src: '',
-  _onClick: () => {},
+  _onClick: () => { },
 };
 
 // default로 프로필 이미지 입니다
@@ -75,8 +75,8 @@ const ImageDefault = styled.div`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius};
   display: ${(props) => props.display};
-  // 태블릿 사이즈(768~992px)
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  // 태블릿 사이즈(768~1090px)
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
@@ -94,8 +94,8 @@ const BigProfileImage = styled.div`
   background-image: url('${(props) => props.src}');
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
-  // 태블릿 사이즈(768~992px)
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  // 태블릿 사이즈(768~1090px)
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
@@ -110,8 +110,8 @@ const HeaderLogo = styled.div`
   border: 1px solid #5f6368;
   align-items: center;
   text-align: center;
-  // 태블릿 사이즈(768~992px)
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  // 태블릿 사이즈(768~1090px)
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
@@ -128,8 +128,8 @@ const CircleLogo = styled.div`
   border-radius: 50%;
   text-align: center;
   line-height: 80px;
-  // 태블릿 사이즈(768~992px)
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  // 태블릿 사이즈(768~1090px)
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};

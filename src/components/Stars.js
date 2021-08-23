@@ -4,12 +4,13 @@ import { Text } from '../elements';
 import { IoStar } from 'react-icons/io5';
 
 const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴포넌트
-  const { score, size, withScore, cursor, _onClick, marginRight, TABsize } = props;            // score라는 이름으로 평점 props를 받는다.
+  const { score, size, withScore, cursor, _onClick, marginRight, TABsize, MOBsize } = props;            // score라는 이름으로 평점 props를 받는다.
   const styles = {
     size: size,
     cursor: cursor,
     marginRight: marginRight,
     TABsize: TABsize,
+    MOBsize: MOBsize,
   }
   const countingStar = () => {
     const star_full = parseInt(score);     // 별점 개수는 평점에서 소수점 이하 자리를 제외한다.
@@ -29,7 +30,7 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
       {/* countingStar()에서 만든 별 5개를 (평점과 함께) 보여준다. */}
       {countingStar()}
       {withScore ?
-        <Text color='#e5e5e5' fontSize={size} TABfontSize={TABsize} margin='0 5px 0' vertical_align='middle'>{Number(score).toFixed(1)}</Text>
+        <Text color='#e5e5e5' fontSize={size} TABfontSize={TABsize} MOBfontSize={MOBsize} margin='0 5px 0' vertical_align='middle'>{Number(score).toFixed(1)}</Text>
         : ''}
     </React.Fragment>
   )
@@ -48,8 +49,11 @@ const StarFull = styled.span`
   color: #e5e5e5;
   vertical-align: middle;
   cursor: default;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABsize};
+  }
+  @media screen and (max-width: 767px) {
+    font-size: ${(props) => props.MOBsize};
   }
 `;
 
@@ -61,8 +65,11 @@ const StarEmpty = styled.span`
   color: #848484;
   vertical-align: middle;
   cursor: default;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABsize};
+  }
+  @media screen and (max-width: 767px) {
+    font-size: ${(props) => props.MOBsize};
   }
 `;
 

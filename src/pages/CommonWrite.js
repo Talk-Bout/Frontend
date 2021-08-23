@@ -76,7 +76,6 @@ const BootCommuWrite = (props) => {
       contentRef.current.value = '';
     } else {
       const new_post = {
-
         title: titleRef.current.value,
         content: contentRef.current.value,
         nickname: username,
@@ -196,7 +195,7 @@ const BootCommuWrite = (props) => {
               <FooterBox>
                 {/* 이미지 추가 버튼 */}
                 <form>
-                  <label for="file">
+                  <label htmlFor="file">
                     <Text
                       fontSize="24px"
                       color="#b3b3b3"
@@ -232,7 +231,7 @@ const Window = styled.div`
   width: 1044px;
   height: fit-content;
   margin: auto;
-  @media screen and (min-width: 768px) and (max-width: 992px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 688px;
     height: fit-content;
   }
@@ -308,7 +307,7 @@ const Preview = styled.div`
   object-fit: cover;
   overflow: hidden;
   margin: 0 auto 16px;
-  @media screen and (min-width: 768px) and (max-width: 992px) { 
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 608px;
     height: fit-content;
   }

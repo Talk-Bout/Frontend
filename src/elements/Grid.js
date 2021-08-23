@@ -47,13 +47,22 @@ const Grid = (props) => {
     alignSelf,
     cursor,
     opacity,
-    // 태블릿 사이즈(width: 768px~992px)
+    // 태블릿 사이즈(width: 768px~1090px)
     TABheight,
     TABwidth,
     TABmargin,
     TABpadding,
     TABdisplay,
     TABopacity,
+    // 모바일 사이즈(width: ~767px)
+    MOBdisplay,
+    MOBheight,
+    MOBwidth,
+    MOBmargin,
+    MOBpadding,
+    MOBjustifyContent,
+    MOBbackgroundColor,
+    MOBborderBottom
   } = props;
 
   const styles = {
@@ -99,13 +108,22 @@ const Grid = (props) => {
     alignSelf: alignSelf,
     cursor: cursor,
     opacity: opacity,
-    // 태블릿 사이즈(width: 768px~992px)
+    // 태블릿 사이즈(width: ~1090px)
     TABheight: TABheight,
     TABwidth: TABwidth,
     TABmargin: TABmargin,
     TABpadding: TABpadding,
     TABdisplay: TABdisplay,
     TABopacity: TABopacity,
+    // 모바일 사이즈(width: ~767px)
+    MOBdisplay: MOBdisplay,
+    MOBheight: MOBheight,
+    MOBwidth: MOBwidth,
+    MOBmargin: MOBmargin,
+    MOBpadding: MOBpadding,
+    MOBjustifyContent: MOBjustifyContent,
+    MOBbackgroundColor: MOBbackgroundColor,
+    MOBborderBottom: MOBborderBottom,
   };
 
   return (
@@ -119,7 +137,7 @@ const Grid = (props) => {
 
 Grid.defaultProps = {
   children: null,
-  _onClick: () => {},
+  _onClick: () => { },
   width: '100%',
 };
 
@@ -167,14 +185,25 @@ const GridBox = styled.div`
   border-collapse: ${(props) => props.borderCollapse};
   cursor: ${(props) => props.cursor};
   opacity: ${(props) => props.opacity};
-  // 태블릿 사이즈(width: 768px~992px)
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  // 태블릿 사이즈(width: ~1090px)
+  @media screen and (max-width: 1090px) {
     height: ${(props) => props.TABheight};
     width: ${(props) => props.TABwidth};
     margin: ${(props) => props.TABmargin};
     padding: ${(props) => props.TABpadding};
     display: ${(props) => props.TABdisplay};
     opacity: ${(props) => props.TABopacity};
+  }
+  // 모바일 사이즈(width: ~767px)
+  @media screen and (max-width: 767px) {
+    display: ${(props) => props.MOBdisplay};
+    height: ${(props) => props.MOBheight};
+    width: ${(props) => props.MOBwidth};
+    margin: ${(props) => props.MOBmargin};
+    padding: ${(props) => props.MOBpadding};
+    justify-content: ${(props) => props.MOBjustifyContent};
+    background-color: ${(props) => props.MOBbackgroundColor};
+    border-bottom: ${(props) => props.MOBborderBottom};
   }
 `;
 

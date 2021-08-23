@@ -39,9 +39,12 @@ const Header = (props) => {
           width="100%"
           height="100px"
           TABheight='72px'
+          MOBheight='48px'
           display="flex"
           justifyContent="space-between"
           backgroundColor='#202124'
+          MOBbackgroundColor='transparent'
+          MOBborderBottom='1px solid #282A2D'
           opacity={opacity}
           TABopacity={TABopacity}
         >
@@ -50,14 +53,19 @@ const Header = (props) => {
             className="logo_search"
             height="fit-content"
             width="auto"
+            MOBwidth='100%'
             margin='10px 0 0'
             TABmargin='9px 0 0'
+            MOBmargin='0'
+            MOBpadding='0 17px 0 18px'
+            MOBdisplay='flex'
+            MOBjustifyContent='space-between'
           >
             <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
             <Image src={Search} alt="검색" />
             <Input placeholder="검색어를 입력하세요." />
           </Grid>
-          <Grid height="fit-content" width="auto" margin="36px 50px" TABmargin='22px 18px'>
+          <Grid height="fit-content" width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none'>
             {/* 북마크 메뉴 */}
             <Text
               color="#5F6368"
@@ -71,18 +79,6 @@ const Header = (props) => {
             >
               <BsFillBookmarkFill />
             </Text>
-            {/* 알림 메뉴 */}
-            {/* <Text
-              color="#5F6368"
-              fontSize="24px"
-              TABfontSize='18px'
-              verticalAlign="middle"
-              margin="0 8px"
-              TABmargin='4px 8px'
-              cursor="pointer"
-            >
-              <BsFillBellFill />
-            </Text> */}
             {/* 프로필 이미지 */}
             <ProfileImg src={Profile_small} alt="프로필" />
             {/* 드롭다운 메뉴 */}
@@ -126,9 +122,12 @@ const Header = (props) => {
         width="100%"
         height="100px"
         TABheight='72px'
+        MOBheight='48px'
         display="flex"
         justifyContent="space-between"
         backgroundColor='#202124'
+        MOBbackgroundColor='transparent'
+        MOBborderBottom='1px solid #282A2D'
         opacity={opacity}
         TABopacity={TABopacity}
       >
@@ -137,22 +136,31 @@ const Header = (props) => {
           className="search"
           height="fit-content"
           width="auto"
+          MOBwidth='100%'
           margin="10px 0 0"
           TABmargin='9px 0 0'
+          MOBmargin='0'
+          MOBpadding='0 18px'
+          MOBdisplay='flex'
+          MOBjustifyContent='space-between'
         >
           <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
-          <Image src={Search} alt="검색" />
-          <Input placeholder="검색어를 입력하세요." />
+          <Hidden>
+            <Image src={Search} alt="검색" />
+            <Input placeholder="검색어를 입력하세요." />
+          </Hidden>
         </Grid>
         {/* 로그인 버튼 */}
         <LoginBtn type="button" onClick={() => history.push('/login')}>
           <Text
             fontSize="16px"
             TABfontSize='14px'
+            MOBfontSize='12px'
             color="#f8f9fa"
             cursor="pointer"
             lineHeight="24px"
             TABlineHeight='18px'
+            MOBmargin='0 17px 0 0'
           >
             로그인
           </Text>
@@ -175,13 +183,16 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: 326px;
     height: 40px;
     &::placeholder {
       font-size: 12px;
     }
   }
+@media screen and (max-width: 767px) {
+  display: none;
+}
 `;
 
 const Logo = styled.img`
@@ -190,21 +201,36 @@ const Logo = styled.img`
   margin: 0 8px;
   cursor: pointer;
   vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     height: 56px;
     width: 140px;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 0;
+    width: auto;
+    height: 48px;
   }
 `;
 
 const Image = styled.img`
   vertical-align: middle;
   width: 24px;
+  @media screen and (max-width: 767px) {
+    height: 24px;
+    margin: 12px 0;
+  }
 `;
 
 const ProfileImg = styled.img`
   vertical-align: middle;
   margin-left: 8px;
   cursor: pointer;
+`;
+
+const Hidden = styled.div`
+  @media screen and (max-width: 767px) {
+  display: none;
+}
 `;
 
 const LoginBtn = styled.button`
@@ -214,9 +240,14 @@ const LoginBtn = styled.button`
   margin: 38px 42px 0 0;
   height: 24px;
   float: right;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     height: 18px;
     margin: 27px 18px 0 0;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 12px 0 0;
+    height: fit-content;
+    width: 60px;
   }
 `;
 

@@ -10,7 +10,7 @@ const Sidebar = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="sidebar" backgroundColor="#202124" width="100px" minHeight='100vh' TABwidth='72px' opacity={opacity} TABopacity={TABopacity}>
+      <Grid className="sidebar" backgroundColor="#202124" width="100px" minHeight='100vh' TABwidth='72px' opacity={opacity} TABopacity={TABopacity} MOBdisplay='none'>
         <Grid className="sidebar-inner">
           <Point
             src={PointImg} alt='디자인' />
@@ -34,6 +34,8 @@ const Sidebar = (props) => {
           </FixNav>
         </Grid>
       </Grid>
+      <Grid className='mobile-navbar' backgroundColor='#202124' MOBheight='48px' display='none' TABdisplay='none' MOBdisplay='none'>
+      </Grid>
     </React.Fragment>
   );
 };
@@ -42,7 +44,7 @@ const FixNav = styled.div`
   position: fixed;
   width: 100px;
   top: 100px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: 72px;
     top: 72px;
   }
@@ -50,7 +52,7 @@ const FixNav = styled.div`
 
 const Point = styled.img`
   width: 100px;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: 72px;
   }
 `;
@@ -58,7 +60,7 @@ const Point = styled.img`
 const Image = styled.img`
   width: 100px;
   cursor: pointer;
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  @media screen and (max-width: 1090px) {
     width: 72px;
   }
 `;

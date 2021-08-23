@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';

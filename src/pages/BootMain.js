@@ -33,7 +33,7 @@ const BootMain = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className='background' display='flex' overflow='auto'>
+      <Grid className='background' display='flex' overflow='auto' MOBpadding='0 0 50px'>
         {/* 사이드바 */}
         <Sidebar />
         {/* 헤더, 푸터 포함한 바디 */}

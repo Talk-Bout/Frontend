@@ -38,7 +38,11 @@ const QuestionWrite = (props) => {
   };
   // 이미지 미리보기 삭제 함수
   const exitPage = () => {
-    dispatch(imageActions.getPreview(null));
+    if (window.confirm('변경사항이 저장되지 않을 수 있습니다.')) {
+      dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
+      history.goBack();
+    }
   };
 
   //setOnePost 불러오기
@@ -97,40 +101,41 @@ const QuestionWrite = (props) => {
       <Grid
         className="background"
         display="flex"
-        backgroundColor="#17181b"
-        minHeight="100vh"
-      >
-        <Sidebar TABopacity="0.2" />
-        <Body header TABopacity="0.2">
-          <Grid className="body-inner" height="100%" padding="5vh 0 0">
+        backgroundColor="#17181b">
+        {/* 바디 */}
+        <Body MOBnopadding>
+          <Grid className="body-inner" height="100%" padding="24px 0 0" MOBpadding='0'>
             <Window>
+              {/* 작성 페이지 헤더 */}
               <Grid
                 className="header-box"
-                height="10%"
+                height="84px" MOBheight='48px'
                 display="flex"
-                borderBottom="1px solid #8f9091"
-                backgroundColor="#212123"
+                borderBottom="1px solid #5f6368"
+                backgroundColor="#202124"
               >
-                <Grid className="exit-button" width="23.33%" padding="0 25px">
+                {/* 나가기 버튼 */}
+                <Grid className="exit-button" width="23.33%" padding="0 40px" MOBpadding='0 10px'>
                   <Text
-                    fontSize="24px"
+                    fontSize="35px" TABfontSize='28px' MOBfontSize='20px'
                     color="#e5e5e5"
-                    lineHeight="84px"
+                    lineHeight="84px" MOBlineHeight='48px'
                     cursor="pointer"
                     _onClick={() => {
-                      history.goBack();
                       exitPage();
                     }}
                   >
                     <BsX />
                   </Text>
                 </Grid>
+                {/* 타이틀 */}
                 <Grid className="title" width="53.33%" is_center>
-                  <Text fontSize="24px" fontWeight="700" color="#e5e5e5" lineHeight="84px" cursor='default'>
+                  <Text fontSize="24px" TABfontSize='20px' MOBfontSize='16px' fontWeight="700" color="#e5e5e5" lineHeight="84px" MOBlineHeight='48px' cursor='default'>
                     질문하기
                   </Text>
                 </Grid>
-                <Grid className="submit-button" width="23.33%" padding="0 25px">
+                {/* 등록 버튼 */}
+                <Grid className="submit-button" width="23.33%" padding="0 40px" MOBpadding='0 10px'>
                   <Text
                     _onClick={() => {
                       create_question();
@@ -144,11 +149,13 @@ const QuestionWrite = (props) => {
                 </Grid>
               </Grid>
               <BodyBox>
+                {/* 질문글 제목 */}
                 <TitleBox>
                   <Text
                     margin="auto 0"
                     color="#e5e5e5"
                     fontSize="18px"
+                    MOBfontSize='16px'
                     fontWeight="700"
                   >
                     Q
@@ -215,6 +222,9 @@ const QuestionWrite = (props) => {
                 >
                   <FiHash />
                 </Text> */}
+                <ButtonMobile onClick={() => {
+                  create_question();
+                }}><Text MOBfontSize='16px' fontWeight='700' color='#848484'>등록</Text></ButtonMobile>
               </FooterBox>
             </Window>
           </Grid>
@@ -225,29 +235,38 @@ const QuestionWrite = (props) => {
 };
 
 const Window = styled.div`
-  background-color: #383838;
+  background-color: #282a2d;
   width: 80%;
-  height: 90%;
+  max-width: 1044px;
+  height: fit-content;
   margin: auto;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 688px;
-    margin: 0 30px 0 -40px;
+    margin: auto;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 0;
+    width: 100%;
   }
 `;
 
 const BodyBox = styled.div`
   height: 80%;
-  padding: 20px 40px;
-  background-color: #282a2d;
+  padding: 40px 40px 0;
+  @media screen and (max-width: 767px) {
+    padding: 10px;
+  }
 `;
 
 const TitleBox = styled.div`
-  height: 5vh;
   border-bottom: 1px solid #8f9091;
   padding-bottom: 20px;
   display: flex;
   text-align: center;
   background-color: #282a2d;
+  @media screen and (max-width: 767px) {
+    border-bottom: 1px solid #5f6368;
+  }
 `;
 
 const HoverActionBtn = styled.text`
@@ -260,6 +279,12 @@ const HoverActionBtn = styled.text`
   :hover {
     color: #7879f1;
   }
+  @media screen and (max-width: 1090px) {
+    font-size: 20px;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 
 const ContentBox = styled.div`
@@ -269,11 +294,10 @@ const ContentBox = styled.div`
 `;
 
 const TitleInput = styled.input`
-  background-color: #383838;
   padding: 10px;
   font-size: 16px;
   color: #e5e5e5;
-  background-color: #282a2d;
+  background-color: #282A2D;
   width: 80%;
   border: none;
   &::placeholder {
@@ -283,13 +307,16 @@ const TitleInput = styled.input`
   &:focus {
     outline: none;
   }
+  @media screen and (max-width: 767px) {
+    width: 90%;
+  }
 `;
 
 const Textarea = styled.textarea`
-  width: 97.7%;
+  width: 95%;
   resize: none;
   padding: 10px;
-  margin-left: 10px;
+  margin: 0 10px;
   font-size: 16px;
   background-color: #282a2d;
   border: none;
@@ -301,8 +328,11 @@ const Textarea = styled.textarea`
   &:focus {
     outline: none;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 568px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 90%;
   }
 `;
 const Preview = styled.div`
@@ -335,6 +365,19 @@ const ImgInput = styled.input`
   padding: 0;
   margin: -1px;
   overflow: hidden;
+`;
+
+const ButtonMobile = styled.button`
+  cursor: pointer;
+  background-color: #202124;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  width: 80px;
+  margin: 0 0 0 auto;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 export default QuestionWrite;

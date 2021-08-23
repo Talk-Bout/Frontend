@@ -72,7 +72,9 @@ const setMyCampDB = () => {
         dispatch(setMyCamp(response.data));
       })
       .catch((err) => {
-        window.alert(`부트캠프 북마크 목록을 불러오는 데 문제가 발생했어요! :(\n[에러코드 ${err.response.status}]`)
+        console.error(
+          `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`)
+        // window.alert(`부트캠프 북마크 목록을 불러오는 데 문제가 발생했어요! :(\n[에러코드 ${err.response.status}]`)
       });
   };
 };

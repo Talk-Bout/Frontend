@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Text, Button, Grid, Input, Image } from '../elements';
 import { Sidebar, Body, Stars } from '../components';
-import { Profile_small, CampLogo_default, Badge } from '../image';
-import Mid_Profile from '../image/mypage_profile.svg';
+import { Profile_small, Profile_medium, CampLogo_default, Badge } from '../image';
 import { BiTimeFive, BiBadgeCheck } from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
 import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
@@ -80,7 +79,7 @@ const Mypage = (props) => {
               <ProfileInner>
                 {/* 인증 안됐을 때 */}
                 <ProfileBox>
-                  <Profile src={Mid_Profile} alt='프로필' />
+                  <Profile src={Profile_medium} alt='프로필' onClick={() => history.push('/mypage/pic')} />
                 </ProfileBox>
                 <Grid>
                   {/* 닉네임 표시 */}
@@ -298,6 +297,10 @@ const ProfileBox = styled.div`
 
 const Profile = styled.img`
   width: 100%;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Nickname = styled.p`

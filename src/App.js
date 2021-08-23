@@ -33,6 +33,7 @@ import QuestionWrite from './pages/QuestionWrite';
 
 //마이 페이지
 import Mypage from './pages/Mypage';
+import MypagePic from './pages/MypagePic';
 import MypagePost from './pages/MypagePost';
 import DeleteUser from './pages/DeleteUser';
 import MypageBookmarks from './pages/MypageBookmarks';
@@ -81,6 +82,7 @@ function App() {
           <Route path="/boot/:name/review" exact component={BootReviewWrite} />
           <Route path="/boot/:name/post/:id" exact component={BootPost} />
           <Route path="/mypage" exact component={Mypage} />
+          <Route path="/mypage/pic" exact component={MypagePic} />
           <Route path="/mypage/mypost" exact component={MypagePost} />
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           <Route path="/mypage/deleteuser" exact component={DeleteUser} />

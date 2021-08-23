@@ -74,7 +74,7 @@ const BootReviewWrite = (props) => {
   return (
     <React.Fragment>
       <Grid className='background' display='flex' backgroundColor='#17181b'>
-        {/* 헤더 포함한 바디 */}
+        {/* 바디 */}
         <Body MOBnopadding>
           <Grid className='body-inner' padding='24px 0 0' MOBpadding='0'>
             <Window>
@@ -198,7 +198,7 @@ const Input = styled.input`
 
 const Textarea = styled.textarea`
   border: 1px solid #5f6368;
-  width: 50vw;
+  width: 95%;
   resize: none;
   padding: 12px 16px;
   font-size: 16px;

@@ -16,7 +16,7 @@ const MypageBootcamps = (props) => {
         <Body header footer>
           <Grid className='body-inner' height='100%' overflow='hidden'>
             {/* 페이지 타이틀 */}
-            <Text color='#f8f9fa' fontSize='32px' fontWeight='700'>관심있는 부트캠프</Text>
+            <Text color='#f8f9fa' fontSize='32px' TABfontSize='20px' fontWeight='700' TABmargin='14px 0 0'>관심있는 부트캠프</Text>
             <CardList>
               {[1, 2, 3, 4, 5].map((camp, idx) => {
                 return (
@@ -58,6 +58,9 @@ const MypageBootcamps = (props) => {
 
 const CardList = styled.div`
   margin: 24px 0 0;
+  @media screen and (max-width: 1090px) {
+    margin: 16px 0 0;
+  }
 `;
 
 const Card = styled.div`

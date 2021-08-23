@@ -13,7 +13,6 @@ const BootRoot = (props) => {
   // 부트캠프 이름, 설명, 리뷰(별점), 현재 탭 url 주소를 props로 받는다.
   const { camp } = props;
   // 현재 접속 중인 사용자의 닉네임
-  // const username = useSelector(state => state.user.user.nickname);
   const username = getCookie('nickname');
   const is_login = useSelector(state => state.user.is_login);
 

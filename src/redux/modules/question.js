@@ -35,7 +35,7 @@ const setQuestionPop = createAction(SET_QUESTION_POP, (question_list) => ({ ques
 const setOneQuestion = createAction(SET_ONE_QUESTION, (question) => ({ question }));
 const createQuestion = createAction(CREATE_QUESTION, (question) => ({ question }));
 const editQuestion = createAction(EDIT_QUESTION, (question) => ({ question }));
-const deleteQuestion = createAction(DELETE_QUESTION, (question) => ({ question }));
+const deleteQuestion = createAction(DELETE_QUESTION, (question_id) => ({ question_id }));
 
 // ANSWER 액션생성함수
 const setAnswer = createAction(SET_ANSWER, (answer_list) => ({ answer_list }));
@@ -162,7 +162,9 @@ const deleteQuestionDB = (question_id) => {
     instance
       .delete(`/questions/${questionId}`)
       .then((response) => {
-        dispatch(deleteQuestion(response.data));
+        if (response.data.isDeleted === true) {
+          dispatch(deleteQuestion(questionId));
+        }
       })
       .catch((err) => {
         console.error(`질문 삭제 에러 발생: ${err}`);
@@ -264,10 +266,12 @@ const deleteQuestionBookmarkDB = (question_id, questionBookmarkId) => {
   return function (dispatch) {
     instance
       .delete(
-        `/questions/${question_id}/questionBookmarks/${questionBookmarkId}`
+        `/questions/${question_id}/questionBookmarks/`
       )
       .then((response) => {
-        dispatch(deleteQuestionBookmark(questionBookmarkId));
+        if (response.data.isDeleted === true) {
+          dispatch(deleteQuestionBookmark(questionBookmarkId));
+        }
       })
       .catch((err) => {
         console.error(`질문 북마크 삭제 에러: ${err}`);
@@ -286,7 +290,7 @@ const likeQuestionDB = (question_id, user_name) => {
         dispatch(likeQuestion(response.data));
       })
       .catch((err) => {
-        console.error(`질문 좋아요추가 에러 : ${err}`);
+        console.error(`질문 좋아요 추가 에러 : ${err}`);
       });
   };
 };
@@ -294,12 +298,14 @@ const likeQuestionDB = (question_id, user_name) => {
 const unlikeQuestionDB = (question_id, questionLikeId) => {
   return function (dispatch) {
     instance
-      .delete(`/questions/${question_id}/questionLikes/${questionLikeId}`)
+      .delete(`/questions/${question_id}/questionLikes`)
       .then((response) => {
-        dispatch(unlikeQuestion(questionLikeId));
+        if (response.data.isDeleted === true) {
+          dispatch(unlikeQuestion(questionLikeId));
+        }
       })
       .catch((err) => {
-        console.error(`질문 좋아요삭제 에러 : ${err}`);
+        console.error(`질문 좋아요 삭제 에러 : ${err}`);
       });
   };
 };
@@ -323,17 +329,18 @@ const likeAnswerDB = (answer_id, user_name) => {
 const unlikeAnswerDB = (answer_id, answerLikeId, nickname) => {
   return function (dispatch) {
     instance
-      .delete(`/answers/${answer_id}/answerLike/${answerLikeId}`)
+      .delete(`/answers/${answer_id}/answerLike`)
       .then((response) => {
-        const answer_info = {
+        const like_info = {
           answer_id: answer_id,
           answerLikeId: answerLikeId,
-          nickname: nickname,
-        };
-        dispatch(unlikeAnswer(answer_info));
+        }
+        if (response.data.isDeleted === true) {
+          dispatch(unlikeAnswer(like_info));
+        }
       })
       .catch((err) => {
-        console.error(`답변 좋아요삭제 에러 : ${err}`);
+        console.error(`답변 좋아요 삭제 에러 : ${err.response}`);
       });
   };
 };
@@ -364,12 +371,8 @@ export default handleActions(
       }),
     [DELETE_QUESTION]: (state, action) =>
       produce(state, (draft) => {
-        const deleted_question = draft.list.filter((question) => {
-          if (question.questionId !== action.payload.question) {
-            return question;
-          }
-          draft.list = deleted_question;
-        });
+        let idx = draft.list.findIndex((question) => question.questionId === action.payload.question_id);
+        draft.list.splice(idx, 1);
       }),
     [SET_ANSWER]: (state, action) =>
       produce(state, (draft) => {

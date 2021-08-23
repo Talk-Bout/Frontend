@@ -7,7 +7,7 @@ import { actionCreators as userActions } from '../redux/modules/user';
 import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { getCookie, profilePic_c } from '../shared/cookie';
+import { getCookie } from '../shared/cookie';
 
 const Header = (props) => {
   const { opacity, TABopacity, MOBopacity } = props;

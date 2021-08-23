@@ -38,7 +38,7 @@ const addBookmark = createAction(ADD_BOOKMARK, (bookmark) => ({ bookmark }));
 const deleteBookmark = createAction(DELETE_BOOKMARK, (bookmarkId) => ({ bookmarkId }));
 // 좋아요
 const likePost = createAction(LIKE_POST, (like_post) => ({ like_post }));
-const unlikePost = createAction(UNLIKE_POST, (unlike_post) => ({ unlike_post }));
+const unlikePost = createAction(UNLIKE_POST, (postlikeId) => ({ postlikeId }));
 
 // 액션생성함수
 const setComment = createAction(SET_COMMENT, (postComment_list) => ({ postComment_list }));
@@ -62,14 +62,25 @@ const setPostDB = (page, category) => {
   // 전체 게시글 불러오는 함수
   return function (dispatch) {
     dispatch(statusActions.setLoading());
-    instance.get(`/posts?page=${page}&category=${category}`)
-      .then((response) => {
-        dispatch(setPost(response.data));
-        dispatch(statusActions.endLoading());
-      })
-      .catch((err) => {
-        console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
-      });
+    if (category === '') {
+      instance.get(`/posts?page=${page}`)
+        .then((response) => {
+          dispatch(setPost(response.data));
+          dispatch(statusActions.endLoading());
+        })
+        .catch((err) => {
+          console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
+        });
+    } else {
+      instance.get(`/posts?page=${page}&category=${category}`)
+        .then((response) => {
+          dispatch(setPost(response.data));
+          dispatch(statusActions.endLoading());
+        })
+        .catch((err) => {
+          console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
+        });
+    }
   };
 };
 
@@ -208,9 +219,11 @@ const addBookmarkDB = (postId, nickname) => {
 const deleteBookmarkDB = (postId, postBookmarkId) => {
   // 부트톡톡 북마크 삭제하기
   return function (dispatch) {
-    instance.delete(`/posts/${postId}/postBookmarks/${postBookmarkId}`)
+    instance.delete(`/posts/${postId}/postBookmarks/`)
       .then((response) => {
-        dispatch(deleteBookmark(response.data));
+        if (response.data.isDeleted === true) {
+          dispatch(deleteBookmark(postBookmarkId));
+        }
       })
       .catch((err) => {
         console.error(`부트톡톡 북마크 삭제하기 에러 발생: ${err} ### ${err.response}`);
@@ -235,9 +248,11 @@ const likePostDB = (nickname, postId) => {
 const unlikePostDB = (postId, postLikeId) => {
   // 부트톡톡 좋아요 해제하기
   return function (dispatch) {
-    instance.delete(`/posts/${postId}/postLikes/${postLikeId}`)
+    instance.delete(`/posts/${postId}/postLikes/`)
       .then((response) => {
-        dispatch(unlikePost(postId, postLikeId));
+        if (response.data.isDeleted === true) {
+          dispatch(unlikePost(postLikeId));
+        }
       }).catch((err) => {
         console.error(`부트톡톡 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`);
       });
@@ -358,7 +373,7 @@ export default handleActions(
     }),
     [DELETE_BOOKMARK]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.my_bookmark_list.findIndex((bookmark) => bookmark.postBookmarkId === action.payload.postBookmarkId);
+        let idx = draft.my_bookmark_list.findIndex((bookmark) => bookmark.postBookmarkId === action.payload.bookmarkId);
         draft.my_bookmark_list.splice(idx, 1);
       }),
     [LIKE_POST]: (state, action) => produce(state, (draft) => {
@@ -366,7 +381,7 @@ export default handleActions(
     }),
 
     [UNLIKE_POST]: (state, action) => produce(state, (draft) => {
-      let like_idx = draft.my_like_list.findIndex((like) => like.postLikeId === action.payload.unlike_post);
+      let like_idx = draft.my_like_list.findIndex((like) => like.postLikeId === action.payload.postlikeId);
       draft.my_like_list.splice(like_idx, 1);
     }),
     [SET_COMMENT]: (state, action) => produce(state, (draft) => {

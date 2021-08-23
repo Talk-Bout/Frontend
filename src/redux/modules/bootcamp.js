@@ -103,14 +103,16 @@ const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
   return function (dispatch) {
     instance
       .delete(
-        `/bootcamp/${bootcampName}/bootcampBookmarks/${bootcampBookmarkId}`
+        `/bootcamp/${bootcampName}/bootcampBookmarks`
       )
       .then((response) => {
-        dispatch(deleteMyCamp(bootcampBookmarkId));
+        if (response.data.isDeleted === true) {
+          dispatch(deleteMyCamp(bootcampBookmarkId));
+        }
       })
       .catch((err) => {
         console.error(
-          `부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response}`
+          `부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response.status} ### ${err.response.message} ### ${err.response.meta}`
         );
       });
   };

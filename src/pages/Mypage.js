@@ -10,14 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
-import { nickname_c, provider_c, profilePic_c } from '../shared/cookie';
+import { getCookie } from '../shared/cookie';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
 
-  const nickname = nickname_c;
-  const provider = provider_c;
-  const profilePic = profilePic_c;
+  const nickname = getCookie('nickname');
+  const provider = getCookie('provider');
+  const profilePic = getCookie('profilePic');
   const user_profile_url = `http://13.209.12.149${profilePic}`;
 
   useEffect(() => {

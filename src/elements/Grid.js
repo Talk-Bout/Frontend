@@ -62,7 +62,8 @@ const Grid = (props) => {
     MOBpadding,
     MOBjustifyContent,
     MOBbackgroundColor,
-    MOBborderBottom
+    MOBborderBottom,
+    MOBbottom,
   } = props;
 
   const styles = {
@@ -124,6 +125,7 @@ const Grid = (props) => {
     MOBjustifyContent: MOBjustifyContent,
     MOBbackgroundColor: MOBbackgroundColor,
     MOBborderBottom: MOBborderBottom,
+    MOBbottom: MOBbottom,
   };
 
   return (
@@ -204,6 +206,7 @@ const GridBox = styled.div`
     justify-content: ${(props) => props.MOBjustifyContent};
     background-color: ${(props) => props.MOBbackgroundColor};
     border-bottom: ${(props) => props.MOBborderBottom};
+    bottom: ${(props) => props.MOBbottom};
   }
 `;
 

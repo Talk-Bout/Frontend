@@ -18,6 +18,10 @@ const Image = (props) => {
     TABwidth,
     TABheight,
     TABmargin,
+    //모바일 사이즈(~768px)
+    MOBwidth,
+    MOBheight,
+    MOBmargin,
   } = props;
 
   const styles = {
@@ -34,6 +38,10 @@ const Image = (props) => {
     TABwidth: TABwidth,
     TABheight: TABheight,
     TABmargin: TABmargin,
+    //모바일 사이즈(~768px)
+    MOBwidth: MOBwidth,
+    MOBheight: MOBheight,
+    MOBmargin: MOBmargin,
   };
 
   if (shape === 'BigProfileImage') {
@@ -76,10 +84,16 @@ const ImageDefault = styled.div`
   border-radius: ${(props) => props.borderRadius};
   display: ${(props) => props.display};
   // 태블릿 사이즈(768~1090px)
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
+  }
+  // 모바일 사이즈(~768px)
+  @media screen and (max-width: 768px) {
+    width: ${(props) => props.MOBwidth};
+    height: ${(props) => props.MOBheight};
+    margin: ${(props) => props.MOBmargin};
   }
 `;
 
@@ -95,10 +109,16 @@ const BigProfileImage = styled.div`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   // 태블릿 사이즈(768~1090px)
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
+  }
+  // 모바일 사이즈(~768px)
+  @media screen and (max-width: 768px) {
+    width: ${(props) => props.MOBwidth};
+    height: ${(props) => props.MOBheight};
+    margin: ${(props) => props.MOBmargin};
   }
 `;
 
@@ -111,10 +131,16 @@ const HeaderLogo = styled.div`
   align-items: center;
   text-align: center;
   // 태블릿 사이즈(768~1090px)
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
+  }
+  // 모바일 사이즈(~768px)
+  @media screen and (max-width: 768px) {
+    width: ${(props) => props.MOBwidth};
+    height: ${(props) => props.MOBheight};
+    margin: ${(props) => props.MOBmargin};
   }
 `;
 
@@ -129,10 +155,16 @@ const CircleLogo = styled.div`
   text-align: center;
   line-height: 80px;
   // 태블릿 사이즈(768~1090px)
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
+  }
+  // 모바일 사이즈(~768px)
+  @media screen and (max-width: 768px) {
+    width: ${(props) => props.MOBwidth};
+    height: ${(props) => props.MOBheight};
+    margin: ${(props) => props.MOBmargin};
   }
 `;
 

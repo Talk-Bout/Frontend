@@ -67,7 +67,7 @@ const Header = (props) => {
             <Image src={Search} alt="검색" />
             <Input placeholder="검색어를 입력하세요." />
           </Grid>
-          <Grid height="fit-content" width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none'>
+          <Grid height="fit-content" width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
             {/* 북마크 메뉴 */}
             <Text
               color="#5F6368"
@@ -82,7 +82,9 @@ const Header = (props) => {
               <BsFillBookmarkFill />
             </Text>
             {/* 프로필 이미지 */}
-            <ProfileImg src={profilePic === 'null' ? Profile_small : user_profile_url} alt='프로필' />
+            <Profile>
+              <ProfileImg src={profilePic === 'null' ? Profile_small : user_profile_url} alt='프로필' />
+            </Profile>
             {/* 드롭다운 메뉴 */}
             <Button
               aria-controls="simple-menu"
@@ -223,10 +225,19 @@ const Image = styled.img`
   }
 `;
 
-const ProfileImg = styled.img`
-  vertical-align: middle;
-  margin-left: 8px;
+const Profile = styled.div`
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   cursor: pointer;
+`;
+
+const ProfileImg = styled.img`
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 

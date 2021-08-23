@@ -123,7 +123,7 @@ const addPostDB = (new_post) => {
         content: content,
         nickname: nickname,
         category: category,
-        image: image,
+        image: { 1: image.path },    // 이미지 여러 개 업로드할 경우 대비해서 객체로 보냄
       })
       .then((response) => {
         dispatch(addPost(response.data));
@@ -143,7 +143,6 @@ const editPostDB = (edited_post) => {
     const category = edited_post.category;
     const nickname = edited_post.nickname;
     const image = edited_post.image;
-    // console.log(edited_post);
     instance
       .patch(`/posts/${postId}`, {
         title: title,
@@ -151,7 +150,7 @@ const editPostDB = (edited_post) => {
         postId: postId,
         category: category,
         nickname: nickname,
-        image: image,
+        image: { 1: image.path },
       })
       .then((response) => {
         const data = {

@@ -5,13 +5,14 @@ import { SmallWindow } from '../components';
 import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as imageActions } from '../redux/modules/image';
+import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import { getCookie } from '../shared/cookie';
 
 const MypagePic = (props) => {
   const dispatch = useDispatch();
-
+  const nickname = getCookie('nickname');
   const user_image = getCookie(`http://13.209.12.149${(getCookie('profilePic'))}`);
 
   //이미지 불러오기
@@ -30,8 +31,9 @@ const MypagePic = (props) => {
     dispatch(imageActions.uploadImageDB(formData));
   };
 
+  // 개인정보 수정하는 함수
   const SubmitPic = () => {
-    // 프로필 사진 업로드 함수
+    dispatch(mypageActions.editInfoDB(nickname, image_url.path));
   }
 
   // 이미지 미리보기 삭제 함수

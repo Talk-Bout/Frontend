@@ -135,9 +135,11 @@ const CommonDetail = (props) => {
     );
   };
 
+  console.log(one_post)
+
   // // 게시글 작성자 프로필 사진
-  // const user_profile = question_found.user.profilePic;
-  // const user_profile_url = `http://13.209.12.149${question_found.user.profilePic}`
+  // const user_profile = one_post.user.profilePic;
+  // const user_profile_url = `http://13.209.12.149${one_post.user.profilePic}`
 
   return (
     <React.Fragment>
@@ -211,7 +213,7 @@ const CommonDetail = (props) => {
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
-                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image}`} /></ImageBox> : ''}
+                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image[1]}`} /></ImageBox> : ''}
                 <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='default'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}

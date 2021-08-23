@@ -20,7 +20,7 @@ const MainQna = (props) => {
 
   return (
     <React.Fragment>
-      <Grid className="top-qna" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px' MOBpadding='20px 0 0'>
+      <Grid className="top-qna" height="fit-content" padding="49px 0 16px" TABpadding='32px 0 16px' MOBpadding='20px 0 50px'>
         {/* 질문과 답변 */}
         <Text fontSize='24px' fontWeight='700' color='#F8F9FA' TABfontSize='20px' MOBfontSize='16px' cursor='default'><Emoji src={Fire_emoji} alt='불' height='24px' TABheight='20px' margin='0 8px 0 0' />부트캠퍼들의 질문과 답변</Text>
         <TextBox>

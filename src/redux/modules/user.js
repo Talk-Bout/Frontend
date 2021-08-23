@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/request';
 import { getCookie, setCookie, deleteCookie } from "../../shared/cookie";
+import { actionCreators as statusActions } from './status';
 
 //액션 타입
 const STAY_LOGIN = 'user/STAY_LOGIN'; //로그인 상태 유지
@@ -38,6 +39,7 @@ const initialState = {
 const googleLogin = () => {
   // 구글 액세스토큰, 리프레시토큰 발급
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const accessToken_URL = new URL(window.location.href).searchParams.get('accessToken');
     const refreshToken_URL = new URL(window.location.href).searchParams.get('refreshToken');
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
@@ -80,6 +82,7 @@ const googleRefresh = () => {
       setCookie('accessToken', response.data.access_token);
       deleteCookie('idToken');
       setCookie('idToken', response.data.access_token);
+      dispatch(statusActions.endLoading());
       dispatch(loginCheck());
       // const tokens = {
       //   accessToken: response.data.access_token,
@@ -95,6 +98,7 @@ const googleRefresh = () => {
 const kakaoLogin = () => {
   // 카카오 액세스 토큰, 리프레시 토큰 발급
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const accessToken_URL = new URL(window.location.href).searchParams.get('accessToken');
     const refreshToken_URL = new URL(window.location.href).searchParams.get('refreshToken');
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
@@ -105,6 +109,7 @@ const kakaoLogin = () => {
     setCookie('provider', provider_URL);
     setCookie('nickname', nickname_URL);
     setCookie('profilePic', profilePic_URL);
+    dispatch(statusActions.endLoading());
     dispatch(loginCheck());
     // const kakao_info = {
     //   accessToken: accessToken_URL,
@@ -152,18 +157,16 @@ const logOut = () => {
     axios.post('http://13.209.12.149/oauth/logout', {
       provider: provider,
     }, { headers: headers }).then((response) => {
-      if (response.status === 200) {
-        window.alert('성공적으로 로그아웃 되었습니다.');
-        deleteCookie('accessToken');
-        deleteCookie('refreshToken');
-        deleteCookie('idToken');
-        deleteCookie('provider');
-        deleteCookie('nickname');
-        deleteCookie('profilePic');
-        dispatch(logoutCheck());
-        history.push('/');
-        // dispatch(removeTokens());
-      }
+      window.alert('성공적으로 로그아웃 되었습니다.');
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('idToken');
+      deleteCookie('provider');
+      deleteCookie('nickname');
+      deleteCookie('profilePic');
+      dispatch(logoutCheck());
+      history.push('/');
+      // dispatch(removeTokens());
     }).catch((err) => {
       console.error(`로그아웃 에러: ${err}`);
     });

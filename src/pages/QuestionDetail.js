@@ -22,7 +22,6 @@ const QuestionDetail = (props) => {
     (question) => question.questionId === parseInt(question_id)
   );
 
-  // const user_name = useSelector((state) => state.user.user.nickname);
   const user_name = getCookie('nickname');
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
@@ -282,7 +281,7 @@ const QuestionDetail = (props) => {
               </Grid>
             }
             {/* 총 답변 개수가 5개 이상인 경우 화살표(더보기) 버튼 보여주기  */}
-            {all_answer.length > 5 &&
+            {all_answer.length >= 5 &&
               <Grid margin="auto" width="fit-content">
                 <Button onClick={() => moreAnswer()}>
                   <MdKeyboardArrowDown size="40" color="#F2F3F4" />

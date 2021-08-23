@@ -108,7 +108,7 @@ const Mypage = (props) => {
                     <BootBox>
                       {myboot_info.map((mb, idx) => {
                         return (
-                          <BootCard key={idx} className={`bootcard${idx}`} onClick={() => { history.push(`/boot/${mb.bootcampName}/info`) }}
+                          <BootCard key={idx + 100} className={`bootcard${idx}`} onClick={() => { history.push(`/boot/${mb.bootcampName}/info`) }}
                           >
                             <ImageBox>
                               <Image shape="CircleLogo" src={mb.logo ? mb.logo : CampLogo_default} />
@@ -147,7 +147,7 @@ const Mypage = (props) => {
                     <Grid display="flex" margin="12px 0" height="211px" width="100%">
                       {mytalk.map((p, idx) => {
                         return (
-                          <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
+                          <Grid key={idx} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
                             _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer'>
                             <Grid overflow="hidden" height="100px" width="100%" >
                               <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
@@ -198,7 +198,7 @@ const Mypage = (props) => {
                     <Grid display="flex" margin="12px 0" height="211px" width="100%">
                       {mypost.map((p, idx) => {
                         return (
-                          <Grid margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
+                          <Grid key={idx + 50} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
                             _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer' hover='opacity: 0.7'>
                             <Grid overflow="hidden" height="100px" width="100%" >
                               <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"

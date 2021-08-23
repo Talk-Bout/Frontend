@@ -65,9 +65,6 @@ const setCampsDB = (page) => {
 const setMyCampDB = () => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
-    // instance
-    //   .get('/tokenUser')
-    //   .then((response) => {
     const nickname = getCookie('nickname');
     instance
       .get(`/users/${nickname}/bootcampBookmarks`)
@@ -75,16 +72,8 @@ const setMyCampDB = () => {
         dispatch(setMyCamp(response.data));
       })
       .catch((err) => {
-        console.error(
-          `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`
-        );
+        window.alert(`부트캠프 북마크 목록을 불러오는 데 문제가 발생했어요! :(\n[에러코드 ${err.response.status}]`)
       });
-    // })
-    // .catch((err) => {
-    //   console.error(
-    //     `사용자 닉네임 불러오기 에러 발생: ${err} ### ${err.response}`
-    //   );
-    // });
   };
 };
 
@@ -162,7 +151,7 @@ const addReviewDB = (new_review) => {
       })
       .catch((err) => {
         if (err.response.status === 500) {
-          window.alert('리뷰는 한 번만 작성할 수 있습니다.');
+          window.alert('리뷰는 한 번만 작성할 수 있습니다.\n이전 페이지로 돌아갑니다.');
           history.goBack();
           return;
         }

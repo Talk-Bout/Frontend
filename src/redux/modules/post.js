@@ -115,7 +115,6 @@ const addPostDB = (new_post) => {
         image: image,
       })
       .then((response) => {
-        console.log(response.data);
         dispatch(addPost(response.data));
       })
       .catch((err) => {

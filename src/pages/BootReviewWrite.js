@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import { BsX } from 'react-icons/bs';
 import { IoStar } from 'react-icons/io5';
@@ -14,7 +13,6 @@ import { getCookie } from '../shared/cookie';
 const BootReviewWrite = (props) => {
   const dispatch = useDispatch();
   const camp_name = props.location.state.camp_name;
-  // const user_name = useSelector(state => state.user.user.nickname);
   const user_name = getCookie('nickname');
 
   // 별점을 state에 저장하기

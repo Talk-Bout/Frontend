@@ -218,7 +218,8 @@ const createAnswerDB = (new_answer) => {
         questionId: questionId,
       })
       .then((response) => {
-        dispatch(createAnswer(response.data));
+        const new_answer_data = { ...response.data, answerLike: [], likeNumber: 0 }
+        dispatch(createAnswer(new_answer_data));
       })
       .catch((err) => {
         console.error(`답변 작성하기 에러: ${err}`);
@@ -314,7 +315,7 @@ const likeAnswerDB = (answer_id, user_name) => {
         dispatch(likeAnswer(response.data));
       })
       .catch((err) => {
-        console.error(`답변 좋아요추가 에러 : ${err}`);
+        console.error(`답변 좋아요 추가 에러 : ${err}`);
       });
   };
 };

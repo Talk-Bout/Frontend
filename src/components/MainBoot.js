@@ -18,6 +18,7 @@ const MainBoot = () => {
   const camp_list = useSelector((state) => state.bootcamp.camp_list);
   const pop_camps = camp_list.slice(0, 6);
 
+  console.log(pop_camps)
   return (
     <React.Fragment>
       <Grid className="top-boot" height="421px" TABheight="330px" MOBheight='fit-content'>

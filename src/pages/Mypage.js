@@ -32,20 +32,6 @@ const Mypage = (props) => {
   const myboot_list = useSelector((state) => state.mypage.myboot_list);
   // 관심있는 부트캠프 3개 추출
   const myboot = myboot_list.slice(0, 3);
-  // 관심있는 부트캠프 3개 이름만 추출
-  let myboot_name = [];
-  myboot.map((boot) => {
-    myboot_name.push(boot.bootcampName);
-  });
-  // 부트캠프 전체 목록
-  const camp_list = useSelector((state) => state.bootcamp.camp_list);
-  // 관심있는 부트캠프 3개 정보까지 추출
-  let myboot_info = [];
-  camp_list.map((camp) => {
-    if (myboot_name.includes(camp.bootcampName)) {
-      myboot_info.push(camp);
-    };
-  });
 
   // 내가 쓴글 리스트
   const all_post = useSelector((state) => state.mypage.mypost_list);
@@ -105,20 +91,21 @@ const Mypage = (props) => {
                   {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                   {myboot_list.length !== 0 ?
                     <BootBox>
-                      {myboot_info.map((mb, idx) => {
+                      {myboot.map((mb, idx) => {
                         return (
-                          <BootCard key={idx + 100} className={`bootcard${idx}`} onClick={() => { history.push(`/boot/${mb.bootcampName}/info`) }}
+                          <BootCard key={idx + 100} className={`bootcard${idx}`} onClick={() => { history.push(`/boot/${mb.bootcampName}`) }}
                           >
                             <ImageBox>
-                              <Image shape="CircleLogo" src={mb.logo ? mb.logo : CampLogo_default} />
+                              <Logo>
+                                <Img src={mb.bootcamp.logo ? mb.bootcamp.logo : CampLogo_default} />
+                              </Logo>
                             </ImageBox>
                             <Grid padding="10px 0" width="67%">
                               <Grid display="flex" justifyContent="space-between">
                                 <Text p margin="0 0 5px 15px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                                 <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill /></Text>
                               </Grid>
-
-                              <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.star} size='14px' withScore /></Text>
+                              <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.stars} size='14px' withScore /></Text>
                             </Grid>
                           </BootCard>
                         );
@@ -334,6 +321,21 @@ const ImgBox = styled.div`
     }
 `;
 
+const Logo = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const Img = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+`;
+
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
@@ -383,6 +385,10 @@ const BootCard = styled.div`
   width: 32.3%;
   background-color:#202124;
   border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
   @media screen and (min-width: 768px) and (max-width: 1090px) {
       width: 49.25%;
       height: 96px;

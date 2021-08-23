@@ -10,42 +10,45 @@ import { getCookie } from '../shared/cookie';
 const BootRoot = (props) => {
   const dispatch = useDispatch();
 
-  // 부트캠프 이름, 설명, 리뷰(별점), 현재 탭 url 주소를 props로 받는다.
-  const { camp } = props;
+  // 현재 캠프 이름을 주소창에서 가져온다.
+  const bootcampName = decodeURI(window.location.pathname.split('boot/')[1]);
+
   // 현재 접속 중인 사용자의 닉네임
   const username = getCookie('nickname');
   const is_login = useSelector(state => state.user.is_login);
 
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const one_camp = camp_list.find((camp) => camp.bootcampName === bootcampName);
+
   // 사용자가 북마크한 부트캠프 목록
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
   // 사용자가 이 부트캠프를 북마크했다면, my_camp에 넣는다.
-  const my_camp = my_camps.find((c) => c.bootcampName === camp.bootcampName);
+  const my_camp = my_camps.find((c) => c.bootcampName === bootcampName);
 
   useEffect(() => {
+    dispatch(campActions.setOneCampDB(bootcampName));
     dispatch(campActions.setMyCampDB());
-  }, []);
+  }, [bootcampName]);
 
   // 부트캠프 북마크 표시
   const markBoot = () => {
-    dispatch(campActions.addMyCampDB(username, camp.bootcampName));
+    dispatch(campActions.addMyCampDB(username, bootcampName));
   }
 
   // 부트캠프 북마크 해제
   const unmarkBoot = (bookmark_id) => {
-    dispatch(campActions.deleteMyCampDB(camp.bootcampName, bookmark_id));
+    dispatch(campActions.deleteMyCampDB(bootcampName, bookmark_id));
   }
 
-  if (!props.camp) {
-    return (
-      <></>
-    )
-  }
+  if (!one_camp) {
+    return <></>
+  };
 
   return (
     <React.Fragment>
       {/* 부트캠프 로고 */}
-      {camp.logo ?
-        <LogoBox><Image src={camp.logo} /></LogoBox>
+      {one_camp.logo ?
+        <LogoBox><Image src={one_camp.logo} /></LogoBox>
         :
         <LogoBox style={{ textAlign: 'center' }}><Image src={LogoIcon} style={{ width: '150px', height: '150px' }} /></LogoBox>
       }
@@ -53,7 +56,7 @@ const BootRoot = (props) => {
         <InfoBtn>
           <div>
             {/* 부트캠프 이름, 북마크 표시 */}
-            <Text fontSize='32px' MOBfontSize='18px' color='#F8F9FA' fontWeight='700' cursor='default'>{camp.bootcampName}
+            <Text fontSize='32px' MOBfontSize='18px' color='#F8F9FA' fontWeight='700' cursor='default'>{one_camp.bootcampName}
               {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
               {is_login ?
                 my_camp ?
@@ -64,14 +67,14 @@ const BootRoot = (props) => {
                 ''
               }
             </Text>
-            <Text p fontSize='14px' MOBfontSize='12px' color='#dadce0' margin='0 0 17px' MOBmargin='-10px 0 16px' cursor='default'>{camp.desc}</Text>
+            <Text p fontSize='14px' MOBfontSize='12px' color='#dadce0' margin='0 0 17px' MOBmargin='-10px 0 16px' cursor='default'>{one_camp.desc}</Text>
           </div>
           {/* 홈페이지 바로가기 버튼 */}
-          <Button onClick={() => window.open(`${camp.url}`, '_blank')}><Text fontSize='14px' MOBfontSize='10px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
+          <Button onClick={() => window.open(`${one_camp.url}`, '_blank')}><Text fontSize='14px' MOBfontSize='10px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
         </InfoBtn>
         {/* 부트캠프 평점, 리뷰 개수 */}
-        <Text fontSize='14px' MOBfontSize='12px' color='#dadce0' cursor='default'>★<span style={{ margin: '0 8px' }}>{Number(camp.star).toFixed(1)}</span>({camp.reviewNumber}개 리뷰)</Text>
-        <ButtonMobile onClick={() => window.open(`${camp.url}`, '_blank')}><Text fontSize='14px' MOBfontSize='10px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></ButtonMobile>
+        <Text fontSize='14px' MOBfontSize='12px' color='#dadce0' cursor='default'>★<span style={{ margin: '0 8px' }}>{Number(one_camp.star).toFixed(1)}</span>({one_camp.review === [] ? 0 : one_camp.review.length}개 리뷰)</Text>
+        <ButtonMobile onClick={() => window.open(`${one_camp.url}`, '_blank')}><Text fontSize='14px' MOBfontSize='10px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></ButtonMobile>
       </Grid>
     </React.Fragment>
   )

@@ -8,26 +8,31 @@ import { getCookie } from '../../shared/cookie';
 // 액션타입
 const MAIN_CAMPS = 'bootcamp/MAIN_CAMPS' // 메인페이지 부트캠프 목록 불러오기(인기순)
 const SET_CAMPS = 'bootcamp/SET_CAMPS'; // 부트캠프 전체 목록 불러오기
+const SET_ONE_CAMP = 'bootcamp/SET_ONE_CAMP'; // 부트캠프 개별 정보 불러오기
 const SET_MY_CAMP = 'bootcamp/SET_MY_CAMP'; // 북마크한 부트캠프 목록 불러오기
 const ADD_MY_CAMP = 'bootcamp/ADD_MY_CAMP'; // 부트캠프 북마크하기
 const DELETE_MY_CAMP = 'bootcamp/DELETE_MY_CAMP'; // 부트캠프 북마크 해제하기
 const SET_REVIEWS = 'bootcamp/SET_REVIEWS'; // 리뷰 불러오기
 const ADD_REVIEW = 'bootcamp/ADD_REVIEW'; // 리뷰 작성하기
+const SET_OTHERS = 'bootcamp/SET_OTHERS'; // 다른 부트캠프 목록 불러오기
 
 // 액션생성함수
 const mainCamps = createAction(MAIN_CAMPS, (camp_list) => ({ camp_list }));
 const setCamps = createAction(SET_CAMPS, (camp_list) => ({ camp_list }));
+const setOneCamp = createAction(SET_ONE_CAMP, (camp) => ({ camp }));
 const setMyCamp = createAction(SET_MY_CAMP, (camp_list) => ({ camp_list }));
 const addMyCamp = createAction(ADD_MY_CAMP, (camp) => ({ camp }));
 const deleteMyCamp = createAction(DELETE_MY_CAMP, (bookmark_id) => ({ bookmark_id }));
 const setReviews = createAction(SET_REVIEWS, (review_list) => ({ review_list }));
 const addReview = createAction(ADD_REVIEW, (review) => ({ review }));
+const setOthers = createAction(SET_OTHERS, (camp_list) => ({ camp_list }));
 
 // 기본값 정하기
 const initialState = {
   camp_list: [], // 부트캠프 전체 목록
   my_camp_list: [], // 북마크한 부트캠프 목록
   review_list: [], // 리뷰 목록
+  others_list: [], // 다른 부트캠프 목록
 };
 
 // 액션함수
@@ -58,6 +63,20 @@ const setCampsDB = (page) => {
         console.error(
           `부트캠프 전체 불러오기 에러 발생: ${err} ### ${err.response}`
         );
+      });
+  };
+};
+
+const setOneCampDB = (bootcampName) => {
+  // 서버로부터 부트캠프 개별 정보 불러오는 함수
+  return function (dispatch) {
+    dispatch(statusActions.setLoading());
+    instance.get(`/bootcamp/${bootcampName}`)
+      .then((response) => {
+        dispatch(setOneCamp(response.data));
+        dispatch(statusActions.endLoading());
+      }).catch((err) => {
+        console.error(`부트캠프 개별 정보 불러오기 에러 발생: ${err} ### ${err.response}`);
       });
   };
 };
@@ -166,12 +185,27 @@ const addReviewDB = (new_review) => {
   };
 };
 
+const setOthersDB = (bootcampName) => {
+  // 서버로부터 다른 부트캠프 목록 불러오는 함수
+  return function (dispatch) {
+    instance.get(`/bootcamp/${bootcampName}/notme`)
+      .then((response) => {
+        dispatch(setOthers(response.data));
+      }).catch((err) => {
+        console.error(`다른 부트캠프 목록 불러오기 에러 발생: ${err} ### ${err.response} ### ${err.message} ### ${err.meta}`);
+      });
+  };
+};
+
 export default handleActions({
   [MAIN_CAMPS]: (state, action) => produce(state, (draft) => {
     draft.camp_list = [...action.payload.camp_list];
   }),
   [SET_CAMPS]: (state, action) => produce(state, (draft) => {
     draft.camp_list = [...action.payload.camp_list];
+  }),
+  [SET_ONE_CAMP]: (state, action) => produce(state, (draft) => {
+    draft.camp_list = [action.payload.camp];
   }),
   [SET_MY_CAMP]: (state, action) => produce(state, (draft) => {
     draft.my_camp_list = [...action.payload.camp_list];
@@ -189,17 +223,22 @@ export default handleActions({
   [ADD_REVIEW]: (state, action) => produce(state, (draft) => {
     draft.review_list.push(action.payload.review);
   }),
+  [SET_OTHERS]: (state, action) => produce(state, (draft) => {
+    draft.others_list = [...action.payload.camp_list];
+  })
 }, initialState);
 
 // 액션 생성자
 const actionCreators = {
   mainCampsDB,
   setCampsDB,
+  setOneCampDB,
   addMyCampDB,
   setMyCampDB,
   deleteMyCampDB,
   setReviewsDB,
   addReviewDB,
+  setOthersDB,
 };
 
 export { actionCreators };

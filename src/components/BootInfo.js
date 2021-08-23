@@ -1,37 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Grid } from '../elements';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
 
 const BootInfo = (props) => {
-  const { camp } = props;
+  const dispatch = useDispatch();
+  const bootcampName = decodeURI(window.location.pathname.split('boot/')[1]);
+
+  useEffect(() => {
+    dispatch(campActions.setOneCampDB(bootcampName));
+  }, [bootcampName]);
+
+  const camp_list = useSelector(state => state.bootcamp.camp_list);
+  const one_camp = camp_list.find((camp) => camp.bootcampName === bootcampName);
+
+  // 이게 없으면 자꾸 데이터 undefined라고 합니다.
+  if (!one_camp) {
+    return <></>
+  }
+
+  // 가격 정보가 객체일 경우와 문자열일 경우를 나누어 처리한다.
+  let camp_cost;
+  if (one_camp.bootcampInfo && typeof (one_camp.bootcampInfo.가격) === 'object') {
+    let camp_array = [...Object.values(one_camp.bootcampInfo.가격)];
+    camp_cost = Math.min.apply(null, camp_array) + '만원~';
+  } else {
+    camp_cost = one_camp.bootcampInfo.가격 + '만원';
+  }
+
+  // 커리큘럼은 '0주: 준비' 형식의 객체이므로 배열로 만들어 나열한다.
+  let course = [];
+  course = Object.entries(one_camp.bootcampInfo.커리큘럼);
 
   return (
     <Grid className='contents-info' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px' MOBpadding='18px'>
       <InfoList>
         <div><TextKey>코스</TextKey></div>
-        <div><TextValue>14주</TextValue></div>
+        <div><TextValue>{one_camp.bootcampInfo.코스}</TextValue></div>
         <div><TextKey>모집기간</TextKey></div>
-        <div><TextValue>2021.09.03(금)까지</TextValue></div>
+        <div><TextValue>{one_camp.bootcampInfo.모집기간}</TextValue></div>
         <div><TextKey>가격</TextKey></div>
-        <div><TextValue>선불 400만원(신청 시 결제)<br />혼합 500만원(신청 시 200만원 + 취업 후 300만원)<br />*연봉 3,000만원 이상 취업 시에만 납부</TextValue></div>
+        <div><TextValue>{camp_cost}</TextValue></div>
         <div><TextKey>커리큘럼</TextKey></div>
         <Schedule>
-          <div><TextValue>0주</TextValue></div>
-          <div><TextValue>사전준비</TextValue></div>
-          <div><TextValue>1주</TextValue></div>
-          <div><TextValue>풀스택 미니프로젝트</TextValue></div>
-          <div><TextValue>2-3주</TextValue></div>
-          <div><TextValue>기본/심화</TextValue></div>
-          <div><TextValue>4주</TextValue></div>
-          <div><TextValue>미니프로젝트</TextValue></div>
-          <div><TextValue>5주</TextValue></div>
-          <div><TextValue>클론코딩</TextValue></div>
-          <div><TextValue>6-11주</TextValue></div>
-          <div><TextValue>실전 프로젝트</TextValue></div>
-          <div><TextValue>12주</TextValue></div>
-          <div><TextValue>코딩테스트1</TextValue></div>
-          <div><TextValue>13-14주</TextValue></div>
-          <div><TextValue>지원하기&코딩테스트2</TextValue></div>
+          {course.map((c_list, idx) => {
+            return (
+              <>
+                <div key={idx}><TextValue>{c_list[0]}</TextValue></div>
+                <div><TextValue>{c_list[1]}</TextValue></div>
+              </>
+            )
+          })}
         </Schedule>
       </InfoList>
     </Grid>

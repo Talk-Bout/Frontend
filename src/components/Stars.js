@@ -30,7 +30,7 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
       {/* countingStar()에서 만든 별 5개를 (평점과 함께) 보여준다. */}
       {countingStar()}
       {withScore ?
-        <Text color='#e5e5e5' fontSize={size} TABfontSize={TABsize} MOBfontSize={MOBsize} margin='0 5px 0' vertical_align='middle'>{Number(score).toFixed(1)}</Text>
+        <Text color='#e5e5e5' fontSize={size} TABfontSize={TABsize} MOBfontSize={MOBsize} margin='0 5px 0' verticalAlign='middle'>{score === 0 ? '별점/리뷰 없음' : Number(score).toFixed(1)}</Text>
         : ''}
     </React.Fragment>
   )

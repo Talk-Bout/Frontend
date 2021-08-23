@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Body, Sidebar, Stars } from '../components';
 import { LogoIcon } from '../image';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
+import { object } from 'yup';
 
 const MypageBootcamps = (props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(campActions.setMyCampDB());
+  }, []);
+
+  const my_camps = useSelector(state => state.bootcamp.my_camp_list);
+
+
+  console.log(my_camps);
 
   return (
     <React.Fragment>
@@ -18,20 +31,20 @@ const MypageBootcamps = (props) => {
             {/* 페이지 타이틀 */}
             <Text color='#f8f9fa' fontSize='32px' TABfontSize='20px' fontWeight='700' TABmargin='14px 0 0'>관심있는 부트캠프</Text>
             <CardList>
-              {[1, 2, 3, 4, 5].map((camp, idx) => {
+              {my_camps.map((camp, idx) => {
                 return (
                   // 북마크한 부트캠프 카드
                   <Card>
                     <NameBox>
                       <LogoBox>
                         {/* 로고 */}
-                        <Logo src={LogoIcon} />
+                        <Logo src={camp.bootcamp.logo ? camp.bootcamp.logo : LogoIcon} />
                       </LogoBox>
                       <TextBox>
                         {/* 부트캠프 이름 */}
-                        <Text p margin='0 0 5px' color='#f8f9fa' fontSize='24px' fontWeight='700'>부트캠프명</Text>
+                        <Text p margin='0 0 5px' color='#f8f9fa' fontSize='24px' fontWeight='700'>{camp.bootcampName}</Text>
                         {/* 별점 */}
-                        <Stars score='2.2' size='16px' marginRight='2px' withScore />
+                        <Stars score={camp.stars} size='16px' marginRight='2px' withScore />
                       </TextBox>
                     </NameBox>
                     <InfoBox>
@@ -40,9 +53,9 @@ const MypageBootcamps = (props) => {
                         <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>모집기간</Text></div>
                         <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>가격</Text></div>
                         <div><Text color='#7879F1' fontSize='30px'><BsHeartFill /></Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>14주</Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>{camp.bootcamp.bootcampInfo.코스}</Text></div>
                         <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>2021.09.03(금)까지</Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>4,000,000~</Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>{typeof (camp.bootcamp.bootcampInfo.가격) === 'object' ? (Object.values(camp.bootcamp.bootcampInfo.가격))[0] : camp.bootcamp.bootcampInfo.가격}</Text></div>
                       </InfoInner>
                     </InfoBox>
                   </Card>

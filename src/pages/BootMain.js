@@ -126,7 +126,7 @@ position: relative;
 const ImageDiv = styled.div`
   width: 100%;
   height: 100%;
-  opacity: 0.4;
+  opacity: 0.5;
   border-radius: 8px;
   overflow: hidden;
   display: flex;

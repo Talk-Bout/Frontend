@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Sidebar, Body, BootRoot, BootOthers, BootInfo, BootReview } from '../components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as campActions } from '../redux/modules/bootcamp';
 
 const BootDetail = (props) => {
+  const dispatch = useDispatch();
+
   // 현재 탭을 useState로 관리한다. 초깃값은 정보 탭.
   const [tab, setTab] = useState('info');
   // 현재 캠프 이름을 주소창에서 가져온다.
@@ -14,6 +17,7 @@ const BootDetail = (props) => {
   const camp = camp_list.find((c) => c.bootcampName === bootcampName);
 
   useEffect(() => {
+    dispatch(campActions.setOneCampDB(bootcampName));
     window.scrollTo(0, 0);
   }, [tab, bootcampName]);
 
@@ -24,7 +28,7 @@ const BootDetail = (props) => {
         <Sidebar />
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
-          <BootRoot camp={camp} tab_now={tab} />
+          <BootRoot tab_now={tab} />
           {/* 정보, 리뷰, 커뮤니티 탭 */}
           {/* 현재 탭에 따라 메뉴 CSS 달라지게 함 */}
           <Grid className='nav-box' height='54px' MOBheight='40px' margin='40px 0 0' borderBottom='2px solid #5F6368'>
@@ -44,7 +48,7 @@ const BootDetail = (props) => {
               <BootReview camp={camp} />
             }
             {/* 다른 부트캠프 목록 */}
-            <BootOthers />
+            <BootOthers bootcampName={bootcampName} />
           </Grid>
         </Body>
       </Grid>

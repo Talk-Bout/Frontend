@@ -17,8 +17,6 @@ const MypageBootcamps = (props) => {
 
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
 
-  console.log(my_camps);
-
   return (
     <React.Fragment>
       <Grid className="background" display='flex'>

@@ -13,7 +13,7 @@ import { getCookie } from '../shared/cookie';
 const MypagePic = (props) => {
   const dispatch = useDispatch();
   const user_image = getCookie('profilePic');
-  const user_image_url = `http://13.209.12.149${user_image}`;
+  const user_image_url = `http://13.209.12.149/${user_image}`;
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
@@ -68,7 +68,7 @@ const MypagePic = (props) => {
           <form>
             <label htmlFor="file">
               <Image
-                src={preview ? preview : user_image !== null ? user_image_url : Profile_medium}
+                src={preview ? preview : user_image == null ? Profile_medium : user_image_url}
                 height='80px'
                 MOBheight='56px'
                 cursor="pointer"

@@ -22,6 +22,7 @@ const Footer = (props) => {
         <Menu src={url === 'boot' ? Boot_nav_white : Boot_nav} onClick={() => history.push('/boot')} />
         <Menu src={url === 'common' ? Talk_nav : Talk_nav} onClick={() => history.push('/common/list')} />
         <Menu src={url === 'question' ? Qna_nav_white : Qna_nav} onClick={() => history.push('/question')} />
+        <Menu src={url === 'common' ? Talk_nav_white : Talk_nav} onClick={() => history.push('/common/list')} />
         <Menu src={url === 'mypage' ? Mypage_white : Mypage} onClick={() => history.push('/mypage')} />
       </Navbar>
     </React.Fragment>

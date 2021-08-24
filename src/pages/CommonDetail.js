@@ -134,8 +134,6 @@ const CommonDetail = (props) => {
     );
   };
 
-  console.log(one_post)
-
   // // 게시글 작성자 프로필 사진
   // const user_profile = one_post.user.profilePic;
   // const user_profile_url = `http://13.209.12.149${one_post.user.profilePic}`

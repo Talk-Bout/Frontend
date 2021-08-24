@@ -210,7 +210,7 @@ const CommonDetail = (props) => {
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
-                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image.path}`} /></ImageBox> : ''}
+                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image}`} /></ImageBox> : ''}
                 <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='default'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}

@@ -123,7 +123,7 @@ const addPostDB = (new_post) => {
         content: content,
         nickname: nickname,
         category: category,
-        image: { 1: image.path },    // 이미지 여러 개 업로드할 경우 대비해서 객체로 보냄
+        image: image,
       })
       .then((response) => {
         dispatch(addPost(response.data));
@@ -150,7 +150,7 @@ const editPostDB = (edited_post) => {
         postId: postId,
         category: category,
         nickname: nickname,
-        image: { 1: image.path },
+        image: image,
       })
       .then((response) => {
         const data = {

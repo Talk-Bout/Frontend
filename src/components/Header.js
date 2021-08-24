@@ -65,8 +65,8 @@ const Header = (props) => {
             MOBjustifyContent='space-between'
           >
             <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
-            <Image src={Search} alt="검색" />
-            <Input placeholder="검색어를 입력하세요." />
+            {/* <Image src={Search} alt="검색" /> */}
+            {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
           <Grid height="fit-content" width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
             {/* 북마크 메뉴 */}
@@ -152,8 +152,8 @@ const Header = (props) => {
           MOBjustifyContent='space-between'
         >
           <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
-          <Image MOBdisplayNone src={Search} alt="검색" />
-          <Input placeholder="검색어를 입력하세요." />
+          {/* <Image MOBdisplayNone src={Search} alt="검색" />
+          <Input placeholder="검색어를 입력하세요." /> */}
         </Grid>
         {/* 로그인 버튼 */}
         <LoginBtn type="button" onClick={() => history.push('/login')}>

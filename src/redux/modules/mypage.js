@@ -83,7 +83,6 @@ const editInfoDB = (nickname, profilePic) => {
         if (response.data.isUpdated === true) {
           instance.patch(`/users/${nickname}`, {
             nickname: nickname,
-            email: 'leedmeen@naver.com',
             profilePic: profilePic,
           }).then((response) => {
             if (response.data.isUpdated === true) {
@@ -92,6 +91,8 @@ const editInfoDB = (nickname, profilePic) => {
               setCookie('profilePic', profilePic);
               setCookie('nickname', nickname);
               window.alert('성공적으로 변경되었습니다.');
+            } else {
+              window.alert('예기치 못한 에러가 발생했습니다! :(\n이전 페이지로 돌아갑니다.');
             }
             dispatch(statusActions.endLoading());
             dispatch(imageActions.getPreview(null));

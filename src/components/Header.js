@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, MenuButton } from '../elements';
+import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
-import { Button, Menu, MenuItem, MenuList, ClickAwayListener, Grow, Paper, Popper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
 
 const Header = (props) => {
@@ -68,14 +67,14 @@ const Header = (props) => {
             {/* <Image src={Search} alt="검색" /> */}
             {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
-          <Grid height="fit-content" width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
+          <Grid width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
             {/* 북마크 메뉴 */}
             <Text
               color="#5F6368"
               fontSize="24px"
               TABfontSize='18px'
               verticalAlign="middle"
-              margin="5px 8px 0 0"
+              margin="0 8px 0 0"
               TABmargin='4px 6px 0 0'
               cursor="pointer"
               _onClick={() => history.push('/mypage/mybookmarks')}
@@ -113,7 +112,6 @@ const Header = (props) => {
                 로그아웃
               </MenuItem>
             </Menu>
-            {/* <MenuButton /> */}
           </Grid>
         </Grid>
       </React.Fragment>

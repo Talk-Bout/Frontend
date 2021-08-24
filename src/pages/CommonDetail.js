@@ -32,8 +32,10 @@ const CommonDetail = (props) => {
   // 게시물 조회
   React.useEffect(() => {
     dispatch(postActions.setOnePostDB(postId));
-    dispatch(postActions.setBookmarkDB(username));
     dispatch(postActions.setCommentDB(postId, 1));
+    if (is_login) {
+      dispatch(postActions.setBookmarkDB(username));
+    }
   }, []);
 
   const handleClick = (e) => {

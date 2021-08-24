@@ -86,7 +86,7 @@ const BootReview = (props) => {
             {/* 리뷰 */}
             <PostBox>
               {/* 리뷰 제목 */}
-              <Text p fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>리뷰 제목</Text>
+              <Text p fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.title}</Text>
               {/* 작성자 닉네임, 작성일자 */}
               <Text p fontSize='14px' MOBfontSize='10px' color='#80868b' margin='4px 0 0' cursor='default'>
                 {review.status === '수료' ? '수료자: ' : '작성자: '}{review.nickname} - {review.createdAt}

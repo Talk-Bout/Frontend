@@ -33,8 +33,9 @@ import Mypage from './Mypage.png';
 import Mypage_white from './Mypage_white.png';
 import Spinner_iris from './loadingspinner_256.gif';
 import Spinner_white from './loadingspinner_white_256.gif';
+import Spinner_web from './Spinner-1.4s-517px.gif'
 import KakaoLogin_btn from './kakao_login_medium_narrow.png';
 import GoogleLogin_btn from './google_login_light_pressed.png';
 import Badge from '../image/badge 1.png';
 
-export { Profile_medium, Search, LogoImg, Profile_small, CaretDown, Banner_desktop, Banner_desktop_short, Banner_tablet, Banner_mobile, CampLogo_default, LogoIcon, Rocket_emoji, Megaphone_emoji, Fire_emoji, PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, Spinner_iris, Spinner_white, KakaoLogin_btn, GoogleLogin_btn, Badge, };
+export { Profile_medium, Search, LogoImg, Profile_small, CaretDown, Banner_desktop, Banner_desktop_short, Banner_tablet, Banner_mobile, CampLogo_default, LogoIcon, Rocket_emoji, Megaphone_emoji, Fire_emoji, PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, Spinner_iris, Spinner_white, Spinner_web, KakaoLogin_btn, GoogleLogin_btn, Badge, };

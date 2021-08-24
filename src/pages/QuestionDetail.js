@@ -55,7 +55,9 @@ const QuestionDetail = (props) => {
   useEffect(() => {
     dispatch(questionActions.setOneQuestionDB(question_id));
     dispatch(questionActions.setAnswerDB(question_id, 1));
-    dispatch(questionActions.setQuestionBookmarkDB());
+    if (is_login) {
+      dispatch(questionActions.setQuestionBookmarkDB());
+    }
   }, []);
 
   if (!question_found) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Spinner_iris } from '../image';
+import { Spinner_iris, Spinner_web } from '../image';
 import PropTypes from 'prop-types';
 
 const Spinner = (props) => {
@@ -13,7 +13,7 @@ const Spinner = (props) => {
   return (
     <React.Fragment>
       <Div>
-        <SpinnerImg src={Spinner_iris} />
+        <SpinnerImg src={Spinner_web} />
       </Div>
     </React.Fragment>
   )
@@ -36,6 +36,8 @@ const Div = styled.div`
 
 const SpinnerImg = styled.img`
   vertical-align: middle;
+  width: 250px;
+  height: 250px;
 `;
 
 export default Spinner;

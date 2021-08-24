@@ -27,7 +27,9 @@ const BootRoot = (props) => {
 
   useEffect(() => {
     dispatch(campActions.setOneCampDB(bootcampName));
-    dispatch(campActions.setMyCampDB());
+    if (is_login) {
+      dispatch(campActions.setMyCampDB());
+    }
   }, [bootcampName]);
 
   // 부트캠프 북마크 표시

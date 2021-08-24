@@ -5,6 +5,7 @@ import Input from './Input';
 import Text from './Text';
 import FloatingBtn from './FloatingBtn';
 import Emoji from './Emoji';
+import MenuButton from './MenuButton';
 
-export { Grid, Button, Image, Input, Text, FloatingBtn, Emoji };
+export { Grid, Button, Image, Input, Text, FloatingBtn, Emoji, MenuButton };
 

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Text } from '../elements';
+import { Grid, Text, MenuButton } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import { Button, Menu, MenuItem, MenuList, ClickAwayListener, Grow, Paper, Popper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { getCookie } from '../shared/cookie';
 
 const Header = (props) => {
@@ -112,6 +113,7 @@ const Header = (props) => {
                 로그아웃
               </MenuItem>
             </Menu>
+            {/* <MenuButton /> */}
           </Grid>
         </Grid>
       </React.Fragment>

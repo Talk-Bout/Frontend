@@ -77,33 +77,36 @@ const setMyBookmarkDB = (nickname) => {
 const editInfoDB = (nickname, profilePic) => {
   // 개인정보 수정하기  
   return function (dispatch) {
-    // dispatch(statusActions.setLoading());
-    instance.get(`/users/nickname/${nickname}`)
+    dispatch(statusActions.setLoading());
+    instance.get(`/users/${nickname}`)
       .then((response) => {
-        console.log(response.data);
+        if (response.data.isUpdated === true) {
+          instance.patch(`/users/${nickname}`, {
+            nickname: nickname,
+            email: 'leedmeen@naver.com',
+            profilePic: profilePic,
+          }).then((response) => {
+            if (response.data.isUpdated === true) {
+              deleteCookie('profilePic');
+              deleteCookie('nickname');
+              setCookie('profilePic', profilePic);
+              setCookie('nickname', nickname);
+              window.alert('성공적으로 변경되었습니다.');
+            }
+            dispatch(statusActions.endLoading());
+            dispatch(imageActions.getPreview(null));
+            dispatch(imageActions.DeleteImageUrl());
+            history.push('/mypage');
+          }).catch((err) => {
+            console.error(`마이페이지 개인정보 수정하기 에러 발생: ${err} ### ${err.response}`);
+          });
+        } else {
+          window.alert('이미 존재하는 닉네임입니다.');
+          return;
+        };
       }).catch((err) => {
         console.error(`개인정보 수정 위한 닉네임 중복확인 에러 발생: ${err} ### ${err.response}`);
-      })
-    // instance.patch(`/users/${nickname}`, {
-    //   nickname: nickname,
-    //   email: 'leedmeen@naver.com',
-    //   profilePic: profilePic,
-    // })
-    //   .then((response) => {
-    //     if (response.data.isUpdated === true) {
-    //       deleteCookie('profilePic');
-    //       deleteCookie('nickname');
-    //       setCookie('profilePic', profilePic);
-    //       setCookie('nickname', nickname);
-    //     }
-    //     console.log(response.data);
-    //     dispatch(statusActions.endLoading());
-    //     dispatch(imageActions.getPreview(null));
-    //     dispatch(imageActions.DeleteImageUrl());
-    //     history.push('/mypage');
-    //   }).catch((err) => {
-    //     console.error(`마이페이지 개인정보 수정하기 에러 발생: ${err} ### ${err.response}`);
-    //   });
+      });
   };
 };
 

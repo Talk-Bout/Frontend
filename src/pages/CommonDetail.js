@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Text, Grid } from '../elements';
-import { Sidebar, Body } from '../components';
+import { Sidebar, Body, OtherTalk } from '../components';
 import { Profile_small } from '../image';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from "../redux/modules/post";
-import { GoPrimitiveDot } from 'react-icons/go';
 import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
@@ -213,7 +212,7 @@ const CommonDetail = (props) => {
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
-                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image[1]}`} /></ImageBox> : ''}
+                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image.path}`} /></ImageBox> : ''}
                 <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='default'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}
@@ -295,14 +294,7 @@ const CommonDetail = (props) => {
               <MoreBtn onClick={() => moreComment()}><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기</Text></MoreBtn>
             </div>
             {/* 다른 게시글 목록 */}
-            <OthersBox>
-              <Text fontSize='18px' fontWeight='700' color='#E8EAED' cursor='default'>커뮤니티 내 다른 게시글</Text>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n, idx) => {
-                return (
-                  <Text key={idx} p fontSize='16px' margin='8px 0 0' color='#DADCE0' _onClick={() => history.push('/boot/community/post')} cursor='pointer' hover='opacity: 0.7' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'><GoPrimitiveDot style={{ height: '10px' }} />부트캠프 질문 드립니다!</Text>
-                )
-              })}
-            </OthersBox>
+            <OtherTalk />
           </BodyInner>
         </Body>
       </Grid>
@@ -443,16 +435,6 @@ const MoreBtn = styled.button`
   cursor: pointer;
   &:active {
     opacity: 0.7;
-  }
-`;
-
-const OthersBox = styled.div`
-  /* height: fit-content; */
-  background-color: #202124;
-  padding: 24px;
-  height: 403px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
-    display: none;
   }
 `;
 

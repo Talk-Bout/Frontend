@@ -12,8 +12,8 @@ import { getCookie } from '../shared/cookie';
 
 const MypagePic = (props) => {
   const dispatch = useDispatch();
-  const nickname = getCookie('nickname');
-  const user_image = getCookie(`http://13.209.12.149${(getCookie('profilePic'))}`);
+  const user_image = getCookie('profilePic');
+  const user_image_url = `http://13.209.12.149${user_image}`;
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
@@ -31,10 +31,19 @@ const MypagePic = (props) => {
     dispatch(imageActions.uploadImageDB(formData));
   };
 
+  const nameRef = useRef();
+
   // 개인정보 수정하는 함수
   const SubmitPic = () => {
-    dispatch(mypageActions.editInfoDB(nickname, image_url.path));
-  }
+    let image;
+    if (image_url === null) {
+      image = user_image;
+    } else {
+      image = image_url.path
+    }
+    const nickname = nameRef.current.value;
+    dispatch(mypageActions.editInfoDB(nickname, image));
+  };
 
   // 이미지 미리보기 삭제 함수
   const exitPage = () => {
@@ -48,17 +57,18 @@ const MypagePic = (props) => {
   return (
     <SmallWindow>
       <Grid height="100%" MOBheight='fit-content' is_center>
-        <Grid display='flex' justifyContent='space-between' margin='-32px 0 0'>
+        <Grid display='flex' justifyContent='space-between' height='fit-content' margin='-70px 0 0 -20px'>
           <Text fontSize='35px' TABfontSize='28px' MOBfontSize='20px' color='#e5e5e5' lineHeight='84px' MOBlineHeight='48px' cursor='pointer' _onClick={() => exitPage()}><BsX /></Text>
         </Grid>
-        <Text color='#7879F1' fontSize='20px' MOBfontSize='14px' margin='0 auto'>프로필 사진을 변경하시려면</Text>
-        <Text p color='#7879F1' fontSize='20px' MOBfontSize='14px' margin='0 auto'>아래 사진을 눌러주세요</Text>
-        <Grid height='fit-content' width='80px' margin='36px auto'>
+        <Text color='#e5e5e5' fontWeight='700' fontSize='20px' MOBfontSize='14px' margin='0 auto'>회원정보 수정</Text>
+        <Text p color='#bdc1c6' fontSize='14px' MOBfontSize='10px' margin='8px auto 0'>프로필 사진을 변경하시려면</Text>
+        <Text p color='#bdc1c6' fontSize='14px' MOBfontSize='10px' margin='0 auto'>아래 사진을 눌러주세요</Text>
+        <Grid height='fit-content' width='80px' margin='36px auto 0'>
           {/* 이미지 추가 버튼 */}
           <form>
             <label htmlFor="file">
               <Image
-                src={preview ? preview : user_image ? user_image : Profile_medium}
+                src={preview ? preview : user_image !== null ? user_image_url : Profile_medium}
                 height='80px'
                 MOBheight='56px'
                 cursor="pointer"
@@ -73,7 +83,8 @@ const MypagePic = (props) => {
             </label>
           </form>
         </Grid>
-        <Button onClick={() => SubmitPic()}><Text color='#f8f9fa' fontSize='14px'>프로필 사진 등록</Text></Button>
+        <Input ref={nameRef} placeholder='변경하실 닉네임을 입력해주세요' />
+        <Button onClick={() => SubmitPic()}><Text color='#f8f9fa' fontSize='14px'>수정 완료</Text></Button>
       </Grid>
       <Grid is_flex margin='330px 0 0' MOBmargin='30vh 0 0'>
         <Text fontSize='12px' color='#bdc1c6'>© 2021 Project Talk'bout</Text>
@@ -92,12 +103,32 @@ const ImgInput = styled.input`
   overflow: hidden;
 `;
 
+const Input = styled.input`
+  width: 100%;
+  height: 48px;
+  border: 1px solid #5F6368;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #f8f9fa;
+  caret-color: #f8f9fa;
+  text-align: center;
+  ::placeholder {
+    font-size: 14px;
+    text-align: center;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
 const Button = styled.button`
-  margin-top: 36px;
+  margin-top: 18px;
   width: 100%;
   height: 48px;
   background-color: #a5a6f6;
   cursor: pointer;
+  border-radius: 8px;
+  border: none;
   &:hover {
     opacity: 0.7;
   }

@@ -17,6 +17,7 @@ import SmallWindow from './SmallWindow';
 import Spinner from './Spinner';
 import Stars from './Stars';
 import ToastMessage from './ToastMessage';
+import OtherTalk from './OtherTalk';
 
 
-export { Header, Footer, AnswerCard, Banner, Body, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, QnaCard, Sidebar, SmallWindow, Spinner, Stars, ToastMessage, };
+export { Header, Footer, AnswerCard, Banner, Body, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, QnaCard, Sidebar, SmallWindow, Spinner, Stars, ToastMessage, OtherTalk, };

@@ -6,7 +6,7 @@ const accessToken = getCookie('accessToken');
 const idToken = getCookie('idToken');
 
 const instance = axios.create({
-  baseURL: 'https://fw3efsadfcv.shop',
+  baseURL: 'https://talkbout.camp/api',
   // baseURL 변경되면 api.js의 baseUrl도 같이 변경해주기!
 });
 

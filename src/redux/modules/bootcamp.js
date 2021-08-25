@@ -201,7 +201,7 @@ const addReviewDB = (new_review) => {
         // console.error(
         //   `부트캠프 리뷰 작성하기 에러 발생: ${err} ### ${err.response}`
         // );
-        window.alert(`에러가 발생했습니다! :(\n나중에 다시 시도해주세요.`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
         history.goBack();
       });
   };

@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
+import { history } from '../ConfigureStore';
 
 // 액션타입
 const SET_POST = 'post/SET_POST'; // 게시글 전체 불러오기
@@ -69,7 +70,11 @@ const setPostDB = (page, category) => {
           dispatch(statusActions.endLoading());
         })
         .catch((err) => {
-          console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
+          // console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
+          if (window.confirm(`에러가 발생했습니다! :(\n[setPostDB_all: ${err}]\n메인으로 돌아가시겠습니까?`)) {
+            history.push('/');
+            dispatch(statusActions.endLoading());
+          }
         });
     } else {
       instance.get(`/posts?page=${page}&category=${category}`)
@@ -78,9 +83,13 @@ const setPostDB = (page, category) => {
           dispatch(statusActions.endLoading());
         })
         .catch((err) => {
-          console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
+          // console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
+          if (window.confirm(`에러가 발생했습니다! :(\n[setPostDB_${category}: ${err}]\n메인으로 돌아가시겠습니까?`)) {
+            history.push('/');
+            dispatch(statusActions.endLoading());
+          }
         });
-    }
+    };
   };
 };
 
@@ -90,7 +99,10 @@ const setPostPopDB = (page) => {
     instance.get(`/popular/posts?page=${page}`).then((response) => {
       dispatch(setPostPop(response.data));
     }).catch((err) => {
-      console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
+      // console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
+      if (window.confirm(`에러가 발생했습니다! :( \n[setPostPopDB: ${err}]\n새로고침하시겠습니까?`)) {
+        window.location.reload();
+      };
     });
   };
 };
@@ -104,7 +116,10 @@ const setOnePostDB = (postId) => {
         dispatch(setOnePost(response.data));
       })
       .catch((err) => {
-        console.error(`부트톡톡 개별 게시글 불러오기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 개별 게시글 불러오기 에러 발생: ${err}`);
+        if (window.confirm(`에러가 발생했습니다! :( \n[setOnePostDB: ${err}]\n새로고침하시겠습니까?`)) {
+          window.location.reload();
+        };
       });
   };
 };
@@ -129,7 +144,8 @@ const addPostDB = (new_post) => {
         dispatch(addPost(response.data));
       })
       .catch((err) => {
-        console.error(`부트톡톡 게시글 추가하기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 게시글 추가하기 에러 발생: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       });
   };
 };
@@ -165,7 +181,8 @@ const editPostDB = (edited_post) => {
         dispatch(editPost(data));
       })
       .catch((err) => {
-        console.error(`부트톡톡 게시글 수정하기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 게시글 수정하기 에러 발생: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       });
   };
 };
@@ -181,7 +198,8 @@ const deletePostDB = (deleted_post) => {
         dispatch(deletePost(postId));
       })
       .catch((err) => {
-        console.error(`부트톡톡 게시글 삭제하기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 게시글 삭제하기 에러 발생: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       });
   };
 };
@@ -193,7 +211,8 @@ const setBookmarkDB = (nickname) => {
       dispatch(setBookmark(response.data));
       // console.log(response.data);
     }).catch((err) => {
-      console.error(`부트톡톡 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
+      // console.error(`부트톡톡 북마크 목록 불러오기 에러 발생: ${err} ### ${err.response}`);
+      window.alert(`부트톡톡 북마크 정보를 불러오는 데 문제가 발생했어요! :(`)
     });
   };
 };
@@ -210,7 +229,8 @@ const addBookmarkDB = (postId, nickname) => {
         dispatch(addBookmark(response.data));
       })
       .catch((err) => {
-        console.error(`부트톡톡 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
+        // console.error(`부트톡톡 북마크 추가하기 에러 발생: ${err} ### ${err.response}`);
+        window.alert('부트톡톡 북마크를 추가하는 데 문제가 발생했어요! :(')
       });
   };
 };
@@ -225,7 +245,8 @@ const deleteBookmarkDB = (postId, postBookmarkId) => {
         }
       })
       .catch((err) => {
-        console.error(`부트톡톡 북마크 삭제하기 에러 발생: ${err} ### ${err.response}`);
+        // console.error(`부트톡톡 북마크 삭제하기 에러 발생: ${err} ### ${err.response}`);
+        window.alert('부트톡톡 북마크를 해제하는 데 문제가 발생했어요! :(');
       });
   };
 };
@@ -239,7 +260,8 @@ const likePostDB = (nickname, postId) => {
     }).then((response) => {
       dispatch(likePost(response.data));
     }).catch((err) => {
-      console.error(`부트톡톡 좋아요 표시하기 에러 발생: ${err} ### ${err.response}`);
+      // console.error(`부트톡톡 좋아요 표시하기 에러 발생: ${err} ### ${err.response}`);
+      window.alert('부트톡톡 좋아요를 표시하는 데 문제가 발생했어요! :(');
     });
   };
 };
@@ -253,7 +275,8 @@ const unlikePostDB = (postId, postLikeId) => {
           dispatch(unlikePost(postLikeId));
         }
       }).catch((err) => {
-        console.error(`부트톡톡 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`);
+        // console.error(`부트톡톡 좋아요 해제하기 에러 발생: ${err} ### ${err.response}`);
+        window.alert('부트톡톡 좋아요를 해제하는 데 문제가 발생했어요! :(');
       });
   };
 };
@@ -274,10 +297,10 @@ const setCommentDB = (postId, page) => {
         } else {
           dispatch(setComment(response.data));
         }
-        // console.log(setComment(response.data));
       })
       .catch((err) => {
-        console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 댓글 불러오기 에러 발생: ${err}`);
+        window.alert('부트톡톡 댓글을 불러오는 데 문제가 발생했어요! :(');
       });
   };
 };
@@ -296,7 +319,8 @@ const addCommentDB = (new_comment) => {           // 댓글 추가하는 함수
         dispatch(addComment(response.data));
         // console.log(response.data);
       }).catch((err) => {
-        console.error(`부트톡톡 댓글 추가하기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 댓글 추가하기 에러 발생: ${err}`);
+        window.alert('부트톡톡 댓글을 작성하는 데 문제가 발생했어요! :(\n잠시 후 다시 시도해주세요.');
       });
   };
 };
@@ -312,7 +336,8 @@ const editCommentDB = (edit_comment, postId) => {           // 댓글 수정하�
         // console.log(response.data);
         dispatch(editComment(response.data));
       }).catch((err) => {
-        console.error(`부트톡톡 댓글 수정하기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 댓글 수정하기 에러 발생: ${err}`);
+        window.alert('부트톡톡 댓글을 수정하는 데 문제가 발생했어요! :(\n잠시 후 다시 시도해주세요.');
       });
   };
 };
@@ -326,7 +351,8 @@ const deleteCommentDB = (postCommentId, postId) => {       // 댓글 삭제하�
         // console.log(response.data);
         dispatch(deleteComment(postCommentId));
       }).catch((err) => {
-        console.error(`부트톡톡 댓글 삭제하기 에러 발생: ${err}`);
+        // console.error(`부트톡톡 댓글 삭제하기 에러 발생: ${err}`);
+        window.alert('부트톡톡 댓글을 삭제하는 데 문제가 발생했어요! :(\n잠시 후 다시 시도해주세요.');
       });
   };
 };

@@ -106,7 +106,7 @@ const editInfoDB = (nickname, profilePic) => {
             history.push('/mypage');
           }).catch((err) => {
             // console.error(`마이페이지 개인정보 수정하기 에러 발생: ${err} ### ${err.response}`);
-            window.alert(`에러가 발생했습니다! :(\n[editInfoDB_edit: ${err}]\n나중에 다시 시도해주세요.`);
+            window.alert(`에러가 발생했습니다! :(\n[editInfoDB_edit: ${err}]\n잠시 후 다시 시도해주세요.`);
             dispatch(statusActions.endLoading());
           });
         } else {
@@ -115,7 +115,7 @@ const editInfoDB = (nickname, profilePic) => {
         };
       }).catch((err) => {
         // console.error(`개인정보 수정 위한 닉네임 중복확인 에러 발생: ${err} ### ${err.response}`);
-        window.alert(`에러가 발생했습니다! :(\n[editInfoDB_nick: ${err}]\n나중에 다시 시도해주세요.`);
+        window.alert(`에러가 발생했습니다! :(\n[editInfoDB_nick: ${err}]\n잠시 후 다시 시도해주세요.`);
         dispatch(statusActions.endLoading());
       });
   };

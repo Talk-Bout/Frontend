@@ -44,9 +44,8 @@ const mainCampsDB = () => {
       dispatch(mainCamps(response.data));
       dispatch(statusActions.endLoading());
     }).catch((err) => {
-      // console.log(`메인페이지 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
-
-      if (window.confirm(`에러가 발생했습니다! :( \n[${err}]\n새로고침하시겠습니까?`)) {
+      // console.error(`메인페이지 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
+      if (window.confirm(`에러가 발생했습니다! :( \n[mainCampsDB: ${err}]\n새로고침하시겠습니까?`)) {
         window.location.reload();
       }
     });
@@ -68,7 +67,7 @@ const setCampsDB = (page) => {
         //   `부트캠프 전체 불러오기 에러 발생: ${err} ### ${err.response}`
         // );
         dispatch(statusActions.endLoading());
-        if (window.confirm(`에러가 발생했습니다! :( \n[${err}]\n메인으로 돌아가시겠습니까?`)) {
+        if (window.confirm(`에러가 발생했습니다! :( \n[setCampsDB: ${err}]\n메인으로 돌아가시겠습니까?`)) {
           history.push('/');
         };
       });
@@ -86,7 +85,7 @@ const setOneCampDB = (bootcampName) => {
       }).catch((err) => {
         // console.error(`부트캠프 개별 정보 불러오기 에러 발생: ${err} ### ${err.response}`);
         dispatch(statusActions.endLoading());
-        if (window.confirm(`에러가 발생했습니다! :( \n[${err}]\n새로고침하시겠습니까?`)) {
+        if (window.confirm(`에러가 발생했습니다! :( \n[setOneCampDB: ${err}]\n새로고침하시겠습니까?`)) {
           window.location.reload();
         };
       });
@@ -107,7 +106,7 @@ const setMyCampDB = () => {
       .catch((err) => {
         // console.error(
         //   `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
-        window.alert(`부트캠프 북마크 목록을 불러오는 데 문제가 발생했어요! :(\n[${err}]`)
+        window.alert(`부트캠프 북마크 목록을 불러오는 데 문제가 발생했어요! :(\n[setMyCampDB: ${err}]`)
         dispatch(statusActions.endLoading());
       });
   };
@@ -128,7 +127,7 @@ const addMyCampDB = (nickname, bootcampName) => {
         // console.error(
         //   `부트캠프 북마크 추가하기 에러 발생: ${err} ### ${err.response}`
         // );
-        window.alert(`부트캠프 북마크를 추가하는 데 문제가 발생했어요! :(\n[${err}]`)
+        window.alert(`부트캠프 북마크를 추가하는 데 문제가 발생했어요! :(\n[addMyCampDB: ${err}]`)
       });
   };
 };
@@ -149,7 +148,7 @@ const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
         // console.error(
         //   `부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response.status} ### ${err.response.message} ### ${err.response.meta}`
         // );
-        window.alert(`부트캠프 북마크를 해제하는 데 문제가 발생했어요! :(\n[${err}]`)
+        window.alert(`부트캠프 북마크를 해제하는 데 문제가 발생했어요! :(\n[deleteMyCampDB: ${err}]`)
       });
   };
 };
@@ -169,7 +168,7 @@ const setReviewsDB = (camp_name, page) => {
         //   `부트캠프 리뷰 불러오기 에러 발생: ${err} ### ${err.response}`
         // );
         dispatch(statusActions.endLoading());
-        if (window.confirm(`에러가 발생했습니다! :( \n[${err}]\n새로고침하시겠습니까?`)) {
+        if (window.confirm(`에러가 발생했습니다! :( \n[setReviewsDB: ${err}]\n새로고침하시겠습니까?`)) {
           window.location.reload();
         };
       });
@@ -202,7 +201,7 @@ const addReviewDB = (new_review) => {
         // console.error(
         //   `부트캠프 리뷰 작성하기 에러 발생: ${err} ### ${err.response}`
         // );
-        window.alert('에러가 발생했습니다! :(\n나중에 다시 시도해주세요.');
+        window.alert(`에러가 발생했습니다! :(\n[addReviewDB: ${err}]\n나중에 다시 시도해주세요.`);
         history.goBack();
       });
   };
@@ -216,7 +215,7 @@ const setOthersDB = (bootcampName) => {
         dispatch(setOthers(response.data));
       }).catch((err) => {
         // console.error(`다른 부트캠프 목록 불러오기 에러 발생: ${err} ### ${err.response} ### ${err.message} ### ${err.meta}`);
-        window.alert(`다른 부트캠프 목록을 불러오는 데 문제가 발생했어요! :(\n[${err}]`)
+        window.alert(`다른 부트캠프 목록을 불러오는 데 문제가 발생했어요! :(\n[setOthersDB: ${err}]`)
       });
   };
 };

@@ -70,6 +70,12 @@ const CommonList = (props) => {
     setPopArray(true);
   };
 
+  const loginAlert = () => {
+    if (window.confirm('로그인 후에 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+      history.push('/login');
+    }
+  }
+
   return (
     <React.Fragment>
       <Grid className="background" display="flex" overflow="auto">
@@ -117,7 +123,7 @@ const CommonList = (props) => {
                   </div>
                   :
                   <div>
-                    <WriteButton onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><BiPencil />&nbsp; 글쓰기</WriteButton>
+                    <WriteButton onClick={() => loginAlert()}><BiPencil />&nbsp; 글쓰기</WriteButton>
                   </div>}
               </Grid>
             </Grid>

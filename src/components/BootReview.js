@@ -27,6 +27,12 @@ const BootReview = (props) => {
     setPage(page + 1);
   }
 
+  const loginAlert = () => {
+    if (window.confirm('로그인 후에 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+      history.push('/login');
+    }
+  }
+
   const is_login = useSelector(state => state.user.is_login);
 
   return (
@@ -44,7 +50,7 @@ const BootReview = (props) => {
           </>
           :
           <>
-            <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}><Text fontSize='14px' color='#7879F1'><span style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '10px' }}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
+            <WriteBtn onClick={() => loginAlert()}><Text fontSize='14px' color='#7879F1'><span style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '10px' }}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
           </>
         }
       </Grid>

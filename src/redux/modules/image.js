@@ -34,9 +34,9 @@ const getPreview = (e) => {
     reader.onloadend = () => {
       dispatch(setPreview(reader.result));
       dispatch(statusActions.endLoading());
-    }
-  }
-}
+    };
+  };
+};
 
 const uploadImageDB = (formData) => {
   // 서버에 이미지를 저장하고, url을 반환하는 함수
@@ -46,9 +46,11 @@ const uploadImageDB = (formData) => {
       dispatch(uploadImage(response.data));
     })
       .catch((err) => {
-        console.error(`이미지 업로드 에러 발생: ${err}`);
+        // console.error(`이미지 업로드 에러 발생: ${err}`);
         if (err.response.status === 413) {
-          window.alert('이미지 용량 한도를 초과했습니다!');
+          window.alert('이미지 용량 한도를 초과했습니다! :(');
+        } else {
+          window.alert(`이미지 등록 에러가 발생했습니다! :(\n[uploadImageDB: ${err}]`)
         }
       });
   };

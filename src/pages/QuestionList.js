@@ -53,6 +53,12 @@ const QuestionList = (props) => {
     setPage(page + 1);
   };
 
+  const loginAlert = () => {
+    if (window.confirm('로그인 후에 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+      history.push('/login');
+    }
+  }
+
   return (
     <React.Fragment>
       <Grid display="flex">
@@ -84,11 +90,12 @@ const QuestionList = (props) => {
                       <BiPencil /> 글쓰기
                     </Text>
                   </WriteBtn>
+                  {/* 태블릿 사이즈 이하에서만 보이는 플로팅 버튼 */}
                   <FloatingBtn _onClick={() => history.push(`/question/write`)} />
                 </>
                 :
                 <>
-                  <WriteBtn onClick={() => window.alert('로그인 후에 이용 가능합니다.')}>
+                  <WriteBtn onClick={() => loginAlert()}>
                     <Text fontSize="16px" color="#7879F1">
                       <BiPencil /> 글쓰기
                     </Text>

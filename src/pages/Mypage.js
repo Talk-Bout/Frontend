@@ -11,6 +11,7 @@ import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
 import { getCookie } from '../shared/cookie';
+import { baseUrl } from '../shared/api';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Mypage = (props) => {
   const nickname = getCookie('nickname');
   const provider = getCookie('provider');
   const profilePic = getCookie('profilePic');
-  const user_profile_url = `http://13.209.12.149${profilePic}`;
+  const user_profile_url = `${baseUrl}${profilePic}`;
 
   useEffect(() => {
     dispatch(mypageActions.setMyBootDB(nickname));

@@ -11,6 +11,7 @@ import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
+import { baseUrl } from '../shared/api';
 
 const BootPost = (props) => {
   const dispatch = useDispatch();
@@ -187,7 +188,7 @@ const BootPost = (props) => {
                 <Text p fontSize='12px' color='#BDC1C6' margin='5px 0 0'>{commu_found.createdAt}</Text>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
-                {commu_found.image ? <ImageBox><Image src={`http://13.209.12.149${commu_found.image}`} /></ImageBox> : ''}
+                {commu_found.image ? <ImageBox><Image src={`${baseUrl}${commu_found.image}`} /></ImageBox> : ''}
                 <Text p fontSize='16px' color='#dadce0' margin={commu_found.image ? '' : '32px 0 0'}>{commu_found.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}

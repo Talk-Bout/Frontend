@@ -6,6 +6,7 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import { FaPlus } from 'react-icons/fa';
+import { baseUrl } from '../shared/api';
 
 const MainTalk = (props) => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const MainTalk = (props) => {
               return (
                 <PostCard key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
                   <ImgBox>
-                    <Img src={pp.image ? `http://13.209.12.149${pp.image}` : LogoIcon} />
+                    <Img src={pp.image ? `${baseUrl}${pp.image}` : LogoIcon} />
                   </ImgBox>
                   {/* 질문 제목 */}
                   <TxtBox>

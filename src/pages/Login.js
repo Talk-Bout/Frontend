@@ -4,16 +4,17 @@ import { Grid, Text, Image } from '../elements';
 import { SmallWindow } from '../components';
 import { KakaoLogin_btn, GoogleLogin_btn, LogoImg } from '../image';
 import { history } from '../redux/ConfigureStore';
+import { baseUrl } from '../shared/api';
 
 const Login = (props) => {
 
   const googleLogin = () => {
-    const googleApi = 'http://fw3efsadfcv.shop/oauth/google';
+    const googleApi = `${baseUrl}/oauth/google`;
     window.location.assign(googleApi);
   };
 
   const kakaoLogin = () => {
-    const kakaoApi = 'http://13.209.12.149/oauth/kakao';
+    const kakaoApi = `${baseUrl}/oauth/kakao`;
     window.location.assign(kakaoApi);
   };
 

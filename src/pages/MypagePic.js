@@ -9,11 +9,12 @@ import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import { getCookie } from '../shared/cookie';
+import { baseUrl } from '../shared/api';
 
 const MypagePic = (props) => {
   const dispatch = useDispatch();
   const user_image = getCookie('profilePic');
-  const user_image_url = `http://13.209.12.149/${user_image}`;
+  const user_image_url = `${baseUrl}/${user_image}`;
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);

@@ -11,6 +11,7 @@ import { BsEye, BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-ic
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
+import { baseUrl } from '../shared/api';
 
 const QuestionDetail = (props) => {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const QuestionDetail = (props) => {
 
   // 질문 작성자 프로필 사진
   const user_profile = question_found.user.profilePic;
-  const user_profile_url = `http://13.209.12.149${question_found.user.profilePic}`
+  const user_profile_url = `${baseUrl}${question_found.user.profilePic}`
 
   // 수정 삭제 버튼
   const handleClick = (e) => {
@@ -213,7 +214,7 @@ const QuestionDetail = (props) => {
               </Text>
               {question_found.image ?
                 <ImageBox>
-                  <Image src={`http://13.209.12.149${question_found.image}`} />
+                  <Image src={`${baseUrl}${question_found.image}`} />
                 </ImageBox>
                 :
                 ''

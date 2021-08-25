@@ -10,7 +10,8 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { nickname_c } from '../shared/cookie';
+import { getCookie } from '../shared/cookie';
+import { baseUrl } from '../shared/api';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const CommonDetail = (props) => {
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
 
-  const username = nickname_c;
+  const username = getCookie('nickname');
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
   const [MenuLink, setMenuLink] = useState(null);
@@ -138,7 +139,7 @@ const CommonDetail = (props) => {
 
   // // 게시글 작성자 프로필 사진
   // const user_profile = one_post.user.profilePic;
-  // const user_profile_url = `http://13.209.12.149${one_post.user.profilePic}`
+  // const user_profile_url = `${baseUrl}${one_post.user.profilePic}`
 
   return (
     <React.Fragment>
@@ -212,7 +213,7 @@ const CommonDetail = (props) => {
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
-                {one_post.image ? <ImageBox><Image src={`http://13.209.12.149${one_post.image}`} /></ImageBox> : ''}
+                {one_post.image ? <ImageBox><Image src={`${baseUrl}${one_post.image}`} /></ImageBox> : ''}
                 <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='default'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}

@@ -8,13 +8,14 @@ import { Search, LogoImg, Profile_small, CaretDown } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
+import { baseUrl } from '../shared/api';
 
 const Header = (props) => {
   const { opacity, TABopacity, MOBopacity } = props;
   const dispatch = useDispatch();
   const token = getCookie('refreshToken');
   const profilePic = getCookie('profilePic');
-  const user_profile_url = `http://13.209.12.149${profilePic}`
+  const user_profile_url = `${baseUrl}${profilePic}`
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);

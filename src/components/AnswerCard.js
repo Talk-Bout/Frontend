@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { BiLike } from 'react-icons/bi';
 import { nickname_c } from '../shared/cookie';
+import { baseUrl } from '../shared/api';
 
 const AnswerCard = (props) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const AnswerCard = (props) => {
 
   // 답변 작성자 프로필 사진
   const user_profile = one_answer.profilePic;
-  const user_profile_url = `http://13.209.12.149/${one_answer.profilePic}`
+  const user_profile_url = `${baseUrl}/${one_answer.profilePic}`
 
   return (
     <React.Fragment>

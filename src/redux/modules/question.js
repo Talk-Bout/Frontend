@@ -74,7 +74,11 @@ const setQuestionDB = (page) => {
         dispatch(statusActions.endLoading());
       })
       .catch((err) => {
-        console.error(`모든 질문 불러오기 에러 발생: ${err}`);
+        // console.error(`모든 질문 불러오기 에러 발생: ${err}`);
+        if (window.confirm(`에러가 발생했습니다! :(\n[setQuestionDB: ${err}]\n메인으로 돌아가시겠습니까?`)) {
+          history.push('/');
+          dispatch(statusActions.endLoading());
+        }
       });
   };
 };
@@ -88,9 +92,12 @@ const setQuestionPopDB = (page) => {
         dispatch(setQuestionPop(response.data));
       })
       .catch((err) => {
-        console.error(
-          `질문 인기순 불러오기 에러 발생: ${err} ### ${err.response}`
-        );
+        // console.error(
+        //   `질문 인기순 불러오기 에러 발생: ${err} ### ${err.response}`
+        // );
+        if (window.confirm(`에러가 발생했습니다! :( \n[setQuestionPopDB: ${err}]\n새로고침하시겠습니까?`)) {
+          window.location.reload();
+        };
       });
   };
 };
@@ -104,7 +111,10 @@ const setOneQuestionDB = (question_id) => {
         dispatch(setOneQuestion(response.data));
       })
       .catch((err) => {
-        console.error(`개별 질문 불러오기 에러 발생: ${err}`);
+        // console.error(`개별 질문 불러오기 에러 발생: ${err}`);
+        if (window.confirm(`에러가 발생했습니다! :( \n[setOneQuestionDB: ${err}]\n새로고침하시겠습니까?`)) {
+          window.location.reload();
+        };
       });
   };
 };
@@ -127,7 +137,8 @@ const createQuestionDB = (new_question) => {
         history.push('/question');
       })
       .catch((err) => {
-        console.error(`질문 작성하기 에러: ${err}`);
+        // console.error(`질문 작성하기 에러: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       });
   };
 };
@@ -151,7 +162,8 @@ const editQuestionDB = (edit_question) => {
         history.push('/question');
       })
       .catch((err) => {
-        console.error(`질문 작성하기 에러: ${err}`);
+        // console.error(`질문 수정하기 에러: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       });
   };
 };
@@ -167,7 +179,8 @@ const deleteQuestionDB = (question_id) => {
         }
       })
       .catch((err) => {
-        console.error(`질문 삭제 에러 발생: ${err}`);
+        // console.error(`질문 삭제 에러 발생: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       });
   };
 };

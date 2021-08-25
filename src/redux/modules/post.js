@@ -199,7 +199,7 @@ const deletePostDB = (deleted_post) => {
       })
       .catch((err) => {
         // console.error(`부트톡톡 게시글 삭제하기 에러 발생: ${err}`);
-        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
+        // window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       });
   };
 };

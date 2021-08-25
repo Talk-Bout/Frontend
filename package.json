@@ -12,6 +12,7 @@
     "connected-react-router": "^6.9.1",
     "formik": "^2.2.9",
     "history": "4.10.1",
+    "http-proxy-middleware": "^2.0.1",
     "immer": "^9.0.5",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

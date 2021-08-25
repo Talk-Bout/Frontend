@@ -127,6 +127,10 @@ const addMyCampDB = (nickname, bootcampName) => {
         // console.error(
         //   `부트캠프 북마크 추가하기 에러 발생: ${err} ### ${err.response}`
         // );
+        if (err.response.status === 500) {
+          window.alert('이미 북마크한 부트캠프입니다.');
+          return;
+        }
         window.alert('부트캠프 북마크를 추가하는 데 문제가 발생했어요! :(')
       });
   };
@@ -148,7 +152,7 @@ const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
         // console.error(
         //   `부트캠프 북마크 해제하기 에러 발생: ${err} ### ${err.response.status} ### ${err.response.message} ### ${err.response.meta}`
         // );
-        window.alert('부트캠프 북마크를 해제하는 데 문제가 발생했어요! :(')
+        window.alert('부트캠프 북마크를 해제하는 데 문제가 발생했어요! :(');
       });
   };
 };

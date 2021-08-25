@@ -189,6 +189,11 @@ const GridBox = styled.div`
   border-collapse: ${(props) => props.borderCollapse};
   cursor: ${(props) => props.cursor};
   opacity: ${(props) => props.opacity};
+  -ms-user-select: none; 
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   // 태블릿 사이즈(width: ~1090px)
   @media screen and (max-width: 1090px) {
     height: ${(props) => props.TABheight};

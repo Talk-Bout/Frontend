@@ -6,7 +6,7 @@ const accessToken = getCookie('accessToken');
 const idToken = getCookie('idToken');
 
 const instance = axios.create({
-  baseURL: 'https://fw3efsadfcv.shop/',
+  baseURL: 'https://fw3efsadfcv.shop',
 });
 
 if (provider === 'kakao') {

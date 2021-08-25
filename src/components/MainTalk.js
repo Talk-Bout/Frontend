@@ -16,6 +16,7 @@ const MainTalk = (props) => {
   }, []);
 
   const pop_posts = useSelector(state => state.post.pop_list);
+  console.log(pop_posts);
 
   return (
     <React.Fragment>
@@ -31,7 +32,7 @@ const MainTalk = (props) => {
         {/* 부트톡톡 게시물 목록 */}
         <Scroll>
           <CardList>
-            {pop_posts.map((pp, idx) => {
+            {pop_posts && pop_posts.map((pp, idx) => {
               return (
                 <PostCard key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
                   <ImgBox>

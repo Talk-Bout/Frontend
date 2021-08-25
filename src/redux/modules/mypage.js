@@ -37,7 +37,9 @@ const setMyBootDB = (nickname) => {
         dispatch(statusActions.endLoading());
       })
       .catch((err) => {
-        console.error(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
+        // console.error(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
+        window.alert('북마크한 부트캠프 목록을 불러오는 데 문제가 발생했어요! :(');
+        dispatch(statusActions.endLoading());
       });
   };
 };
@@ -55,7 +57,9 @@ const setMypostDB = (nickname) => {
         dispatch(statusActions.endLoading());
       })
       .catch((err) => {
-        console.error(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);
+        // console.error(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);
+        window.alert('내가 쓴 글 목록을 불러오는 데 문제가 발생했어요! :(');
+        dispatch(statusActions.endLoading());
       });
   };
 };
@@ -69,7 +73,9 @@ const setMyBookmarkDB = (nickname) => {
         dispatch(setMyBookmark(response.data));
         dispatch(statusActions.endLoading());
       }).catch((err) => {
-        console.error(`마이페이지 내 북마크 글 불러오기 에러 발생: ${err} ### ${err.response}`);
+        // console.error(`마이페이지 내 북마크 글 불러오기 에러 발생: ${err} ### ${err.response}`);
+        window.alert('북마크한 글 목록을 불러오는 데 문제가 발생했어요! :(');
+        dispatch(statusActions.endLoading());
       });
   };
 };
@@ -92,21 +98,25 @@ const editInfoDB = (nickname, profilePic) => {
               setCookie('nickname', nickname);
               window.alert('성공적으로 변경되었습니다.');
             } else {
-              window.alert('예기치 못한 에러가 발생했습니다! :(\n이전 페이지로 돌아갑니다.');
+              window.alert(`예기치 못한 에러가 발생했습니다! :(\n이전 페이지로 돌아갑니다.`);
             }
             dispatch(statusActions.endLoading());
             dispatch(imageActions.getPreview(null));
             dispatch(imageActions.DeleteImageUrl());
             history.push('/mypage');
           }).catch((err) => {
-            console.error(`마이페이지 개인정보 수정하기 에러 발생: ${err} ### ${err.response}`);
+            // console.error(`마이페이지 개인정보 수정하기 에러 발생: ${err} ### ${err.response}`);
+            window.alert(`에러가 발생했습니다! :(\n[editInfoDB_edit: ${err}]\n나중에 다시 시도해주세요.`);
+            dispatch(statusActions.endLoading());
           });
         } else {
           window.alert('이미 존재하는 닉네임입니다.');
           return;
         };
       }).catch((err) => {
-        console.error(`개인정보 수정 위한 닉네임 중복확인 에러 발생: ${err} ### ${err.response}`);
+        // console.error(`개인정보 수정 위한 닉네임 중복확인 에러 발생: ${err} ### ${err.response}`);
+        window.alert(`에러가 발생했습니다! :(\n[editInfoDB_nick: ${err}]\n나중에 다시 시도해주세요.`);
+        dispatch(statusActions.endLoading());
       });
   };
 };

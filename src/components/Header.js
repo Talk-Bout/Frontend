@@ -72,7 +72,7 @@ const Header = (props) => {
             {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
           <Grid width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
-            <GiftBtn src={Gift} onClick={() => getFeedback()} backgroundColor />
+            <GiftBtn src={Gift} onClick={() => getFeedback()} />
             {/* 북마크 메뉴 */}
             <Text
               color="#7879f1"
@@ -88,7 +88,7 @@ const Header = (props) => {
             </Text>
             {/* 프로필 이미지 */}
             <Profile>
-              <ProfileImg src={profilePic == null ? Profile_small : `http://fw3efsadfcv.shop${profilePic}`} />
+              <ProfileImg onClick={() => history.push('/mypage')} src={profilePic == null ? Profile_small : `http://fw3efsadfcv.shop${profilePic}`} />
             </Profile>
             {/* 드롭다운 메뉴 */}
             <Button

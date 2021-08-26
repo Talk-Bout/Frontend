@@ -20,7 +20,6 @@ const Footer = (props) => {
         </Grid>
         <Grid width='70%' height='100%'>
           <Contact>
-            {/* <InfoImg src={footer_info} /> */}
             <Column>
               <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Design</Text></div>
               <div><Text color='#A5A6F6' fontSize='12px'>윤영미 <Icon src={Little_home} /></Text></div>

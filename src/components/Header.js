@@ -37,7 +37,7 @@ const Header = (props) => {
   }
 
   // 로그인 토큰이 있을 때 보이는 헤더
-  if (!token) {
+  if (token) {
     return (
       <React.Fragment>
         <Grid

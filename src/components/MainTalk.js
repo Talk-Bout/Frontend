@@ -35,7 +35,7 @@ const MainTalk = (props) => {
               return (
                 <PostCard key={idx} onClick={() => history.push(`/common/detail/${pp.postId}`)}>
                   <ImgBox>
-                    <Img src={pp.image ? `${baseUrl}${pp.image}` : LogoIcon} />
+                    <Img src={pp.image ? `http://fw3efsadfcv.shop${pp.image}` : LogoIcon} />
                   </ImgBox>
                   {/* 질문 제목 */}
                   <TxtBox>

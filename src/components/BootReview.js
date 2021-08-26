@@ -17,7 +17,7 @@ const BootReview = (props) => {
   const [page, setPage] = useState(1);
   useEffect(() => {
     dispatch(campActions.setReviewsDB(camp.bootcampName, page));
-  }, [page]);
+  }, []);
   const all_review = useSelector(state => state.bootcamp.review_list);
   const review_list = all_review.slice(0, 5);
   const toPrePage = () => {
@@ -62,7 +62,7 @@ const BootReview = (props) => {
             <Post key={review.reviewId}>
               {/* 별점 */}
               <StarBox>
-                <Text p fontSize='18px' MOBfontSize='12px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
+                {/* <Text p fontSize='18px' MOBfontSize='12px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text> */}
                 <Stars score={review.stars} size='16px' MOBsize='10px' marginRight='4px' />
               </StarBox>
               {/* 리뷰 */}

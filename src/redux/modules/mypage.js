@@ -37,8 +37,8 @@ const setMyBootDB = (nickname) => {
         dispatch(statusActions.endLoading());
       })
       .catch((err) => {
-        // console.error(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
-        window.alert('북마크한 부트캠프 목록을 불러오는 데 문제가 발생했어요! :(');
+        console.log(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
+        // window.alert('북마크한 부트캠프 목록을 불러오는 데 문제가 발생했어요! :(');
         dispatch(statusActions.endLoading());
       });
   };
@@ -57,8 +57,8 @@ const setMypostDB = (nickname) => {
         dispatch(statusActions.endLoading());
       })
       .catch((err) => {
-        // console.error(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);
-        window.alert('내가 쓴 글 목록을 불러오는 데 문제가 발생했어요! :(');
+        console.log(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);
+        // window.alert('내가 쓴 글 목록을 불러오는 데 문제가 발생했어요! :(');
         dispatch(statusActions.endLoading());
       });
   };
@@ -73,8 +73,8 @@ const setMyBookmarkDB = (nickname) => {
         dispatch(setMyBookmark(response.data));
         dispatch(statusActions.endLoading());
       }).catch((err) => {
-        // console.error(`마이페이지 내 북마크 글 불러오기 에러 발생: ${err} ### ${err.response}`);
-        window.alert('북마크한 글 목록을 불러오는 데 문제가 발생했어요! :(');
+        console.log(`마이페이지 내 북마크 글 불러오기 에러 발생: ${err} ### ${err.response}`);
+        // window.alert('북마크한 글 목록을 불러오는 데 문제가 발생했어요! :(');
         dispatch(statusActions.endLoading());
       });
   };

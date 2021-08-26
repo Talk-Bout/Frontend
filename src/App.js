@@ -43,7 +43,7 @@ import MypageBookmarks from './pages/MypageBookmarks';
 import Spinner from './components/Spinner';
 
 // NotFound 페이지
-// import NotFound from './shared/NotFound';
+import NotFound from './shared/NotFound';
 
 
 function App() {
@@ -89,7 +89,7 @@ function App() {
           <Route path="/mypage/mypost" exact component={MypagePost} />
           <Route path="/mypage/mybookmarks" exact component={MypageBookmarks} />
           {/* <Route path="/mypage/deleteuser" exact component={DeleteUser} /> */}
-          {/* <Route render={(props) => <NotFound history={props.history} />} /> */}
+          <Route render={(props) => <NotFound history={props.history} />} />
         </Switch>
       </ConnectedRouter>
       <Spinner visible={is_loading} />

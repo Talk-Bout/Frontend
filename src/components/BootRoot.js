@@ -30,7 +30,7 @@ const BootRoot = (props) => {
     if (is_login) {
       dispatch(campActions.setMyCampDB());
     }
-  }, [bootcampName]);
+  }, []);
 
   // 부트캠프 북마크 표시
   const markBoot = () => {
@@ -60,13 +60,13 @@ const BootRoot = (props) => {
             {/* 부트캠프 이름, 북마크 표시 */}
             <Text fontSize='32px' MOBfontSize='18px' color='#F8F9FA' fontWeight='700' cursor='default'>{one_camp.bootcampName}
               {/* 이 부트캠프를 북마크했다면, 하트를 클릭했을 때 북마크 해제 함수 호출 */}
-              {is_login ?
+              {!is_login ?
+                ''
+                :
                 my_camp ?
                   <Heart check onClick={() => unmarkBoot(my_camp.bootcampBookmarkId)}><HiHeart /></Heart>
                   :
                   <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>
-                :
-                ''
               }
             </Text>
             <Text p fontSize='14px' MOBfontSize='12px' color='#dadce0' margin='0 0 17px' MOBmargin='-10px 0 16px' cursor='default'>{one_camp.desc}</Text>

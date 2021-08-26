@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
 import { history } from '../ConfigureStore';
+import { getCookie } from '../../shared/cookie';
 
 // 액션타입
 const SET_POST = 'post/SET_POST'; // 게시글 전체 불러오기
@@ -63,6 +64,7 @@ const setPostDB = (page, category) => {
   // 전체 게시글 불러오는 함수
   return function (dispatch) {
     dispatch(statusActions.setLoading());
+    // 카테고리가 없을 때(전체)
     if (category === '') {
       instance.get(`/posts?page=${page}`)
         .then((response) => {
@@ -76,6 +78,7 @@ const setPostDB = (page, category) => {
             dispatch(statusActions.endLoading());
           }
         });
+      // 카테고리가 있을 때(정보, 잡담)
     } else {
       instance.get(`/posts?page=${page}&category=${category}`)
         .then((response) => {
@@ -204,9 +207,10 @@ const deletePostDB = (deleted_post) => {
   };
 };
 
-const setBookmarkDB = (nickname) => {
+const setBookmarkDB = () => {
   // 부트톡톡 북마크 불러오기
   return function (dispatch) {
+    const nickname = getCookie('nickname');
     instance.get(`/users/${nickname}/postBookmarks`).then((response) => {
       dispatch(setBookmark(response.data));
       // console.log(response.data);

@@ -19,7 +19,7 @@ const Mypage = (props) => {
   const nickname = getCookie('nickname');
   const provider = getCookie('provider');
   const profilePic = getCookie('profilePic');
-  const user_profile_url = `http://fw3efsadfcv.shop/${profilePic}`;
+  const user_profile_url = `http://fw3efsadfcv.shop${profilePic}`;
 
   useEffect(() => {
     dispatch(mypageActions.setMyBootDB(nickname));
@@ -62,7 +62,6 @@ const Mypage = (props) => {
             {/* 왼쪽 프로필 */}
             <ProfileOutter>
               <ProfileInner>
-                {/* 인증 안됐을 때 */}
                 <ProfileBox>
                   <Profile src={profilePic === 'null' ? Profile_medium : user_profile_url} alt='프로필' onClick={() => history.push('/mypage/pic')} />
                 </ProfileBox>
@@ -73,6 +72,8 @@ const Mypage = (props) => {
                   </Nickname>
                   {/* 소셜 로그인 표시 */}
                   <Status>{provider} 로그인 이용 중</Status>
+                  <Line />
+                  <Status purple>개인정보 수정</Status>
                 </Grid>
               </ProfileInner>
             </ProfileOutter>
@@ -104,7 +105,7 @@ const Mypage = (props) => {
                                 <Text p margin="0 0 5px 15px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                                 <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill /></Text>
                               </Grid>
-                              <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.stars == null ? 0 : mb.stars} size='14px' withScore /></Text>
+                              <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.stars == null ? 0 : mb.stars} size='12px' withScore /></Text>
                             </Grid>
                           </BootCard>
                         );
@@ -291,7 +292,7 @@ const Profile = styled.img`
 const Nickname = styled.p`
   color: #F8F9FA;
   text-align: center;
-  margin: 50px 0 10px;
+  margin: 30px 0 10px;
   font-size: 20px;
   font-weight: bold;
   cursor: default;
@@ -302,15 +303,20 @@ const Nickname = styled.p`
 `;
 
 const Status = styled.p`
-  color: #5f6368;
+  color: ${(props) => props.purple ? '#7879f1' : '#5f6368'};
   text-align: center;
   margin: 0;
   font-size: 14px;
-  cursor: default;
+  cursor: ${(props) => props.purple ? 'pointer' : 'default'};
+  ${(props) => props.purple ? ':hover {opacity: 0.8}' : ''};
   @media screen and (min-width: 768px) and (max-width: 1090px) {
     text-align: start;
     margin: 10px 24px;
   }
+`;
+
+const Line = styled.hr`
+  border: 1px solid #333;
 `;
 
 const ImgBox = styled.div`

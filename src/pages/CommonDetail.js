@@ -35,7 +35,7 @@ const CommonDetail = (props) => {
     dispatch(postActions.setOnePostDB(postId));
     dispatch(postActions.setCommentDB(postId, 1));
     if (is_login) {
-      dispatch(postActions.setBookmarkDB(username));
+      dispatch(postActions.setBookmarkDB());
     }
   }, []);
 

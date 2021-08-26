@@ -62,7 +62,7 @@ const StarEmpty = styled.span`
   ${(props) => props.cursor ? `cursor: ${props.cursor}` : ''};
   ${(props) => props.marginRight ? `margin-right: ${props.marginRight}` : ''};
   font-weight: 700;
-  color: #848484;
+  color: #555;
   vertical-align: middle;
   cursor: default;
   @media screen and (max-width: 1090px) {

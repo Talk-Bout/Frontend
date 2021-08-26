@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Spinner_iris, Spinner_web } from '../image';
+import { Spinner_web } from '../image';
 import PropTypes from 'prop-types';
 
 const Spinner = (props) => {
+
+  const body = document.body;
+  const html = document.documentElement;
+  const height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+
   if (!props.visible) {
     return (
       <></>
@@ -13,7 +18,7 @@ const Spinner = (props) => {
   return (
     <React.Fragment>
       <Div>
-        <SpinnerImg src={Spinner_web} />
+        <SpinnerImg src={Spinner_web} windowHeight={height} />
       </Div>
     </React.Fragment>
   )
@@ -28,6 +33,7 @@ const Div = styled.div`
   top: 0;
   width: 100vw;
   min-height: 100vh;
+  height: ${(props) => props.windowHeight};
   line-height: 85vh;
   text-align: center;
   background: #17181B;

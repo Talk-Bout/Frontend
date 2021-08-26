@@ -24,7 +24,7 @@ const CommonPostList = (props) => {
         </Grid>
         {/* 작성자 정보 */}
         <Grid margin='16px 0 0' TABmargin='24px 0 0'>
-          <ProfileImage src={props.profilePic ? props.profilePic : Profile_small}
+          <ProfileImage src={props.profilePic ? `http://fw3efsadfcv.shop${props.profilePic}` : Profile_small}
             alt='프로필' />
           <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px'>
             {props.nickname}

@@ -8,17 +8,16 @@ import { baseUrl } from '../shared/api';
 
 const Login = (props) => {
 
-  const googleLogin = () => {
-    const googleApi = `${baseUrl}/oauth/google`;
-    window.location.assign(googleApi);
-  };
+  // const googleLogin = () => {
+  //   const googleApi = `${baseUrl}/oauth/google`;
+  //   window.location.assign(googleApi);
+  // };
 
   const kakaoLogin = () => {
     const kakaoApi = `${baseUrl}/oauth/kakao`;
     window.location.assign(kakaoApi);
   };
 
-  //onChange의 e.target.value안찍힐때 버튼에 콘솔로그 해보기!
   return (
     <SmallWindow>
       <Grid is_center height="100%" MOBheight='fit-content'>

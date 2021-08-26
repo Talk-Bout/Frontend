@@ -4,7 +4,7 @@ import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import { Search, LogoImg, Profile_small, CaretDown } from '../image';
+import { Search, LogoImg, Profile_small, CaretDown, Gift } from '../image';
 import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
@@ -15,7 +15,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const token = getCookie('refreshToken');
   const profilePic = getCookie('profilePic');
-  const user_profile_url = `http://fw3efsadfcv.shop${profilePic}`
+  const user_profile_url = `http://fw3efsadfcv.shop/${profilePic}`
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -32,8 +32,12 @@ const Header = (props) => {
     dispatch(userActions.logOut());
   };
 
+  const getFeedback = () => {
+    window.open('https://forms.gle/qVXAFziZKaD2jEq39', '_blank');
+  }
+
   // 로그인 토큰이 있을 때 보이는 헤더
-  if (token) {
+  if (!token) {
     return (
       <React.Fragment>
         <Grid
@@ -69,13 +73,14 @@ const Header = (props) => {
             {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
           <Grid width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
+            <GiftBtn src={Gift} onClick={() => getFeedback()} backgroundColor />
             {/* 북마크 메뉴 */}
             <Text
-              color="#5F6368"
-              fontSize="24px"
+              color="#7879f1"
+              fontSize="32px"
               TABfontSize='18px'
               verticalAlign="middle"
-              margin="0 8px 0 0"
+              margin="-4px 16px 0 0"
               TABmargin='4px 6px 0 0'
               cursor="pointer"
               _onClick={() => history.push('/mypage/mybookmarks')}
@@ -84,14 +89,14 @@ const Header = (props) => {
             </Text>
             {/* 프로필 이미지 */}
             <Profile>
-              <ProfileImg src={profilePic === 'null' ? Profile_small : user_profile_url} alt='프로필' />
+              <ProfileImg src={profilePic ? user_profile_url : Profile_small} alt='프로필' />
             </Profile>
             {/* 드롭다운 메뉴 */}
             <Button
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
-              style={{ padding: 0, minWidth: 0, width: '24px' }}
+              style={{ padding: 0, minWidth: 0, width: '24px', margin: '0 0 0 8px' }}
             >
               <Text color="#5F6368" fontSize="4.6px">
                 <img src={CaretDown} alt="메뉴" />
@@ -155,6 +160,7 @@ const Header = (props) => {
           <Input placeholder="검색어를 입력하세요." /> */}
         </Grid>
         {/* 로그인 버튼 */}
+        <GiftBtn src={Gift} onClick={() => getFeedback()} />
         <LoginBtn type="button" onClick={() => history.push('/login')}>
           <Text
             fontSize="16px"
@@ -216,6 +222,15 @@ const Logo = styled.img`
   }
 `;
 
+const GiftBtn = styled.img`
+  position: absolute;
+  top: -10px;
+  right: 200px;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+`;
+
 const Image = styled.img`
   vertical-align: middle;
   width: 24px;
@@ -227,8 +242,8 @@ const Image = styled.img`
 `;
 
 const Profile = styled.div`
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;

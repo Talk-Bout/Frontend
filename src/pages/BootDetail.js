@@ -19,7 +19,7 @@ const BootDetail = (props) => {
   useEffect(() => {
     dispatch(campActions.setOneCampDB(bootcampName));
     window.scrollTo(0, 0);
-  }, [tab, bootcampName]);
+  }, []);
 
   return (
     <React.Fragment>

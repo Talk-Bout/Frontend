@@ -33,7 +33,7 @@ const QnaCard = (props) => {
         {/* 화면 너비 width > 1200px 일 때 보이기 */}
         <QInfoDesktop>
           {/* 작성자 프로필 이미지 */}
-          <ProfileImg src={Profile_small} width='16px' />
+          <ProfileImg src={question_found.user.profilePic ? `http://fw3efsadfcv.shop${question_found.user.profilePic}` : Profile_small} width='16px' />
           {/* 작성자 닉네임 */}
           <Text fontSize="12px" TABfontSize='10px' color="#80868b" lineHeight="24px" margin="0 16px 0 8px" TABmargin='0 4px 0'>
             {question_found.nickname}
@@ -47,7 +47,7 @@ const QnaCard = (props) => {
         {/* 화면 너비 < 1200px 일 때 보이기 */}
         <QInfoTablet>
           {/* 작성자 프로필 이미지 */}
-          <ProfileImg src={Profile_small} width='16px' />
+          <ProfileImg src={question_found.user.profilePic ? `http://fw3efsadfcv.shop${question_found.user.profilePic}` : Profile_small} width='16px' />
           {/* 작성자 닉네임 */}
           <Text color="#80868b" fontSize='12px' lineHeight='24px' TABfontSize="10px" margin='0 16px 0 8px' TABmargin="0 4px 0">
             {question_found.nickname}

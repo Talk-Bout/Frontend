@@ -11,13 +11,14 @@ import { actionCreators as campActions } from '../redux/modules/bootcamp';
 
 const BootReview = (props) => {
   const dispatch = useDispatch();
-  const { camp } = props;
+  const bootcampName = decodeURI(window.location.pathname.split('boot/')[1]);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
   useEffect(() => {
-    dispatch(campActions.setReviewsDB(camp.bootcampName, page));
-  }, []);
+    dispatch(campActions.setReviewsDB(bootcampName, page));
+    window.scrollTo(0, 0);
+  }, [page]);
   const all_review = useSelector(state => state.bootcamp.review_list);
   const review_list = all_review.slice(0, 5);
   const toPrePage = () => {
@@ -39,14 +40,14 @@ const BootReview = (props) => {
     <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px' MOBpadding='18px 18px 0 18px'>
       <Grid className='review-title' display='flex' justifyContent='space-between' padding='0 0 40px' borderBottom='1px solid #8f9091'>
         {/* 리뷰 페이지 타이틀 */}
-        <Text fontSize='24px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' cursor='default'>{camp.bootcampName} 리뷰</Text>
+        <Text fontSize='24px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' cursor='default'>{bootcampName} 리뷰</Text>
         {/* 리뷰 남기기 버튼 */}
         {/* 로그인 상태가 아니면 로그인 후에 이용 가능하다는 얼럿 띄우기 */}
         {is_login ?
           <>
-            <WriteBtn onClick={() => history.push({ pathname: `/boot/${camp.bootcampName}/review`, state: { camp_name: camp.bootcampName } })}><Text fontSize='14px' color='#7879F1'><span style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '10px' }}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
+            <WriteBtn onClick={() => history.push({ pathname: `/boot/${bootcampName}/review`, state: { camp_name: bootcampName } })}><Text fontSize='14px' color='#7879F1'><span style={{ fontSize: '20px', verticalAlign: 'middle', marginRight: '10px' }}><BiPencil /></span>리뷰 남기기</Text></WriteBtn>
             {/* 플로팅 버튼(태블릿 사이즈 이하에서만 나옴) */}
-            <FloatingBtn _onClick={() => history.push({ pathname: `/boot/${camp.bootcampName}/review`, state: { camp_name: camp.bootcampName } })} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
+            <FloatingBtn _onClick={() => history.push({ pathname: `/boot/${bootcampName}/review`, state: { camp_name: bootcampName } })} active='opacity: 0.7;'><Text fontSize='32px' color='#dadce0'><BiPencil /></Text></FloatingBtn>
           </>
           :
           <>

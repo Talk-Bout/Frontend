@@ -18,7 +18,7 @@ const BootReview = (props) => {
   useEffect(() => {
     dispatch(campActions.setReviewsDB(bootcampName, page));
     window.scrollTo(0, 0);
-  }, [page]);
+  }, [page, bootcampName]);
   const all_review = useSelector(state => state.bootcamp.review_list);
   const review_list = all_review.slice(0, 5);
   const toPrePage = () => {

@@ -30,7 +30,7 @@ const BootRoot = (props) => {
     if (is_login) {
       dispatch(campActions.setMyCampDB());
     }
-  }, []);
+  }, [bootcampName]);
 
   // 부트캠프 북마크 표시
   const markBoot = () => {

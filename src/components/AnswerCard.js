@@ -65,7 +65,7 @@ const AnswerCard = (props) => {
           </Grid>
           {/* 답변 내용 */}
           <Grid margin="30px 0 50px 0" height='fit-content'>
-            <Text p fontSize="16px" color="#C4C4C4" cursor='text' userSelect='text'>
+            <Text p fontSize="16px" color="#C4C4C4" cursor='text' userSelect='text' wordBreak='break-all'>
               {props.content}
             </Text>
           </Grid>

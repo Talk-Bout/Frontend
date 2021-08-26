@@ -67,7 +67,7 @@ const QuestionDetail = (props) => {
 
   // 질문 작성자 프로필 사진
   const user_profile = question_found.user.profilePic;
-  const user_profile_url = `${baseUrl}${question_found.user.profilePic}`
+  const user_profile_url = `http://fw3efsadfcv.shop${question_found.user.profilePic}`
 
   // 수정 삭제 버튼
   const handleClick = (e) => {
@@ -197,7 +197,7 @@ const QuestionDetail = (props) => {
               {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" margin="10px 0">
                 <Grid width="40px">
-                  <Image src={user_profile === null ? Profile_medium : user_profile_url}></Image>
+                  <Image src={user_profile === 'null' ? Profile_medium : user_profile_url}></Image>
                 </Grid>
                 <Grid width="40%">
                   <Text p margin="auto 10px" fontSize="14px" fontWeight="600" color="#9aa0a6" cursor='default'>
@@ -214,7 +214,7 @@ const QuestionDetail = (props) => {
               </Text>
               {question_found.image ?
                 <ImageBox>
-                  <Image src={`${baseUrl}${question_found.image}`} />
+                  <Image src={`http://fw3efsadfcv.shop${question_found.image}`} />
                 </ImageBox>
                 :
                 ''

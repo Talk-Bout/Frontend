@@ -19,7 +19,7 @@ const Mypage = (props) => {
   const nickname = getCookie('nickname');
   const provider = getCookie('provider');
   const profilePic = getCookie('profilePic');
-  const user_profile_url = `${baseUrl}${profilePic}`;
+  const user_profile_url = `http://fw3efsadfcv.shop/${profilePic}`;
 
   useEffect(() => {
     dispatch(mypageActions.setMyBootDB(nickname));

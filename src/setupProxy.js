@@ -1,11 +1,11 @@
-// const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
-// module.exports = function (app) {
-//   app.use(
-//     '/',
-//     createProxyMiddleware({
-//       target: 'https://fw3efsadfcv.shop',
-//       changeOrigin: true,
-//     })
-//   );
-// };
+module.exports = function (app) {
+  app.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'http://fw3efsadfcv.shop/api',
+      changeOrigin: true,
+    })
+  );
+};

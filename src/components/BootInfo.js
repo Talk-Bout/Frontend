@@ -56,7 +56,7 @@ const BootInfo = (props) => {
           } else if (i[0].includes('커리큘럼') && i[1]) {
             return (
               <>
-                <div><TextKey key={idx}>{i[0]}</TextKey></div>
+                <div><TextKey key={idx + 10}>{i[0]}</TextKey></div>
                 <Schedule>
                   {course.map((c_list, idx) => {
                     return (

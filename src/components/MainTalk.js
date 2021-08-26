@@ -16,7 +16,6 @@ const MainTalk = (props) => {
   }, []);
 
   const pop_posts = useSelector(state => state.post.pop_list);
-  console.log(pop_posts);
 
   return (
     <React.Fragment>

@@ -154,7 +154,7 @@ const logOut = () => {
     const provider = getCookie('provider');
     const headers = { 'authorization': `Bearer ${accessToken}` };
     const axios = require('axios');
-    axios.post('https://fw3efsadfcv.shop/oauth/logout', {
+    axios.post('http://fw3efsadfcv.shop/api/oauth/logout', {
       provider: provider,
     }, { headers: headers }).then((response) => {
       window.alert('성공적으로 로그아웃 되었습니다.');

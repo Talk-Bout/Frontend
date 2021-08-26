@@ -46,13 +46,13 @@ const MypageBootcamps = (props) => {
                     </NameBox>
                     <InfoBox>
                       <InfoInner>
-                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>코스</Text></div>
-                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>모집기간</Text></div>
+                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>기간</Text></div>
+                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>모집일정</Text></div>
                         <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>가격</Text></div>
                         <div><Text color='#7879F1' fontSize='30px'><BsHeartFill /></Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>{camp.bootcamp.bootcampInfo.코스}</Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>{camp.bootcamp.bootcampInfo.모집기간}</Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px'>{typeof (camp.bootcamp.bootcampInfo.가격) === 'object' ? `${Math.min.apply(null, (Object.values(camp.bootcamp.bootcampInfo.가격)))}만원~` : `${camp.bootcamp.bootcampInfo.가격}만원`}</Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.기간 ? camp.bootcamp.bootcampInfo.기간 : 'N/A'}</Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.모집기간 ? camp.bootcamp.bootcampInfo.모집기간 : 'N/A'}</Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.가격 ? camp.bootcamp.bootcampInfo.가격 : 'N/A'}</Text></div>
                       </InfoInner>
                     </InfoBox>
                   </Card>
@@ -87,7 +87,7 @@ const Card = styled.div`
 `;
 
 const NameBox = styled.div`
-  width: 40%;
+  width: 30%;
   height: 100%;
   padding: 32px;
   display: flex;
@@ -109,27 +109,29 @@ const Logo = styled.img`
 `;
 
 const TextBox = styled.div`
-  width: 60%;
+  width: 70%;
   margin: 0 16px 0;
   padding: 10px 0;
 `;
 
 const InfoBox = styled.div`
-  width: 50%;
+  width: 70%;
   padding: 24px 0;
 `;
 
 const InfoInner = styled.div`
-  width: 100%;
-  height: 84px;
+  width: 90%;
+  height: 100%;
   border-left: 1px solid #3C4043;
   padding: 8px 32px 8px 29px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 5fr 3fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1.5fr 2fr 2fr 0.5fr;
+  grid-template-rows: 1fr 2fr;
   column-gap: 40px;
   & > div {
     text-align: center;
+    min-width: fit-content;
   }
 `;
 

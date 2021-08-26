@@ -1,3 +1,3 @@
-const baseUrl = 'https://talkbout.camp/api';
+const baseUrl = 'http://fw3efsadfcv.shop/api';
 
 export { baseUrl };

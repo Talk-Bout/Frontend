@@ -33,9 +33,9 @@ const Login = (props) => {
           cursor="pointer"
         />
         <Text p color='#7879F1' fontSize='16px' margin='-10px 0 0' MOBfontSize='12px'>부트캠퍼들의 속시원한 이야기</Text>
-        <GoogleBtn src={GoogleLogin_btn} alt='구글 로그인' onClick={() => googleLogin()} />
+        {/* <GoogleBtn src={GoogleLogin_btn} alt='구글 로그인' onClick={() => googleLogin()} /> */}
         <KakaoBtn src={KakaoLogin_btn} alt='카카오 로그인' onClick={() => kakaoLogin()} />
-        <Text p color='#5F6368' fontSize='16px' margin='20px 0 0' MOBfontSize='12px'>구글, 카카오로 로그인하기</Text>
+        <Text p color='#5F6368' fontSize='16px' margin='20px 0 0' MOBfontSize='12px'>카카오로 로그인하기</Text>
       </Grid>
       <Grid is_flex margin='330px 0 0' MOBmargin='30vh 0 0'>
         <Text fontSize='12px' color='#bdc1c6'>© 2021 Project Talk'bout</Text>
@@ -45,19 +45,19 @@ const Login = (props) => {
   );
 };
 
-const GoogleBtn = styled.img`
-  /* margin: 100px auto 0; */
-  margin: 50px auto 0;
-  height: 48px;
-  display: block;
-  cursor: pointer;
-  &:active {
-    opacity: 0.7;
-  }
-`;
+// const GoogleBtn = styled.img`
+//   /* margin: 100px auto 0; */
+//   margin: 50px auto 0;
+//   height: 48px;
+//   display: block;
+//   cursor: pointer;
+//   &:active {
+//     opacity: 0.7;
+//   }
+// `;
 
 const KakaoBtn = styled.img`
-  margin: 20px auto 0;
+  margin: 80px auto 0;
   height: 48px;
   display: block;
   cursor: pointer;

@@ -16,13 +16,18 @@ const OtherTalk = (props) => {
   const pop_list = useSelector(state => state.post.pop_list);
   const pop_ten = pop_list.slice(0, 10);
 
+  const nextPost = (postId) => {
+    dispatch(postActions.setOnePostDB(postId));
+    history.push(`/common/detail/${postId}`)
+  }
+
   return (
     <React.Fragment>
       <OthersBox>
         <Text fontSize='18px' fontWeight='700' color='#E8EAED' cursor='default'>인기 부트톡톡</Text>
         {pop_ten.map((pt, idx) => {
           return (
-            <Text key={idx} p fontSize='16px' margin='8px 0 0' color='#DADCE0' _onClick={() => history.push(`/common/detail/${pt.postId}`)} cursor='pointer' hover='opacity: 0.7' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'><GoPrimitiveDot style={{ height: '10px' }} />{pt.title}</Text>
+            <Text key={idx} p fontSize='16px' margin='8px 0 0' color='#DADCE0' _onClick={() => nextPost(pt.postId)} cursor='pointer' hover='opacity: 0.7' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'><GoPrimitiveDot style={{ height: '10px' }} />{pt.title}</Text>
           )
         })}
       </OthersBox>

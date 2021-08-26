@@ -32,6 +32,7 @@ const Div = styled.div`
   text-align: center;
   background: #17181B;
   z-index: 100;
+  overflow: hidden;
 `;
 
 const SpinnerImg = styled.img`

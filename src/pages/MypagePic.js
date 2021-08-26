@@ -13,8 +13,9 @@ import { baseUrl } from '../shared/api';
 
 const MypagePic = (props) => {
   const dispatch = useDispatch();
+  const user_name = getCookie('nickname');
   const user_image = getCookie('profilePic');
-  const user_image_url = `${baseUrl}/${user_image}`;
+  const user_image_url = `http://fw3efsadfcv.shop${user_image}`;
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
@@ -40,9 +41,15 @@ const MypagePic = (props) => {
     if (image_url === null) {
       image = user_image;
     } else {
-      image = image_url.path
+      image = image_url;
     }
-    const nickname = nameRef.current.value;
+    console.log(image);
+    let nickname;
+    if (!nameRef.current.value) {
+      nickname = user_name;
+    } else {
+      nickname = nameRef.current.value;
+    }
     dispatch(mypageActions.editInfoDB(nickname, image));
   };
 
@@ -69,7 +76,7 @@ const MypagePic = (props) => {
           <form>
             <label htmlFor="file">
               <Image
-                src={preview ? preview : user_image == null ? Profile_medium : user_image_url}
+                src={preview ? preview : user_image === 'null' ? Profile_medium : user_image_url}
                 height='80px'
                 MOBheight='56px'
                 cursor="pointer"

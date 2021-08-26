@@ -65,6 +65,8 @@ const QuestionDetail = (props) => {
     return <></>;
   }
 
+  console.log(question_found)
+
   // 질문 작성자 프로필 사진
   const user_profile = question_found.user.profilePic;
   const user_profile_url = `http://fw3efsadfcv.shop${question_found.user.profilePic}`
@@ -247,7 +249,7 @@ const QuestionDetail = (props) => {
                   <span style={{ fontSize: '20px', lineHeight: '30px', margin: '0 6px 0 0', verticalAlign: 'middle', }}>
                     <BiComment />
                   </span>
-                  {all_answer.length}
+                  {question_found.answerNumber}
                 </Text>
                 {/* 조회수 */}
                 <Text color="#C4C4C4" margin="auto 16px auto 0" cursor='default'>

@@ -69,6 +69,7 @@ const CommonList = (props) => {
   const setPop = () => {
     dispatch(postActions.setPostPopDB(page));
     setPopArray(true);
+    setCategory('all');
   };
 
   const loginAlert = () => {

@@ -59,6 +59,8 @@ const QuestionList = (props) => {
     }
   }
 
+  console.log(qna_list);
+
   return (
     <React.Fragment>
       <Grid display="flex">

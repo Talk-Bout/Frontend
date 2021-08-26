@@ -18,6 +18,10 @@ const CommonDetail = (props) => {
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
 
+  // 질문 작성자 프로필 사진
+  const user_profile = one_post.user ? one_post.user.profilePic : null;
+  const user_profile_url = `http://fw3efsadfcv.shop${user_profile}`
+
   const username = getCookie('nickname');
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
@@ -136,9 +140,6 @@ const CommonDetail = (props) => {
     );
   };
 
-  // const profilePic = one_post.user.profilePic;
-  // console.log(profilePic);
-
   return (
     <React.Fragment>
       <Grid className='background' display='flex'>
@@ -200,7 +201,11 @@ const CommonDetail = (props) => {
                 {/* 작성일자 */}
                 <InfoBox>
                   <ProfileBox>
-                    <Profile src={Profile_small} alt='프로필' />
+                    {user_profile ?
+                      <Profile src={user_profile_url} />
+                      :
+                      <Profile src={Profile_small} />
+                    }
                   </ProfileBox>
                   <InfoBoxInner>
                     <div style={{ height: '18px', lineHeight: '18px' }}>

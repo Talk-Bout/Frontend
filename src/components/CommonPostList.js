@@ -8,7 +8,6 @@ import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 
 const CommonPostList = (props) => {
-  const one_post = useSelector(state => state.post.one_post);
   const common_list = useSelector(state => state.post.list);
 
   return (
@@ -24,7 +23,7 @@ const CommonPostList = (props) => {
         </Grid>
         {/* 작성자 정보 */}
         <Grid margin='16px 0 0' TABmargin='24px 0 0'>
-          <ProfileImage src={props.profilePic ? `http://fw3efsadfcv.shop${props.profilePic}` : Profile_small}
+          <ProfileImage src={props.user.profilePic ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small}
             alt='프로필' />
           <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px'>
             {props.nickname}

@@ -137,10 +137,6 @@ const CommonDetail = (props) => {
     );
   };
 
-  // // 게시글 작성자 프로필 사진
-  // const user_profile = one_post.user.profilePic;
-  // const user_profile_url = `${baseUrl}${one_post.user.profilePic}`
-
   return (
     <React.Fragment>
       <Grid className='background' display='flex'>
@@ -201,7 +197,9 @@ const CommonDetail = (props) => {
                 </Grid>
                 {/* 작성일자 */}
                 <InfoBox>
-                  <img src={Profile_small} alt='프로필' style={{ width: '40px', height: '40px' }} />
+                  <ProfileBox>
+                    <Profile src={one_post.user.profilePic ? `http://fw3efsadfcv.shop${one_post.user.profilePic}` : Profile_small} alt='프로필' />
+                  </ProfileBox>
                   <InfoBoxInner>
                     <div style={{ height: '18px', lineHeight: '18px' }}>
                       <Text fontSize='14px' color='#BDC1C6' margin='0' cursor='default'>{one_post.nickname}</Text>
@@ -326,6 +324,20 @@ display: flex;
 width: auto;
 height: 40px;
 margin: 24px 0 0 0;
+`;
+
+const ProfileBox = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const Profile = styled.img`
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const InfoBoxInner = styled.div`

@@ -26,6 +26,7 @@ const CommonList = (props) => {
   useEffect(() => {
     if (PopArray) {
       dispatch(postActions.setPostPopDB(page));
+      setCategory('all');
     } else {
       dispatch(postActions.setPostDB(page, ''));
     }
@@ -55,7 +56,7 @@ const CommonList = (props) => {
     dispatch(postActions.setPostDB(page, 'info'));
   };
   // 카테고리 잡담방 게시물
-  const cc_category = () => {
+  const chitchat_category = () => {
     dispatch(postActions.setPostDB(page, 'chitchat'));
   };
   // 카테고리 전체 게시물
@@ -94,15 +95,15 @@ const CommonList = (props) => {
             <Grid display="flex" justifyContent="space-between" margin="0 0 24px 0" TABmargin='0 0 16px 0'>
               <Categories>
                 <CategoryButton url={category === 'all' && 'white'}
-                  onClick={() => { setCategory('all'); total_category() }}>
+                  onClick={() => { setCategory('all'); total_category(); setPopArray(false); }}>
                   전체
                 </CategoryButton>
                 <CategoryButton url={category === 'info' && 'white'}
-                  onClick={() => { setCategory('info'); info_category() }}>
+                  onClick={() => { setCategory('info'); info_category(); setPopArray(false) }}>
                   정보
                 </CategoryButton>
                 <CategoryButton url={category === 'chitchat' && 'white'}
-                  onClick={() => { setCategory('chitchat'); cc_category() }}>
+                  onClick={() => { setCategory('chitchat'); chitchat_category(); setPopArray(false) }}>
                   잡담
                 </CategoryButton>
               </Categories>
@@ -111,9 +112,9 @@ const CommonList = (props) => {
                 <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" verticalAlign='middle'><RiArrowUpDownFill /></Text>
                 <SelectButton>
                   {PopArray ?
-                    <Options onClick={() => total_category()}><Text fontSize='16px' TABfontSize='14px'>인기순</Text></Options>
+                    <Options onClick={() => setPopArray(false)}><Text fontSize='16px' TABfontSize='14px'>인기순</Text></Options>
                     :
-                    <Options onClick={() => setPop()}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
+                    <Options onClick={() => { setPopArray(true); setPop(); setCategory('all') }}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
                   }
                 </SelectButton>
                 {/* 글쓰기버튼 (로그인 후 이용가능) */}

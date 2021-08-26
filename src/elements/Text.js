@@ -30,6 +30,7 @@ const Text = (props) => {
     wlc, // -webkit-line-clamp: 콘텐츠 줄 수 제한
     wbo, // -webkit-box-orient: 콘텐츠 정렬 방향
     overflow,
+    userSelect,
     // 태블릿 사이즈(width: ~1090px)
     TABfontSize,
     TABmargin,
@@ -79,6 +80,7 @@ const Text = (props) => {
     wlc: wlc,
     wbo: wbo,
     overflow: overflow,
+    userSelect: userSelect,
     TABfontSize: TABfontSize,
     TABmargin: TABmargin,
     TABlineHeight: TABlineHeight,
@@ -155,6 +157,7 @@ const TextBoxP = styled.p`
   -webkit-line-clamp: ${(props) => props.wlc};
   -webkit-box-orient: ${(props) => props.wbo};
   overflow: ${(props) => props.overflow};
+  user-select: ${(props) => props.userSelect};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};
@@ -212,6 +215,7 @@ const TextBoxS = styled.span`
   -webkit-line-clamp: ${(props) => props.wlc};
   -webkit-box-orient: ${(props) => props.wbo};
   overflow: ${(props) => props.overflow};
+  user-select: ${(props) => props.userSelect};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};

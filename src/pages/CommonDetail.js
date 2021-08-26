@@ -11,7 +11,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
-import { baseUrl } from '../shared/api';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -137,6 +136,9 @@ const CommonDetail = (props) => {
     );
   };
 
+  // const profilePic = one_post.user.profilePic;
+  // console.log(profilePic);
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex'>
@@ -198,7 +200,7 @@ const CommonDetail = (props) => {
                 {/* 작성일자 */}
                 <InfoBox>
                   <ProfileBox>
-                    <Profile src={one_post.user.profilePic ? `http://fw3efsadfcv.shop${one_post.user.profilePic}` : Profile_small} alt='프로필' />
+                    <Profile src={Profile_small} alt='프로필' />
                   </ProfileBox>
                   <InfoBoxInner>
                     <div style={{ height: '18px', lineHeight: '18px' }}>
@@ -212,7 +214,7 @@ const CommonDetail = (props) => {
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
                 {one_post.image ? <ImageBox><Image src={`http://fw3efsadfcv.shop${one_post.image}`} /></ImageBox> : ''}
-                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='default'>{one_post.content}</Text>
+                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}
                   {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}
@@ -284,7 +286,7 @@ const CommonDetail = (props) => {
                     {ct.postCommentId === edit_comment ?
                       <Input edit_mode ref={commentEdit} defaultValue={ct.content} />
                       :
-                      <Text p lineHeight='24px' fontSize='16px' color='#F1F3F4' margin='0 0 16px' cursor='default'>{ct.content}</Text>
+                      <Text p lineHeight='24px' fontSize='16px' color='#F1F3F4' margin='0 0 16px' cursor='text' userSelect='text'>{ct.content}</Text>
                     }
                   </CommentBox>
                 )
@@ -308,23 +310,23 @@ const BodyInner = styled.div`
   grid-template-columns: 65% 34%;
   @media screen and (min-width: 768px) and (max-width: 1090px) {
     grid-template-columns: 100%;
-  }
-`;
+}
+  `;
 
 const Post = styled.div`
   border-bottom: 1px solid #5F6368;
   padding: 0 0 20px;
   @media screen and (min-width: 768px) and (max-width: 1090px) {
     width: 100%;
-  }
-`;
+}
+  `;
 
 const InfoBox = styled.div`
-display: flex;
-width: auto;
-height: 40px;
-margin: 24px 0 0 0;
-`;
+  display: flex;
+  width: auto;
+  height: 40px;
+  margin: 24px 0 0 0;
+  `;
 
 const ProfileBox = styled.div`
   width: 40px;
@@ -333,17 +335,17 @@ const ProfileBox = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-`;
+  `;
 
 const Profile = styled.img`
   max-width: 100%;
   max-height: 100%;
-`;
+  `;
 
 const InfoBoxInner = styled.div`
-margin: 0 0 0 8px;
-height: 40px;
-`;
+  margin: 0 0 0 8px;
+  height: 40px;
+  `;
 
 
 const PostBtn = styled.button`
@@ -354,8 +356,8 @@ const PostBtn = styled.button`
   border: none;
   &:active {
     opacity: 0.7;
-  }
-`;
+}
+  `;
 
 const ImageBox = styled.div`
   width: 70%;
@@ -365,28 +367,28 @@ const ImageBox = styled.div`
   object-fit: cover;
   overflow: hidden;
   margin: 32px auto;
-`;
+  `;
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
   overflow: hidden;
   object-fit: contain;
-`;
+  `;
 
 const IconBox = styled.div`
   margin: 50px 0 0;
-`;
+  `;
 
 const CommentInput = styled.div`
   border-bottom: 1px solid #5F6368;
   padding-bottom: 34px;
-`;
+  `;
 
 const InputWrap = styled.div`
   display: flex;
   justify-content: space-between;
-`;
+  `;
 
 const Input = styled.input`
   width: 80%;
@@ -403,11 +405,11 @@ const Input = styled.input`
   color: #e1e1e1;
   &::placeholder {
     color: #5F6368;
-  }
+}
   &:focus {
     outline: none;
-  }
-`;
+}
+  `;
 
 const CommentBtn = styled.button`
   line-height: '18px';
@@ -418,26 +420,26 @@ const CommentBtn = styled.button`
   cursor: pointer;
   &:active {
     opacity: 0.7;
-  }
-`;
+}
+  `;
 
 const CommentBox = styled.div`
   border-bottom: 1px solid #5F6368;
   padding: 16px 24px 10px;
-`;
+  `;
 
 const NameTime = styled.div`
   width: auto;
   padding-bottom: 8px;
-`;
+  `;
 
 const Buttons = styled.div`
   width: auto;
-`;
+  `;
 
 const Like = styled.div`
   line-height: 20px;
-`;
+  `;
 
 const MoreBtn = styled.button`
   width: 100%;
@@ -448,7 +450,7 @@ const MoreBtn = styled.button`
   cursor: pointer;
   &:active {
     opacity: 0.7;
-  }
-`;
+}
+  `;
 
 export default CommonDetail;

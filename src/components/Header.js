@@ -15,7 +15,6 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const token = getCookie('refreshToken');
   const profilePic = getCookie('profilePic');
-  const user_profile_url = `http://fw3efsadfcv.shop/${profilePic}`
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -89,7 +88,7 @@ const Header = (props) => {
             </Text>
             {/* 프로필 이미지 */}
             <Profile>
-              <ProfileImg src={profilePic ? user_profile_url : Profile_small} alt='프로필' />
+              <ProfileImg src={profilePic == null ? Profile_small : `http://fw3efsadfcv.shop${profilePic}`} />
             </Profile>
             {/* 드롭다운 메뉴 */}
             <Button

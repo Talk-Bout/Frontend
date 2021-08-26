@@ -63,7 +63,7 @@ const Mypage = (props) => {
             <ProfileOutter>
               <ProfileInner>
                 <ProfileBox>
-                  <Profile src={profilePic === 'null' ? Profile_medium : user_profile_url} alt='프로필' onClick={() => history.push('/mypage/pic')} />
+                  <Profile src={profilePic == null ? Profile_medium : user_profile_url} alt='프로필' onClick={() => history.push('/mypage/pic')} />
                 </ProfileBox>
                 <Grid>
                   {/* 닉네임 표시 */}
@@ -73,7 +73,8 @@ const Mypage = (props) => {
                   {/* 소셜 로그인 표시 */}
                   <Status>{provider} 로그인 이용 중</Status>
                   <Line />
-                  <Status purple>개인정보 수정</Status>
+                  {/* 개인정보 수정 버튼 */}
+                  <Status purple onClick={() => history.push('/mypage/pic')}>개인정보 수정</Status>
                 </Grid>
               </ProfileInner>
             </ProfileOutter>

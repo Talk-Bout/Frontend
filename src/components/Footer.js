@@ -1,15 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import { LogoImg, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, footer_info } from '../image';
+import { LogoImg, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, Little_home, Little_behance, Little_github } from '../image';
 import { history } from '../redux/ConfigureStore';
 
 const Footer = (props) => {
   const url = window.location.pathname.split('/')[1];
-
-  const goGithub = () => {
-    window.open('https://github.com/Talk-Bout', '_blank');
-  }
 
   return (
     <React.Fragment>
@@ -21,9 +17,30 @@ const Footer = (props) => {
             <Text fontSize='12px' MOBfontSize='10px' color='#bdc1c6' margin='0 24px' cursor='default'>All rights reserved.</Text>
           </Grid>
         </Grid>
-        <Grid height='fit-content' width='70%'>
+        <Grid width='70%' height='100%'>
           <Contact>
-            <InfoImg src={footer_info} />
+            {/* <InfoImg src={footer_info} /> */}
+            <Column>
+              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Design</Text></div>
+              <div><Text color='#A5A6F6' fontSize='12px'>윤영미 <Icon src={Little_home} /></Text></div>
+              <div></div>
+              <div><Text color='#A5A6F6' fontSize='12px'>양서문 <Icon src={Little_behance} /></Text></div>
+            </Column>
+            <Column>
+              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Front-end</Text></div>
+              <div><Text color='#A5A6F6' fontSize='12px'>이동민 <Icon src={Little_github} onClick={() => window.open('https://github.com/leedmeen', '_blank')} /></Text><Text color='#80868b' fontSize='12px'>Tel. +82 10-3204-0232</Text></div>
+              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Back-end</Text></div>
+              <div><Text color='#A5A6F6' fontSize='12px'>정창길 <Icon src={Little_github} onClick={() => window.open('https://github.com/ombreman', '_blank')} /></Text><Text color='#80868b' fontSize='12px'>Tel. +44 79-0426-6484</Text></div>
+              <div></div>
+              <div><Text color='#A5A6F6' fontSize='12px'>방민수 <Icon src={Little_github} onClick={() => window.open('https://github.com/skylermbang', '_blank')} /></Text><Text color='#80868b' fontSize='12px'>Tel. +82 10-9422-0170</Text></div>
+              <div></div>
+              <div><Text color='#A5A6F6' fontSize='12px'>송하영 <Icon src={Little_github} onClick={() => window.open('https://github.com/hayasha', '_blank')} /></Text><Text color='#80868b' fontSize='12px'>Tel. +82 10-5069-0825</Text></div>
+            </Column><Column>
+              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Team</Text></div>
+              <div></div>
+              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Repository</Text></div>
+              <div><Text color='#A5A6F6' fontSize='12px' cursor='pointer' _onClick={() => window.open('https://github.com/Talk-Bout', '_blank')}>https://github.com/Talk-Bout</Text></div>
+            </Column>
           </Contact>
         </Grid>
       </Grid>
@@ -49,6 +66,32 @@ const Image = styled.img`
     height: 48px;
     width: auto;
   }
+`;
+
+const Contact = styled.div`
+  background-color: #17181B;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr 2fr;
+  column-gap: 40px;
+  padding: 28px 23px;
+  width: fit-content;
+`;
+
+const Column = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  column-gap: 20px;
+  & > div {
+    vertical-align: middle;
+  }
+`;
+
+const Icon = styled.img`
+  width: 16px;
+  vertical-align: text-top;
+  margin: 0 8px;
+  cursor: pointer;
 `;
 
 const Navbar = styled.div`
@@ -78,12 +121,6 @@ const Navbar = styled.div`
   @media screen and (min-width: 768px) {
     display: none;
   }
-`;
-
-const Contact = styled.div``;
-
-const InfoImg = styled.img`
-  margin: 24px 0 0;
 `;
 
 const Menu = styled.img`

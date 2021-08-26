@@ -86,7 +86,7 @@ const BootReview = (props) => {
           <Post key={review.reviewId}>
             {/* 별점 */}
             <StarBox>
-              <Text p fontSize='18px' MOBfontSize='12px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text>
+              {/* <Text p fontSize='18px' MOBfontSize='12px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.stars}</Text> */}
               <Stars score={review.stars} size='16px' MOBsize='10px' marginRight='4px' />
             </StarBox>
             {/* 리뷰 */}

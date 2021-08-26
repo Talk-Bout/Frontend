@@ -38,7 +38,7 @@ const AnswerCard = (props) => {
 
   // 답변 작성자 프로필 사진
   const user_profile = one_answer.profilePic;
-  const user_profile_url = `http://fw3efsadfcv.shop/${one_answer.profilePic}`
+  const user_profile_url = `http://fw3efsadfcv.shop${one_answer.profilePic}`
 
   return (
     <React.Fragment>
@@ -50,7 +50,7 @@ const AnswerCard = (props) => {
               A
             </Text>
             <Grid width="40px" height="40px" margin="auto 15px">
-              <Image src={!user_profile ? Profile_medium : user_profile_url}></Image>
+              <Image src={user_profile == null ? Profile_medium : user_profile_url}></Image>
             </Grid>
             <Grid width="480px">
               {/* 작성자 닉네임 */}

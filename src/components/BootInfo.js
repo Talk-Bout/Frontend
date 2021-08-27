@@ -20,28 +20,13 @@ const BootInfo = (props) => {
     return <></>
   }
 
-  // console.log(one_camp)
-
-  // 가격 정보가 객체일 경우와 문자열일 경우를 나누어 처리한다.
-  // let camp_cost;
-  // if (one_camp.bootcampInfo && typeof (one_camp.bootcampInfo.가격) === 'object') {
-  //   let camp_array = [...Object.values(one_camp.bootcampInfo.가격)];
-  //   camp_cost = Math.min.apply(null, camp_array) + '만원~';
-  // } else {
-  //   camp_cost = one_camp.bootcampInfo.가격 + '만원';
-  // }
-
   // 커리큘럼은 '0주: 준비' 형식의 객체이므로 배열로 만들어 나열한다.
   let course = [];
-  let course_raw = [];
-
   course = Object.entries(one_camp.bootcampInfo['커리큘럼']).sort((a, b) => a[0].localeCompare(b[0]));
-  // console.log(course);
 
   // 정보란에 보여줄 모든 정보를 배열로 만들어 나열한다.
   let info = [];
   info = Object.entries(one_camp.bootcampInfo);
-  // .sort((a, b) => a[0].localCompare(b[0]));
 
   return (
     <Grid className='contents-info' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px' MOBpadding='18px'>
@@ -56,7 +41,7 @@ const BootInfo = (props) => {
           } else if (i[0].includes('커리큘럼') && i[1]) {
             return (
               <>
-                <div><TextKey key={idx + 10}>{i[0]}</TextKey></div>
+                <div key={idx + 100}><TextKey>{i[0]}</TextKey></div>
                 <Schedule>
                   {course.map((c_list, idx) => {
                     return (
@@ -73,7 +58,7 @@ const BootInfo = (props) => {
           } else {
             return (
               <>
-                <div><TextKey key={idx}>{i[0]}</TextKey></div>
+                <div key={idx}><TextKey>{i[0]}</TextKey></div>
                 <div><TextValue>{i[1]}</TextValue></div>
               </>
             )

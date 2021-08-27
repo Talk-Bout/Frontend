@@ -65,8 +65,6 @@ const QuestionDetail = (props) => {
     return <></>;
   }
 
-  console.log(question_found)
-
   // 질문 작성자 프로필 사진
   const user_profile = question_found.user.profilePic;
   const user_profile_url = `http://fw3efsadfcv.shop${question_found.user.profilePic}`

@@ -8,7 +8,6 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import { actionCreators as imageActions } from '../redux/modules/image';
-import { getCookie } from '../shared/cookie';
 
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();

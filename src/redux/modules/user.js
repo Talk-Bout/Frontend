@@ -11,6 +11,7 @@ const LOG_IN = 'user/GOOGLE_LOG_IN'; // 로그인하는 사용자 닉네임, 프
 const LOGIN_CHECK = 'user/LOGIN_CHECK'; // 로그인 상태 설정
 const LOGOUT_CHECK = 'user/LOGOUT_CHECK'; // 로그아웃 상태 설정
 const USER_CHECK = 'user/USER_CHECK'; // 접속자 닉네임, 프로필 사진 확인
+const USER_EDIT = 'user/USER_EDIT'; // 회원정보 변경
 
 //액션 생성함수
 const logIn = createAction(LOG_IN, (info) => ({ info }));
@@ -18,6 +19,7 @@ const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
 const loginCheck = createAction(LOGIN_CHECK, () => ({}));
 const logoutCheck = createAction(LOGOUT_CHECK, () => ({}));
 const userCheck = createAction(USER_CHECK, (info) => ({ info }));
+const userEdit = createAction(USER_EDIT, (info) => ({ info }));
 
 //기본값 정하기
 const initialState = {
@@ -48,7 +50,6 @@ const googleLogin = () => {
     setCookie('provider', provider_URL);
     history.push('/');
     dispatch(statusActions.endLoading());
-    // window.location.reload();
     window.location.reload();
   };
 };
@@ -195,6 +196,10 @@ export default handleActions(
       draft.user = action.payload.info;
       draft.is_login = true;
     }),
+    [USER_EDIT]: (state, action) => produce(state, (draft) => {
+      draft.user_info = action.payload.info;
+      draft.is_login = true;
+    })
     // [DELETE_USER]: (state, action) =>
     // produce(state, (draft) => {
     //   draft.is_deleted = true;
@@ -214,6 +219,7 @@ const actionCreators = {
   loginCheck,
   userCheckDB,
   userDeleteDB,
+  userEdit,
 };
 
 export { actionCreators };

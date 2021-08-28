@@ -3,8 +3,6 @@ import { produce } from 'immer';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
 import { history } from '../ConfigureStore';
-import { getCookie } from '../../shared/cookie';
-import { useSelector } from 'react-redux';
 
 // 액션타입
 const SET_POST = 'post/SET_POST'; // 게시글 전체 불러오기
@@ -216,10 +214,9 @@ const deletePostDB = (deleted_post) => {
   };
 };
 
-const setBookmarkDB = () => {
+const setBookmarkDB = (nickname) => {
   // 부트톡톡 북마크 불러오기
   return function (dispatch) {
-    const nickname = useSelector(state => state.user.user.nickname);
     instance.get(`/users/${nickname}/postBookmarks`).then((response) => {
       dispatch(setBookmark(response.data));
       // console.log(response.data);

@@ -14,7 +14,6 @@ const MainQna = (props) => {
 
   useEffect(() => {
     dispatch(questionActions.setQuestionPopDB(1));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pop_list = useSelector(state => state.question.popular_list);

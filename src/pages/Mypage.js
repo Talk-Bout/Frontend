@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Text, Grid, Image } from '../elements';
+import { Text, Grid } from '../elements';
 import { Sidebar, Body, Stars } from '../components';
 import { Profile_small, Profile_medium, CampLogo_default } from '../image';
 import { BiTimeFive } from 'react-icons/bi';
@@ -51,6 +51,11 @@ const Mypage = (props) => {
   // 질문과답변 3개 추출
   const myqna = myqna_list.slice(0, 3);
 
+  const editInfo = () => {
+    // history.push('/mypage/pic');
+    window.alert('지금은 에러 처리 중입니다!\n빠르게 복구하여 돌아오겠습니다! ;-/')
+  }
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -61,7 +66,7 @@ const Mypage = (props) => {
             <ProfileOutter>
               <ProfileInner>
                 <ProfileBox>
-                  <Profile src={profilePic == null ? Profile_medium : user_profile_url} alt='프로필' onClick={() => history.push('/mypage/pic')} />
+                  <Profile src={profilePic == null ? Profile_medium : user_profile_url} alt='프로필' onClick={() => editInfo()} />
                 </ProfileBox>
                 <Grid>
                   {/* 닉네임 표시 */}

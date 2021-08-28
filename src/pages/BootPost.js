@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { getCookie } from '../shared/cookie';
 import { baseUrl } from '../shared/api';
 
 const BootPost = (props) => {

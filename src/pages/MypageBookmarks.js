@@ -8,7 +8,6 @@ import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
-import { getCookie } from '../shared/cookie';
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();

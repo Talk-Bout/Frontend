@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text } from '../elements';
 import { Profile_small } from '../image';
-//icons
 import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 

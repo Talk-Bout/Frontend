@@ -3,7 +3,6 @@ import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
-import { useSelector } from 'react-redux';
 
 // 액션타입
 const MAIN_CAMPS = 'bootcamp/MAIN_CAMPS' // 메인페이지 부트캠프 목록 불러오기(인기순)
@@ -92,11 +91,10 @@ const setOneCampDB = (bootcampName) => {
   };
 };
 
-const setMyCampDB = () => {
+const setMyCampDB = (nickname) => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
     dispatch(statusActions.setLoading());
-    const nickname = useSelector(state => state.user.user.nickname);
     instance
       .get(`/users/${nickname}/bootcampBookmarks`)
       .then((response) => {

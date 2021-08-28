@@ -27,9 +27,8 @@ const BootRoot = (props) => {
   useEffect(() => {
     dispatch(campActions.setOneCampDB(bootcampName));
     if (is_login) {
-      dispatch(campActions.setMyCampDB());
+      dispatch(campActions.setMyCampDB(username));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bootcampName]);
 
   // 부트캠프 북마크 표시

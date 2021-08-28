@@ -10,7 +10,6 @@ const BootInfo = (props) => {
 
   useEffect(() => {
     dispatch(campActions.setOneCampDB(bootcampName));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bootcampName]);
 
   const camp_list = useSelector(state => state.bootcamp.camp_list);

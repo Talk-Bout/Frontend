@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Text, Grid } from '../elements';
 import { Sidebar, Body, OtherTalk } from '../components';
@@ -10,7 +10,6 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { getCookie, setCookie } from '../shared/cookie';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -34,11 +33,11 @@ const CommonDetail = (props) => {
   const commentEdit = useRef(null);
 
   // 게시물 조회
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(postActions.setOnePostDB(postId));
     dispatch(postActions.setCommentDB(postId, 1));
     if (is_login) {
-      dispatch(postActions.setBookmarkDB());
+      dispatch(postActions.setBookmarkDB(username));
     }
   }, [postId]);
 

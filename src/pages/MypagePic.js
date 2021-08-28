@@ -8,7 +8,6 @@ import { actionCreators as imageActions } from '../redux/modules/image';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
-import { getCookie } from '../shared/cookie';
 
 const MypagePic = (props) => {
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ const MypagePic = (props) => {
       nickname = user_name;
     } else {
       nickname = nameRef.current.value;
-      if (nickname.length <= 4) {
+      if (nickname.length < 4) {
         window.alert('닉네임은 최소 4글자 이상 입력해주세요.');
         return;
       }
@@ -83,7 +82,7 @@ const MypagePic = (props) => {
           <form>
             <label htmlFor="file">
               <Image
-                src={preview ? preview : user_image === 'null' ? Profile_medium : user_image_url}
+                src={preview ? preview : user_image == null ? Profile_medium : user_image_url}
                 height='80px'
                 MOBheight='56px'
                 cursor="pointer"

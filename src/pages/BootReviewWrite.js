@@ -8,7 +8,6 @@ import { IoStar } from 'react-icons/io5';
 import { history } from '../redux/ConfigureStore';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import StarRatingComponent from 'react-star-rating-component';
-import { getCookie } from '../shared/cookie';
 
 const BootReviewWrite = (props) => {
   const dispatch = useDispatch();

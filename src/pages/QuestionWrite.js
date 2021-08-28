@@ -9,8 +9,7 @@ import { actionCreators as imageActions } from '../redux/modules/image';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
-import { FiHash } from 'react-icons/fi';
-import { nickname_c } from '../shared/cookie';
+// import { FiHash } from 'react-icons/fi';
 
 const QuestionWrite = (props) => {
   const dispatch = useDispatch();

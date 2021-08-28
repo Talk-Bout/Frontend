@@ -101,12 +101,12 @@ const Mypage = (props) => {
                                 <Img src={mb.bootcamp.logo ? mb.bootcamp.logo : CampLogo_default} />
                               </Logo>
                             </ImageBox>
-                            <Grid padding="10px 0" width="67%">
+                            <Grid padding="10px 0" TABpadding='16px 0' width="67%">
                               <Grid display="flex" justifyContent="space-between">
-                                <Text p margin="0 0 5px 15px" color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
-                                <Text margin="0 0 0 2px" cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill /></Text>
+                                <Text p margin="0 0 5px 15px" TABmargin='0 0 5px 0' color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
+                                <Text margin="0 0 0 2px" TABmargin='0' cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill /></Text>
                               </Grid>
-                              <Text p margin="2px 0px 0px 15px" color="#F1F3F4" fontSize="14px"><Stars score={mb.stars == null ? 0 : mb.stars} size='12px' withScore /></Text>
+                              <Text p margin="2px 0px 0px 15px" TABmargin='2px 0 0' color="#F1F3F4" fontSize="14px"><Stars score={mb.stars == null ? 0 : mb.stars} size='12px' withScore /></Text>
                             </Grid>
                           </BootCard>
                         );
@@ -297,9 +297,9 @@ const Nickname = styled.p`
   font-size: 20px;
   font-weight: bold;
   cursor: default;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     text-align: start;
-    margin: 32px 0 0 24px;
+    margin: 24px 0 0 24px;
     }
 `;
 
@@ -310,7 +310,7 @@ const Status = styled.p`
   font-size: 14px;
   cursor: ${(props) => props.purple ? 'pointer' : 'default'};
   ${(props) => props.purple ? ':hover {opacity: 0.8}' : ''};
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     text-align: start;
     margin: 10px 24px;
   }
@@ -322,7 +322,7 @@ const Line = styled.hr`
 
 const ImgBox = styled.div`
   margin: 0px 15px 0 0;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     margin: 0px 8px 0 0;
     }
 `;
@@ -345,7 +345,7 @@ const Img = styled.img`
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 16px;
   }
 `;
@@ -364,7 +364,7 @@ const MoreButton = styled.button`
   font-weight: bold;
   width: 13%;
   cursor: pointer;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 12%;
     font-size: 14px;
   }
@@ -375,7 +375,7 @@ const BootBox = styled.div`
   margin: 12px 0;
   height: 96px;
   width: 100%;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     height: 100%;
     .bootcard2 {
       display: none;
@@ -395,7 +395,7 @@ const BootCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
       width: 49.25%;
       height: 96px;
       margin-bottom: 12px;
@@ -406,7 +406,7 @@ const BootCard = styled.div`
 const ResponSiveOutter = styled.div`
   height: auto;
   width: 100%;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     height: 100%;
     width: 100%;
   }
@@ -424,7 +424,7 @@ const ImageBox = styled.div`
   width: 35%;
   justify-content: middle;
   margin: auto;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 40%;
   }
 `;

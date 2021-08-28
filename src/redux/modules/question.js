@@ -105,13 +105,16 @@ const setQuestionPopDB = (page) => {
 const setOneQuestionDB = (question_id) => {
   return function (dispatch) {
     const questionId = parseInt(question_id);
+    dispatch(statusActions.setLoading());
     instance
       .get(`/questions/${questionId}`)
       .then((response) => {
         dispatch(setOneQuestion(response.data));
+        dispatch(statusActions.endLoading());
       })
       .catch((err) => {
         // console.error(`개별 질문 불러오기 에러 발생: ${err}`);
+        dispatch(statusActions.endLoading());
         if (window.confirm(`에러가 발생했습니다! :( \n[setOneQuestionDB: ${err}]\n새로고침하시겠습니까?`)) {
           window.location.reload();
         };

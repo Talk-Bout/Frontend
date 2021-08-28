@@ -48,6 +48,10 @@ const MypagePic = (props) => {
       nickname = user_name;
     } else {
       nickname = nameRef.current.value;
+      if (nickname.length <= 4) {
+        window.alert('닉네임은 최소 4글자 이상 입력해주세요.');
+        return;
+      }
     }
     dispatch(mypageActions.editInfoDB(nickname, image));
   };

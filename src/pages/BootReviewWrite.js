@@ -39,7 +39,7 @@ const BootReviewWrite = (props) => {
       window.alert('제목을 입력해주세요.')
       return;
     }
-    if (stars === 0) {
+    if (stars === 0 && user_name !== 'admin') {
       window.alert('평점을 매겨주세요.')
       return;
     }

@@ -72,15 +72,16 @@ const Header = (props) => {
             {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
           <Grid width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
+            {/* 피드백 버튼 */}
             <GiftBtn src={Gift} onClick={() => getFeedback()} />
             {/* 북마크 메뉴 */}
             <Text
               color="#7879f1"
               fontSize="32px"
-              TABfontSize='18px'
+              TABfontSize='24px'
               verticalAlign="middle"
               margin="-4px 16px 0 0"
-              TABmargin='4px 6px 0 0'
+              TABmargin='0 6px 0 0'
               cursor="pointer"
               _onClick={() => history.push('/mypage/mybookmarks')}
             >
@@ -228,6 +229,11 @@ const GiftBtn = styled.img`
   width: 150px;
   height: 150px;
   cursor: pointer;
+  @media screen and (max-width: 1090px) {
+    width: 100px;
+    height: 100px;
+    right: 120px;
+  }
 `;
 
 const Image = styled.img`

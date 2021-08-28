@@ -32,6 +32,8 @@ const Text = (props) => {
     overflow,
     userSelect,
     wordBreak,
+    textOverflow,
+    whiteSpace,
     // 태블릿 사이즈(width: ~1090px)
     TABfontSize,
     TABmargin,
@@ -83,6 +85,8 @@ const Text = (props) => {
     overflow: overflow,
     userSelect: userSelect,
     wordBreak: wordBreak,
+    textOverflow: textOverflow,
+    whiteSpace: whiteSpace,
     TABfontSize: TABfontSize,
     TABmargin: TABmargin,
     TABlineHeight: TABlineHeight,
@@ -161,6 +165,8 @@ const TextBoxP = styled.p`
   overflow: ${(props) => props.overflow};
   user-select: ${(props) => props.userSelect};
   word-break: ${(props) => props.wordBreak};
+  text-overflow: ${(props) => props.textOverflow};
+  white-space: ${(props) => props.whiteSpace};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};
@@ -220,6 +226,8 @@ const TextBoxS = styled.span`
   overflow: ${(props) => props.overflow};
   user-select: ${(props) => props.userSelect};
   word-break: ${(props) => props.wordBreak};
+  text-overflow: ${(props) => props.textOverflow};
+  white-space: ${(props) => props.whiteSpace};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};

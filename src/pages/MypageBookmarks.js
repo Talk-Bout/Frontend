@@ -12,9 +12,7 @@ import { getCookie } from '../shared/cookie';
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();
-  // const nickname = useSelector((state) => state.user.user.nickname);
   const nickname = getCookie('nickname');
-
 
   // 부트캠프, 부트톡톡 북마크
   React.useEffect(() => {

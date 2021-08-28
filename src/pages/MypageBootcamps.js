@@ -7,8 +7,10 @@ import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
+import { setCookie } from '../shared/cookie';
 
 const MypageBootcamps = (props) => {
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const MypageBootcamps = (props) => {
           <Grid className='body-inner' height='100%' overflow='hidden'>
             {/* 페이지 타이틀 */}
             <Text color='#f8f9fa' fontSize='32px' TABfontSize='20px' fontWeight='700' TABmargin='14px 0 0'>관심있는 부트캠프</Text>
+            <Text color='#5F6368' fontSize='32px' TABfontSize='20px' TABmargin='14px 0 0'> ({my_camps ? my_camps.length : 0})</Text>
             <CardList>
               {my_camps.map((camp, idx) => {
                 return (
@@ -39,20 +42,26 @@ const MypageBootcamps = (props) => {
                       </LogoBox>
                       <TextBox>
                         {/* 부트캠프 이름 */}
-                        <Text p margin='0 0 5px' color='#f8f9fa' fontSize='24px' fontWeight='700'>{camp.bootcampName}</Text>
+                        <Text p margin='0 0 5px' TABmargin='0' color='#f8f9fa' fontSize='24px' TABfontSize='16px' fontWeight='700'>{camp.bootcampName}</Text>
                         {/* 별점 */}
-                        <Stars score={camp.stars == null ? 0 : camp.stars} size='16px' marginRight='2px' withScore />
+                        <StarBox>
+                          <Stars score={camp.stars == null ? 0 : camp.stars} size='16px' marginRight='2px' withScore />
+                        </StarBox>
+                        <ScoreBox>
+                          <Text TABfontSize='12px' color='#dadce0'>★ {camp.stars ? camp.stars.toFixed(1) : '별점/리뷰 없음'}</Text>
+                        </ScoreBox>
                       </TextBox>
                     </NameBox>
                     <InfoBox>
                       <InfoInner>
-                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>기간</Text></div>
-                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>모집일정</Text></div>
-                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px'>가격</Text></div>
-                        <div><Text color='#7879F1' fontSize='30px'><BsHeartFill /></Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.기간 ? camp.bootcamp.bootcampInfo.기간 : 'N/A'}</Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.모집기간 ? camp.bootcamp.bootcampInfo.모집기간 : 'N/A'}</Text></div>
-                        <div><Text color='#9aa0a6' fontSize='18px' backgroundColor='#17181B' padding='10px 20px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.가격 ? camp.bootcamp.bootcampInfo.가격 : 'N/A'}</Text></div>
+                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px' TABfontSize='10px'>기간</Text></div>
+                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px' TABfontSize='10px'>모집일정</Text></div>
+                        <div><Text color='#5f6368' fontWeight='700' fontSize='12px' TABfontSize='10px'>가격</Text></div>
+                        <div><Text color='#7879F1' fontSize='30px' TABfontSize='24px'><BsHeartFill /></Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px' TABfontSize='14px' backgroundColor='#17181B' padding='10px' TABpadding='6px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.기간 ? camp.bootcamp.bootcampInfo.기간 : 'N/A'}</Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px'
+                          TABfontSize='14px' backgroundColor='#17181B' padding='10px 20px' TABpadding='5px 10px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.모집기간 ? camp.bootcamp.bootcampInfo.모집기간 : 'N/A'}</Text></div>
+                        <div><Text color='#9aa0a6' fontSize='18px' TABfontSize='14px' backgroundColor='#17181B' padding='10px 20px' TABpadding='5px 10px' borderRadius='8px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'>{camp.bootcamp.bootcampInfo.가격 ? camp.bootcamp.bootcampInfo.가격 : 'N/A'}</Text></div>
                       </InfoInner>
                     </InfoBox>
                   </Card>
@@ -84,6 +93,10 @@ const Card = styled.div`
   &:hover {
     opacity: 0.7;
   }
+  @media screen and (max-width: 1090px) {
+    height: 96px;
+    margin: 0 0 12px;
+  }
 `;
 
 const NameBox = styled.div`
@@ -91,6 +104,9 @@ const NameBox = styled.div`
   height: 100%;
   padding: 32px;
   display: flex;
+  @media screen and (max-width: 1090px) {
+    padding: 20px;
+  }
 `;
 
 const LogoBox = styled.div`
@@ -101,6 +117,10 @@ const LogoBox = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  @media screen and (max-width: 1090px) {
+    width: 56px;
+    height: 56px;
+  }
 `;
 
 const Logo = styled.img`
@@ -112,11 +132,29 @@ const TextBox = styled.div`
   width: 70%;
   margin: 0 16px 0;
   padding: 10px 0;
+  @media screen and (max-width: 1090px) {
+    padding: 0;
+  }
+`;
+
+const StarBox = styled.div`
+  @media screen and (max-width: 1090px) {
+    display: none;
+  }
+`;
+
+const ScoreBox = styled.div`
+  @media screen and (min-width: 1091px) {
+    display: none;
+  }
 `;
 
 const InfoBox = styled.div`
   width: 70%;
   padding: 24px 0;
+  @media screen and (max-width: 1090px) {
+    padding: 8px 0;
+  }
 `;
 
 const InfoInner = styled.div`
@@ -132,6 +170,12 @@ const InfoInner = styled.div`
   & > div {
     text-align: center;
     min-width: fit-content;
+  }
+  @media screen and (max-width: 1090px) {
+    grid-template-columns: 1.5fr 2fr 2fr 0.5fr;
+    grid-template-rows: 1fr 2fr;
+    padding: 0 0 0 20px;
+    column-gap: 8px;
   }
 `;
 

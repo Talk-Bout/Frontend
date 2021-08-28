@@ -54,17 +54,17 @@ const BootMain = (props) => {
                       <Logo src={LogoIcon} alt={camp.bootcampName} style={{ width: 'auto', height: 'auto' }}></Logo>
                     }
                   </ImageDiv>
-                  <div id='txt'>
+                  <div>
                     {/* 부트캠프 이름 */}
-                    <Text p fontSize="18px" MOBfontSize='14px' fontWeight="700" position="absolute" top="140px" TABtop='114px' MOBtop='10px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA'>
+                    <Text p fontSize="18px" MOBfontSize='14px' fontWeight="700" position="absolute" top="140px" TABtop='0' MOBtop='10px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA'>
                       {camp.bootcampName}
                     </Text>
                     {/* 부트캠프 설명 */}
-                    <Text p fontSize="14px" MOBfontSize='10px' position="absolute" top="172px" TABtop='144px' MOBtop='35px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA' MOBcolor='#BDC1C6' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
+                    <Text p fontSize="14px" MOBfontSize='10px' position="absolute" top="172px" TABtop='32px' MOBtop='35px' margin="0 0 0 15px" TABmargin='0 0 0 24px' color='#F8F9FA' MOBcolor='#BDC1C6' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>
                       {camp.desc}
                     </Text>
                     {/* 부트캠프 별점 */}
-                    <Text fontSize="14px" MOBfontSize='12px' color='#E8EAED' MOBcolor='#BDC1C6' position="absolute" top="200px" TABtop='158px' MOBtop='50px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
+                    <Text fontSize="14px" MOBfontSize='12px' color='#E8EAED' MOBcolor='#BDC1C6' position="absolute" top="200px" TABtop='44px' MOBtop='50px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
                       {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' MOBsize='10px' marginRight='4px' withScore /> : '별점/리뷰 없음'}
                     </Text>
                   </div>

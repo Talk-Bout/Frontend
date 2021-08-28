@@ -10,7 +10,7 @@ const Footer = (props) => {
 
   return (
     <React.Fragment>
-      <Grid height='250px' TABheight='182px' MOBheight='168px' margin='80px 0 0' TABmargin='64px 0 0' MOBmargin='24px 0 0' backgroundColor='#0E1013' padding='24px 20px' TABpadding='24px 20px 36px' MOBpadding='6px 16px 64px' MOBdisplay='none' display='flex'>
+      <Grid height='250px' TABheight='fit-content' MOBheight='168px' margin='0 0 0' TABmargin='64px 0 0' MOBmargin='24px 0 0' backgroundColor='#0E1013' padding='24px 20px' TABpadding='24px 20px 36px' MOBpadding='6px 16px 64px' MOBdisplay='none' display='flex' position='relative' bottom='0'>
         <Grid width='30%'>
           <Image src={LogoImg} alt='로고' />
           <Text p fontSize='12px' margin='-20px 0 0 115px' TABmargin='-10px 0 0 25px' MOBfontSize='10px' color='#A5A6F6' cursor='default'>부트캠퍼들의 속시원한 이야기</Text>

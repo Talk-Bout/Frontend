@@ -18,6 +18,8 @@ const CommonDetail = (props) => {
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
 
+  console.log(one_post)
+
   // 질문 작성자 프로필 사진
   const user_profile = one_post.user ? one_post.user.profilePic : null;
   const user_profile_url = `http://fw3efsadfcv.shop${user_profile}`
@@ -40,7 +42,7 @@ const CommonDetail = (props) => {
     if (is_login) {
       dispatch(postActions.setBookmarkDB());
     }
-  }, []);
+  }, [postId]);
 
   const handleClick = (e) => {
     setMenuLink(e.currentTarget);
@@ -297,7 +299,9 @@ const CommonDetail = (props) => {
                 )
               })}
               {/* 댓글 더보기 버튼 */}
-              <MoreBtn onClick={() => moreComment()}><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기</Text></MoreBtn>
+              {/* 총 댓글 수가 5개 이상일 때만 보여주기 */}
+              {comment_list.length >= 5 &&
+                <MoreBtn onClick={() => moreComment()}><Text fontSize='14px' fontWeight='700' color='#A9AAAB'>댓글 더보기</Text></MoreBtn>}
             </div>
             {/* 다른 게시글 목록 */}
             <OtherTalk />

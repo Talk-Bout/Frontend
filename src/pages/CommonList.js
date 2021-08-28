@@ -88,12 +88,12 @@ const CommonList = (props) => {
           <Grid>
             {/* 부트톡톡 타이틀 */}
             <Grid height="fit-content" margin="0 0 24px 0" TABmargin='14px 0 8px'>
-              <Text p fontSize="32px" TABfontSize='20px' color="#F8F9FA" fontWeight="700" margin='0 0 8px' TABmargin='0' cursor='default'>
-                <Emoji src={Megaphone_emoji} height='32px' TABheight='20px' margin='0 8px 0 0' />부트톡톡</Text>
-              <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' cursor='default'>부트캠퍼들의 자유로운 Talk Talk</Text>
+              <Text p fontSize="32px" TABfontSize='20px' MOBfontSize='16px' color="#F8F9FA" fontWeight="700" margin='0 0 8px' TABmargin='0' cursor='default'>
+                <Emoji src={Megaphone_emoji} height='32px' TABheight='20px' MOBheight='16px' margin='0 8px 0 0' />부트톡톡</Text>
+              <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' MOBfontSize='10px' cursor='default'>부트캠퍼들의 자유로운 Talk Talk</Text>
             </Grid>
             {/* 게시판 카테고리 */}
-            <Grid display="flex" justifyContent="space-between" margin="0 0 24px 0" TABmargin='0 0 16px 0'>
+            <Grid display="flex" justifyContent="space-between" margin="0 0 24px 0" TABmargin='0 0 16px 0' MOBmargin='0 0 8px 0'>
               <Categories>
                 <CategoryButton url={category === 'all' && 'white'}
                   onClick={() => { setCategory('all'); total_category(); setPopArray(false); }}>
@@ -110,12 +110,12 @@ const CommonList = (props) => {
               </Categories>
               <Grid width="fit-content" display="flex">
                 {/* 인기순, 최신순 정렬 버튼 */}
-                <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" verticalAlign='middle'><RiArrowUpDownFill /></Text>
+                <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' MOBfontSize='14px' lineHeight="52px" MOBlineHeight='43px' verticalAlign='middle'><RiArrowUpDownFill /></Text>
                 <SelectButton>
                   {PopArray ?
-                    <Options onClick={() => setPopArray(false)}><Text fontSize='16px' TABfontSize='14px'>인기순</Text></Options>
+                    <Options onClick={() => setPopArray(false)}><Text fontSize='16px' TABfontSize='14px' MOBfontSize='10px'>인기순</Text></Options>
                     :
-                    <Options onClick={() => { setPopArray(true); setPop(); setCategory('all') }}><Text fontSize='16px' TABfontSize='14px'>최신순</Text></Options>
+                    <Options onClick={() => { setPopArray(true); setPop(); setCategory('all') }}><Text fontSize='16px' TABfontSize='14px' MOBfontSize='10px'>최신순</Text></Options>
                   }
                 </SelectButton>
                 {/* 글쓰기버튼 (로그인 후 이용가능) */}
@@ -141,7 +141,7 @@ const CommonList = (props) => {
             ''
           }
           {/* import 부트톡톡 게시물  */}
-          <Grid width="100%" height='850px' TABheight='730px'>
+          <Grid width="100%" height='850px' TABheight='730px' MOBheight='fit-content'>
             {PopArray ? (
               <Contents>
                 {popPost_list.map((c, idx) => {
@@ -160,31 +160,31 @@ const CommonList = (props) => {
           <Grid is_center>
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
-              <Text lineHeight="14px" margin="0 20px 0">
+              <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                 <Page onClick={() => toPrePage()}>
                   {page === 1 ? '' : <BsChevronLeft />}
                 </Page>
               </Text>
               {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-              <Text lineHeight="14px" margin="0 20px 0">
+              <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                 <Page onClick={() => toPrePage()}>
                   {page === 1 ? '' : page - 1}
                 </Page>
               </Text>
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-              <Text lineHeight="14px" margin="0 20px 0">
+              <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                 <Page style={{ opacity: 1 }}>{page}</Page>
               </Text>
               {!PopArray ? (
                 <>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight="14px" margin="0 20px 0">
+                  <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                     <Page onClick={() => toNextPage()}>
                       {new_post.length > 8 ? page + 1 : ''}
                     </Page>
                   </Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight="14px" margin="0 20px 0">
+                  <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                     <Page onClick={() => toNextPage()}>
                       {new_post.length > 8 ? <BsChevronRight /> : ''}
                     </Page>
@@ -193,13 +193,13 @@ const CommonList = (props) => {
               ) : (
                 <>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight="14px" margin="0 20px 0">
+                  <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                     <Page onClick={() => toNextPage()}>
                       {pop_post.length > 8 ? page + 1 : ''}
                     </Page>
                   </Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight="14px" margin="0 20px 0">
+                  <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                     <Page onClick={() => toNextPage()}>
                       {pop_post.length > 8 ? <BsChevronRight /> : ''}
                     </Page>
@@ -218,8 +218,11 @@ const Categories = styled.div`
   display: flex;
   align-items: flex-start;
   height: 44px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     height: 34px;
+  }
+  @media screen and (max-width: 767px) {
+    height: 26px;
   }
 `;
 
@@ -240,21 +243,31 @@ const CategoryButton = styled.div`
     background-color: #bdc1c6;
     color: #0e1013;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     padding: 3px 20px;
     font-size: 14px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 0px 16px;
+    font-size: 10px;
+    border-radius: 14px;
   }
 `;
 
 const SelectButton = styled.div`
-border: none;
-background-color: transparent;
-color: #F1F3F4;
-width: fit-content;
-height: 48px;
-appearance: none;
-line-height: 24px;
-margin: 3px 16px 0 8px;
+  border: none;
+  background-color: transparent;
+  color: #F1F3F4;
+  width: fit-content;
+  height: 48px;
+  appearance: none;
+  line-height: 24px;
+  margin: 3px 16px 0 8px;
+  @media screen and (max-width: 767px) {
+    height: 14px;
+    line-height: 8px;
+    margin: 3px;
+    }
 `;
 
 const Options = styled.div`
@@ -274,14 +287,14 @@ const WriteButton = styled.button`
   height: 48px;
   padding: 10px 0px;
   border: 1px solid #7879F1;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     display: none;
   }
 `;
 
 const Line = styled.hr`
   border: 1px solid #80868B;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     display: none;
   }
 `;
@@ -342,6 +355,9 @@ const PageBox = styled.div`
   display: inline-block;
   height: 100%;
   margin: 32px 0;
+  @media screen and (max-width: 767px) {
+    padding: 0 0 50px;
+  }
 `;
 
 const Page = styled.span`

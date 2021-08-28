@@ -10,6 +10,7 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
+import { setCookie } from '../shared/cookie';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -151,19 +152,19 @@ const CommonDetail = (props) => {
               {/* 게시글 */}
               <Post>
                 {/* 게시글 카테고리 */}
-                <Text fontSize='14px' color='#dadce0' cursor='default'>부트캠프 &gt; {one_post.category === 'chitchat' ? '잡담' : '정보'}</Text>
-                <Grid display='flex' justifyContent='space-between' padding='12px 0 0'>
+                <Text fontSize='14px' MOBfontSize='10px' color='#dadce0' cursor='default'>부트캠프 &gt; {one_post.category === 'chitchat' ? '잡담' : '정보'}</Text>
+                <Grid display='flex' justifyContent='space-between' padding='12px 0 0' MOBpadding='4px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize='24px' color='#f1f3f4' fontWeight='700' lineHeight='36px' verticalAlign='middle' cursor='default'>{one_post.title}</Text>
+                  <Text fontSize='24px' MOBfontSize='16px' color='#f1f3f4' fontWeight='700' lineHeight='36px' MOBlineHeight='24px' verticalAlign='middle' cursor='default' MOBwidth='80%'>{one_post.title}</Text>
                   <div style={{ height: 'fit-content' }}>
                     {/* 북마크 버튼 */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
                     {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
                     {is_login ?
                       post_bookmark ?
-                        <Text color='#7879F1' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
+                        <Text color='#7879F1' fontSize='28px' MOBfontSize='18px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
                         :
-                        <Text color='#9aa0a6' fontSize='28px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text>
+                        <Text color='#9aa0a6' fontSize='28px' MOBfontSize='18px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text>
                       :
                       ''
                     }
@@ -172,7 +173,7 @@ const CommonDetail = (props) => {
                     {one_post.nickname === username ?
                       <>
                         <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                          <Text color='#9AA0A6' fontSize='28px' lineHeight='28px' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
+                          <Text color='#9AA0A6' fontSize='28px' MOBfontSize='18px' lineHeight='28px' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
                         </Button>
                         <Menu
                           id="simple-menu"
@@ -197,7 +198,7 @@ const CommonDetail = (props) => {
                     }
                   </div>
                 </Grid>
-                {/* 작성일자 */}
+                {/* 게시글 작성자 프로필 사진 */}
                 <InfoBox>
                   <ProfileBox>
                     {user_profile ?
@@ -207,18 +208,20 @@ const CommonDetail = (props) => {
                     }
                   </ProfileBox>
                   <InfoBoxInner>
+                    {/* 게시글 작성자 닉네임 */}
                     <div style={{ height: '18px', lineHeight: '18px' }}>
-                      <Text fontSize='14px' color='#BDC1C6' margin='0' cursor='default'>{one_post.nickname}</Text>
+                      <Text fontSize='14px' MOBfontSize='12px' color='#BDC1C6' margin='0' cursor='default'>{one_post.nickname}</Text>
                     </div>
+                    {/* 게시글 작성시간 */}
                     <div style={{ height: '16px', lineHeight: '16px' }}>
-                      <Text fontSize='12px' color='#BDC1C6' margin='0' cursor='default'>{one_post.createdAt}</Text>
+                      <Text fontSize='12px' MOBfontSize='10px' color='#BDC1C6' margin='0' cursor='default'>{one_post.createdAt}</Text>
                     </div>
                   </InfoBoxInner>
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
                 {one_post.image ? <ImageBox><Image src={`http://fw3efsadfcv.shop${one_post.image}`} /></ImageBox> : ''}
-                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text' whiteSpace='pre-line'>{one_post.content}</Text>
+                <Text p lineHeight='24px' fontSize='16px' MOBfontSize='14px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text' whiteSpace='pre-line'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}
                   {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}
@@ -250,10 +253,11 @@ const CommonDetail = (props) => {
               {/* 댓글 입력란 */}
               {is_login &&
                 <CommentInput>
-                  <Text p fontSize='14px' lineHeight='18px' color='#E8eaed' margin='16px 0' cursor='default'>댓글</Text>
+                  <Text p fontSize='14px' MOBfontSize='12px' lineHeight='18px' color='#E8eaed' margin='16px 0' cursor='default'>댓글</Text>
                   <InputWrap>
                     <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
                     <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
+                    <CommentBtnMOB onClick={() => addComment()}><Text MOBfontSize='12px' fontWeight='700' color='#121212'>등록</Text></CommentBtnMOB>
                   </InputWrap>
                 </CommentInput>
               }
@@ -264,7 +268,7 @@ const CommonDetail = (props) => {
                     <Grid display='flex' justifyContent='space-between'>
                       <NameTime>
                         {/* 작성자 닉네임 */}
-                        <Text fontSize='14px' lineHeight='18px' fontWeight='700' color='#F1F3F4' margin='0 16px 0 0' cursor='default'>{ct.nickname}</Text>
+                        <Text fontSize='14px' MOBfontSize='12px' lineHeight='18px' fontWeight='700' color='#F1F3F4' margin='0 16px 0 0' cursor='default'>{ct.nickname}</Text>
                         {/* 작성일자 */}
                         <Text fontSize='12px' lineHeight='16px' color='#BDC1C6' cursor='default'>{ct.createdAt}</Text>
                       </NameTime>
@@ -290,7 +294,7 @@ const CommonDetail = (props) => {
                     {ct.postCommentId === edit_comment ?
                       <Input edit_mode ref={commentEdit} defaultValue={ct.content} />
                       :
-                      <Text p lineHeight='24px' fontSize='16px' color='#F1F3F4' margin='0 0 16px' cursor='text' userSelect='text'>{ct.content}</Text>
+                      <Text p lineHeight='24px' fontSize='16px' MOBfontSize='14px' color='#F1F3F4' margin='0 0 16px' cursor='text' userSelect='text'>{ct.content}</Text>
                     }
                   </CommentBox>
                 )
@@ -311,18 +315,18 @@ const CommonDetail = (props) => {
 
 const BodyInner = styled.div`
   width: 100%;
-  height: auto;
+  height: fit-content;
   display: grid;
   grid-template-columns: 65% 34%;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     grid-template-columns: 100%;
-}
-  `;
+  }
+`;
 
 const Post = styled.div`
   border-bottom: 1px solid #5F6368;
   padding: 0 0 20px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 100%;
 }
   `;
@@ -331,8 +335,13 @@ const InfoBox = styled.div`
   display: flex;
   width: auto;
   height: 40px;
-  margin: 24px 0 0 0;
-  `;
+  margin: 24px 0 0;
+  @media screen and (max-width: 767px) {
+    height: fit-content;
+    width: auto;
+    margin: 16px 0 0;
+  }
+`;
 
 const ProfileBox = styled.div`
   width: 40px;
@@ -341,17 +350,22 @@ const ProfileBox = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  `;
+  @media screen and (max-width: 767px) {
+    margin: 4px 0 0;
+    height: 28px;
+    width: 28px;
+  }
+`;
 
 const Profile = styled.img`
   max-width: 100%;
   max-height: 100%;
-  `;
+`;
 
 const InfoBoxInner = styled.div`
   margin: 0 0 0 8px;
   height: 40px;
-  `;
+ `;
 
 
 const PostBtn = styled.button`
@@ -362,8 +376,8 @@ const PostBtn = styled.button`
   border: none;
   &:active {
     opacity: 0.7;
-}
-  `;
+  }
+`;
 
 const ImageBox = styled.div`
   width: 70%;
@@ -372,8 +386,11 @@ const ImageBox = styled.div`
   text-align: center;
   object-fit: cover;
   overflow: hidden;
-  margin: 32px auto;
-  `;
+  margin: 20px auto;
+  @media screen and (max-width: 767px) {
+    width: 95%;
+  }
+`;
 
 const Image = styled.img`
   width: 100%;
@@ -384,6 +401,9 @@ const Image = styled.img`
 
 const IconBox = styled.div`
   margin: 50px 0 0;
+  @media screen and (max-width: 767px) {
+    margin: 24px 0 0;
+  }
   `;
 
 const CommentInput = styled.div`
@@ -411,14 +431,20 @@ const Input = styled.input`
   color: #e1e1e1;
   &::placeholder {
     color: #5F6368;
-}
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
   &:focus {
     outline: none;
-}
+  }
+  @media screen and (max-width: 767px) {
+    font-size: 12px;
+  }
   `;
 
 const CommentBtn = styled.button`
-  line-height: '18px';
+  line-height: 18px;
   width: 17%;
   background-color: #7879F1;
   border-radius: 8px;
@@ -426,18 +452,36 @@ const CommentBtn = styled.button`
   cursor: pointer;
   &:active {
     opacity: 0.7;
-}
-  `;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const CommentBtnMOB = styled.button`
+  line-height: 18px;
+  width: 20%;
+  background-color: #7879F1;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`;
 
 const CommentBox = styled.div`
   border-bottom: 1px solid #5F6368;
   padding: 16px 24px 10px;
-  `;
+`;
 
 const NameTime = styled.div`
   width: auto;
   padding-bottom: 8px;
-  `;
+`;
 
 const Buttons = styled.div`
   width: auto;

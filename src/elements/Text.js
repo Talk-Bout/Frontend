@@ -59,6 +59,7 @@ const Text = (props) => {
     MOBheight,
     MOBdisplay,
     MOBcolor,
+    MOBwidth,
   } = props;
 
   const styles = {
@@ -112,6 +113,7 @@ const Text = (props) => {
     MOBheight: MOBheight,
     MOBdisplay: MOBdisplay,
     MOBcolor: MOBcolor,
+    MOBwidth: MOBwidth,
   };
 
   if (p) {
@@ -199,6 +201,7 @@ const TextBoxP = styled.p`
     height: ${(props) => props.MOBheight};
     display: ${(props) => props.MOBdisplay};
     color: ${(props) => props.MOBcolor};
+    width: ${(props) => props.MOBwidth};
   }
 `;
 
@@ -262,6 +265,7 @@ const TextBoxS = styled.span`
     height: ${(props) => props.MOBheight};
     display: ${(props) => props.MOBdisplay};
     color: ${(props) => props.MOBcolor};
+    width: ${(props) => props.MOBwidth};
   }
 `;
 

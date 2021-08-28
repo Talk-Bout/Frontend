@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { Grid, Text, Image } from '../elements/index';
-import Sidebar from '../components/Sidebar';
-import Body from '../components/Body';
+import { Sidebar, Body } from '../components';
 import notfound_logo from '../image/notfound_logo.png';
+import { history } from '../redux/ConfigureStore';
 
 const NotFound = (props) => {
   return (
-    <Grid display="flex" height="100vh" TABheight='1024px'>
+    <Grid display="flex">
       <Sidebar />
       <Body header>
         <Wrapper>
@@ -34,6 +33,9 @@ const NotFound = (props) => {
             </Text>
             <Text p fontSize="16px" margin="auto" color="#E9EAED" TABfontSize='12px'>
               요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.
+            </Text>
+            <Text p fontSize="20px" margin="16px auto" color="#7879f1" TABfontSize='12px' cursor='pointer' hover='opacity: 0.7' _onClick={() => history.goBack()}>
+              뒤로 가기
             </Text>
           </Grid>
         </Wrapper>

@@ -8,12 +8,14 @@ import { actionCreators as imageActions } from '../redux/modules/image';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
+import NotFound from '../shared/NotFound';
 
 const MypagePic = (props) => {
   const dispatch = useDispatch();
   const user_name = useSelector(state => state.user.user.nickname);
   const user_image = useSelector(state => state.user.user.profilePic);
   const user_image_url = `http://fw3efsadfcv.shop${user_image}`;
+  const is_login = useSelector(state => state.user.is_login);
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
@@ -67,6 +69,10 @@ const MypagePic = (props) => {
   const deletePic = () => {
     dispatch(mypageActions.deletePicDB(user_name, null));
   };
+
+  if (!is_login) {
+    return <NotFound />
+  }
 
   return (
     <SmallWindow>

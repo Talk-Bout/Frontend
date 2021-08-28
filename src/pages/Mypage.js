@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { getCookie } from '../shared/cookie';
+import NotFound from '../shared/NotFound';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
 
+  const is_login = useSelector(state => state.user.is_login);
   const nickname = useSelector(state => state.user.user.nickname);
   const provider = getCookie('provider');
   const profilePic = useSelector(state => state.user.user.profilePic);
@@ -54,6 +56,10 @@ const Mypage = (props) => {
   const editInfo = () => {
     // history.push('/mypage/pic');
     window.alert('지금은 에러 처리 중입니다!\n빠르게 복구하여 돌아오겠습니다! ;-/')
+  }
+
+  if (!is_login) {
+    return <NotFound />
   }
 
   return (

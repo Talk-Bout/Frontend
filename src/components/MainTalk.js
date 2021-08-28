@@ -15,7 +15,8 @@ const MainTalk = (props) => {
     dispatch(postActions.setPostPopDB(1));
   }, []);
 
-  const pop_posts = useSelector(state => state.post.pop_list);
+  const post_list = useSelector(state => state.post.pop_list);
+  const pop_posts = post_list.slice(0, 9);
 
   return (
     <React.Fragment>

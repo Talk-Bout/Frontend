@@ -9,11 +9,6 @@ import { AiOutlineEye } from 'react-icons/ai';
 
 const QnaCard = (props) => {
   const { _onClick } = props;
-  const question_id = props.questionId;
-  const question_list = useSelector((state) => state.question.list);
-  const question_found = question_list.find(
-    (question) => question.questionId == question_id
-  );
 
   return (
     <React.Fragment>
@@ -22,51 +17,51 @@ const QnaCard = (props) => {
         {/* 질문 제목 */}
         <Text fontSize="18px" fontWeight="700" color="#F8F9FA" overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px">
           <span style={{ marginRight: '8px' }}>Q</span>
-          {question_found.title}
+          {props.title}
         </Text>
         {/* 질문 내용 */}
         <Content>
           <Text p fontSize="14px" color="#9AA0A6" lineHeight='18px' letterSpacing='0.2px' overflow="hidden" display="-webkit-box" wlc="4" wbo="vertical" TABoverflow="hidden" TABfontSize="12px">
-            {question_found.content}
+            {props.content}
           </Text>
         </Content>
         {/* 화면 너비 width > 1200px 일 때 보이기 */}
         <QInfoDesktop>
           {/* 작성자 프로필 이미지 */}
-          <ProfileImg src={question_found.user.profilePic ? `http://fw3efsadfcv.shop${question_found.user.profilePic}` : Profile_small} width='16px' />
+          <ProfileImg src={props.user.profilePic != null ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} width='16px' />
           {/* 작성자 닉네임 */}
           <Text fontSize="12px" TABfontSize='10px' color="#80868b" lineHeight="24px" margin="0 16px 0 8px" TABmargin='0 4px 0'>
-            {question_found.nickname}
+            {props.nickname}
           </Text>
           {/* 작성일자 */}
           <Text fontSize="12px" color="#80868b" lineHeight="24px" TABfontSize="8px">
             <Text fontSize="16px" TABfontSize="10px" verticalAlign="middle" margin="0 4px 0 0" TABmargin="0 2px 0 0"><BiTimeFive /></Text>
-            {question_found.createdAt}
+            {props.createdAt}
           </Text>
         </QInfoDesktop>
         {/* 화면 너비 < 1200px 일 때 보이기 */}
         <QInfoTablet>
           {/* 작성자 프로필 이미지 */}
-          <ProfileImg src={question_found.user.profilePic ? `http://fw3efsadfcv.shop${question_found.user.profilePic}` : Profile_small} width='16px' />
+          <ProfileImg src={props.user.profilePic != null ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} width='16px' />
           {/* 작성자 닉네임 */}
           <Text color="#80868b" fontSize='12px' lineHeight='24px' TABfontSize="10px" margin='0 16px 0 8px' TABmargin="0 4px 0">
-            {question_found.nickname}
+            {props.nickname}
           </Text>
           <Date>
             {/* 작성일자 */}
             <Text fontSize='12px' color="#80868b" lineHeight='24px' TABfontSize="8px">
               <Text fontSize='16px' verticalAlign="middle" TABfontSize="10px" margin='0 4px 0 0' TABmargin="0 2px 0 0"><BiTimeFive /></Text>
-              {question_found.createdAt}
+              {props.createdAt}
             </Text>
           </Date>
         </QInfoTablet>
         <Line />
         <span style={{ height: 'fit-content' }}>
           {/* 추천 수 */}
-          {question_found.questionLike ?
+          {props.questionLike ?
             <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
               <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><BiLike /></Text>
-              {question_found.questionLike.length}
+              {props.questionLike.length}
             </Text>
             :
             <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
@@ -74,11 +69,11 @@ const QnaCard = (props) => {
               0
             </Text>
           }
-          {/* 댓글 수 */}
-          {question_found.answer ?
+          {/* 답변 수 */}
+          {props.answer ?
             <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
               <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><BiComment /></Text>
-              {question_found.answer.length}
+              {props.answerNumber}
             </Text>
             :
             <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" margin="0 16px 0 0" TABfontSize="10px">
@@ -87,10 +82,10 @@ const QnaCard = (props) => {
             </Text>
           }
           {/* 조회수 */}
-          {question_found.viewCount > 0 ?
+          {props.viewCount > 0 ?
             <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" TABfontSize="10px">
               <Text fontSize="16px" color="#bdc1c6" margin="0 6px 0 0" verticalAlign="middle" TABfontSize="14px"><AiOutlineEye /></Text>
-              {question_found.viewCount}
+              {props.viewCount}
             </Text>
             :
             <Text fontSize="12px" color="#bdc1c6" verticalAlign="middle" TABfontSize="10px">

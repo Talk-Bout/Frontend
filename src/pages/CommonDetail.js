@@ -18,13 +18,6 @@ const CommonDetail = (props) => {
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
 
-  // 로컬환경을 위한 임시쿠키
-  setCookie('nickname', '따봉쟁이');
-  setCookie('provider', 'kakao');
-  setCookie('accessToken', 'BseFmx3VNRoE-dgz079crlYZtJfRYM0VJhjpPwo9dJgAAAF7i2MzSw');
-  setCookie('profilePic', '/api/images/fire_emoji1630131523648.png');
-  setCookie('refreshToken', 'kXs1z5PxniaR1sUxW4HcHkmWwfAvKvidTqt7pgopcBQAAAF7i2MpfA');
-
   // 질문 작성자 프로필 사진
   const user_profile = one_post.user ? one_post.user.profilePic : null;
   const user_profile_url = `http://fw3efsadfcv.shop${user_profile}`

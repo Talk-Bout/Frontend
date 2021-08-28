@@ -16,7 +16,8 @@ const MainQna = (props) => {
     dispatch(questionActions.setQuestionPopDB(1));
   }, []);
 
-  const pop_qna = useSelector(state => state.question.popular_list);
+  const pop_list = useSelector(state => state.question.popular_list);
+  const pop_qna = pop_list.slice(0, 9);
 
   return (
     <React.Fragment>
@@ -93,8 +94,9 @@ const MainQna = (props) => {
                       <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><BiLike /></Text>{pq.likeNumber}
                     </Text>
                     {/* 댓글 수 */}
-                    {/* <Text fontSize='12px' color='#bdc1c6' margin='0 8px'>
-                  <span style={{fontSize: '16px', verticalAlign: 'middle', marginRight: '6px'}}><BiComment /></span>댓글 수</Text> */}
+                    <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0' TABfontSize='10px'>
+                      <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><BiComment /></Text>{pq.answerNumber}
+                    </Text>
                     {/* 조회수 */}
                     <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
                       <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><AiOutlineEye /></Text>{pq.viewCount}</Text>

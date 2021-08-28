@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import { LogoImg, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, Little_home, Little_behance, Little_github } from '../image';
+import { Contact } from '.';
+import { LogoImg, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white } from '../image';
 import { history } from '../redux/ConfigureStore';
 
 const Footer = (props) => {
@@ -12,44 +13,14 @@ const Footer = (props) => {
       <Grid height='250px' TABheight='182px' MOBheight='168px' margin='80px 0 0' TABmargin='64px 0 0' MOBmargin='24px 0 0' backgroundColor='#0E1013' padding='24px 20px' TABpadding='24px 20px 36px' MOBpadding='6px 16px 64px' MOBdisplay='none' display='flex'>
         <Grid width='30%'>
           <Image src={LogoImg} alt='로고' />
-          <Text p fontSize='12px' margin='-20px 0 0 115px' MOBfontSize='10px' color='#A5A6F6' cursor='default'>부트캠퍼들의 속시원한 이야기</Text>
-          <Grid display='flex' justifyContent='space-between' width='fit-content' margin='56px 40px 0' TABmargin='12px 4px' MOBmargin='8px 4px'>
-            <Text fontSize='12px' MOBfontSize='10px' color='#bdc1c6' cursor='default'>© 2021 Project Talk'bout</Text>
-            <Text fontSize='12px' MOBfontSize='10px' color='#bdc1c6' margin='0 24px' cursor='default'>All rights reserved.</Text>
+          <Text p fontSize='12px' margin='-20px 0 0 115px' TABmargin='-10px 0 0 25px' MOBfontSize='10px' color='#A5A6F6' cursor='default'>부트캠퍼들의 속시원한 이야기</Text>
+          <Grid display='flex' justifyContent='space-between' width='fit-content' margin='56px 40px 0' TABmargin='40px 0 0 20px' MOBmargin='8px 4px'>
+            <Text fontSize='12px' TABfontSize='4px' color='#bdc1c6' cursor='default'>© 2021 Project Talk'bout</Text>
+            <Text fontSize='12px' TABfontSize='4px' color='#bdc1c6' margin='0 24px' cursor='default'>All rights reserved.</Text>
           </Grid>
         </Grid>
         <Grid width='60%' height='100%'>
-          <Contact>
-            <Column>
-              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Design</Text></div>
-              <div><Text color='#A5A6F6' fontSize='12px'>윤영미 <Icon src={Little_home} /></Text></div>
-              <div></div>
-              <div><Text color='#A5A6F6' fontSize='12px'>양서문 <Icon src={Little_behance} /></Text></div>
-            </Column>
-            <Column>
-              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Front-end</Text></div>
-              <div><Text color='#A5A6F6' fontSize='12px'>이동민 <Icon src={Little_github} onClick={() => window.open('https://github.com/leedmeen', '_blank')} /></Text>
-                {/* <Text color='#80868b' fontSize='12px'>Tel. +82 10-3204-0232</Text> */}
-              </div>
-              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Back-end</Text></div>
-              <div><Text color='#A5A6F6' fontSize='12px'>정창길 <Icon src={Little_github} onClick={() => window.open('https://github.com/ombreman', '_blank')} /></Text>
-                {/* <Text color='#80868b' fontSize='12px'>Tel. +44 79-0426-6484</Text> */}
-              </div>
-              <div></div>
-              <div><Text color='#A5A6F6' fontSize='12px'>방민수 <Icon src={Little_github} onClick={() => window.open('https://github.com/skylermbang', '_blank')} /></Text>
-                {/* <Text color='#80868b' fontSize='12px'>Tel. +82 10-9422-0170</Text> */}
-              </div>
-              <div></div>
-              <div><Text color='#A5A6F6' fontSize='12px'>송하영 <Icon src={Little_github} onClick={() => window.open('https://github.com/hayasha', '_blank')} /></Text>
-                {/* <Text color='#80868b' fontSize='12px'>Tel. +82 10-5069-0825</Text> */}
-              </div>
-            </Column>
-            <Column_repo>
-              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Team</Text></div>
-              <div><Text color='#A5A6F6' fontSize='12px' cursor='pointer' _onClick={() => window.open('https://github.com/Talk-Bout', '_blank')}>https://github.com/Talk-Bout</Text></div>
-              <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Repository</Text></div>
-            </Column_repo>
-          </Contact>
+          <Contact />
         </Grid>
       </Grid>
       <Navbar>
@@ -69,54 +40,12 @@ const Image = styled.img`
   @media screen and (max-width: 1090px) {
     height: 56px;
     width: 140px;
+    margin: 0 0 0 20px;
   }
   @media screen and (max-width: 767px) {
     height: 48px;
     width: auto;
   }
-`;
-
-const Contact = styled.div`
-  background-color: #17181B;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr;
-  column-gap: 40px;
-  padding: 28px 23px;
-  width: 100%;
-  @media screen and (max-width: 1260px) {
-    grid-template-columns: 1fr 1fr;
-  }
-`;
-
-const Column = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  column-gap: 20px;
-  width: fit-content;
-  & > div {
-    vertical-align: middle;
-    text-align: right;
-  }
-`;
-
-const Column_repo = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  column-gap: 20px;
-  width: 100%;
-  & > div {
-    vertical-align: middle;
-  }
-`;
-
-
-const Icon = styled.img`
-  width: 16px;
-  vertical-align: text-top;
-  margin: 0 8px;
-  cursor: pointer;
 `;
 
 const Navbar = styled.div`

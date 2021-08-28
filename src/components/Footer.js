@@ -83,6 +83,9 @@ const Contact = styled.div`
   column-gap: 40px;
   padding: 28px 23px;
   width: 100%;
+  @media screen and (max-width: 1260px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const Column = styled.div`

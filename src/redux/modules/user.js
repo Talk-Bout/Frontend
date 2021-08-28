@@ -42,11 +42,13 @@ const googleLogin = () => {
     dispatch(statusActions.setLoading());
     const accessToken_URL = new URL(window.location.href).searchParams.get('accessToken');
     const refreshToken_URL = new URL(window.location.href).searchParams.get('refreshToken');
+    const idToken_URL = new URL(window.location.href).searchParams.get('idToken');
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
     const nickname_URL = new URL(window.location.href).searchParams.get('nickname');
     const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
     setCookie('refreshToken', refreshToken_URL);
     setCookie('accessToken', accessToken_URL);
+    setCookie('idToken', idToken_URL);
     setCookie('provider', provider_URL);
     setCookie('nickname', nickname_URL);
     setCookie('profilePic', profilePic_URL);

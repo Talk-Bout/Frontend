@@ -74,7 +74,7 @@ const Mypage = (props) => {
                   <Status>{provider} 로그인 이용 중</Status>
                   <Line />
                   {/* 개인정보 수정 버튼 */}
-                  <Status purple onClick={() => history.push('/mypage/pic')}>개인정보 수정</Status>
+                  <Status purple onClick={() => history.push('/mypage/pic')}>회원정보 수정</Status>
                 </Grid>
               </ProfileInner>
             </ProfileOutter>

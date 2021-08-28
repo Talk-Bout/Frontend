@@ -6,7 +6,6 @@ import { getCookie, setCookie, deleteCookie } from "../../shared/cookie";
 import { actionCreators as statusActions } from './status';
 
 //액션 타입
-const STAY_LOGIN = 'user/STAY_LOGIN'; //로그인 상태 유지
 const DELETE_USER = 'user/DELETE_USER'; //회원 탈퇴
 const GOOGLE_LOG_IN = 'user/GOOGLE_LOG_IN'; // 구글 accessToken, provider, nickname, profilePic 저장
 const GOOGLE_RE_FRESH = 'user/GOOGLE_RE_FRESH'; // 구글 accessToken 갱신 및 idToken 발급
@@ -17,13 +16,7 @@ const LOGIN_CHECK = 'user/LOGIN_CHECK'; // 로그인 상태 설정
 const LOGOUT_CHECK = 'user/LOGOUT_CHECK'; // 로그아웃 상태 설정
 
 //액션 생성함수
-const stayLogIn = createAction(STAY_LOGIN, (user) => ({ user }));
 const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
-// const googleLogIn = createAction(GOOGLE_LOG_IN, (google_info) => ({ google_info }));
-// const googleReFresh = createAction(GOOGLE_RE_FRESH, (google_tokens) => ({ google_tokens }));
-// const kakaoLogIn = createAction(KAKAO_LOG_IN, (kakao_info) => ({ kakao_info }));
-// const kakaoReFresh = createAction(KAKAO_RE_FRESH, (kakao_token) => ({ kakao_token }));
-// const removeTokens = createAction(REMOVE_TOKENS, () => ({}));
 const loginCheck = createAction(LOGIN_CHECK, () => ({}));
 const logoutCheck = createAction(LOGOUT_CHECK, () => ({}));
 
@@ -74,9 +67,7 @@ const googleRefresh = () => {
       client_id: clientId,
       refresh_token: refreshToken,
     }), { headers: headers }).then((response) => {
-      deleteCookie('accessToken');
       setCookie('accessToken', response.data.access_token);
-      deleteCookie('idToken');
       setCookie('idToken', response.data.id_token);
       dispatch(statusActions.endLoading());
       dispatch(loginCheck());
@@ -119,7 +110,6 @@ const kakaoRefresh = () => {
       client_id: REST_API_KEY,
       refresh_token: getCookie('refreshToken'),
     }), { headers: headers }).then((response) => {
-      deleteCookie('accessToken');
       setCookie('accessToken', response.data.access_token);
       dispatch(loginCheck());
     }).catch((err) => {
@@ -167,32 +157,6 @@ const logOutAuto = () => {
     dispatch(logoutCheck());
     // dispatch(removeTokens());
     history.push('/login');
-  };
-};
-
-const stayLogInDB = () => {
-  return function (dispatch) {
-    const headers = {
-      authorization: `Bearer ${localStorage.getItem('token')}`,
-    };
-
-    const token = localStorage.getItem('token'); // token이라는 이름의 저장된 것을 불러오기
-    // console.log(`토큰` === token);
-    if (!token) {
-      return;
-    }
-
-    instance
-      .get('/tokenUser', {
-        headers: headers,
-      })
-      .then((response) => {
-        // console.log(response.data); //nickname 예상
-        dispatch(stayLogIn(response.data));
-      })
-      .catch((err) => {
-        console.error(`로그인 유지 에러: ${err}`);
-      });
   };
 };
 
@@ -266,7 +230,6 @@ const actionCreators = {
   logOut,
   logOutAuto,
   loginCheck,
-  stayLogInDB,
   userDeleteDB,
 };
 

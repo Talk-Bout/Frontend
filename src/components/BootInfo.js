@@ -78,19 +78,9 @@ const InfoList = styled.div`
     @media screen and (max-width: 1090px) {
       line-height: 24px;
     }
-  }
-`;
-
-const Schedule = styled.div`
-  width: 100%;
-  height: fit-content;
-  display: grid;
-  grid-template-columns: 25% 75%;
-  & > div {
-    margin-bottom: 4px;
-  }
-  @media screen and (max-width: 767px) {
-    grid-template-columns: 20% 80%;
+    @media screen and (max-width: 767px) {
+      line-height: 16px;
+    }
   }
 `;
 
@@ -111,5 +101,19 @@ const TextValue = styled.span`
     font-size: 12px;
   }
 `;
+
+const Schedule = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  & > div {
+    margin-bottom: 4px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 40% 60%;
+  }
+`;
+
 
 export default BootInfo;

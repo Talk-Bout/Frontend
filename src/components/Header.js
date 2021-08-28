@@ -234,6 +234,12 @@ const GiftBtn = styled.img`
     height: 100px;
     right: 120px;
   }
+  @media screen and (max-width: 767px) {
+    width: 60px;
+    height: 60px;
+    top: 3px;
+    right: 80px;
+  }
 `;
 
 const Image = styled.img`

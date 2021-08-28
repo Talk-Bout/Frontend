@@ -209,7 +209,7 @@ const QuestionDetail = (props) => {
                 </Grid>
               </Grid>
               {/* Question 본문 내용 */}
-              <Text p margin="50px 0" fontSize="16px" color="#bdc1c6" cursor='text' userSelect='text'>
+              <Text p margin="50px 0" fontSize="16px" color="#bdc1c6" cursor='text' userSelect='text' whiteSpace='pre-line'>
                 {question_found.content}
               </Text>
               {question_found.image ?

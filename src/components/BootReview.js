@@ -69,16 +69,17 @@ const BootReview = (props) => {
               {/* 리뷰 */}
               <PostBoxThird>
                 {/* 리뷰 제목 */}
-                <Text p fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' margin='0' cursor='default'>{review.title}</Text>
+                <Text p fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' margin='0' cursor='default' wordBreak='break-all'>{review.title}</Text>
                 {/* 작성자 닉네임, 작성일자 */}
                 <Text p fontSize='14px' MOBfontSize='10px' color='#80868b' margin='4px 0 0' cursor='default'>
                   {review.status === '수료' ? '수료자: ' : '작성자: '}{review.nickname} - {review.createdAt}
                 </Text>
                 {/* 장점 */}
                 <Text p fontSize='14px' fontWeight='700' MOBfontSize='10px' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
-                <Text p fontSize='14px' color='#e8eaed' MOBfontSize='10px' margin='4px 0 0' cursor='text' userSelect='text'>{review.pros}</Text>
+                <Text p fontSize='14px' color='#e8eaed' MOBfontSize='10px' margin='4px 0 0' cursor='text' userSelect='text' whiteSpace='pre-line' wordBreak='break-all'>{review.pros}</Text>
+                {/* 단점 */}
                 <Text p fontSize='14px' fontWeight='700' MOBfontSize='10px' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
-                <Text p fontSize='14px' color='#e8eaed' MOBfontSize='10px' margin='4px 0 0' cursor='text' userSelect='text'>{review.cons}</Text>
+                <Text p fontSize='14px' color='#e8eaed' MOBfontSize='10px' margin='4px 0 0' cursor='text' userSelect='text' whiteSpace='pre-line' wordBreak='break-all'>{review.cons}</Text>
               </PostBoxThird>
             </Post>
           )
@@ -100,9 +101,9 @@ const BootReview = (props) => {
               </Text>
               {/* 장점 */}
               <Text p fontSize='14px' MOBfontSize='10px' fontWeight='700' color='#e8eaed' margin='24px 0 0' cursor='default'>장점</Text>
-              <Text p fontSize='14px' MOBfontSize='10px' color='#e8eaed' margin='4px 0 0' cursor='text' userSelect='text'>{review.pros}</Text>
+              <Text p fontSize='14px' MOBfontSize='10px' color='#e8eaed' margin='4px 0 0' cursor='text' userSelect='text' whiteSpace='pre-line' wordBreak='break-all'>{review.pros}</Text>
               <Text p fontSize='14px' MOBfontSize='10px' fontWeight='700' color='#e8eaed' margin='16px 0 0' cursor='default'>단점</Text>
-              <Text p fontSize='14px' MOBfontSize='10px' color='#e8eaed' margin='4px 0 0' cursor='text' userSelect='text'>{review.cons}</Text>
+              <Text p fontSize='14px' MOBfontSize='10px' color='#e8eaed' margin='4px 0 0' cursor='text' userSelect='text' whiteSpace='pre-line' wordBreak='break-all'>{review.cons}</Text>
             </PostBox>
           </Post>
         )

@@ -10,13 +10,20 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { getCookie } from '../shared/cookie';
+import { getCookie, setCookie } from '../shared/cookie';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
   // 해당 게시물
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
+
+  // 로컬환경을 위한 임시쿠키
+  setCookie('nickname', '따봉쟁이');
+  setCookie('provider', 'kakao');
+  setCookie('accessToken', 'BseFmx3VNRoE-dgz079crlYZtJfRYM0VJhjpPwo9dJgAAAF7i2MzSw');
+  setCookie('profilePic', '/api/images/fire_emoji1630131523648.png');
+  setCookie('refreshToken', 'kXs1z5PxniaR1sUxW4HcHkmWwfAvKvidTqt7pgopcBQAAAF7i2MpfA');
 
   // 질문 작성자 프로필 사진
   const user_profile = one_post.user ? one_post.user.profilePic : null;
@@ -219,7 +226,7 @@ const CommonDetail = (props) => {
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
                 {one_post.image ? <ImageBox><Image src={`http://fw3efsadfcv.shop${one_post.image}`} /></ImageBox> : ''}
-                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text'>{one_post.content}</Text>
+                <Text p lineHeight='24px' fontSize='16px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text' whiteSpace='pre-line'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}
                   {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}

@@ -78,9 +78,9 @@ const QuestionList = (props) => {
               {/* 인기순, 최신순 정렬 버튼 */}
               <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" TABlineHeight='24px' verticalAlign='middle' margin='8px'><RiArrowUpDownFill /></Text>
               {popPage ?
-                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_latest()}>최신순</Text>
+                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_latest()}>인기순</Text>
                 :
-                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_popular()}>인기순</Text>
+                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_popular()}>최신순</Text>
               }
               {/* 글쓰기 버튼 */}
               {is_login ?

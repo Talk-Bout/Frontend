@@ -22,9 +22,10 @@ const CommonPostList = (props) => {
           <Text p fontSize="14px" margin="16px 0 0" TABmargin='10px 0 0' letterSpacing='0.2px' lineHeight='18px' color="#9aa0a6" overflow='hidden' wlc='2' wbo='vertical' display='-webkit-box' TABfontSize='12px' TABlineHeight='16px'>{props.content}</Text>
         </Grid>
         {/* 작성자 정보 */}
-        <Grid margin='16px 0 0' TABmargin='24px 0 0'>
-          <ProfileImage src={props.user.profilePic ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small}
-            alt='프로필' />
+        <Grid margin='16px 0 0' TABmargin='24px 0 0' display='flex'>
+          <Profile>
+            <ProfileImage src={props.user.profilePic != null ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} />
+          </Profile>
           <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px'>
             {props.nickname}
           </Text>
@@ -63,18 +64,29 @@ const Content = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     border-bottom: 1px solid #3c4043;
     padding: 16px;
   }
 `;
 
-const ProfileImage = styled.img`
+const Profile = styled.div`
+  display: flex;
   width: 24px;
-  vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  height: 24px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 1090px) {
     width: 16px;
+    height: 16px;
   }
+`;
+
+const ProfileImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
 `;
 
 export default CommonPostList;

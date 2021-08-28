@@ -69,7 +69,8 @@ const BootRoot = (props) => {
                   <Heart onClick={() => markBoot()}><HiOutlineHeart /></Heart>
               }
             </Text>
-            <Text p fontSize='14px' MOBfontSize='12px' color='#dadce0' margin='0 0 17px' MOBmargin='-10px 0 16px' cursor='default'>{one_camp.desc}</Text>
+            {/* 부트캠프 설명 */}
+            <Text p fontSize='14px' MOBfontSize='12px' color='#dadce0' margin='0 0 17px' MOBmargin='0 0 16px' cursor='default'>{one_camp.desc}</Text>
           </div>
           {/* 홈페이지 바로가기 버튼 */}
           <Button onClick={() => window.open(`${one_camp.url}`, '_blank')}><Text fontSize='14px' MOBfontSize='10px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>

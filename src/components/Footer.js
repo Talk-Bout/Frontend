@@ -53,12 +53,13 @@ const Navbar = styled.div`
   bottom: 0;
   z-index: 10;
   width: 100%;
-  height: 48px;
+  height: 53px;
   background-color: #202124;
   display: flex;
   justify-content: space-around;
   overflow-x: auto;
   overflow-y: hidden;
+  padding: 0 0 5px;
   ::-webkit-scrollbar {
     height: 10px;
   }

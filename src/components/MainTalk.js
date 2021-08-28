@@ -41,11 +41,11 @@ const MainTalk = (props) => {
                   {/* 질문 제목 */}
                   <TxtBox>
                     <Text
-                      fontSize="18px" TABfontSize='16px' MOBfontSize='14px' fontWeight="700" color="#f1f3f4" margin="0 0 16px" TABmargin='0 0 11px' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>{pp.title}
+                      fontSize="18px" TABfontSize='16px' MOBfontSize='14px' fontWeight="700" color="#f1f3f4" margin="0 0 16px 12px" TABmargin='0 0 11px' overflow='hidden' display='-webkit-box' wlc='1' wbo='vertical'>{pp.title}
                     </Text>
                     {/* 질문 내용 */}
                     <Content>
-                      <Text p fontSize="14px" TABfontSize='12px' MOBfontSize='10px' letterSpacing="0.2px" lineHeight='18px' TABlineHeight='16px' color="#9aa0a6" overflow="hidden" display="-webkit-box" wlc="4" TABwlc='2' MOBwlc='1' wbo="vertical">{pp.content}
+                      <Text p fontSize="14px" TABfontSize='12px' MOBfontSize='10px' margin='0 0 0 12px' TABmargin='0' letterSpacing="0.2px" lineHeight='18px' TABlineHeight='16px' color="#9aa0a6" overflow="hidden" display="-webkit-box" wlc="4" TABwlc='2' MOBwlc='1' wbo="vertical">{pp.content}
                       </Text>
                     </Content>
                   </TxtBox>

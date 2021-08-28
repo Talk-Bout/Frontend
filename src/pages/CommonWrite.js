@@ -305,7 +305,7 @@ const Preview = styled.div`
   object-fit: cover;
   overflow: hidden;
   margin: 0 auto 16px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 608px;
     height: fit-content;
   }

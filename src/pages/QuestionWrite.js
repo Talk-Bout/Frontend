@@ -101,7 +101,8 @@ const QuestionWrite = (props) => {
       <Grid
         className="background"
         display="flex"
-        backgroundColor="#17181b">
+        backgroundColor="#17181b"
+        padding='0 0 42px'>
         {/* 바디 */}
         <Body MOBnopadding>
           <Grid className="body-inner" height="100%" padding="24px 0 0" MOBpadding='0'>
@@ -137,14 +138,15 @@ const QuestionWrite = (props) => {
                 {/* 등록 버튼 */}
                 <Grid className="submit-button" width="23.33%" padding="0 40px" MOBpadding='0 10px'>
                   <Text
-                    _onClick={() => {
-                      create_question();
-                    }}
+                    fontSize="24px"
+                    fontWeight="700"
+                    color="#848484"
+                    lineHeight="84px"
+                    float="right"
+                    cursor="pointer"
+                    _onClick={() => create_question()}
                   >
-                    <HoverActionBtn>
-                      {' '}
-                      {edit_mode ? '수정' : '등록'}
-                    </HoverActionBtn>
+                    {edit_mode ? '수정' : '등록'}
                   </Text>
                 </Grid>
               </Grid>
@@ -168,7 +170,7 @@ const QuestionWrite = (props) => {
                 </TitleBox>
                 <ContentBox>
                   <Textarea
-                    rows={preview ? '5' : '10'}
+                    rows={preview ? '5' : '15'}
                     placeholder="내용을 입력해주세요."
                     ref={contentInput}
                     defaultValue={edit_mode ? old_question.content : null}
@@ -288,9 +290,8 @@ const HoverActionBtn = styled.text`
 `;
 
 const ContentBox = styled.div`
-  height: 40vh;
-  padding-top: 20px;
-  background-color: #282a2d;
+  height: fit-content;
+  margin: 0 0 80px;
 `;
 
 const TitleInput = styled.input`
@@ -328,6 +329,20 @@ const Textarea = styled.textarea`
   &:focus {
     outline: none;
   }
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #5f6368;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
   @media screen and (max-width: 1090px) {
     width: 568px;
   }
@@ -344,6 +359,10 @@ const Preview = styled.div`
   object-fit: cover;
   overflow: hidden;
   margin: 0 auto 16px;
+  @media screen and (max-width: 1090px) {
+    width: 608px;
+    height: fit-content;
+  }
 `;
 
 const Img = styled.img`
@@ -352,6 +371,7 @@ const Img = styled.img`
   height: 100%;
   object-fit: contain;
 `;
+
 const FooterBox = styled.div`
   background-color: #2e3134;
   height: 10%;

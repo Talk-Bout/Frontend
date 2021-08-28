@@ -133,7 +133,7 @@ const Icon = styled.img`
   width: 16px;
   vertical-align: text-top;
   margin: 0 8px;
-  cursor: pointer;
+  cursor: pointer; 
 `;
 
 const ContactBoxTAB = styled.div`

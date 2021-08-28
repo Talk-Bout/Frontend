@@ -99,10 +99,8 @@ const BootCommuWrite = (props) => {
         backgroundColor="#17181b"
         padding="0 0 42px"
       >
-        {/* 사이드바 */}
-        <Sidebar />
         {/* 헤더 포함한 바디 */}
-        <Body header>
+        <Body MOBnopadding>
           <Grid className="body-inner" padding="24px 0 0">
             <Window>
               {/* 작성 페이지 헤더 */}
@@ -153,9 +151,9 @@ const BootCommuWrite = (props) => {
                 <SelectBox
                   ref={categoryRef}
                 >
-                  <Option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</Option>
-                  <Option value="info">정보</Option>
-                  <Option value="chitchat">잡담</Option>
+                  <option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</option>
+                  <option value="info">정보</option>
+                  <option value="chitchat">잡담</option>
                 </SelectBox>
                 {/* 제목 입력 칸 */}
                 <TitleBox>
@@ -338,20 +336,18 @@ const ImgInput = styled.input`
 `;
 
 const SelectBox = styled.select`
-  width: 100%;
+  width: 250px;
   height: 72px;
   background-color: #282a2d;
+  box-sizing: border-box;
   border: none;
   color: #5f6368;
-  outline: none;
   font-size: 18px;
   display: block;
   appearance: none;
-  
+  &:focus {
+    outline: none;
+  }
 `;
 
-const Option = styled.option`
-  font-size: 18px;
-  color: #FFFFFF; 
-`;
 export default BootCommuWrite;

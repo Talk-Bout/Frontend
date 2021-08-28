@@ -43,7 +43,6 @@ const MypagePic = (props) => {
     } else {
       image = image_url;
     }
-    console.log(image);
     let nickname;
     if (!nameRef.current.value) {
       nickname = user_name;

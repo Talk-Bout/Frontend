@@ -44,16 +44,16 @@ const Login = (props) => {
   );
 };
 
-// const GoogleBtn = styled.img`
-//   /* margin: 100px auto 0; */
-//   margin: 50px auto 0;
-//   height: 48px;
-//   display: block;
-//   cursor: pointer;
-//   &:active {
-//     opacity: 0.7;
-//   }
-// `;
+const GoogleBtn = styled.img`
+  /* margin: 100px auto 0; */
+  margin: 50px auto 0;
+  height: 48px;
+  display: block;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
+`;
 
 const KakaoBtn = styled.img`
   margin: 80px auto 0;

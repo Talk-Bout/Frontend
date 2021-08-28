@@ -47,19 +47,13 @@ const googleLogin = () => {
     const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
     setCookie('refreshToken', refreshToken_URL);
     setCookie('accessToken', accessToken_URL);
-    setCookie('idToken', accessToken_URL);
     setCookie('provider', provider_URL);
     setCookie('nickname', nickname_URL);
     setCookie('profilePic', profilePic_URL);
     dispatch(loginCheck());
-    // const google_info = {
-    //   accessToken: accessToken_URL,
-    //   provider: provider_URL,
-    //   nickname: nickname_URL,
-    //   profilePic: profilePic_URL,
-    // };
-    // dispatch(googleLogIn(google_info));
     history.push('/');
+    // window.location.reload();
+    window.location.reload();
   };
 };
 
@@ -81,14 +75,9 @@ const googleRefresh = () => {
       deleteCookie('accessToken');
       setCookie('accessToken', response.data.access_token);
       deleteCookie('idToken');
-      setCookie('idToken', response.data.access_token);
+      setCookie('idToken', response.data.id_token);
       dispatch(statusActions.endLoading());
       dispatch(loginCheck());
-      // const tokens = {
-      //   accessToken: response.data.access_token,
-      //   idToken: response.data.id_token,
-      // };
-      // dispatch(googleReFresh(tokens));
     }).catch((err) => {
       console.error(`구글 로그인 토큰 갱신 에러: ${err}`);
     });
@@ -111,14 +100,8 @@ const kakaoLogin = () => {
     setCookie('profilePic', profilePic_URL);
     dispatch(statusActions.endLoading());
     dispatch(loginCheck());
-    // const kakao_info = {
-    //   accessToken: accessToken_URL,
-    //   provider: provider_URL,
-    //   nickname: nickname_URL,
-    //   profilePic: profilePic_URL,
-    // };
-    // dispatch(kakaoLogIn(kakao_info));
     history.push('/');
+    window.location.reload();
   };
 };
 
@@ -137,10 +120,6 @@ const kakaoRefresh = () => {
       deleteCookie('accessToken');
       setCookie('accessToken', response.data.access_token);
       dispatch(loginCheck());
-      // const kakao_token = {
-      //   accessToken: response.data.access_token
-      // }
-      // dispatch(kakaoReFresh(kakao_token));
     }).catch((err) => {
       console.error(`카카오 로그인 토큰 갱신 에러: ${err}`);
     });

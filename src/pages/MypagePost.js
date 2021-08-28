@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
+import NotFound from '../shared/NotFound';
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();
   const nickname = useSelector((state) => state.user.user.nickname);
+  const is_login = useSelector((state) => state.user.is_login);
 
   // 내가 쓴글 리스트
   const all_post = useSelector((state) => state.mypage.mypost_list);
@@ -21,6 +23,10 @@ const MypagePost = (props) => {
   useEffect(() => {
     dispatch(mypageActions.setMypostDB(nickname));
   }, []);
+
+  if (!is_login) {
+    return <NotFound />
+  }
 
   return (
     <React.Fragment>

@@ -8,10 +8,12 @@ import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
+import NotFound from '../shared/NotFound';
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();
   const nickname = useSelector(state => state.user.user.nickname);
+  const is_login = useSelector(state => state.user.is_login);
 
   // 부트캠프, 부트톡톡 북마크
   useEffect(() => {
@@ -27,6 +29,10 @@ const MypagePost = (props) => {
   const all_qna = useSelector((state) => state.mypage.myqna_list);
   // 삭제된 post의 경우 안띄워줌
   const myqna_list = all_qna.filter((qnas) => qnas.question !== null);
+
+  if (!is_login) {
+    return <NotFound />
+  }
 
   return (
     <React.Fragment>

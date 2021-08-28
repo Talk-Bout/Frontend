@@ -7,16 +7,21 @@ import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
+import NotFound from '../shared/NotFound';
 
 const MypageBootcamps = (props) => {
-
   const dispatch = useDispatch();
+  const is_login = useSelector(state => state.user.is_login);
 
   useEffect(() => {
     dispatch(campActions.setMyCampDB());
   }, []);
 
   const my_camps = useSelector(state => state.bootcamp.my_camp_list);
+
+  if (!is_login) {
+    return <NotFound />
+  }
 
   return (
     <React.Fragment>

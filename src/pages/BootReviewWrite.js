@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import Body from '../components/Body';
@@ -13,7 +13,7 @@ import { getCookie } from '../shared/cookie';
 const BootReviewWrite = (props) => {
   const dispatch = useDispatch();
   const camp_name = props.location.state.camp_name;
-  const user_name = getCookie('nickname');
+  const user_name = useSelector(state => state.user.user.nickname);
 
   // 별점을 state에 저장하기
   const [stars, setStars] = useState(0);

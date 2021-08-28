@@ -6,13 +6,13 @@ import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 import { FaPlus } from 'react-icons/fa';
-import { baseUrl } from '../shared/api';
 
 const MainTalk = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(postActions.setPostPopDB(1));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const post_list = useSelector(state => state.post.pop_list);

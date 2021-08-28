@@ -13,6 +13,7 @@ const MainBoot = () => {
 
   useEffect(() => {
     dispatch(campActions.mainCampsDB());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const camp_list = useSelector((state) => state.bootcamp.camp_list);

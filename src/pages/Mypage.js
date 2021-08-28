@@ -8,17 +8,15 @@ import { AiOutlineRight } from "react-icons/ai";
 import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
-import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
 import { getCookie } from '../shared/cookie';
-import { baseUrl } from '../shared/api';
 
 const Mypage = (props) => {
   const dispatch = useDispatch();
 
-  const nickname = getCookie('nickname');
+  const nickname = useSelector(state => state.user.user.nickname);
   const provider = getCookie('provider');
-  const profilePic = getCookie('profilePic');
+  const profilePic = useSelector(state => state.user.user.profilePic);
   const user_profile_url = `http://fw3efsadfcv.shop${profilePic}`;
 
   useEffect(() => {
@@ -124,7 +122,7 @@ const Mypage = (props) => {
                   <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
                     <BookMarkBox>
                       <Text fontSize="18px" color="#F1F3F4" cursor='default'>내 북마크</Text>
-                      <Count> {'('}{mytalk_list.length} {')'} </Count>
+                      <Count> {'('}{mytalk_list.length}{')'} </Count>
                     </BookMarkBox>
                     <MoreButton onClick={() => { history.push('/mypage/mybookmarks') }}
                     >더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
@@ -135,7 +133,7 @@ const Mypage = (props) => {
                       {mytalk.map((p, idx) => {
                         return (
                           <Grid key={idx} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
-                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer'>
+                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer' hover='opacity: 0.7'>
                             <Grid overflow="hidden" height="100px" width="100%" >
                               <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
                                 overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"

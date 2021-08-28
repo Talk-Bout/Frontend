@@ -19,8 +19,7 @@ const BootPost = (props) => {
   const commu_id = parseInt(props.match.params.id);
 
   // 현재 접속 중인 사용자 닉네임
-  // const username = useSelector(state => state.user.user.nickname);
-  const username = getCookie('nickname');
+  const username = useSelector(state => state.user.user.nickname);
   // 사용자가 북마크한 커뮤니티글 목록
   const my_commu_list = useSelector(state => state.bootcamp.my_commu_list);
   // 북마크한 커뮤니티글 목록에 이 글이 있으면, this_commu에 넣는다.

@@ -4,6 +4,7 @@ import { history } from '../ConfigureStore';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
 import { getCookie } from '../../shared/cookie';
+import { useSelector } from 'react-redux';
 
 // QUESTION 액션타입
 const SET_QUESTION = 'question/SET_QUESTION';
@@ -252,7 +253,7 @@ const createAnswerDB = (new_answer) => {
 
 const setQuestionBookmarkDB = () => {
   return function (dispatch) {
-    const nickname = getCookie('nickname');
+    const nickname = useSelector(state => state.user.user.nickname);
     if (!nickname) {
       return;
     }

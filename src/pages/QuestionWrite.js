@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import { Sidebar, Body } from '../components';
+import { Body } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
 import { actionCreators as imageActions } from '../redux/modules/image';
@@ -19,7 +19,7 @@ const QuestionWrite = (props) => {
   const titleInput = useRef(null);
   const contentInput = useRef(null);
 
-  const user_name = nickname_c;
+  const user_name = useSelector(state => state.user.user.nickname);
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);

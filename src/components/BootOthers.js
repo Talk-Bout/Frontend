@@ -14,6 +14,7 @@ const BootOthers = (props) => {
 
   useEffect(() => {
     dispatch(campActions.setOthersDB(bootcampName));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bootcampName]);
 
   const other_camps = useSelector(state => state.bootcamp.others_list);

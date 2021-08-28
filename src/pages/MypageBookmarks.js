@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Sidebar, Body } from '../components';
@@ -6,16 +6,16 @@ import { Profile_small } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
-import { BiTimeFive, BiBadgeCheck } from 'react-icons/bi';
+import { BiTimeFive } from 'react-icons/bi';
 import { AiOutlineRight } from "react-icons/ai";
 import { getCookie } from '../shared/cookie';
 
 const MypagePost = (props) => {
   const dispatch = useDispatch();
-  const nickname = getCookie('nickname');
+  const nickname = useSelector(state => state.user.user.nickname);
 
   // 부트캠프, 부트톡톡 북마크
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(mypageActions.setMyBookmarkDB(nickname));
   }, []);
 

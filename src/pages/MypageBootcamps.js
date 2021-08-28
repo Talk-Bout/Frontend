@@ -7,7 +7,6 @@ import { BsHeart, BsHeartFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
 import { history } from '../redux/ConfigureStore';
-import { setCookie } from '../shared/cookie';
 
 const MypageBootcamps = (props) => {
 

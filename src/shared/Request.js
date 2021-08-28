@@ -7,7 +7,6 @@ const idToken = getCookie('idToken');
 
 const instance = axios.create({
   baseURL: 'http://fw3efsadfcv.shop/api',
-  // baseURL 변경되면 api.js의 baseUrl도 같이 변경해주기!
 });
 
 if (provider === 'kakao') {

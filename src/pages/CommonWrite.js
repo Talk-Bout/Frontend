@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import { Sidebar, Body } from '../components';
+import { Body } from '../components';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
 import { history } from '../redux/ConfigureStore';
@@ -14,8 +14,7 @@ const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
 
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
-  // const username = useSelector(state => state.user.user.nickname);
-  const username = getCookie('nickname');
+  const username = useSelector(state => state.user.user.nickname);
 
   const postId = parseInt(window.location.pathname.split('/common/write/')[1]);
   const commu_found = useSelector((state) => state.post.one_post);

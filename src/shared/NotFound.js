@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Grid, Text, Button, Image } from '../elements/index';
+import { Grid, Text, Image } from '../elements/index';
 import Sidebar from '../components/Sidebar';
 import Body from '../components/Body';
 import notfound_logo from '../image/notfound_logo.png';

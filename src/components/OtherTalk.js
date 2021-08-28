@@ -11,6 +11,7 @@ const OtherTalk = (props) => {
 
   useEffect(() => {
     dispatch(postActions.setPostPopDB(1));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pop_list = useSelector(state => state.post.pop_list);

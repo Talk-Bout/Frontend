@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Contact } from '.';
-import { LogoImg, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white } from '../image';
+import { LogoNew, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white } from '../image';
 import { history } from '../redux/ConfigureStore';
 
 const Footer = (props) => {
@@ -12,8 +12,7 @@ const Footer = (props) => {
     <React.Fragment>
       <Grid height='250px' TABheight='fit-content' MOBheight='168px' margin='0 0 0' TABmargin='64px 0 0' MOBmargin='24px 0 0' backgroundColor='#0E1013' padding='24px 20px' TABpadding='24px 20px 36px' MOBpadding='6px 16px 64px' MOBdisplay='none' display='flex' position='relative' bottom='0'>
         <Grid width='30%'>
-          <Image src={LogoImg} alt='로고' />
-          <Text p fontSize='12px' margin='-20px 0 0 115px' TABmargin='-10px 0 0 25px' MOBfontSize='10px' color='#A5A6F6' cursor='default'>부트캠퍼들의 속시원한 이야기</Text>
+          <Image src={LogoNew} alt='로고' />
           <Grid display='flex' justifyContent='space-between' width='fit-content' margin='56px 40px 0' TABmargin='40px 0 0 20px' MOBmargin='8px 4px'>
             <Text fontSize='12px' TABfontSize='4px' color='#bdc1c6' cursor='default'>© 2021 Project Talk'bout</Text>
             <Text fontSize='12px' TABfontSize='4px' color='#bdc1c6' margin='0 24px' cursor='default'>All rights reserved.</Text>
@@ -38,8 +37,7 @@ const Footer = (props) => {
 const Image = styled.img`
   margin: 0 0 0 30px;
   @media screen and (max-width: 1090px) {
-    height: 56px;
-    width: 140px;
+    width: 300px;
     margin: 0 0 0 20px;
   }
   @media screen and (max-width: 767px) {

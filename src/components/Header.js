@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
-import { Search, LogoImg, Profile_small, CaretDown, Gift } from '../image';
-import { BsFillBookmarkFill, BsFillBellFill } from 'react-icons/bs';
+// import { Search } from '../image';
+import { LogoNew, Profile_small, CaretDown, Gift } from '../image';
+import { BsFillBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
-import { baseUrl } from '../shared/api';
 
 const Header = (props) => {
   const { opacity, TABopacity, MOBopacity } = props;
   const dispatch = useDispatch();
   const token = getCookie('refreshToken');
-  const profilePic = getCookie('profilePic');
+  const profilePic = useSelector(state => state.user.user.profilePic);
 
   // 드롭다운 메뉴
   const [MenuLink, setMenuLink] = useState(null);
@@ -67,7 +67,7 @@ const Header = (props) => {
             MOBdisplay='flex'
             MOBjustifyContent='space-between'
           >
-            <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
+            <Logo src={LogoNew} alt="토크부트 로고" onClick={() => history.push('/')} />
             {/* <Image src={Search} alt="검색" /> */}
             {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
@@ -155,7 +155,7 @@ const Header = (props) => {
           MOBdisplay='flex'
           MOBjustifyContent='space-between'
         >
-          <Logo src={LogoImg} alt="토크부트 로고" onClick={() => history.push('/')} />
+          <Logo src={LogoNew} alt="토크부트 로고" onClick={() => history.push('/')} />
           {/* <Image MOBdisplayNone src={Search} alt="검색" />
           <Input placeholder="검색어를 입력하세요." /> */}
         </Grid>
@@ -180,34 +180,33 @@ const Header = (props) => {
   );
 };
 
-const Input = styled.input`
-  border: none;
-  width: 400px;
-  height: 48px;
-  background-color: transparent;
-  color: #80868b;
-  &::placeholder {
-    color: #80868b;
-    font-size: 16px;
-  }
-  &:focus {
-    outline: none;
-  }
-  @media screen and (max-width: 1090px) {
-    width: 326px;
-    height: 40px;
-    &::placeholder {
-      font-size: 12px;
-    }
-  }
-@media screen and (max-width: 767px) {
-  display: none;
-}
-`;
+// const Input = styled.input`
+//   border: none;
+//   width: 400px;
+//   height: 48px;
+//   background-color: transparent;
+//   color: #80868b;
+//   &::placeholder {
+//     color: #80868b;
+//     font-size: 16px;
+//   }
+//   &:focus {
+//     outline: none;
+//   }
+//   @media screen and (max-width: 1090px) {
+//     width: 326px;
+//     height: 40px;
+//     &::placeholder {
+//       font-size: 12px;
+//     }
+//   }
+// @media screen and (max-width: 767px) {
+//   display: none;
+// }
+// `;
 
 const Logo = styled.img`
-  height: 80px;
-  width: 210px;
+  width: 300px;
   margin: 0 8px;
   cursor: pointer;
   vertical-align: middle;
@@ -242,15 +241,15 @@ const GiftBtn = styled.img`
   }
 `;
 
-const Image = styled.img`
-  vertical-align: middle;
-  width: 24px;
-  @media screen and (max-width: 767px) {
-    height: 24px;
-    margin: 12px 0;
-    ${(props) => props.MOBdisplayNone ? 'display: none' : ''};
-  }
-`;
+// const Image = styled.img`
+//   vertical-align: middle;
+//   width: 24px;
+//   @media screen and (max-width: 767px) {
+//     height: 24px;
+//     margin: 12px 0;
+//     ${(props) => props.MOBdisplayNone ? 'display: none' : ''};
+//   }
+// `;
 
 const Profile = styled.div`
   width: 32px;

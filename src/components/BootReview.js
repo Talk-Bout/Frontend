@@ -12,6 +12,7 @@ import { actionCreators as campActions } from '../redux/modules/bootcamp';
 const BootReview = (props) => {
   const dispatch = useDispatch();
   const bootcampName = decodeURI(window.location.pathname.split('boot/')[1]);
+  const is_login = useSelector(state => state.user.is_login);
 
   // 페이지네이션
   const [page, setPage] = useState(1);
@@ -33,8 +34,6 @@ const BootReview = (props) => {
       history.push('/login');
     }
   }
-
-  const is_login = useSelector(state => state.user.is_login);
 
   return (
     <Grid className='contents-postlist' backgroundColor='#202124' width='64%' TABwidth='100%' padding='40px 40px 0 40px' MOBpadding='18px 18px 0 18px'>

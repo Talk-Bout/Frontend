@@ -3,7 +3,7 @@ import { produce } from 'immer';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
 import { actionCreators as imageActions } from './image';
-import { deleteCookie, setCookie, getCookie } from '../../shared/cookie';
+import { deleteCookie, setCookie } from '../../shared/cookie';
 import { history } from '../ConfigureStore';
 
 // 액션타입
@@ -126,6 +126,25 @@ const editInfoDB = (nickname, profilePic) => {
   };
 };
 
+const deletePicDB = (nickname, profilePic) => {
+  // DB에 저장된 프로필 사진 삭제하기
+  return function (dispatch) {
+    dispatch(statusActions.setLoading());
+    instance.patch(`/users/${nickname}`, {
+      nickname: nickname,
+      profilePic: profilePic,
+    }).then((response) => {
+      window.alert('프로필 사진이 삭제되었습니다.');
+      dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
+      dispatch(statusActions.endLoading());
+    }).catch((err) => {
+      window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
+      dispatch(statusActions.endLoading());
+    });
+  };
+};
+
 
 export default handleActions({
   [SET_MYBOOT]: (state, action) => produce(state, (draft) => {
@@ -147,6 +166,7 @@ const actionCreators = {
   setMypostDB,
   setMyBookmarkDB,
   editInfoDB,
+  deletePicDB,
 }
 
 export {

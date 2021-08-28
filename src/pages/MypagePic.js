@@ -9,12 +9,11 @@ import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import { getCookie } from '../shared/cookie';
-import { baseUrl } from '../shared/api';
 
 const MypagePic = (props) => {
   const dispatch = useDispatch();
-  const user_name = getCookie('nickname');
-  const user_image = getCookie('profilePic');
+  const user_name = useSelector(state => state.user.user.nickname);
+  const user_image = useSelector(state => state.user.user.profilePic);
   const user_image_url = `http://fw3efsadfcv.shop${user_image}`;
 
   //이미지 불러오기
@@ -65,6 +64,11 @@ const MypagePic = (props) => {
     }
   };
 
+  // 프로필 사진 삭제 함수
+  const deletePic = () => {
+    dispatch(mypageActions.deletePicDB(user_name, null));
+  };
+
   return (
     <SmallWindow>
       <Grid height="100%" MOBheight='fit-content' is_center>
@@ -96,6 +100,7 @@ const MypagePic = (props) => {
         </Grid>
         <Input ref={nameRef} placeholder='변경하실 닉네임을 입력해주세요' />
         <Button onClick={() => SubmitPic()}><Text color='#f8f9fa' fontSize='14px'>수정 완료</Text></Button>
+        <Text p color='#7879f1' fontSize='14px' margin='20px 0 0' cursor='pointer' hover='opacity 0.9' _onClick={() => deletePic()}>프로필 사진 삭제하기</Text>
       </Grid>
       <Grid is_flex margin='330px 0 0' MOBmargin='30vh 0 0'>
         <Text fontSize='12px' color='#bdc1c6'>© 2021 Project Talk'bout</Text>

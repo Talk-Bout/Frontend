@@ -36,7 +36,6 @@ import Mypage from './pages/Mypage';
 import MypagePic from './pages/MypagePic';
 import MypageBootcamps from './pages/MypageBootcamps';
 import MypagePost from './pages/MypagePost';
-// import DeleteUser from './pages/DeleteUser';
 import MypageBookmarks from './pages/MypageBookmarks';
 
 //로딩 스피너
@@ -45,7 +44,6 @@ import Spinner from './components/Spinner';
 // NotFound 페이지
 import NotFound from './shared/NotFound';
 
-
 function App() {
   const dispatch = useDispatch();
   const is_loading = useSelector(state => state.status.is_loading);
@@ -53,13 +51,12 @@ function App() {
   const provider = getCookie('provider');
 
   useEffect(() => {
-    if (token && provider) {
-      dispatch(userActions.loginCheck());
-      if (provider === 'google') {
-        dispatch(userActions.googleRefresh());
-      } else if (provider === 'kakao') {
-        dispatch(userActions.kakaoRefresh());
-      }
+    if (token && provider === 'google') {
+      dispatch(userActions.googleRefresh());
+      dispatch(userActions.userCheckDB());
+    } else if (token && provider === 'kakao') {
+      dispatch(userActions.kakaoRefresh());
+      dispatch(userActions.userCheckDB());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -5,7 +5,6 @@ import { LogoIcon } from '../image';
 import { HiOutlineHeart, HiHeart } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as campActions } from '../redux/modules/bootcamp';
-import { getCookie } from '../shared/cookie';
 
 const BootRoot = (props) => {
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ const BootRoot = (props) => {
   const bootcampName = decodeURI(window.location.pathname.split('boot/')[1]);
 
   // 현재 접속 중인 사용자의 닉네임
-  const username = getCookie('nickname');
+  const username = useSelector(state => state.user.user.nickname);
   const is_login = useSelector(state => state.user.is_login);
 
   const camp_list = useSelector(state => state.bootcamp.camp_list);
@@ -30,6 +29,7 @@ const BootRoot = (props) => {
     if (is_login) {
       dispatch(campActions.setMyCampDB());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bootcampName]);
 
   // 부트캠프 북마크 표시

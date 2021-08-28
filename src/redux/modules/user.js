@@ -2,29 +2,27 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/request';
-import { getCookie, setCookie, deleteCookie } from "../../shared/cookie";
+import { getCookie, setCookie, deleteCookie, } from "../../shared/cookie";
 import { actionCreators as statusActions } from './status';
 
 //액션 타입
 const DELETE_USER = 'user/DELETE_USER'; //회원 탈퇴
-const GOOGLE_LOG_IN = 'user/GOOGLE_LOG_IN'; // 구글 accessToken, provider, nickname, profilePic 저장
-const GOOGLE_RE_FRESH = 'user/GOOGLE_RE_FRESH'; // 구글 accessToken 갱신 및 idToken 발급
-const KAKAO_LOG_IN = 'user/KAKAO_LOG_IN'; // 카카오 accessToken, provider, nickname, profilePic 저장
-const KAKAO_RE_FRESH = 'user/KAKAO_RE_FRESH'; // 카카오 accessToken 갱신
-const REMOVE_TOKENS = 'user/REMOVE_TOKENS'; // 구글&카카오 로그아웃 및 토큰 삭제
+const LOG_IN = 'user/GOOGLE_LOG_IN'; // 로그인하는 사용자 닉네임, 프로필 사진 저장
 const LOGIN_CHECK = 'user/LOGIN_CHECK'; // 로그인 상태 설정
 const LOGOUT_CHECK = 'user/LOGOUT_CHECK'; // 로그아웃 상태 설정
+const USER_CHECK = 'user/USER_CHECK'; // 접속자 닉네임, 프로필 사진 확인
 
 //액션 생성함수
+const logIn = createAction(LOG_IN, (info) => ({ info }));
 const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
 const loginCheck = createAction(LOGIN_CHECK, () => ({}));
 const logoutCheck = createAction(LOGOUT_CHECK, () => ({}));
+const userCheck = createAction(USER_CHECK, (info) => ({ info }));
 
 //기본값 정하기
 const initialState = {
-  user: [],
+  user: { nickname: null, profilePic: null },
   is_deleted: false,
-  user_info: null,
   is_login: false,
 };
 
@@ -39,14 +37,17 @@ const googleLogin = () => {
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
     const nickname_URL = new URL(window.location.href).searchParams.get('nickname');
     const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
+    const user_info = {
+      nickname: nickname_URL,
+      profilePic: profilePic_URL,
+    }
+    dispatch(logIn(user_info));
     setCookie('refreshToken', refreshToken_URL);
     setCookie('accessToken', accessToken_URL);
     setCookie('idToken', idToken_URL);
     setCookie('provider', provider_URL);
-    setCookie('nickname', nickname_URL);
-    setCookie('profilePic', profilePic_URL);
-    dispatch(loginCheck());
     history.push('/');
+    dispatch(statusActions.endLoading());
     // window.location.reload();
     window.location.reload();
   };
@@ -55,6 +56,7 @@ const googleLogin = () => {
 const googleRefresh = () => {
   // 구글 액세스토큰 갱신 및 아이디토큰 발급
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const clientSecret = 'NEk_9kMajTMRCvE0b24vQWCh';
     const clientId = '1024289816833-ekko4or0shvl9vusetgga5rmbs5u8gla.apps.googleusercontent.com';
     const refreshToken = getCookie('refreshToken');
@@ -70,9 +72,9 @@ const googleRefresh = () => {
       setCookie('accessToken', response.data.access_token);
       setCookie('idToken', response.data.id_token);
       dispatch(statusActions.endLoading());
-      dispatch(loginCheck());
     }).catch((err) => {
       console.error(`구글 로그인 토큰 갱신 에러: ${err}`);
+      dispatch(statusActions.endLoading());
     });
   };
 };
@@ -86,14 +88,16 @@ const kakaoLogin = () => {
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
     const nickname_URL = new URL(window.location.href).searchParams.get('nickname');
     const profilePic_URL = new URL(window.location.href).searchParams.get('profilePic');
+    const user_info = {
+      nickname: nickname_URL,
+      profilePic: profilePic_URL,
+    };
+    dispatch(logIn(user_info));
     setCookie('accessToken', accessToken_URL);
     setCookie('refreshToken', refreshToken_URL);
     setCookie('provider', provider_URL);
-    setCookie('nickname', nickname_URL);
-    setCookie('profilePic', profilePic_URL);
-    dispatch(statusActions.endLoading());
-    dispatch(loginCheck());
     history.push('/');
+    dispatch(statusActions.endLoading());
     window.location.reload();
   };
 };
@@ -101,6 +105,7 @@ const kakaoLogin = () => {
 const kakaoRefresh = () => {
   // 카카오 액세스 토큰 갱신
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const REST_API_KEY = 'a1e045a6bd23510144e987da133f3eff';
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
     const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
@@ -111,9 +116,10 @@ const kakaoRefresh = () => {
       refresh_token: getCookie('refreshToken'),
     }), { headers: headers }).then((response) => {
       setCookie('accessToken', response.data.access_token);
-      dispatch(loginCheck());
+      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`카카오 로그인 토큰 갱신 에러: ${err}`);
+      dispatch(statusActions.setLoading());
     });
   };
 };
@@ -121,6 +127,7 @@ const kakaoRefresh = () => {
 const logOut = () => {
   // 로그아웃
   return function (dispatch) {
+    dispatch(statusActions.setLoading());
     const accessToken = getCookie('accessToken');
     const provider = getCookie('provider');
     const headers = { 'authorization': `Bearer ${accessToken}` };
@@ -128,35 +135,30 @@ const logOut = () => {
     axios.post('http://fw3efsadfcv.shop/api/oauth/logout', {
       provider: provider,
     }, { headers: headers }).then((response) => {
-      window.alert('성공적으로 로그아웃 되었습니다.');
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
       deleteCookie('idToken');
       deleteCookie('provider');
-      deleteCookie('nickname');
-      deleteCookie('profilePic');
       dispatch(logoutCheck());
+      dispatch(statusActions.endLoading());
+      window.alert('성공적으로 로그아웃 되었습니다.');
       history.push('/');
-      // dispatch(removeTokens());
     }).catch((err) => {
       console.error(`로그아웃 에러: ${err}`);
+      dispatch(statusActions.setLoading());
     });
   };
 };
 
-const logOutAuto = () => {
-  // 쿠키 만료된 후 자동 로그아웃
+const userCheckDB = () => {
+  // 접속 중인 사용자 닉네임, 프로필 사진 정보 가져오기
   return function (dispatch) {
-    deleteCookie('accessToken');
-    deleteCookie('refreshToken');
-    deleteCookie('idToken');
-    deleteCookie('provider');
-    deleteCookie('nickname');
-    deleteCookie('profilePic');
-    window.alert('로그인 정보가 만료되어 자동 로그아웃 되었습니다. 로그인 화면으로 이동합니다.');
-    dispatch(logoutCheck());
-    // dispatch(removeTokens());
-    history.push('/login');
+    instance.get('/oauth/tokenUser')
+      .then((response) => {
+        dispatch(userCheck(response.data));
+      }).catch((err) => {
+        console.log(`사용자 접속 정보 불러오기 에러 발생: ${err} ### ${err.response}`);
+      });
   };
 };
 
@@ -178,45 +180,26 @@ const userDeleteDB = (nickname) => {
 
 export default handleActions(
   {
-    // [LOGIN_CHECK]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     if (action.payload.is_error === 400) {
-    //       draft.is_error = true;
-    //     }
-    //   }),
-    [DELETE_USER]: (state, action) =>
-      produce(state, (draft) => {
-        draft.is_deleted = true;
-        draft.is_login = false;
-      }),
-    [GOOGLE_LOG_IN]: (state, action) => produce(state, (draft) => {
-      draft.user_info = action.payload.google_info;
+    [LOG_IN]: (state, action) => produce(state, (draft) => {
+      draft.user_info = action.payload.info;
       draft.is_login = true;
-    }),
-    [GOOGLE_RE_FRESH]: (state, action) => produce(state, (draft) => {
-      draft.user_info['accessToken'] = action.payload.google_tokens.accessToken;
-      draft.user_info['idToken'] = action.payload.google_tokens.idToken;
-      draft.is_login = true;
-    }),
-    [KAKAO_LOG_IN]: (state, action) => produce(state, (draft) => {
-      draft.user_info = action.payload.kakao_info;
-      draft.is_login = true;
-    }),
-    [KAKAO_RE_FRESH]: (state, action) => produce(state, (draft) => {
-      draft.user_info['accessToken'] = action.payload.kakao_token.accessToken;
-      draft.is_login = true;
-    }),
-    [REMOVE_TOKENS]: (state, action) => produce(state, (draft) => {
-      draft.user_info = null;
-      draft.is_login = false;
-      history.push('/');
     }),
     [LOGIN_CHECK]: (state, action) => produce(state, (draft) => {
       draft.is_login = true;
     }),
     [LOGOUT_CHECK]: (state, action) => produce(state, (draft) => {
+      draft.user_info = { nickname: null, profilePic: null };
       draft.is_login = false;
     }),
+    [USER_CHECK]: (state, action) => produce(state, (draft) => {
+      draft.user = action.payload.info;
+      draft.is_login = true;
+    }),
+    // [DELETE_USER]: (state, action) =>
+    // produce(state, (draft) => {
+    //   draft.is_deleted = true;
+    //   draft.is_login = false;
+    // }),
   },
   initialState
 );
@@ -228,8 +211,8 @@ const actionCreators = {
   kakaoLogin,
   kakaoRefresh,
   logOut,
-  logOutAuto,
   loginCheck,
+  userCheckDB,
   userDeleteDB,
 };
 

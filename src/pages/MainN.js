@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Grid } from '../elements';
 import { Sidebar, Body, Banner, MainBoot, MainQna, MainTalk } from '../components';
 

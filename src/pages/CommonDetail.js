@@ -18,13 +18,11 @@ const CommonDetail = (props) => {
   const one_post = useSelector(state => state.post.one_post);
   const comment_list = useSelector(state => state.post.postComment_list);
 
-  console.log(one_post)
-
   // 질문 작성자 프로필 사진
   const user_profile = one_post.user ? one_post.user.profilePic : null;
   const user_profile_url = `http://fw3efsadfcv.shop${user_profile}`
 
-  const username = getCookie('nickname');
+  const username = useSelector(state => state.user.user.nickname);
   const postId = parseInt(props.match.params.id);
   // 게시물 수정, 삭제 버튼
   const [MenuLink, setMenuLink] = useState(null);

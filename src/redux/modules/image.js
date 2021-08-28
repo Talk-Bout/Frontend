@@ -1,6 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from 'immer';
-import { history } from '../ConfigureStore';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
 

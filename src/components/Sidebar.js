@@ -12,9 +12,9 @@ const Sidebar = (props) => {
     <React.Fragment>
       <Grid className="sidebar" backgroundColor="#202124" width="100px" minHeight='100vh' TABwidth='72px' opacity={opacity} TABopacity={TABopacity} MOBdisplay='none'>
         <Grid className="sidebar-inner">
-          <Point
-            src={PointImg} alt='디자인' />
           <FixNav>
+            <Point
+              src={PointImg} alt='디자인' />
             <Image
               src={url === '' ? Home_white : Home}
               onClick={() => history.push('/')}
@@ -43,10 +43,10 @@ const Sidebar = (props) => {
 const FixNav = styled.div`
   position: fixed;
   width: 100px;
-  top: 100px;
+  top: 0;
   @media screen and (max-width: 1090px) {
     width: 72px;
-    top: 72px;
+    top: 0;
   }
 `;
 

@@ -35,10 +35,10 @@ const Footer = (props) => {
 };
 
 const Image = styled.img`
-  margin: 0 0 0 30px;
+  margin: 0 0 0 20px;
   @media screen and (max-width: 1090px) {
     width: 300px;
-    margin: 0 0 0 20px;
+    margin: 0;
   }
   @media screen and (max-width: 767px) {
     height: 48px;

@@ -35,6 +35,7 @@ const Text = (props) => {
     textOverflow,
     whiteSpace,
     overflowWrap,
+    zIndex,
     // 태블릿 사이즈(width: ~1090px)
     TABfontSize,
     TABmargin,
@@ -89,6 +90,7 @@ const Text = (props) => {
     textOverflow: textOverflow,
     whiteSpace: whiteSpace,
     overflowWrap: overflowWrap,
+    zIndex: zIndex,
     TABfontSize: TABfontSize,
     TABmargin: TABmargin,
     TABlineHeight: TABlineHeight,
@@ -170,6 +172,7 @@ const TextBoxP = styled.p`
   text-overflow: ${(props) => props.textOverflow};
   white-space: ${(props) => props.whiteSpace};
   overflow-wrap: ${(props) => props.overflowWrap};
+  z-index: ${(props) => props.zIndex};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};
@@ -232,6 +235,7 @@ const TextBoxS = styled.span`
   text-overflow: ${(props) => props.textOverflow};
   white-space: ${(props) => props.whiteSpace};
   overflow-wrap: ${(props) => props.overflowWrap};
+  z-index: ${(props) => props.zIndex};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};

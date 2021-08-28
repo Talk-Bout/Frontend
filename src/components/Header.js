@@ -119,6 +119,18 @@ const Header = (props) => {
               </MenuItem>
             </Menu>
           </Grid>
+          {/* 모바일 버전에서만 보이는 로그아웃 버튼 */}
+          <LogoutBtn type="button" onClick={() => history.push('/login')}>
+            <Text
+              MOBfontSize='12px'
+              color="#f8f9fa"
+              cursor="pointer"
+              TABlineHeight='18px'
+              MOBmargin='0'
+            >
+              로그아웃
+            </Text>
+          </LogoutBtn>
         </Grid>
       </React.Fragment>
     );
@@ -206,16 +218,17 @@ const Header = (props) => {
 // `;
 
 const Logo = styled.img`
-  width: 300px;
+  height: 84px;
+  width: auto;
   margin: 0 8px;
   cursor: pointer;
   vertical-align: middle;
   @media screen and (max-width: 1090px) {
     height: 56px;
-    width: 140px;
+    width: auto;
   }
   @media screen and (max-width: 767px) {
-    margin: 0;
+    margin: 0 0 0 -10px;
     width: auto;
     height: 48px;
   }
@@ -282,6 +295,21 @@ const LoginBtn = styled.button`
     margin: 12px 0 0;
     height: fit-content;
     width: 60px;
+  }
+`;
+
+const LogoutBtn = styled.button`
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  @media screen and (max-width: 767px) {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    float: right;
+    margin: 12px 17px 0 0;
+    height: fit-content;
+    width: 70px;
   }
 `;
 

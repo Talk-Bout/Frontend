@@ -195,7 +195,7 @@ const QuestionDetail = (props) => {
               {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" margin="10px 0">
                 <Grid width="40px">
-                  <Image src={user_profile != null && user_profile !== 'null' ? Profile_medium : user_profile_url}></Image>
+                  <Image src={user_profile == null || user_profile === 'null' ? Profile_medium : user_profile_url}></Image>
                 </Grid>
                 <Grid width="40%">
                   <Text p margin="auto 10px" fontSize="14px" fontWeight="600" color="#9aa0a6" cursor='default'>

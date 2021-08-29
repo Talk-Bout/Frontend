@@ -48,6 +48,7 @@ const Grid = (props) => {
     cursor,
     opacity,
     userSelect,
+    wordBreak,
     // 태블릿 사이즈(width: 768px~1090px)
     TABheight,
     TABwidth,
@@ -112,6 +113,7 @@ const Grid = (props) => {
     cursor: cursor,
     opacity: opacity,
     userSelect: userSelect,
+    wordBreak: wordBreak,
     // 태블릿 사이즈(width: ~1090px)
     TABheight: TABheight,
     TABwidth: TABwidth,
@@ -196,6 +198,7 @@ const GridBox = styled.div`
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: ${(props) => props.userSelect ? props.userSelect : 'none'};
+  word-break: ${(props) => props.wordBreak};
   // 태블릿 사이즈(width: ~1090px)
   @media screen and (max-width: 1090px) {
     height: ${(props) => props.TABheight};

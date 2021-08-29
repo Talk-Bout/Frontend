@@ -139,12 +139,12 @@ const QuestionDetail = (props) => {
             {/* 질문 카드 */}
             <QuestionBox>
               <Grid display="flex">
-                <Grid width="100%">
+                <Grid width="100%" TABmargin='11px 0 0' MOBmargin='6px 0 0'>
                   {/* 제목 */}
-                  <Text fontSize="24px" fontWeight="600" color="#ffffff" cursor='default'>
+                  <Text fontSize="24px" MOBfontSize='16px' fontWeight="700" color="#ffffff" cursor='default'>
                     Q
                   </Text>
-                  <Text fontSize="24px" fontWeight="600" margin="0 8px" color="#ffffff" cursor='default'>
+                  <Text fontSize="24px" MOBfontSize='16px' fontWeight="700" margin="0 8px" color="#ffffff" cursor='text' userSelect='text'>
                     {question_found.title}
                   </Text>
                 </Grid>
@@ -155,13 +155,13 @@ const QuestionDetail = (props) => {
                     <>
                       {question_bookmark ?
                         <Button padding="0" width="16.33px" height="21px" onClick={() => delete_bookmark(question_bookmark.questionBookmarkId)}>
-                          <Text padding="0" color="#7879F1" fontSize="24px" lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
+                          <Text padding="0" color="#7879F1" fontSize="24px" MOBfontSize='16px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
                             <BsBookmarkFill />
                           </Text>
                         </Button>
                         :
                         <Button padding="0" width="16.33px" height="21px" onClick={() => add_bookmark()}>
-                          <Text padding="0" color="#9aa0a6" fontSize="24px" lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
+                          <Text padding="0" color="#9aa0a6" fontSize="24px" MOBfontSize='16px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
                             <BsBookmark />
                           </Text>
                         </Button>
@@ -172,7 +172,7 @@ const QuestionDetail = (props) => {
                   {question_found.nickname === user_name ?
                     <>
                       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        <Text padding="0" color="#9AA0A6" fontSize="24px" lineHeight="35px" hover="opacity: 0.8">
+                        <Text padding="0" color="#9AA0A6" fontSize="24px" MOBfontSize='16px' lineHeight="35px" hover="opacity: 0.8">
                           <BsThreeDotsVertical />
                         </Text>
                       </Button>
@@ -193,21 +193,21 @@ const QuestionDetail = (props) => {
                 </Grid>
               </Grid>
               {/* {Question 글쓴이 프로필 }*/}
-              <Grid display="flex" margin="10px 0">
-                <Grid width="40px">
+              <Grid display="flex" margin="10px 0" TABmargin='24px 0 32px' MOBmargin='16px 0'>
+                <Grid width="40px" MOBwidth='28px'>
                   <Image src={user_profile == null || user_profile === 'null' ? Profile_medium : user_profile_url}></Image>
                 </Grid>
                 <Grid width="40%">
-                  <Text p margin="auto 10px" fontSize="14px" fontWeight="600" color="#9aa0a6" cursor='default'>
+                  <Text p margin="auto 10px" fontSize="14px" MOBfontSize='12px' fontWeight="600" color="#9aa0a6" cursor='default'>
                     {question_found.nickname}
                   </Text>
-                  <Text p margin="auto 10px" fontSize='14px' color="#bdc1c6" cursor='default'>
+                  <Text p margin="auto 10px" fontSize='14px' MOBfontSize='8px' color="#bdc1c6" cursor='default'>
                     {question_found.createdAt}
                   </Text>
                 </Grid>
               </Grid>
               {/* Question 본문 내용 */}
-              <Text p margin="50px 0" fontSize="16px" color="#bdc1c6" cursor='text' userSelect='text' whiteSpace='pre-line'>
+              <Text p margin="50px 0" TABmargin='0 0 48px' MOBmargin='0 0 24px' fontSize="16px" MOBfontSize='14px' color="#bdc1c6" cursor='text' userSelect='text' whiteSpace='pre-line'>
                 {question_found.content}
               </Text>
               {question_found.image ?
@@ -220,38 +220,38 @@ const QuestionDetail = (props) => {
               {/* 좋아요 수 */}
               {/* 내가 좋아요를 눌렀다면, 보라색 */}
               {/* 누르지 않았다면, 하얀색으로 보여주기 */}
-              <Grid display="flex" margin="56px 0 47px" verticalAlign="center">
-                <span style={{ backgroundColor: '#202124', padding: '8px 16px', borderRadius: '10px' }}>
+              <Grid display="flex" margin="56px 0 47px" MOBmargin='24px 0' verticalAlign="center">
+                <Text backgroundColor='#202124' padding='8px 16px' borderRadius='10px'>
                   {is_login ?
                     question_like ?
-                      <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeQuestion(question_like.questionLikeId)}>
-                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px' }}><BiLike /></span>
+                      <Text color="#7879F1" fontSize="14px" MOBfontSize='12px' fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeQuestion(question_like.questionLikeId)}>
+                        <Text fontSize='24px' MOBfontSize='16px' margin='0 8px 0 0' verticalAlign='middle' lineHeight='30px'><BiLike /></Text>
                         {question_like_list.length}
                       </Text>
                       :
-                      <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeQuestion()}>
-                        <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+                      <Text color="#BDC1C6" fontSize="14px" MOBfontSize='12px' fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeQuestion()}>
+                        <Text fontSize='24px' MOBfontSize='16px' margin='0 8px 0 0' verticalAlign='middle' lineHeight='30px'><BiLike /></Text>
                         {question_like_list.length}
                       </Text>
                     :
-                    <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="default">
-                      <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+                    <Text color="#BDC1C6" fontSize="14px" MOBfontSize='12px' fontWeight="700" lineHeight="18px" cursor="default">
+                      <Text fontSize='24px' MOBfontSize='16px' margin='0 8px 0 0' verticalAlign='middle' lineHeight='30px'><BiLike /></Text>
                       {question_like_list.length}
                     </Text>
                   }
-                </span>
+                </Text>
                 {/* 답변 수 */}
-                <Text color="#C4C4C4" margin="auto 16px" cursor='default'>
-                  <span style={{ fontSize: '20px', lineHeight: '30px', margin: '0 6px 0 0', verticalAlign: 'middle', }}>
+                <Text color="#C4C4C4" fontSize='12px' margin="auto 16px" cursor='default'>
+                  <Text fontSize='20px' MOBfontSize='14px' lineHeight='30px' margin='0 6px 0 0' verticalAlign='middle'>
                     <BiComment />
-                  </span>
+                  </Text>
                   {question_found.answerNumber}
                 </Text>
                 {/* 조회수 */}
-                <Text color="#C4C4C4" margin="auto 16px auto 0" cursor='default'>
-                  <span style={{ fontSize: '20px', lineHeight: '30px', margin: '0 6px', verticalAlign: 'middle', }}>
+                <Text color="#C4C4C4" fontSize='12px' margin="auto 16px auto 0" cursor='default'>
+                  <Text fontSize='20px' MOBfontSize='14px' lineHeight='30px' margin='0 6px' verticalAlign='middle'>
                     <BsEye />
-                  </span>
+                  </Text>
                   {question_found.viewCount}
                 </Text>
               </Grid>
@@ -262,7 +262,7 @@ const QuestionDetail = (props) => {
             {/* 로그인 상태에서만 보여주기 */}
             {is_login &&
               <AddAnswerSection>
-                <Text p fontWeight="600" fontSize="14px" color="#E2E2E3" cursor='default'>
+                <Text p fontWeight="700" fontSize="14px" color="#E2E2E3" cursor='default'>
                   답변
                 </Text>
                 <ACommentBox>
@@ -306,9 +306,34 @@ const QuestionBox = styled.div`
   @media screen and (max-width: 1200px) {
     width: 800px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 660px;
   }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+`;
+
+const ImageBox = styled.div`
+  width: 70%;
+  border: none;
+  box-sizing: border-box;
+  text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 32px auto;
+  @media screen and (max-width: 767px) {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+  }
+`;
+
+const Image = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  object-fit: contain; //가로세로 비율 콘텐츠 박스 크기에 맞춤
 `;
 
 //Answer Section
@@ -317,9 +342,13 @@ const AnswerBox = styled.div`
   margin: 0 -40px -80px -40px;
   padding: 10px 0 80px;
   background-color: #282a2d;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     margin: 0 -18px -65px -18px;
     padding-bottom: 65px;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 0 -18px;
+    padding: 10px 0 0;
   }
 `;
 
@@ -329,22 +358,6 @@ const ACommentBox = styled.div`
   border: 1px solid #9aa0a6;
   width: 100%;
 `;
-const ImageBox = styled.div`
-  width: 70%;
-  border: none;
-  box-sizing: border-box;
-  text-align: center;
-  object-fit: cover;
-  overflow: hidden;
-  margin: 32px auto;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  object-fit: contain; //가로세로 비율 콘텐츠 박스 크기에 맞춤
-`;
 
 const AddAnswerSection = styled.div`
   width: 1044px;
@@ -352,7 +365,7 @@ const AddAnswerSection = styled.div`
   @media screen and (max-width: 1200px) {
     width: 800px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 660px;
   }
 `;
@@ -378,7 +391,7 @@ const AInput = styled.textarea`
   @media screen and (max-width: 1200px) {
     width: 760px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 620px;
   }
 `;
@@ -395,7 +408,7 @@ const AnswerSaveButton = styled.button`
   @media screen and (max-width: 1200px) {
     margin-left: 630px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     margin-left: 490px;
   }
 `;

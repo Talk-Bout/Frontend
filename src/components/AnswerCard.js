@@ -44,26 +44,26 @@ const AnswerCard = (props) => {
         <AnswerContent>
           <Grid display="flex">
             {/* 답변 작성자 정보 */}
-            <Text fontSize="32px" fontWeight="700" color="#ffffff" cursor='default'>
+            <Text fontSize="32px" MOBfontSize='24px' fontWeight="700" color="#ffffff" cursor='default'>
               A
             </Text>
-            <Grid width="40px" height="40px" margin="auto 15px">
-              <Image src={user_profile == null ? Profile_medium : user_profile_url}></Image>
+            <Grid width="40px" height="40px" MOBwidth='28px' MOBheight='28px' margin="auto 15px" MOBmargin='4px 8px'>
+              <Image maxWidth='100%' maxHeight='100%' src={user_profile == null ? Profile_medium : user_profile_url}></Image>
             </Grid>
-            <Grid width="480px">
+            <Grid width="480px" MOBwidth='fit-content' MOBmargin='2px 0 0'>
               {/* 작성자 닉네임 */}
-              <Text p margin="auto" fontSize="14px" fontWeight="600" color="#F1F3F4" cursor='default'>
+              <Text p margin="auto" fontSize="14px" MOBfontSize='12px' fontWeight="600" color="#F1F3F4" cursor='default'>
                 {props.nickname} 님의 답변
               </Text>
               {/* 작성 시간 */}
-              <Text p margin="auto" fontSize="12px" color="#BDC1C6" cursor='default'>
+              <Text p margin="auto" fontSize="12px" MOBfontSize='8px' color="#BDC1C6" cursor='default'>
                 {props.createdAt}
               </Text>
             </Grid>
           </Grid>
           {/* 답변 내용 */}
-          <Grid margin="30px 0 50px 0" height='fit-content'>
-            <Text p fontSize="16px" color="#C4C4C4" cursor='text' userSelect='text' wordBreak='break-all'>
+          <Grid margin="30px 0 50px" MOBmargin='10px 0 20px' height='fit-content'>
+            <Text p fontSize="16px" MOBfontSize='12px' color="#C4C4C4" cursor='text' userSelect='text' wordBreak='break-all'>
               {props.content}
             </Text>
           </Grid>
@@ -71,26 +71,26 @@ const AnswerCard = (props) => {
           {/* 이미 눌려 있는 경우 보라색, 그렇지 않은 경우 하얀색으로 보여주기 */}
           {is_login ?
             my_answer_like ?
-              <span style={{ backgroundColor: '#282A2D', padding: '8px 16px', borderRadius: '12px', }}>
-                <Text color="#7879F1" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}>
-                  <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+              <Text backgroundColor='282A2D' padding='8px 16px' MOBpadding='2px 12px 6px' borderRadius='12px'>
+                <Text color="#7879F1" fontSize="14px" MOBfontSize='12px' fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}>
+                  <Text fontSize='24px' MOBfontSize='16px' margin='0 8px 0 0' MOBmargin='0 6px 0 0' verticalAlign='middle' lineHeight='30px' MOBlineHeight='20px'><BiLike /></Text>
                   {one_answer.likeNumber}
                 </Text>
-              </span>
+              </Text>
               :
-              <span style={{ backgroundColor: '#2E3134', padding: '8px 16px', borderRadius: '12px', }}>
-                <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeAnswer()}>
-                  <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+              <Text backgroundColor='#2E3134' padding='8px 16px' MOBpadding='2px 12px 6px' borderRadius='12px'>
+                <Text color="#BDC1C6" fontSize="14px" MOBfontSize='12px' fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => likeAnswer()}>
+                  <Text fontSize='24px' MOBfontSize='16px' margin='0 8px 0 0' MOBmargin='0 6px 0 0' verticalAlign='middle' lineHeight='30px' MOBlineHeight='20px'><BiLike /></Text>
                   {one_answer.likeNumber}
                 </Text>
-              </span>
+              </Text>
             :
-            <span style={{ backgroundColor: '#2E3134', padding: '8px 16px', borderRadius: '12px', }}>
-              <Text color="#BDC1C6" fontSize="14px" fontWeight="700" lineHeight="18px" cursor="default">
-                <span style={{ fontSize: '24px', margin: '0 8px 0 0', verticalAlign: 'middle', lineHeight: '30px', }}><BiLike /></span>
+            <Text backgroundColor='#2E3134' padding='8px 16px' MOBpadding='4px 16px 8px' borderRadius='12px'>
+              <Text color="#BDC1C6" fontSize="14px" MOBfontSize='12px' fontWeight="700" lineHeight="18px" cursor="default">
+                <Text fontSize='24px' MOBfontSize='16px' margin='0 8px 0 0' MOBmargin='0 6px 0 0' verticalAlign='middle' lineHeight='30px' MOBlineHeight='20px'><BiLike /></Text>
                 {one_answer.likeNumber}
               </Text>
-            </span>
+            </Text>
           }
         </AnswerContent>
       </AnswerBox>
@@ -106,13 +106,19 @@ const AnswerBox = styled.div`
   @media screen and (max-width: 1200px) {
     width: 800px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 660px;
+  }
+  @media screen and (max-width: 767px) {
+    width: calc(100% - 36px);
   }
 `;
 
 const AnswerContent = styled.div`
   padding: 40px;
+  @media screen and (max-width: 767px) {
+    padding: 20px;
+  }
 `;
 
 export default AnswerCard;

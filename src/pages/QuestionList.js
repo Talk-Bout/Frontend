@@ -67,20 +67,20 @@ const QuestionList = (props) => {
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           {/* 질문과 답변 타이틀 */}
-          <Grid className='Title' height='fit-content' TABmargin='15px 0 0'>
-            <Text color="#F8F9FA" fontWeight="700" fontSize="32px" TABfontSize='20px' TABmargin='15px 0 0' cursor='default'>
+          <Grid className='Title' height='fit-content' TABmargin='15px 0 0' MOBmargin='6px 0 0'>
+            <Text color="#F8F9FA" fontWeight="700" fontSize="32px" TABfontSize='20px' MOBfontSize='16px' cursor='default'>
               <Emoji src={Fire_emoji} alt='불' height='32px' TABheight='20px' margin='0 8px 0 0' />질문과 답변
             </Text>
           </Grid>
           <Grid className='Descr-btn' display='flex' justifyContent='space-between' height='fit-content'>
-            <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' lineHeight='52px' TABlineHeight='32px' cursor='default'>궁금한 점을 자유롭게 묻고 답하는 공간이에요!</Text>
+            <Text color="#BDC1C6" fontSize="20px" TABfontSize='12px' MOBfontSize='10px' lineHeight='52px' TABlineHeight='32px' cursor='default'>궁금한 점을 자유롭게 묻고 답하는 공간이에요!</Text>
             <div>
               {/* 인기순, 최신순 정렬 버튼 */}
               <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' lineHeight="52px" TABlineHeight='24px' verticalAlign='middle' margin='8px'><RiArrowUpDownFill /></Text>
               {popPage ?
-                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_latest()}>인기순</Text>
+                <Text fontSize="16px" TABfontSize='14px' MOBfontSize='10px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" MOBmargin='0' cursor="pointer" _onClick={() => set_latest()}>인기순</Text>
                 :
-                <Text fontSize="16px" TABfontSize='14px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" cursor="pointer" _onClick={() => set_popular()}>최신순</Text>
+                <Text fontSize="16px" TABfontSize='14px' MOBfontSize='10px' color="#F8F9fA" lineHeight="48px" TABlineHeight='24px' margin="10px 16px 0 0" MOBmargin='0' cursor="pointer" _onClick={() => set_popular()}>최신순</Text>
               }
               {/* 글쓰기 버튼 */}
               {is_login ?
@@ -139,23 +139,23 @@ const QuestionList = (props) => {
           <Grid is_center>
             <PageBox>
               {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기 */}
-              <Text fontSize="14px" margin="0 20px 0 0">
+              <Text fontSize="14px" MOBfontSize='12px' margin="0 20px 0 0">
                 <Page onClick={() => toPrePage()}>
                   {page === 1 ? '' : <BsChevronLeft />}
                 </Page>
               </Text>
               {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-              <Text fontSize="14px" margin="0 20px 0">
+              <Text fontSize="14px" MOBfontSize='12px' margin="0 20px 0">
                 <Page onClick={() => toPrePage()}>
                   {page === 1 ? '' : page - 1}
                 </Page>
               </Text>
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-              <Text fontSize="14px" margin="0 20px 0">
+              <Text fontSize="14px" MOBfontSize='12px' margin="0 20px 0">
                 <Page style={{ opacity: 1 }}>{page}</Page>
               </Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text fontSize="14px" margin="0 20px 0">
+              <Text fontSize="14px" MOBfontSize='12px' margin="0 20px 0">
                 {popPage ? (
                   <Page onClick={() => toNextPage()}>
                     {pop_qna_list.length > 12 ? page + 1 : ''}
@@ -167,7 +167,7 @@ const QuestionList = (props) => {
                 )}
               </Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text fontSize="14px" margin="0 0 0 20px">
+              <Text fontSize="14px" MOBfontSize='12px' margin="0 0 0 20px">
                 {popPage ? (
                   <Page onClick={() => toNextPage()}>
                     {pop_qna_list.length > 12 ? <BsChevronRight /> : ''}
@@ -209,9 +209,14 @@ const CardList = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 16px;
   row-gap: 24px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     row-gap: 16px;
     margin-top: 15px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+    margin-top: 16px;
   }
 `;
 
@@ -219,7 +224,11 @@ const PageBox = styled.div`
   display: inline-block;
   height: 100%;
   margin-top: 40px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
+    margin-top: 24px;
+  }
+  @media screen and (max-width: 767px) {
+    padding-bottom: 50px;
     margin-top: 24px;
   }
 `;

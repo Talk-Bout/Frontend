@@ -5,6 +5,8 @@ const Image = (props) => {
   const {
     width,
     height,
+    maxWidth,
+    maxHeight,
     shape,
     src,
     cursor,
@@ -27,6 +29,8 @@ const Image = (props) => {
   const styles = {
     width: width,
     height: height,
+    maxWidth: maxWidth,
+    maxHeight: maxHeight,
     src: src,
     cursor: cursor,
     margin: margin,
@@ -75,6 +79,8 @@ Image.defaultProps = {
 const ImageDefault = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  max-width: ${(props) => props.maxWidth};
+  max-height: ${(props) => props.maxHeight};
   cursor: ${(props) => props.cursor};
   background-image: url('${(props) => props.src}');
   background-size: contain;

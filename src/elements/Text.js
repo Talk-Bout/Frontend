@@ -50,6 +50,7 @@ const Text = (props) => {
     // 모바일 사이즈(width: ~767px)
     MOBfontSize,
     MOBmargin,
+    MOBpadding,
     MOBlineHeight,
     MOBtop,
     MOBwlc,
@@ -104,6 +105,7 @@ const Text = (props) => {
     TABheight: TABheight,
     MOBfontSize: MOBfontSize,
     MOBmargin: MOBmargin,
+    MOBpadding: MOBpadding,
     MOBlineHeight: MOBlineHeight,
     MOBtop: MOBtop,
     MOBwlc: MOBwlc,
@@ -192,6 +194,7 @@ const TextBoxP = styled.p`
     @media screen and (max-width: 767px) {
     font-size: ${(props) => props.MOBfontSize};
     margin: ${(props) => props.MOBmargin};
+    padding: ${(props) => props.MOBpadding};
     line-height: ${(props) => props.MOBlineHeight};
     top: ${(props) => props.MOBtop};
     -webkit-line-clamp: ${(props) => props.MOBwlc};
@@ -256,6 +259,7 @@ const TextBoxS = styled.span`
   @media screen and (max-width: 767px) {
     font-size: ${(props) => props.MOBfontSize};
     margin: ${(props) => props.MOBmargin};
+    padding: ${(props) => props.MOBpadding};
     line-height: ${(props) => props.MOBlineHeight};
     top: ${(props) => props.MOBtop};
     -webkit-line-clamp: ${(props) => props.MOBwlc};

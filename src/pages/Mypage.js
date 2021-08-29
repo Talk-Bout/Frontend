@@ -58,7 +58,7 @@ const Mypage = (props) => {
     window.alert('지금은 에러 처리 중입니다!\n빠르게 복구하여 돌아오겠습니다! ;-/')
   }
 
-  if (!is_login) {
+  if (!provider) {
     return <NotFound />
   }
 
@@ -88,15 +88,15 @@ const Mypage = (props) => {
               </ProfileInner>
             </ProfileOutter>
             {/* 북마크된 부트캠프, 글들 */}
-            <ResponSiveOutter height="100%" width="100%" >
-              <Grid height="100%" width="100%">
-                <Grid height="172px" width="100%" >
-                  <Grid padding="18px 20px" justifyContent="space-between" flexDirection="row" alignItems="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
-                    <BookMarkBox>
-                      <Text fontSize="18px" color="#F1F3F4" cursor='default'>관심있는 부트캠프</Text>
+            <ResponsiveOutter>
+              <Grid height="100%">
+                <Grid height="172px" MOBheight='fit-content'>
+                  <Grid padding="18px 20px" justifyContent="space-between" flexDirection="row" alignItems="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" MOBbackgroundColor='#17181d' height="64px" MOBheight='40px' MOBpadding='8px 0' width="100%">
+                    <div>
+                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" cursor='default'>관심있는 부트캠프</Text>
                       <Count> {'('}{myboot_list.length}{')'} </Count>
-                    </BookMarkBox>
-                    <MoreButton onClick={() => history.push('/mypage/mycamp')}>더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
+                    </div>
+                    <MoreButton onClick={() => history.push('/mypage/mycamp')}><WordMOBNone>더보기 </WordMOBNone><Text verticalAlign='middle'><AiOutlineRight /></Text></MoreButton>
                   </Grid>
                   {/* 관심있는 부트캠프가 있을 때만 보여줌 */}
                   {myboot_list.length !== 0 ?
@@ -105,12 +105,10 @@ const Mypage = (props) => {
                         return (
                           <BootCard key={idx + 100} className={`bootcard${idx}`} onClick={() => { history.push(`/boot/${mb.bootcampName}`) }}
                           >
-                            <ImageBox>
-                              <Logo>
-                                <Img src={mb.bootcamp.logo ? mb.bootcamp.logo : CampLogo_default} />
-                              </Logo>
-                            </ImageBox>
-                            <Grid padding="10px 0" TABpadding='16px 0' width="67%">
+                            <Logo>
+                              <Img src={mb.bootcamp.logo ? mb.bootcamp.logo : CampLogo_default} />
+                            </Logo>
+                            <Grid padding="10px 0" TABpadding='16px 0' width="67%" MOBdisplay='none'>
                               <Grid display="flex" justifyContent="space-between">
                                 <Text p margin="0 0 5px 15px" TABmargin='0 0 5px 0' color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                                 <Text margin="0 0 0 2px" TABmargin='0' cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill /></Text>
@@ -122,49 +120,65 @@ const Mypage = (props) => {
                       })}
                     </BootBox>
                     :
-                    <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="96px" width="98.5%">
+                    <Grid display="flex" margin="12px 0 0 0" justifyContent="space-between" height="96px" width="98.5%" MOBdisplay='none'>
                       <Grid height="100%" width="100%" border="4px dotted #2E3134" borderRadius="5px" display='flex' alignItems='center'>
                         <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default' margin='auto'>부트캠프를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }
                 </Grid>
-                <Grid width="100%" margin="48px 0 0 0" >
-                  <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
-                    <BookMarkBox>
-                      <Text fontSize="18px" color="#F1F3F4" cursor='default'>내 북마크</Text>
+                <Grid width="100%" margin="48px 0 0" MOBmargin='16px 0 0'>
+                  <Grid padding="18px 20px" MOBpadding='8px 0' flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" MOBbackgroundColor='#17181d' height="64px" MOBheight='40px' width="100%">
+                    <div>
+                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" cursor='default'>내 북마크</Text>
                       <Count> {'('}{mytalk_list.length}{')'} </Count>
-                    </BookMarkBox>
+                    </div>
                     <MoreButton onClick={() => { history.push('/mypage/mybookmarks') }}
-                    >더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
+                    ><WordMOBNone>더보기 </WordMOBNone><span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
                   </Grid>
                   {/* 북마크가 있을 경우에만 보여줌 */}
                   {mytalk_list.length !== 0 ?
-                    <Grid display="flex" margin="12px 0" height="211px" width="100%">
+                    <Grid display="flex" margin="12px 0" MOBmargin='4px 0 33px' height="211px" MOBheight='fit-content' width="100%">
+                      {/* 내 북마크 카드 */}
                       {mytalk.map((p, idx) => {
                         return (
-                          <Grid key={idx} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
+                          <Grid key={idx} margin="0 16px 16px 0" MOBmargin='0 4px' padding="15px 20px" MOBpadding='14px' height="fit-content" MOBheight='180px' width="32.3%" MOBwidth='49%' backgroundColor="#202124" borderRadius="12px"
                             _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer' hover='opacity: 0.7'>
-                            <Grid overflow="hidden" height="100px" width="100%" >
-                              <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
+                            <Grid overflow="hidden" height="fit-content">
+                              {/* 제목 */}
+                              <Text margin="0 0 12px" color="#F1F3F4" fontSize="18px"
                                 overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
+                                MOBfontSize='14px'
                               >{p.post.title}
                               </Text>
-                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="2" wbo="vertical"
-                                margin="0 0 24px 0" height="44px" TABfontSize="12px"
+                              {/* 내용 */}
+                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="2" MOBwlc='3' wbo="vertical"
+                                margin="0 0 24px"
+                                MOBmargin='0 0 16px' height="42px"
+                                TABheight='36px'
+                                MOBheight='44px'
+                                TABfontSize="12px"
+                                MOBfontSize='10px'
                               >{p.post.content}</Text>
                             </Grid>
-                            <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
+                            {/* 작성자 프로필 */}
+                            <Grid display="flex" height="fit-content" width="100%">
                               <ImgBox>
-                                <ProfileImg src={Profile_small} alt='프로필' />
+                                <Img src={Profile_small} alt='프로필' />
                               </ImgBox>
                               <InfoBox>
-                                <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.post.nickname}</Text>
-                                <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive />{p.post.createdAt}</Text>
+                                <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px" MOBfontSize='8px'>{p.post.nickname}</Text>
+                                {/* 작성일시 */}
+                                <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"
+                                  MOBfontSize='8px'><Text margin="0 4px 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="12px"
+                                    MOBfontSize='10px'
+                                  ><BiTimeFive /></Text>{p.post.createdAt}</Text>
                               </InfoBox>
                             </Grid>
-                            <Grid padding="3px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
-                              <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.post.category} </Text>
+                            <CardLine />
+                            {/* 게시판 및 카테고리 */}
+                            <Grid padding="0 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+                              <Text color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.post.category} </Text>
                             </Grid>
 
                           </Grid>
@@ -172,49 +186,58 @@ const Mypage = (props) => {
                       })}
                     </Grid>
                     :
-                    <Grid margin="12px 0 0 0" height="211px" width="98.5%">
+                    <Grid margin="12px 0 0 0" height="211px" width="100%" MOBdisplay='none'>
                       <Grid display="flex" alignItems="center" height="203px" width="100%" border="4px dotted #2E3134" borderRadius="12px">
                         <Text fontSize="16px" color="#FFFFFF" TABfontSize="16px" cursor='default' margin='auto'>북마크를 추가해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
                     </Grid>
                   }
                 </Grid>
-                <Grid height="279px" width="100%" margin="48px 0 0 0">
-                  <Grid padding="18px 20px" flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" height="64px" width="98.5%">
-                    <BookMarkBox>
-                      <Text fontSize="18px" color="#F1F3F4" cursor='default'>{nickname} 님의 글</Text>
+                <Grid width="100%" margin="48px 0 0" MOBmargin='16px 0 0'>
+                  <Grid padding="18px 20px"
+                    MOBpadding='8px 0' flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124"
+                    MOBbackgroundColor='#17181d' height="64px" MOBheight='40px' width="100%">
+                    <div>
+                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" cursor='default'>{nickname} 님의 글</Text>
                       <Count> {'('}{mypost_list.length}{')'} </Count>
-                    </BookMarkBox>
-                    <MoreButton color="#5F6368" bg="transparent" border="none" font_size="18px" fontWeight="bold" width="10%"
-                      onClick={() => { history.push('/mypage/mypost') }}
-                    >더보기 <span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
+                    </div>
+                    <MoreButton onClick={() => { history.push('/mypage/mypost') }}
+                    ><WordMOBNone>더보기 </WordMOBNone><span style={{ verticalAlign: 'middle' }}><AiOutlineRight /></span></MoreButton>
                   </Grid>
                   {/* 내가 쓴글이 있을 경우에만 보여줌 */}
                   {mypost_list.length !== 0 ?
-                    <Grid display="flex" margin="12px 0" height="211px" width="100%">
+                    <Grid display="flex" margin="12px 0" MOBmargin='4px 0 33px' height="211px" MOBheight='fit-content' width="100%">
+                      {/* 내가 쓴 글 카드 */}
                       {mypost.map((p, idx) => {
                         return (
-                          <Grid key={idx + 50} margin="0 16px 16px 0" padding="15px 20px" height="211px" width="32.3%" backgroundColor="#202124" borderRadius="12px"
+                          <Grid key={idx + 50} margin="0 16px 16px 0" OBmargin='0 4px' padding="15px 20px" MOBpadding='14px' height="fit-content" MOBheight='170px' width="32.3%" MOBwidth='49%' backgroundColor="#202124" borderRadius="12px"
                             _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer' hover='opacity: 0.7'>
-                            <Grid overflow="hidden" height="100px" width="100%" >
-                              <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
+                            <Grid overflow="hidden" height="fit-content">
+                              <Text p margin="0 0 12px" color="#F1F3F4" fontSize="18px"
                                 overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
+                                MOBfontSize='14px'
                               >{p.title}
                               </Text>
-                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                                margin="0 0 24px 0" height="44px" TABfontSize="12px"
+                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="2" MOBwlc='3' wbo="vertical" margin="0 0 24px"
+                                MOBmargin='0 0 16px' height="42px"
+                                TABheight='36px'
+                                MOBheight='44px'
+                                TABfontSize="12px"
+                                MOBfontSize='10px'
                               >{p.content}</Text>
                             </Grid>
-                            <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
+                            <Grid display="flex" height="fit-content">
                               <ImgBox>
-                                <ProfileImg src={profilePic === 'null' ? Profile_small : profilePic} alt='프로필' />
+                                <ProfileImg src={Profile_small} alt='프로필' />
                               </ImgBox>
-                              <InfoBox>
-                                <Text margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><span style={{ marginRight: '4px' }}><BiTimeFive /></span>{p.createdAt}</Text>
-                              </InfoBox>
+                              <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"
+                                MOBfontSize='8px'><Text margin="0 4px 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="12px"
+                                  MOBfontSize='10px'
+                                ><BiTimeFive /></Text>{p.createdAt}</Text>
                             </Grid>
-                            <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
-                              <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.category} </Text>
+                            <CardLine />
+                            <Grid padding="0 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
+                              <Text color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.category} </Text>
                             </Grid>
 
                           </Grid>
@@ -222,7 +245,7 @@ const Mypage = (props) => {
                       })}
                     </Grid>
                     :
-                    <Grid margin="12px 0 0 0" height="203px" width="98%">
+                    <Grid margin="12px 0 0 0" height="203px" width="100%" MOBdisplay='none'>
                       <Grid display="flex" alignItems="center" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
                         <Text fontSize="18px" color="#FFFFFF" TABfontSize="16px" cursor='default' margin='auto'>글을 작성해주세요 ㄟ(≧◇≦)ㄏ</Text>
                       </Grid>
@@ -230,7 +253,7 @@ const Mypage = (props) => {
                   }
                 </Grid>
               </Grid>
-            </ResponSiveOutter>
+            </ResponsiveOutter>
           </Outter>
         </Body>
       </Grid>
@@ -242,9 +265,7 @@ const Outter = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  grid-template-columns: 30% 68%;
-
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     grid-template-columns: 100%;
     display: grid;
   }
@@ -255,10 +276,13 @@ const ProfileOutter = styled.div`
   height: auto;
   width: 24%;
   margin: 0 16px 0 0;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
-    width: 98.5%;
+  @media screen and (max-width: 1090px) {
+    width: 100%;
     height: auto;
     margin: 0 0 32px 0;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 0 0 16px 0;
   }
 `;
 
@@ -269,14 +293,19 @@ const ProfileInner = styled.div`
   margin: auto;
   border: 1px solid #202124;
   border-radius: 12px;
-  @media screen and (min-width: 992px) and (max-width: 1460px) { 
+  @media screen and (max-width: 1460px) { 
     width: 100%;
     height: 325px;
   }
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
-    width: 99.5%;
+  @media screen and (max-width: 1090px) {
+    width: 100%;
     height: 136px;
     display: flex;
+  }
+  @media screen and (max-width: 767px) {
+    background-color: #17181d;
+    border: none;
+    height: 110px;
   }
 `;
 
@@ -284,15 +313,25 @@ const ProfileBox = styled.div`
   width: 100px;
   height: 100px;
   margin: 70px auto 0;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  @media screen and (max-width: 1090px) {
     width: 100px;
     height: 100px;
     margin: 24px 64px;
-    }
+  }
+  @media screen and (max-width: 767px) {
+    width: 68px;
+    height: 68px;
+    margin: 24px 0;
+  }
 `;
 
 const Profile = styled.img`
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   cursor: pointer;
   &:hover {
     opacity: 0.7;
@@ -309,7 +348,11 @@ const Nickname = styled.p`
   @media screen and (max-width: 1090px) {
     text-align: start;
     margin: 24px 0 0 24px;
-    }
+  }
+  @media screen and (max-width: 767px) {
+    font-size: 18px;
+    margin: 24px 0 0 20px;
+  }
 `;
 
 const Status = styled.p`
@@ -323,17 +366,36 @@ const Status = styled.p`
     text-align: start;
     margin: 10px 24px;
   }
+  @media screen and (max-width: 767px) {
+    margin: ${(props) => props.purple ? '-10px 0 0 20px' : '4px 20px 16px'};
+    font-size: 10px;
+  }
 `;
 
 const Line = styled.hr`
   border: 1px solid #333;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 
 const ImgBox = styled.div`
+  width: 24px;
+  height: 24px;
   margin: 0px 15px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   @media screen and (max-width: 1090px) {
+    width: 16px;
+    height: 16px;
     margin: 0px 8px 0 0;
-    }
+  }
+  @media screen and (max-width: 767px) {
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 const Logo = styled.div`
@@ -352,17 +414,17 @@ const Img = styled.img`
 `;
 
 const ProfileImg = styled.img`
-  width: 24px;
-  vertical-align: middle;
-  @media screen and (max-width: 1090px) {
-    width: 16px;
-  }
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const InfoBox = styled.div`
   width: 100%;
-  padding: 5px 0;
   vertical-align: middle;
+`;
+
+const CardLine = styled.hr`
+  border: 1px solid #282A2D;
 `;
 
 const MoreButton = styled.button`
@@ -374,8 +436,14 @@ const MoreButton = styled.button`
   width: 13%;
   cursor: pointer;
   @media screen and (max-width: 1090px) {
-    width: 12%;
+    width: fit-content;
     font-size: 14px;
+  }
+`;
+
+const WordMOBNone = styled.span`
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 `;
 
@@ -384,12 +452,31 @@ const BootBox = styled.div`
   margin: 12px 0;
   height: 96px;
   width: 100%;
-  @media screen and (max-width: 1090px) {
+  @media screen and (min-width: 768px) and (max-width: 1090px) {
     height: 100%;
     .bootcard2 {
       display: none;
     }
-}
+  }
+  @media screen and (max-width: 1090px) {
+    height: 76px;
+  }
+`;
+
+const ResponsiveOutter = styled.div`
+  height: auto;
+  width: 100%;
+  @media screen and (max-width: 1090px) {
+    height: 100%;
+  }
+`;
+
+const Count = styled.span`
+  color: #5F6368;
+  font-size: 18px;
+  @media screen and (max-width: 767px) {
+    font-size: 16px;
+  }
 `;
 
 const BootCard = styled.div`
@@ -405,36 +492,36 @@ const BootCard = styled.div`
     opacity: 0.7;
   }
   @media screen and (max-width: 1090px) {
-      width: 49.25%;
-      height: 96px;
-      margin-bottom: 12px;
-      box-shadow: none;
-    }
-`;
-
-const ResponSiveOutter = styled.div`
-  height: auto;
-  width: 100%;
-  @media screen and (max-width: 1090px) {
-    height: 100%;
-    width: 100%;
+    width: 49.25%;
+    height: 96px;
+    margin-bottom: 12px;
+    box-shadow: none;
   }
-`;
-
-const BookMarkBox = styled.div`
-`;
-
-const Count = styled.span`
-  color: #5F6368;
-  font-size: 18px;
+  @media screen and (max-width: 767px) {
+    width: 33.3%;
+    height: 76px;
+    margin: 0 0 33px;
+    box-shadow: none;
+    padding: 0;
+    background-color: #17181d;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const ImageBox = styled.div`
   width: 35%;
-  justify-content: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   margin: auto;
   @media screen and (max-width: 1090px) {
     width: 40%;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
   }
 `;
 

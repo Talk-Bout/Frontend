@@ -56,6 +56,7 @@ const Grid = (props) => {
     TABpadding,
     TABdisplay,
     TABopacity,
+    TABminHeight,
     // 모바일 사이즈(width: ~767px)
     MOBdisplay,
     MOBheight,
@@ -67,6 +68,7 @@ const Grid = (props) => {
     MOBborderBottom,
     MOBbottom,
     MOBopacity,
+    MOBminHeight,
   } = props;
 
   const styles = {
@@ -121,6 +123,7 @@ const Grid = (props) => {
     TABpadding: TABpadding,
     TABdisplay: TABdisplay,
     TABopacity: TABopacity,
+    TABminHeight: TABminHeight,
     // 모바일 사이즈(width: ~767px)
     MOBdisplay: MOBdisplay,
     MOBheight: MOBheight,
@@ -132,6 +135,7 @@ const Grid = (props) => {
     MOBborderBottom: MOBborderBottom,
     MOBbottom: MOBbottom,
     MOBopacity: MOBopacity,
+    MOBminHeight: MOBminHeight,
   };
 
   return (
@@ -207,6 +211,7 @@ const GridBox = styled.div`
     padding: ${(props) => props.TABpadding};
     display: ${(props) => props.TABdisplay};
     opacity: ${(props) => props.TABopacity};
+    min-height: ${(props) => props.TABminHeight};
   }
   // 모바일 사이즈(width: ~767px)
   @media screen and (max-width: 767px) {
@@ -220,6 +225,7 @@ const GridBox = styled.div`
     border-bottom: ${(props) => props.MOBborderBottom};
     bottom: ${(props) => props.MOBbottom};
     opacity: ${(props) => props.MOBopacity};
+    min-height: ${(props) => props.MOBminHeight};
   }
 `;
 

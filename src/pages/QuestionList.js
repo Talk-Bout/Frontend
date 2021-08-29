@@ -67,7 +67,7 @@ const QuestionList = (props) => {
         {/* 헤더, 푸터 포함한 바디 */}
         <Body header footer>
           {/* 질문과 답변 타이틀 */}
-          <Grid className='Title' height='fit-content' TABmargin='15px 0 0' MOBmargin='6px 0 0'>
+          <Grid className='Title' height='fit-content' TABmargin='15px 0 0' MOBmargin='14px 0 0'>
             <Text color="#F8F9FA" fontWeight="700" fontSize="32px" TABfontSize='20px' MOBfontSize='16px' cursor='default'>
               <Emoji src={Fire_emoji} alt='불' height='32px' TABheight='20px' margin='0 8px 0 0' />질문과 답변
             </Text>

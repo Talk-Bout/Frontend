@@ -189,18 +189,58 @@ const QuestionDetail = (props) => {
                 </ButtonBox>
               </Grid>
               {/* {Question 글쓴이 프로필 }*/}
-              <Grid display="flex" margin="10px 0" TABmargin='24px 0 32px' MOBmargin='16px 0'>
-                <Grid width="40px" MOBwidth='28px'>
-                  <Image src={user_profile == null || user_profile === 'null' ? Profile_medium : user_profile_url}></Image>
+              <Grid display="flex" justifyContent='space-between' margin="10px 0" TABmargin='24px 0 32px' MOBmargin='16px 0'>
+                <Grid width='fit-content' display='flex'>
+                  <Grid width="40px" MOBwidth='28px'>
+                    <Image src={user_profile == null || user_profile === 'null' ? Profile_medium : user_profile_url}></Image>
+                  </Grid>
+                  <Grid width="fit-content">
+                    <Text p margin="auto 10px" fontSize="14px" MOBfontSize='12px' fontWeight="600" color="#9aa0a6" cursor='default'>
+                      {question_found.nickname}
+                    </Text>
+                    <Text p margin="auto 10px" fontSize='14px' MOBfontSize='8px' color="#bdc1c6" cursor='default'>
+                      {question_found.createdAt}
+                    </Text>
+                  </Grid>
                 </Grid>
-                <Grid width="40%">
-                  <Text p margin="auto 10px" fontSize="14px" MOBfontSize='12px' fontWeight="600" color="#9aa0a6" cursor='default'>
-                    {question_found.nickname}
-                  </Text>
-                  <Text p margin="auto 10px" fontSize='14px' MOBfontSize='8px' color="#bdc1c6" cursor='default'>
-                    {question_found.createdAt}
-                  </Text>
-                </Grid>
+                {/*모바일 버전에서는 북마크, 수정/삭제 버튼이 작성자 닉네임 옆에 오기 */}
+                <ButtonBoxMOB>
+                  {is_login &&
+                    <>
+                      {question_bookmark ?
+                        <Text padding="0" color="#7879F1" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" onClick={() => delete_bookmark(question_bookmark.questionBookmarkId)}>
+                          <BsBookmarkFill />
+                        </Text>
+                        :
+                        <Text padding="0" color="#9aa0a6" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" onClick={() => add_bookmark()}>
+                          <BsBookmark />
+                        </Text>
+                      }
+                    </>
+                  }
+                  {/* 드롭 다운 버튼 */}
+                  {question_found.nickname === user_name ?
+                    <>
+                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        <Text padding="0" color="#9AA0A6" fontSize="24px" MOBfontSize='18px' lineHeight="35px" hover="opacity: 0.8">
+                          <BsThreeDotsVertical />
+                        </Text>
+                      </Button>
+                      <Menu id="simple-menu" anchorEl={MenuLink} keepMounted open={Boolean(MenuLink)} onClose={handleClose}>
+                        <MenuItem onClick={() => { handleClose(); editBtn() }}>
+                          수정하기
+                          <Text margin="0 0 0 10px"><BiPencil /></Text>
+                        </MenuItem>
+                        <MenuItem onClick={() => { handleClose(); deleteBtn(); }}>
+                          삭제하기
+                          <Text margin="0 0 0 10px"><BiTrashAlt /></Text>
+                        </MenuItem>
+                      </Menu>
+                    </>
+                    :
+                    ''
+                  }
+                </ButtonBoxMOB>
               </Grid>
               {/* Question 본문 내용 */}
               <Text p margin="50px 0" TABmargin='0 0 48px' MOBmargin='0 0 24px' fontSize="16px" MOBfontSize='14px' color="#bdc1c6" cursor='text' userSelect='text' whiteSpace='pre-line'>
@@ -314,6 +354,20 @@ const QuestionBox = styled.div`
 const ButtonBox = styled.div`
   min-width: 90px;
   float: right;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const ButtonBoxMOB = styled.div`
+  min-width: fit-content;
+  float: right;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  .MuiButton-root {
+    min-width: fit-content;
+  }
 `;
 
 const ImageBox = styled.div`

@@ -10,7 +10,6 @@ import { BiLike, BiComment, BiPencil, BiTrashAlt } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { BsThreeDotsVertical, BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { Button, Menu, MenuItem } from '@material-ui/core';
-import { setCookie } from '../shared/cookie';
 
 const CommonDetail = (props) => {
   const dispatch = useDispatch();
@@ -200,23 +199,64 @@ const CommonDetail = (props) => {
                 </Grid>
                 {/* 게시글 작성자 프로필 사진 */}
                 <InfoBox>
-                  <ProfileBox>
-                    {user_profile ?
-                      <Profile src={user_profile_url} />
+                  <div style={{ display: 'flex' }}>
+                    <ProfileBox>
+                      {user_profile ?
+                        <Profile src={user_profile_url} />
+                        :
+                        <Profile src={Profile_small} />
+                      }
+                    </ProfileBox>
+                    <InfoBoxInner>
+                      {/* 게시글 작성자 닉네임 */}
+                      <div style={{ height: '18px', lineHeight: '18px' }}>
+                        <Text fontSize='14px' MOBfontSize='12px' color='#BDC1C6' margin='0' cursor='default'>{one_post.nickname}</Text>
+                      </div>
+                      {/* 게시글 작성시간 */}
+                      <div style={{ height: '16px', lineHeight: '16px' }}>
+                        <Text fontSize='12px' MOBfontSize='10px' color='#BDC1C6' margin='0' cursor='default'>{one_post.createdAt}</Text>
+                      </div>
+                    </InfoBoxInner>
+                  </div>
+                  {/*모바일 버전에서는 북마크, 수정/삭제 버튼이 작성자 닉네임 옆에 오기 */}
+                  <ButtonBoxMOB>
+                    {is_login ?
+                      post_bookmark ?
+                        <Text color='#7879F1' fontSize='28px' MOBfontSize='18px' MOBmargin='-8px 0 0' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
+                        :
+                        <Text color='#9aa0a6' fontSize='28px' MOBfontSize='18px' MOBmargin='-8px 0 0' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text>
                       :
-                      <Profile src={Profile_small} />
+                      ''
                     }
-                  </ProfileBox>
-                  <InfoBoxInner>
-                    {/* 게시글 작성자 닉네임 */}
-                    <div style={{ height: '18px', lineHeight: '18px' }}>
-                      <Text fontSize='14px' MOBfontSize='12px' color='#BDC1C6' margin='0' cursor='default'>{one_post.nickname}</Text>
-                    </div>
-                    {/* 게시글 작성시간 */}
-                    <div style={{ height: '16px', lineHeight: '16px' }}>
-                      <Text fontSize='12px' MOBfontSize='10px' color='#BDC1C6' margin='0' cursor='default'>{one_post.createdAt}</Text>
-                    </div>
-                  </InfoBoxInner>
+                    {/* 드롭다운 메뉴 버튼 */}
+                    {/* 게시글 작성자와 접속자의 닉네임이 같을 때만 보이기 */}
+                    {one_post.nickname === username ?
+                      <>
+                        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                          <Text color='#9AA0A6' fontSize='28px' MOBfontSize='18px' lineHeight='28px' hover='opacity: 0.8'><BsThreeDotsVertical /></Text>
+                        </Button>
+                        <Menu
+                          id="simple-menu"
+                          anchorEl={MenuLink}
+                          keepMounted
+                          open={Boolean(MenuLink)}
+                          onClose={handleClose}
+                        >
+                          {/* 수정하기 */}
+                          <MenuItem onClick={() => {
+                            history.push(`/common/write/${postId}`);
+                          }}>수정하기<Text margin='0 0 0 10px'><BiPencil /></Text></MenuItem>
+                          {/* 삭제하기 */}
+                          <MenuItem onClick={() => {
+                            handleClose();
+                            deleteCommon();
+                          }}>삭제하기<Text margin='0 0 0 10px'><BiTrashAlt /></Text></MenuItem>
+                        </Menu>
+                      </>
+                      :
+                      ''
+                    }
+                  </ButtonBoxMOB>
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
@@ -337,8 +377,18 @@ const Post = styled.div`
 const ButtonBox = styled.div`
   height: fit-content;
   @media screen and (max-width: 767px) {
-    min-width: 90px;
-    margin: -6px 0 0;
+    display: none;
+  }
+`;
+
+const ButtonBoxMOB = styled.div`
+  height: fit-content;
+  min-width: fit-content;
+  .MuiButton-root {
+    min-width: fit-content;
+  }
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 `;
 
@@ -351,6 +401,7 @@ const InfoBox = styled.div`
     height: fit-content;
     width: auto;
     margin: 16px 0 0;
+    justify-content: space-between;
   }
 `;
 

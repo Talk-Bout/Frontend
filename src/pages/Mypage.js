@@ -62,6 +62,8 @@ const Mypage = (props) => {
     return <NotFound />
   }
 
+  console.log(mytalk);
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -93,7 +95,7 @@ const Mypage = (props) => {
                 <Grid height="172px" MOBheight='fit-content'>
                   <Grid padding="18px 20px" justifyContent="space-between" flexDirection="row" alignItems="flex-start" display="flex" borderRadius="12px" backgroundColor="#202124" MOBbackgroundColor='#17181d' height="64px" MOBheight='40px' MOBpadding='8px 0' width="100%">
                     <div>
-                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" cursor='default'>관심있는 부트캠프</Text>
+                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" fontWeight='700' cursor='default'>관심있는 부트캠프</Text>
                       <Count> {'('}{myboot_list.length}{')'} </Count>
                     </div>
                     <MoreButton onClick={() => history.push('/mypage/mycamp')}><WordMOBNone>더보기 </WordMOBNone><Text verticalAlign='middle'><AiOutlineRight /></Text></MoreButton>
@@ -130,7 +132,7 @@ const Mypage = (props) => {
                 <Grid width="100%" margin="48px 0 0" MOBmargin='16px 0 0'>
                   <Grid padding="18px 20px" MOBpadding='8px 0' flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124" MOBbackgroundColor='#17181d' height="64px" MOBheight='40px' width="100%">
                     <div>
-                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" cursor='default'>내 북마크</Text>
+                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" fontWeight='700' cursor='default'>내 북마크</Text>
                       <Count> {'('}{mytalk_list.length}{')'} </Count>
                     </div>
                     <MoreButton onClick={() => { history.push('/mypage/mybookmarks') }}
@@ -148,7 +150,7 @@ const Mypage = (props) => {
                               {/* 제목 */}
                               <Text margin="0 0 12px" color="#F1F3F4" fontSize="18px"
                                 overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
-                                MOBfontSize='14px'
+                                MOBfontSize='14px' fontWeight='700'
                               >{p.post.title}
                               </Text>
                               {/* 내용 */}
@@ -198,7 +200,7 @@ const Mypage = (props) => {
                     MOBpadding='8px 0' flexDirection="row" alignItems="flex-start" justifyContent="space-between" display="flex" borderRadius="12px" backgroundColor="#202124"
                     MOBbackgroundColor='#17181d' height="64px" MOBheight='40px' width="100%">
                     <div>
-                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" cursor='default'>{nickname} 님의 글</Text>
+                      <Text fontSize="18px" MOBfontSize='16px' color="#F1F3F4" fontWeight='700' cursor='default'>{nickname} 님의 글</Text>
                       <Count> {'('}{mypost_list.length}{')'} </Count>
                     </div>
                     <MoreButton onClick={() => { history.push('/mypage/mypost') }}
@@ -215,7 +217,7 @@ const Mypage = (props) => {
                             <Grid overflow="hidden" height="fit-content">
                               <Text p margin="0 0 12px" color="#F1F3F4" fontSize="18px"
                                 overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
-                                MOBfontSize='14px'
+                                MOBfontSize='14px' fontWeight='700'
                               >{p.title}
                               </Text>
                               <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="2" MOBwlc='3' wbo="vertical" margin="0 0 24px"
@@ -227,9 +229,6 @@ const Mypage = (props) => {
                               >{p.content}</Text>
                             </Grid>
                             <Grid display="flex" height="fit-content">
-                              <ImgBox>
-                                <ProfileImg src={Profile_small} alt='프로필' />
-                              </ImgBox>
                               <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"
                                 MOBfontSize='8px'><Text margin="0 4px 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="12px"
                                   MOBfontSize='10px'

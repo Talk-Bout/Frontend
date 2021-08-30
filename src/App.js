@@ -6,7 +6,8 @@ import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from './redux/modules/user';
-import { getCookie, setCookie } from './shared/cookie';
+import { getCookie } from './shared/cookie';
+import toast, {Toaster} from 'react-hot-toast';
 
 //메인 페이지
 import MainN from './pages/MainN';
@@ -58,7 +59,6 @@ function App() {
       dispatch(userActions.kakaoRefresh());
       dispatch(userActions.userCheckDB());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -90,6 +90,7 @@ function App() {
         </Switch>
       </ConnectedRouter>
       <Spinner visible={is_loading} />
+      <Toaster toastOptions={{className: '', style: {borderRadius: '10px', background: '#202124', color: '#8e90f9',}}}/>
     </React.Fragment>
   );
 }

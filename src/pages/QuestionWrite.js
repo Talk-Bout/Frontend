@@ -1,4 +1,3 @@
-//질문 업로드 임의 게시판
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
@@ -101,7 +100,7 @@ const QuestionWrite = (props) => {
         className="background"
         display="flex"
         backgroundColor="#17181b"
-        padding='0 0 42px'>
+        padding='0 0 42px' MOBpadding='0'>
         {/* 바디 */}
         <Body MOBnopadding>
           <Grid className="body-inner" height="100%" padding="24px 0 0" MOBpadding='0'>
@@ -143,6 +142,7 @@ const QuestionWrite = (props) => {
                     lineHeight="84px"
                     float="right"
                     cursor="pointer"
+                    MOBdisplay='none'
                     _onClick={() => create_question()}
                   >
                     {edit_mode ? '수정' : '등록'}
@@ -156,7 +156,7 @@ const QuestionWrite = (props) => {
                     margin="auto 0"
                     color="#e5e5e5"
                     fontSize="18px"
-                    MOBfontSize='16px'
+                    MOBfontSize='14px'
                     fontWeight="700"
                   >
                     Q
@@ -183,6 +183,7 @@ const QuestionWrite = (props) => {
                     <Text
                       p
                       fontSize="16px"
+                      MOBfontSize='10px'
                       color="#5f6368"
                       margin="0 auto 80px"
                     >
@@ -214,7 +215,6 @@ const QuestionWrite = (props) => {
                     />
                   </label>
                 </form>
-
                 {/* <Text
                   fontSize="2.5vh"
                   color="#b3b3b3"
@@ -246,6 +246,7 @@ const Window = styled.div`
     margin: auto;
   }
   @media screen and (max-width: 767px) {
+    min-height: 100vh;
     margin: 0;
     width: 100%;
   }
@@ -255,7 +256,7 @@ const BodyBox = styled.div`
   height: 80%;
   padding: 40px 40px 0;
   @media screen and (max-width: 767px) {
-    padding: 10px;
+    padding: 18px 18px 40px;
   }
 `;
 
@@ -270,27 +271,12 @@ const TitleBox = styled.div`
   }
 `;
 
-const HoverActionBtn = styled.text`
-  color: #5f6368;
-  cursor: pointer;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 84px;
-  float: right;
-  :hover {
-    color: #7879f1;
-  }
-  @media screen and (max-width: 1090px) {
-    font-size: 20px;
-  }
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
-`;
-
 const ContentBox = styled.div`
   height: fit-content;
   margin: 0 0 80px;
+  @media screen and (max-width: 767px) {
+    margin: 20px 0 60px;
+  } 
 `;
 
 const TitleInput = styled.input`
@@ -303,12 +289,16 @@ const TitleInput = styled.input`
   &::placeholder {
     color: #8f9091;
     font-size: 16px;
+    @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
   }
   &:focus {
     outline: none;
   }
   @media screen and (max-width: 767px) {
     width: 90%;
+    font-size: 14px;
   }
 `;
 
@@ -324,6 +314,9 @@ const Textarea = styled.textarea`
   &::placeholder {
     color: #8f9091;
     font-size: 16px;
+    @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
   }
   &:focus {
     outline: none;
@@ -346,7 +339,8 @@ const Textarea = styled.textarea`
     width: 568px;
   }
   @media screen and (max-width: 767px) {
-    width: 90%;
+    width: calc(100% - 36px);
+    font-size: 14px;
   }
 `;
 const Preview = styled.div`
@@ -354,29 +348,41 @@ const Preview = styled.div`
   height: 500px;
   border: 1px solid #5f6368;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  object-fit: cover;
   overflow: hidden;
   margin: 0 auto 16px;
   @media screen and (max-width: 1090px) {
     width: 608px;
     height: fit-content;
   }
+  @media screen and (max-width: 767px) {
+    max-width: calc(100% - 36px);
+  }
 `;
 
 const Img = styled.img`
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const FooterBox = styled.div`
   background-color: #2e3134;
   height: 10%;
-  padding: 20px 40px 20px;
+  padding: 20px 40px;
   display: flex;
+  align-items: center;
+  @media screen and (max-width: 767px) {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 40px);
+    height: 40px;
+    padding: 18px 20px;
+  }
 `;
+
 // 이미지 파일 선택하는 기본 버튼 숨기기
 const ImgInput = styled.input`
   width: 1px;

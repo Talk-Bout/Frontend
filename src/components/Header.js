@@ -71,9 +71,9 @@ const Header = (props) => {
             {/* <Image src={Search} alt="검색" /> */}
             {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
+          {/* 피드백 버튼 */}
+          <GiftBtn src={Gift} onClick={() => getFeedback()} />
           <Grid width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
-            {/* 피드백 버튼 */}
-            <GiftBtn src={Gift} onClick={() => getFeedback()} />
             {/* 북마크 메뉴 */}
             <Text
               color="#7879f1"
@@ -120,7 +120,7 @@ const Header = (props) => {
             </Menu>
           </Grid>
           {/* 모바일 버전에서만 보이는 로그아웃 버튼 */}
-          <LogoutBtn type="button" onClick={() => history.push('/login')}>
+          <LogoutBtn type="button" onClick={() => logout()}>
             <Text
               MOBfontSize='12px'
               color="#f8f9fa"

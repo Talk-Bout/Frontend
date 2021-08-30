@@ -12,6 +12,7 @@ const SmallWindow = (props) => {
           MOBbackgroundColor='transparent'
           width="400px"
           height="500px"
+          MOBwidth='100%'
           MOBheight='auto'
           margin="auto"
           padding="72px 48px"

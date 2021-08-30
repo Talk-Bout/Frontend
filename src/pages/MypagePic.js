@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Image } from '../elements';
+import { Grid, Text } from '../elements';
 import { SmallWindow } from '../components';
 import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
@@ -78,42 +78,61 @@ const MypagePic = (props) => {
     <SmallWindow>
       <Grid height="100%" MOBheight='fit-content' is_center>
         <Grid display='flex' justifyContent='space-between' height='fit-content' margin='-70px 0 0 -20px'>
-          <Text fontSize='35px' TABfontSize='28px' MOBfontSize='20px' color='#e5e5e5' lineHeight='84px' MOBlineHeight='48px' cursor='pointer' _onClick={() => exitPage()}><BsX /></Text>
+          <Text fontSize='35px' TABfontSize='28px' MOBfontSize='20px' color='#e5e5e5' lineHeight='84px' MOBlineHeight='48px' cursor='pointer' MOBmargin='20px 0 0 40px' _onClick={() => exitPage()}><BsX /></Text>
         </Grid>
         <Text color='#e5e5e5' fontWeight='700' fontSize='20px' MOBfontSize='14px' margin='0 auto'>회원정보 수정</Text>
         <Text p color='#bdc1c6' fontSize='14px' MOBfontSize='10px' margin='8px auto 0'>프로필 사진을 변경하시려면</Text>
         <Text p color='#bdc1c6' fontSize='14px' MOBfontSize='10px' margin='0 auto'>아래 사진을 눌러주세요</Text>
-        <Grid height='fit-content' width='80px' margin='36px auto 0'>
+        <Grid height='fit-content' width='fit-content' margin='36px auto 0'>
           {/* 이미지 추가 버튼 */}
           <form>
             <label htmlFor="file">
-              <Image
-                src={preview ? preview : user_image == null ? Profile_medium : user_image_url}
-                height='80px'
-                MOBheight='56px'
-                cursor="pointer"
-              />
-              <ImgInput
-                type="file"
-                ref={imageRef}
-                onChange={selectFile}
-                accept="image/*"
-                id="file"
-              />
+              <ImageBox>
+                <Image
+                  src={preview ? preview : user_image == null ? Profile_medium : user_image_url}
+                />
+                <ImgInput
+                  type="file"
+                  ref={imageRef}
+                  onChange={selectFile}
+                  accept="image/*"
+                  id="file"
+                />
+              </ImageBox>
             </label>
           </form>
         </Grid>
         <Input ref={nameRef} placeholder='변경하실 닉네임을 입력해주세요' />
         <Button onClick={() => SubmitPic()}><Text color='#f8f9fa' fontSize='14px'>수정 완료</Text></Button>
-        <Text p color='#7879f1' fontSize='14px' margin='20px 0 0' cursor='pointer' hover='opacity 0.9' _onClick={() => deletePic()}>프로필 사진 삭제하기</Text>
+        <Text p color='#7879f1' fontSize='14px' MOBfontSize='12px' margin='20px 0 0' cursor='pointer' hover='opacity 0.9' _onClick={() => deletePic()}>프로필 사진 삭제하기</Text>
       </Grid>
-      <Grid is_flex margin='330px 0 0' MOBmargin='30vh 0 0'>
-        <Text fontSize='12px' color='#bdc1c6'>© 2021 Project Talk'bout</Text>
-        <Text fontSize='12px' color='#bdc1c6' margin='0 24px'>All rights reserved.</Text>
+      <Grid is_flex position='absolute' left='calc((100% - 265px) / 2)' bottom='20px' MOBbottom='5px' width='fit-content' margin='0 auto'>
+        <Text fontSize='12px' color='#bdc1c6' margin='0 24px 0 0'>© 2021 Project Talk'bout</Text>
+        <Text fontSize='12px' color='#bdc1c6'>All rights reserved.</Text>
       </Grid>
     </SmallWindow>
   );
 };
+
+const ImageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  @media screen and (max-width: 767px) {
+    width: 56px;
+    height: 56px;
+  }
+`;
+
+const Image = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+`;
 
 // 이미지 파일 선택하는 기본 버튼 숨기기
 const ImgInput = styled.input`
@@ -129,6 +148,7 @@ const Input = styled.input`
   height: 48px;
   border: 1px solid #5F6368;
   border-radius: 8px;
+  margin-top: 20px;
   background-color: transparent;
   color: #f8f9fa;
   caret-color: #f8f9fa;
@@ -139,6 +159,9 @@ const Input = styled.input`
   }
   &:focus {
     outline: none;
+  }
+  @media screen and (max-width: 767px) {
+    width: 90%;
   }
 `;
 
@@ -152,6 +175,9 @@ const Button = styled.button`
   border: none;
   &:hover {
     opacity: 0.7;
+  }
+  @media screen and (max-width: 767px) {
+    width: 92%;
   }
 `;
 

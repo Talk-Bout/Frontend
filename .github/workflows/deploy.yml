@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-1atest
+    runs-on: ubuntu-18.04
     steps:
       - name: Checkout source code.   # 레포지토리 체크아웃
         uses: actions/checkout@main

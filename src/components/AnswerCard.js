@@ -47,8 +47,10 @@ const AnswerCard = (props) => {
             <Text fontSize="32px" MOBfontSize='24px' fontWeight="700" color="#ffffff" cursor='default'>
               A
             </Text>
-            <Grid width="40px" height="40px" MOBwidth='28px' MOBheight='28px' margin="auto 15px" MOBmargin='4px 8px'>
-              <Image maxWidth='100%' maxHeight='100%' src={user_profile == null ? Profile_medium : user_profile_url}></Image>
+            <Grid width="40px" MOBwidth='28px' margin="auto 15px" MOBmargin='auto 8px'>
+              <ImageBox>
+                <Profile src={user_profile ? user_profile_url : Profile_medium} />
+              </ImageBox>
             </Grid>
             <Grid width="480px" MOBwidth='fit-content' MOBmargin='2px 0 0'>
               {/* 작성자 닉네임 */}
@@ -119,6 +121,25 @@ const AnswerContent = styled.div`
   @media screen and (max-width: 767px) {
     padding: 20px;
   }
+`;
+
+const ImageBox = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  @media screen and (max-width: 767px) {
+    width: 28px;
+    height: 28px;
+  }
+`;
+
+const Profile = styled.img`
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 export default AnswerCard;

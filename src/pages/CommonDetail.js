@@ -156,15 +156,15 @@ const CommonDetail = (props) => {
                 <Grid display='flex' justifyContent='space-between' padding='12px 0 0' MOBpadding='4px 0 0'>
                   {/* 제목 */}
                   <Text fontSize='24px' MOBfontSize='16px' color='#f1f3f4' fontWeight='700' lineHeight='36px' MOBlineHeight='24px' verticalAlign='middle' cursor='default' MOBwidth='80%'>{one_post.title}</Text>
-                  <div style={{ height: 'fit-content' }}>
+                  <ButtonBox>
                     {/* 북마크 버튼 */}
                     {/* 북마크 되어 있으면, 보라색 북마크 보이기 */}
                     {/* 북마크 되어 있지 않으면, 회색 빈 북마크 보이기 */}
                     {is_login ?
                       post_bookmark ?
-                        <Text color='#7879F1' fontSize='28px' MOBfontSize='18px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
+                        <Text color='#7879F1' fontSize='28px' MOBfontSize='18px' MOBmargin='-8px 0 0' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => unmarkPost(post_bookmark.postBookmarkId)}><BsBookmarkFill /></Text>
                         :
-                        <Text color='#9aa0a6' fontSize='28px' MOBfontSize='18px' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text>
+                        <Text color='#9aa0a6' fontSize='28px' MOBfontSize='18px' MOBmargin='-8px 0 0' lineHeight='28px' verticalAlign='middle' cursor='pointer' hover='opacity: 0.7' _onClick={() => markPost()}><BsBookmark /></Text>
                       :
                       ''
                     }
@@ -196,7 +196,7 @@ const CommonDetail = (props) => {
                       :
                       ''
                     }
-                  </div>
+                  </ButtonBox>
                 </Grid>
                 {/* 게시글 작성자 프로필 사진 */}
                 <InfoBox>
@@ -321,6 +321,9 @@ const BodyInner = styled.div`
   @media screen and (max-width: 1090px) {
     grid-template-columns: 100%;
   }
+  @media screen and (max-width: 767px) {
+    padding-bottom: 50px;
+  }
 `;
 
 const Post = styled.div`
@@ -330,6 +333,14 @@ const Post = styled.div`
     width: 100%;
 }
   `;
+
+const ButtonBox = styled.div`
+  height: fit-content;
+  @media screen and (max-width: 767px) {
+    min-width: 90px;
+    margin: -6px 0 0;
+  }
+`;
 
 const InfoBox = styled.div`
   display: flex;

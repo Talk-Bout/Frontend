@@ -40,24 +40,22 @@ const MypagePost = (props) => {
         <Sidebar />
         <Body header footer>
           <Grid height="fit-content">
-            <Grid height="9%" width="100%">
-              <Text fontSize="32px" lineHeight="46px" color="#F8F9FA" TABfontSize="20px" cursor='default'>내 북마크</Text>
+            <Grid>
+              <Text fontSize="32px" MOBfontSize='16px' fontWeight='700' lineHeight="46px" color="#F8F9FA" TABfontSize="20px" cursor='default'>내 북마크</Text>
             </Grid>
-            <Card display="flex" height="81%" width="100%">
+            <Card>
               {mytalk_list.map((p, idx) => {
                 return (
                   <Post onClick={() => { history.push(`/common/detail/${p.postId}`) }}
                   >
-                    <Grid overflow="hidden" height="100px" width="100%" >
-                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
-                        overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
+                    <Grid overflow="hidden" height="fit-content">
+                      <Text p margin="0 0 12px 0" color="#F1F3F4" fontSize="18px" overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px" MOBfontSize='14px'
                       >{p.post.title}
                       </Text>
-                      <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                        margin="0 0 24px 0" height="44px" TABfontSize="12px"
+                      <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical" margin="0 0 24px" MOBmargin='0 0 16px' height="60px" TABheight='52px' MOBheight='48px' TABfontSize="12px" MOBfontSize='10px'
                       >{p.post.content}</Text>
                     </Grid>
-                    <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
+                    <Grid display="flex">
                       <ImgBox>
                         <ProfileImg src={Profile_small} alt='프로필' />
                       </ImgBox>
@@ -66,38 +64,10 @@ const MypagePost = (props) => {
                         <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive />{p.post.createdAt}</Text>
                       </InfoBox>
                     </Grid>
-                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
-                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.post.category} </Text>
+                    <Line />
+                    <Grid>
+                      <Text margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.post.category} </Text>
                     </Grid>
-                  </Post>
-                );
-              })}
-              {myqna_list.map((q, idx) => {
-                return (
-                  <Post onClick={() => { history.push(`/question/detail/${q.questionId}`) }}
-                  >
-                    <Grid overflow="hidden" height="100px" width="100%" >
-                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" height="26px"
-                        overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
-                      >{q.question.title}
-                      </Text>
-                      <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical"
-                        margin="0 0 24px 0" height="44px" TABfontSize="12px"
-                      >{q.question.content}</Text>
-                    </Grid>
-                    <Grid display="flex" height="45px" width="100%" borderBottom="1px solid #5F6368">
-                      <ImgBox>
-                        <ProfileImg src={Profile_small} alt='프로필' />
-                      </ImgBox>
-                      <InfoBox>
-                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{q.question.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive />{q.question.createdAt}</Text>
-                      </InfoBox>
-                    </Grid>
-                    <Grid padding="3px 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
-                      <Text p margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 질문과답변 </Text>
-                    </Grid>
-
                   </Post>
                 );
               })}
@@ -124,52 +94,75 @@ const MypagePost = (props) => {
 };
 
 const Card = styled.div`
-grid-template-rows: repeat(1, minmax(auto, auto));
-grid-template-columns: repeat(4, 1fr);
-display: grid;
-width: 100%;
-@media screen and (min-width: 768px) and (max-width: 1090px) {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  display: grid;
   width: 100%;
-  grid-template-rows: repeat(1, minmax(auto, auto));
-  grid-template-columns: repeat(3, 1fr);
+  margin-top: 33px;
+  @media screen and (max-width: 1090px) {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 16px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 `;
 
 const Post = styled.div`
-margin: 0 16px 16px 0;
-padding: 15px 20px;
-height: 211px;
-width: 95%;
-background-color: #202124;
-border-radius: 12px;
-box-sizing: border-box;
-cursor: pointer;
-&:hover {
-  opacity: 0.7;
-}
+  padding: 15px 20px;
+  height: 211px;
+  width: 100%;
+  background-color: #202124;
+  border-radius: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  word-break: break-all;
+  &:hover {
+    opacity: 0.7;
+  }
+  @media screen and (max-width: 1090px) {
+    margin: 0;
+  }
+  @media screen and (max-width: 767px) {
+    height: 188px;
+    padding: 14px 14px 10px;
+  }
 `;
 
 const ImgBox = styled.div`
-margin: 0px 15px 0 0;
-@media screen and (min-width: 768px) and (max-width: 1090px) {
-  margin: 0px 8px 0 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  margin: 0px 15px 0 0;
+  @media screen and (max-width: 1090px) {
+    width: 16px;
+    height: 16px;
+    margin: 0px 8px 0 0;
+  }
+  @media screen and (max-width: 767px) {
+    width: 14px;
+    height: 14px;
   }
 `;
 
 const ProfileImg = styled.img`
-  width: 24px;
-  vertical-align: middle;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
-    width: 16px;
-  }
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const InfoBox = styled.div`
-display: flex;
-width: 100%;
-padding: 5px 0;
-height: 24px;
+  display: flex;
+  width: 100%;
+  height: 24px;
+`;
 
+const Line = styled.hr`
+  border: 1px solid #282a2d;
 `;
 
 const PageBox = styled.div`

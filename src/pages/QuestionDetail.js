@@ -150,21 +150,17 @@ const QuestionDetail = (props) => {
                 </Grid>
                 {/* 북마크와 수정 삭제 */}
                 {/* 북마크 버튼은 로그인한 사용자만 보여주기 */}
-                <Grid display="flex" width='auto' float='right'>
+                <ButtonBox>
                   {is_login &&
                     <>
                       {question_bookmark ?
-                        <Button padding="0" width="16.33px" height="21px" onClick={() => delete_bookmark(question_bookmark.questionBookmarkId)}>
-                          <Text padding="0" color="#7879F1" fontSize="24px" MOBfontSize='16px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
-                            <BsBookmarkFill />
-                          </Text>
-                        </Button>
+                        <Text padding="0" color="#7879F1" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" onClick={() => delete_bookmark(question_bookmark.questionBookmarkId)}>
+                          <BsBookmarkFill />
+                        </Text>
                         :
-                        <Button padding="0" width="16.33px" height="21px" onClick={() => add_bookmark()}>
-                          <Text padding="0" color="#9aa0a6" fontSize="24px" MOBfontSize='16px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7">
-                            <BsBookmark />
-                          </Text>
-                        </Button>
+                        <Text padding="0" color="#9aa0a6" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" onClick={() => add_bookmark()}>
+                          <BsBookmark />
+                        </Text>
                       }
                     </>
                   }
@@ -172,7 +168,7 @@ const QuestionDetail = (props) => {
                   {question_found.nickname === user_name ?
                     <>
                       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        <Text padding="0" color="#9AA0A6" fontSize="24px" MOBfontSize='16px' lineHeight="35px" hover="opacity: 0.8">
+                        <Text padding="0" color="#9AA0A6" fontSize="24px" MOBfontSize='18px' lineHeight="35px" hover="opacity: 0.8">
                           <BsThreeDotsVertical />
                         </Text>
                       </Button>
@@ -190,7 +186,7 @@ const QuestionDetail = (props) => {
                     :
                     ''
                   }
-                </Grid>
+                </ButtonBox>
               </Grid>
               {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" margin="10px 0" TABmargin='24px 0 32px' MOBmargin='16px 0'>
@@ -267,7 +263,8 @@ const QuestionDetail = (props) => {
                 </Text>
                 <ACommentBox>
                   <AInput rows="5" placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
-답변을 남긴 이후에는 수정 및 삭제가 불가하오니 신중하게 써주시길 부탁드립니다." ref={answerInput} />
+답변을 남긴 이후에는 수정 및 삭제가 불가하오니,
+신중하게 작성해 주시길 부탁드립니다." ref={answerInput} />
                   <AnswerSaveButton onClick={() => createAnswerBtn()}>
                     답변 추가하기
                   </AnswerSaveButton>
@@ -314,6 +311,11 @@ const QuestionBox = styled.div`
   }
 `;
 
+const ButtonBox = styled.div`
+  min-width: 90px;
+  float: right;
+`;
+
 const ImageBox = styled.div`
   width: 70%;
   border: none;
@@ -348,7 +350,7 @@ const AnswerBox = styled.div`
   }
   @media screen and (max-width: 767px) {
     margin: 0 -18px;
-    padding: 10px 0 0;
+    padding: 10px 0 50px;
   }
 `;
 
@@ -357,6 +359,7 @@ const ACommentBox = styled.div`
   border-radius: 12px;
   border: 1px solid #9aa0a6;
   width: 100%;
+  overflow: hidden;
 `;
 
 const AddAnswerSection = styled.div`
@@ -367,6 +370,10 @@ const AddAnswerSection = styled.div`
   }
   @media screen and (max-width: 1090px) {
     width: 660px;
+  }
+  @media screen and (max-width: 767px) {
+    width: calc(100% - 36px);
+    padding: 0 18px;
   }
 `;
 
@@ -388,11 +395,27 @@ const AInput = styled.textarea`
     color: #4e5357;
     font-size: 14px;
   }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #5f6368;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
   @media screen and (max-width: 1200px) {
     width: 760px;
   }
   @media screen and (max-width: 1090px) {
     width: 620px;
+  }
+  @media screen and (max-width: 767px) {
+    width: calc(100% - 36px);
   }
 `;
 
@@ -410,6 +433,12 @@ const AnswerSaveButton = styled.button`
   }
   @media screen and (max-width: 1090px) {
     margin-left: 490px;
+  }
+  @media screen and (max-width: 767px) {
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 10px;
+    padding: 10px 25px;
   }
 `;
 

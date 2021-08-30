@@ -68,8 +68,6 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  width: '100%',
-  height: '100%',
   shape: 'circle',
   src: '',
   _onClick: () => { },

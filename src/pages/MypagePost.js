@@ -35,26 +35,25 @@ const MypagePost = (props) => {
         <Body header footer>
           <Grid height="fit-content">
             <Grid>
-              <Text fontSize="32px" lineHeight="46px" fontWeight='700' color="#F8F9FA" TABfontSize="20px" cursor='default'>{nickname} 님의 글</Text>
-              <Text fontSize="32px" lineHeight="46px" fontWeight='700' color="#5F6368" TABfontSize="20px" cursor='default' margin='0 8px 0'> ({mypost_list ? mypost_list.length : 0})</Text>
+              <Text fontSize="32px" MOBfontSize='16px' lineHeight="46px" fontWeight='700' color="#F8F9FA" TABfontSize="20px" cursor='default'>{nickname} 님의 글<Text color="#5F6368" margin='0 8px 0'> ({mypost_list ? mypost_list.length : 0})</Text></Text>
             </Grid>
             <Cards>
               {mypost_list.map((p, idx) => {
                 return (
-                  <Grid key={idx} TABheight='201px' width="95%" backgroundColor="#202124" borderRadius="12px" cursor='pointer' hover='opacity: 0.7'
+                  <Grid key={idx} TABheight='201px' MOBheight='170px' backgroundColor="#202124" borderRadius="12px" cursor='pointer' hover='opacity: 0.7'
                   // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
                   >
-                    <Grid padding='24px 24px 16px' TABpadding='16px 16px 13px' borderBottom='1px solid #5F6368'>
-                      <Text p margin="0 0 13px 0" color="#F1F3F4" fontSize="18px" overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
+                    <Grid padding='24px 24px 16px' TABpadding='16px 16px 13px' MOBpadding='14px 14px 10px' borderBottom='1px solid #282a2d'>
+                      <Text p margin="0 0 12px 0" color="#F1F3F4" fontSize="18px" fontWeight='700' overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px" MOBfontSize='14px'
                       >{p.title}
                       </Text>
-                      <Text p color="#F1F3F4" fontSize="14px" letterSpacing='0.2px' lineHeight='22px' overflow="hidden" display="-webkit-box" wlc="2" TABwlc='4' wbo="vertical"
-                        margin="13px 0 16px" TABmargin='11px 0 21px' height='44px' TABheight='64px' TABfontSize="12px"
+                      <Text p color="#9AA0A6" fontSize="14px" letterSpacing='0.2px' lineHeight='22px' MOBlineHeight='14px' overflow="hidden" display="-webkit-box" wlc="2" TABwlc='4' MOBwlc='3' wbo="vertical"
+                        margin="13px 0 16px" TABmargin='11px 0 21px' MOBmargin='12px 0 16px' height='44px' TABheight='64px' MOBheight='42px' TABfontSize="12px" MOBfontSize='10px'
                       >{p.content}</Text>
                       <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px" padding='0 0 3px'><span style={{ marginRight: '4px' }}><BiTimeFive /></span>{p.createdAt}</Text>
                     </Grid>
                     <Grid padding='12px 24px' TABpadding='11px 16px'>
-                      <Text p margin='0' color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.category} </Text>
+                      <Text p margin='0' color="#BDC1C6" fontSize="14px" TABfontSize="10px" MOBfontSize='8px'>부트톡톡 <AiOutlineRight /> {p.category === 'chitchat' ? '잡담' : '정보'} </Text>
                     </Grid>
                   </Grid>
                 );
@@ -88,16 +87,19 @@ const Cards = styled.div`
   gap: 16px;
   width: 100%;
   margin-top: 24px;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
-    width: 100%;
-    grid-template-rows: repeat(3, 1fr);
+  @media screen and (max-width: 1090px) {
+    grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     }
+  @media screen and (max-width: 767px) {
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Line = styled.hr`
-  border: 1px solid #282A2D;;
+  border: 1px solid #282A2D;
 `;
 
 const PageBox = styled.div`

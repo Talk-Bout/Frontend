@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 import { history } from './redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from './redux/modules/user';
-import { getCookie } from './shared/cookie';
+import { getCookie, setCookie } from './shared/cookie';
 
 //메인 페이지
 import MainN from './pages/MainN';

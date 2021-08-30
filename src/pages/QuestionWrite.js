@@ -116,7 +116,7 @@ const QuestionWrite = (props) => {
                 {/* 나가기 버튼 */}
                 <Grid className="exit-button" width="23.33%" padding="0 40px" MOBpadding='0 10px'>
                   <Text
-                    fontSize="35px" TABfontSize='28px' MOBfontSize='20px'
+                    fontSize="35px" MOBfontSize='20px'
                     color="#e5e5e5"
                     lineHeight="84px" MOBlineHeight='48px'
                     cursor="pointer"

@@ -38,7 +38,10 @@ const BootCommuWrite = (props) => {
   };
   // 이미지 미리보기 삭제 함수
   const exitPage = () => {
-    dispatch(imageActions.getPreview(null));
+    if (window.confirm("변경사항이 저장되지 않을 수 있습니다.")) {
+      history.goBack();
+      dispatch(imageActions.getPreview(null));
+    }
   };
 
   // 게시글 등록(수정)
@@ -97,26 +100,28 @@ const BootCommuWrite = (props) => {
         backgroundColor="#17181b"
         padding="0 0 42px"
       >
-        {/* 헤더 포함한 바디 */}
+        {/* 바디 */}
         <Body MOBnopadding>
-          <Grid className="body-inner" padding="24px 0 0">
+          <Grid className="body-inner" padding="24px 0 0" MOBpadding='0'>
             <Window>
               {/* 작성 페이지 헤더 */}
               <Grid
                 height="84px"
+                MOBheight='48px'
                 display="flex"
                 borderBottom="1px solid #5f6368"
+                backgroundColor='#202124'
               >
                 {/* 나가기 버튼 */}
-                <Grid width="23.33%" padding="0 40px">
+                <Grid width="23.33%" padding="0 40px" MOBpadding='0 10px'>
                   <Text
                     fontSize="35px"
+                    MOBfontSize='20px'
                     color="#e5e5e5"
                     lineHeight="84px"
+                    MOBlineHeight='48px'
                     cursor="pointer"
                     _onClick={() => {
-                      window.confirm("변경사항이 저장되지 않을 수 있습니다.")
-                      history.goBack();
                       exitPage();
                     }}
                   >
@@ -125,12 +130,12 @@ const BootCommuWrite = (props) => {
                 </Grid>
                 {/* 타이틀 */}
                 <Grid width="53.33%" is_center>
-                  <Text fontSize="24px" fontWeight="700" color="#e5e5e5" lineHeight="84px" cursor='default'>
+                  <Text fontSize="24px" TABfontSize='20px' MOBfontSize='16px' fontWeight="700" color="#e5e5e5" lineHeight="84px" MOBlineHeight='48px' cursor='default'>
                     글쓰기
                   </Text>
                 </Grid>
                 {/* 등록(수정) 버튼 */}
-                <Grid width="23.33%" padding="0 40px">
+                <Grid width="23.33%" padding="0 40px" MOBpadding='0 10px'>
                   <Text
                     fontSize="24px"
                     fontWeight="700"
@@ -138,6 +143,7 @@ const BootCommuWrite = (props) => {
                     lineHeight="84px"
                     float="right"
                     cursor="pointer"
+                    MOBdisplay='none'
                     _onClick={() => addPost()}
                   >
                     {postId ? '수정' : '등록'}
@@ -179,6 +185,7 @@ const BootCommuWrite = (props) => {
                     <Text
                       p
                       fontSize="16px"
+                      MOBfontSize='10px'
                       color="#5f6368"
                       margin="0 auto 80px"
                     >
@@ -213,6 +220,9 @@ const BootCommuWrite = (props) => {
                 {/* <Text fontSize="24px" color="#b3b3b3" cursor="pointer">
                   <FiHash />
                 </Text> */}
+                <ButtonMobile onClick={() => {
+                  addPost()
+                }}><Text MOBfontSize='16px' fontWeight='700' color='#848484'>등록</Text></ButtonMobile>
               </FooterBox>
             </Window>
           </Grid>
@@ -227,19 +237,31 @@ const Window = styled.div`
   width: 1044px;
   height: fit-content;
   margin: auto;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (max-width: 1090px) {
     width: 688px;
     height: fit-content;
+  }
+  @media screen and (max-width: 767px) {
+    min-height: 100vh;
+    margin: 0;
+    width: 100%;
   }
 `;
 
 const BodyBox = styled.div`
   padding: 0 40px;
+  @media screen and (max-width: 767px) {
+    padding: 20px 20px 40px;
+  }
 `;
 
 const TitleBox = styled.div`
   height: 72px;
   border-bottom: 1px solid #5f6368;
+  @media screen and (max-width: 767px) {
+    border-top: 1px solid #5f6368;
+    height: 60px;
+  }
 `;
 
 const ContentBox = styled.div`
@@ -257,9 +279,17 @@ const Input = styled.input`
   &::placeholder {
     color: #5f6368;
     font-size: 16px;
+    @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
   }
   &:focus {
     outline: none;
+  }
+  @media screen and (max-width: 767px) {
+    width: calc(100% - 40px);
+    padding: 20px 0;
+    font-size: 14px;
   }
 `;
 
@@ -274,6 +304,9 @@ const Textarea = styled.textarea`
   &::placeholder {
     color: #5f6368;
     font-size: 16px;
+    @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
   }
   &:focus {
     outline: none;
@@ -292,6 +325,10 @@ const Textarea = styled.textarea`
   ::-webkit-scrollbar-button {
     display: none;
   }
+  @media screen and (max-width: 767px) {
+    font-size: 14px;
+    padding: 20px 0;
+  }
 `;
 
 const Preview = styled.div`
@@ -299,29 +336,39 @@ const Preview = styled.div`
   height: 500px;
   border: 1px solid #5f6368;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  object-fit: cover;
   overflow: hidden;
   margin: 0 auto 16px;
   @media screen and (max-width: 1090px) {
     width: 608px;
     height: fit-content;
   }
+  @media screen and (max-width: 767px) {
+    max-width: calc(100% - 36px);
+  }
 `;
 
 const Img = styled.img`
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const FooterBox = styled.div`
   background-color: #2e3134;
-  height: 24px;
-  padding: 28px 40px;
+  height: 10%;
+  padding: 20px 40px;
   display: flex;
-  
+  align-items: center;
+  @media screen and (max-width: 767px) {
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 40px);
+    height: 40px;
+    padding: 18px 20px;
+  }
 `;
 
 // 이미지 파일 선택하는 기본 버튼 숨기기
@@ -345,6 +392,25 @@ const SelectBox = styled.select`
   appearance: none;
   &:focus {
     outline: none;
+  }
+  @media screen and (max-width: 767px) {
+    height: 20px;
+    font-size: 14px;
+    width: calc(100% - 40px);
+    margin-bottom: 20px;
+  }
+`;
+
+const ButtonMobile = styled.button`
+  cursor: pointer;
+  background-color: #202124;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  width: 80px;
+  margin: 0 0 0 auto;
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 `;
 

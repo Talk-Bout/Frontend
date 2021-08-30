@@ -4,9 +4,11 @@ import { Grid, Text } from '../elements';
 import { Contact } from '.';
 import { LogoNew, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white } from '../image';
 import { history } from '../redux/ConfigureStore';
+import { useSelector } from 'react-redux';
 
 const Footer = (props) => {
   const url = window.location.pathname.split('/')[1];
+  const is_login = useSelector(state => state.user.is_login);
 
   return (
     <React.Fragment>
@@ -27,7 +29,9 @@ const Footer = (props) => {
         <Menu src={url === 'boot' ? Boot_nav_white : Boot_nav} onClick={() => history.push('/boot')} />
         <Menu src={url === 'question' ? Qna_nav_white : Qna_nav} onClick={() => history.push('/question')} />
         <Menu src={url === 'common' ? Talk_nav_white : Talk_nav} onClick={() => history.push('/common/list')} />
-        <Menu src={url === 'mypage' ? Mypage_white : Mypage} onClick={() => history.push('/mypage')} />
+        {/* 마이페이지 메뉴는 로그인 상태에서만 보이기 */}
+        {is_login &&
+          <Menu src={url === 'mypage' ? Mypage_white : Mypage} onClick={() => history.push('/mypage')} />}
       </Navbar>
     </React.Fragment>
   )

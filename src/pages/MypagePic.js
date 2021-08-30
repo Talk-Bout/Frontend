@@ -14,7 +14,7 @@ const MypagePic = (props) => {
   const dispatch = useDispatch();
   const user_name = useSelector(state => state.user.user.nickname);
   const user_image = useSelector(state => state.user.user.profilePic);
-  const user_image_url = `http://fw3efsadfcv.shop${user_image}`;
+  const user_image_url = `https://fw3efsadfcv.shop${user_image}`;
   const is_login = useSelector(state => state.user.is_login);
 
   //이미지 불러오기

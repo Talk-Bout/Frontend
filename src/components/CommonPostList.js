@@ -24,7 +24,7 @@ const CommonPostList = (props) => {
         {/* 작성자 정보 */}
         <Grid margin='16px 0 0' TABmargin='24px 0 0' MOBmargin='0' display='flex'>
           <Profile>
-            <ProfileImage src={props.user.profilePic != null ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} />
+            <ProfileImage src={props.user.profilePic != null ? `https://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} />
           </Profile>
           <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px' MOBfontSize='8px'>
             {props.nickname}

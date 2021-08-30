@@ -1,3 +1,3 @@
-const baseUrl = 'http://fw3efsadfcv.shop/api';
+const baseUrl = 'https://fw3efsadfcv.shop/api';
 
 export { baseUrl };

@@ -72,7 +72,7 @@ const MainQna = (props) => {
                   </Content>
                   <Info>
                     {/* 작성자 프로필 이미지 */}
-                    <ProfileImg src={pq.user.profilePic ? `http://fw3efsadfcv.shop${pq.user.profilePic}` : Profile_small} alt="프로필" />
+                    <ProfileImg src={pq.user.profilePic ? `https://fw3efsadfcv.shop${pq.user.profilePic}` : Profile_small} alt="프로필" />
                     {/* 작성자 닉네임 */}
                     <Text fontSize="12px" MOBfontSize='8px' color="#9aa0a6" margin="0 8px" TABfontSize='10px'>
                       {pq.nickname}

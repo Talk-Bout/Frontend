@@ -26,7 +26,7 @@ const QnaCard = (props) => {
         {/* 화면 너비 width > 1200px 이거나 width < 768px 일 때 보이기 */}
         <QInfoDesktop>
           {/* 작성자 프로필 이미지 */}
-          <ProfileImg src={props.user.profilePic != null && props.user.profilePic !== 'null' ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} width='16px' />
+          <ProfileImg src={props.user.profilePic != null && props.user.profilePic !== 'null' ? `https://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} width='16px' />
           {/* 작성자 닉네임 */}
           <Text fontSize="12px" MOBfontSize='8px' color="#80868b" lineHeight="24px" margin="0 16px 0 8px" TABmargin='0 4px 0' MOBmargin='0 12px 0 4px'>
             {props.nickname}
@@ -40,7 +40,7 @@ const QnaCard = (props) => {
         {/* 화면 너비 768px <= width <= 1200px 일 때 보이기 */}
         <QInfoTablet>
           {/* 작성자 프로필 이미지 */}
-          <ProfileImg src={props.user.profilePic != null && props.user.profilePic !== 'null' ? `http://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} width='16px' />
+          <ProfileImg src={props.user.profilePic != null && props.user.profilePic !== 'null' ? `https://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} width='16px' />
           {/* 작성자 닉네임 */}
           <Text color="#80868b" fontSize='12px' lineHeight='24px' TABfontSize="10px" margin='0 16px 0 8px' TABmargin="0 4px 0">
             {props.nickname}

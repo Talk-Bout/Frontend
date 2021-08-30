@@ -19,7 +19,7 @@ const CommonDetail = (props) => {
 
   // 질문 작성자 프로필 사진
   const user_profile = one_post.user ? one_post.user.profilePic : null;
-  const user_profile_url = `http://fw3efsadfcv.shop${user_profile}`
+  const user_profile_url = `https://fw3efsadfcv.shop${user_profile}`
 
   const username = useSelector(state => state.user.user.nickname);
   const postId = parseInt(props.match.params.id);
@@ -260,7 +260,7 @@ const CommonDetail = (props) => {
                 </InfoBox>
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
-                {one_post.image ? <ImageBox><Image src={`http://fw3efsadfcv.shop${one_post.image}`} /></ImageBox> : ''}
+                {one_post.image ? <ImageBox><Image src={`https://fw3efsadfcv.shop${one_post.image}`} /></ImageBox> : ''}
                 <Text p lineHeight='24px' fontSize='16px' MOBfontSize='14px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text' whiteSpace='pre-line'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}

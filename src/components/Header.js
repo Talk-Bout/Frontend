@@ -89,7 +89,7 @@ const Header = (props) => {
             </Text>
             {/* 프로필 이미지 */}
             <Profile>
-              <ProfileImg onClick={() => history.push('/mypage')} src={profilePic ? `http://fw3efsadfcv.shop${profilePic}` : Profile_small} />
+              <ProfileImg onClick={() => history.push('/mypage')} src={profilePic ? `https://fw3efsadfcv.shop${profilePic}` : Profile_small} />
             </Profile>
             {/* 드롭다운 메뉴 */}
             <Button

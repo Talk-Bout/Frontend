@@ -65,7 +65,7 @@ const QuestionDetail = (props) => {
 
   // 질문 작성자 프로필 사진
   const user_profile = question_found.user.profilePic;
-  const user_profile_url = `http://fw3efsadfcv.shop${question_found.user.profilePic}`
+  const user_profile_url = `https://fw3efsadfcv.shop${question_found.user.profilePic}`
 
   // 수정 삭제 버튼
   const handleClick = (e) => {
@@ -248,7 +248,7 @@ const QuestionDetail = (props) => {
               </Text>
               {question_found.image ?
                 <ImageBox>
-                  <Image src={`http://fw3efsadfcv.shop${question_found.image}`} />
+                  <Image src={`https://fw3efsadfcv.shop${question_found.image}`} />
                 </ImageBox>
                 :
                 ''

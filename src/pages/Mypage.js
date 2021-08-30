@@ -19,7 +19,7 @@ const Mypage = (props) => {
   const nickname = useSelector(state => state.user.user.nickname);
   const provider = getCookie('provider');
   const profilePic = useSelector(state => state.user.user.profilePic);
-  const user_profile_url = `http://fw3efsadfcv.shop${profilePic}`;
+  const user_profile_url = `https://fw3efsadfcv.shop${profilePic}`;
 
   useEffect(() => {
     dispatch(mypageActions.setMyBootDB(nickname));
@@ -61,8 +61,6 @@ const Mypage = (props) => {
   if (!is_login) {
     return <NotFound />
   }
-
-  console.log(mytalk);
 
   return (
     <React.Fragment>

@@ -36,7 +36,7 @@ const AnswerCard = (props) => {
 
   // 답변 작성자 프로필 사진
   const user_profile = one_answer.profilePic;
-  const user_profile_url = `http://fw3efsadfcv.shop${one_answer.profilePic}`
+  const user_profile_url = `https://fw3efsadfcv.shop${one_answer.profilePic}`
 
   return (
     <React.Fragment>

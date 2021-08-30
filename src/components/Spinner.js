@@ -45,6 +45,10 @@ const SpinnerImg = styled.img`
   vertical-align: middle;
   width: 250px;
   height: 250px;
+  @media screen and (max-width: 767px) {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 export default Spinner;

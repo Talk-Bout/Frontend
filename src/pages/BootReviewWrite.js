@@ -94,13 +94,13 @@ const BootReviewWrite = (props) => {
               </Grid>
               <BodyBox>
                 {/* 리뷰 제목 */}
-                <div><Text fontSize='18px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' lineHeight='50px' MOBlineHeight='16px' cursor='default'>제목</Text></div>
+                <div><Text fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' lineHeight='50px' MOBlineHeight='16px' cursor='default'>제목</Text></div>
                 <div><Input placeholder='제목을 입력해주세요' ref={titleInput} /></div>
                 {/* 평점 */}
-                <div style={{ lineHeight: '32px' }}><Text fontSize='18px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' cursor='default'>평점</Text></div>
+                <div style={{ lineHeight: '32px' }}><Text fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' cursor='default'>평점</Text></div>
                 <div style={{ lineHeight: '32px' }}><Text fontSize='32px' fontWeight='700'><StarRatingComponent name='Stars' onStarClick={(e) => onClickStar(e)} renderStarIcon={() => <IoStar />} starColor='#dadce0' emptyStarColor='#3c4043' /></Text></div>
                 {/* 수료 여부 */}
-                <div style={{ marginTop: '-8px', lineHeight: '52px' }}><Text fontSize='18px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' cursor='default'>수료 여부</Text></div>
+                <div style={{ marginTop: '-8px', lineHeight: '52px' }}><Text fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' cursor='default'>수료 여부</Text></div>
                 <div style={{ marginTop: '-8px' }}>
                   <Select ref={courseInput}>
                     <option value=''>선택해주세요</option>
@@ -109,14 +109,14 @@ const BootReviewWrite = (props) => {
                   </Select>
                 </div>
                 {/* 장점 */}
-                <div><Text fontSize='18px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' cursor='default'>장점<br /></Text><Text fontSize='14px' MOBfontSize='12px' color='#9AA0A6' cursor='default'>최소 20자</Text></div>
+                <div><Text fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' cursor='default'>장점<br /></Text><Text fontSize='14px' MOBfontSize='12px' color='#9AA0A6' cursor='default'>최소 20자</Text></div>
                 <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요.
 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput} /></div>
                 {/* 단점 */}
-                <div><Text fontSize='18px' MOBfontSize='16px' fontWeight='700' color='#e8eaed' cursor='default'>단점<br /></Text><Text fontSize='14px' MOBfontSize='12px' color='#9AA0A6' cursor='default'>최소 20자</Text></div>
+                <div><Text fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' cursor='default'>단점<br /></Text><Text fontSize='14px' MOBfontSize='12px' color='#9AA0A6' cursor='default'>최소 20자</Text></div>
                 <div><Textarea rows='5' placeholder={`${camp_name}의 단점을 입력해주세요.
 리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={consInput} /></div>
-                <ButtonMobile onClick={() => addReview()}><Text MOBfontSize='16px' fontWeight='700' color='#848484'>등록</Text></ButtonMobile>
+                <ButtonMobile onClick={() => addReview()}><Text MOBfontSize='14px' fontWeight='700' color='#848484'>등록하기</Text></ButtonMobile>
               </BodyBox>
             </Window>
           </Grid>
@@ -151,12 +151,15 @@ const BodyBox = styled.div`
     @media screen and (max-width: 1090px) {
       margin-bottom: 32px;
     }
+    @media screen and (max-width: 767px) {
+      margin-bottom: 10px;
+    }
   }
   @media screen and (max-width: 1090px) {
     grid-template-columns: 25% 75%;
   }
   @media screen and (max-width: 767px) {
-    padding: 10px;
+    padding: 24px 18px;
     display: flex;
     flex-direction: column;
   }
@@ -174,6 +177,9 @@ const Select = styled.select`
   &:focus {
     outline: none;
   }
+  @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
 `;
 
 const Input = styled.input`
@@ -186,12 +192,16 @@ const Input = styled.input`
   &::placeholder {
     color: #8f9091;
     font-size: 16px;
+    @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
   }
   &:focus {
     outline: none;
   }
   @media screen and (max-width: 767px) {
-    width: 90%;
+    width: calc(100% - 36px);
+    font-size: 14px;
   }
 `;
 
@@ -206,6 +216,9 @@ const Textarea = styled.textarea`
   &::placeholder {
     color: #8f9091;
     font-size: 16px;
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+    }
   }
   &:focus {
     outline: none;
@@ -215,7 +228,8 @@ const Textarea = styled.textarea`
     height: 120px;
   }
   @media screen and (max-width: 767px) {
-    width: 90%;
+    width: calc(100% - 36px);
+    font-size: 14px;
   }
 `;
 
@@ -223,8 +237,7 @@ const ButtonMobile = styled.button`
   cursor: pointer;
   background-color: #202124;
   border: none;
-  border-radius: 8px;
-  height: 40px;
+  height: 56px;
   @media screen and (min-width: 768px) {
     display: none;
   }

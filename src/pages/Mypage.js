@@ -58,7 +58,7 @@ const Mypage = (props) => {
     window.alert('지금은 에러 처리 중입니다!\n빠르게 복구하여 돌아오겠습니다! ;-/')
   }
 
-  if (!provider) {
+  if (!is_login) {
     return <NotFound />
   }
 

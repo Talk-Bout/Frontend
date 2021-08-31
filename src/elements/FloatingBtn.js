@@ -45,6 +45,7 @@ const FloatBtn = styled.button`
   @media screen and (max-width: 767px) {
     height: 48px;
     width: 48px;
+    bottom: 70px;
   }
 `;
 

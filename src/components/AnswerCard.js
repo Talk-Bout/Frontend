@@ -108,7 +108,7 @@ const AnswerBox = styled.div`
   @media screen and (max-width: 1200px) {
     width: 800px;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 660px;
   }
   @media screen and (max-width: 767px) {

@@ -257,7 +257,7 @@ const Outter = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     grid-template-columns: 100%;
     display: grid;
   }
@@ -268,7 +268,7 @@ const ProfileOutter = styled.div`
   height: auto;
   width: 24%;
   margin: 0 16px 0 0;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 100%;
     height: auto;
     margin: 0 0 32px 0;
@@ -289,7 +289,7 @@ const ProfileInner = styled.div`
     width: 100%;
     height: 325px;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 100%;
     height: 136px;
     display: flex;
@@ -308,7 +308,7 @@ const ProfileBox = styled.div`
   overflow: hidden;
   display: flex;
   text-align: center;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 100px;
     height: 100px;
     margin: 24px 64px;
@@ -336,7 +336,7 @@ const Nickname = styled.p`
   font-size: 20px;
   font-weight: bold;
   cursor: default;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     text-align: start;
     margin: 24px 0 0 24px;
   }
@@ -353,7 +353,7 @@ const Status = styled.p`
   font-size: 14px;
   cursor: ${(props) => props.purple ? 'pointer' : 'default'};
   ${(props) => props.purple ? ':hover {opacity: 0.8}' : ''};
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     text-align: start;
     margin: 10px 24px;
   }
@@ -378,7 +378,7 @@ const ImgBox = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 16px;
     height: 16px;
     margin: 0px 8px 0 0;
@@ -421,7 +421,7 @@ const MoreButton = styled.button`
   font-weight: bold;
   width: 13%;
   cursor: pointer;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: fit-content;
     font-size: 14px;
   }
@@ -438,13 +438,13 @@ const BootBox = styled.div`
   margin: 12px 0;
   height: 96px;
   width: 100%;
-  @media screen and (min-width: 768px) and (max-width: 1090px) {
+  @media screen and (min-width: 768px) and (max-width: 1150px) {
     height: 100%;
     .bootcard2 {
       display: none;
     }
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 76px;
   }
 `;
@@ -452,7 +452,7 @@ const BootBox = styled.div`
 const ResponsiveOutter = styled.div`
   height: auto;
   width: 100%;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 100%;
   }
 `;
@@ -477,7 +477,7 @@ const BootCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 49.25%;
     height: 96px;
     margin-bottom: 12px;
@@ -503,7 +503,7 @@ const ImageBox = styled.div`
   align-items: center;
   overflow: hidden;
   margin: auto;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 40%;
   }
   @media screen and (max-width: 767px) {

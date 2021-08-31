@@ -135,7 +135,7 @@ const WriteBtn = styled.button`
   &:active {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;

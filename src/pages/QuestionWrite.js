@@ -241,7 +241,7 @@ const Window = styled.div`
   max-width: 1044px;
   height: fit-content;
   margin: auto;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 688px;
     margin: auto;
   }
@@ -335,7 +335,7 @@ const Textarea = styled.textarea`
   ::-webkit-scrollbar-button {
     display: none;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 568px;
   }
   @media screen and (max-width: 767px) {
@@ -354,7 +354,7 @@ const Preview = styled.div`
   text-align: center;
   overflow: hidden;
   margin: 0 auto 16px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 608px;
     height: fit-content;
   }

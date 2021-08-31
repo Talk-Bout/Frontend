@@ -116,7 +116,7 @@ const TextBox = styled.div`
   justify-content: space-between;
   padding-bottom: 24px;
   margin-top: 3px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin-top: 4px;
     padding-bottom: 20px;
   }
@@ -138,7 +138,7 @@ const Scroll = styled.div`
   ::-webkit-scrollbar-button {
     display: none;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: calc(100vw - 108px);
   }
   @media screen and (max-width: 767px) {
@@ -152,7 +152,7 @@ const CardList = styled.div`
   display: flex;
   overflow: hidden;
   padding-bottom: 16px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 225px;
   }
   @media screen and (max-width: 767px) {
@@ -173,7 +173,7 @@ const QuestionCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     padding: 16px 16px 12px;
     width: 250px;
     height: 225px;
@@ -189,7 +189,7 @@ const Content = styled.div`
   margin: 0;
   padding: 0;
   height: 76px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 60px;
   }
   @media screen and (max-width: 767px) {
@@ -200,7 +200,7 @@ const Content = styled.div`
 const Info = styled.div`
   margin-top: 24px;
   height: 24px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin-top: 16px;
     height: 50px;
   }
@@ -213,7 +213,7 @@ const ProfileImg = styled.img`
   vertical-align: middle;
   width: 24px;
   height: 24px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 16px;
     height: 16px;
   }
@@ -225,7 +225,7 @@ const ProfileImg = styled.img`
 
 const Date = styled.div`
   display: inline;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: block;
   }
 `;
@@ -233,7 +233,7 @@ const Date = styled.div`
 const Line = styled.hr`
   margin: 16px 0 8px;
   border: 1px solid #282a2d;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin: 12px 0;
   }
   @media screen and (max-width: 767px) {
@@ -243,7 +243,7 @@ const Line = styled.hr`
 
 const Numbers = styled.div`
   height: fit-content;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin: -10px 0 0;
   }
   @media screen and (max-width: 767px) {

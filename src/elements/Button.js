@@ -15,7 +15,7 @@ const Button = (props) => {
     display: display,
     padding: padding,
     float: float,
-    // 태블릿 사이즈(768px~1090px)
+    // 태블릿 사이즈(768px~1150px)
     TABheight: TABheight,
     TABwidth: TABwidth,
     TABmargin: TABmargin,
@@ -47,7 +47,7 @@ const Btn = styled.button`
   border: ${(props) => props.border};
   display: ${(props) => props.display};
   float: ${(props) => props.float};
-  // 태블릿 사이즈(768px~1090px)
+  // 태블릿 사이즈(768px~1150px)
   @media screen and (min-width: 768px) and (max-width: 992px) {
     width: ${(props) => props.TABwidth};
     height: ${(props) => props.TABheight};

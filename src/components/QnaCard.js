@@ -89,7 +89,7 @@ const QnaListCard = styled.div`
   @media screen and (max-width: 1200px) {
     height: 270px;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 230px;
     padding: 16px 16px 0;
   }
@@ -102,7 +102,7 @@ const QnaListCard = styled.div`
 const Content = styled.div`
   height: 72px;
   margin: 16px 0 32px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin: 10px 0 10px;
   }
   @media screen and (max-width: 767px) {
@@ -129,7 +129,7 @@ const QInfoTablet = styled.div`
 const ProfileImg = styled.img`
   width: 24px;
   vertical-align: middle;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 16px;
     height: 16px;
   }
@@ -141,7 +141,7 @@ const ProfileImg = styled.img`
 
 const Line = styled.hr`
   border: 1px solid #282a2d;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin-bottom: 0px;
   }
 `;

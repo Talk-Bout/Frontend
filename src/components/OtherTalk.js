@@ -39,7 +39,7 @@ const OthersBox = styled.div`
   height: fit-content;
   background-color: #202124;
   padding: 24px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;

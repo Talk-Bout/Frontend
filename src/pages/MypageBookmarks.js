@@ -99,7 +99,7 @@ const Card = styled.div`
   display: grid;
   width: 100%;
   margin-top: 33px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     grid-template-columns: repeat(3, 1fr);
     margin-top: 16px;
   }
@@ -121,7 +121,7 @@ const Post = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin: 0;
   }
   @media screen and (max-width: 767px) {
@@ -139,7 +139,7 @@ const ImgBox = styled.div`
   text-align: center;
   overflow: hidden;
   margin: 0px 15px 0 0;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 16px;
     height: 16px;
     margin: 0px 8px 0 0;

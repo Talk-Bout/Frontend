@@ -198,7 +198,7 @@ const WriteBtn = styled.button`
   &:active {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;
@@ -210,7 +210,7 @@ const CardList = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 16px;
   row-gap: 24px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     row-gap: 16px;
     margin-top: 15px;
   }
@@ -226,7 +226,7 @@ const PageBox = styled.div`
   height: 100%;
   margin-top: 40px;
   padding-bottom: 80px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin-top: 24px;
     padding-bottom: 40px;
   }

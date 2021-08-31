@@ -39,7 +39,7 @@ const FixNav = styled.div`
   position: fixed;
   width: 100px;
   top: 0;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 72px;
     top: 0;
   }
@@ -47,7 +47,7 @@ const FixNav = styled.div`
 
 const Point = styled.img`
   width: 100px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 72px;
   }
 `;
@@ -55,7 +55,7 @@ const Point = styled.img`
 const Image = styled.img`
   width: 100px;
   cursor: pointer;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 72px;
   }
 `;

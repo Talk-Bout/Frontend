@@ -39,7 +39,7 @@ const FloatBtn = styled.button`
   &:active {
     ${(props) => props.active};
   }
-  @media screen and (min-width: 1091px) {
+  @media screen and (min-width: 1151px) {
     display: none;
   }
   @media screen and (max-width: 767px) {

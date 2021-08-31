@@ -144,7 +144,7 @@ const ContactBoxTAB = styled.div`
   @media screen and (min-width: 1201px) {
     display: none;
   }
-  @media screen and (min-width: 1091px) {
+  @media screen and (min-width: 1151px) {
     left: 500px;
   }
 `;

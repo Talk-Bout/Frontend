@@ -30,7 +30,7 @@ const Stars = (props) => {          // 부트캠프별 별점 표시하는 컴�
       {/* countingStar()에서 만든 별 5개를 (평점과 함께) 보여준다. */}
       {countingStar()}
       {withScore ?
-        <Text color='#e5e5e5' fontSize={size} TABfontSize={TABsize} MOBfontSize={MOBsize} margin='0 5px 0' verticalAlign='middle'>{score === 0 ? '별점/리뷰 없음' : Number(score).toFixed(1)}</Text>
+        <Text color='#e5e5e5' fontSize={size} TABfontSize={TABsize} MOBfontSize={MOBsize} margin='0 5px 0' verticalAlign='middle'>{score === 0 ? '리뷰 없음' : Number(score).toFixed(1)}</Text>
         : ''}
     </React.Fragment>
   )
@@ -49,7 +49,7 @@ const StarFull = styled.span`
   color: #e5e5e5;
   vertical-align: middle;
   cursor: default;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     font-size: ${(props) => props.TABsize};
   }
   @media screen and (max-width: 767px) {
@@ -65,7 +65,7 @@ const StarEmpty = styled.span`
   color: #555;
   vertical-align: middle;
   cursor: default;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     font-size: ${(props) => props.TABsize};
   }
   @media screen and (max-width: 767px) {

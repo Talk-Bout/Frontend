@@ -194,7 +194,7 @@ const Logo = styled.img`
   margin: 0 8px;
   cursor: pointer;
   vertical-align: middle;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 56px;
     width: auto;
   }
@@ -212,7 +212,7 @@ const GiftBtn = styled.img`
   width: 150px;
   height: 150px;
   cursor: pointer;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 100px;
     height: 100px;
     right: 120px;
@@ -248,7 +248,7 @@ const LoginBtn = styled.button`
   margin: 38px 42px 0 0;
   height: 24px;
   float: right;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 18px;
     margin: 27px 18px 0 0;
   }

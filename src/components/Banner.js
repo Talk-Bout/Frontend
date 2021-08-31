@@ -20,24 +20,24 @@ const BannerN = (props) => {
 
 const ImageDT = styled.img`
   cursor: pointer;
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1460px) {
     display: none;
   }
 `;
 
 const ImageDTS = styled.img`
   cursor: pointer;
-  @media screen and (min-width: 1401px) {
+  @media screen and (min-width: 1461px) {
     display: none;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;
 
 const ImageTAB = styled.img`
   cursor: pointer;
-  @media screen and (min-width: 1090px) {
+  @media screen and (min-width: 1150px) {
     display: none;
   }
   @media screen and (max-width: 767px) {

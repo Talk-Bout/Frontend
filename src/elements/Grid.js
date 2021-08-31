@@ -49,7 +49,7 @@ const Grid = (props) => {
     opacity,
     userSelect,
     wordBreak,
-    // 태블릿 사이즈(width: 768px~1090px)
+    // 태블릿 사이즈(width: 768px~1150px)
     TABheight,
     TABwidth,
     TABmargin,
@@ -116,7 +116,7 @@ const Grid = (props) => {
     opacity: opacity,
     userSelect: userSelect,
     wordBreak: wordBreak,
-    // 태블릿 사이즈(width: ~1090px)
+    // 태블릿 사이즈(width: ~1150px)
     TABheight: TABheight,
     TABwidth: TABwidth,
     TABmargin: TABmargin,
@@ -203,8 +203,8 @@ const GridBox = styled.div`
   -webkit-user-select: none;
   user-select: ${(props) => props.userSelect ? props.userSelect : 'none'};
   word-break: ${(props) => props.wordBreak};
-  // 태블릿 사이즈(width: ~1090px)
-  @media screen and (max-width: 1090px) {
+  // 태블릿 사이즈(width: ~1150px)
+  @media screen and (max-width: 1150px) {
     height: ${(props) => props.TABheight};
     width: ${(props) => props.TABwidth};
     margin: ${(props) => props.TABmargin};

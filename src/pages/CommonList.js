@@ -219,7 +219,7 @@ const Categories = styled.div`
   display: flex;
   align-items: flex-start;
   height: 44px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 34px;
   }
   @media screen and (max-width: 767px) {
@@ -244,7 +244,7 @@ const CategoryButton = styled.div`
     background-color: #bdc1c6;
     color: #0e1013;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     padding: 3px 20px;
     font-size: 14px;
   }
@@ -288,14 +288,14 @@ const WriteButton = styled.button`
   height: 48px;
   padding: 10px 0px;
   border: 1px solid #7879F1;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;
 
 const Line = styled.hr`
   border: 1px solid #80868B;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;
@@ -313,7 +313,7 @@ const PageBox = styled.div`
   height: 100%;
   margin-top: 40px;
   padding-bottom: 80px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin-top: 24px;
     padding-top: 24px;
     padding-bottom: 40px;

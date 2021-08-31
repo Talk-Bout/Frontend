@@ -64,7 +64,7 @@ const Content = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     border-bottom: 1px solid #3c4043;
     padding: 16px;
   }
@@ -82,7 +82,7 @@ const Profile = styled.div`
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 16px;
     height: 16px;
   }

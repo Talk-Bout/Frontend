@@ -81,7 +81,7 @@ const MypageBootcamps = (props) => {
 
 const CardList = styled.div`
   margin: 24px 0 0;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin: 16px 0 0;
   }
 `;
@@ -97,7 +97,7 @@ const Card = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 96px;
     margin: 0 0 12px;
   }
@@ -113,7 +113,7 @@ const NameBox = styled.div`
   height: 100%;
   padding: 32px;
   display: flex;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     padding: 20px;
   }
   @media screen and (max-width: 767px) {
@@ -131,7 +131,7 @@ const LogoBox = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 56px;
     height: 56px;
   }
@@ -150,7 +150,7 @@ const TextBox = styled.div`
   width: 70%;
   margin: 0 16px 0;
   padding: 10px 0;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     padding: 0;
   }
   @media screen and (max-width: 767px) {
@@ -166,13 +166,13 @@ const HeartBox = styled.span`
 `;
 
 const StarBox = styled.div`
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     display: none;
   }
 `;
 
 const ScoreBox = styled.div`
-  @media screen and (min-width: 1091px) {
+  @media screen and (min-width: 1151px) {
     display: none;
   }
 `;
@@ -180,7 +180,7 @@ const ScoreBox = styled.div`
 const InfoBox = styled.div`
   width: 70%;
   padding: 24px 0;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     padding: 8px 0;
   }
   @media screen and (max-width: 767px) {
@@ -203,7 +203,7 @@ const InfoInner = styled.div`
     text-align: center;
     min-width: fit-content;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     grid-template-columns: 1.5fr 2fr 2fr 0.5fr;
     grid-template-rows: 1fr 2fr;
     padding: 0 0 0 20px;

@@ -39,7 +39,7 @@ const Footer = (props) => {
 
 const Image = styled.img`
   margin: 0 0 0 20px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 300px;
     margin: 0;
   }

@@ -75,7 +75,7 @@ const InfoList = styled.div`
   & > div {
     margin: 0 0 16px;
     line-height: 30px;
-    @media screen and (max-width: 1090px) {
+    @media screen and (max-width: 1150px) {
       line-height: 24px;
     }
     @media screen and (max-width: 767px) {

@@ -20,7 +20,7 @@ const Emoji = (props) => {
 const Img = styled.img`
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: ${(props) => props.TABheight};
     margin: ${(props) => props.TABmargin};
   }

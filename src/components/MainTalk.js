@@ -63,7 +63,7 @@ const TextBox = styled.div`
   justify-content: space-between;
   padding-bottom: 24px;
   margin-top: 3px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     margin-top: 4px;
     padding-bottom: 20px;
   }
@@ -85,7 +85,7 @@ const Scroll = styled.div`
   ::-webkit-scrollbar-button {
     display: none;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: calc(100vw - 108px);
   }
   @media screen and (max-width: 767px) {
@@ -99,7 +99,7 @@ const CardList = styled.div`
   display: flex;
   overflow: hidden;
   padding-bottom: 16px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: 201px;
   }
   @media screen and (max-width: 767px) {
@@ -119,7 +119,7 @@ const PostCard = styled.div`
   &:hover {
     opacity: 0.7;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     padding: 16px 16px 12px;
     width: 250px;
     height: 201px;
@@ -138,7 +138,7 @@ const ImgBox = styled.div`
   margin: 0 auto 20px;
   overflow: hidden;
   text-align: center;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 100%;
     height: 50%;
     margin: 0 0 8px;
@@ -158,7 +158,7 @@ const Content = styled.div`
   margin: 0;
   padding: 0;
   height: 76px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     height: fit-content;
   }
 `;

@@ -358,7 +358,7 @@ const BodyInner = styled.div`
   height: fit-content;
   display: grid;
   grid-template-columns: 65% 34%;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     grid-template-columns: 100%;
   }
   @media screen and (max-width: 767px) {
@@ -369,7 +369,7 @@ const BodyInner = styled.div`
 const Post = styled.div`
   border-bottom: 1px solid #5F6368;
   padding: 0 0 20px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 100%;
 }
   `;

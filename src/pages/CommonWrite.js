@@ -237,7 +237,7 @@ const Window = styled.div`
   width: 1044px;
   height: fit-content;
   margin: auto;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 688px;
     height: fit-content;
   }
@@ -342,7 +342,7 @@ const Preview = styled.div`
   text-align: center;
   overflow: hidden;
   margin: 0 auto 16px;
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1150px) {
     width: 608px;
     height: fit-content;
   }

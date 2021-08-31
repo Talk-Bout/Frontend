@@ -34,7 +34,7 @@ const FloatBtn = styled.button`
   background-color: #5F6368;
   position: fixed;
   z-index: 10;
-  bottom: 110px;
+  bottom: 220px;
   right: 12px;
   &:active {
     ${(props) => props.active};

@@ -300,50 +300,6 @@ const Line = styled.hr`
   }
 `;
 
-const Notice = styled.div`
-border-bottom: 1px solid #3C4043;
-display: flex;
-justify-content: space-between;
-width: 100%;
-height: 60px;
-margin-top: 16px;
-@media screen and (min-width: 768px) and (max-width: 1090px) {
-  height: 48px;
-}
-`;
-
-const NoticeHead = styled.span`
-text-align: center;
-color: #7879F1;
-padding: 8px 32px;
-width: 90px;
-height: 34px;
-border: 1px solid #7879F1;
-box-sizing: border-box;
-border-radius: 8px;
-margin: 17px 24px;
-font-size: 14px;
-line-height: 18px;
-vertical-align: middle;
-@media screen and (min-width: 768px) and (max-width: 1090px) {
-  margin: 0 16px;
-  padding: 6px 20px;
-  line-height: 16px;
-}
-`;
-
-const NoticeText = styled.span`
-font-weight: bold;
-color: #7879F1;
-font-size: 18px;
-line-height: 18px;
-letter-spacing: 0.2px;
-vertical-align: middle;
-@media screen and (min-width: 768px) and (max-width: 1090px) {
-  font-size: 14px;
-}
-`;
-
 const Contents = styled.div`
   width: 100%;
   height: fit-content;
@@ -359,6 +315,7 @@ const PageBox = styled.div`
   padding-bottom: 80px;
   @media screen and (max-width: 1090px) {
     margin-top: 24px;
+    padding-top: 24px;
     padding-bottom: 40px;
   }
   @media screen and (max-width: 767px) {

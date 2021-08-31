@@ -18,7 +18,7 @@ const Body = (props) => {
         width="100vw"
       >
         {header ? <Header opacity={opacity} TABopacity={TABopacity} MOBopacity={MOBopacity} /> : ''}
-        <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='18px 18px 0' MOBpadding={MOBnopadding ? '0' : '6px 17px 50px 18px'} minHeight='calc(100vh - 100px)' TABminHeight='calc(100vh - 72px)' MOBminHeight='calc(100vh - 50px)'>
+        <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='18px 18px 0' MOBpadding={MOBnopadding ? '0' : '6px 17px 50px 18px'} minHeight='calc(100vh - 350px)' TABminHeight='calc(100vh - 276px)' MOBminHeight='calc(100vh - 50px)'>
           {children}
         </Grid>
         {footer ? <Footer /> : ''}

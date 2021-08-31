@@ -107,9 +107,9 @@ const setPostPopDB = (page) => {
     }).catch((err) => {
       // console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
       dispatch(statusActions.endLoading());
-      if (window.confirm(`에러가 발생했습니다! :( \n[setPostPopDB: ${err}]\n새로고침하시겠습니까?`)) {
-        window.location.reload();
-      };
+      // if (window.confirm(`에러가 발생했습니다! :( \n[setPostPopDB: ${err}]\n새로고침하시겠습니까?`)) {
+      //   window.location.reload();
+      // };
     });
   };
 };

@@ -24,10 +24,13 @@ const Login = (props) => {
         <Image
           src={LogoImg}
           width="210px"
+          // width="300px"
           MOBwidth='200px'
           height='80px'
+          // height='110px'
           MOBheight='80px'
           margin="0 auto"
+          // margin='0 0 0 35px'
           _onClick={() => history.push('/')}
           cursor="pointer"
         />
@@ -50,6 +53,9 @@ const GoogleBtn = styled.img`
   cursor: pointer;
   &:active {
     opacity: 0.7;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 30px auto 0;
   }
 `;
 

@@ -44,9 +44,9 @@ const mainCampsDB = () => {
       dispatch(statusActions.endLoading());
     }).catch((err) => {
       // console.error(`메인페이지 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
-      if (window.confirm(`에러가 발생했습니다! :(\n[mainCampsDB: ${err}]\n새로고침하시겠습니까?`)) {
-        window.location.reload();
-      }
+      // if (window.confirm(`에러가 발생했습니다! :(\n[mainCampsDB: ${err}]\n새로고침하시겠습니까?`)) {
+      //   window.location.reload();
+      // }
     });
   };
 };

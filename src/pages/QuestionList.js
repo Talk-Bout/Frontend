@@ -224,8 +224,10 @@ const PageBox = styled.div`
   display: inline-block;
   height: 100%;
   margin-top: 40px;
+  padding-bottom: 80px;
   @media screen and (max-width: 1090px) {
     margin-top: 24px;
+    padding-bottom: 40px;
   }
   @media screen and (max-width: 767px) {
     padding-bottom: 50px;

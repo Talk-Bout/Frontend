@@ -14,9 +14,11 @@ const CommonPostList = (props) => {
   }
   const postInfo = {
     viewCount: props.viewCount,
-    commentNumber: 0,
+    commentNumber: props.postComment ? props.postComment.length : 0,
     like: props.postLike,
   }
+
+  console.log(props);
 
   return (
     <React.Fragment>

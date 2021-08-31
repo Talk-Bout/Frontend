@@ -216,6 +216,7 @@ const deletePicDB = (nickname, profilePic) => {
       dispatch(imageActions.DeleteImageUrl());
       dispatch(statusActions.endTask());
       window.alert('프로필 사진이 삭제되었습니다.');
+      history.replace('/mypage');
     }).catch((err) => {
       window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
       dispatch(statusActions.endTask());

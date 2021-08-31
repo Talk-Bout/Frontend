@@ -261,7 +261,7 @@ const CommonDetail = (props) => {
                 {/* 내용 */}
                 {/* 이미지가 있을 경우 내용 위에 보여주기 */}
                 {one_post.image ? <ImageBox><Image src={`https://fw3efsadfcv.shop${one_post.image}`} /></ImageBox> : ''}
-                <Text p lineHeight='24px' fontSize='16px' MOBfontSize='14px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text' whiteSpace='pre-line'>{one_post.content}</Text>
+                <Text p lineHeight='24px' fontSize='16px' MOBfontSize='14px' color='#dadce0' margin={one_post.image ? '' : '32px 0 0'} cursor='text' userSelect='text' whiteSpace='pre-line' wordBreak='break-all'>{one_post.content}</Text>
                 <IconBox>
                   {/* 좋아요 버튼 */}
                   {/* 좋아요 한 상태이면 보라색, 아니면 하얀색으로 보여주기 */}

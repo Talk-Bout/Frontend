@@ -255,7 +255,7 @@ const LoginBtn = styled.button`
   @media screen and (max-width: 767px) {
     margin: 14px 0 0;
     height: fit-content;
-    width: 60px;
+    min-width: 60px;
   }
 `;
 

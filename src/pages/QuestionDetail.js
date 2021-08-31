@@ -203,7 +203,7 @@ const QuestionDetail = (props) => {
                     </Text>
                   </Grid>
                 </Grid>
-                {/*모바일 버전에서는 북마크, 수정/삭제 버튼이 작성자 닉네임 옆에 오기 */}
+                {/* 모바일 버전에서는 북마크, 수정/삭제 버튼이 작성자 닉네임 옆에 오기 */}
                 <ButtonBoxMOB>
                   {is_login &&
                     <>
@@ -243,7 +243,7 @@ const QuestionDetail = (props) => {
                 </ButtonBoxMOB>
               </Grid>
               {/* Question 본문 내용 */}
-              <Text p margin="50px 0" TABmargin='0 0 48px' MOBmargin='0 0 24px' fontSize="16px" MOBfontSize='14px' color="#bdc1c6" cursor='text' userSelect='text' whiteSpace='pre-line'>
+              <Text p margin="50px 0" TABmargin='0 0 48px' MOBmargin='0 0 24px' fontSize="16px" MOBfontSize='14px' color="#bdc1c6" cursor='text' userSelect='text' whiteSpace='pre-line' wordBreak='break-all'>
                 {question_found.content}
               </Text>
               {question_found.image ?

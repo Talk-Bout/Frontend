@@ -154,8 +154,11 @@ const addPostDB = (new_post) => {
         dispatch(addPost(response.data));
       })
       .catch((err) => {
-        // console.error(`부트톡톡 게시글 추가하기 에러 발생: ${err}`);
-        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
+        if (err.response.status === 400) {
+          window.alert('도배 또는 욕설로 분류되는 내용은 등록할 수 없습니다.');
+        } else {
+          window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
+        }
       });
   };
 };

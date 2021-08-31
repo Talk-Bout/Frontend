@@ -33,10 +33,10 @@ const Contact = (props) => {
           </div>
         </Column>
         <Column>
-          <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Design</Text></div>
-          <div><Text color='#A5A6F6' fontSize='12px'>{info_list.designer1[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer1[1], '_blank')} /></Text></div>
+          <div className='design'><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Design</Text></div>
+          <div className='design'><Text color='#A5A6F6' fontSize='12px'>{info_list.designer1[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer1[1], '_blank')} /></Text></div>
           <div></div>
-          <div><Text color='#A5A6F6' fontSize='12px'>{info_list.designer2[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer2[1], '_blank')} /></Text></div>
+          <div className='design'><Text color='#A5A6F6' fontSize='12px'>{info_list.designer2[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer2[1], '_blank')} /></Text></div>
         </Column>
         <ColumnRepo>
           <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>{info_list.repo[0]}</Text></div>
@@ -79,7 +79,7 @@ const Contact = (props) => {
 const ContactBox = styled.div`
   background-color: #17181B;
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr;
+  grid-template-columns: 1fr 0.9fr 1.5fr;
   column-gap: 40px;
   padding: 28px 23px;
   width: 100%;
@@ -93,10 +93,13 @@ const Column = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   column-gap: 20px;
-  width: fit-content;
+  width: 100%;
   & > div {
     vertical-align: middle;
     text-align: right;
+  }
+  .design {
+    text-align: center;
   }
   @media screen and (max-width: 1260px) {
     display: grid;

@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import { history } from '../ConfigureStore';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
+import { actionCreators as imageActions } from './image';
 
 // QUESTION 액션타입
 const SET_QUESTION = 'question/SET_QUESTION';
@@ -139,7 +140,9 @@ const createQuestionDB = (new_question) => {
       })
       .then((response) => {
         dispatch(createQuestion(response.data));
-        history.push('/question');
+        dispatch(imageActions.getPreview(null));
+        dispatch(imageActions.DeleteImageUrl());
+        history.replace('/question');
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -167,7 +170,9 @@ const editQuestionDB = (edit_question) => {
       })
       .then((response) => {
         dispatch(editQuestion(response.data));
-        history.push('/question');
+        dispatch(imageActions.getPreview(null));
+        dispatch(imageActions.DeleteImageUrl());
+        history.replace('/question');
       })
       .catch((err) => {
         // console.error(`질문 수정하기 에러: ${err}`);

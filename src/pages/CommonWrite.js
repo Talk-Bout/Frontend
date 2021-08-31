@@ -70,11 +70,7 @@ const BootCommuWrite = (props) => {
         image: edited_image,
       };
       dispatch(postActions.editPostDB(edited_post));
-      dispatch(imageActions.getPreview(null));
-      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
-      history.push(`/common/detail/${postId}`)
-      titleRef.current.value = '';
-      contentRef.current.value = '';
+      
     } else {
       const new_post = {
         title: titleRef.current.value,
@@ -83,12 +79,7 @@ const BootCommuWrite = (props) => {
         category: categoryRef.current.value,
         image: image_url,
       };
-      dispatch(postActions.addPostDB(new_post));
-      dispatch(imageActions.getPreview(null));
-      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
-      history.push(`/common/list`)
-      titleRef.current.value = '';
-      contentRef.current.value = '';
+      dispatch(postActions.addPostDB(new_post))  
     }
   };
 

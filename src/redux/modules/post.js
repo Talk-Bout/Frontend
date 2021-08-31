@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import instance from '../../shared/request';
 import { actionCreators as statusActions } from './status';
+import { actionCreators as imageActions } from './image';
 import { history } from '../ConfigureStore';
 
 // 액션타입
@@ -40,8 +41,7 @@ const deleteBookmark = createAction(DELETE_BOOKMARK, (bookmarkId) => ({ bookmark
 // 좋아요
 const likePost = createAction(LIKE_POST, (like_post) => ({ like_post }));
 const unlikePost = createAction(UNLIKE_POST, (postlikeId) => ({ postlikeId }));
-
-// 액션생성함수
+// 댓글
 const setComment = createAction(SET_COMMENT, (postComment_list) => ({ postComment_list }));
 const setNextComment = createAction(SET_NEXT_COMMENT, (postComment_list) => ({ postComment_list }));
 const addComment = createAction(ADD_COMMENT, (postComment) => ({ postComment }));
@@ -168,6 +168,9 @@ const addPostDB = (new_post) => {
       })
       .then((response) => {
         dispatch(addPost(response.data));
+        dispatch(imageActions.getPreview(null));
+        dispatch(imageActions.DeleteImageUrl());
+        history.replace(`/common/list`);
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -198,16 +201,10 @@ const editPostDB = (edited_post) => {
         image: image,
       })
       .then((response) => {
-        const data = {
-          title: title,
-          content: content,
-          postId: postId,
-          category: category,
-          nickname: nickname,
-          image: image,
-        }
-        // console.log(response.data);
-        dispatch(editPost(data));
+        dispatch(editPost(response.data));
+        dispatch(imageActions.getPreview(null));
+        dispatch(imageActions.DeleteImageUrl());
+        history.replace(`/common/detail/${postId}`);
       })
       .catch((err) => {
         // console.error(`부트톡톡 게시글 수정하기 에러 발생: ${err}`);

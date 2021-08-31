@@ -79,8 +79,6 @@ const QuestionWrite = (props) => {
         image: edited_image,
       };
       dispatch(questionActions.editQuestionDB(edit_question));
-      dispatch(imageActions.getPreview(null));
-      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
     } else {
       const new_question = {
         title: titleInput.current.value,
@@ -89,8 +87,6 @@ const QuestionWrite = (props) => {
         image: image_url,
       };
       dispatch(questionActions.createQuestionDB(new_question));
-      dispatch(imageActions.getPreview(null)); //이미지 미리보기를 없애기
-      dispatch(imageActions.DeleteImageUrl()); //이미지 url 삭제하기
     }
   };
 

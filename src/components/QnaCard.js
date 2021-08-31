@@ -45,13 +45,13 @@ const QnaCard = (props) => {
           <Text color="#80868b" fontSize='12px' lineHeight='24px' TABfontSize="10px" margin='0 16px 0 8px' TABmargin="0 4px 0">
             {props.nickname}
           </Text>
-          <Date>
+          <div>
             {/* 작성일자 */}
             <Text fontSize='12px' color="#80868b" lineHeight='24px' TABfontSize="8px">
               <Text fontSize='16px' verticalAlign="middle" TABfontSize="10px" margin='0 4px 0 0' TABmargin="0 2px 0 0"><BiTimeFive /></Text>
               {props.createdAt}
             </Text>
-          </Date>
+          </div>
         </QInfoTablet>
         <Line />
         <span style={{ height: 'fit-content' }}>
@@ -139,18 +139,11 @@ const ProfileImg = styled.img`
   }
 `;
 
-const Date = styled.div`
-  @media screen and (max-width: 1200px) {
-    margin-top: -8px;
-    margin-left: 30px;
-  }
-  @media screen and (max-width: 1090px) {
-    margin-left: 20px;
-  }
-`;
-
 const Line = styled.hr`
   border: 1px solid #282a2d;
+  @media screen and (max-width: 1090px) {
+    margin-bottom: 0px;
+  }
 `;
 
 QnaCard.defaultProps = {

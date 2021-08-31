@@ -106,7 +106,7 @@ const Schedule = styled.div`
   width: 100%;
   height: fit-content;
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 30% 70%;
   & > div {
     margin-bottom: 4px;
   }

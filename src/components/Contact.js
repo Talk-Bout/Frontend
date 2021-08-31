@@ -19,12 +19,6 @@ const Contact = (props) => {
     <React.Fragment>
       <ContactBox>
         <Column>
-          <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Design</Text></div>
-          <div><Text color='#A5A6F6' fontSize='12px'>{info_list.designer1[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer1[1], '_blank')} /></Text></div>
-          <div></div>
-          <div><Text color='#A5A6F6' fontSize='12px'>{info_list.designer2[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer2[1], '_blank')} /></Text></div>
-        </Column>
-        <Column>
           <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Front-end</Text></div>
           <div><Text color='#A5A6F6' fontSize='12px'>{info_list.frontend[0]}<Icon src={Little_github} onClick={() => window.open(info_list.frontend[1], '_blank')} /></Text>
           </div>
@@ -37,6 +31,12 @@ const Contact = (props) => {
           <div></div>
           <div><Text color='#A5A6F6' fontSize='12px'>{info_list.backend3[0]}<Icon src={Little_github} onClick={() => window.open(info_list.backend3[1], '_blank')} /></Text>
           </div>
+        </Column>
+        <Column>
+          <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>Design</Text></div>
+          <div><Text color='#A5A6F6' fontSize='12px'>{info_list.designer1[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer1[1], '_blank')} /></Text></div>
+          <div></div>
+          <div><Text color='#A5A6F6' fontSize='12px'>{info_list.designer2[0]}<Icon src={Little_home} onClick={() => window.open(info_list.designer2[1], '_blank')} /></Text></div>
         </Column>
         <ColumnRepo>
           <div><Text color='#BDC1C6' fontSize='12px' fontWeight='700'>{info_list.repo[0]}</Text></div>
@@ -84,10 +84,6 @@ const ContactBox = styled.div`
   padding: 28px 23px;
   width: 100%;
   @media screen and (max-width: 1260px) {
-    height: fit-content;
-    grid-template-columns: 1fr 1fr;
-  }
-  @media screen and (max-width: 1200px) {
     display: none;
   }
 `;
@@ -102,7 +98,7 @@ const Column = styled.div`
     vertical-align: middle;
     text-align: right;
   }
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1260px) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
@@ -120,12 +116,9 @@ const ColumnRepo = styled.div`
     vertical-align: middle;
   }
   @media screen and (max-width: 1260px) {
-    grid-template-rows: 1fr 1fr;
-    padding: 0 23px;
-  }
-  @media screen and (max-width: 1200px) {
-    display: flex;
-    text-align: center;
+    margin-left: 20px;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;    
   }
 `;
 
@@ -141,7 +134,7 @@ const ContactBoxTAB = styled.div`
   padding: 20px 16px;
   position: absolute;
   left: 330px;
-  @media screen and (min-width: 1201px) {
+  @media screen and (min-width: 1261px) {
     display: none;
   }
   @media screen and (min-width: 1151px) {

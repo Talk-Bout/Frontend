@@ -117,7 +117,6 @@ const MypagePic = (props) => {
 const ImageBox = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   text-align: center;
   overflow: hidden;
   width: 80px;

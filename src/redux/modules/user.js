@@ -125,19 +125,13 @@ const logOut = () => {
     axios.post('https://fw3efsadfcv.shop/api/oauth/logout', {
       provider: provider,
     }, { headers: headers }).then((response) => {
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
-      deleteCookie('idToken');
-      deleteCookie('provider');
+      document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
       dispatch(logoutCheck());
       dispatch(statusActions.endTask());
       window.alert('성공적으로 로그아웃 되었습니다.');
       history.push('/');
     }).catch((err) => {
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
-      deleteCookie('idToken');
-      deleteCookie('provider');
+      document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
       dispatch(logoutCheck());
       dispatch(statusActions.endTask());
       window.alert('성공적으로 로그아웃 되었습니다.');

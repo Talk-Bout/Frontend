@@ -26,7 +26,7 @@ const MainTalk = (props) => {
           {/* 부트캠퍼들이 가장 많이 추천한 게시물 */}
           <Text fontSize='14px' color='#BDC1C6' TABfontSize='12px' MOBfontSize='10px' cursor='default'>지금 우리에게 가장 관심받는 주제는?!</Text>
           {/* 더보기 버튼 */}
-          <Text fontSize='20px' MOBfontSize='12px' color='#BDC1C6' cursor='pointer' _onClick={() => history.push('/common/list')}><FaPlus /></Text>
+          <Text fontSize="28px" color="#BDC1C6" cursor="pointer" MOBfontSize='18px' position='absolute' TABtop='630px' MOBtop='540px' right='42px' TABright='18px' _onClick={() => history.push('/common/list')}><FaPlus /></Text>
         </TextBox>
         {/* 부트톡톡 게시물 목록 */}
         <Scroll>

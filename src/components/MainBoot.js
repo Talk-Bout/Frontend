@@ -32,13 +32,7 @@ const MainBoot = () => {
               매력있는 부트캠프들을 만나보세요!
             </Text>
             {/* 부트캠프 더보기 버튼 */}
-            <Text
-              fontSize="20px"
-              color="#BDC1C6"
-              cursor="pointer"
-              MOBfontSize='12px'
-              _onClick={() => history.push('/boot')}
-            >
+            <Text fontSize="28px" color="#BDC1C6" cursor="pointer" MOBfontSize='18px' position='absolute' TABtop='310px' MOBtop='200px' right='42px' TABright='18px' _onClick={() => history.push('/boot')}>
               <FaPlus />
             </Text>
           </TextBox>

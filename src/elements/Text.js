@@ -36,6 +36,7 @@ const Text = (props) => {
     whiteSpace,
     overflowWrap,
     zIndex,
+    right,
     // 태블릿 사이즈(width: ~1090px)
     TABfontSize,
     TABmargin,
@@ -47,6 +48,7 @@ const Text = (props) => {
     TABoverflow,
     TABtextAlign,
     TABheight,
+    TABright,
     // 모바일 사이즈(width: ~767px)
     MOBfontSize,
     MOBmargin,
@@ -61,6 +63,7 @@ const Text = (props) => {
     MOBdisplay,
     MOBcolor,
     MOBwidth,
+    MOBright,
   } = props;
 
   const styles = {
@@ -93,6 +96,7 @@ const Text = (props) => {
     whiteSpace: whiteSpace,
     overflowWrap: overflowWrap,
     zIndex: zIndex,
+    right: right,
     TABfontSize: TABfontSize,
     TABmargin: TABmargin,
     TABlineHeight: TABlineHeight,
@@ -103,6 +107,7 @@ const Text = (props) => {
     TABoverflow: TABoverflow,
     TABtextAlign: TABtextAlign,
     TABheight: TABheight,
+    TABright: TABright,
     MOBfontSize: MOBfontSize,
     MOBmargin: MOBmargin,
     MOBpadding: MOBpadding,
@@ -116,6 +121,7 @@ const Text = (props) => {
     MOBdisplay: MOBdisplay,
     MOBcolor: MOBcolor,
     MOBwidth: MOBwidth,
+    MOBright: MOBright,
   };
 
   if (p) {
@@ -177,6 +183,7 @@ const TextBoxP = styled.p`
   white-space: ${(props) => props.whiteSpace};
   overflow-wrap: ${(props) => props.overflowWrap};
   z-index: ${(props) => props.zIndex};
+  right: ${(props) => props.right};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};
@@ -189,6 +196,7 @@ const TextBoxP = styled.p`
     overflow: ${(props) => props.TABoverflow};
     text-align: ${(props) => props.TABtextAlign};
     height: ${(props) => props.TABheight};
+    right: ${(props) => props.TABright};
   }
     // 모바일 사이즈(width: ~767px)
     @media screen and (max-width: 767px) {
@@ -205,6 +213,7 @@ const TextBoxP = styled.p`
     display: ${(props) => props.MOBdisplay};
     color: ${(props) => props.MOBcolor};
     width: ${(props) => props.MOBwidth};
+    right: ${(props) => props.MOBright};
   }
 `;
 
@@ -242,6 +251,7 @@ const TextBoxS = styled.span`
   white-space: ${(props) => props.whiteSpace};
   overflow-wrap: ${(props) => props.overflowWrap};
   z-index: ${(props) => props.zIndex};
+  right: ${(props) => props.right};
   // 태블릿 사이즈(width: 768px~1090px)
   @media screen and (max-width: 1090px) {
     font-size: ${(props) => props.TABfontSize};
@@ -254,6 +264,7 @@ const TextBoxS = styled.span`
     overflow: ${(props) => props.TABoverflow};
     text-align: ${(props) => props.TABtextAlign};
     height: ${(props) => props.TABheight};
+    right: ${(props) => props.TABright};
   }
   // 모바일 사이즈(width: ~767px)
   @media screen and (max-width: 767px) {
@@ -270,6 +281,7 @@ const TextBoxS = styled.span`
     display: ${(props) => props.MOBdisplay};
     color: ${(props) => props.MOBcolor};
     width: ${(props) => props.MOBwidth};
+    right: ${(props) => props.MOBright};
   }
 `;
 

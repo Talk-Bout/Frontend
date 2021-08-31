@@ -11,7 +11,7 @@ const MainTalk = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postActions.setPostPopDB(1));
+    dispatch(postActions.setPostPopDB(1, ''));
   }, []);
 
   const post_list = useSelector(state => state.post.pop_list);

@@ -154,11 +154,11 @@ const QuestionDetail = (props) => {
                   {is_login &&
                     <>
                       {question_bookmark ?
-                        <Text padding="0" color="#7879F1" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" onClick={() => delete_bookmark(question_bookmark.questionBookmarkId)}>
+                        <Text padding="0" color="#7879F1" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" _onClick={() => delete_bookmark(question_bookmark.questionBookmarkId)}>
                           <BsBookmarkFill />
                         </Text>
                         :
-                        <Text padding="0" color="#9aa0a6" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" onClick={() => add_bookmark()}>
+                        <Text padding="0" color="#9aa0a6" fontSize="24px" MOBfontSize='18px' lineHeight="35px" verticalAlign="middle" cursor="pointer" hover="opacity: 0.7" _onClick={() => add_bookmark()}>
                           <BsBookmark />
                         </Text>
                       }

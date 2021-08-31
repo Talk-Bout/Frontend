@@ -1,14 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Text, Grid } from '../elements';
-import { Profile_small } from '../image';
+import { WriterInfo, PostInfo } from '.';
 import { history } from '../redux/ConfigureStore';
 import { useSelector } from 'react-redux';
-import { BiTimeFive, BiLike, BiComment } from 'react-icons/bi';
-import { AiOutlineEye } from 'react-icons/ai';
 
 const CommonPostList = (props) => {
   const common_list = useSelector(state => state.post.list);
+  const userInfo = {
+    profilePic: props.user.profilePic,
+    nickname: props.nickname,
+    createdAt: props.createdAt,
+  }
+  const postInfo = {
+    viewCount: props.viewCount,
+    commentNumber: 0,
+    like: props.postLike,
+  }
 
   return (
     <React.Fragment>
@@ -23,29 +31,10 @@ const CommonPostList = (props) => {
         </Grid>
         {/* 작성자 정보 */}
         <Grid margin='16px 0 0' TABmargin='24px 0 0' MOBmargin='0' display='flex'>
-          <Profile>
-            <ProfileImage src={props.user.profilePic != null ? `https://fw3efsadfcv.shop${props.user.profilePic}` : Profile_small} />
-          </Profile>
-          <Text fontSize="12px" color="#9aa0a6" margin='0 8px' TABfontSize='10px' MOBfontSize='8px'>
-            {props.nickname}
-          </Text>
-          {/* 작성일자 */}
-          <Text fontSize='12px' color='#bdc1c6' margin='0 12px 0 0' TABmargin='0' MOBmargin='0' TABfontSize='10px' MOBfontSize='8px'>
-            <Text fontSize='16px' MOBfontSize='14px' color='#bdc1c6' margin='0 6px 0 0' TABmargin='0 4px 0 0' verticalAlign='middle'><BiTimeFive /></Text>{props.createdAt}
-          </Text>
+          <WriterInfo width_point='1150px' userInfo={userInfo}/>
         </Grid>
         <Grid margin='16px 0 0' TABmargin='12px 0 0'>
-          {/* 추천 수 */}
-          <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px' MOBfontSize='8px'>
-            <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><BiLike /></Text>{props.postLike ? props.postLike.length : '0'}
-          </Text>
-          {/* 댓글 수 */}
-          <Text fontSize='12px' color='#bdc1c6' margin='0 8px' MOBfontSize='8px'>
-            <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><BiComment /></Text>{props.postComment ? props.postComment.length : '0'}</Text>
-          {/* 조회수 */}
-          <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px' MOBfontSize='8px'>
-            <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><AiOutlineEye /></Text>{props.viewCount}
-          </Text>
+          <PostInfo postInfo={postInfo} />
         </Grid>
       </Content>
     </React.Fragment>

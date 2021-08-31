@@ -26,17 +26,17 @@ const initialState = {
 // 부트캠프 북마크 불러오기
 const setMyBootDB = (nickname) => {
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.get(`/users/${nickname}/bootcampBookmarks`)
       .then((response) => {
         // console.log(response.data);
         dispatch(setMyboot(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         console.log(`마이페이지 부트캠프 북마크 불러오기 에러 발생: ${err}`);
         // window.alert('북마크한 부트캠프 목록을 불러오는 데 문제가 발생했어요! :(');
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       });
   };
 };
@@ -45,18 +45,16 @@ const setMyBootDB = (nickname) => {
 // 내가 쓴글 불러오기
 const setMypostDB = (nickname) => {
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.get(`/users/${nickname}/posts`, {
     })
       .then((response) => {
-        // console.log(response.data);
         dispatch(setMypost(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         console.log(`마이페이지 내가 쓴글 불러오기 에러 발생: ${err}`);
-        // window.alert('내가 쓴 글 목록을 불러오는 데 문제가 발생했어요! :(');
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       });
   };
 };
@@ -64,21 +62,17 @@ const setMypostDB = (nickname) => {
 const setMyBookmarkDB = (nickname) => {
   // 내가 북마크한 글들 불러오기
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.get(`/users/${nickname}/allBookmarks`)
       .then((response) => {
         dispatch(setMyBookmark(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       }).catch((err) => {
         console.log(`마이페이지 내 북마크 글 불러오기 에러 발생: ${err} ### ${err.response}`);
-        // window.alert('북마크한 글 목록을 불러오는 데 문제가 발생했어요! :(');
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       });
   };
 };
-
-
-
 
 export default handleActions({
   [SET_MYBOOT]: (state, action) => produce(state, (draft) => {

@@ -38,15 +38,16 @@ const initialState = {
 const mainCampsDB = () => {
   // 메인페이지 부트캠프 목록 불러오는 함수(인기순)
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.get(`/popular/bootcamps`).then((response) => {
       dispatch(mainCamps(response.data));
-      dispatch(statusActions.endLoading());
+      dispatch(statusActions.endTask());
     }).catch((err) => {
       // console.error(`메인페이지 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
       // if (window.confirm(`에러가 발생했습니다! :(\n[mainCampsDB: ${err}]\n새로고침하시겠습니까?`)) {
       //   window.location.reload();
       // }
+      dispatch(statusActions.endTask());
     });
   };
 };
@@ -54,18 +55,18 @@ const mainCampsDB = () => {
 const setCampsDB = (page) => {
   // 서버로부터 부트캠프 전체 목록 불러오는 함수(페이징)
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance
       .get(`/bootcamp?page=${page}`)
       .then((response) => {
         dispatch(setCamps(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         // console.error(
         //   `부트캠프 전체 불러오기 에러 발생: ${err} ### ${err.response}`
         // );
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
         if (window.confirm(`에러가 발생했습니다! :( \n[setCampsDB: ${err}]\n메인으로 돌아가시겠습니까?`)) {
           history.push('/');
         };
@@ -76,14 +77,14 @@ const setCampsDB = (page) => {
 const setOneCampDB = (bootcampName) => {
   // 서버로부터 부트캠프 개별 정보 불러오는 함수
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.get(`/bootcamp/${bootcampName}`)
       .then((response) => {
         dispatch(setOneCamp(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       }).catch((err) => {
         // console.error(`부트캠프 개별 정보 불러오기 에러 발생: ${err} ### ${err.response}`);
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
         if (window.confirm(`에러가 발생했습니다! :( \n[setOneCampDB: ${err}]\n새로고침하시겠습니까?`)) {
           window.location.reload();
         };
@@ -94,18 +95,18 @@ const setOneCampDB = (bootcampName) => {
 const setMyCampDB = (nickname) => {
   // 서버에 저장된 부트캠프 북마크 목록 불러오는 함수
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance
       .get(`/users/${nickname}/bootcampBookmarks`)
       .then((response) => {
         dispatch(setMyCamp(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         // console.error(
         //   `북마크한 부트캠프 불러오기 에러 발생: ${err} ### ${err.response}`);
         window.alert(`부트캠프 북마크 정보를 불러오는 데 문제가 발생했어요! :(`)
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       });
   };
 };
@@ -158,18 +159,18 @@ const deleteMyCampDB = (bootcampName, bootcampBookmarkId) => {
 const setReviewsDB = (camp_name, page) => {
   // 서버로부터 리뷰 불러오는 함수(페이징)
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance
       .get(`/bootcamp/${camp_name}/review?page=${page}`)
       .then((response) => {
         dispatch(setReviews(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         // console.error(
         //   `부트캠프 리뷰 불러오기 에러 발생: ${err} ### ${err.response}`
         // );
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
         if (window.confirm(`에러가 발생했습니다! :( \n[setReviewsDB: ${err}]\n새로고침하시겠습니까?`)) {
           window.location.reload();
         };

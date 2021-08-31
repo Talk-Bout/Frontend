@@ -9,7 +9,6 @@ import { actionCreators as postActions } from '../redux/modules/post';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
-import { setCookie } from '../shared/cookie';
 
 const CommonList = (props) => {
   const dispatch = useDispatch();
@@ -19,30 +18,24 @@ const CommonList = (props) => {
   const [PopArray, setPopArray] = useState(false);
 
   // 카테고리
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState('');
 
   // 페이지네이션
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     if (PopArray) {
-      dispatch(postActions.setPostPopDB(page));
-      setCategory('all');
+      dispatch(postActions.setPostPopDB(page, category));
     } else {
-      dispatch(postActions.setPostDB(page, ''));
+      dispatch(postActions.setPostDB(page, category));
     }
     window.scrollTo(0, 0);
   }, [page]);
 
-  // 불러오는 3페이지짜리 최신순 커뮤니티글 목록
-  const new_post = useSelector((state) => state.post.list);
-  // 1페이지에 보여줄 개수로만 자른 최신순 목록
-  const newPost_list = new_post.slice(0, 8);
-
-  // 불러오는 3페이지짜리 인기순 커뮤니티글 목록
-  const pop_post = useSelector((state) => state.post.pop_list);
-  // 1페이지에 보여줄 개수로만 자른 인기순 목록
-  const popPost_list = pop_post.slice(0, 8);
+  // 불러오는 3페이지짜리 커뮤니티글 목록
+  const all_post = useSelector((state) => state.post.list);
+  // 1페이지에 보여줄 개수로만 자른 목록
+  const post_list = all_post.slice(0, 8);
 
   // 앞 페이지로 가는 함수
   const toPrePage = () => {
@@ -52,25 +45,19 @@ const CommonList = (props) => {
   const toNextPage = () => {
     setPage(page + 1);
   };
-  // 카테고리 정보방 게시물 
-  const info_category = () => {
-    dispatch(postActions.setPostDB(page, 'info'));
-  };
-  // 카테고리 잡담방 게시물
-  const chitchat_category = () => {
-    dispatch(postActions.setPostDB(page, 'chitchat'));
-  };
-  // 카테고리 전체 게시물
-  const total_category = () => {
-    dispatch(postActions.setPostDB(page, ''));
+  
+  // 최신순 게시물 불러오기
+  const setPost = (category) => {
+    dispatch(postActions.setPostDB(page, category));
+    setCategory(category);
     setPopArray(false);
   };
 
-  // 인기순 조회
-  const setPop = () => {
-    dispatch(postActions.setPostPopDB(page));
+  // 인기순 게시물 불러오기
+  const setPop = (category) => {
+    dispatch(postActions.setPostPopDB(page, category));
+    setCategory(category);
     setPopArray(true);
-    setCategory('all');
   };
 
   const loginAlert = () => {
@@ -96,16 +83,16 @@ const CommonList = (props) => {
             {/* 게시판 카테고리 */}
             <Grid display="flex" justifyContent="space-between" margin="0 0 24px 0" TABmargin='0 0 16px 0' MOBmargin='0 0 8px 0'>
               <Categories>
-                <CategoryButton url={category === 'all' && 'white'}
-                  onClick={() => { setCategory('all'); total_category(); setPopArray(false); }}>
+                <CategoryButton url={category === '' && 'white'}
+                  onClick={() => setPost('')}>
                   전체
                 </CategoryButton>
                 <CategoryButton url={category === 'info' && 'white'}
-                  onClick={() => { setCategory('info'); info_category(); setPopArray(false) }}>
+                  onClick={() => setPost('info')}>
                   정보
                 </CategoryButton>
                 <CategoryButton url={category === 'chitchat' && 'white'}
-                  onClick={() => { setCategory('chitchat'); chitchat_category(); setPopArray(false) }}>
+                  onClick={() => setPost('chitchat')}>
                   잡담
                 </CategoryButton>
               </Categories>
@@ -114,9 +101,9 @@ const CommonList = (props) => {
                 <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' MOBfontSize='14px' lineHeight="52px" MOBlineHeight='43px' verticalAlign='middle'><RiArrowUpDownFill /></Text>
                 <SelectButton>
                   {PopArray ?
-                    <Options onClick={() => setPopArray(false)}><Text fontSize='16px' TABfontSize='14px' MOBfontSize='10px'>인기순</Text></Options>
+                    <Options onClick={() => setPost(category)}><Text fontSize='16px' TABfontSize='14px' MOBfontSize='10px'>인기순</Text></Options>
                     :
-                    <Options onClick={() => { setPopArray(true); setPop(); setCategory('all') }}><Text fontSize='16px' TABfontSize='14px' MOBfontSize='10px'>최신순</Text></Options>
+                    <Options onClick={() => setPop(category)}><Text fontSize='16px' TABfontSize='14px' MOBfontSize='10px'>최신순</Text></Options>
                   }
                 </SelectButton>
                 {/* 글쓰기버튼 (로그인 후 이용가능) */}
@@ -143,19 +130,11 @@ const CommonList = (props) => {
           }
           {/* import 부트톡톡 게시물  */}
           <Grid width="100%" height='850px' TABheight='730px' MOBheight='fit-content'>
-            {PopArray ? (
               <Contents>
-                {popPost_list.map((c, idx) => {
+                {post_list.map((c, idx) => {
                   return <CommonPostList key={c.postId} {...c} />;
                 })}
-              </Contents>)
-              : (
-                <Contents>
-                  {newPost_list.map((c, idx) => {
-                    return <CommonPostList key={c.postId} {...c} />;
-                  })}
-                </Contents>
-              )}
+              </Contents>
           </Grid>
           {/* 페이지네이션 */}
           <Grid is_center>
@@ -176,37 +155,18 @@ const CommonList = (props) => {
               <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                 <Page style={{ opacity: 1 }}>{page}</Page>
               </Text>
-              {!PopArray ? (
-                <>
                   {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
                   <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                     <Page onClick={() => toNextPage()}>
-                      {new_post.length > 8 ? page + 1 : ''}
+                      {post_list.length > 8 ? page + 1 : ''}
                     </Page>
                   </Text>
                   {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
                   <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
                     <Page onClick={() => toNextPage()}>
-                      {new_post.length > 8 ? <BsChevronRight /> : ''}
+                      {post_list.length > 8 ? <BsChevronRight /> : ''}
                     </Page>
                   </Text>
-                </>
-              ) : (
-                <>
-                  {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-                  <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
-                    <Page onClick={() => toNextPage()}>
-                      {pop_post.length > 8 ? page + 1 : ''}
-                    </Page>
-                  </Text>
-                  {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-                  <Text lineHeight="14px" margin="0 20px 0" MOBfontSize='10px'>
-                    <Page onClick={() => toNextPage()}>
-                      {pop_post.length > 8 ? <BsChevronRight /> : ''}
-                    </Page>
-                  </Text>
-                </>
-              )}
             </PageBox>
           </Grid>
         </Body>

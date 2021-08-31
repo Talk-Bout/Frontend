@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text, FloatingBtn, Emoji } from '../elements';
-import { Sidebar, Body, QnaCard } from '../components';
+import { Sidebar, Body, PostCard } from '../components';
 import { Fire_emoji } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
@@ -58,7 +58,7 @@ const QuestionList = (props) => {
     if (window.confirm('로그인 후에 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
       history.push('/login');
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -110,9 +110,9 @@ const QuestionList = (props) => {
             <CardList>
               {pop_question_page.map((q, idx) => {
                 return (
-                  <QnaCard
-                    key={q.questionId}
-                    {...q}
+                  <PostCard
+                    key={q.questionId} width_point='1200px'
+                    title={q.title} content={q.content} commentNumber={q.answerNumber} createdAt={q.createdAt} nickname={q.nickname} likes={q.questionLike} profilePic={q.user.profilePic}
                     _onClick={() =>
                       history.push(`/question/detail/${q.questionId}`)
                     }
@@ -124,14 +124,15 @@ const QuestionList = (props) => {
             <CardList>
               {question_page.map((q, idx) => {
                 return (
-                  <QnaCard
-                    key={q.questionId}
+                  <PostCard
+                    key={q.questionId} width_point='1200px'
+                    title={q.title} content={q.content} commentNumber={q.answerNumber} createdAt={q.createdAt} nickname={q.nickname} likes={q.questionLike} profilePic={q.user.profilePic}
                     {...q}
                     _onClick={() =>
                       history.push(`/question/detail/${q.questionId}`)
                     }
                   />
-                ); //props 넘기기(이름포함)
+                );
               })}
             </CardList>
           )}

@@ -7,7 +7,6 @@ import { actionCreators as statusActions } from './status';
 import { actionCreators as imageActions } from './image';
 
 //액션 타입
-const DELETE_USER = 'user/DELETE_USER'; //회원 탈퇴
 const LOG_IN = 'user/GOOGLE_LOG_IN'; // 로그인하는 사용자 닉네임, 프로필 사진 저장
 const LOGIN_CHECK = 'user/LOGIN_CHECK'; // 로그인 상태 설정
 const LOGOUT_CHECK = 'user/LOGOUT_CHECK'; // 로그아웃 상태 설정
@@ -16,7 +15,6 @@ const USER_EDIT = 'user/USER_EDIT'; // 회원정보 변경
 
 //액션 생성함수
 const logIn = createAction(LOG_IN, (info) => ({ info }));
-const deleteUser = createAction(DELETE_USER, (is_deleted) => ({ is_deleted }));
 const loginCheck = createAction(LOGIN_CHECK, () => ({}));
 const logoutCheck = createAction(LOGOUT_CHECK, () => ({}));
 const userCheck = createAction(USER_CHECK, (info) => ({ info }));
@@ -33,7 +31,6 @@ const initialState = {
 const googleLogin = () => {
   // 구글 액세스토큰, 리프레시토큰 발급
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     const accessToken_URL = new URL(window.location.href).searchParams.get('accessToken');
     const refreshToken_URL = new URL(window.location.href).searchParams.get('refreshToken');
     const idToken_URL = new URL(window.location.href).searchParams.get('idToken');
@@ -50,7 +47,6 @@ const googleLogin = () => {
     setCookie('idToken', idToken_URL);
     setCookie('provider', provider_URL);
     history.push('/');
-    dispatch(statusActions.endLoading());
     window.location.reload();
   };
 };
@@ -58,7 +54,6 @@ const googleLogin = () => {
 const googleRefresh = () => {
   // 구글 액세스토큰 갱신 및 아이디토큰 발급
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     const clientSecret = 'NEk_9kMajTMRCvE0b24vQWCh';
     const clientId = '1024289816833-ekko4or0shvl9vusetgga5rmbs5u8gla.apps.googleusercontent.com';
     const refreshToken = getCookie('refreshToken');
@@ -73,10 +68,8 @@ const googleRefresh = () => {
     }), { headers: headers }).then((response) => {
       setCookie('accessToken', response.data.access_token);
       setCookie('idToken', response.data.id_token);
-      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`구글 로그인 토큰 갱신 에러: ${err}`);
-      dispatch(statusActions.endLoading());
     });
   };
 };
@@ -84,7 +77,6 @@ const googleRefresh = () => {
 const kakaoLogin = () => {
   // 카카오 액세스 토큰, 리프레시 토큰 발급
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     const accessToken_URL = new URL(window.location.href).searchParams.get('accessToken');
     const refreshToken_URL = new URL(window.location.href).searchParams.get('refreshToken');
     const provider_URL = new URL(window.location.href).searchParams.get('provider');
@@ -99,7 +91,6 @@ const kakaoLogin = () => {
     setCookie('refreshToken', refreshToken_URL);
     setCookie('provider', provider_URL);
     history.push('/');
-    dispatch(statusActions.endLoading());
     window.location.reload();
   };
 };
@@ -107,7 +98,6 @@ const kakaoLogin = () => {
 const kakaoRefresh = () => {
   // 카카오 액세스 토큰 갱신
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
     const REST_API_KEY = 'a1e045a6bd23510144e987da133f3eff';
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
     const formUrlEncoded = x => Object.keys(x).reduce((p, c) => p + `&${c}=${encodeURIComponent(x[c])}`, '');
@@ -118,10 +108,8 @@ const kakaoRefresh = () => {
       refresh_token: getCookie('refreshToken'),
     }), { headers: headers }).then((response) => {
       setCookie('accessToken', response.data.access_token);
-      dispatch(statusActions.endLoading());
     }).catch((err) => {
       console.error(`카카오 로그인 토큰 갱신 에러: ${err}`);
-      dispatch(statusActions.setLoading());
     });
   };
 };
@@ -129,7 +117,7 @@ const kakaoRefresh = () => {
 const logOut = () => {
   // 로그아웃
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     const accessToken = getCookie('accessToken');
     const provider = getCookie('provider');
     const headers = { 'authorization': `Bearer ${accessToken}` };
@@ -142,12 +130,12 @@ const logOut = () => {
       deleteCookie('idToken');
       deleteCookie('provider');
       dispatch(logoutCheck());
-      dispatch(statusActions.endLoading());
+      dispatch(statusActions.endTask());
       window.alert('성공적으로 로그아웃 되었습니다.');
       history.push('/');
     }).catch((err) => {
       console.error(`로그아웃 에러: ${err}`);
-      dispatch(statusActions.setLoading());
+      dispatch(statusActions.endTask());
     });
   };
 };
@@ -167,7 +155,7 @@ const userCheckDB = () => {
 const editInfoDB = (nickname, profilePic) => {
   // 개인정보 수정하기  
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.get(`/users/${nickname}`)
       .then((response) => {
         // 중복되지 않는 닉네임이면 서버로 보낸다.
@@ -188,7 +176,7 @@ const editInfoDB = (nickname, profilePic) => {
             } else {
               window.alert(`예기치 못한 에러가 발생했습니다! :(\n이전 페이지로 돌아갑니다.`);
             }
-            dispatch(statusActions.endLoading());
+            dispatch(statusActions.endTask());
             dispatch(imageActions.getPreview(null));
             dispatch(imageActions.DeleteImageUrl());
             history.push('/mypage');
@@ -196,7 +184,7 @@ const editInfoDB = (nickname, profilePic) => {
           }).catch((err) => {
             // console.error(`마이페이지 개인정보 수정하기 에러 발생: ${err} ### ${err.response}`);
             window.alert(`에러가 발생했습니다! :(\n[editInfoDB_edit: ${err}]\n잠시 후 다시 시도해주세요.`);
-            dispatch(statusActions.endLoading());
+            dispatch(statusActions.endTask());
           });
           // 중복되는 닉네임인 경우
         } else {
@@ -206,7 +194,7 @@ const editInfoDB = (nickname, profilePic) => {
       }).catch((err) => {
         // console.error(`개인정보 수정 위한 닉네임 중복확인 에러 발생: ${err} ### ${err.response}`);
         window.alert(`에러가 발생했습니다! :(\n[editInfoDB_nick: ${err}]\n잠시 후 다시 시도해주세요.`);
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       });
   };
 };
@@ -214,7 +202,7 @@ const editInfoDB = (nickname, profilePic) => {
 const deletePicDB = (nickname, profilePic) => {
   // DB에 저장된 프로필 사진 삭제하기
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.patch(`/users/${nickname}`, {
       nickname: nickname,
       profilePic: profilePic,
@@ -226,11 +214,11 @@ const deletePicDB = (nickname, profilePic) => {
       dispatch(userEdit(new_info));
       dispatch(imageActions.getPreview(null));
       dispatch(imageActions.DeleteImageUrl());
-      dispatch(statusActions.endLoading());
+      dispatch(statusActions.endTask());
       window.alert('프로필 사진이 삭제되었습니다.');
     }).catch((err) => {
       window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
-      dispatch(statusActions.endLoading());
+      dispatch(statusActions.endTask());
     });
   };
 };

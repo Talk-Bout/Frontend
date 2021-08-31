@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import { Sidebar, Body } from '../components';
-import { Profile_small } from '../image';
+import { Sidebar, Body, PostCard } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
-import { history } from '../redux/ConfigureStore';
-import { BiTimeFive } from 'react-icons/bi';
-import { AiOutlineRight } from "react-icons/ai";
 import NotFound from '../shared/NotFound';
 
 const MypagePost = (props) => {
@@ -44,31 +40,14 @@ const MypagePost = (props) => {
               <Text fontSize="32px" MOBfontSize='16px' fontWeight='700' lineHeight="46px" color="#F8F9FA" TABfontSize="20px" cursor='default'>내 북마크</Text>
             </Grid>
             <Card>
-              {mytalk_list.map((p, idx) => {
+              {mytalk_list && mytalk_list.map((p, idx) => {
                 return (
-                  <Post onClick={() => { history.push(`/common/detail/${p.postId}`) }}
-                  >
-                    <Grid overflow="hidden" height="fit-content">
-                      <Text p margin="0 0 12px 0" color="#F1F3F4" fontSize="18px" overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px" MOBfontSize='14px'
-                      >{p.post.title}
-                      </Text>
-                      <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="3" wbo="vertical" margin="0 0 24px" MOBmargin='0 0 16px' height="60px" TABheight='52px' MOBheight='48px' TABfontSize="12px" MOBfontSize='10px'
-                      >{p.post.content}</Text>
-                    </Grid>
-                    <Grid display="flex">
-                      <ImgBox>
-                        <ProfileImg src={p.post.user.profilePic ? `https://fw3efsadfcv.shop${p.post.user.profilePic}` :Profile_small} alt='프로필' />
-                      </ImgBox>
-                      <InfoBox>
-                        <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.post.nickname}</Text>
-                        <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"><BiTimeFive />{p.post.createdAt}</Text>
-                      </InfoBox>
-                    </Grid>
-                    <Line />
-                    <Grid>
-                      <Text margin="12px 0 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.post.category} </Text>
-                    </Grid>
-                  </Post>
+                  <PostCard key={p.postId} title={p.post.title} content={p.post.content} nickname={p.post.nickname} createdAt={p.post.createdAt} profilePic={p.post.user.profilePic} category_bool='true' board_name='부트톡톡' category_name={p.post.category}/>
+                );
+              })}
+              {myqna_list && myqna_list.map((p, idx) => {
+                return (
+                  <PostCard key={p.questionId} title={p.question.title} content={p.question.content} nickname={p.question.nickname} createdAt={p.question.createdAt} profilePic={p.question.user.profilePic} category_bool='true' board_name='질문과 답변'/>
                 );
               })}
             </Card>
@@ -107,62 +86,6 @@ const Card = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
-`;
-
-const Post = styled.div`
-  padding: 15px 20px;
-  height: 211px;
-  width: 100%;
-  background-color: #202124;
-  border-radius: 12px;
-  box-sizing: border-box;
-  cursor: pointer;
-  word-break: break-all;
-  &:hover {
-    opacity: 0.7;
-  }
-  @media screen and (max-width: 1150px) {
-    margin: 0;
-  }
-  @media screen and (max-width: 767px) {
-    height: 188px;
-    padding: 14px 14px 10px;
-  }
-`;
-
-const ImgBox = styled.div`
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-  margin: 0px 15px 0 0;
-  @media screen and (max-width: 1150px) {
-    width: 16px;
-    height: 16px;
-    margin: 0px 8px 0 0;
-  }
-  @media screen and (max-width: 767px) {
-    width: 14px;
-    height: 14px;
-  }
-`;
-
-const ProfileImg = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-`;
-
-const InfoBox = styled.div`
-  display: flex;
-  width: 100%;
-  height: 24px;
-`;
-
-const Line = styled.hr`
-  border: 1px solid #282a2d;
 `;
 
 const PageBox = styled.div`

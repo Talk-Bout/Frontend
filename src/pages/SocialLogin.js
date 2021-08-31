@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid } from '../elements';
-import { Spinner_iris } from '../image';
+import { Spinner_web } from '../image';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 import { history } from '../redux/ConfigureStore';
@@ -24,7 +24,7 @@ const SocialLogin = (props) => {
   return (
     <React.Fragment>
       <Grid is_center height='100vh' lineHeight='85vh' backgroundColor='#17181B'>
-        <SpinnerImg src={Spinner_iris} />
+        <SpinnerImg src={Spinner_web} />
       </Grid>
     </React.Fragment>
   )

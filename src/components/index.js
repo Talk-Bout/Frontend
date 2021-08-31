@@ -11,12 +11,14 @@ import CommonPostList from './CommonPostList';
 import MainBoot from './MainBoot';
 import MainQna from './MainQna';
 import MainTalk from './MainTalk';
-import QnaCard from './QnaCard';
+import PostCard from './PostCard';
 import Sidebar from './Sidebar';
 import SmallWindow from './SmallWindow';
 import Spinner from './Spinner';
 import Stars from './Stars';
 import OtherTalk from './OtherTalk';
 import Contact from './Contact';
+import WriterInfo from './WriterInfo';
+import PostInfo from './PostInfo';
 
-export { Header, Footer, AnswerCard, Banner, Body, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, QnaCard, Sidebar, SmallWindow, Spinner, Stars, OtherTalk, Contact };
+export { Header, Footer, AnswerCard, Banner, Body, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, PostCard, Sidebar, SmallWindow, Spinner, Stars, OtherTalk, Contact, WriterInfo, PostInfo };

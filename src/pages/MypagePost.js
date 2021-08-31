@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import { Sidebar, Body } from '../components';
+import { Sidebar, Body, PostCard } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
-import { BiTimeFive } from 'react-icons/bi';
-import { AiOutlineRight } from "react-icons/ai";
 import NotFound from '../shared/NotFound';
 
 const MypagePost = (props) => {
@@ -28,6 +26,8 @@ const MypagePost = (props) => {
     return <NotFound />
   }
 
+  console.log(mypost_list);
+
   return (
     <React.Fragment>
       <Grid className='background' display='flex' overflow='auto'>
@@ -40,22 +40,7 @@ const MypagePost = (props) => {
             <Cards>
               {mypost_list.map((p, idx) => {
                 return (
-                  <Grid key={idx} TABheight='201px' MOBheight='170px' backgroundColor="#202124" borderRadius="12px" cursor='pointer' hover='opacity: 0.7'
-                  // _onClick={()=>{history.push(`/common/detail/${p.postId}`)}}
-                  >
-                    <Grid padding='24px 24px 16px' TABpadding='16px 16px 13px' MOBpadding='14px 14px 10px' borderBottom='1px solid #282a2d'>
-                      <Text p margin="0 0 12px 0" color="#F1F3F4" fontSize="18px" fontWeight='700' overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px" MOBfontSize='14px'
-                      >{p.title}
-                      </Text>
-                      <Text p color="#9AA0A6" fontSize="14px" letterSpacing='0.2px' lineHeight='22px' MOBlineHeight='14px' overflow="hidden" display="-webkit-box" wlc="2" TABwlc='4' MOBwlc='3' wbo="vertical"
-                        margin="13px 0 16px" TABmargin='11px 0 21px' MOBmargin='12px 0 16px' height='44px' TABheight='64px' MOBheight='42px' TABfontSize="12px" MOBfontSize='10px'
-                      >{p.content}</Text>
-                      <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px" padding='0 0 3px'><span style={{ marginRight: '4px' }}><BiTimeFive /></span>{p.createdAt}</Text>
-                    </Grid>
-                    <Grid padding='12px 24px' TABpadding='11px 16px'>
-                      <Text p margin='0' color="#BDC1C6" fontSize="14px" TABfontSize="10px" MOBfontSize='8px'>부트톡톡 <AiOutlineRight /> {p.category === 'chitchat' ? '잡담' : '정보'} </Text>
-                    </Grid>
-                  </Grid>
+                  <PostCard key={p.postId} title={p.title} content={p.content} createdAt={p.createdAt} category_bool='true' board_name='부트톡톡' category_name={p.category} mypost_bool='true'/>
                 );
               })}
             </Cards>

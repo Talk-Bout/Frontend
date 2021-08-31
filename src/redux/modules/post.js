@@ -62,19 +62,19 @@ const initialState = {
 const setPostDB = (page, category) => {
   // 전체 게시글 불러오는 함수
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     // 카테고리가 없을 때(전체)
     if (category === '') {
       instance.get(`/posts?page=${page}`)
         .then((response) => {
           dispatch(setPost(response.data));
-          dispatch(statusActions.endLoading());
+          dispatch(statusActions.endTask());
         })
         .catch((err) => {
           // console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
           if (window.confirm(`에러가 발생했습니다! :(\n[setPostDB_all: ${err}]\n메인으로 돌아가시겠습니까?`)) {
             history.push('/');
-            dispatch(statusActions.endLoading());
+            dispatch(statusActions.endTask());
           }
         });
       // 카테고리가 있을 때(정보, 잡담)
@@ -82,51 +82,67 @@ const setPostDB = (page, category) => {
       instance.get(`/posts?page=${page}&category=${category}`)
         .then((response) => {
           dispatch(setPost(response.data));
-          dispatch(statusActions.endLoading());
+          dispatch(statusActions.endTask());
         })
         .catch((err) => {
           // console.error(`부트톡톡 전체 게시글 불러오기 에러 발생: ${err}`);
           if (window.confirm(`에러가 발생했습니다! :(\n[setPostDB_${category}: ${err}]\n메인으로 돌아가시겠습니까?`)) {
             history.push('/');
-            dispatch(statusActions.endLoading());
+            dispatch(statusActions.endTask());
           }
         });
     };
   };
 };
 
-const setPostPopDB = (page) => {
+const setPostPopDB = (page, category) => {
   // 전체 게시글 인기순 불러오는 함수
   return function (dispatch) {
-    if (window.location.pathname.split('/')[1] !== '') {
-      dispatch(statusActions.setLoading());
-    }
-    instance.get(`/popular/posts?page=${page}`).then((response) => {
-      dispatch(setPostPop(response.data));
-      dispatch(statusActions.endLoading());
-    }).catch((err) => {
-      // console.error(`부트톡톡 인기순 불러오기 에러 발생: ${err} ### ${err.response}`);
-      dispatch(statusActions.endLoading());
-      // if (window.confirm(`에러가 발생했습니다! :( \n[setPostPopDB: ${err}]\n새로고침하시겠습니까?`)) {
-      //   window.location.reload();
-      // };
-    });
+      dispatch(statusActions.addTask());
+    // 카테고리가 없을 때(전체)
+    if (category === '') {
+      instance.get(`/popular/posts?page=${page}`)
+        .then((response) => {
+          dispatch(setPost(response.data));
+          dispatch(setPostPop(response.data));
+          dispatch(statusActions.endTask());
+        })
+        .catch((err) => {
+          // console.error(`부트톡톡 전체 게시글 인기순 불러오기 에러 발생: ${err}`);
+            dispatch(statusActions.endTask());
+          });
+      // 카테고리가 있을 때(정보, 잡담)
+    } else {
+      instance.get(`/popular/posts?page=${page}&category=${category}`)
+        .then((response) => {
+          dispatch(setPost(response.data));
+          dispatch(setPostPop(response.data));
+          dispatch(statusActions.endTask());
+        })
+        .catch((err) => {
+          // console.error(`부트톡톡 게시글 인기순 불러오기 에러 발생: ${err}`);
+          // if (window.confirm(`에러가 발생했습니다! :(\n[setPostDB_${category}: ${err}]\n메인으로 돌아가시겠습니까?`)) {
+          //   history.push('/');
+            dispatch(statusActions.endTask());
+          // }
+        });
+    };
   };
 };
 
 const setOnePostDB = (postId) => {
   // 개별 게시글 불러오는 함수
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance.get(`/posts/${postId}`)
       .then((response) => {
         // console.log(response.data);
         dispatch(setOnePost(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         // console.error(`부트톡톡 개별 게시글 불러오기 에러 발생: ${err}`);
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
         if (window.confirm(`에러가 발생했습니다! :( \n[setOnePostDB: ${err}]\n새로고침하시겠습니까?`)) {
           window.location.reload();
         };

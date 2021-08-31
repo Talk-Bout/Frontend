@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Text, Grid } from '../elements';
-import { Sidebar, Body, Stars } from '../components';
-import { Profile_small, Profile_medium, CampLogo_default } from '../image';
-import { BiTimeFive } from 'react-icons/bi';
+import { Sidebar, Body, Stars, PostCard } from '../components';
+import { Profile_medium, CampLogo_default } from '../image';
 import { AiOutlineRight } from "react-icons/ai";
-import { BsHeart, BsHeartFill, BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { BsHeartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
@@ -133,53 +132,14 @@ const Mypage = (props) => {
                   </Grid>
                   {/* 북마크가 있을 경우에만 보여줌 */}
                   {mytalk_list.length !== 0 ?
-                    <Grid display="flex" margin="12px 0" MOBmargin='4px 0 33px' height="211px" MOBheight='fit-content' width="100%">
+                    <CardList>
                       {/* 내 북마크 카드 */}
                       {mytalk.map((p, idx) => {
                         return (
-                          <Grid key={idx} margin="0 16px 16px 0" MOBmargin='0 4px' padding="15px 20px" MOBpadding='14px' height="fit-content" MOBheight='180px' width="32.3%" MOBwidth='49%' backgroundColor="#202124" borderRadius="12px"
-                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer' hover='opacity: 0.7'>
-                            <Grid overflow="hidden" height="fit-content">
-                              {/* 제목 */}
-                              <Text margin="0 0 12px" color="#F1F3F4" fontSize="18px"
-                                overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
-                                MOBfontSize='14px' fontWeight='700'
-                              >{p.post.title}
-                              </Text>
-                              {/* 내용 */}
-                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="2" MOBwlc='3' wbo="vertical"
-                                margin="0 0 24px"
-                                MOBmargin='0 0 16px' height="42px"
-                                TABheight='36px'
-                                MOBheight='44px'
-                                TABfontSize="12px"
-                                MOBfontSize='10px'
-                              >{p.post.content}</Text>
-                            </Grid>
-                            {/* 작성자 프로필 */}
-                            <Grid display="flex" height="fit-content" width="100%" alignItems='center'>
-                              <ImgBox>
-                                <Img src={p.post.user.profilePic ? `https://fw3efsadfcv.shop${p.post.user.profilePic}` : Profile_small} alt='프로필' />
-                              </ImgBox>
-                              <InfoBox>
-                                <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px" MOBfontSize='8px'>{p.post.nickname}</Text>
-                                {/* 작성일시 */}
-                                <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"
-                                  MOBfontSize='8px'><Text margin="0 4px 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="12px"
-                                    MOBfontSize='10px'
-                                  ><BiTimeFive /></Text>{p.post.createdAt}</Text>
-                              </InfoBox>
-                            </Grid>
-                            <CardLine />
-                            {/* 게시판 및 카테고리 */}
-                            <Grid padding="0 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
-                              <Text color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.post.category} </Text>
-                            </Grid>
-
-                          </Grid>
+                            <PostCard key={p.post.postId} width_point='1460px' title={p.post.title} content={p.post.content} createdAt={p.post.createdAt} nickname={p.post.nickname} profilePic={p.post.user.profilePic} category_bool='true' board_name='부트톡톡' category_name={p.post.category} _onClick={() => { history.push(`/common/detail/${p.post.postId}`) }}/>
                         );
                       })}
-                    </Grid>
+                    </CardList>
                     :
                     <Grid margin="12px 0 0 0" height="211px" width="100%" MOBdisplay='none'>
                       <Grid display="flex" alignItems="center" height="203px" width="100%" border="4px dotted #2E3134" borderRadius="12px">
@@ -201,41 +161,14 @@ const Mypage = (props) => {
                   </Grid>
                   {/* 내가 쓴글이 있을 경우에만 보여줌 */}
                   {mypost_list.length !== 0 ?
-                    <Grid display="flex" margin="12px 0" MOBmargin='4px 0 33px' height="211px" MOBheight='fit-content' width="100%">
+                    <CardList>
                       {/* 내가 쓴 글 카드 */}
                       {mypost.map((p, idx) => {
                         return (
-                          <Grid key={idx + 50} margin="0 16px 16px 0" OBmargin='0 4px' padding="15px 20px" MOBpadding='14px' height="fit-content" MOBheight='170px' width="32.3%" MOBwidth='49%' backgroundColor="#202124" borderRadius="12px"
-                            _onClick={() => { history.push(`/common/detail/${p.postId}`) }} cursor='pointer' hover='opacity: 0.7'>
-                            <Grid overflow="hidden" height="fit-content">
-                              <Text p margin="0 0 12px" color="#F1F3F4" fontSize="18px"
-                                overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px"
-                                MOBfontSize='14px' fontWeight='700'
-                              >{p.title}
-                              </Text>
-                              <Text p color="#F1F3F4" fontSize="14px" overflow="hidden" display="-webkit-box" wlc="2" MOBwlc='3' wbo="vertical" margin="0 0 24px"
-                                MOBmargin='0 0 16px' height="42px"
-                                TABheight='36px'
-                                MOBheight='44px'
-                                TABfontSize="12px"
-                                MOBfontSize='10px'
-                              >{p.content}</Text>
-                            </Grid>
-                            <Grid display="flex" height="fit-content">
-                              <Text p margin="0" color="#BDC1C6" fontSize="12px" TABfontSize="10px"
-                                MOBfontSize='8px'><Text margin="0 4px 0 0" color="#BDC1C6" fontSize="14px" TABfontSize="12px"
-                                  MOBfontSize='10px'
-                                ><BiTimeFive /></Text>{p.createdAt}</Text>
-                            </Grid>
-                            <CardLine />
-                            <Grid padding="0 5px 0 0" justifyContent="space-between" display="flex" height="24px" width="100%">
-                              <Text color="#BDC1C6" fontSize="14px" TABfontSize="10px"> 부트톡톡 <AiOutlineRight /> {p.category} </Text>
-                            </Grid>
-
-                          </Grid>
+                          <PostCard key={p.postId} width_point='1460px' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트톡톡' category_name={p.category} mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/common/detail/${p.postId}`) }}/>
                         );
                       })}
-                    </Grid>
+                    </CardList>
                     :
                     <Grid margin="12px 0 0 0" height="203px" width="100%" MOBdisplay='none'>
                       <Grid display="flex" alignItems="center" height="203px" width="100%" border="5px dotted #2E3134" borderRadius="12px">
@@ -257,6 +190,7 @@ const Outter = styled.div`
   width: 100%;
   height: auto;
   display: flex;
+  padding-bottom: 50px;
   @media screen and (max-width: 1150px) {
     grid-template-columns: 100%;
     display: grid;
@@ -370,25 +304,6 @@ const Line = styled.hr`
   }
 `;
 
-const ImgBox = styled.div`
-  width: 24px;
-  height: 24px;
-  margin: 0px 15px 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  @media screen and (max-width: 1150px) {
-    width: 16px;
-    height: 16px;
-    margin: 0px 8px 0 0;
-  }
-  @media screen and (max-width: 767px) {
-    width: 14px;
-    height: 14px;
-  }
-`;
-
 const Logo = styled.div`
   width: 80px;
   height: 80px;
@@ -402,11 +317,6 @@ const Logo = styled.div`
 const Img = styled.img`
   max-width: 100%;
   max-height: 100%;
-`;
-
-const InfoBox = styled.div`
-  width: 100%;
-  vertical-align: middle;
 `;
 
 const CardLine = styled.hr`
@@ -447,6 +357,14 @@ const BootBox = styled.div`
   @media screen and (max-width: 1150px) {
     height: 76px;
   }
+`;
+
+const CardList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 16px;
+  width: 100%;
+  margin-top: 12px;
 `;
 
 const ResponsiveOutter = styled.div`

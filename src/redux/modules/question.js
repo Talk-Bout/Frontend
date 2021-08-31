@@ -65,18 +65,18 @@ const initialState = {
 // 액션함수
 const setQuestionDB = (page) => {
   return function (dispatch) {
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance
       .get(`/questions?page=${page}`)
       .then((response) => {
         dispatch(setQuestion(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         // console.error(`모든 질문 불러오기 에러 발생: ${err}`);
         if (window.confirm(`에러가 발생했습니다! :(\n[setQuestionDB: ${err}]\n메인으로 돌아가시겠습니까?`)) {
           history.push('/');
-          dispatch(statusActions.endLoading());
+          dispatch(statusActions.endTask());
         }
       });
   };
@@ -85,20 +85,18 @@ const setQuestionDB = (page) => {
 const setQuestionPopDB = (page) => {
   // 질문글 인기순 정렬
   return function (dispatch) {
-    if (window.location.pathname.split('/')[1] !== '') {
-      dispatch(statusActions.setLoading());
-    }
+      dispatch(statusActions.addTask());
     instance
       .get(`/popular/questions?page=${page}`)
       .then((response) => {
         dispatch(setQuestionPop(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         // console.error(
         //   `질문 인기순 불러오기 에러 발생: ${err} ### ${err.response}`
         // );
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
         // if (window.confirm(`에러가 발생했습니다! :( \n[setQuestionPopDB: ${err}]\n새로고침하시겠습니까?`)) {
         //   window.location.reload();
         // };
@@ -109,16 +107,16 @@ const setQuestionPopDB = (page) => {
 const setOneQuestionDB = (question_id) => {
   return function (dispatch) {
     const questionId = parseInt(question_id);
-    dispatch(statusActions.setLoading());
+    dispatch(statusActions.addTask());
     instance
       .get(`/questions/${questionId}`)
       .then((response) => {
         dispatch(setOneQuestion(response.data));
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
       })
       .catch((err) => {
         // console.error(`개별 질문 불러오기 에러 발생: ${err}`);
-        dispatch(statusActions.endLoading());
+        dispatch(statusActions.endTask());
         if (window.confirm(`에러가 발생했습니다! :( \n[setOneQuestionDB: ${err}]\n새로고침하시겠습니까?`)) {
           window.location.reload();
         };

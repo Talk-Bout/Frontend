@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Image } from '../elements';
+import { Grid, Text } from '../elements';
 import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as questionActions } from '../redux/modules/question';
@@ -49,7 +49,7 @@ const AnswerCard = (props) => {
             </Text>
             <Grid width="40px" MOBwidth='28px' margin="auto 15px" MOBmargin='auto 8px'>
               <ImageBox>
-                <Profile src={user_profile ? user_profile_url : Profile_medium} />
+                <Profile src={user_profile != null && user_profile !== 'null' ? user_profile_url : Profile_medium} />
               </ImageBox>
             </Grid>
             <Grid width="480px" MOBwidth='fit-content' MOBmargin='2px 0 0'>

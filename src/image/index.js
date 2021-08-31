@@ -1,5 +1,4 @@
 import Profile_medium from './profile_medium.png';
-import Search from './search_black.png';
 import LogoImg from './Logo.png';
 import Profile_small from './profile_small.png';
 import CaretDown from './CaretDown.png';
@@ -31,16 +30,12 @@ import Talk_nav from './Board_nav.png';
 import Talk_nav_white from './Board_nav_white.png';
 import Mypage from './Mypage.png';
 import Mypage_white from './Mypage_white.png';
-import Spinner_iris from './loadingspinner_256.gif';
-import Spinner_white from './loadingspinner_white_256.gif';
 import Spinner_web from './Spinner-1.4s-517px.gif'
 import KakaoLogin_btn from './kakao_login_medium_narrow.png';
 import GoogleLogin_btn from './google_login_light_pressed.png';
-import Badge from './badge 1.png';
 import Gift from './gift.gif';
-import Footer_info from './footer_info.png';
 import Little_home from './little_home.png';
 import Little_github from './little_github.png';
 import LogoNew from './logo_new.png';
 
-export { Profile_medium, Search, LogoImg, Profile_small, CaretDown, Banner_desktop, Banner_desktop_short, Banner_tablet, Banner_mobile, CampLogo_default, LogoIcon, Rocket_emoji, Megaphone_emoji, Fire_emoji, PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, Spinner_iris, Spinner_white, Spinner_web, KakaoLogin_btn, GoogleLogin_btn, Badge, Gift, Footer_info, Little_home, Little_github, LogoNew };
+export { Profile_medium, LogoImg, Profile_small, CaretDown, Banner_desktop, Banner_desktop_short, Banner_tablet, Banner_mobile, CampLogo_default, LogoIcon, Rocket_emoji, Megaphone_emoji, Fire_emoji, PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, Spinner_web, KakaoLogin_btn, GoogleLogin_btn, Gift, Little_home, Little_github, LogoNew };

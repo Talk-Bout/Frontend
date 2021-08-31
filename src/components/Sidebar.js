@@ -5,13 +5,11 @@ import { PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Tal
 import { history } from '../redux/ConfigureStore';
 
 const Sidebar = (props) => {
-  const { opacity, TABopacity } = props;
   const url = window.location.pathname.split('/')[1];
 
   return (
     <React.Fragment>
-      <Grid className="sidebar" backgroundColor="#202124" width="100px" minHeight='100vh' TABwidth='72px' opacity={opacity} TABopacity={TABopacity} MOBdisplay='none'>
-        <Grid className="sidebar-inner">
+      <Grid className="sidebar" backgroundColor="#202124" width="100px" minHeight='100vh' TABwidth='72px' MOBdisplay='none'>
           <FixNav>
             <Point
               src={PointImg} alt='디자인' />
@@ -32,9 +30,6 @@ const Sidebar = (props) => {
               onClick={() => history.push('/question')}
             />
           </FixNav>
-        </Grid>
-      </Grid>
-      <Grid className='mobile-navbar' backgroundColor='#202124' MOBheight='48px' display='none' TABdisplay='none' MOBdisplay='none'>
       </Grid>
     </React.Fragment>
   );

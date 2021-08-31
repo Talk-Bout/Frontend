@@ -3,7 +3,7 @@ import { Grid } from '../elements';
 import { Header, Footer } from '../components';
 
 const Body = (props) => {
-  const { header, children, footer, opacity, TABopacity, MOBopacity, MOBnopadding } = props;
+  const { header, children, footer, MOBnopadding } = props;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,7 +17,7 @@ const Body = (props) => {
         minHeight="100vh"
         width="100vw"
       >
-        {header ? <Header opacity={opacity} TABopacity={TABopacity} MOBopacity={MOBopacity} /> : ''}
+        {header ? <Header /> : ''}
         <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='18px 18px 0' MOBpadding={MOBnopadding ? '0' : '6px 17px 50px 18px'} minHeight='calc(100vh - 350px)' TABminHeight='calc(100vh - 276px)' MOBminHeight='calc(100vh - 50px)'>
           {children}
         </Grid>

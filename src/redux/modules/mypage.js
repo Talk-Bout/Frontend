@@ -128,24 +128,24 @@ const editInfoDB = (nickname, profilePic) => {
   };
 };
 
-// const deletePicDB = (nickname, profilePic) => {
-//   // DB에 저장된 프로필 사진 삭제하기
-//   return function (dispatch) {
-//     dispatch(statusActions.setLoading());
-//     instance.patch(`/users/${nickname}`, {
-//       nickname: nickname,
-//       profilePic: profilePic,
-//     }).then((response) => {
-//       window.alert('프로필 사진이 삭제되었습니다.');
-//       dispatch(imageActions.getPreview(null));
-//       dispatch(imageActions.DeleteImageUrl());
-//       dispatch(statusActions.endLoading());
-//     }).catch((err) => {
-//       window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
-//       dispatch(statusActions.endLoading());
-//     });
-//   };
-// };
+const deletePicDB = (nickname, profilePic) => {
+  // DB에 저장된 프로필 사진 삭제하기
+  return function (dispatch) {
+    dispatch(statusActions.setLoading());
+    instance.patch(`/users/${nickname}`, {
+      nickname: nickname,
+      profilePic: profilePic,
+    }).then((response) => {
+      window.alert('프로필 사진이 삭제되었습니다.');
+      dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
+      dispatch(statusActions.endLoading());
+    }).catch((err) => {
+      window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
+      dispatch(statusActions.endLoading());
+    });
+  };
+};
 
 
 export default handleActions({
@@ -168,7 +168,7 @@ const actionCreators = {
   setMypostDB,
   setMyBookmarkDB,
   editInfoDB,
-  // deletePicDB,
+  deletePicDB,
 }
 
 export {

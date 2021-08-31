@@ -19,5 +19,4 @@ import Stars from './Stars';
 import OtherTalk from './OtherTalk';
 import Contact from './Contact';
 
-
-export { Header, Footer, AnswerCard, Banner, Body, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, QnaCard, Sidebar, SmallWindow, Spinner, Stars, OtherTalk, Contact, };
+export { Header, Footer, AnswerCard, Banner, Body, BootInfo, BootOthers, BootReview, BootRoot, CommonPostList, MainBoot, MainQna, MainTalk, QnaCard, Sidebar, SmallWindow, Spinner, Stars, OtherTalk, Contact };

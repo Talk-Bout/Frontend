@@ -161,7 +161,7 @@ const Header = (props) => {
           margin="10px 0 0"
           TABmargin='9px 0 0'
           MOBmargin='0'
-          MOBpadding='0 18px'
+          MOBpadding='0 0 0 18px'
           MOBdisplay='flex'
           MOBjustifyContent='space-between'
         >

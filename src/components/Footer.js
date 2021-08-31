@@ -15,9 +15,9 @@ const Footer = (props) => {
       <Grid height='250px' TABheight='fit-content' MOBheight='168px' margin='0 0 0' TABmargin='64px 0 0' MOBmargin='24px 0 0' backgroundColor='#0E1013' padding='24px 20px' TABpadding='24px 20px 36px' MOBpadding='6px 16px 64px' MOBdisplay='none' display='flex' position='relative' bottom='0'>
         <Grid width='30%'>
           <Image src={LogoNew} alt='로고' />
-          <Grid display='flex' justifyContent='space-between' width='fit-content' margin='56px 40px 0' TABmargin='40px 0 0 20px' MOBmargin='8px 4px'>
+          <Grid display='flex' justifyContent='space-between' width='300px' TABwidth='250px' margin='56px 0 0 40px' TABmargin='40px 0 0 20px' MOBmargin='8px 4px'>
             <Text fontSize='12px' TABfontSize='4px' color='#bdc1c6' cursor='default'>© 2021 Project Talk'bout</Text>
-            <Text fontSize='12px' TABfontSize='4px' color='#bdc1c6' margin='0 24px' cursor='default'>All rights reserved.</Text>
+            <Text fontSize='12px' TABfontSize='4px' color='#bdc1c6' margin='0 28px' TABmargin='0 24px' cursor='default'>All rights reserved.</Text>
           </Grid>
         </Grid>
         <Grid width='60%' height='100%'>

@@ -88,7 +88,7 @@ const MainQna = (props) => {
                     </Date>
                   </Info>
                   <Line />
-                  <div style={{ height: 'fit-content' }}>
+                  <Numbers>
                     {/* 추천 수 */}
                     <Text fontSize='12px' color='#bdc1c6' margin='0 8px 0 0' TABfontSize='10px'>
                       <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><BiLike /></Text>{pq.likeNumber}
@@ -100,7 +100,7 @@ const MainQna = (props) => {
                     {/* 조회수 */}
                     <Text fontSize='12px' color='#bdc1c6' margin='0 0 0 8px' TABfontSize='10px'>
                       <Text fontSize='16px' color='#bdc1c6' margin='0 6px 0 0' verticalAlign='middle' TABfontSize='14px'><AiOutlineEye /></Text>{pq.viewCount}</Text>
-                  </div>
+                  </Numbers>
                 </QuestionCard>
               );
             })}
@@ -189,6 +189,9 @@ const Content = styled.div`
   margin: 0;
   padding: 0;
   height: 76px;
+  @media screen and (max-width: 1090px) {
+    height: 60px;
+  }
   @media screen and (max-width: 767px) {
     height: 40px;
   }
@@ -198,11 +201,10 @@ const Info = styled.div`
   margin-top: 24px;
   height: 24px;
   @media screen and (max-width: 1090px) {
-    margin-top: 20px;
-    height: 16px;
-  }
-  @media screen and (max-width: 1090px) {
     margin-top: 16px;
+    height: 50px;
+  }
+  @media screen and (max-width: 767px) {
     height: fit-content;
   }
 `;
@@ -223,9 +225,8 @@ const ProfileImg = styled.img`
 
 const Date = styled.div`
   display: inline;
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1090px) {
     display: block;
-    margin: 0 0 0 15px;
   }
 `;
 
@@ -237,6 +238,16 @@ const Line = styled.hr`
   }
   @media screen and (max-width: 767px) {
     margin: 8px 0;
+  }
+`;
+
+const Numbers = styled.div`
+  height: fit-content;
+  @media screen and (max-width: 1090px) {
+    margin: -10px 0 0;
+  }
+  @media screen and (max-width: 767px) {
+    margin: -5px 0 0;
   }
 `;
 

@@ -87,7 +87,7 @@ const ContactBox = styled.div`
     height: fit-content;
     grid-template-columns: 1fr 1fr;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1200px) {
     display: none;
   }
 `;
@@ -102,7 +102,7 @@ const Column = styled.div`
     vertical-align: middle;
     text-align: right;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1200px) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
@@ -123,7 +123,7 @@ const ColumnRepo = styled.div`
     grid-template-rows: 1fr 1fr;
     padding: 0 23px;
   }
-  @media screen and (max-width: 1090px) {
+  @media screen and (max-width: 1200px) {
     display: flex;
     text-align: center;
   }
@@ -139,9 +139,13 @@ const Icon = styled.img`
 const ContactBoxTAB = styled.div`
   background-color: #17181B;
   padding: 20px 16px;
-  float: right;
-  @media screen and (min-width: 1091px) {
+  position: absolute;
+  left: 330px;
+  @media screen and (min-width: 1201px) {
     display: none;
+  }
+  @media screen and (min-width: 1091px) {
+    left: 500px;
   }
 `;
 

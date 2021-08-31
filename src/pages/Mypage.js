@@ -307,7 +307,6 @@ const ProfileBox = styled.div`
   margin: 70px auto 0;
   overflow: hidden;
   display: flex;
-  align-items: center;
   text-align: center;
   @media screen and (max-width: 1090px) {
     width: 100px;

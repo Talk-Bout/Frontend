@@ -292,7 +292,7 @@ const LoginBtn = styled.button`
     margin: 27px 18px 0 0;
   }
   @media screen and (max-width: 767px) {
-    margin: 12px 0 0;
+    margin: 14px 0 0;
     height: fit-content;
     width: 60px;
   }
@@ -307,7 +307,7 @@ const LogoutBtn = styled.button`
     border: none;
     padding: 0;
     float: right;
-    margin: 12px 17px 0 0;
+    margin: 14px 17px 0 0;
     height: fit-content;
     width: 70px;
   }

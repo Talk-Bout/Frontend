@@ -162,7 +162,7 @@ const Mypage = (props) => {
                               >{p.post.content}</Text>
                             </Grid>
                             {/* 작성자 프로필 */}
-                            <Grid display="flex" height="fit-content" width="100%">
+                            <Grid display="flex" height="fit-content" width="100%" alignItems='center'>
                               <ImgBox>
                                 <Img src={p.post.user.profilePic ? `https://fw3efsadfcv.shop${p.post.user.profilePic}` : Profile_small} alt='프로필' />
                               </ImgBox>
@@ -406,11 +406,6 @@ const Logo = styled.div`
 `;
 
 const Img = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-`;
-
-const ProfileImg = styled.img`
   max-width: 100%;
   max-height: 100%;
 `;

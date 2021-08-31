@@ -111,11 +111,13 @@ const BootReviewWrite = (props) => {
                 {/* 장점 */}
                 <div><Text fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' cursor='default'>장점<br /></Text><Text fontSize='14px' MOBfontSize='12px' color='#9AA0A6' cursor='default'>최소 20자</Text></div>
                 <div><Textarea rows='5' placeholder={`${camp_name}의 장점을 입력해주세요.
-리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={prosInput} /></div>
+부트캠프 리뷰는 한 번만 작성이 가능하며 등록한 후에는 수정 또는 삭제가 불가하므로,
+신중하게 작성해주시기 바랍니다.`} ref={prosInput} /></div>
                 {/* 단점 */}
                 <div><Text fontSize='18px' MOBfontSize='14px' fontWeight='700' color='#e8eaed' cursor='default'>단점<br /></Text><Text fontSize='14px' MOBfontSize='12px' color='#9AA0A6' cursor='default'>최소 20자</Text></div>
                 <div><Textarea rows='5' placeholder={`${camp_name}의 단점을 입력해주세요.
-리뷰를 등록한 후에는 수정이나 삭제가 불가하므로, 신중하게 작성해주세요.`} ref={consInput} /></div>
+부트캠프 리뷰는 한 번만 작성이 가능하며 등록한 후에는 수정 또는 삭제가 불가하므로,
+신중하게 작성해주시기 바랍니다.`} ref={consInput} /></div>
                 <ButtonMobile onClick={() => addReview()}><Text MOBfontSize='14px' fontWeight='700' color='#848484'>등록하기</Text></ButtonMobile>
               </BodyBox>
             </Window>

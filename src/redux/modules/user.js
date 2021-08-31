@@ -134,8 +134,14 @@ const logOut = () => {
       window.alert('성공적으로 로그아웃 되었습니다.');
       history.push('/');
     }).catch((err) => {
-      console.error(`로그아웃 에러: ${err}`);
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('idToken');
+      deleteCookie('provider');
+      dispatch(logoutCheck());
       dispatch(statusActions.endTask());
+      window.alert('성공적으로 로그아웃 되었습니다.');
+      history.push('/');
     });
   };
 };

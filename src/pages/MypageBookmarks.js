@@ -47,24 +47,12 @@ const MypagePost = (props) => {
               })}
               {myqna_list && myqna_list.map((p, idx) => {
                 return (
-                  <PostCard key={p.questionId} title={p.question.title} content={p.question.content} nickname={p.question.nickname} createdAt={p.question.createdAt} profilePic={p.question.user.profilePic} category_bool='true' board_name='질문과 답변'/>
+                  <PostCard key={p.questionId} question_bool='true' title={p.question.title} content={p.question.content} nickname={p.question.nickname} createdAt={p.question.createdAt} profilePic={p.question.user.profilePic} category_bool='true' board_name='질문과 답변'/>
                 );
               })}
             </Card>
           </Grid>
           <Grid height="24px" width="100%" is_center>
-            <PageBox>
-              {/* 앞 페이지로 이동하는 화살표는 1페이지에서는 안 보이게 하기
-              <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
-              앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-              <Text lineHeight='14px' margin='0 20px 0'><Page>1</Page></Text>
-              {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기
-              <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
-              마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기
-              <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text>
-              다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기
-              <Text lineHeight='14px' margin='0 20px 0'><Page></Page></Text> */}
-            </PageBox>
           </Grid>
         </Body>
       </Grid>

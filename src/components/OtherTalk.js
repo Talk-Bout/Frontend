@@ -10,7 +10,7 @@ const OtherTalk = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(postActions.setPostPopDB(1));
+    dispatch(postActions.setPostPopDB(1, ''));
   }, []);
 
   const pop_list = useSelector(state => state.post.pop_list);

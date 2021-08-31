@@ -9,6 +9,7 @@ import { actionCreators as postActions } from '../redux/modules/post';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { BiPencil } from 'react-icons/bi';
+import { setCookie } from '../shared/cookie';
 
 const CommonList = (props) => {
   const dispatch = useDispatch();
@@ -77,7 +78,7 @@ const CommonList = (props) => {
       history.push('/login');
     }
   }
-
+  
   return (
     <React.Fragment>
       <Grid className="background" display="flex" overflow="auto">

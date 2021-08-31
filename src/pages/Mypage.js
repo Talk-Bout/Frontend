@@ -164,7 +164,7 @@ const Mypage = (props) => {
                             {/* 작성자 프로필 */}
                             <Grid display="flex" height="fit-content" width="100%">
                               <ImgBox>
-                                <Img src={Profile_small} alt='프로필' />
+                                <Img src={p.post.user.profilePic ? `https://fw3efsadfcv.shop${p.post.user.profilePic}` : Profile_small} alt='프로필' />
                               </ImgBox>
                               <InfoBox>
                                 <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px" MOBfontSize='8px'>{p.post.nickname}</Text>

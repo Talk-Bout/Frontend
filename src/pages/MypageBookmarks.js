@@ -57,7 +57,7 @@ const MypagePost = (props) => {
                     </Grid>
                     <Grid display="flex">
                       <ImgBox>
-                        <ProfileImg src={Profile_small} alt='프로필' />
+                        <ProfileImg src={p.post.user.profilePic ? `https://fw3efsadfcv.shop${p.post.user.profilePic}` :Profile_small} alt='프로필' />
                       </ImgBox>
                       <InfoBox>
                         <Text p margin="0 8px 0 0" color="#BDC1C6" fontSize="12px" TABfontSize="10px">{p.post.nickname}</Text>

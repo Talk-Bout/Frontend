@@ -18,8 +18,6 @@ const CommonPostList = (props) => {
     like: props.postLike,
   }
 
-  console.log(props);
-
   return (
     <React.Fragment>
       <Content common_list={common_list} key={props.postId} onClick={() => history.push(`/common/detail/${props.postId}`)}>

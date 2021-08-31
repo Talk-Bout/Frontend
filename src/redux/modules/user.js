@@ -226,14 +226,14 @@ const deletePicDB = (nickname, profilePic) => {
 export default handleActions(
   {
     [LOG_IN]: (state, action) => produce(state, (draft) => {
-      draft.user_info = action.payload.info;
+      draft.user = action.payload.info;
       draft.is_login = true;
     }),
     [LOGIN_CHECK]: (state, action) => produce(state, (draft) => {
       draft.is_login = true;
     }),
     [LOGOUT_CHECK]: (state, action) => produce(state, (draft) => {
-      draft.user_info = { nickname: null, profilePic: null };
+      draft.user = { nickname: null, profilePic: null };
       draft.is_login = false;
     }),
     [USER_CHECK]: (state, action) => produce(state, (draft) => {
@@ -241,7 +241,7 @@ export default handleActions(
       draft.is_login = true;
     }),
     [USER_EDIT]: (state, action) => produce(state, (draft) => {
-      draft.user_info = action.payload.info;
+      draft.user = action.payload.info;
       draft.is_login = true;
     })
   },

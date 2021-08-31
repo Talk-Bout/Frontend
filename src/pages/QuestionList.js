@@ -38,6 +38,7 @@ const QuestionList = (props) => {
     } else {
       dispatch(questionActions.setQuestionDB(page));
     }
+    window.scrollTo(0, 0);
   }, [page]);
 
   //1 페이지
@@ -145,17 +146,17 @@ const QuestionList = (props) => {
                 </Page>
               </Text>
               {/* 앞 페이지 번호는 0일 때는 안 보이게 하기 */}
-              <Text fontSize="14px" MOBfontSize='12px' margin="0 20px 0">
+              <Text fontSize="14px" MOBfontSize='10px' margin="0 20px 0">
                 <Page onClick={() => toPrePage()}>
                   {page === 1 ? '' : page - 1}
                 </Page>
               </Text>
               {/* 가운데 페이지 번호는 현재 페이지 번호로 띄우기 */}
-              <Text fontSize="14px" MOBfontSize='12px' margin="0 20px 0">
+              <Text fontSize="14px" MOBfontSize='10px' margin="0 20px 0">
                 <Page style={{ opacity: 1 }}>{page}</Page>
               </Text>
               {/* 마지막 페이지 번호는 마지막 페이지에 게시글이 있을 때만 보이게 하기 */}
-              <Text fontSize="14px" MOBfontSize='12px' margin="0 20px 0">
+              <Text fontSize="14px" MOBfontSize='10px' margin="0 20px 0">
                 {popPage ? (
                   <Page onClick={() => toNextPage()}>
                     {pop_qna_list.length > 12 ? page + 1 : ''}
@@ -167,7 +168,7 @@ const QuestionList = (props) => {
                 )}
               </Text>
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
-              <Text fontSize="14px" MOBfontSize='12px' margin="0 0 0 20px">
+              <Text fontSize="14px" MOBfontSize='10px' margin="0 0 0 20px">
                 {popPage ? (
                   <Page onClick={() => toNextPage()}>
                     {pop_qna_list.length > 12 ? <BsChevronRight /> : ''}
@@ -238,8 +239,7 @@ const PageBox = styled.div`
 const Page = styled.span`
   opacity: 0.5;
   cursor: pointer;
-  /* color: rgba(255, 255, 255, 0.87); // 선택된 페이지 색깔 */
-  color: rgba(255, 255, 255, 0.33); // 선택되지 않은 페이지 색깔
+  color: #f8f9fa;
   &:hover {
     opacity: 1;
   }

@@ -73,7 +73,7 @@ const AnswerCard = (props) => {
           {/* 이미 눌려 있는 경우 보라색, 그렇지 않은 경우 하얀색으로 보여주기 */}
           {is_login ?
             my_answer_like ?
-              <Text backgroundColor='282A2D' padding='8px 16px' MOBpadding='2px 12px 6px' borderRadius='12px'>
+              <Text backgroundColor='#2E3134' padding='8px 16px' MOBpadding='2px 12px 6px' borderRadius='12px'>
                 <Text color="#7879F1" fontSize="14px" MOBfontSize='12px' fontWeight="700" lineHeight="18px" cursor="pointer" _onClick={() => unlikeAnswer(my_answer_like.answerLikeId)}>
                   <Text fontSize='24px' MOBfontSize='16px' margin='0 8px 0 0' MOBmargin='0 6px 0 0' verticalAlign='middle' lineHeight='30px' MOBlineHeight='20px'><BiLike /></Text>
                   {one_answer.likeNumber}

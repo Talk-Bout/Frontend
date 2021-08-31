@@ -68,8 +68,6 @@ const Header = (props) => {
             MOBjustifyContent='space-between'
           >
             <Logo src={LogoNew} alt="토크부트 로고" onClick={() => history.push('/')} />
-            {/* <Image src={Search} alt="검색" /> */}
-            {/* <Input placeholder="검색어를 입력하세요." /> */}
           </Grid>
           {/* 피드백 버튼 */}
           <GiftBtn src={Gift} onClick={() => getFeedback()} />
@@ -98,7 +96,7 @@ const Header = (props) => {
               onClick={handleClick}
               style={{ padding: 0, minWidth: 0, width: '24px', margin: '0 0 0 8px' }}
             >
-              <Text color="#5F6368" fontSize="4.6px">
+              <Text color="#5F6368" fontSize="4.6px" TABmargin='0 0 0 -10px'>
                 <img src={CaretDown} alt="메뉴" />
               </Text>
             </Button>
@@ -168,8 +166,6 @@ const Header = (props) => {
           MOBjustifyContent='space-between'
         >
           <Logo src={LogoNew} alt="토크부트 로고" onClick={() => history.push('/')} />
-          {/* <Image MOBdisplayNone src={Search} alt="검색" />
-          <Input placeholder="검색어를 입력하세요." /> */}
         </Grid>
         {/* 로그인 버튼 */}
         <GiftBtn src={Gift} onClick={() => getFeedback()} />
@@ -191,31 +187,6 @@ const Header = (props) => {
     </React.Fragment>
   );
 };
-
-// const Input = styled.input`
-//   border: none;
-//   width: 400px;
-//   height: 48px;
-//   background-color: transparent;
-//   color: #80868b;
-//   &::placeholder {
-//     color: #80868b;
-//     font-size: 16px;
-//   }
-//   &:focus {
-//     outline: none;
-//   }
-//   @media screen and (max-width: 1090px) {
-//     width: 326px;
-//     height: 40px;
-//     &::placeholder {
-//       font-size: 12px;
-//     }
-//   }
-// @media screen and (max-width: 767px) {
-//   display: none;
-// }
-// `;
 
 const Logo = styled.img`
   height: 84px;
@@ -253,16 +224,6 @@ const GiftBtn = styled.img`
     right: 80px;
   }
 `;
-
-// const Image = styled.img`
-//   vertical-align: middle;
-//   width: 24px;
-//   @media screen and (max-width: 767px) {
-//     height: 24px;
-//     margin: 12px 0;
-//     ${(props) => props.MOBdisplayNone ? 'display: none' : ''};
-//   }
-// `;
 
 const Profile = styled.div`
   width: 32px;

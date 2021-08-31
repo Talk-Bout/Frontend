@@ -355,9 +355,15 @@ const Contents = styled.div`
 const PageBox = styled.div`
   display: inline-block;
   height: 100%;
-  margin: 32px 0;
+  margin-top: 40px;
+  padding-bottom: 80px;
+  @media screen and (max-width: 1090px) {
+    margin-top: 24px;
+    padding-bottom: 40px;
+  }
   @media screen and (max-width: 767px) {
-    padding: 0 0 50px;
+    padding-bottom: 50px;
+    margin-top: 24px;
   }
 `;
 

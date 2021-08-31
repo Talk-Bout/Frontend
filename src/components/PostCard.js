@@ -5,7 +5,7 @@ import { WriterInfo, PostInfo } from '.';
 import { AiOutlineRight } from "react-icons/ai";
 
 const PostCard = (props) => {
-  const { _onClick, title, content, profilePic, nickname, createdAt, viewCount, commentNumber, likes, width_point, height, TABheight, MOBheight, category_bool, board_name, category_name, mypost_bool} = props;
+  const { _onClick, title, content, profilePic, nickname, createdAt, viewCount, commentNumber, likes, width_point, height, TABheight, MOBheight, category_bool, board_name, category_name, mypost_bool, question_bool, answer_bool} = props;
   
   const cardContent = {
     title: title,
@@ -28,7 +28,16 @@ const PostCard = (props) => {
       <QnaListCard onClick={_onClick} width_point={width_point} height={height} TABheight={TABheight} MOBheight={MOBheight}>
         {/* 제목 */}
         <Text fontSize="18px" fontWeight="700" color="#F8F9FA" overflow="hidden" display="-webkit-box" wlc="1" wbo="vertical" TABfontSize="16px" MOBfontSize='14px'>
-          <span style={{ marginRight: '8px' }}>Q</span>
+        {question_bool ?
+        <span style={{ marginRight: '8px' }}>Q</span>
+        :
+        ''
+        }
+        {answer_bool ?
+        <span style={{ marginRight: '8px' }}>A</span>
+        :
+        ''
+        }
           {cardContent.title}
         </Text>
         {/* 내용 */}
@@ -46,10 +55,10 @@ const PostCard = (props) => {
         <Line />
         {category_bool ? 
         // 게시판 및 카테고리
-        <Grid padding="2px 5px 0 0" justify_content="space-between" display="flex" height="24px" width="100%">
+        <Grid padding="2px 5px 0 0" justify_content="space-between" display="flex" height="20px" width="100%">
           {/* 카테고리 이름이 있으면 보여주고, 없으면 게시판 이름만 보여주기 */}
         {category_name ? 
-        <Text color="#BDC1C6" fontSize="14px" TABfontSize="12px" MOBfontSize='10px'> {board_name} <AiOutlineRight /> {category_name === 'info' ? '정보' : '잡담'} </Text>
+        <Text color="#BDC1C6" fontSize="14px" TABfontSize="12px" MOBfontSize='10px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'> {board_name} <span style={{verticalAlign: 'middle'}}><AiOutlineRight /></span> {category_name === 'info' ? '정보' : category_name === 'chitchat' ? '잡담' : `${category_name} 리뷰`} </Text>
         :
         <Text color="#BDC1C6" fontSize="14px" TABfontSize="12px" MOBfontSize='10px'> {board_name} </Text>
         }

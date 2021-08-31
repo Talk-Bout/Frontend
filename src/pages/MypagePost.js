@@ -4,6 +4,7 @@ import { Grid, Text } from '../elements';
 import { Sidebar, Body, PostCard } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
+import { history } from '../redux/ConfigureStore';
 import NotFound from '../shared/NotFound';
 
 const MypagePost = (props) => {
@@ -12,10 +13,16 @@ const MypagePost = (props) => {
   const is_login = useSelector((state) => state.user.is_login);
 
   // 내가 쓴글 리스트
-  const all_post = useSelector((state) => state.mypage.mypost_list);
-
-  // 삭제된 post의 경우 안띄워줌
-  const mypost_list = all_post.filter((posts) => posts.post !== null);
+  const mypost_all = useSelector((state) => state.mypage.mypost_list);
+  const mypost_answers = mypost_all.answers;
+  const mypost_posts = mypost_all.posts;
+  const mypost_questions = mypost_all.questions;
+  const mypost_reviews = mypost_all.reviews;
+  let mypost_list = [];
+  mypost_answers && mypost_list.push(...mypost_answers);
+  mypost_posts && mypost_list.push(...mypost_posts);
+  mypost_questions && mypost_list.push(...mypost_questions);
+  mypost_reviews && mypost_list.push(...mypost_reviews);
 
   // 부트캠프, 부트톡톡 북마크
   useEffect(() => {
@@ -25,8 +32,6 @@ const MypagePost = (props) => {
   if (!is_login) {
     return <NotFound />
   }
-
-  console.log(mypost_list);
 
   return (
     <React.Fragment>
@@ -39,9 +44,23 @@ const MypagePost = (props) => {
             </Grid>
             <Cards>
               {mypost_list.map((p, idx) => {
-                return (
-                  <PostCard key={p.postId} title={p.title} content={p.content} createdAt={p.createdAt} category_bool='true' board_name='부트톡톡' category_name={p.category} mypost_bool='true'/>
-                );
+                if (p.hasOwnProperty('answerId')) {
+                  return (
+                    <PostCard key={idx} width_point='1460px' answer_bool='true' title='질문에 대한 답변' content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/${p.questionId}`) }}/>
+                  );
+                } else if (p.hasOwnProperty('postId')) {
+                  return (
+                    <PostCard key={idx} width_point='1460px' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트톡톡' category_name={p.category} mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/common/detail/${p.postId}`) }}/>
+                  );
+                } else if (p.hasOwnProperty('reviewId')) {
+                  return (
+                    <PostCard key={idx} width_point='1460px' title={p.title} content={`장점: ${p.cons} // 단점: ${p.pros}`} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트캠프' category_name={p.bootcampName} mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/boot/${p.bootcampName}`) }}/>
+                  );
+                } else if (p.hasOwnProperty('questionId')) {
+                  return (
+                    <PostCard key={idx} width_point='1460px' question_bool='true' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/${p.questionId}`) }}/>
+                  );
+                }
               })}
             </Cards>
             <Grid height="10%" width="100%" is_center>

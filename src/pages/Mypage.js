@@ -8,7 +8,7 @@ import { BsHeartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
-import { getCookie } from '../shared/cookie';
+import { getCookie, setCookie } from '../shared/cookie';
 import NotFound from '../shared/NotFound';
 
 const Mypage = (props) => {
@@ -32,9 +32,16 @@ const Mypage = (props) => {
   const myboot = myboot_list.slice(0, 3);
 
   // 내가 쓴글 리스트
-  const all_post = useSelector((state) => state.mypage.mypost_list);
-  // 삭제된 post의 경우 안띄워줌
-  const mypost_list = all_post.filter((posts) => posts.post !== null);
+  const mypost_all = useSelector((state) => state.mypage.mypost_list);
+  const mypost_answers = mypost_all.answers;
+  const mypost_posts = mypost_all.posts;
+  const mypost_questions = mypost_all.questions;
+  const mypost_reviews = mypost_all.reviews;
+  let mypost_list = [];
+  mypost_answers && mypost_list.push(...mypost_answers);
+  mypost_posts && mypost_list.push(...mypost_posts);
+  mypost_questions && mypost_list.push(...mypost_questions);
+  mypost_reviews && mypost_list.push(...mypost_reviews);
   // 내가쓴글 3개 추출
   const mypost = mypost_list.slice(0, 3);
 
@@ -55,6 +62,11 @@ const Mypage = (props) => {
   if (!is_login) {
     return <NotFound />
   }
+
+  setCookie('provider', 'kakao');
+  setCookie('accessToken', 'LEGmcGJDHHDZzjhzgSrLqaIaW38EtydVokUBxgopcBQAAAF7njMBug');
+  setCookie('refreshToken', '2cE5Mnn3TGxyEUuXfoxKQYhRtzPEBH2FBDiMago9dNsAAAF7njL7eg');
+
 
   return (
     <React.Fragment>
@@ -164,9 +176,23 @@ const Mypage = (props) => {
                     <CardList>
                       {/* 내가 쓴 글 카드 */}
                       {mypost.map((p, idx) => {
-                        return (
-                          <PostCard key={p.postId} width_point='1460px' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트톡톡' category_name={p.category} mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/common/detail/${p.postId}`) }}/>
-                        );
+                        if (p.hasOwnProperty('answerId')) {
+                          return (
+                            <PostCard key={idx} width_point='1460px' answer_bool='true' title='질문에 대한 답변' content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/${p.questionId}`) }}/>
+                          );
+                        } else if (p.hasOwnProperty('postId')) {
+                          return (
+                            <PostCard key={idx} width_point='1460px' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트톡톡' category_name={p.category} mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/common/detail/${p.postId}`) }}/>
+                          );
+                        } else if (p.hasOwnProperty('reviewId')) {
+                          return (
+                            <PostCard key={idx} width_point='1460px' title={p.title} content={`장점: ${p.cons} // 단점: ${p.pros}`} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트캠프' category_name={p.bootcampName} mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/boot/${p.bootcampName}`) }}/>
+                          );
+                        } else if (p.hasOwnProperty('questionId')) {
+                          return (
+                            <PostCard key={idx} width_point='1460px' question_bool='true' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/${p.questionId}`) }}/>
+                          );
+                        }
                       })}
                     </CardList>
                     :

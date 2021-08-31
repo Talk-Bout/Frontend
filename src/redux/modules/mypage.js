@@ -10,13 +10,13 @@ const SET_MYBOOKMARK = 'mypage/SET_MYBOOKMARK'; // 내가 북마크한 글들 �
 
 // 액션생성함수
 const setMyboot = createAction(SET_MYBOOT, (myboot_list) => ({ myboot_list }));
-const setMypost = createAction(SET_MYPOST, (mypost_list) => ({ mypost_list }));
+const setMypost = createAction(SET_MYPOST, (list_list) => ({ list_list }));
 const setMyBookmark = createAction(SET_MYBOOKMARK, (mybookmark_list) => ({ mybookmark_list }));
 
 // 기본값 정하기
 const initialState = {
   myboot_list: [],
-  mypost_list: [],
+  mypost_list: {},
   myqna_list: [],
   mytalk_list: [],
 };
@@ -49,6 +49,7 @@ const setMypostDB = (nickname) => {
     instance.get(`/users/${nickname}/posts`, {
     })
       .then((response) => {
+        // console.log(response.data);
         dispatch(setMypost(response.data));
         dispatch(statusActions.endTask());
       })
@@ -79,7 +80,7 @@ export default handleActions({
     draft.myboot_list = [...action.payload.myboot_list];
   }),
   [SET_MYPOST]: (state, action) => produce(state, (draft) => {
-    draft.mypost_list = [...action.payload.mypost_list];
+    draft.mypost_list = {...action.payload.list_list};
   }),
   [SET_MYBOOKMARK]: (state, action) => produce(state, (draft) => {
     draft.myqna_list = [...action.payload.mybookmark_list.questionBookmarks];

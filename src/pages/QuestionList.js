@@ -111,7 +111,7 @@ const QuestionList = (props) => {
               {pop_question_page.map((q, idx) => {
                 return (
                   <PostCard
-                    key={q.questionId} width_point='1200px'
+                    key={q.questionId} width_point='1200px' question_bool='true'
                     title={q.title} content={q.content} commentNumber={q.answerNumber} createdAt={q.createdAt} nickname={q.nickname} likes={q.questionLike} profilePic={q.user.profilePic}
                     _onClick={() =>
                       history.push(`/question/detail/${q.questionId}`)
@@ -125,7 +125,7 @@ const QuestionList = (props) => {
               {question_page.map((q, idx) => {
                 return (
                   <PostCard
-                    key={q.questionId} width_point='1200px'
+                    key={q.questionId} width_point='1200px' question_bool='true'
                     title={q.title} content={q.content} commentNumber={q.answerNumber} createdAt={q.createdAt} nickname={q.nickname} likes={q.questionLike} profilePic={q.user.profilePic}
                     {...q}
                     _onClick={() =>

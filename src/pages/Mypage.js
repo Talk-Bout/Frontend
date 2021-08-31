@@ -53,11 +53,6 @@ const Mypage = (props) => {
   // 질문과답변 3개 추출
   const myqna = myqna_list.slice(0, 3);
 
-  const editInfo = () => {
-    // history.push('/mypage/pic');
-    window.alert('지금은 에러 처리 중입니다!\n빠르게 복구하여 돌아오겠습니다! ;-/')
-  }
-
   if (!is_login) {
     return <NotFound />
   }
@@ -72,7 +67,7 @@ const Mypage = (props) => {
             <ProfileOutter>
               <ProfileInner>
                 <ProfileBox>
-                  <Profile src={profilePic == null ? Profile_medium : user_profile_url} alt='프로필' onClick={() => editInfo()} />
+                  <Profile src={profilePic == null ? Profile_medium : user_profile_url} alt='프로필' onClick={() => history.push('/mypage/pic')} />
                 </ProfileBox>
                 <Grid>
                   {/* 닉네임 표시 */}

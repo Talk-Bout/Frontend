@@ -5,7 +5,7 @@ import { SmallWindow } from '../components';
 import { Profile_medium } from '../image';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as imageActions } from '../redux/modules/image';
-import { actionCreators as mypageActions } from '../redux/modules/mypage';
+import { actionCreators as userActions } from '../redux/modules/user';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import NotFound from '../shared/NotFound';
@@ -53,7 +53,7 @@ const MypagePic = (props) => {
         return;
       }
     }
-    dispatch(mypageActions.editInfoDB(nickname, image));
+    dispatch(userActions.editInfoDB(nickname, image));
   };
 
   // 이미지 미리보기 삭제 함수
@@ -67,7 +67,7 @@ const MypagePic = (props) => {
 
   // 프로필 사진 삭제 함수
   const deletePic = () => {
-    dispatch(mypageActions.deletePicDB(user_name, null));
+    dispatch(userActions.deletePicDB(user_name, null));
   };
 
   if (!is_login) {

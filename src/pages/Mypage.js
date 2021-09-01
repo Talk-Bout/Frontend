@@ -8,7 +8,7 @@ import { BsHeartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
-import { getCookie, setCookie } from '../shared/cookie';
+import { getCookie } from '../shared/cookie';
 import NotFound from '../shared/NotFound';
 
 const Mypage = (props) => {
@@ -62,11 +62,6 @@ const Mypage = (props) => {
   if (!is_login) {
     return <NotFound />
   }
-
-  setCookie('provider', 'kakao');
-  setCookie('accessToken', 'LEGmcGJDHHDZzjhzgSrLqaIaW38EtydVokUBxgopcBQAAAF7njMBug');
-  setCookie('refreshToken', '2cE5Mnn3TGxyEUuXfoxKQYhRtzPEBH2FBDiMago9dNsAAAF7njL7eg');
-
 
   return (
     <React.Fragment>

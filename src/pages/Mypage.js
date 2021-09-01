@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Text, Grid } from '../elements';
-import { Sidebar, Body, Stars, PostCard } from '../components';
+import { Sidebar, Body, Stars, PostCard, Spinner } from '../components';
 import { Profile_medium, CampLogo_default } from '../image';
 import { AiOutlineRight } from "react-icons/ai";
 import { BsHeartFill } from "react-icons/bs";
@@ -33,18 +33,7 @@ const Mypage = (props) => {
 
   // 내가 쓴글 리스트
   const mypost_all = useSelector((state) => state.mypage.mypost_list);
-  const mypost_answers = mypost_all.answers.filter((answer) => answer.questionId != null);
-  const mypost_posts = mypost_all.posts;
-  const mypost_questions = mypost_all.questions;
-  const mypost_reviews = mypost_all.reviews;
-  let mypost_list = [];
-  mypost_answers && mypost_list.push(...mypost_answers);
-  mypost_posts && mypost_list.push(...mypost_posts);
-  mypost_questions && mypost_list.push(...mypost_questions);
-  mypost_reviews && mypost_list.push(...mypost_reviews);
-  // 내가쓴글 3개 추출
-  const mypost = mypost_list.slice(0, 3);
-
+  
   // 부트톡톡 북마크 리스트
   const all_mytalk = useSelector((state) => state.mypage.mytalk_list);
   // 삭제된 post의 경우 안띄워줌
@@ -62,6 +51,22 @@ const Mypage = (props) => {
   if (!is_login) {
     return <NotFound />
   }
+
+  if (!mypost_all.answers) {
+    return <Spinner />
+  }
+
+  const mypost_answers = mypost_all.answers.filter((answer) => answer.questionId != null);
+  const mypost_posts = mypost_all.posts;
+  const mypost_questions = mypost_all.questions;
+  const mypost_reviews = mypost_all.reviews;
+  let mypost_list = [];
+  mypost_answers && mypost_list.push(...mypost_answers);
+  mypost_posts && mypost_list.push(...mypost_posts);
+  mypost_questions && mypost_list.push(...mypost_questions);
+  mypost_reviews && mypost_list.push(...mypost_reviews);
+  // 내가쓴글 3개 추출
+  const mypost = mypost_list.slice(0, 3);
 
   return (
     <React.Fragment>

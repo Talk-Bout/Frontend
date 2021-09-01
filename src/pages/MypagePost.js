@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
-import { Sidebar, Body, PostCard } from '../components';
+import { Sidebar, Body, PostCard, Spinner } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as mypageActions } from '../redux/modules/mypage';
 import { history } from '../redux/ConfigureStore';
@@ -14,15 +14,6 @@ const MypagePost = (props) => {
 
   // 내가 쓴글 리스트
   const mypost_all = useSelector((state) => state.mypage.mypost_list);
-  const mypost_answers = mypost_all.answers.filter((answer) => answer.questionId != null);
-  const mypost_posts = mypost_all.posts;
-  const mypost_questions = mypost_all.questions;
-  const mypost_reviews = mypost_all.reviews;
-  let mypost_list = [];
-  mypost_answers && mypost_list.push(...mypost_answers);
-  mypost_posts && mypost_list.push(...mypost_posts);
-  mypost_questions && mypost_list.push(...mypost_questions);
-  mypost_reviews && mypost_list.push(...mypost_reviews);
 
   // 부트캠프, 부트톡톡 북마크
   useEffect(() => {
@@ -32,6 +23,22 @@ const MypagePost = (props) => {
   if (!is_login) {
     return <NotFound />
   }
+
+  if (!mypost_all.answers) {
+    return <Spinner />
+  }
+
+  const mypost_answers = mypost_all.answers.filter((answer) => answer.questionId != null);
+  const mypost_posts = mypost_all.posts;
+  const mypost_questions = mypost_all.questions;
+  const mypost_reviews = mypost_all.reviews;
+  let mypost_list = [];
+  mypost_answers && mypost_list.push(...mypost_answers);
+  mypost_posts && mypost_list.push(...mypost_posts);
+  mypost_questions && mypost_list.push(...mypost_questions);
+  mypost_reviews && mypost_list.push(...mypost_reviews);
+  // 내가쓴글 3개 추출
+  const mypost = mypost_list.slice(0, 3);
 
   return (
     <React.Fragment>

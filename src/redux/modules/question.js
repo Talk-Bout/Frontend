@@ -411,7 +411,10 @@ export default handleActions(
       }),
     [CREATE_ANSWER]: (state, action) =>
       produce(state, (draft) => {
-        draft.answer_list.push(action.payload.answer);
+        if (draft.answer_list.length === 0 || draft.answer_list.length % 5 !== 0) {
+          draft.answer_list.push(action.payload.answer);
+          draft.list[0].answer.push(action.payload.answer);
+        };
       }),
     [SET_QUESTION_BOOKMARK]: (state, action) =>
       produce(state, (draft) => {

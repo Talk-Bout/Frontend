@@ -10,6 +10,7 @@ const Sidebar = (props) => {
   return (
     <React.Fragment>
       <Grid className="sidebar" backgroundColor="#202124" width="100px" minHeight='100vh' TABwidth='72px' MOBdisplay='none'>
+        <Grid width='100px' TABwidth='72px'>
           <FixNav>
             <Point
               src={PointImg} alt='디자인' />
@@ -30,6 +31,7 @@ const Sidebar = (props) => {
               onClick={() => history.push('/question')}
             />
           </FixNav>
+          </Grid>
       </Grid>
     </React.Fragment>
   );

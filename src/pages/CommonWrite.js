@@ -79,7 +79,7 @@ const BootCommuWrite = (props) => {
         category: categoryRef.current.value,
         image: image_url,
       };
-      dispatch(postActions.addPostDB(new_post))  
+      dispatch(postActions.addPostDB(new_post));
     }
   };
 
@@ -149,6 +149,8 @@ const BootCommuWrite = (props) => {
                   <option value=""> ≡ &nbsp; &nbsp; 주제를 선택해주세요</option>
                   <option value="info">정보</option>
                   <option value="chitchat">잡담</option>
+                  <option value="job">취업</option>
+                  <option value="lecture">인터넷 강의</option>
                 </SelectBox>
                 {/* 제목 입력 칸 */}
                 <TitleBox>

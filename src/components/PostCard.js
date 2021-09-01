@@ -58,7 +58,7 @@ const PostCard = (props) => {
         <Grid padding="2px 5px 0 0" justify_content="space-between" display="flex" height="20px" width="100%">
           {/* 카테고리 이름이 있으면 보여주고, 없으면 게시판 이름만 보여주기 */}
         {category_name ? 
-        <Text color="#BDC1C6" fontSize="14px" TABfontSize="12px" MOBfontSize='10px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'> {board_name} <span style={{verticalAlign: 'middle'}}><AiOutlineRight /></span> {category_name === 'info' ? '정보' : category_name === 'chitchat' ? '잡담' : `${category_name} 리뷰`} </Text>
+        <Text color="#BDC1C6" fontSize="14px" TABfontSize="12px" MOBfontSize='10px' display='-webkit-box' overflow='hidden' wlc='1' wbo='vertical'> {board_name} <span style={{verticalAlign: 'middle'}}><AiOutlineRight /></span> {category_name === 'info' ? '정보' : category_name === 'chitchat' ? '잡담' : category_name === 'job' ? '취업' : category_name === 'lecture' ? '인터넷 강의' : `${category_name} 리뷰`} </Text>
         :
         <Text color="#BDC1C6" fontSize="14px" TABfontSize="12px" MOBfontSize='10px'> {board_name} </Text>
         }

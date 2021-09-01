@@ -14,6 +14,7 @@ const CommonList = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
+
   // 인기순, 최신순 정렬
   const [PopArray, setPopArray] = useState(false);
 
@@ -94,6 +95,14 @@ const CommonList = (props) => {
                 <CategoryButton url={category === 'chitchat' && 'white'}
                   onClick={() => setPost('chitchat')}>
                   잡담
+                </CategoryButton>
+                <CategoryButton url={category === 'job' && 'white'}
+                  onClick={() => setPost('job')}>
+                  취업
+                </CategoryButton>
+                <CategoryButton url={category === 'lecture' && 'white'}
+                  onClick={() => setPost('lecture')}>
+                  인터넷 강의
                 </CategoryButton>
               </Categories>
               <Grid width="fit-content" display="flex">

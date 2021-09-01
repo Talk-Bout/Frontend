@@ -33,7 +33,7 @@ const Mypage = (props) => {
 
   // 내가 쓴글 리스트
   const mypost_all = useSelector((state) => state.mypage.mypost_list);
-  const mypost_answers = mypost_all.answers;
+  const mypost_answers = mypost_all.answers.filter((answer) => answer.questionId != null);
   const mypost_posts = mypost_all.posts;
   const mypost_questions = mypost_all.questions;
   const mypost_reviews = mypost_all.reviews;

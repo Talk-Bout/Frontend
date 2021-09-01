@@ -42,9 +42,9 @@ const googleLogin = () => {
       profilePic: profilePic_URL,
     }
     dispatch(logIn(user_info));
-    setCookie('refreshToken', refreshToken_URL);
-    setCookie('accessToken', accessToken_URL);
-    setCookie('idToken', idToken_URL);
+    setCookie('refreshToken', refreshToken_URL, 'httpOnly');
+    setCookie('accessToken', accessToken_URL, 'httpOnly');
+    setCookie('idToken', idToken_URL, 'httpOnly');
     setCookie('provider', provider_URL);
     history.push('/');
     window.location.reload();

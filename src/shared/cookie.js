@@ -6,10 +6,20 @@ const getCookie = (name) => {
   }
 };
 
-const setCookie = (name, value, exp = 2) => {
+// const setCookie = (name, value, exp = 2) => {
+//   let date = new Date();
+//   date.setTime(date.getTime() + exp * 60 * 60 * 1000);
+//   document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;secure`;
+// };
+
+const setCookie = (name, value, httpOnly) => {
   let date = new Date();
-  date.setTime(date.getTime() + exp * 60 * 60 * 1000);
-  document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;secure`;
+  date.setTime(date.getTime());
+  if (httpOnly) {
+    document.cookie = `${name}=${value};path=/;secure;httpOnly`;  
+  } else {
+    document.cookie = `${name}=${value};path=/;secure`;
+  }
 };
 
 const deleteCookie = (name) => {

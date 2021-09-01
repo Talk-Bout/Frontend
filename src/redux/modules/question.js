@@ -125,7 +125,7 @@ const setOneQuestionDB = (question_id) => {
   };
 };
 
-const createQuestionDB = (new_question) => {
+const createQuestionDB = (new_question, profilePic) => {
   return function (dispatch) {
     const title = new_question.title;
     const content = new_question.content;
@@ -139,7 +139,7 @@ const createQuestionDB = (new_question) => {
         image: image,
       })
       .then((response) => {
-        dispatch(createQuestion(response.data));
+        dispatch(createQuestion({...response.data, user: {profilePic: profilePic}}));
         dispatch(imageActions.getPreview(null));
         dispatch(imageActions.DeleteImageUrl());
         history.replace('/question');
@@ -234,7 +234,7 @@ const setNextAnswerDB = (question_id, page) => {
   };
 };
 
-const createAnswerDB = (new_answer) => {
+const createAnswerDB = (new_answer, profilePic) => {
   return function (dispatch) {
     const questionId = parseInt(new_answer.questionId);
     const content = new_answer.content;
@@ -246,7 +246,7 @@ const createAnswerDB = (new_answer) => {
         questionId: questionId,
       })
       .then((response) => {
-        const new_answer_data = { ...response.data, answerLike: [], likeNumber: 0 }
+        const new_answer_data = { ...response.data, answerLike: [], likeNumber: 0, profilePic: profilePic};
         dispatch(createAnswer(new_answer_data));
       })
       .catch((err) => {

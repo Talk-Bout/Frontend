@@ -18,6 +18,7 @@ const QuestionWrite = (props) => {
   const contentInput = useRef(null);
 
   const user_name = useSelector(state => state.user.user.nickname);
+  const profilePic = useSelector(state => state.user.user.profilePic);
 
   //이미지 불러오기
   const image_url = useSelector((state) => state.image.image_url);
@@ -86,7 +87,7 @@ const QuestionWrite = (props) => {
         nickname: user_name,
         image: image_url,
       };
-      dispatch(questionActions.createQuestionDB(new_question));
+      dispatch(questionActions.createQuestionDB(new_question, profilePic));
     }
   };
 

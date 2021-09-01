@@ -22,6 +22,7 @@ const QuestionDetail = (props) => {
   );
 
   const user_name = useSelector(state => state.user.user.nickname);
+  const profilePic = useSelector(state => state.user.user.profilePic);
   const [MenuLink, setMenuLink] = useState(null);
   const is_login = useSelector((state) => state.user.is_login);
 
@@ -100,7 +101,7 @@ const QuestionDetail = (props) => {
       window.alert('내용을 입력해주세요.');
       return;
     }
-    dispatch(questionActions.createAnswerDB(new_answer));
+    dispatch(questionActions.createAnswerDB(new_answer, profilePic));
     answerInput.current.value = '';
   };
 
@@ -396,7 +397,7 @@ const Image = styled.img`
 const AnswerBox = styled.div`
   min-height: 100vh;
   margin: 0 -40px -80px -40px;
-  padding: 10px 0 80px;
+  padding: 10px 0 120px;
   background-color: #282a2d;
   @media screen and (max-width: 1150px) {
     margin: 0 -18px -65px -18px;
@@ -482,6 +483,10 @@ const AnswerSaveButton = styled.button`
   padding: 15px 40px;
   margin-left: 866px;
   margin-bottom: 15px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
   @media screen and (max-width: 1200px) {
     margin-left: 630px;
   }

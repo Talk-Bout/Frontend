@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Text, Emoji } from '../elements';
+import { Grid, Text, Emoji, ToTopBtn } from '../elements';
 import { Sidebar, Body, Stars } from '../components';
 import { LogoIcon, Rocket_emoji } from '../image';
 import { history } from '../redux/ConfigureStore';
@@ -86,6 +86,7 @@ const BootMain = (props) => {
               {/* 다음 페이지로 이동하는 화살표는 다음 페이지가 있을 때만 보이게 하기 */}
               <Text lineHeight='14px' MOBfontSize='12px' margin='0 20px 0'><Page onClick={() => toNextPage()}>{all_camp.length > 12 ? <BsChevronRight /> : ''}</Page></Text>
             </PageBox>
+            <ToTopBtn />
           </Grid>
         </Body>
       </Grid>

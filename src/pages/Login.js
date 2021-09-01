@@ -69,6 +69,10 @@ const GoogleBttn = styled.button`
   padding: 0;
   position: relative;
   margin: 50px auto 0;
+  cursor: pointer;
+  &:active {
+    opacity: 0.7;
+  }
 `;
 
 const GoogleImg = styled.img`

@@ -1,7 +1,8 @@
 # Talk'Bout 토크부트
-항해99 2기 대망의 실전 프로젝트!
-부트캠프를 찾아 헤매는 이들을 위한 유일무이한 대화의 장,
-토크 어바웃 부트캠프, 토크부트입니다💬
+항해99 2기 대망의 실전 프로젝트!<br>
+부트캠프를 찾아 헤매는 이들을 위한 유일무이한 대화의 장,<br>
+토크 어바웃 부트캠프, 토크부트입니다💬<br>
+[🏡토크부트 링크](https://talkbout.camp)
 
 # 토크부트 (Front-end)
 
@@ -20,9 +21,6 @@
 7. [힘들었던 점 및 개선](#힘들었던-점-및-개선)
 8. [상세 설명 페이지](#상세-설명-페이지)
 -->
-
-## 🖥 ↓↓토크부트 링크↓↓
-- [https://talkbout.camp](https://talkbout.camp)
   
 ## 👾 토크부트 소개
 - 실제 부트캠프 수강중인 학생과 수료자에게 듣는 리뷰.
@@ -36,14 +34,12 @@
   - Front-end(React): 이동민
   - Back-end(Node.js): 정창길, 송하영, 방민수
   - Designer(UI/UX): 윤영미, 양서문
+- [프로젝트 초기 기획 노션](https://www.notion.so/Talk-Bout-_-_5-90d8e8f4f3904dfb84b3892b94daa7d0)
+- [Back-end(Node.js) 깃허브](https://github.com/Talk-Bout/nd)
 
 ## 🛠Architecture 
 ![img](https://github.com/skylermbang/Backend/blob/main/img/architecture.png)
-- REST API: AWS EC2(Ubuntu 18.04 LTS)
-- Framework: Express(TypeScript)
-- ORM : Prisma 
-- Database: Amazon RDS (MySQL)
-- Image Storage : AWS S3
+- 
 
 ## 📚 주요 라이브러리
 axios, class-validator, passport, multer,  dotenv, helmet, cors, sharp
@@ -82,13 +78,3 @@ axios, class-validator, passport, multer,  dotenv, helmet, cors, sharp
 - sharp 라이브러리를 사용하여 사진을 압축하여 원본과 함께 저장하였습니다. 사용자에게 더 빠르게 페이지를 보여줄 수 있었습니다.
 - 악성 유저의 글 도배를 방지하는 간단한 알고리즘을 적용했고 개선하는 중입니다.
 - Amazon RDS와 S3 이미지 저장소를 서버에서 분리해내 서버 부하를 줄였습니다.  
-
-
-## 주요 API
-- API 명세 : <검토 중>
-
-## 프로젝트 초기 기획 노션
-- https://www.notion.so/Talk-Bout-_-_5-90d8e8f4f3904dfb84b3892b94daa7d0
-
-## Front-End(React) 깃허브 
-- https://github.com/Talk-Bout/Frontend

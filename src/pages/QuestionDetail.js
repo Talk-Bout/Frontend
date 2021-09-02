@@ -303,8 +303,7 @@ const QuestionDetail = (props) => {
                   답변
                 </Text>
                 <ACommentBox>
-                  <AInput rows="5" placeholder="부트캠퍼들의 질문에 답변을 남겨주세요.
-답변을 남긴 이후에는 수정 및 삭제가 불가하오니,
+                  <AInput rows="4" placeholder="답변을 남긴 이후에는 수정 및 삭제가 불가하오니,
 신중하게 작성해 주시길 부탁드립니다." ref={answerInput} />
                   <AnswerSaveButton onClick={() => createAnswerBtn()}>
                     답변 추가하기
@@ -434,7 +433,7 @@ const AddAnswerSection = styled.div`
 
 const AInput = styled.textarea`
   font-size: 14px;
-  line-height: 18px;
+  line-height: 24px;
   font-weight: 400;
   border: none;
   border-radius: 12px;
@@ -448,7 +447,8 @@ const AInput = styled.textarea`
   }
   ::placeholder {
     color: #4e5357;
-    font-size: 14px;
+    line-height: 24px;
+    font-size: 18px;
   }
   ::-webkit-scrollbar {
     width: 8px;

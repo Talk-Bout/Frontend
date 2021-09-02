@@ -247,7 +247,7 @@ export default handleActions({
     draft.review_list = [...action.payload.review_list];
   }),
   [ADD_REVIEW]: (state, action) => produce(state, (draft) => {
-    draft.review_list.push(action.payload.review);
+    draft.review_list.unshift(action.payload.review);
   }),
   [SET_OTHERS]: (state, action) => produce(state, (draft) => {
     draft.others_list = [...action.payload.camp_list];

@@ -23,7 +23,7 @@ const BootDetail = (props) => {
     if (props.history.location.state !== undefined && props.history.location.state.this_tab) {
       setTab(props.history.location.state.this_tab);
     };
-  }, []);
+  }, [bootcampName]);
 
   return (
     <React.Fragment>

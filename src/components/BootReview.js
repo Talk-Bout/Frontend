@@ -30,7 +30,7 @@ const BootReview = (props) => {
   }
 
   const loginAlert = () => {
-    if (window.confirm('로그인 후에 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+    if (window.confirm('로그인 후 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
       history.push('/login');
     }
   }

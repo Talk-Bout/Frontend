@@ -86,6 +86,13 @@ const QuestionDetail = (props) => {
     history.push(`/question`);
   };
 
+  const loginAlert = () => {
+    if (window.confirm('로그인 후 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+      history.push('/login');
+    }
+    answerInput.current.value = '';
+  }
+
   // 답변 작성
   const createAnswerBtn = () => {
     const new_answer = {
@@ -94,13 +101,16 @@ const QuestionDetail = (props) => {
       questionId: question_id,
     };
     if (!is_login) {
-      window.alert('로그인 후에 이용 가능합니다.');
+      if (window.confirm('로그인 후 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+        history.push('/login');
+      }
+      answerInput.current.value = '';
       return;
-    }
+    };
     if (answerInput.current.value === '') {
       window.alert('내용을 입력해주세요.');
       return;
-    }
+    };
     dispatch(questionActions.createAnswerDB(new_answer, profilePic));
     answerInput.current.value = '';
   };
@@ -297,20 +307,22 @@ const QuestionDetail = (props) => {
           <AnswerBox>
             {/* 답변 등록 input */}
             {/* 로그인 상태에서만 보여주기 */}
-            {is_login &&
               <AddAnswerSection>
                 <Text p fontWeight="700" fontSize="14px" color="#E2E2E3" cursor='default'>
                   답변
                 </Text>
                 <ACommentBox>
+                  {is_login ?
                   <AInput rows="4" placeholder="답변을 남긴 이후에는 수정 및 삭제가 불가하오니,
 신중하게 작성해 주시길 부탁드립니다." ref={answerInput} />
+                  :
+                  <AInput rows="1" placeholder="로그인 후 이용 가능합니다." ref={answerInput} onChange={() => loginAlert()}/>
+                  }
                   <AnswerSaveButton onClick={() => createAnswerBtn()}>
                     답변 추가하기
                   </AnswerSaveButton>
                 </ACommentBox>
               </AddAnswerSection>
-            }
             {/* 답변 목록  */}
             {answer_list && answer_list.map((answer, idx) => {
               return <AnswerCard key={answer.answerId} {...answer} />;

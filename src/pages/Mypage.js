@@ -178,7 +178,7 @@ const Mypage = (props) => {
                       {mypost.map((p, idx) => {
                         if (p.hasOwnProperty('answerId')) {
                           return (
-                            <PostCard key={idx} width_point='1460px' answer_bool='true' title='질문에 대한 답변' content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/${p.questionId}`) }}/>
+                            <PostCard key={idx} width_point='1460px' answer_bool='true' title='질문에 대한 답변' content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/detail/${p.questionId}`) }}/>
                           );
                         } else if (p.hasOwnProperty('postId')) {
                           return (
@@ -190,7 +190,7 @@ const Mypage = (props) => {
                           );
                         } else if (p.hasOwnProperty('questionId')) {
                           return (
-                            <PostCard key={idx} width_point='1460px' question_bool='true' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/${p.questionId}`) }}/>
+                            <PostCard key={idx} width_point='1460px' question_bool='true' title={p.title} content={p.content} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='질문과 답변' mypost_bool='true' TABheight='206px' _onClick={() => { history.push(`/question/detail/${p.questionId}`) }}/>
                           );
                         }
                       })}

@@ -35,7 +35,7 @@
   - Back-end(Node.js): 정창길, 송하영, 방민수
   - Designer(UI/UX): 윤영미, 양서문
 - [프로젝트 초기 기획 노션](https://www.notion.so/Talk-Bout-_-_5-90d8e8f4f3904dfb84b3892b94daa7d0)
-- [Back-end(Node.js) 깃허브](https://github.com/Talk-Bout/nd)
+- [Back-end(Node.js) 깃허브](https://github.com/Talk-Bout/Backend)
 
 ## 🛠Architecture 
 ![img](https://github.com/skylermbang/Backend/blob/main/img/architecture.png)

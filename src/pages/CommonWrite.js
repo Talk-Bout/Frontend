@@ -59,7 +59,11 @@ const BootCommuWrite = (props) => {
 
   const removeImage = () => {
     if (window.confirm('업로드한 이미지 파일을 삭제하시겠습니까?')) {
-      dispatch(postActions.editPostDB_img(commu_found));
+      if (postId) {
+        dispatch(postActions.editPostDB_img(commu_found));
+      }
+      dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
       setImage('');
     }
   }

@@ -154,7 +154,7 @@ const createQuestionDB = (new_question, profilePic) => {
   };
 };
 
-const editQuestionDB = (edit_question) => {
+const editQuestionDB = (edit_question, profilePic) => {
   return function (dispatch) {
     const title = edit_question.title;
     const content = edit_question.content;
@@ -169,10 +169,50 @@ const editQuestionDB = (edit_question) => {
         image: image,
       })
       .then((response) => {
-        dispatch(editQuestion(response.data));
+        const question = {
+          ...response.data,
+          user: {
+            nickname: nickname,
+            profilePic: profilePic,
+          }
+        }
+        dispatch(editQuestion(question));
         dispatch(imageActions.getPreview(null));
         dispatch(imageActions.DeleteImageUrl());
-        history.replace('/question');
+        history.replace(`/question/detail/${questionId}`);
+      })
+      .catch((err) => {
+        // console.error(`질문 수정하기 에러: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
+      });
+  };
+};
+
+const editQuestionDB_img = (edit_question, profilePic) => {
+  return function (dispatch) {
+    const title = edit_question.title;
+    const content = edit_question.content;
+    const questionId = parseInt(edit_question.questionId);
+    const nickname = edit_question.nickname;
+    const image = null
+    instance
+      .patch(`/questions/${questionId}`, {
+        title: title,
+        content: content,
+        nickname: nickname,
+        image: image,
+      })
+      .then((response) => {
+        const question = {
+          ...response.data,
+          user: {
+            nickname: nickname,
+            profilePic: profilePic,
+          }
+        }
+        dispatch(editQuestion(question));
+        dispatch(imageActions.getPreview(null));
+        dispatch(imageActions.DeleteImageUrl());
       })
       .catch((err) => {
         // console.error(`질문 수정하기 에러: ${err}`);
@@ -474,6 +514,7 @@ const actionCreators = {
   createQuestionDB,
   deleteQuestionDB,
   editQuestionDB,
+  editQuestionDB_img,
   setAnswerDB,
   setNextAnswerDB,
   createAnswerDB,

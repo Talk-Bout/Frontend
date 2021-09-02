@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Body } from '../components';
@@ -8,10 +8,12 @@ import { actionCreators as imageActions } from '../redux/modules/image';
 import { history } from '../redux/ConfigureStore';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
-// import { FiHash } from 'react-icons/fi';
+import { FcCancel } from 'react-icons/fc';
 
 const QuestionWrite = (props) => {
   const dispatch = useDispatch();
+
+  const [image, setImage] = useState('');
 
   //리뷰 콘텐츠 작성
   const titleInput = useRef(null);
@@ -60,6 +62,27 @@ const QuestionWrite = (props) => {
     (question) => question.questionId === question_id
   );
 
+  useEffect(() => {
+    if (preview) {
+      setImage(preview);
+    } else if (old_question && old_question.image) {
+      setImage(`https://fw3efsadfcv.shop${old_question.image}`);
+    } else {
+      setImage('');
+    }
+  }, [preview]);
+
+  const removeImage = () => {
+    if (window.confirm('업로드한 이미지 파일을 삭제하시겠습니까?')) {
+      if (edit_mode) {
+        dispatch(questionActions.editQuestionDB_img(old_question, profilePic));
+      }
+      dispatch(imageActions.getPreview(null));
+      dispatch(imageActions.DeleteImageUrl());
+      setImage('');
+    };
+  };
+
   //포스트 작성
   const create_question = () => {
     if (titleInput.current.value === '') {
@@ -71,7 +94,7 @@ const QuestionWrite = (props) => {
       return;
     }
     if (edit_mode) {
-      const edited_image = preview ? image_url : old_question.image;
+      const edited_image = preview ? image_url : image;
       const edit_question = {
         questionId: question_id,
         title: titleInput.current.value,
@@ -79,7 +102,7 @@ const QuestionWrite = (props) => {
         nickname: user_name,
         image: edited_image,
       };
-      dispatch(questionActions.editQuestionDB(edit_question));
+      dispatch(questionActions.editQuestionDB(edit_question, profilePic));
     } else {
       const new_question = {
         title: titleInput.current.value,
@@ -166,16 +189,16 @@ const QuestionWrite = (props) => {
                 </TitleBox>
                 <ContentBox>
                   <Textarea
-                    rows={preview ? '5' : '15'}
+                    rows={image !== '' ? '5' : '15'}
                     placeholder="내용을 입력해주세요."
                     ref={contentInput}
                     defaultValue={edit_mode ? old_question.content : null}
                   />
                 </ContentBox>
-                {preview ? (
+                {image !== '' ?
                   <div style={{ textAlign: 'center' }}>
                     <Preview>
-                      <Img src={preview} />
+                      <Img src={preview ? preview : image} />
                     </Preview>
                     <Text
                       p
@@ -187,9 +210,8 @@ const QuestionWrite = (props) => {
                       {preview ? imageRef.current.files[0].name : ''}
                     </Text>
                   </div>
-                ) : (
-                  ''
-                )}
+                :
+                ''}
               </BodyBox>
               <FooterBox>
                 {/* 이미지 추가 버튼 */}
@@ -212,14 +234,18 @@ const QuestionWrite = (props) => {
                     />
                   </label>
                 </form>
-                {/* <Text
-                  fontSize="2.5vh"
+                {image !== '' ?
+                <Text
+                  fontSize="24px"
                   color="#b3b3b3"
                   margin="0 0 0 10px"
                   cursor="pointer"
+                  _onClick={() => removeImage()}
                 >
-                  <FiHash />
-                </Text> */}
+                  <FcCancel />
+                </Text>
+                :
+                ''}
                 <ButtonMobile onClick={() => {
                   create_question();
                 }}><Text MOBfontSize='16px' fontWeight='700' color='#848484'>등록</Text></ButtonMobile>
@@ -271,9 +297,7 @@ const TitleBox = styled.div`
 const ContentBox = styled.div`
   height: fit-content;
   margin: 0 0 80px;
-  @media screen and (max-width: 767px) {
-    margin: 20px 0 60px;
-  } 
+  padding: 20px 0 0;
 `;
 
 const TitleInput = styled.input`

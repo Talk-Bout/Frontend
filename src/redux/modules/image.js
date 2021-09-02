@@ -32,7 +32,6 @@ const getPreview = (e) => {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       dispatch(setPreview(reader.result));
-      dispatch(statusActions.endLoading());
     };
   };
 };

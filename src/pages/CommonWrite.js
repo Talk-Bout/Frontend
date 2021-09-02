@@ -65,7 +65,7 @@ const BootCommuWrite = (props) => {
         title: titleRef.current.value,
         content: contentRef.current.value,
         nickname: username,
-        category: categoryRef.current.value,
+        category: commu_found.category,
         postId: postId,
         image: edited_image,
       };
@@ -143,6 +143,11 @@ const BootCommuWrite = (props) => {
               </Grid>
               <BodyBox>
                 {/* 카테고리 선택 */}
+                {postId ?
+                <SelectBox>
+                  <option value={commu_found.category}>{commu_found.category === 'info' ? '정보' : commu_found.category === 'chitchat' ? '잡담' : commu_found.category === 'job' ? '취업' : '인터넷 강의'}</option>
+                </SelectBox>
+                :
                 <SelectBox
                   ref={categoryRef}
                 >
@@ -152,6 +157,8 @@ const BootCommuWrite = (props) => {
                   <option value="job">취업</option>
                   <option value="lecture">인터넷 강의</option>
                 </SelectBox>
+                }
+                
                 {/* 제목 입력 칸 */}
                 <TitleBox>
                   <Input

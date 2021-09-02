@@ -10,6 +10,7 @@ const BootDetail = (props) => {
 
   // 현재 탭을 useState로 관리한다. 초깃값은 정보 탭.
   const [tab, setTab] = useState('info');
+  
   // 현재 캠프 이름을 주소창에서 가져온다.
   const bootcampName = props.match.params.name;
   // 리덕스에 저장된 camp_list에서 bootcampName과 같은 이름을 가진 캠프 정보를 가져온다.

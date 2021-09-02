@@ -88,6 +88,13 @@ const CommonDetail = (props) => {
     dispatch(postActions.unlikePostDB(postId, postLikeId));
   };
 
+  const loginAlert = () => {
+    if (window.confirm('로그인 후 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+      history.push('/login');
+    }
+    commentInput.current.value = '';
+  }
+
   //댓글 추가하기
   const addComment = () => {
     const content_comment = commentInput.current.value;
@@ -97,7 +104,9 @@ const CommonDetail = (props) => {
       postId: postId,
     };
     if (!is_login) {
-      window.alert('로그인 후 이용해주세요!');
+      if (window.confirm('로그인 후 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?')) {
+        history.push('/login');
+      }
       return;
     };
     if (commentInput === '') {
@@ -290,17 +299,19 @@ const CommonDetail = (props) => {
                   <Text color='#BDC1C6' fontSize='12px' cursor='default'><span style={{ fontSize: '20px', margin: '0 6px 0 0', verticalAlign: 'middle' }}><AiOutlineEye /></span>{one_post.viewCount}</Text>
                 </IconBox>
               </Post>
-              {/* 댓글 입력란 */}
-              {is_login &&
+              {/* 댓글 입력란 */}         
                 <CommentInput>
                   <Text p fontSize='14px' MOBfontSize='12px' lineHeight='18px' color='#E8eaed' margin='16px 0' cursor='default'>댓글</Text>
                   <InputWrap>
+                  {is_login ?
                     <Input placeholder='댓글을 남겨주세요' ref={commentInput} />
+                  :
+                    <Input placeholder='로그인 후 이용 가능합니다' ref={commentInput} onChange={() => loginAlert()}/>
+                  }
                     <CommentBtn onClick={() => addComment()}><Text fontSize='14px' fontWeight='700' color='#121212'>등록하기</Text></CommentBtn>
                     <CommentBtnMOB onClick={() => addComment()}><Text MOBfontSize='12px' fontWeight='700' color='#121212'>등록</Text></CommentBtnMOB>
                   </InputWrap>
                 </CommentInput>
-              }
               {/* 댓글 리스트 */}
               {comment_list && comment_list.map((ct, idx) => {
                 return (

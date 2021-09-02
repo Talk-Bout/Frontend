@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from 'immer';
 import instance from '../../shared/request';
-import { actionCreators as statusActions } from './status';
 
 // 액션타입
 const SET_PREVIEW = 'image/SET_PREVIEW';  // 선택한 이미지 파일 프리뷰 생성

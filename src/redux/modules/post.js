@@ -213,6 +213,36 @@ const editPostDB = (edited_post) => {
   };
 };
 
+const editPostDB_img = (edited_post) => {
+  // 게시글 이미지만 삭제하는 함수
+  return function (dispatch) {
+    const title = edited_post.title;
+    const content = edited_post.content;
+    const postId = parseInt(edited_post.postId);
+    const category = edited_post.category;
+    const nickname = edited_post.nickname;
+    const image = null;
+    instance
+      .patch(`/posts/${postId}`, {
+        title: title,
+        content: content,
+        postId: postId,
+        category: category,
+        nickname: nickname,
+        image: image,
+      })
+      .then((response) => {
+        dispatch(editPost(response.data));
+        dispatch(imageActions.getPreview(null));
+        dispatch(imageActions.DeleteImageUrl());
+      })
+      .catch((err) => {
+        // console.error(`부트톡톡 게시글 수정하기 에러 발생: ${err}`);
+        window.alert(`에러가 발생했습니다! :(\n잠시 후 다시 시도해주세요.`);
+      });
+  };
+};
+
 const deletePostDB = (deleted_post) => {
   // 게시글 삭제하는 함수
   return function (dispatch) {
@@ -465,6 +495,7 @@ const actionCreators = {
   setOnePostDB,
   addPostDB,
   editPostDB,
+  editPostDB_img,
   deletePostDB,
   addBookmarkDB,
   deleteBookmarkDB,

@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { Body } from '../components';
 import { BsX } from 'react-icons/bs';
 import { BiImageAdd } from 'react-icons/bi';
+import { FcCancel } from 'react-icons/fc';
 import { history } from '../redux/ConfigureStore';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
@@ -12,13 +13,26 @@ import { actionCreators as imageActions } from '../redux/modules/image';
 const BootCommuWrite = (props) => {
   const dispatch = useDispatch();
 
+  const [image, setImage] = useState('');
+
   // 로그인 상태일 때 리덕스에서 닉네임 가져오기
   const username = useSelector(state => state.user.user.nickname);
 
   const postId = parseInt(window.location.pathname.split('/common/write/')[1]);
   const commu_found = useSelector((state) => state.post.one_post);
-  const image_url = useSelector((state) => state.image.image_url);
+  const preview = useSelector((state) => state.image.preview);
 
+  useEffect(() => {
+    if (preview) {
+      setImage(preview);
+    } else if (commu_found && commu_found.image) {
+      setImage(`https://fw3efsadfcv.shop${commu_found.image}`);
+    } else {
+      setImage('');
+    }
+  }, [preview]);
+
+  const image_url = useSelector((state) => state.image.image_url);
   const titleRef = useRef('');
   const contentRef = useRef('');
 
@@ -27,7 +41,6 @@ const BootCommuWrite = (props) => {
 
   // 이미지 업로드
   const imageRef = useRef();
-  const preview = useSelector((state) => state.image.preview);
   // 이미지 미리보기 실행 및 서버 업로드 함수
   const selectFile = (e) => {
     const uploaded_image = imageRef.current.files[0];
@@ -43,6 +56,13 @@ const BootCommuWrite = (props) => {
       dispatch(imageActions.getPreview(null));
     }
   };
+
+  const removeImage = () => {
+    if (window.confirm('업로드한 이미지 파일을 삭제하시겠습니까?')) {
+      dispatch(postActions.editPostDB_img(commu_found));
+      setImage('');
+    }
+  }
 
   // 게시글 등록(수정)
   const addPost = () => {
@@ -60,7 +80,7 @@ const BootCommuWrite = (props) => {
     }
 
     if (postId) {
-      const edited_image = preview ? image_url : commu_found.image
+      const edited_image = preview ? image_url : image;
       const edited_post = {
         title: titleRef.current.value,
         content: contentRef.current.value,
@@ -82,6 +102,9 @@ const BootCommuWrite = (props) => {
       dispatch(postActions.addPostDB(new_post));
     }
   };
+
+  console.log(commu_found);
+  console.log(image);
 
   return (
     <React.Fragment>
@@ -172,15 +195,15 @@ const BootCommuWrite = (props) => {
                 {/* 글 수정 중이라면 저장된 제목과 내용 보여주기 */}
                 <ContentBox>
                   <Textarea
-                    rows={preview ? '5' : '15'}
+                    rows={image !== '' ? '5' : '15'}
                     placeholder="내용을 입력해주세요"
                     ref={contentRef}
                     defaultValue={postId ? commu_found.content : null} />
                 </ContentBox>
-                {preview ?
+                {image !== '' ?
                   <div style={{ textAlign: 'center' }}>
                     <Preview>
-                      <Img src={preview} />
+                      <Img src={preview ? preview : image} />
                     </Preview>
                     <Text
                       p
@@ -216,10 +239,13 @@ const BootCommuWrite = (props) => {
                     />
                   </label>
                 </form>
-                {/* 해시태그 추가 버튼 */}
-                {/* <Text fontSize="24px" color="#b3b3b3" cursor="pointer">
-                  <FiHash />
-                </Text> */}
+                {/* 이미지 삭제 버튼 */}
+                {image !== '' ?
+                <Text fontSize="24px" color="#b3b3b3" cursor="pointer" _onClick={() => removeImage()}>
+                  <FcCancel />
+                </Text>
+                :
+                ''}
                 <ButtonMobile onClick={() => {
                   addPost()
                 }}><Text MOBfontSize='16px' fontWeight='700' color='#848484'>등록</Text></ButtonMobile>

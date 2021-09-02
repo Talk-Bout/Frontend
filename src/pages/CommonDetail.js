@@ -151,7 +151,7 @@ const CommonDetail = (props) => {
               {/* 게시글 */}
               <Post>
                 {/* 게시글 카테고리 */}
-                <Text fontSize='14px' MOBfontSize='10px' color='#dadce0' cursor='default'>부트캠프 &gt; {one_post.category === 'chitchat' ? '잡담' : '정보'}</Text>
+                <Text fontSize='14px' MOBfontSize='10px' color='#dadce0' cursor='default'>부트톡톡 &gt; {one_post.category === 'chitchat' ? '잡담' : '정보'}</Text>
                 <Grid display='flex' justifyContent='space-between' padding='12px 0 0' MOBpadding='4px 0 0'>
                   {/* 제목 */}
                   <Text fontSize='24px' MOBfontSize='16px' color='#f1f3f4' fontWeight='700' lineHeight='36px' MOBlineHeight='24px' verticalAlign='middle' cursor='default' MOBwidth='80%'>{one_post.title}</Text>

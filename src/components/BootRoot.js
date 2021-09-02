@@ -75,7 +75,7 @@ const BootRoot = (props) => {
           <Button onClick={() => window.open(`${one_camp.url}`, '_blank')}><Text fontSize='14px' MOBfontSize='10px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></Button>
         </InfoBtn>
         {/* 부트캠프 평점, 리뷰 개수 */}
-        <Text fontSize='14px' MOBfontSize='12px' color='#dadce0' cursor='default'>★<span style={{ margin: '0 8px' }}>{Number(one_camp.star).toFixed(1)}</span>({one_camp.review === [] ? 0 : one_camp.review.length}개 리뷰)</Text>
+        <Text fontSize='14px' MOBfontSize='12px' color='#dadce0' cursor='default'>★<span style={{ margin: '0 8px' }}>{one_camp.star ? Number(one_camp.star).toFixed(1) : '0.0'}</span>({one_camp.review === [] ? 0 : one_camp.review.length}개 리뷰)</Text>
         <ButtonMobile onClick={() => window.open(`${one_camp.url}`, '_blank')}><Text fontSize='14px' MOBfontSize='10px' color='#DADCE0' fontWeight='700'>홈페이지 바로가기</Text></ButtonMobile>
       </Grid>
     </React.Fragment>

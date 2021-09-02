@@ -65,7 +65,7 @@ const BootMain = (props) => {
                     </Text>
                     {/* 부트캠프 별점 */}
                     <Text fontSize="14px" MOBfontSize='12px' color='#E8EAED' MOBcolor='#BDC1C6' position="absolute" top="200px" TABtop='154px' MOBtop='50px' margin="0 0 0 15px" TABmargin='16px 0 16px 24px'>
-                      {camp.reviewNumber > 0 ? <Stars score={camp.star} size='16px' TABsize='14px' MOBsize='10px' marginRight='4px' withScore /> : '별점/리뷰 없음'}
+                      <Stars score={camp.star? camp.star : 0} size='16px' TABsize='14px' MOBsize='10px' marginRight='4px' withScore />
                     </Text>
                   </div>
                 </Card>

@@ -14,7 +14,6 @@ const CommonList = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
-
   // 인기순, 최신순 정렬
   const [PopArray, setPopArray] = useState(false);
 

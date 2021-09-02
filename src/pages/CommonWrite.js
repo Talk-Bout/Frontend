@@ -103,9 +103,6 @@ const BootCommuWrite = (props) => {
     }
   };
 
-  console.log(commu_found);
-  console.log(image);
-
   return (
     <React.Fragment>
       <Grid

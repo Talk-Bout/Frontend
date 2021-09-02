@@ -106,7 +106,7 @@ const CommonList = (props) => {
               </Categories>
               <Grid width="fit-content" display="flex">
                 {/* 인기순, 최신순 정렬 버튼 */}
-                <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' MOBfontSize='14px' lineHeight="52px" MOBlineHeight='43px' verticalAlign='middle'><RiArrowUpDownFill /></Text>
+                <Text color="#F1F3F4" fontSize='24px' TABfontSize='16px' MOBfontSize='14px' MINfontSize='10px' lineHeight="52px" MOBlineHeight='43px' MINlineHeight='33px' verticalAlign='middle'><RiArrowUpDownFill /></Text>
                 <SelectButton>
                   {PopArray ?
                     <Options onClick={() => setPost(category)}><Text fontSize='16px' TABfontSize='14px' MOBfontSize='10px'>인기순</Text></Options>
@@ -217,9 +217,14 @@ const CategoryButton = styled.div`
     font-size: 14px;
   }
   @media screen and (max-width: 767px) {
-    padding: 0px 16px;
-    font-size: 10px;
-    border-radius: 14px;
+    padding: 0px 10px;
+    font-size: 8px;
+    border-radius: 12px;
+  }
+  @media screen and (max-width: 350px) {
+    padding: 0 1px;
+    font-size: 6px;
+    line-height: 20px;
   }
 `;
 
@@ -236,12 +241,20 @@ const SelectButton = styled.div`
     height: 14px;
     line-height: 8px;
     margin: 3px;
-    }
+  }
+  @media screen and (max-width: 350px) {
+    height: 8px;
+    line-height: 8px;
+    margin: 3px;
+  }
 `;
 
 const Options = styled.div`
-  margin: 10px 0 0 0;
+  margin: 10px 0 0;
   cursor: pointer;
+  @media screen and (max-width: 350px) {
+    margin: 5px 0 0;
+  }
 `;
 
 const WriteButton = styled.button`

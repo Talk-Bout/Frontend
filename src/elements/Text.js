@@ -64,6 +64,9 @@ const Text = (props) => {
     MOBcolor,
     MOBwidth,
     MOBright,
+    // 최소 사이즈(width: ~350px)
+    MINfontSize,
+    MINlineHeight,
   } = props;
 
   const styles = {
@@ -122,6 +125,8 @@ const Text = (props) => {
     MOBcolor: MOBcolor,
     MOBwidth: MOBwidth,
     MOBright: MOBright,
+    MINfontSize: MINfontSize,
+    MINlineHeight: MINlineHeight,
   };
 
   if (p) {
@@ -214,6 +219,11 @@ const TextBoxP = styled.p`
     color: ${(props) => props.MOBcolor};
     width: ${(props) => props.MOBwidth};
     right: ${(props) => props.MOBright};
+    // 최소 사이즈(width: ~350px)
+    @media screen and (max-width: 350px) {
+      font-size: ${(props) => props.MINfontSize};
+      line-height: ${(props) => props.MINlineHeight};
+    }
   }
 `;
 
@@ -282,6 +292,11 @@ const TextBoxS = styled.span`
     color: ${(props) => props.MOBcolor};
     width: ${(props) => props.MOBwidth};
     right: ${(props) => props.MOBright};
+    // 최소 사이즈(width: ~350px)
+    @media screen and (max-width: 350px) {
+      font-size: ${(props) => props.MINfontSize};
+      line-height: ${(props) => props.MINlineHeight};
+    }
   }
 `;
 

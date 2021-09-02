@@ -20,6 +20,9 @@ const BootDetail = (props) => {
   useEffect(() => {
     dispatch(campActions.setOneCampDB(bootcampName));
     window.scrollTo(0, 0);
+    if (props.history.location.state !== undefined && props.history.location.state.this_tab === 'review') {
+      setTab(props.history.location.state.this_tab);
+    };
   }, []);
 
   return (

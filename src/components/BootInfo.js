@@ -43,10 +43,10 @@ const BootInfo = (props) => {
               <>
                 <div key={idx + 100}><TextKey>{i[0]}</TextKey></div>
                 <Schedule>
-                  {course.map((c_list, idx) => {
+                  {course.map((c_list, c_idx) => {
                     return (
                       <>
-                        <div key={idx}><TextValue>{c_list[0]}</TextValue></div>
+                        <div key={c_idx}><TextValue>{c_list[0]}</TextValue></div>
                         <div><TextValue>{c_list[1]}</TextValue></div>
                       </>
                     )

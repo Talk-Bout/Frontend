@@ -186,7 +186,7 @@ const Mypage = (props) => {
                           );
                         } else if (p.hasOwnProperty('reviewId')) {
                           return (
-                            <PostCard key={idx} width_point='1460px' title={p.title} content={`장점: ${p.cons} // 단점: ${p.pros}`} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트캠프' category_name={p.bootcampName} mypost_bool='true' TABheight='206px' _onClick={() => history.push(`/boot/${p.bootcampName}`)}/>
+                            <PostCard key={idx} width_point='1460px' title={p.title} content={`장점: ${p.cons} // 단점: ${p.pros}`} createdAt={p.createdAt} nickname={p.nickname} profilePic={null} category_bool='true' board_name='부트캠프' category_name={p.bootcampName} mypost_bool='true' TABheight='206px' _onClick={() => history.push({pathname: `/boot/${p.bootcampName}`, state: {this_tab: 'review'}})}/>
                           );
                         } else if (p.hasOwnProperty('questionId')) {
                           return (

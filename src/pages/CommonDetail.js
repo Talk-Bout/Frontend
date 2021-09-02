@@ -370,6 +370,7 @@ const BodyInner = styled.div`
   height: fit-content;
   display: grid;
   grid-template-columns: 65% 34%;
+  padding-bottom: 50px;
   @media screen and (max-width: 1150px) {
     grid-template-columns: 100%;
   }

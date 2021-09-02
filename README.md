@@ -7,7 +7,7 @@
 # 토크부트 (Front-end)
 
 
-![Img](https://github.com/skylermbang/Backend/blob/main/img/talkboot_insta_1200x628_2.jpg)
+![talkboot_insta_1200x628_2](https://user-images.githubusercontent.com/84034174/131930501-d21239e6-03d5-46f2-be8a-22070e35ed18.jpg)
 
   
 ## 👾 토크부트 소개
@@ -28,7 +28,7 @@
 
 
 ## 🛠Architecture 
-![img](https://github.com/skylermbang/Backend/blob/main/img/architecture.png)
+![architecture](https://user-images.githubusercontent.com/84034174/131930547-d5d63c1e-801c-4d7b-bc55-d125c1a7b443.png)
 
 
 ## 📚 사용한 라이브러리

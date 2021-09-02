@@ -23,7 +23,7 @@ const BootOthers = (props) => {
       <Text fontSize='18px' fontWeight='700' color='#e8eaed' cursor='default'>다른 부트캠프</Text>
       {other_camps.map((other, idx) => {
         return (
-          <Camp key={idx} onClick={() => history.push({ pathname: `/boot/${other.bootcampName}`, state: { camp: other } })}>
+          <Camp key={idx} onClick={() => history.push({ pathname: `/boot/${other.bootcampName}`, state: { camp: other, this_tab: 'info' } })}>
             {/* 다른 부트캠프 로고 */}
             <ImageDiv>
               <Image src={other.logo ? other.logo : LogoIcon} />

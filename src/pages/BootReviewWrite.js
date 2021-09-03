@@ -105,6 +105,7 @@ const BootReviewWrite = (props) => {
                   <Select ref={courseInput}>
                     <option value=''>선택해주세요</option>
                     <option value='수강중'>수강중</option>
+                    <option value='중도하차'>중도하차</option>
                     <option value='수료'>수료</option>
                   </Select>
                 </div>

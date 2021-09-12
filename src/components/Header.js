@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Grid, Text } from '../elements';
 import { history } from '../redux/ConfigureStore';
@@ -7,7 +7,7 @@ import { actionCreators as userActions } from '../redux/modules/user';
 // import { Search } from '../image';
 import { LogoNew, Profile_small, CaretDown, Gift } from '../image';
 import { BsFillBookmarkFill } from 'react-icons/bs';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import { Button, Grow, Paper, Popper, MenuList, MenuItem, ClickAwayListener } from '@material-ui/core';
 import { getCookie } from '../shared/cookie';
 
 const Header = (props) => {
@@ -17,15 +17,34 @@ const Header = (props) => {
   const profilePic = useSelector(state => state.user.user.profilePic);
 
   // 드롭다운 메뉴
-  const [MenuLink, setMenuLink] = useState(null);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
   // 펼치기
-  const handleClick = (e) => {
-    setMenuLink(e.currentTarget);
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
   };
   // 접기
-  const handleClose = () => {
-    setMenuLink(null);
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+    setOpen(false);
   };
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  const prevOpen = useRef(open);
+  useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
 
   const logout = () => {
     dispatch(userActions.logOut());
@@ -90,33 +109,37 @@ const Header = (props) => {
               <ProfileImg onClick={() => history.push('/mypage')} src={profilePic ? `https://fw3efsadfcv.shop${profilePic}` : Profile_small} />
             </Profile>
             {/* 드롭다운 메뉴 */}
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              style={{ padding: 0, minWidth: 0, width: '24px', margin: '0 0 0 8px' }}
-            >
-              <Text color="#5F6368" fontSize="4.6px" TABmargin='0 0 0 -10px'>
-                <img src={CaretDown} alt="메뉴" />
-              </Text>
-            </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={MenuLink}
-              keepMounted
-              open={Boolean(MenuLink)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={() => history.push('/mypage')}>
-                마이페이지
-              </MenuItem>
-              <MenuItem
-                onClick={() => { handleClose(); logout() }}
+            <DropDown>
+              <Button
+                ref={anchorRef}
+                aria-controls={open ? 'menu-list-grow' : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+                style={{ padding: 0, minWidth: 0, width: '24px', margin: '0 0 0 8px' }}
               >
-                로그아웃
-              </MenuItem>
-            </Menu>
-          </Grid>
+                <Text color="#5F6368" fontSize="4.6px" TABmargin='0 0 0 -10px'>
+                  <img src={CaretDown} alt="메뉴" />
+                </Text>
+              </Button>
+              <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList className='MenuList' autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                          <MenuItem onClick={(e) => {handleClose(e); history.push('/mypage')}}>마이페이지</MenuItem>
+                          <MenuItem onClick={(e) => {handleClose(e); logout()}}>로그아웃</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </DropDown>
+            </Grid>
           {/* 모바일 버전에서만 보이는 로그아웃 버튼 */}
           <LogoutBtn type="button" onClick={() => logout()}>
             <Text
@@ -240,6 +263,17 @@ const ProfileImg = styled.img`
   max-height: 100%;
 `;
 
+const DropDown = styled.div`
+  .MuiList-root {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    background-color: #2E3134;
+    color: #f1f3f4;
+    opacity: 0.8;
+    border-radius: 8px;
+  }
+`;
 
 const LoginBtn = styled.button`
   background-color: transparent;

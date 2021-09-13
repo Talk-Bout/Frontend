@@ -1,4 +1,5 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { combineReducers, applyMiddleware, compose } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { connectRouter } from 'connected-react-router';
@@ -41,6 +42,10 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-let store = (initialStore) => createStore(rootReducer, enhancer);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: middlewares,
+  enhancer: enhancer,
+})
 
-export default store();
+export default store;

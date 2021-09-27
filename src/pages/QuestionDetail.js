@@ -202,7 +202,7 @@ const QuestionDetail = (props) => {
               {/* {Question 글쓴이 프로필 }*/}
               <Grid display="flex" justifyContent='space-between' margin="10px 0" TABmargin='24px 0 32px' MOBmargin='16px 0'>
                 <Grid width='fit-content' display='flex'>
-                  <Grid width="40px" MOBwidth='28px'>
+                  <Grid width="40px" MOBwidth='28px' display='flex' alignItems='center'>
                     <Image src={user_profile == null || user_profile === 'null' ? Profile_medium : user_profile_url}></Image>
                   </Grid>
                   <Grid width="fit-content">

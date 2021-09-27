@@ -15,10 +15,9 @@ const Body = (props) => {
         className="whole-body"
         backgroundColor="#17181b"
         minHeight="100vh"
-        // width="100vw"
       >
         {header ? <Header /> : ''}
-        <Grid className="body" width="100%" padding="40px 42px 0" TABpadding='18px 18px 0' MOBpadding={MOBnopadding ? '0' : '6px 17px 50px 18px'} minHeight='calc(100vh - 350px)' TABminHeight='calc(100vh - 276px)' MOBminHeight='calc(100vh - 50px)'>
+        <Grid className="body" width="100%" padding="140px 42px 0" TABpadding='90px 18px 0' MOBpadding={MOBnopadding ? '0' : '54px 17px 50px 18px'} minHeight='calc(100vh - 350px)' TABminHeight='calc(100vh - 276px)' MOBminHeight='calc(100vh - 50px)'>
           {children}
         </Grid>
         {footer ? <Footer /> : ''}

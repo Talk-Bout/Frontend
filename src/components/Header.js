@@ -67,11 +67,14 @@ const Header = (props) => {
           display="flex"
           justifyContent="space-between"
           backgroundColor='#202124'
-          MOBbackgroundColor='transparent'
+          MOBbackgroundColor='#17181B'
           MOBborderBottom='1px solid #282A2D'
           opacity={opacity}
           TABopacity={TABopacity}
           MOBopacity={MOBopacity}
+          position='fixed'
+          top='0'
+          zIndex='10'
         >
           {/* 검색창 */}
           <Grid
@@ -90,7 +93,7 @@ const Header = (props) => {
           </Grid>
           {/* 피드백 버튼 */}
           <GiftBtn src={Gift} onClick={() => getFeedback()} />
-          <Grid width="auto" margin="36px 50px" TABmargin='22px 18px' MOBdisplay='none' display='flex'>
+          <Grid width="auto" margin="36px 150px" TABmargin='22px 90px' MOBdisplay='none' display='flex'>
             {/* 북마크 메뉴 */}
             <Text
               color="#7879f1"
@@ -169,11 +172,14 @@ const Header = (props) => {
         display="flex"
         justifyContent="space-between"
         backgroundColor='#202124'
-        MOBbackgroundColor='transparent'
+        MOBbackgroundColor='#17181B'
         MOBborderBottom='1px solid #282A2D'
         opacity={opacity}
         TABopacity={TABopacity}
         MOBopacity={MOBopacity}
+        position='fixed'
+        top='0'
+        zIndex='10'
       >
         {/* 검색창 */}
         <Grid
@@ -231,14 +237,14 @@ const Logo = styled.img`
 const GiftBtn = styled.img`
   position: absolute;
   top: -10px;
-  right: 200px;
+  right: 300px;
   width: 150px;
   height: 150px;
   cursor: pointer;
   @media screen and (max-width: 1150px) {
     width: 100px;
     height: 100px;
-    right: 120px;
+    right: 192px;
   }
   @media screen and (max-width: 767px) {
     width: 60px;
@@ -279,17 +285,21 @@ const LoginBtn = styled.button`
   background-color: transparent;
   border: none;
   padding: 0;
-  margin: 38px 42px 0 0;
   height: 24px;
   float: right;
+  position: absolute;
+  top: 38px;
+  right: 142px;
   @media screen and (max-width: 1150px) {
     height: 18px;
-    margin: 27px 18px 0 0;
+    top: 27px;
+    right: 90px;
   }
   @media screen and (max-width: 767px) {
-    margin: 14px 0 0;
     height: fit-content;
     min-width: 60px;
+    top: 14px;
+    right: 0;
   }
 `;
 

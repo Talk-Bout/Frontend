@@ -30,7 +30,7 @@ import Talk_nav from './Board_nav.svg';
 import Talk_nav_white from './Board_nav_white.svg';
 import Mypage from './Mypage.svg';
 import Mypage_white from './Mypage_white.svg';
-import Spinner_web from './Spinner-1.4s-517px.gif'
+import Spinner_web from './Disk-1.1s-256px.svg'
 import KakaoLogin_btn from './kakao_login_medium_narrow.png';
 import GoogleLogin_btn from './google_login_light_pressed.png';
 import Gift from './gift.gif';

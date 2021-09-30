@@ -1,5 +1,5 @@
 import Profile_medium from './profile_medium.png';
-import LogoImg from './Logo.png';
+import LogoImg from './Logo.svg';
 import Profile_small from './profile_small.png';
 import CaretDown from './CaretDown.png';
 import Banner_desktop from './banner.svg';

@@ -36,7 +36,7 @@ import GoogleLogin_btn from './google_login_light_pressed.png';
 import Gift from './gift.gif';
 import Little_home from './little_home.png';
 import Little_github from './little_github.png';
-import LogoNew from './logo_new.png';
+import LogoNew from './logo_new.svg';
 import Google from './g-logo.png';
 
 export { Profile_medium, LogoImg, Profile_small, CaretDown, Banner_desktop, Banner_desktop_short, Banner_tablet, Banner_mobile, CampLogo_default, LogoIcon, Rocket_emoji, Megaphone_emoji, Fire_emoji, PointImg, Home, Home_white, Boot, Boot_white, Qna, Qna_white, Talk, Talk_white, Home_nav, Home_nav_white, Boot_nav, Boot_nav_white, Qna_nav, Qna_nav_white, Talk_nav, Talk_nav_white, Mypage, Mypage_white, Spinner_web, KakaoLogin_btn, GoogleLogin_btn, Gift, Little_home, Little_github, LogoNew, Google };

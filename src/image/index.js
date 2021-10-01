@@ -31,8 +31,8 @@ import Talk_nav_white from './Board_nav_white.svg';
 import Mypage from './Mypage.svg';
 import Mypage_white from './Mypage_white.svg';
 import Spinner_web from './Disk-1.1s-256px.svg'
-import KakaoLogin_btn from './kakao_login_medium_narrow.png';
-import GoogleLogin_btn from './google_login_light_pressed.png';
+import KakaoLogin_btn from './kakao_login.svg';
+import GoogleLogin_btn from './google_login.svg';
 import Gift from './gift.gif';
 import Little_home from './little_home.png';
 import Little_github from './little_github.png';

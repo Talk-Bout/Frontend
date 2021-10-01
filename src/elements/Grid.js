@@ -57,6 +57,8 @@ const Grid = (props) => {
     TABdisplay,
     TABopacity,
     TABminHeight,
+    TABtop,
+    TABbottom,
     // 모바일 사이즈(width: ~767px)
     MOBdisplay,
     MOBheight,
@@ -66,6 +68,7 @@ const Grid = (props) => {
     MOBjustifyContent,
     MOBbackgroundColor,
     MOBborderBottom,
+    MOBtop,
     MOBbottom,
     MOBopacity,
     MOBminHeight,
@@ -124,6 +127,8 @@ const Grid = (props) => {
     TABdisplay: TABdisplay,
     TABopacity: TABopacity,
     TABminHeight: TABminHeight,
+    TABtop: TABtop,
+    TABbottom: TABbottom,
     // 모바일 사이즈(width: ~767px)
     MOBdisplay: MOBdisplay,
     MOBheight: MOBheight,
@@ -133,6 +138,7 @@ const Grid = (props) => {
     MOBjustifyContent: MOBjustifyContent,
     MOBbackgroundColor: MOBbackgroundColor,
     MOBborderBottom: MOBborderBottom,
+    MOBtop: MOBtop,
     MOBbottom: MOBbottom,
     MOBopacity: MOBopacity,
     MOBminHeight: MOBminHeight,
@@ -212,6 +218,8 @@ const GridBox = styled.div`
     display: ${(props) => props.TABdisplay};
     opacity: ${(props) => props.TABopacity};
     min-height: ${(props) => props.TABminHeight};
+    top: ${(props) => props.TABtop};
+    bottom: ${(props) => props.TABbottom};
   }
   // 모바일 사이즈(width: ~767px)
   @media screen and (max-width: 767px) {
@@ -223,6 +231,7 @@ const GridBox = styled.div`
     justify-content: ${(props) => props.MOBjustifyContent};
     background-color: ${(props) => props.MOBbackgroundColor};
     border-bottom: ${(props) => props.MOBborderBottom};
+    top: ${(props) => props.MOBtop};
     bottom: ${(props) => props.MOBbottom};
     opacity: ${(props) => props.MOBopacity};
     min-height: ${(props) => props.MOBminHeight};

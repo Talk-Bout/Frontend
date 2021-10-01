@@ -6,12 +6,12 @@ const SmallWindow = (props) => {
 
   return (
     <React.Fragment>
-      <Grid backgroundColor="#18181A" MOBbackgroundColor='#212123' height="100vh" padding="220px 0 0" TABpadding='180px 0 0' MOBpadding='0'>
+      <Grid backgroundColor="#18181A" MOBbackgroundColor='#212123' height="100vh" padding="150px 0 0" TABpadding='180px 0 0' MOBpadding='0'>
         <Grid
-          backgroundColor="#212123"
+          backgroundColor="#202124"
           MOBbackgroundColor='transparent'
-          width="400px"
-          height="500px"
+          width="408px"
+          height="600px"
           MOBwidth='100%'
           MOBheight='auto'
           margin="auto"

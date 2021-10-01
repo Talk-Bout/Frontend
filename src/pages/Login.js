@@ -34,7 +34,7 @@ const Login = (props) => {
         <GoogleBtn src={GoogleLogin_btn} alt='구글 로그인' onClick={() => googleLogin()} />
         <KakaoBtn src={KakaoLogin_btn} alt='카카오 로그인' onClick={() => kakaoLogin()} />
       </Grid>
-      <Grid is_flex position='absolute' left='calc((100% - 265px) / 2)' top='774px' MOBbottom='5px' width='fit-content' margin='0 auto'>
+      <Grid is_flex position='absolute' left='calc((100% - 265px) / 2)' top='774px' TABtop='960px' MOBbottom='5px' width='fit-content' margin='0 auto'>
         <Text fontSize='12px' color='#bdc1c6' margin='0 24px 0 0'>© 2021 Project Talk'bout</Text>
         <Text fontSize='12px' color='#bdc1c6'>All rights reserved.</Text>
       </Grid>
@@ -47,6 +47,9 @@ const GoogleBtn = styled.img`
   cursor: pointer;
   &:active {
     opacity: 0.7;
+  }
+  @media screen and (max-width: 1150px) {
+    margin: 144px auto 0;
   }
 `;
 

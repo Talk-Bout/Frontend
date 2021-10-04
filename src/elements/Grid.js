@@ -231,7 +231,6 @@ const GridBox = styled.div`
     justify-content: ${(props) => props.MOBjustifyContent};
     background-color: ${(props) => props.MOBbackgroundColor};
     border-bottom: ${(props) => props.MOBborderBottom};
-    top: ${(props) => props.MOBtop};
     bottom: ${(props) => props.MOBbottom};
     opacity: ${(props) => props.MOBopacity};
     min-height: ${(props) => props.MOBminHeight};

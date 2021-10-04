@@ -9,7 +9,7 @@ const NotFound = (props) => {
   return (
     <Grid display="flex">
       <Sidebar />
-      <Body header>
+      <Body header footer>
         <Wrapper>
           <Grid>
             <Image

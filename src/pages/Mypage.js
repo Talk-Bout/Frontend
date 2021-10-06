@@ -114,12 +114,12 @@ const Mypage = (props) => {
                             <Logo>
                               <Img src={mb.bootcamp.logo ? mb.bootcamp.logo : CampLogo_default} />
                             </Logo>
-                            <Grid padding="10px 0" TABpadding='16px 0' width="67%" MOBdisplay='none'>
+                            <Grid padding="10px 0" TABpadding='16px 0' width="72%" TABwidth='80%' MOBdisplay='none'>
                               <Grid display="flex" justifyContent="space-between">
-                                <Text p margin="0 0 5px 15px" TABmargin='0 0 5px 0' color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
+                                <Text p margin="0 0 5px 15px" TABmargin='0 0 5px 5px' color="#F1F3F4" fontSize="18px">{mb.bootcampName}</Text>
                                 <Text margin="0 0 0 2px" TABmargin='0' cursor="pointer" color="#7879F1" fontSize="24px"><BsHeartFill /></Text>
                               </Grid>
-                              <Text p margin="2px 0px 0px 15px" TABmargin='2px 0 0' color="#F1F3F4" fontSize="14px"><Stars score={mb.stars == null ? 0 : mb.stars} size='12px' withScore /></Text>
+                              <Text p margin="2px 0px 0px 15px" TABmargin='2px 0 0 5px' color="#F1F3F4" fontSize="14px"><Stars score={mb.stars == null ? 0 : mb.stars} size='12px' withScore /></Text>
                             </Grid>
                           </BootCard>
                         );
@@ -370,12 +370,15 @@ const WordMOBNone = styled.span`
 `;
 
 const BootBox = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 16px;
   margin: 12px 0;
   height: 96px;
   width: 100%;
   @media screen and (min-width: 768px) and (max-width: 1150px) {
     height: 100%;
+    grid-template-columns: repeat(2, 1fr);
     .bootcard2 {
       display: none;
     }
@@ -410,11 +413,9 @@ const Count = styled.span`
 `;
 
 const BootCard = styled.div`
-  margin: 0 16px 0 0;
   display: flex;
   padding: 0 15px;
   height: 96px;
-  width: 32.3%;
   background-color:#202124;
   border-radius: 5px;
   cursor: pointer;
@@ -423,13 +424,10 @@ const BootCard = styled.div`
     opacity: 0.7;
   }
   @media screen and (max-width: 1150px) {
-    width: 49.25%;
-    height: 96px;
     margin-bottom: 12px;
     box-shadow: none;
   }
   @media screen and (max-width: 767px) {
-    width: 33.3%;
     height: 76px;
     margin: 0 0 33px;
     box-shadow: none;

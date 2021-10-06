@@ -24,6 +24,7 @@
   - Back-end(Node.js): 정창길, 송하영, 방민수
   - Designer(UI/UX): 윤영미, 양서문
 - [팀 토크부트 소개](https://www.notion.so/TALK-BOUT-63a1e36f729d4f83bd7e95a663bf63a9)
+- [시연영상](https://www.youtube.com/watch?v=UH1_z64hTWc&t=2s)
 - [Back-end(Node.js) 깃허브](https://github.com/Talk-Bout/Backend)
 - [프로젝트 초기 기획 노션](https://www.notion.so/Talk-Bout-_-_5-90d8e8f4f3904dfb84b3892b94daa7d0)
 

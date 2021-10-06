@@ -418,6 +418,7 @@ const BootCard = styled.div`
   background-color:#202124;
   border-radius: 5px;
   cursor: pointer;
+  align-items: center;
   &:hover {
     opacity: 0.7;
   }
